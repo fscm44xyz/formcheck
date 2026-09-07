@@ -60,10 +60,11 @@ def main():
         print("  LLM and no hand-authored anchor, reproduces July's false negative:")
         print("  it satisfies the issue's observable contract and still scores 0.0,")
         print("  failing exactly the graded test and nothing else.")
-        print("  => D4 has an executable basis. Proceed to Phase 1.")
+        print("  => the transform family has an executable basis.")
         return 0
     print("VERDICT: the mechanical witness did NOT reproduce.")
-    print("  D4 dies here, for 0 EUR. Nothing further is built.")
+    print("  No transform of the gold patch exhibited the false negative, so the")
+    print("  transform family has no executable basis on this task.")
     return 1
 
 
