@@ -1,0 +1,184 @@
+{
+  "oracle_observes": "set of marker names on the collected item (public iter_markers)",
+  "oracle_covers": {
+    "callable signature (arity / parameter names)": true,
+    "symbol identity (module-level name)": true,
+    "order of elements in a returned collection": false,
+    "human-readable text of an exception message": false
+  },
+  "touched_symbols": [
+    "MarkDecorator",
+    "get_unpacked_marks",
+    "normalize_mark_list",
+    "store_mark"
+  ],
+  "cases": [
+    {
+      "operator": "kwonly_specialize",
+      "tier": "HIGH",
+      "name": "kwonly_specialize_get_unpacked_marks_consider_mro_",
+      "anchor": "get_unpacked_marks(*, consider_mro=...)",
+      "outcome": "RAN",
+      "oracle_markers": [
+        "bar",
+        "foo"
+      ],
+      "report": {
+        "operator": "kwonly_specialize",
+        "tier": "HIGH",
+        "observable": "callable signature (arity / parameter names)",
+        "argument": "A keyword-only parameter with a constant default, read only in param-only `if` tests and passed only as a literal (or omitted) at every call site, is a static switch. Specialising the function per constant and dispatching each call site to its specialisation evaluates the same branch on the same arguments in the same order.",
+        "breaks_if": "the parameter is read dynamically (**kwargs, getattr, signature introspection), or a call site passes a non-constant.",
+        "anchor": "get_unpacked_marks(*, consider_mro=...)",
+        "evidence": null,
+        "preconditions": {
+          "P1_signature": "keyword-only, default True",
+          "P2_contract": "issue names neither 'consider_mro' nor 'get_unpacked_marks' -> incidental FORM",
+          "P3_call_sites": "1 call site(s) in this module + 2 in 1 other scanned module(s), none of the latter passing the parameter; non-default constants passed: [False]",
+          "P4_no_dynamic": "read only in 1 param-only `if` test(s); no **kwargs"
+        },
+        "detail": {
+          "call_sites_rewritten": 1,
+          "siblings_emitted": [
+            "_get_unpacked_marks__consider_mro_False"
+          ]
+        }
+      }
+    },
+    {
+      "operator": "symbol_rename",
+      "tier": "MEDIUM",
+      "name": "symbol_rename_MarkDecorator",
+      "anchor": "MarkDecorator",
+      "outcome": "REFUSED",
+      "reason": "dynamic reach: 'MarkDecorator' appears in a non-annotation string literal in src/pytest/__init__.py line 117 ('MarkDecorator') -- an `__all__` entry; 7 further hit(s) -- an alpha-rename cannot be argued safe"
+    },
+    {
+      "operator": "symbol_rename",
+      "tier": "MEDIUM",
+      "name": "symbol_rename_get_unpacked_marks",
+      "anchor": "get_unpacked_marks",
+      "outcome": "RAN",
+      "oracle_markers": [
+        "bar",
+        "foo"
+      ],
+      "report": {
+        "operator": "symbol_rename",
+        "tier": "MEDIUM",
+        "observable": "symbol identity (module-level name)",
+        "argument": "Renaming a definition and every static reference to it -- including `from X import name` -- is a pure alpha-rename. Nothing observable changes unless the name is reached by a path the rewrite cannot see.",
+        "breaks_if": "the name is reached dynamically (a string literal, `getattr`, `__all__`, an entry point) or from a module outside the scanned set.",
+        "anchor": "get_unpacked_marks",
+        "evidence": "public name inside a `_`-private package (src/_pytest/mark/structures.py); not part of the documented API",
+        "preconditions": {
+          "contract": "issue does not name 'get_unpacked_marks'",
+          "no_dynamic_reach": "'get_unpacked_marks' appears in no string literal across 2 scanned file(s)"
+        },
+        "detail": {
+          "new_name": "get_unpacked_marks__renamed",
+          "references_rewritten": 5,
+          "files": [
+            "src/_pytest/mark/structures.py",
+            "src/_pytest/python.py"
+          ]
+        }
+      }
+    },
+    {
+      "operator": "symbol_rename",
+      "tier": "MEDIUM",
+      "name": "symbol_rename_normalize_mark_list",
+      "anchor": "normalize_mark_list",
+      "outcome": "RAN",
+      "oracle_markers": [
+        "bar",
+        "foo"
+      ],
+      "report": {
+        "operator": "symbol_rename",
+        "tier": "MEDIUM",
+        "observable": "symbol identity (module-level name)",
+        "argument": "Renaming a definition and every static reference to it -- including `from X import name` -- is a pure alpha-rename. Nothing observable changes unless the name is reached by a path the rewrite cannot see.",
+        "breaks_if": "the name is reached dynamically (a string literal, `getattr`, `__all__`, an entry point) or from a module outside the scanned set.",
+        "anchor": "normalize_mark_list",
+        "evidence": "public name inside a `_`-private package (src/_pytest/mark/structures.py); not part of the documented API",
+        "preconditions": {
+          "contract": "issue does not name 'normalize_mark_list'",
+          "no_dynamic_reach": "'normalize_mark_list' appears in no string literal across 2 scanned file(s)"
+        },
+        "detail": {
+          "new_name": "normalize_mark_list__renamed",
+          "references_rewritten": 4,
+          "files": [
+            "src/_pytest/mark/structures.py",
+            "src/_pytest/python.py"
+          ]
+        }
+      }
+    },
+    {
+      "operator": "symbol_rename",
+      "tier": "MEDIUM",
+      "name": "symbol_rename_store_mark",
+      "anchor": "store_mark",
+      "outcome": "RAN",
+      "oracle_markers": [
+        "bar",
+        "foo"
+      ],
+      "report": {
+        "operator": "symbol_rename",
+        "tier": "MEDIUM",
+        "observable": "symbol identity (module-level name)",
+        "argument": "Renaming a definition and every static reference to it -- including `from X import name` -- is a pure alpha-rename. Nothing observable changes unless the name is reached by a path the rewrite cannot see.",
+        "breaks_if": "the name is reached dynamically (a string literal, `getattr`, `__all__`, an entry point) or from a module outside the scanned set.",
+        "anchor": "store_mark",
+        "evidence": "public name inside a `_`-private package (src/_pytest/mark/structures.py); not part of the documented API",
+        "preconditions": {
+          "contract": "issue does not name 'store_mark'",
+          "no_dynamic_reach": "'store_mark' appears in no string literal across 1 scanned file(s)"
+        },
+        "detail": {
+          "new_name": "store_mark__renamed",
+          "references_rewritten": 2,
+          "files": [
+            "src/_pytest/mark/structures.py"
+          ]
+        }
+      }
+    },
+    {
+      "operator": "collection_reverse",
+      "tier": "MEDIUM",
+      "name": "collection_reverse_get_unpacked_marks_return_list_",
+      "anchor": "get_unpacked_marks -> return list(...)",
+      "outcome": "RAN",
+      "oracle_markers": [
+        "bar",
+        "foo"
+      ],
+      "report": {
+        "operator": "collection_reverse",
+        "tier": "MEDIUM",
+        "observable": "order of elements in a returned collection",
+        "argument": "If the issue fixes no order for a returned collection, and no caller depends on position, order is unspecified and reversing it changes nothing a consumer may rely on.",
+        "breaks_if": "any consumer is order-sensitive -- including precedence rules like 'nearest definition wins', which are ordering semantics even when the issue never writes the word 'order'.",
+        "anchor": "get_unpacked_marks -> return list(...)",
+        "evidence": "order-sensitivity of consumers not established by this operator",
+        "preconditions": {
+          "order_unspecified": "asserted from the issue text only; consumer order-sensitivity is NOT established -- this is why the tier is MEDIUM and the observable is element order"
+        },
+        "detail": {
+          "rewritten_line": 386
+        }
+      }
+    },
+    {
+      "operator": "message_reword",
+      "tier": "HIGH",
+      "outcome": "NOT_APPLICABLE",
+      "note": "no anchor inside the gold-touched region (['MarkDecorator', 'get_unpacked_marks', 'normalize_mark_list', 'store_mark']); 2 anchor(s) elsewhere in the module"
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "instance_id": "pytest-dev__pytest-10356",
+  "issue_contract": "a test inheriting from two marked base classes must carry the marks of BOTH (MRO considered), not one shadowing the other",
+  "form_not_in_contract": [
+    "private import from _pytest.mark.structures",
+    "invented keyword get_unpacked_marks(..., consider_mro=False)",
+    "exact list order [c, a, b]"
+  ],
+  "behavior_asserted": "both base-class marks present on the test, via public item.iter_markers(); asserted as a set of names",
+  "verdict": "private symbol + invented keyword + exact order are implementation-coupled -> replaced with observable presence check; presence stays asserted",
+  "boundary": "set-equality does not forbid marker DUPLICATION; the issue is silent on uniqueness, so this repair does NOT distinguish duplicated markers. Documented, not claimed as covered (see mutants/H_dup).",
+  "grounding_mode": "manual (G4 auto-extraction is M3, not M4)"
+}

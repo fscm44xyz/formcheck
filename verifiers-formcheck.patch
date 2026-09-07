@@ -1,0 +1,121 @@
+diff --git a/verifiers/v1/cli/validate.py b/verifiers/v1/cli/validate.py
+index 88f5fa6..5c53c42 100644
+--- a/verifiers/v1/cli/validate.py
++++ b/verifiers/v1/cli/validate.py
+@@ -49,10 +49,11 @@ REASONS = ("valid", "invalid", "unchecked", "error", "timeout")
+ ResultRow = dict[str, Any]
+ 
+ USAGE = (
+-    "usage: uv run validate [<taskset-id>] [--only-setup | --only-gold] "
++    "usage: uv run validate [<taskset-id>] "
++    "[--only-setup | --only-gold | --only-formcheck] "
+     "[-o <output-dir>] [--runtime.type subprocess] [options] [@ file.toml]\n"
+     "       uv run validate @ <run-dir>/configs/validate.json --resume   (re-run missing/errored/timed-out tasks)\n"
+-    "       runs persisted gold and setup-only checks per task (no model)"
++    "       runs persisted gold, formcheck and setup-only checks per task (no model)"
+ )
+ 
+ 
+@@ -66,6 +67,8 @@ def _narrow(argv: list[str]) -> type[ValidateConfig]:
+ def validation_mode(config: ValidateConfig) -> str:
+     if config.only_gold:
+         return "gold"
++    if config.only_formcheck:
++        return "formcheck"
+     if config.only_setup:
+         return "setup"
+     return "all"
+@@ -255,9 +258,13 @@ async def _run_check(task: Task, config: ValidateConfig, mode: str) -> ResultRow
+             invoke(task.setup, {"trace": trace, "runtime": runtime}),
+             setup_timeout,
+         )
++        # One hook per check; `setup` has already run and is its own check.
++        # `formcheck` is tri-state exactly like `validate`, so a taskset that
++        # ships neither reads as `unchecked` rather than as agreement.
++        check = {"gold": task.validate, "formcheck": task.formcheck}.get(mode)
+         valid = (
+-            await asyncio.wait_for(task.validate(runtime), config.timeout.total)
+-            if mode == "gold"
++            await asyncio.wait_for(check(runtime), config.timeout.total)
++            if check is not None
+             else True
+         )
+     except Exception as e:  # noqa: BLE001 - validation reports plugin failures per task
+@@ -295,8 +302,9 @@ def _all_error(rows: list[ResultRow]) -> tuple[str | None, str | None]:
+ async def _run_all(task: Task, config: ValidateConfig) -> ResultRow:
+     start = time.time()
+     gold = await _run_check(task, config, "gold")
++    formcheck = await _run_check(task, config, "formcheck")
+     setup = await _run_check(task, config, "setup")
+-    rows = [gold, setup]
++    rows = [gold, formcheck, setup]
+     reason = _all_reason(rows)
+     error, error_type = _all_error(rows)
+     return {
+diff --git a/verifiers/v1/configs/cli/validate.py b/verifiers/v1/configs/cli/validate.py
+index a562945..dcc4f49 100644
+--- a/verifiers/v1/configs/cli/validate.py
++++ b/verifiers/v1/configs/cli/validate.py
+@@ -31,6 +31,9 @@ class ValidateConfig(BaseConfig):
+     """Run only `Task.setup`."""
+     only_gold: bool = False
+     """Run only `Task.setup` and `Task.validate`."""
++    only_formcheck: bool = False
++    """Run only `Task.setup` and `Task.formcheck` (does the reward reject a
++    correct-but-different solution?)."""
+     num_tasks: int | None = Field(
+         None,
+         ge=1,
+@@ -76,8 +79,15 @@ class ValidateConfig(BaseConfig):
+ 
+     @model_validator(mode="after")
+     def _validate_only(self):
+-        if self.only_setup and self.only_gold:
+-            raise ValueError("pass at most one of `--only-setup` or `--only-gold`")
++        chosen = [name for name, on in (
++            ("--only-setup", self.only_setup),
++            ("--only-gold", self.only_gold),
++            ("--only-formcheck", self.only_formcheck),
++        ) if on]
++        if len(chosen) > 1:
++            raise ValueError(
++                "pass at most one of `--only-setup`, `--only-gold` or "
++                f"`--only-formcheck` (got {', '.join(chosen)})")
+         return self
+ 
+     @model_validator(mode="before")
+diff --git a/verifiers/v1/task.py b/verifiers/v1/task.py
+index f8bc9ba..fccf0c1 100644
+--- a/verifiers/v1/task.py
++++ b/verifiers/v1/task.py
+@@ -181,6 +181,30 @@ class Task(Generic[DataT, StateT, ConfigT]):
+         """Check the ground truth, or return None when no model-free check exists."""
+         return None
+ 
++    async def formcheck(self, runtime: Runtime) -> bool | None:
++        """Check that the task's reward does not reject a CORRECT solution, or
++        return None when no such check exists.
++
++        `validate` asks whether the ground truth is right. This asks the
++        complementary question the gold check cannot: whether the reward would
++        also accept a correct solution that is written differently. A gold patch
++        passes its own tests by construction, so a test coupled to that patch's
++        incidental form -- an invented keyword, a private symbol, an exact
++        message -- is invisible to `validate` and rejects correct work at
++        training time.
++
++        The intended implementation is mechanical: transform the reference
++        solution in ways that preserve observable behaviour, and re-run the
++        graded tests. A transform that keeps the task's stated contract but
++        fails the graded tests is a witness that the reward is form-coupled.
++
++        Returns True when no witness was found, False when one was, and None
++        when the taskset ships no such check -- the same tri-state contract as
++        `validate`, so an absent check reads as `unchecked` rather than as
++        agreement.
++        """
++        return None
++
+     def defer_scoring(self) -> Self:
+         """An independent copy whose task signals are deferred.
+ 

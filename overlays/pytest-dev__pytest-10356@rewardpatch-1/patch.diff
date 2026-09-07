@@ -1,0 +1,51 @@
+--- a/testing/test_mark.py
++++ b/testing/test_mark.py
+@@ -1,22 +1,29 @@
+-def test_mark_mro() -> None:
+-    xfail = pytest.mark.xfail
++def test_mark_mro(pytester: Pytester) -> None:
++    # Regression test for #10356. The issue's contract is behavioral: a test
++    # inheriting from two marked base classes must carry the marks of *both*,
++    # rather than one shadowing the other. Assert that observable contract
++    # through the public iter_markers() API -- not through the internal
++    # get_unpacked_marks() signature, whose private `consider_mro` keyword and
++    # exact list order are implementation details the issue never specifies.
++    pytester.makepyfile(
++        """
++        import pytest
+ 
+-    @xfail("a")
+-    class A:
+-        pass
++        @pytest.mark.a
++        class A:
++            pass
+ 
+-    @xfail("b")
+-    class B:
+-        pass
++        @pytest.mark.b
++        class B:
++            pass
+ 
+-    @xfail("c")
+-    class C(A, B):
+-        pass
+-
+-    from _pytest.mark.structures import get_unpacked_marks
+-
+-    all_marks = get_unpacked_marks(C)
+-
+-    assert all_marks == [xfail("c").mark, xfail("a").mark, xfail("b").mark]
+-
+-    assert get_unpacked_marks(C, consider_mro=False) == [xfail("c").mark]
++        @pytest.mark.c
++        class TestC(A, B):
++            def test_it(self):
++                pass
++        """
++    )
++    items, rec = pytester.inline_genitems()
++    (item,) = items
++    marker_names = {m.name for m in item.iter_markers()}
++    assert marker_names == {"a", "b", "c"}

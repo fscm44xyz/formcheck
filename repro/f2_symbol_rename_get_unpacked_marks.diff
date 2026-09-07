@@ -1,0 +1,20 @@
+--- a/src/_pytest/mark/structures.py (gold)
++++ b/src/_pytest/mark/structures.py (gold + symbol_rename)
+@@ -355,7 +355,7 @@
+         return self.with_args(*args, **kwargs)
+ 
+ 
+-def get_unpacked_marks(
++def get_unpacked_marks__renamed(
+     obj: Union[object, type],
+     *,
+     consider_mro: bool = True,
+@@ -411,7 +411,7 @@
+     assert isinstance(mark, Mark), mark
+     # Always reassign name to avoid updating pytestmark in a reference that
+     # was only borrowed.
+-    obj.pytestmark = [*get_unpacked_marks(obj, consider_mro=False), mark]
++    obj.pytestmark = [*get_unpacked_marks__renamed(obj, consider_mro=False), mark]
+ 
+ 
+ # Typing for builtin pytest marks. This is cheating; it gives builtin marks

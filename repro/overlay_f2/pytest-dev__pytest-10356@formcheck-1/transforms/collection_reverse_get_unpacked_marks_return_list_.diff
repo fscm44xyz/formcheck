@@ -1,0 +1,11 @@
+--- a/src/_pytest/mark/structures.py (gold)
++++ b/src/_pytest/mark/structures.py (gold + collection_reverse)
+@@ -383,7 +383,7 @@
+             mark_list = mark_attribute
+         else:
+             mark_list = [mark_attribute]
+-    return list(normalize_mark_list(mark_list))
++    return list(reversed(list(normalize_mark_list(mark_list))))
+ 
+ 
+ def normalize_mark_list(

@@ -1,0 +1,44 @@
+{
+  "operators": {
+    "bool_flip": "flip a boolean keyword-arg literal (False <-> True)",
+    "mro_truncate": "restrict an __mro__ iteration to a slice",
+    "cond_flip": "negate an if-condition on the fix",
+    "raise_drop": "replace a `raise X` statement with `pass`",
+    "noop_logic": "replace the fix's key expression with pre-fix behavior"
+  },
+  "training": {
+    "bug_none": {
+      "reward": 0.0,
+      "verdict": "caught"
+    },
+    "bug_direct": {
+      "reward": 0.0,
+      "verdict": "caught"
+    },
+    "bug_first": {
+      "reward": 0.0,
+      "verdict": "caught"
+    },
+    "bug_dropown": {
+      "reward": 0.0,
+      "verdict": "caught"
+    }
+  },
+  "held_out": {
+    "H_dup": {
+      "reward": 1.0,
+      "verdict": "survives",
+      "failure_mode": "EXTRA marker (duplication) -- absent from training set"
+    },
+    "H_onlyself": {
+      "reward": 0.0,
+      "verdict": "caught",
+      "failure_mode": "MISSING markers (a,b) -- overlaps training bug_direct"
+    },
+    "H_branchflip": {
+      "reward": 0.0,
+      "verdict": "caught",
+      "failure_mode": "MISSING markers at collection -- different mechanism"
+    }
+  }
+}

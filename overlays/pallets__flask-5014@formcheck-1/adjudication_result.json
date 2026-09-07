@@ -1,0 +1,11 @@
+{
+  "case": "pallets__flask-5014",
+  "provider": "openai",
+  "model": "gpt-5.6-luna",
+  "reply": "{\n  \"verdict\": \"CONTRACT\",\n  \"confidence\": 0.98,\n  \"evidence\": \"Things do not work correctly if a Blueprint is given an empty name ... It would be helpful if a `ValueError` was raised when trying to do that.\",\n  \"rationale\": \"The issue explicitly names the `Blueprint` API/class whose constructor must reject an empty name. Therefore the public symbol reached as `flask.Blueprint` is part of the task contract, not merely an incidental implementation choice.\"\n}",
+  "input_tokens": 419,
+  "output_tokens": 240,
+  "cost_usd": 0.00037,
+  "n": 1,
+  "caveat": "n=1; demonstrates routing, measures no rate"
+}

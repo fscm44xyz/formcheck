@@ -1,0 +1,12 @@
+{
+  "name": "H_onlyself",
+  "bucket": "held_out",
+  "operator": "mro_truncate",
+  "transform": {
+    "old": "for x in obj.__mro__]",
+    "new": "for x in obj.__mro__[:1]]"
+  },
+  "failure_mode": "MISSING markers (a,b) -- overlaps training bug_direct",
+  "reward": 0.0,
+  "verdict": "caught"
+}

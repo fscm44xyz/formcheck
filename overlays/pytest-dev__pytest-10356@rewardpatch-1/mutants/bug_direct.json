@@ -1,0 +1,7 @@
+{
+  "name": "bug_direct",
+  "bucket": "training",
+  "source": "hand-authored (M1)",
+  "reward": 0.0,
+  "verdict": "caught"
+}

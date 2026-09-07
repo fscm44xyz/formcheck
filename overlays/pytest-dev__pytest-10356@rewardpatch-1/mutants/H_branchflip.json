@@ -1,0 +1,12 @@
+{
+  "name": "H_branchflip",
+  "bucket": "held_out",
+  "operator": "cond_flip",
+  "transform": {
+    "old": "if not consider_mro:",
+    "new": "if consider_mro:"
+  },
+  "failure_mode": "MISSING markers at collection -- different mechanism",
+  "reward": 0.0,
+  "verdict": "caught"
+}

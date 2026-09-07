@@ -1,0 +1,12 @@
+{
+  "name": "H_dup",
+  "bucket": "held_out",
+  "operator": "bool_flip",
+  "transform": {
+    "old": "get_unpacked_marks(obj, consider_mro=False)",
+    "new": "get_unpacked_marks(obj, consider_mro=True)"
+  },
+  "failure_mode": "EXTRA marker (duplication) -- absent from training set",
+  "reward": 1.0,
+  "verdict": "survives"
+}

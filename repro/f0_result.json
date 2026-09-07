@@ -1,0 +1,22 @@
+{
+  "report": {
+    "operator": "kwonly_specialize",
+    "function": "get_unpacked_marks",
+    "parameter": "consider_mro",
+    "confidence": "high",
+    "preconditions": {
+      "P1_signature": "keyword-only, default True",
+      "P2_contract": "issue names neither 'consider_mro' nor 'get_unpacked_marks' -> incidental FORM",
+      "P3_call_sites": "1 call site(s) in this module + 2 in 1 other scanned module(s), none of the latter passing the parameter; non-default constants passed: [False]",
+      "P4_no_dynamic": "read only in 1 param-only `if` test(s); no **kwargs"
+    },
+    "call_sites_rewritten": 1,
+    "siblings_emitted": [
+      "_get_unpacked_marks__consider_mro_False"
+    ]
+  },
+  "oracle_markers": [
+    "bar",
+    "foo"
+  ]
+}

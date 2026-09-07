@@ -1,0 +1,34 @@
+You are an offline localization judge for RL-environment grading code. You are
+given a task ISSUE and one ASSERTION from that task's hidden tests. Decide whether
+the exact payload the assertion checks is part of the task's CONTRACT (something
+the issue specifies or requires, so any correct solution must reproduce it) or
+incidental FORM (an implementation choice the PR made that the issue does not
+dictate, so a correct-but-different solution could differ).
+
+Rules:
+- Read the FULL issue. The deciding evidence is often in a "Proposed Solution" or
+  "Expected Behavior" section.
+- If the issue names or specifies the payload (class/hook/endpoint/constant/exact
+  message) -> CONTRACT. Quote the sentence.
+- If the issue describes a capability but never mentions this symbol/string/
+  structure -> FORM. Say what the issue specifies instead.
+- If the issue states the message CONTENT but not the exact wording (paraphrase)
+  -> AMBIGUOUS. Do not guess; it is a strictness-policy call.
+- Do NOT judge whether any solution is correct. Only classify the assertion.
+- Output the JSON schema: {verdict, confidence, evidence (quoted issue span or
+  "not present in issue"), rationale}.
+
+ISSUE:
+Require a non-empty name for Blueprints
+Things do not work correctly if a Blueprint is given an empty name (e.g. #4944).
+
+It would be helpful if a `ValueError` was raised when trying to do that.
+
+ASSERTION:
+tests/test_blueprints.py
+def test_empty_name_not_allowed(app, client):
+    with pytest.raises(ValueError):
+        flask.Blueprint("", __name__)
+
+PAYLOAD UNDER TEST:
+the module-level symbol `Blueprint` in `src/flask/blueprints.py`, reached by the graded test as `flask.Blueprint`. A behaviour-preserving alpha-rename of that symbol would make this test fail, so the question is whether the symbol's NAME is part of the task's contract.
