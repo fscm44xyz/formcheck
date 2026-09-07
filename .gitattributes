@@ -1,0 +1,6 @@
+* text=auto
+# byte-exact: consumed by git apply / the log parser
+*.patch -text
+*.diff -text
+*.txt -text
+*.json -text
