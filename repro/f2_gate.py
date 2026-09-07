@@ -25,6 +25,7 @@ outcomes are the ones that matter:
 import os
 import sys
 import json
+import textwrap
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
@@ -58,6 +59,22 @@ def classify(case, covers):
     return "WITNESS", r, {}
 
 
+def _column(text, width=44):
+    """Fixed-width label column, cut at a word boundary. A note truncated
+    mid-token reads as a rendering bug rather than as an elision."""
+    if len(text) <= width:
+        return text
+    cut = text[:width].rsplit(" ", 1)[0] or text[:width]
+    return cut.rstrip(" ([,") + " ..."
+
+
+def _detail(text):
+    """A wrapped, hanging-indented explanation line under a verdict row."""
+    return textwrap.fill(text, width=96,
+                         initial_indent="                 -> ",
+                         subsequent_indent="                    ")
+
+
 def main():
     data = json.load(open(os.path.join(HERE, "f2_cases.json")))
     covers = data["oracle_covers"]
@@ -70,14 +87,18 @@ def main():
         verdict, r, extra = classify(case, covers)
         counts[verdict] = counts.get(verdict, 0) + 1
         tier = case.get("tier", "-")
-        label = case.get("anchor", case.get("note", ""))[:44]
+        label = _column(case.get("anchor", case.get("note", "")))
         reward = "-" if r is None else r["reward"]
         print(f"  {verdict:14s} {case['operator']:20s} {str(tier):6s} "
               f"reward={reward!s:5s} {label}")
         if extra.get("why"):
-            print(f"                 -> {extra['why']}")
+            print(_detail(extra["why"]))
         if case.get("reason"):
-            print(f"                 -> {case['reason'][:100]}")
+            # Print the reason in FULL. It is the audit trail for a refusal, and
+            # the deciding clause tends to sit at the end: which file the name
+            # was reached from, and whether that reach is an `__all__` entry.
+            # Truncating lost exactly that clause. Wrapped, not cut.
+            print(_detail(case["reason"]))
         rows.append({**case, "verdict": verdict,
                      "grading": r, "explanation": extra.get("why")})
 
