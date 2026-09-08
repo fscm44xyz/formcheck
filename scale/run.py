@@ -323,6 +323,10 @@ async def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--instance-id", action="append", default=[],
                     help="run exactly these; repeatable. Reproduces one task.")
+    ap.add_argument("--ids-file",
+                    help="file of instance ids, one per line, `#` comments "
+                         "ignored. Used by M3, whose sample is frozen to "
+                         "scale/ids_50.txt and committed before the run.")
     ap.add_argument("--limit", type=int, default=None)
     ap.add_argument("--seed", type=int, default=0,
                     help="sampling seed; recorded, so a pilot is reproducible")
@@ -338,8 +342,13 @@ async def main():
     progress = Progress(PROGRESS)
 
     instances = load_instances()
-    if args.instance_id:
+    if args.ids_file:
+        with open(args.ids_file, encoding="utf-8") as f:
+            ids = [ln.strip() for ln in f
+                   if ln.strip() and not ln.startswith("#")]
+    elif args.instance_id:
         ids = list(args.instance_id)
+    if args.ids_file or args.instance_id:
         missing = [i for i in ids if i not in instances]
         if missing:
             raise SystemExit(f"unknown instance_id(s): {missing}")
