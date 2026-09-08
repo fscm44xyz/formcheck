@@ -21,7 +21,7 @@ import sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 SUITES = ["test_scope.py", "test_rotation.py", "test_partition.py",
-          "test_digest.py", "test_aggregate.py"]
+          "test_digest.py", "test_aggregate.py", "test_burn.py"]
 
 
 def main():

@@ -60,6 +60,25 @@ ELIGIBLE = os.path.join(HERE, "eligible.jsonl")
 
 DEFAULT_TASK_TIMEOUT = 45 * 60
 
+# THE LIVENESS INVARIANT. M4 ran 330 tasks into the ground in 32 minutes because
+# every pull was refused with a 429 and each "task" therefore took 2.5s. Nothing
+# stopped it: the monitor was watching for DiskBudgetError, Traceback and abort,
+# and a fast clean-looking failure is none of those. The run reported healthy
+# because it was being watched for causes already known.
+#
+# So the harness now asserts something causally necessary instead: a real task
+# must pull an image, start a container and run the control suite. It cannot be
+# fast. The threshold is measured, not guessed -- across 97 tasks whose control
+# passed, the fastest was 30.5s; across 357 tasks burned by the rate limit, the
+# slowest was 19.6s and the 95th percentile was 3.4s. The populations do not
+# overlap, and 25s sits in the empty gap between them.
+MIN_PLAUSIBLE_TASK_SECONDS = 25
+BURN_STREAK = 8
+
+
+class BurnDetected(RuntimeError):
+    """Consecutive tasks finished faster than any real task can."""
+
 
 class Progress:
     """Append-only, one JSON object per line, flushed on every write.
@@ -248,6 +267,15 @@ async def run_one(instance, leases, progress, timeout, baseline_free=0):
             task = SweBenchFormcheckTask(data, spec)
             row = await asyncio.wait_for(
                 _run_check(task, cfg, "formcheck"), timeout)
+    except rotation.RateLimited as exc:
+        # INFRASTRUCTURE REFUSAL, NOT A TASK RESULT. The registry would not serve
+        # the image, so the task was never mounted, never controlled, never
+        # judged. No record is written at all: the task stays unattempted and a
+        # resume picks it up. Putting this in the same bucket as a failed task is
+        # exactly what let 334 refusals look like 334 results.
+        progress.write(event="refused", instance_id=instance_id,
+                       reason="registry rate limit", detail=str(exc)[:200])
+        return None
     except asyncio.TimeoutError:
         error = f"task exceeded {timeout}s"
     except Exception as exc:  # noqa: BLE001 - one task's failure is a row, not a crash
@@ -408,19 +436,47 @@ async def main():
     sem = asyncio.Semaphore(workers)
     done = 0
 
+    recent: list = []
+
     async def guarded(instance):
         nonlocal done
         async with sem:
             record = await run_one(instance, leases, progress, args.timeout,
                                    baseline_free)
         done += 1
+        if record is None:          # refused: unattempted, not a result
+            print(f"  [{done}/{len(ids)}] {instance['instance_id']:40s} "
+                  f"{'refused':9s}  (registry rate limit; will be retried)")
+            return None
+
+        recent.append(record["elapsed_seconds"])
+        del recent[:-BURN_STREAK]
+        if (len(recent) == BURN_STREAK
+                and all(t < MIN_PLAUSIBLE_TASK_SECONDS for t in recent)):
+            progress.write(event="abort", reason="burn pattern",
+                           streak=BURN_STREAK, seconds=list(recent),
+                           threshold=MIN_PLAUSIBLE_TASK_SECONDS)
+            raise BurnDetected(
+                f"{BURN_STREAK} consecutive tasks finished in "
+                f"{min(recent):.1f}-{max(recent):.1f}s, all under the "
+                f"{MIN_PLAUSIBLE_TASK_SECONDS}s floor a real task cannot beat "
+                "(pull + container + control suite). Something is refusing the "
+                "work rather than doing it. Stopping instead of burning the "
+                "task list.")
+
         flag = ("witness" if record["witnesses"]
                 else "ok" if record["control"]["passed"] else "UNCHECKED")
         print(f"  [{done}/{len(ids)}] {record['instance_id']:40s} "
               f"{flag:9s} {record['elapsed_seconds']:7.1f}s")
         return record
 
-    records = await asyncio.gather(*(guarded(instances[i]) for i in ids))
+    try:
+        records = await asyncio.gather(*(guarded(instances[i]) for i in ids))
+    except BurnDetected as exc:
+        print(f"\n  ABORTED: {exc}")
+        progress.write(event="run_end", aborted=True, reason=str(exc)[:300])
+        return 3
+    records = [r for r in records if r is not None]
     progress.write(event="run_end", n_tasks=len(records))
     print(f"\n  {len(records)} record(s) -> {RESULTS}")
     print("  aggregate with: ~/.venv-fc/bin/python scale/aggregate.py")

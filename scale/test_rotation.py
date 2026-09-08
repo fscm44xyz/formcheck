@@ -262,5 +262,62 @@ def test_release_is_idempotent():
         shutil.rmtree(d, ignore_errors=True)
 
 
+def test_rate_limited_text_is_recognised():
+    """The 429 must be recognised from what docker actually prints, not from a
+    status code we never see."""
+    real = ("Error response from daemon: unknown: failed to resolve reference "
+            '"docker.io/swebench/x:latest": unexpected status from HEAD request '
+            "to https://registry-1.docker.io/v2/...: 429 Too Many Requests")
+    assert rotation.is_rate_limited(real)
+    assert rotation.is_rate_limited("toomanyrequests: You have reached your "
+                                    "unauthenticated pull rate limit.")
+    assert not rotation.is_rate_limited("no space left on device")
+    assert not rotation.is_rate_limited("")
+
+
+def test_rate_limited_is_not_a_task_failure():
+    """Distinct type, so the caller cannot accidentally bucket it as a result."""
+    assert issubclass(rotation.RateLimited, RuntimeError)
+    assert rotation.RateLimited is not rotation.NotEnoughDisk
+    assert not issubclass(rotation.RateLimited, rotation.NotEnoughDisk)
+
+
+def test_the_governor_paces_off_headers_not_a_constant():
+    """The budget must come from the registry's own numbers. A hardcoded
+    interval is a guess that breaks when the quota changes -- and it did change:
+    the limit is 100 per HOUR, not per six hours as first assumed."""
+    calls = []
+    original = rotation.hub_rate_limit
+    seq = [{"limit": 100, "remaining": 2, "window": 3600},
+           {"limit": 100, "remaining": 90, "window": 3600}]
+    rotation.hub_rate_limit = lambda: seq[min(len(calls), len(seq) - 1)]
+    slept = []
+    original_sleep = rotation.time.sleep
+    rotation.time.sleep = lambda n: slept.append(n)
+    try:
+        def log(**kw):
+            calls.append(kw)
+        info = rotation.wait_for_pull_slot(log)
+        assert info["remaining"] == 90, info
+        assert slept, "must wait when the quota is nearly spent"
+        # window/limit, derived -- not a literal
+        assert slept[0] == max(20, 3600 // 100), slept
+        assert any(c.get("event") == "rate_limit_wait" for c in calls), calls
+    finally:
+        rotation.hub_rate_limit = original
+        rotation.time.sleep = original_sleep
+
+
+def test_unmeasurable_quota_says_so_rather_than_assuming_fine():
+    original = rotation.hub_rate_limit
+    rotation.hub_rate_limit = lambda: None
+    seen = []
+    try:
+        assert rotation.wait_for_pull_slot(lambda **kw: seen.append(kw)) is None
+        assert seen and seen[0]["event"] == "rate_limit_unknown", seen
+    finally:
+        rotation.hub_rate_limit = original
+
+
 if __name__ == "__main__":
     sys.exit(main())

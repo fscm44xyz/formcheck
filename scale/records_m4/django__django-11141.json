@@ -1,0 +1,329 @@
+{
+  "completed": true,
+  "control": {
+    "passed": true,
+    "reason": "untransformed reference scores 1.0"
+  },
+  "digest_trace": [
+    {
+      "digest": "8ff68d95d51301b412264bd37a63442e1cccfa7f7a8e17d5e742e34ca6e84d3f",
+      "memo_hit": false
+    },
+    {
+      "digest": "42bb43ccbf1a2a9881de0af3ceaaf5bc0db04637ca2b44ae6acbedad36dc4c98",
+      "memo_hit": false
+    }
+  ],
+  "disk_orphan_reclaimed_bytes": 0,
+  "disk_residual_bytes": 0,
+  "elapsed_seconds": 141.74,
+  "error": null,
+  "image": "swebench/sweb.eval.x86_64.django_1776_django-11141:latest",
+  "instance_id": "django__django-11141",
+  "leaked_containers": [],
+  "leaked_image": false,
+  "log": [
+    [
+      "<control>",
+      "OK",
+      "untransformed reference scores 1.0"
+    ],
+    [
+      "kwonly_specialize:<no anchor>",
+      "NOT_APPLICABLE",
+      "no anchor inside the gold-touched region"
+    ],
+    [
+      "symbol_rename:MigrationLoader",
+      "UNVALIDATED",
+      "2 failing test(s) have no recognisable failure block -- unknown log shape, not evidence of breakage; first: Files prefixed with underscore, tilde, or dot aren't loaded."
+    ],
+    [
+      "collection_reverse:<no anchor>",
+      "NOT_APPLICABLE",
+      "no anchor inside the gold-touched region"
+    ],
+    [
+      "message_reword:<no anchor>",
+      "NOT_APPLICABLE",
+      "no anchor inside the gold-touched region"
+    ]
+  ],
+  "mountable": true,
+  "multi_target": false,
+  "n_targets": 1,
+  "on_prime_hub": null,
+  "on_prime_hub_reason": "not resolvable offline; no hub environment index is reachable from this repo, verifiers or swebench",
+  "operators_not_applicable": [
+    "collection_reverse",
+    "kwonly_specialize",
+    "message_reword"
+  ],
+  "operators_with_anchors": [
+    "symbol_rename"
+  ],
+  "repo": "django/django",
+  "row": {
+    "elapsed": 81.41,
+    "error": null,
+    "error_type": null,
+    "index": 0,
+    "mode": "formcheck",
+    "name": "django__django-11141",
+    "reason": "unchecked",
+    "valid": null
+  },
+  "rows": [
+    {
+      "anchor": null,
+      "failure_analysis": null,
+      "file": null,
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 1,
+        "found": true,
+        "n_parsed": 25,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 24,
+        "reward": 1.0
+      },
+      "loud_failure": false,
+      "observable": "callable signature (arity / parameter names)",
+      "operator": "kwonly_specialize",
+      "reason": "no anchor inside the gold-touched region",
+      "tier": "HIGH",
+      "tree_digest": "8ff68d95d51301b412264bd37a63442e1cccfa7f7a8e17d5e742e34ca6e84d3f",
+      "verdict": "NOT_APPLICABLE"
+    },
+    {
+      "anchor": "MigrationLoader",
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "broke": [],
+        "coupled": [
+          "test_apply (migrations.test_loader.RecorderTests)",
+          "test_invalid (migrations.test_loader.PycLoaderTests)",
+          "test_valid (migrations.test_loader.PycLoaderTests)",
+          "test_check_consistent_history (migrations.test_loader.LoaderTests)",
+          "test_check_consistent_history_squashed (migrations.test_loader.LoaderTests)",
+          "test_explicit_missing_module (migrations.test_loader.LoaderTests)",
+          "test_first (migrations.test_loader.LoaderTests)",
+          "test_load (migrations.test_loader.LoaderTests)",
+          "test_load_empty_dir (migrations.test_loader.LoaderTests)"
+        ],
+        "failing": [
+          "test_apply (migrations.test_loader.RecorderTests)",
+          "test_invalid (migrations.test_loader.PycLoaderTests)",
+          "test_valid (migrations.test_loader.PycLoaderTests)",
+          "test_check_consistent_history (migrations.test_loader.LoaderTests)",
+          "test_check_consistent_history_squashed (migrations.test_loader.LoaderTests)",
+          "test_explicit_missing_module (migrations.test_loader.LoaderTests)",
+          "test_first (migrations.test_loader.LoaderTests)",
+          "Files prefixed with underscore, tilde, or dot aren't loaded.",
+          "test_load (migrations.test_loader.LoaderTests)",
+          "test_load_empty_dir (migrations.test_loader.LoaderTests)",
+          "Migration directories without an __init__.py file are loaded."
+        ],
+        "symbol": "MigrationLoader",
+        "unexplained": [
+          "Files prefixed with underscore, tilde, or dot aren't loaded. (no failure section found)",
+          "Migration directories without an __init__.py file are loaded. (no failure section found)"
+        ],
+        "unparsed": [
+          "Files prefixed with underscore, tilde, or dot aren't loaded.",
+          "Migration directories without an __init__.py file are loaded."
+        ],
+        "unparsed_log_shape": true
+      },
+      "file": "django/db/migrations/loader.py",
+      "graded_log": "+ ./tests/runtests.py --verbosity 2 --settings=test_sqlite --parallel 1 migrations.test_loader migrations.test_migrations_namespace_package.0001_initial\nTesting against Django installed in '/testbed/django'\nImporting application migrations\nSkipping setup of unused database(s): default, other.\nSystem check identified no issues (0 silenced).\n\ntest_loader (unittest.loader._FailedTest) ... ERROR\n\n======================================================================\nERROR: test_loader (unittest.loader._FailedTest)\n----------------------------------------------------------------------\nImportError: Failed to import test module: test_loader\nTraceback (most recent call last):\n  File \"/opt/miniconda3/envs/testbed/lib/python3.6/unittest/loader.py\", line 153, in loadTestsFromName\n    module = __import__(module_name)\n  File \"/testbed/tests/migrations/test_loader.py\", line 8, in <module>\n    from django.db.migrations.loader import MigrationLoader\nImportError: cannot import name 'MigrationLoader'\n\n\n----------------------------------------------------------------------\nRan 1 test in 0.000s\n\nFAILED (errors=1)\n",
+      "graded_report": {
+        "f2p_fail": 1,
+        "f2p_failing": [
+          "Migration directories without an __init__.py file are loaded."
+        ],
+        "f2p_pass": 0,
+        "found": true,
+        "n_parsed": 2,
+        "p2p_fail": 24,
+        "p2p_failing": [
+          "test_apply (migrations.test_loader.RecorderTests)",
+          "test_invalid (migrations.test_loader.PycLoaderTests)",
+          "test_valid (migrations.test_loader.PycLoaderTests)",
+          "test_check_consistent_history (migrations.test_loader.LoaderTests)",
+          "test_check_consistent_history_squashed (migrations.test_loader.LoaderTests)",
+          "test_explicit_missing_module (migrations.test_loader.LoaderTests)",
+          "test_first (migrations.test_loader.LoaderTests)",
+          "Files prefixed with underscore, tilde, or dot aren't loaded.",
+          "test_load (migrations.test_loader.LoaderTests)",
+          "test_load_empty_dir (migrations.test_loader.LoaderTests)"
+        ],
+        "p2p_pass": 0,
+        "reward": 0.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "2 failing test(s) have no recognisable failure block -- unknown log shape, not evidence of breakage; first: Files prefixed with underscore, tilde, or dot aren't loaded.",
+      "tier": "MEDIUM",
+      "tree_digest": "42bb43ccbf1a2a9881de0af3ceaaf5bc0db04637ca2b44ae6acbedad36dc4c98",
+      "verdict": "UNVALIDATED"
+    },
+    {
+      "anchor": null,
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "broke": [],
+        "coupled": [
+          "test_apply (migrations.test_loader.RecorderTests)",
+          "test_invalid (migrations.test_loader.PycLoaderTests)",
+          "test_valid (migrations.test_loader.PycLoaderTests)",
+          "test_check_consistent_history (migrations.test_loader.LoaderTests)",
+          "test_check_consistent_history_squashed (migrations.test_loader.LoaderTests)",
+          "test_explicit_missing_module (migrations.test_loader.LoaderTests)",
+          "test_first (migrations.test_loader.LoaderTests)",
+          "test_load (migrations.test_loader.LoaderTests)",
+          "test_load_empty_dir (migrations.test_loader.LoaderTests)"
+        ],
+        "failing": [
+          "test_apply (migrations.test_loader.RecorderTests)",
+          "test_invalid (migrations.test_loader.PycLoaderTests)",
+          "test_valid (migrations.test_loader.PycLoaderTests)",
+          "test_check_consistent_history (migrations.test_loader.LoaderTests)",
+          "test_check_consistent_history_squashed (migrations.test_loader.LoaderTests)",
+          "test_explicit_missing_module (migrations.test_loader.LoaderTests)",
+          "test_first (migrations.test_loader.LoaderTests)",
+          "Files prefixed with underscore, tilde, or dot aren't loaded.",
+          "test_load (migrations.test_loader.LoaderTests)",
+          "test_load_empty_dir (migrations.test_loader.LoaderTests)",
+          "Migration directories without an __init__.py file are loaded."
+        ],
+        "symbol": "MigrationLoader",
+        "unexplained": [
+          "Files prefixed with underscore, tilde, or dot aren't loaded. (no failure section found)",
+          "Migration directories without an __init__.py file are loaded. (no failure section found)"
+        ],
+        "unparsed": [
+          "Files prefixed with underscore, tilde, or dot aren't loaded.",
+          "Migration directories without an __init__.py file are loaded."
+        ],
+        "unparsed_log_shape": true
+      },
+      "file": null,
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 1,
+        "f2p_failing": [
+          "Migration directories without an __init__.py file are loaded."
+        ],
+        "f2p_pass": 0,
+        "found": true,
+        "n_parsed": 2,
+        "p2p_fail": 24,
+        "p2p_failing": [
+          "test_apply (migrations.test_loader.RecorderTests)",
+          "test_invalid (migrations.test_loader.PycLoaderTests)",
+          "test_valid (migrations.test_loader.PycLoaderTests)",
+          "test_check_consistent_history (migrations.test_loader.LoaderTests)",
+          "test_check_consistent_history_squashed (migrations.test_loader.LoaderTests)",
+          "test_explicit_missing_module (migrations.test_loader.LoaderTests)",
+          "test_first (migrations.test_loader.LoaderTests)",
+          "Files prefixed with underscore, tilde, or dot aren't loaded.",
+          "test_load (migrations.test_loader.LoaderTests)",
+          "test_load_empty_dir (migrations.test_loader.LoaderTests)"
+        ],
+        "p2p_pass": 0,
+        "reward": 0.0
+      },
+      "loud_failure": false,
+      "observable": "order of elements in a returned collection",
+      "operator": "collection_reverse",
+      "reason": "no anchor inside the gold-touched region",
+      "tier": "MEDIUM",
+      "tree_digest": "42bb43ccbf1a2a9881de0af3ceaaf5bc0db04637ca2b44ae6acbedad36dc4c98",
+      "verdict": "NOT_APPLICABLE"
+    },
+    {
+      "anchor": null,
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "broke": [],
+        "coupled": [
+          "test_apply (migrations.test_loader.RecorderTests)",
+          "test_invalid (migrations.test_loader.PycLoaderTests)",
+          "test_valid (migrations.test_loader.PycLoaderTests)",
+          "test_check_consistent_history (migrations.test_loader.LoaderTests)",
+          "test_check_consistent_history_squashed (migrations.test_loader.LoaderTests)",
+          "test_explicit_missing_module (migrations.test_loader.LoaderTests)",
+          "test_first (migrations.test_loader.LoaderTests)",
+          "test_load (migrations.test_loader.LoaderTests)",
+          "test_load_empty_dir (migrations.test_loader.LoaderTests)"
+        ],
+        "failing": [
+          "test_apply (migrations.test_loader.RecorderTests)",
+          "test_invalid (migrations.test_loader.PycLoaderTests)",
+          "test_valid (migrations.test_loader.PycLoaderTests)",
+          "test_check_consistent_history (migrations.test_loader.LoaderTests)",
+          "test_check_consistent_history_squashed (migrations.test_loader.LoaderTests)",
+          "test_explicit_missing_module (migrations.test_loader.LoaderTests)",
+          "test_first (migrations.test_loader.LoaderTests)",
+          "Files prefixed with underscore, tilde, or dot aren't loaded.",
+          "test_load (migrations.test_loader.LoaderTests)",
+          "test_load_empty_dir (migrations.test_loader.LoaderTests)",
+          "Migration directories without an __init__.py file are loaded."
+        ],
+        "symbol": "MigrationLoader",
+        "unexplained": [
+          "Files prefixed with underscore, tilde, or dot aren't loaded. (no failure section found)",
+          "Migration directories without an __init__.py file are loaded. (no failure section found)"
+        ],
+        "unparsed": [
+          "Files prefixed with underscore, tilde, or dot aren't loaded.",
+          "Migration directories without an __init__.py file are loaded."
+        ],
+        "unparsed_log_shape": true
+      },
+      "file": null,
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 1,
+        "f2p_failing": [
+          "Migration directories without an __init__.py file are loaded."
+        ],
+        "f2p_pass": 0,
+        "found": true,
+        "n_parsed": 2,
+        "p2p_fail": 24,
+        "p2p_failing": [
+          "test_apply (migrations.test_loader.RecorderTests)",
+          "test_invalid (migrations.test_loader.PycLoaderTests)",
+          "test_valid (migrations.test_loader.PycLoaderTests)",
+          "test_check_consistent_history (migrations.test_loader.LoaderTests)",
+          "test_check_consistent_history_squashed (migrations.test_loader.LoaderTests)",
+          "test_explicit_missing_module (migrations.test_loader.LoaderTests)",
+          "test_first (migrations.test_loader.LoaderTests)",
+          "Files prefixed with underscore, tilde, or dot aren't loaded.",
+          "test_load (migrations.test_loader.LoaderTests)",
+          "test_load_empty_dir (migrations.test_loader.LoaderTests)"
+        ],
+        "p2p_pass": 0,
+        "reward": 0.0
+      },
+      "loud_failure": false,
+      "observable": "human-readable text of an exception message",
+      "operator": "message_reword",
+      "reason": "no anchor inside the gold-touched region",
+      "tier": "HIGH",
+      "tree_digest": "42bb43ccbf1a2a9881de0af3ceaaf5bc0db04637ca2b44ae6acbedad36dc4c98",
+      "verdict": "NOT_APPLICABLE"
+    }
+  ],
+  "targets": [
+    "django/db/migrations/loader.py"
+  ],
+  "version": "3.1",
+  "witnesses": []
+}

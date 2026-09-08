@@ -805,3 +805,64 @@ fixed code into the same records directory rather than restarting a 7-hour run.
 `scale/rotation.py` (`_unlink`, `Leases.live_refs`); `scale/run.py`
 (`build_record`).
 
+---
+
+## 21. 330 tasks burned in sequence and nothing stopped the run
+
+**Instance six of the family, and the worst-behaved of them: the monitor
+reported healthy the entire time, because it was watching for causes it already
+knew.**
+
+M4 exhausted Docker Hub's anonymous pull quota. Every subsequent `docker pull`
+returned `429 Too Many Requests` in about two seconds, so each "task" completed
+in 2.5s having pulled nothing, started nothing and judged nothing. In 32 minutes
+the run consumed **380 of its 500 tasks and produced 334 errors.**
+
+**Why nothing caught it.** The monitor filtered on `DiskBudgetError`,
+`Traceback`, `abort` and `UNCHECKED` — every failure mode that had already bitten
+this project. A fast, clean, *recorded* failure is none of those. The per-task
+disk budget was satisfied (nothing was pulled, so nothing leaked). The control
+check was satisfied vacuously (it never ran). Every guard reported success
+because every guard was answering a question about a cause that had already been
+seen.
+
+It was found because a human asked whether the run was still going, and the
+**rate** was impossible: 362 of 500 in 32 minutes against a 6.4-hour projection.
+Nothing in the machinery said so.
+
+**Two facts about the quota, both wrong in the first diagnosis.** It is 100 pulls
+per **hour**, not per six hours; and `~/.docker/config.json` did not exist, so
+every pull in this project has been anonymous. Both were checked rather than
+assumed once the first assumption proved wrong.
+
+**Rule 1 — assert something causally necessary, not the absence of known
+causes.** A real task must pull an image, start a container and run the control
+suite. It cannot be fast. `MIN_PLAUSIBLE_TASK_SECONDS = 25` with
+`BURN_STREAK = 8`: eight consecutive tasks under the floor aborts the run. The
+threshold is measured, not guessed — across 97 tasks whose control passed the
+fastest was **30.5s**; across 357 tasks burned by the limit the slowest was
+**19.6s** and the 95th percentile **3.4s**. The two populations do not overlap
+and 25 sits in the empty gap between them.
+
+**Rule 2 — pace off the registry's own headers, never a constant.**
+`x-ratelimit-limit` and `x-ratelimit-remaining` are published on every request.
+`wait_for_pull_slot` reads them, holds `PULL_RESERVE = 8` in hand, and derives
+its wait from `window / limit` rather than a literal. `remaining` is logged with
+every pull, so the margin is visible in `progress.jsonl` instead of reconstructed
+after a burn. An unmeasurable quota logs `rate_limit_unknown` and proceeds —
+"cannot measure" is not "fine".
+
+**Rule 3 — an infrastructure refusal is not a task result.** A 429 leaves the
+task *unattempted*: `RateLimited` is a distinct exception, `run_one` writes **no
+record at all**, and the task returns to the queue for a resume. Recording it as
+a failed task is what let 334 refusals look like 334 results, and it is the same
+error as reporting an unparseable log as `INVALID` (`CHANGES.md` 18).
+
+**Fixing the ceiling would not have fixed the defect.** Authenticating raises the
+quota to 200/hour and would have hidden this for another run. A harness that
+survives only because it has headroom is not fixed.
+
+`scale/rotation.py` (`hub_rate_limit`, `wait_for_pull_slot`, `is_rate_limited`,
+`RateLimited`); `scale/run.py` (`MIN_PLAUSIBLE_TASK_SECONDS`, `BURN_STREAK`,
+`BurnDetected`); `scale/test_burn.py`.
+

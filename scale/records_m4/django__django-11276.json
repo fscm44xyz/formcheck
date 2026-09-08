@@ -1,0 +1,52 @@
+{
+  "completed": true,
+  "control": {
+    "passed": false,
+    "reason": "the untransformed reference solution scored 0.0, not 1.0; F2P 26/26, P2P 546/548; first failing: test_strip_tags_files (utils_tests.test_html.TestUtilsHtml)"
+  },
+  "digest_trace": [
+    {
+      "digest": "0b509b73c7e97e7369c76bbf1622a1cd916690db30b1610d16a7fcb63ed65465",
+      "memo_hit": false
+    }
+  ],
+  "disk_orphan_reclaimed_bytes": 0,
+  "disk_residual_bytes": 0,
+  "elapsed_seconds": 32.72,
+  "error": null,
+  "image": "swebench/sweb.eval.x86_64.django_1776_django-11276:latest",
+  "instance_id": "django__django-11276",
+  "leaked_containers": [],
+  "leaked_image": false,
+  "log": [
+    [
+      "<control>",
+      "HARNESS_UNPROVEN",
+      "the untransformed reference solution scored 0.0, not 1.0; F2P 26/26, P2P 546/548; first failing: test_strip_tags_files (utils_tests.test_html.TestUtilsHtml)"
+    ]
+  ],
+  "mountable": true,
+  "multi_target": false,
+  "n_targets": 1,
+  "on_prime_hub": null,
+  "on_prime_hub_reason": "not resolvable offline; no hub environment index is reachable from this repo, verifiers or swebench",
+  "operators_not_applicable": [],
+  "operators_with_anchors": [],
+  "repo": "django/django",
+  "row": {
+    "elapsed": 18.73,
+    "error": null,
+    "error_type": null,
+    "index": 0,
+    "mode": "formcheck",
+    "name": "django__django-11276",
+    "reason": "unchecked",
+    "valid": null
+  },
+  "rows": [],
+  "targets": [
+    "django/utils/html.py"
+  ],
+  "version": "3.0",
+  "witnesses": []
+}

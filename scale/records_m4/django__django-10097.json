@@ -1,0 +1,52 @@
+{
+  "completed": true,
+  "control": {
+    "passed": false,
+    "reason": "the untransformed reference solution scored 0.0, not 1.0; F2P 431/438, P2P 1427/1432; first failing: test_PasswordChangeDoneView (auth_tests.test_templates.AuthTemplateTests)"
+  },
+  "digest_trace": [
+    {
+      "digest": "65f77081ffd2c4c4ccfe2dafdf646a60b040a614926131174688469a48e4bcc9",
+      "memo_hit": false
+    }
+  ],
+  "disk_orphan_reclaimed_bytes": 0,
+  "disk_residual_bytes": 0,
+  "elapsed_seconds": 584.78,
+  "error": null,
+  "image": "swebench/sweb.eval.x86_64.django_1776_django-10097:latest",
+  "instance_id": "django__django-10097",
+  "leaked_containers": [],
+  "leaked_image": false,
+  "log": [
+    [
+      "<control>",
+      "HARNESS_UNPROVEN",
+      "the untransformed reference solution scored 0.0, not 1.0; F2P 431/438, P2P 1427/1432; first failing: test_PasswordChangeDoneView (auth_tests.test_templates.AuthTemplateTests)"
+    ]
+  ],
+  "mountable": true,
+  "multi_target": false,
+  "n_targets": 1,
+  "on_prime_hub": null,
+  "on_prime_hub_reason": "not resolvable offline; no hub environment index is reachable from this repo, verifiers or swebench",
+  "operators_not_applicable": [],
+  "operators_with_anchors": [],
+  "repo": "django/django",
+  "row": {
+    "elapsed": 531.97,
+    "error": null,
+    "error_type": null,
+    "index": 0,
+    "mode": "formcheck",
+    "name": "django__django-10097",
+    "reason": "unchecked",
+    "valid": null
+  },
+  "rows": [],
+  "targets": [
+    "django/core/validators.py"
+  ],
+  "version": "2.2",
+  "witnesses": []
+}

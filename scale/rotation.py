@@ -46,6 +46,94 @@ ASSUMED_IMAGE_BYTES = 4 * 1024**3
 HEADROOM_FACTOR = 2
 
 
+class RateLimited(RuntimeError):
+    """The registry refused to serve us, so the task was never attempted.
+
+    Distinct from every task-level failure on purpose. A 429 says nothing about
+    the task: it was not mounted, not controlled, not judged. Recording it as a
+    failed task would put an infrastructure refusal in the same bucket as a real
+    result, and 334 of those in a row is what M4 did before it was stopped.
+    """
+
+
+# Docker Hub publishes the quota on every request. Reading it is better than
+# pacing against a hardcoded interval, which is a guess that breaks the day the
+# quota changes -- and it did change: the limit is 100 per HOUR, not per six
+# hours as first assumed.
+_RATE_URL = ("https://auth.docker.io/token?service=registry.docker.io"
+             "&scope=repository:ratelimitpreview/test:pull")
+_RATE_HEAD = "https://registry-1.docker.io/v2/ratelimitpreview/test/manifests/latest"
+
+# Keep this many pulls in hand. Not a throttle -- a floor, so a burst never
+# takes the last slot and turns every subsequent task into a refusal.
+PULL_RESERVE = 8
+
+
+def hub_rate_limit():
+    """`{limit, remaining, window}` from Docker Hub's own headers, or None.
+
+    The `ratelimitpreview/test` probe is the endpoint Docker documents for this
+    and does not itself consume quota. Returning None means "cannot measure",
+    which the caller must treat as "proceed and say so" rather than as "fine".
+    """
+    import json as _json
+    import urllib.request
+    try:
+        with urllib.request.urlopen(_RATE_URL, timeout=20) as r:
+            token = _json.load(r)["token"]
+        req = urllib.request.Request(_RATE_HEAD, method="HEAD")
+        req.add_header("Authorization", f"Bearer {token}")
+        with urllib.request.urlopen(req, timeout=20) as r:
+            hdrs = {k.lower(): v for k, v in r.headers.items()}
+    except Exception:
+        return None
+
+    def parse(name):
+        raw = hdrs.get(name)
+        if not raw:
+            return None
+        head = raw.split(";")[0].strip()
+        window = raw.split("w=")[-1] if "w=" in raw else "3600"
+        try:
+            return int(head), int(window)
+        except ValueError:
+            return None
+
+    lim, rem = parse("ratelimit-limit"), parse("ratelimit-remaining")
+    if not lim or not rem:
+        return None
+    return {"limit": lim[0], "remaining": rem[0], "window": lim[1]}
+
+
+def wait_for_pull_slot(log=None):
+    """Block until the registry has quota to spare, pacing off its own headers.
+
+    Returns the last reading (or None if the quota cannot be measured), so the
+    caller can record `remaining` alongside the pull and the margin is visible
+    in `progress.jsonl` rather than inferred afterwards.
+    """
+    log = log or (lambda **kw: None)
+    while True:
+        info = hub_rate_limit()
+        if info is None:
+            log(event="rate_limit_unknown",
+                note="registry quota not measurable; proceeding unpaced")
+            return None
+        if info["remaining"] > PULL_RESERVE:
+            return info
+        # One slot ages out roughly every window/limit seconds in a sliding
+        # window, so that is the natural wait -- derived, not guessed.
+        nap = max(20, info["window"] // max(1, info["limit"]))
+        log(event="rate_limit_wait", remaining=info["remaining"],
+            limit=info["limit"], window=info["window"], sleep_s=nap)
+        time.sleep(nap)
+
+
+def is_rate_limited(text: str) -> bool:
+    t = (text or "").lower()
+    return "429" in t or "toomanyrequests" in t or "too many requests" in t
+
+
 class NotEnoughDisk(RuntimeError):
     """Raised instead of letting `docker pull` fail with a space error that
     reads like a network fault."""
@@ -393,6 +481,7 @@ class ImageLease:
             self.leases.take(self.ref, self.instance_id)
         t0 = time.time()
         global _PULLS_IN_FLIGHT
+        quota = await asyncio.to_thread(wait_for_pull_slot, self.log)
         _PULLS_IN_FLIGHT += 1
         try:
             pull = await asyncio.to_thread(_docker, "pull", self.ref,
@@ -401,11 +490,20 @@ class ImageLease:
             _PULLS_IN_FLIGHT -= 1
         if pull.returncode != 0:
             self.leases.release(self.ref)
+            if is_rate_limited(pull.stderr):
+                # NOT a task failure. The task was never attempted.
+                raise RateLimited(
+                    f"registry refused {self.ref}: "
+                    f"{pull.stderr.strip()[:200]}")
             raise RuntimeError(f"docker pull {self.ref}: "
                                f"{pull.stderr.strip()[:300]}")
         self.size = await asyncio.to_thread(image_size, self.ref)
         self.log(event="pulled", instance_id=self.instance_id, ref=self.ref,
-                 bytes=self.size, seconds=round(time.time() - t0, 1))
+                 bytes=self.size, seconds=round(time.time() - t0, 1),
+                 # The margin, logged per pull so it is visible rather than
+                 # reconstructed after a burn.
+                 quota_remaining=(quota or {}).get("remaining"),
+                 quota_limit=(quota or {}).get("limit"))
         return self
 
     async def __aexit__(self, *exc):
