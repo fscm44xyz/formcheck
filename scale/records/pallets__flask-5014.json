@@ -4,10 +4,14 @@
     "passed": true,
     "reason": "untransformed reference scores 1.0"
   },
-  "elapsed_seconds": 50.39,
+  "disk_orphan_reclaimed_bytes": 0,
+  "disk_residual_bytes": 0,
+  "elapsed_seconds": 109.87,
   "error": null,
-  "image": "swebench/sweb.eval.x86_64.scikit-learn_1776_scikit-learn-14894:latest",
-  "instance_id": "scikit-learn__scikit-learn-14894",
+  "image": "swebench/sweb.eval.x86_64.pallets_1776_flask-5014:latest",
+  "instance_id": "pallets__flask-5014",
+  "leaked_containers": [],
+  "leaked_image": false,
   "log": [
     [
       "<control>",
@@ -20,9 +24,9 @@
       "no anchor inside the gold-touched region"
     ],
     [
-      "symbol_rename:BaseLibSVM",
-      "CLEAN",
-      "reward 1.0"
+      "symbol_rename:Blueprint",
+      "REFUSED",
+      "BORDER: the issue names 'Blueprint' -- candidate CONTRACT, route to the rubric"
     ],
     [
       "collection_reverse:<no anchor>",
@@ -32,7 +36,7 @@
     [
       "message_reword:<no anchor>",
       "NOT_APPLICABLE",
-      "no anchor inside the gold-touched region; 7 anchor(s) elsewhere in the target"
+      "no anchor inside the gold-touched region; 5 anchor(s) elsewhere in the target"
     ]
   ],
   "mountable": true,
@@ -48,23 +52,33 @@
   "operators_with_anchors": [
     "symbol_rename"
   ],
-  "repo": "scikit-learn/scikit-learn",
+  "repo": "pallets/flask",
   "row": {
-    "elapsed": 38.8,
+    "elapsed": 14.29,
     "error": null,
     "error_type": null,
     "index": 0,
     "mode": "formcheck",
-    "name": "scikit-learn__scikit-learn-14894",
-    "reason": "valid",
-    "valid": true
+    "name": "pallets__flask-5014",
+    "reason": "unchecked",
+    "valid": null
   },
   "rows": [
     {
       "anchor": null,
       "file": null,
       "graded_log": null,
-      "graded_report": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 1,
+        "found": true,
+        "n_parsed": 60,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 59,
+        "reward": 1.0
+      },
       "loud_failure": false,
       "observable": "callable signature (arity / parameter names)",
       "operator": "kwonly_specialize",
@@ -73,22 +87,42 @@
       "verdict": "NOT_APPLICABLE"
     },
     {
-      "anchor": "BaseLibSVM",
-      "file": "sklearn/svm/base.py",
+      "anchor": "Blueprint",
+      "file": "src/flask/blueprints.py",
       "graded_log": null,
-      "graded_report": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 1,
+        "found": true,
+        "n_parsed": 60,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 59,
+        "reward": 1.0
+      },
       "loud_failure": true,
       "observable": "symbol identity (module-level name)",
       "operator": "symbol_rename",
-      "reason": "reward 1.0",
+      "reason": "BORDER: the issue names 'Blueprint' -- candidate CONTRACT, route to the rubric",
       "tier": "MEDIUM",
-      "verdict": "CLEAN"
+      "verdict": "REFUSED"
     },
     {
       "anchor": null,
       "file": null,
       "graded_log": null,
-      "graded_report": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 1,
+        "found": true,
+        "n_parsed": 60,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 59,
+        "reward": 1.0
+      },
       "loud_failure": false,
       "observable": "order of elements in a returned collection",
       "operator": "collection_reverse",
@@ -100,18 +134,28 @@
       "anchor": null,
       "file": null,
       "graded_log": null,
-      "graded_report": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 1,
+        "found": true,
+        "n_parsed": 60,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 59,
+        "reward": 1.0
+      },
       "loud_failure": false,
       "observable": "human-readable text of an exception message",
       "operator": "message_reword",
-      "reason": "no anchor inside the gold-touched region; 7 anchor(s) elsewhere in the target",
+      "reason": "no anchor inside the gold-touched region; 5 anchor(s) elsewhere in the target",
       "tier": "HIGH",
       "verdict": "NOT_APPLICABLE"
     }
   ],
   "targets": [
-    "sklearn/svm/base.py"
+    "src/flask/blueprints.py"
   ],
-  "version": "0.22",
+  "version": "2.3",
   "witnesses": []
 }

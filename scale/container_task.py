@@ -491,14 +491,16 @@ class SweBenchFormcheckTask(ContainerFormcheckTask):
             log = ("+ " + full + "\n"
                    + (result.stdout or "") + "\n" + (result.stderr or ""))
             self._graded_memo = {key: (log, grade_log(log, self.meta))}
+        # Kept current here rather than only in `formcheck_graded`: the oracle
+        # grades the transformed tree through this method, and a row that
+        # records `self.graded` set elsewhere would attach the CONTROL's report
+        # to a verdict about a transform.
+        self.graded_log, self.graded = self._graded_memo[key]
         return self._graded_memo[key][1]
 
     async def formcheck_graded(self, runtime):
-        await self.graded_report(runtime)
-        log, graded = self._graded_memo[self._tree_digest()]
-        self.graded_log = log
-        self.graded = graded
-        return log, graded["reward"]
+        graded = await self.graded_report(runtime)
+        return self.graded_log, graded["reward"]
 
     async def formcheck_oracle(self, runtime, report=None):
         satisfied = await self.oracle.check(self, runtime, report)

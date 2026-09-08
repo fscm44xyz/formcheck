@@ -163,7 +163,90 @@ def _pid_alive(pid: int) -> bool:
     return True
 
 
-def reconcile(leases: Leases, keep: set | None = None) -> dict:
+class DiskBudgetError(RuntimeError):
+    """Raised when disk does not come back after a task and cannot be reclaimed."""
+
+
+# A task that has cleaned up correctly returns the filesystem to within noise of
+# where it started; both a bare pull/rmi cycle and a full task (pull, container,
+# formcheck, teardown, rmi) were measured at exactly 0 MiB residual. Anything
+# above this is unexplained, and an unexplained budget cannot be guarded.
+RESIDUAL_ABORT_MIB = 256
+
+
+# The name `verifiers` gives the containers it starts for a validate run:
+# `validate-{mode}-{idx}-{8 hex}` (`verifiers/v1/cli/validate.py`, `_run_check`).
+# Matching on this prefix is what keeps reconcile from ever touching a container
+# belonging to something else on this host.
+CONTAINER_PREFIX = "validate-"
+
+
+def reconcile_containers(keep_images: set) -> list:
+    """Remove validate containers a killed worker left behind.
+
+    A worker killed mid-task never reaches `runtime.stop()`, so its container
+    keeps RUNNING. That is not merely untidy: a running container holds its
+    image, so `docker rmi` cannot remove it and `docker image prune` will not
+    collect its layers either. Reclaiming the image is therefore impossible
+    until the container is gone, which is why this runs before the image sweep
+    rather than after it.
+
+    A container is orphaned iff its image is not one a live lease is holding. A
+    live worker's container is protected because its image is in `keep_images`.
+    """
+    out = _docker("ps", "-a", "--format", "{{.Names}}\t{{.Image}}")
+    removed = []
+    for line in out.stdout.splitlines():
+        name, _, image = line.partition("\t")
+        if not name.startswith(CONTAINER_PREFIX) or image in keep_images:
+            continue
+        if _docker("rm", "-f", name, timeout=120).returncode == 0:
+            removed.append(name)
+    return removed
+
+
+def image_present(ref: str) -> bool:
+    return bool(_docker("images", "-q", ref).stdout.strip())
+
+
+def containers_for(ref: str) -> list:
+    out = _docker("ps", "-a", "--filter", f"ancestor={ref}", "--format", "{{.Names}}")
+    return [n for n in out.stdout.split() if n]
+
+
+def prune_is_safe() -> bool:
+    """False while any worker is pulling. See `_PULLS_IN_FLIGHT`."""
+    return _PULLS_IN_FLIGHT == 0
+
+
+def reclaim_orphans(force: bool = False) -> int:
+    """Collect layer data no image or container references, measured by `df`.
+
+    WHY THIS EXISTS AND WHY IT IS MEASURED WITH `df`. A task killed mid-flight
+    leaves layer data that `docker rmi` on the image does not collect. Worse,
+    `docker system df` does not report it: over one session of this project it
+    accumulated 5.06 GiB while `docker system df` showed `0B (0%)` reclaimable
+    throughout, and `docker system prune` then reported reclaiming 41 kB while
+    the filesystem gave back 5185 MiB. Docker's own accounting is therefore not
+    usable as the budget; the filesystem is. Every byte figure here is a `df`
+    delta.
+
+    `image prune`, not `system prune`: it removes only dangling, untagged layer
+    data. It can never take a tagged image, so it cannot touch a live worker's
+    image or an unrelated workload's, and it does not remove stopped containers
+    that might belong to something else on this host.
+    """
+    if not (force or prune_is_safe()):
+        # Skipped, not silently done: a pull is in flight and pruning would
+        # kill it. The orphan sweep is not urgent -- it runs at the start of
+        # every run, when nothing is pulling.
+        return 0
+    before = free_bytes()
+    _docker("image", "prune", "-f", timeout=300)
+    return max(0, free_bytes() - before)
+
+
+def reconcile(leases: Leases, keep: set | None = None, prune: bool = False) -> dict:
     """Remove every resident SWE-bench image no live worker is using.
 
     Returns what was reclaimed, so the caller can put it in `progress.jsonl`.
@@ -171,6 +254,7 @@ def reconcile(leases: Leases, keep: set | None = None) -> dict:
     with less free space than it started needs to show where it went.
     """
     keep = (keep or set()) | leases.live_refs()
+    stale_containers = reconcile_containers(keep)
     removed, reclaimed = [], 0
     for ref, size in resident_images().items():
         if ref in keep:
@@ -182,7 +266,14 @@ def reconcile(leases: Leases, keep: set | None = None) -> dict:
         # A non-zero rc means something else holds the image (a running
         # container from another workload). Leaving it is correct; the headroom
         # check below is what decides whether the run can still proceed.
-    return {"removed": removed, "reclaimed_bytes": reclaimed,
+    orphaned = reclaim_orphans() if prune else 0
+    return {"removed": removed,
+            "containers_removed": stale_containers,
+            # What `docker image inspect` said the removed images were worth.
+            "reclaimed_bytes": reclaimed,
+            # What the filesystem actually gave back from orphaned layer data,
+            # which is the number docker's own accounting hides.
+            "orphan_bytes_reclaimed": orphaned,
             "free_bytes_after": free_bytes()}
 
 
@@ -209,6 +300,14 @@ RAM_PER_WORKER = 1536 * 1024**2
 MAX_WORKERS = 8
 
 _RECONCILE_LOCK = asyncio.Lock()
+
+# How many workers are inside a `docker pull` right now. Pruning is not safe
+# while any of them are: `docker image prune` drops containerd content-store
+# leases, and a pull in flight is HOLDING one, so the pull dies with
+# "lease does not exist: not found" -- a daemon-level error with nothing in its
+# text to connect it to the prune that caused it. Found by M2, whose five tasks
+# all came back `unchecked` in ~2s. See `CHANGES.md` 11.
+_PULLS_IN_FLIGHT = 0
 
 
 def available_ram_bytes() -> int:
@@ -275,7 +374,13 @@ class ImageLease:
             ensure_headroom()
             self.leases.take(self.ref, self.instance_id)
         t0 = time.time()
-        pull = await asyncio.to_thread(_docker, "pull", self.ref, timeout=3600)
+        global _PULLS_IN_FLIGHT
+        _PULLS_IN_FLIGHT += 1
+        try:
+            pull = await asyncio.to_thread(_docker, "pull", self.ref,
+                                           timeout=3600)
+        finally:
+            _PULLS_IN_FLIGHT -= 1
         if pull.returncode != 0:
             self.leases.release(self.ref)
             raise RuntimeError(f"docker pull {self.ref}: "

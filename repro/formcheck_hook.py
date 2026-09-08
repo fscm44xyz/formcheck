@@ -178,7 +178,8 @@ class FormCheckMixin:
                     self.formcheck_log.append(
                         (label, "INVALID", "transform broke the contract"))
                     self._formcheck_row(op, anchor, "INVALID",
-                                        "transform broke the contract", report)
+                                        "transform broke the contract", report,
+                                        graded_log=getattr(self, "graded_log", None))
                     judged += 1
                     continue
                 self.formcheck_reset()
@@ -235,7 +236,7 @@ class FormCheckMixin:
             # later: a witness is only interpretable if we can say WHICH tests
             # failed, and re-parsing the log on a different code path is the
             # cross-path inference 4.1 warns about.
-            "graded_report": getattr(self, "graded", None) if graded_log else None,
+            "graded_report": getattr(self, "graded", None),
         })
 
     def formcheck_in_scope(self, anchor) -> bool:

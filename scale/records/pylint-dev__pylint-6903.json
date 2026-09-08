@@ -4,10 +4,14 @@
     "passed": true,
     "reason": "untransformed reference scores 1.0"
   },
-  "elapsed_seconds": 286.5,
+  "disk_orphan_reclaimed_bytes": 0,
+  "disk_residual_bytes": 0,
+  "elapsed_seconds": 123.86,
   "error": null,
-  "image": "swebench/sweb.eval.x86_64.sympy_1776_sympy-17139:latest",
-  "instance_id": "sympy__sympy-17139",
+  "image": "swebench/sweb.eval.x86_64.pylint-dev_1776_pylint-6903:latest",
+  "instance_id": "pylint-dev__pylint-6903",
+  "leaked_containers": [],
+  "leaked_image": false,
   "log": [
     [
       "<control>",
@@ -20,9 +24,9 @@
       "no anchor inside the gold-touched region"
     ],
     [
-      "symbol_rename:_TR56",
+      "symbol_rename:_query_cpu",
       "REFUSED",
-      "BORDER: the issue names '_TR56' -- candidate CONTRACT, route to the rubric"
+      "BORDER: the issue names '_query_cpu' -- candidate CONTRACT, route to the rubric"
     ],
     [
       "collection_reverse:<no anchor>",
@@ -32,7 +36,7 @@
     [
       "message_reword:<no anchor>",
       "NOT_APPLICABLE",
-      "no anchor inside the gold-touched region; 1 anchor(s) elsewhere in the target"
+      "no anchor inside the gold-touched region"
     ]
   ],
   "mountable": true,
@@ -48,14 +52,14 @@
   "operators_with_anchors": [
     "symbol_rename"
   ],
-  "repo": "sympy/sympy",
+  "repo": "pylint-dev/pylint",
   "row": {
-    "elapsed": 244.96,
+    "elapsed": 26.37,
     "error": null,
     "error_type": null,
     "index": 0,
     "mode": "formcheck",
-    "name": "sympy__sympy-17139",
+    "name": "pylint-dev__pylint-6903",
     "reason": "unchecked",
     "valid": null
   },
@@ -64,7 +68,17 @@
       "anchor": null,
       "file": null,
       "graded_log": null,
-      "graded_report": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 1,
+        "found": true,
+        "n_parsed": 9,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 8,
+        "reward": 1.0
+      },
       "loud_failure": false,
       "observable": "callable signature (arity / parameter names)",
       "operator": "kwonly_specialize",
@@ -73,14 +87,24 @@
       "verdict": "NOT_APPLICABLE"
     },
     {
-      "anchor": "_TR56",
-      "file": "sympy/simplify/fu.py",
+      "anchor": "_query_cpu",
+      "file": "pylint/lint/run.py",
       "graded_log": null,
-      "graded_report": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 1,
+        "found": true,
+        "n_parsed": 9,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 8,
+        "reward": 1.0
+      },
       "loud_failure": true,
       "observable": "symbol identity (module-level name)",
       "operator": "symbol_rename",
-      "reason": "BORDER: the issue names '_TR56' -- candidate CONTRACT, route to the rubric",
+      "reason": "BORDER: the issue names '_query_cpu' -- candidate CONTRACT, route to the rubric",
       "tier": "MEDIUM",
       "verdict": "REFUSED"
     },
@@ -88,7 +112,17 @@
       "anchor": null,
       "file": null,
       "graded_log": null,
-      "graded_report": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 1,
+        "found": true,
+        "n_parsed": 9,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 8,
+        "reward": 1.0
+      },
       "loud_failure": false,
       "observable": "order of elements in a returned collection",
       "operator": "collection_reverse",
@@ -100,18 +134,28 @@
       "anchor": null,
       "file": null,
       "graded_log": null,
-      "graded_report": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 1,
+        "found": true,
+        "n_parsed": 9,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 8,
+        "reward": 1.0
+      },
       "loud_failure": false,
       "observable": "human-readable text of an exception message",
       "operator": "message_reword",
-      "reason": "no anchor inside the gold-touched region; 1 anchor(s) elsewhere in the target",
+      "reason": "no anchor inside the gold-touched region",
       "tier": "HIGH",
       "verdict": "NOT_APPLICABLE"
     }
   ],
   "targets": [
-    "sympy/simplify/fu.py"
+    "pylint/lint/run.py"
   ],
-  "version": "1.5",
+  "version": "2.15",
   "witnesses": []
 }

@@ -300,36 +300,206 @@ they are milliseconds, not minutes, and the long operations are all awaited.
 
 ---
 
-## 10. Disk accounting is not yet trustworthy enough for a 500-task run
+## 10. Disk accounting: attributed, and docker's own numbers are not usable
 
-**Open item, recorded because the pilot could not close it and M2 depends on it.**
+**Closed before M2, as required. The growth was crash residue, not a per-task
+leak, and the useful finding is that `docker system df` cannot be the budget.**
 
-After the pilot, `docker system df` reports essentially nothing resident -- one
-25.9 kB `hello-world` image, no volumes, no build cache, and `scale/.leases/` is
-empty, so rotation did its job. Yet the filesystem holding the image store shows
-**~5 GiB more used than at the start of the session**, and that growth cannot be
-attributed with the permissions available here: every directory this user can
-read (`~/.cache` 0.7 GiB, `~/.venv-fc` 0.6 GiB, the two repos 29 MB) accounts for
-well under a gigabyte, and `/var/lib/docker` is not readable without root.
+**What was measured.** Two controlled cycles, both timed against `df` at the
+daemon's own `DockerRootDir`:
 
-**Why it matters.** `rotation.ensure_headroom` refuses a pull when free space is
-below twice the image size, and `suggested_workers` derives the worker count from
-free space. Both are only as good as the number they read. Unattributed growth of
-~1 GiB per task, extrapolated over 500 tasks, is the difference between a run
-that completes and one that dies of a disk error two thirds of the way through --
-and by entry 9's argument it would die reporting something that looks like a
-transport fault.
+  * pull, then `docker rmi`, no container ever started -> **0 MiB residual**
+  * a full task -- pull, container start, `formcheck`, teardown, `rmi` ->
+    **0 MiB residual**
 
-**What was fixed now.** The storage path is no longer hardcoded: it is read from
-`docker info --format {{.DockerRootDir}}`, because where images live is the
-daemon's business and a headroom check guarding the wrong filesystem passes while
-the image store fills. On this WSL host the two happen to coincide, which is
-exactly why hardcoding it would have gone unnoticed.
+So nothing leaks per task. The ~5 GiB was left by the runs that were
+*interrupted*: the aborted first pilot with two tasks in flight, plus killed
+gate runs.
 
-**What M2 must do before the full run.** Measure free space at the daemon's root
-dir before and after a task, log the delta per task in `progress.jsonl`, and stop
-the run if the per-task residual is non-zero after `docker rmi`. A budget that
-cannot be reconciled per task cannot be trusted across 500 of them.
+**The finding that matters.** Throughout that accumulation `docker system df`
+reported `0B (0%)` reclaimable. `docker system prune` then reported reclaiming
+**41.03 kB** while the filesystem gave back **5185 MiB**, after which `du -x /`
+and `df` agreed to within 1 MiB. Docker's own accounting under-reported real,
+on-disk, reclaimable data by three orders of magnitude. It is therefore not
+usable as the disk budget for a 500-task run; `df` at `DockerRootDir` is.
 
-`scale/rotation.py`, `docker_root_dir` / `free_bytes` / `ensure_headroom`.
+**What a killed worker actually leaves.** Reproduced deliberately by killing a
+task mid-flight: a 5.44 GB image, a lease naming a dead pid, and -- the part the
+first version of `reconcile` missed -- a **still-running container**. A running
+container holds its image, so `docker rmi` cannot remove it and
+`docker image prune` will not collect its layers either. The image is
+unreclaimable until the container is gone.
+
+**Rules.**
+1. *Measure the budget with `df`, never with `docker system df`.* Every byte
+   figure `rotation` reports is a filesystem delta.
+2. *Reconcile containers before images.* `reconcile_containers` removes
+   `validate-*` containers -- the name `verifiers` itself gives them -- whose
+   image no live lease holds, and it runs first, because the image sweep cannot
+   succeed while one is alive.
+3. *Reconcile the budget per task, and stop if it does not reconcile.* Each task
+   records `disk_residual_bytes`; a residual over `RESIDUAL_ABORT_MIB` (256 MiB,
+   against a measured 0) triggers a reclaim attempt, and if it survives that,
+   `DiskBudgetError` stops the run. A budget that cannot be accounted for is not
+   a budget.
+
+**Verified against real residue, not a simulation.** After a deliberate mid-pull
+kill, `reconcile` removed the orphaned container `validate-formcheck-0-d323189a`,
+removed the 5.06 GiB image, and returned 5205 MiB by `df`, leaving zero
+containers, zero images and zero leases.
+
+`scale/rotation.py` (`reconcile_containers`, `reclaim_orphans`, `free_bytes`,
+`DiskBudgetError`); `scale/run.py` (per-task residual and abort).
+
+---
+
+## 11. Pruning orphaned layers killed the pulls it was running alongside
+
+**Bug, and the M2 gate is what caught it.** Entry 10's fix put
+`reclaim_orphans()` -- a `docker image prune -f` -- inside `reconcile`, and
+`reconcile` runs at the top of every `ImageLease` acquisition. With two workers
+that means one worker prunes while another is mid-`docker pull`. `docker image
+prune` drops containerd content-store leases, and an in-flight pull is *holding*
+one, so the pull dies with:
+
+    Error response from daemon: lease does not exist: not found
+
+**How it surfaced.** M2's first attempt: all five tasks came back `unchecked` in
+under three seconds each. The daemon was not broken -- a plain
+`docker pull hello-world` succeeded immediately afterwards -- and the error text
+contains nothing that points at the prune that caused it. Without the per-task
+error being recorded in the row, this would have looked like a registry outage.
+
+**Fail-loud is what made it harmless.** Five `unchecked` rows, five recorded
+errors, zero results. The run reported that it had checked nothing, which is
+exactly the distinction verifiers #2466 introduced and the reason
+`writeup.md` 4.1's rule is enforced in the hook rather than in the caller.
+
+**Rule.** *Never prune while a pull is in flight.* `_PULLS_IN_FLIGHT` counts
+workers inside a pull; `reclaim_orphans` returns 0 and skips rather than running
+when that count is non-zero, and pruning is now opt-in (`reconcile(..., prune=
+True)`) rather than implicit. The normal path prunes exactly once, at run start,
+before any worker exists. The orphan sweep is not urgent -- it exists to recover
+from a *previous* run's crash -- so skipping it under contention costs nothing.
+
+The per-pull reconcile the design requires is unchanged: stale containers and
+stale images are still removed before every pull, ownership-checked against live
+leases. Only the prune moved.
+
+`scale/rotation.py` (`_PULLS_IN_FLIGHT`, `prune_is_safe`, `reclaim_orphans`,
+`reconcile`); `scale/run.py`.
+
+---
+
+## 12. A per-task disk budget measured globally is meaningless under concurrency
+
+**Bug, and my own abort threshold from entry 10 is what fired on it.** `run_one`
+measured free space before and after each task and called the difference that
+task's residual. With two workers that is not a measurement of anything.
+
+**How it surfaced.** M2, second attempt. `pallets__flask-5014` finished cleanly
+while the other worker still held the 3.57 GiB `pytest-10356` image. The global
+delta charged that image to flask: **3664 MiB of "residual"** against a 256 MiB
+threshold, and the run aborted on a task that had cleaned up perfectly. The
+number was almost exactly one image, which is what gave it away.
+
+**Why the guard firing is not a defence.** It stopped the run, so nothing false
+was reported -- but it stopped it for a fabricated reason, and a guard that
+aborts a healthy 500-task run two thirds of the way through is as expensive as
+one that lets a real leak past. A check that cannot distinguish "this task
+leaked" from "another task is running" is not a check.
+
+**Rule.** *Attribute the budget to what the task owns.* The per-task check is now
+structural: after the lease exits, is THIS task's image gone, and are the
+containers whose ancestor is that image gone? Both are exact, cheap, and
+unaffected by other workers. The run-wide free-space check is kept, but only
+evaluated when no other lease is live -- at that moment free space is
+attributable to the run as a whole, and a shortfall against the run's baseline
+(measured after the start-of-run reclaim, so a previous run's residue is never
+charged to this one) is real accumulation.
+
+Two thresholds, two questions: "did this task clean up after itself" is answered
+structurally and per task; "is this run accumulating" is answered in bytes and
+only when the answer means something.
+
+`scale/run.py` (`run_one`); `scale/rotation.py` (`image_present`,
+`containers_for`).
+
+---
+
+## 13. `SuiteOracle` reintroduced the exact classifier bug Phase 4 had fixed
+
+**Bug, found by M2's diff against Phase 4, and it stops M2.**
+
+`SuiteOracle.check` decides whether a transform preserved behaviour with
+`graded["p2p_fail"] == 0`. Any PASS_TO_PASS failure therefore reads as "the
+transform broke the contract" and the case is classified `INVALID`.
+
+`writeup.md` §6.2 records that Phase 4 hit this and corrected it mid-flight:
+
+> the classifier originally called *any* P2P breakage `INVALID`. That would have
+> reported this as "the transform broke behaviour". It now partitions P2P
+> failures into those whose failure text names the renamed symbol (coupling) and
+> those that fail any other way (genuinely invalid) [...]
+
+M1's generic oracle was written without that partition, so it reintroduced the
+bug -- in a new file, on a code path Phase 4's fix never covered.
+
+**What it costs, measured.** `pydata/xarray-4966` is the task §6.2 was written
+about, and M2 classifies it `INVALID` where Phase 4 classified it `WITNESS`. The
+transformed run measures F2P 0/4, P2P 17 pass / 4 fail, reward 0.0, and every
+failure carries the same text:
+
+    E   AttributeError: module 'xarray.coding.variables' has no attribute
+        'UnsignedIntegerCoder'
+
+That is an alpha-rename, which changes no expression's value: tests failing on
+that text are asserting the *name*. Under §6.2's rule every one of those
+failures is coupling, and the task is a WITNESS. Under `SuiteOracle` as written,
+it is a broken transform.
+
+**Why this matters beyond one task.** `xarray-4966` is the whole evidence for
+§6.2's finding that coupling does not only live in the graded test. A scale run
+carrying this bug would report the P2P-coupling class as invalid transforms --
+that is, it would silently convert the project's most novel result into apparent
+noise, and the aggregate would show a plausible-looking `INVALID` count rather
+than an obviously broken one.
+
+**Rule (not yet implemented -- M2 stops here for a decision).** *A P2P failure
+whose text names the renamed symbol is coupling, not breakage.* The partition
+belongs in `SuiteOracle`, attributed through each failing test's own failure
+block rather than by scanning the log for `E ` lines, because a passing test that
+runs a nested pytest session prints those too (§6.2).
+
+`scale/container_task.py`, `SuiteOracle.check`; `writeup.md` §6.2.
+
+---
+
+## 14. §6.2's FAIL_TO_PASS figure has no artifact behind it, and M2 contradicts it
+
+**Unresolved. Reported rather than reconciled, because guessing which side is
+wrong is exactly what this file exists to prevent.**
+
+`writeup.md` §6.2 states that under the `UnsignedIntegerCoder` rename **all 4
+FAIL_TO_PASS tests pass**, and that the reward reaches zero through PASS_TO_PASS
+alone. M2 measures the P2P half exactly as §6.2 reports it -- **17 pass, 4 fail**
+-- and the F2P half as **0 pass, 4 fail**, with the four F2P tests
+(`test_decode_signed_from_unsigned[1,2,4,8]`) failing on the same
+`AttributeError` naming the renamed symbol as the four P2P ones.
+
+No Phase 4 artifact for this task exists in the repository -- no log, no result
+JSON, no overlay -- so the two numbers cannot be reconciled against a record.
+This is the same class of problem as the `46.44` elapsed figure: a number in the
+writeup with nothing behind it that a reader can check.
+
+If M2 is right, §6.2's headline sentence needs narrowing: the reward would reach
+zero through P2P *as well as* F2P, and the finding becomes "coupling also lives
+in P2P" rather than "the coupling lives in P2P, not in the graded test". The
+finding survives either way -- four P2P tests asserting a name is the novel part,
+and M2 confirms those four -- but the sentence as written would be wrong.
+
+Do not amend §6.2 on M2's number alone. Either recover a Phase 4 artifact, or
+re-derive the F2P result deliberately and record it.
+
+`writeup.md` §6.2; `scale/records/pydata__xarray-4966.json`.
 

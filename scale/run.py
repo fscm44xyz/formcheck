@@ -203,7 +203,7 @@ def build_record(instance_id, image, spec, row, task, elapsed, error=None):
     }
 
 
-async def run_one(instance, leases, progress, timeout):
+async def run_one(instance, leases, progress, timeout, baseline_free=0):
     instance_id = instance["instance_id"]
     spec = build_task_spec(instance)
     image = image_ref(instance_id)
@@ -239,8 +239,43 @@ async def run_one(instance, leases, progress, timeout):
         progress.write(event="error", instance_id=instance_id, error=error,
                        traceback=traceback.format_exc()[-2000:])
 
+    # THE PER-TASK BUDGET IS CHECKED STRUCTURALLY, NOT BY A FREE-SPACE DELTA.
+    #
+    # The first version compared free space before and after the task. That is
+    # wrong under concurrency, and M2 proved it: `flask-5014` finished while the
+    # other worker still held the 3.57 GiB `pytest-10356` image, so the global
+    # delta charged that image to flask -- 3664 MiB of "residual" against a
+    # 256 MiB threshold -- and the run aborted on a task that had cleaned up
+    # perfectly. A global measurement cannot answer a per-task question while
+    # anything else is running.
+    #
+    # What IS attributable to this task is whether ITS image and ITS containers
+    # are gone. Exact, cheap, and unaffected by other workers.
+    leaked_containers = rotation.containers_for(image)
+    leaked_image = rotation.image_present(image)
+    orphan_reclaimed = 0
+    if leaked_containers or leaked_image:
+        rotation.reconcile_containers(set())
+        orphan_reclaimed = rotation.reclaim_orphans()
+        leaked_containers = rotation.containers_for(image)
+        leaked_image = rotation.image_present(image)
+
+    # The run-wide budget is still checked, but only when it is meaningful: with
+    # no other lease live, free space is attributable to the run as a whole and a
+    # shortfall against its baseline is real accumulation.
+    residual = 0
+    if not leases.live_refs():
+        residual = max(0, baseline_free - rotation.free_bytes())
+        if residual > rotation.RESIDUAL_ABORT_MIB * 1024**2:
+            orphan_reclaimed += rotation.reclaim_orphans()
+            residual = max(0, baseline_free - rotation.free_bytes())
+
     record = build_record(instance_id, image, spec, row, task,
                           round(time.time() - t0, 2), error)
+    record["disk_residual_bytes"] = residual
+    record["disk_orphan_reclaimed_bytes"] = orphan_reclaimed
+    record["leaked_image"] = leaked_image
+    record["leaked_containers"] = leaked_containers
     write_record(record)
     progress.write(
         event="done", instance_id=instance_id,
@@ -248,7 +283,31 @@ async def run_one(instance, leases, progress, timeout):
         control=record["control"]["passed"],
         witnesses=len(record["witnesses"]),
         seconds=record["elapsed_seconds"],
+        disk_residual_mib=round(residual / 1024**2, 1),
+        orphan_reclaimed_mib=round(orphan_reclaimed / 1024**2, 1),
+        leaked_image=leaked_image, leaked_containers=leaked_containers,
         free_gib=round(rotation.free_bytes() / 1024**3, 2))
+
+    if leaked_image or leaked_containers:
+        progress.write(event="abort", instance_id=instance_id,
+                       reason="the task's own image or container survived it",
+                       leaked_image=leaked_image,
+                       leaked_containers=leaked_containers)
+        raise rotation.DiskBudgetError(
+            f"{instance_id}: its own image or container outlived the task and "
+            f"could not be reclaimed (image_present={leaked_image}, "
+            f"containers={leaked_containers}). Stopping: at ~4 GiB each these "
+            "fill the budget silently and the next pull fails looking like a "
+            "transport error.")
+    if residual > rotation.RESIDUAL_ABORT_MIB * 1024**2:
+        progress.write(event="abort", instance_id=instance_id,
+                       reason="run-wide disk did not return to baseline",
+                       residual_mib=round(residual / 1024**2, 1))
+        raise rotation.DiskBudgetError(
+            f"{instance_id}: with no other task running, "
+            f"{residual / 1024**2:.0f} MiB has not come back since the run "
+            f"started (threshold {rotation.RESIDUAL_ABORT_MIB} MiB). Stopping "
+            "rather than continuing on a budget that cannot be accounted for.")
     return record
 
 
@@ -288,7 +347,13 @@ async def main():
         print(f"  resume: {before - len(ids)} already complete, {len(ids)} to run")
 
     workers = args.workers or rotation.suggested_workers()
-    reclaimed = rotation.reconcile(leases)
+    # `prune=True` is safe here and only here in the normal path: no worker has
+    # started, so no pull is in flight to have its containerd lease pulled out
+    # from under it.
+    reclaimed = rotation.reconcile(leases, prune=True)
+    # Measured AFTER the start-of-run reclaim, so a previous run's residue is
+    # never charged to this one.
+    baseline_free = rotation.free_bytes()
     if reclaimed["removed"]:
         progress.write(event="reclaimed_at_start", **reclaimed)
 
@@ -313,7 +378,8 @@ async def main():
     async def guarded(instance):
         nonlocal done
         async with sem:
-            record = await run_one(instance, leases, progress, args.timeout)
+            record = await run_one(instance, leases, progress, args.timeout,
+                                   baseline_free)
         done += 1
         flag = ("witness" if record["witnesses"]
                 else "ok" if record["control"]["passed"] else "UNCHECKED")
