@@ -1,0 +1,438 @@
+{
+  "completed": true,
+  "control": {
+    "passed": true,
+    "reason": "untransformed reference scores 1.0"
+  },
+  "disk_orphan_reclaimed_bytes": 0,
+  "disk_residual_bytes": 0,
+  "elapsed_seconds": 85.18,
+  "error": null,
+  "image": "swebench/sweb.eval.x86_64.django_1776_django-13195:latest",
+  "instance_id": "django__django-13195",
+  "leaked_containers": [],
+  "leaked_image": false,
+  "log": [
+    [
+      "<control>",
+      "OK",
+      "untransformed reference scores 1.0"
+    ],
+    [
+      "kwonly_specialize:<no anchor>",
+      "NOT_APPLICABLE",
+      "no anchor inside the gold-touched region; 2 anchor(s) elsewhere in the 3 target(s): django/contrib/messages/storage/cookie.py, django/contrib/sessions/middleware.py, django/http/response.py"
+    ],
+    [
+      "symbol_rename:django/contrib/messages/storage/cookie.py:CookieStorage",
+      "INVALID",
+      "transform broke the contract"
+    ],
+    [
+      "symbol_rename:django/contrib/sessions/middleware.py:SessionMiddleware",
+      "REFUSED",
+      "dynamic reach: 'SessionMiddleware' appears in a non-annotation string literal in django/contrib/admin/checks.py line 131 ('django.contrib.sessions.middleware.Sessi'); 7 further hit(s) -- an alpha-rename cannot be argued safe"
+    ],
+    [
+      "symbol_rename:django/http/response.py:HttpResponseBase",
+      "REFUSED",
+      "BORDER: the issue names 'HttpResponseBase' -- candidate CONTRACT, route to the rubric"
+    ],
+    [
+      "collection_reverse:<no anchor>",
+      "NOT_APPLICABLE",
+      "no anchor inside the gold-touched region"
+    ],
+    [
+      "message_reword:<no anchor>",
+      "NOT_APPLICABLE",
+      "no anchor inside the gold-touched region; 6 anchor(s) elsewhere in the 3 target(s): django/contrib/messages/storage/cookie.py, django/contrib/sessions/middleware.py, django/http/response.py"
+    ]
+  ],
+  "mountable": true,
+  "multi_target": true,
+  "n_targets": 3,
+  "on_prime_hub": null,
+  "on_prime_hub_reason": "not resolvable offline; no hub environment index is reachable from this repo, verifiers or swebench",
+  "operators_not_applicable": [
+    "collection_reverse",
+    "kwonly_specialize",
+    "message_reword"
+  ],
+  "operators_with_anchors": [
+    "symbol_rename"
+  ],
+  "repo": "django/django",
+  "row": {
+    "elapsed": 32.76,
+    "error": null,
+    "error_type": null,
+    "index": 0,
+    "mode": "formcheck",
+    "name": "django__django-13195",
+    "reason": "valid",
+    "valid": true
+  },
+  "rows": [
+    {
+      "anchor": null,
+      "failure_analysis": null,
+      "file": null,
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 5,
+        "found": true,
+        "n_parsed": 389,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 382,
+        "reward": 1.0
+      },
+      "loud_failure": false,
+      "observable": "callable signature (arity / parameter names)",
+      "operator": "kwonly_specialize",
+      "reason": "no anchor inside the gold-touched region; 2 anchor(s) elsewhere in the 3 target(s): django/contrib/messages/storage/cookie.py, django/contrib/sessions/middleware.py, django/http/response.py",
+      "tier": "HIGH",
+      "verdict": "NOT_APPLICABLE"
+    },
+    {
+      "anchor": "CookieStorage",
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "coupled": [],
+        "failing": [
+          "test_add (messages_tests.test_cookie.CookieTests)",
+          "test_add_lazy_translation (messages_tests.test_cookie.CookieTests)",
+          "test_add_update (messages_tests.test_cookie.CookieTests)",
+          "test_context_processor_message_levels (messages_tests.test_cookie.CookieTests)",
+          "test_custom_tags (messages_tests.test_cookie.CookieTests)",
+          "test_default_level (messages_tests.test_cookie.CookieTests)",
+          "test_existing_add (messages_tests.test_cookie.CookieTests)",
+          "test_existing_add_read_update (messages_tests.test_cookie.CookieTests)",
+          "test_existing_read (messages_tests.test_cookie.CookieTests)",
+          "test_existing_read_add_update (messages_tests.test_cookie.CookieTests)",
+          "test_cookie_setings (messages_tests.test_cookie.CookieTests)"
+        ],
+        "symbol": "CookieStorage",
+        "unexplained": [
+          "test_add (messages_tests.test_cookie.CookieTests) (no failure section found)",
+          "test_add_lazy_translation (messages_tests.test_cookie.CookieTests) (no failure section found)",
+          "test_add_update (messages_tests.test_cookie.CookieTests) (no failure section found)",
+          "test_context_processor_message_levels (messages_tests.test_cookie.CookieTests) (no failure section found)",
+          "test_custom_tags (messages_tests.test_cookie.CookieTests) (no failure section found)",
+          "test_default_level (messages_tests.test_cookie.CookieTests) (no failure section found)",
+          "test_existing_add (messages_tests.test_cookie.CookieTests) (no failure section found)",
+          "test_existing_add_read_update (messages_tests.test_cookie.CookieTests) (no failure section found)",
+          "test_existing_read (messages_tests.test_cookie.CookieTests) (no failure section found)",
+          "test_existing_read_add_update (messages_tests.test_cookie.CookieTests) (no failure section found)",
+          "test_cookie_setings (messages_tests.test_cookie.CookieTests) (no failure section found)"
+        ]
+      },
+      "file": "django/contrib/messages/storage/cookie.py",
+      "graded_log": "+ ./tests/runtests.py --verbosity 2 --settings=test_sqlite --parallel 1 messages_tests.test_cookie responses.test_cookie sessions_tests.tests\nTesting against Django installed in '/testbed/django'\nImporting application sessions_tests\nImporting application responses\nImporting application messages_tests\nSkipping setup of unused database(s): other.\nOperations to perform:\n  Synchronize unmigrated apps: auth, contenttypes, messages, messages_tests, responses, sessions, sessions_tests, staticfiles\n  Apply all migrations: admin, sites\nSynchronizing apps without migrations:\n  Creating tables...\n    Creating table django_content_type\n    Creating table auth_permission\n    Creating table auth_group\n    Creating table auth_user\n    Creating table django_session\n    Creating table sessions_tests_customsession\n    Running deferred SQL...\nRunning migrations:\n  Applying admin.0001_initial... OK\n  Applying admin.0002_logentry_remove_auto_add... OK\n  Applying admin.0003_logentry_add_action_flag_choices... OK\n  Applying sites.0001_initial... OK\n  Applying sites.0002_alter_domain_unique... OK\nSystem check identified no issues (0 silenced).\n\nCreating test database for alias 'default' ('file:memorydb_default?mode=memory&cache=shared')...\ntest_actual_expiry (sessions_tests.tests.CacheDBSessionTests) ... ok\ntest_clear (sessions_tests.tests.CacheDBSessionTests) ... ok\ntest_custom_expiry_datetime (sessions_tests.tests.CacheDBSessionTests) ... ok\ntest_custom_expiry_reset (sessions_tests.tests.CacheDBSessionTests) ... ok\ntest_custom_expiry_seconds (sessions_tests.tests.CacheDBSessionTests) ... ok\ntest_custom_expiry_timedelta (sessions_tests.tests.CacheDBSessionTests) ... ok\ntest_cycle (sessions_tests.tests.CacheDBSessionTests) ... ok\ntest_cycle_with_no_session_cache (sessions_tests.tests.CacheDBSessionTests) ... ok\ntest_decode (sessions_tests.tests.CacheDBSessionTests) ... ok\ntest_decode_failure_logged_to_security (sessions_tests.tests.CacheDBSessionTests) ... ok\ntest_decode_legacy (sessions_tests.tests.CacheDBSessionTests) ... ok\ntest_default_expiry (sessions_tests.tests.CacheDBSessionTests) ... ok\ntest_delete (sessions_tests.tests.CacheDBSessionTests) ... ok\ntest_exists_searches_cache_first (sessions_tests.tests.CacheDBSessionTests) ... ok\ntest_flush (sessions_tests.tests.CacheDBSessionTests) ... ok\ntest_get_empty (sessions_tests.tests.CacheDBSessionTests) ... ok\ntest_get_expire_at_browser_close (sessions_tests.tests.CacheDBSessionTests) ... ok\ntest_has_key (sessions_tests.tests.CacheDBSessionTests) ... ok\ntest_invalid_key (sessions_tests.tests.CacheDBSessionTests) ... ok\ntest_items (sessions_tests.tests.CacheDBSessionTests) ... ok\ntest_keys (sessions_tests.tests.CacheDBSessionTests) ... ok\ntest_load_overlong_key (sessions_tests.tests.CacheDBSessionTests) ... ok\ntest_new_session (sessions_tests.tests.CacheDBSessionTests) ... ok\ntest_non_default_cache (sessions_tests.tests.CacheDBSessionTests) ... ok\ntest_pop (sessions_tests.tests.CacheDBSessionTests) ... ok\ntest_pop_default (sessions_tests.tests.CacheDBSessionTests) ... ok\ntest_pop_default_named_argument (sessions_tests.tests.CacheDBSessionTests) ... ok\ntest_pop_no_default_keyerror_raised (sessions_tests.tests.CacheDBSessionTests) ... ok\ntest_save (sessions_tests.tests.CacheDBSessionTests) ... ok\ntest_save_doesnt_clear_data (sessions_tests.tests.CacheDBSessionTests) ... ok\ntest_session_key_empty_string_invalid (sessions_tests.tests.CacheDBSessionTests)\nFalsey values (Such as an empty string) are rejected. ... ok\ntest_session_key_is_read_only (sessions_tests.tests.CacheDBSessionTests) ... ok\ntest_session_key_too_short_invalid (sessions_tests.tests.CacheDBSessionTests)\nStrings shorter than 8 characters are rejected. ... ok\ntest_session_key_valid_string_saved (sessions_tests.tests.CacheDBSessionTests)\nStrings of length 8 and up are accepted and stored. ... ok\ntest_session_load_does_not_create_record (sessions_tests.tests.CacheDBSessionTests) ... ok\ntest_session_save_does_not_resurrect_session_logged_out_in_other_context (sessions_tests.tests.CacheDBSessionTests) ... ok\ntest_setdefault (sessions_tests.tests.CacheDBSessionTests) ... ok\ntest_store (sessions_tests.tests.CacheDBSessionTests) ... ok\ntest_update (sessions_tests.tests.CacheDBSessionTests) ... ok\ntest_values (sessions_tests.tests.CacheDBSessionTests) ... ok\ntest_actual_expiry (sessions_tests.tests.CacheDBSessionWithTimeZoneTests) ... ok\ntest_clear (sessions_tests.tests.CacheDBSessionWithTimeZoneTests) ... ok\ntest_custom_expiry_datetime (sessions_tests.tests.CacheDBSessionWithTimeZoneTests) ... ok\ntest_custom_expiry_reset (sessions_tests.tests.CacheDBSessionWithTimeZoneTests) ... ok\ntest_custom_expiry_seconds (sessions_tests.tests.CacheDBSessionWithTimeZoneTests) ... ok\ntest_custom_expiry_timedelta (sessions_tests.tests.CacheDBSessionWithTimeZoneTests) ... ok\ntest_cycle (sessions_tests.tests.CacheDBSessionWithTimeZoneTests) ... ok\ntest_cycle_with_no_session_cache (sessions_tests.tests.CacheDBSessionWithTimeZoneTests) ... ok\ntest_decode (sessions_tests.tests.CacheDBSessionWithTimeZoneTests) ... ok\ntest_decode_failure_logged_to_security (sessions_tests.tests.CacheDBSessionWithTimeZoneTests) ... ok\ntest_decode_legacy (sessions_tests.tests.CacheDBSessionWithTimeZoneTests) ... ok\ntest_default_expiry (sessions_tests.tests.CacheDBSessionWithTimeZoneTests) ... ok\ntest_delete (sessions_tests.tests.CacheDBSessionWithTimeZoneTests) ... ok\ntest_exists_searches_cache_first (sessions_tests.tests.CacheDBSessionWithTimeZoneTests) ... ok\ntest_flush (sessions_tests.tests.CacheDBSessionWithTimeZoneTests) ... ok\ntest_get_empty (sessions_tests.tests.CacheDBSessionWithTimeZoneTests) ... ok\ntest_get_expire_at_browser_close (sessions_tests.tests.CacheDBSessionWithTimeZoneTests) ... ok\ntest_has_key (sessions_tests.tests.CacheDBSessionWithTimeZoneTests) ... ok\ntest_invalid_key (sessions_tests.tests.CacheDBSessionWithTimeZoneTests) ... ok\ntest_items (sessions_tests.tests.CacheDBSessionWithTimeZoneTests) ... ok\ntest_keys (sessions_tests.tests.CacheDBSessionWithTimeZoneTests) ... ok\ntest_load_overlong_key (sessions_tests.tests.CacheDBSessionWithTimeZoneTests) ... ok\ntest_new_session (sessions_tests.tests.CacheDBSessionWithTimeZoneTests) ... ok\ntest_non_default_cache (sessions_tests.tests.CacheDBSessionWithTimeZoneTests) ... ok\ntest_pop (sessions_tests.tests.CacheDBSessionWithTimeZoneTests) ... ok\ntest_pop_default (sessions_tests.tests.CacheDBSessionWithTimeZoneTests) ... ok\ntest_pop_default_named_argument (sessions_tests.tests.CacheDBSessionWithTimeZoneTests) ... ok\ntest_pop_no_default_keyerror_raised (sessions_tests.tests.CacheDBSessionWithTimeZoneTests) ... ok\ntest_save (sessions_tests.tests.CacheDBSessionWithTimeZoneTests) ... ok\ntest_save_doesnt_clear_data (sessions_tests.tests.CacheDBSessionWithTimeZoneTests) ... ok\ntest_session_key_empty_string_invalid (sessions_tests.tests.CacheDBSessionWithTimeZoneTests)\nFalsey values (Such as an empty string) are rejected. ... ok\ntest_session_key_is_read_only (sessions_tests.tests.CacheDBSessionWithTimeZoneTests) ... ok\ntest_session_key_too_short_invalid (sessions_tests.tests.CacheDBSessionWithTimeZoneTests)\nStrings shorter than 8 characters are rejected. ... ok\ntest_session_key_valid_string_saved (sessions_tests.tests.CacheDBSessionWithTimeZoneTests)\nStrings of length 8 and up are accepted and stored. ... ok\ntest_session_load_does_not_create_record (sessions_tests.tests.CacheDBSessionWithTimeZoneTests) ... ok\ntest_session_save_does_not_resurrect_session_logged_out_in_other_context (sessions_tests.tests.CacheDBSessionWithTimeZoneTests) ... ok\ntest_setdefault (sessions_tests.tests.CacheDBSessionWithTimeZoneTests) ... ok\ntest_store (sessions_tests.tests.CacheDBSessionWithTimeZoneTests) ... ok\ntest_update (sessions_tests.tests.CacheDBSessionWithTimeZoneTests) ... ok\ntest_values (sessions_tests.tests.CacheDBSessionWithTimeZoneTests) ... ok\ntest_actual_expiry (sessions_tests.tests.CustomDatabaseSessionTests) ... ok\ntest_clear (sessions_tests.tests.CustomDatabaseSessionTests) ... ok\ntest_clearsessions_command (sessions_tests.tests.CustomDatabaseSessionTests) ... ok\ntest_custom_expiry_datetime (sessions_tests.tests.CustomDatabaseSessionTests) ... ok\ntest_custom_expiry_reset (sessions_tests.tests.CustomDatabaseSessionTests) ... ok\ntest_custom_expiry_seconds (sessions_tests.tests.CustomDatabaseSessionTests) ... ok\ntest_custom_expiry_timedelta (sessions_tests.tests.CustomDatabaseSessionTests) ... ok\ntest_cycle (sessions_tests.tests.CustomDatabaseSessionTests) ... ok\ntest_cycle_with_no_session_cache (sessions_tests.tests.CustomDatabaseSessionTests) ... ok\ntest_decode (sessions_tests.tests.CustomDatabaseSessionTests) ... ok\ntest_decode_failure_logged_to_security (sessions_tests.tests.CustomDatabaseSessionTests) ... ok\ntest_decode_legacy (sessions_tests.tests.CustomDatabaseSessionTests) ... ok\ntest_default_expiry (sessions_tests.tests.CustomDatabaseSessionTests) ... ok\ntest_delete (sessions_tests.tests.CustomDatabaseSessionTests) ... ok\ntest_extra_session_field (sessions_tests.tests.CustomDatabaseSessionTests) ... ok\ntest_flush (sessions_tests.tests.CustomDatabaseSessionTests) ... ok\ntest_get_empty (sessions_tests.tests.CustomDatabaseSessionTests) ... ok\ntest_get_expire_at_browser_close (sessions_tests.tests.CustomDatabaseSessionTests) ... ok\ntest_has_key (sessions_tests.tests.CustomDatabaseSessionTests) ... ok\ntest_invalid_key (sessions_tests.tests.CustomDatabaseSessionTests) ... ok\ntest_items (sessions_tests.tests.CustomDatabaseSessionTests) ... ok\ntest_keys (sessions_tests.tests.CustomDatabaseSessionTests) ... ok\ntest_new_session (sessions_tests.tests.CustomDatabaseSessionTests) ... ok\ntest_pop (sessions_tests.tests.CustomDatabaseSessionTests) ... ok\ntest_pop_default (sessions_tests.tests.CustomDatabaseSessionTests) ... ok\ntest_pop_default_named_argument (sessions_tests.tests.CustomDatabaseSessionTests) ... ok\ntest_pop_no_default_keyerror_raised (sessions_tests.tests.CustomDatabaseSessionTests) ... ok\ntest_save (sessions_tests.tests.CustomDatabaseSessionTests) ... ok\ntest_save_doesnt_clear_data (sessions_tests.tests.CustomDatabaseSessionTests) ... ok\ntest_session_get_decoded (sessions_tests.tests.CustomDatabaseSessionTests) ... ok\ntest_session_key_empty_string_invalid (sessions_tests.tests.CustomDatabaseSessionTests)\nFalsey values (Such as an empty string) are rejected. ... ok\ntest_session_key_is_read_only (sessions_tests.tests.CustomDatabaseSessionTests) ... ok\ntest_session_key_too_short_invalid (sessions_tests.tests.CustomDatabaseSessionTests)\nStrings shorter than 8 characters are rejected. ... ok\ntest_session_key_valid_string_saved (sessions_tests.tests.CustomDatabaseSessionTests)\nStrings of length 8 and up are accepted and stored. ... ok\ntest_session_load_does_not_create_record (sessions_tests.tests.CustomDatabaseSessionTests) ... ok\ntest_session_save_does_not_resurrect_session_logged_out_in_other_context (sessions_tests.tests.CustomDatabaseSessionTests) ... ok\ntest_session_str (sessions_tests.tests.CustomDatabaseSessionTests)\nSession repr should be the session key. ... ok\ntest_sessionmanager_save (sessions_tests.tests.CustomDatabaseSessionTests) ... ok\ntest_setdefault (sessions_tests.tests.CustomDatabaseSessionTests) ... ok\ntest_store (sessions_tests.tests.CustomDatabaseSessionTests) ... ok\ntest_update (sessions_tests.tests.CustomDatabaseSessionTests) ... ok\ntest_values (sessions_tests.tests.CustomDatabaseSessionTests) ... ok\ntest_actual_expiry (sessions_tests.tests.DatabaseSessionTests) ... ok\ntest_clear (sessions_tests.tests.DatabaseSessionTests) ... ok\ntest_clearsessions_command (sessions_tests.tests.DatabaseSessionTests) ... ok\ntest_custom_expiry_datetime (sessions_tests.tests.DatabaseSessionTests) ... ok\ntest_custom_expiry_reset (sessions_tests.tests.DatabaseSessionTests) ... ok\ntest_custom_expiry_seconds (sessions_tests.tests.DatabaseSessionTests) ... ok\ntest_custom_expiry_timedelta (sessions_tests.tests.DatabaseSessionTests) ... ok\ntest_cycle (sessions_tests.tests.DatabaseSessionTests) ... ok\ntest_cycle_with_no_session_cache (sessions_tests.tests.DatabaseSessionTests) ... ok\ntest_decode (sessions_tests.tests.DatabaseSessionTests) ... ok\ntest_decode_failure_logged_to_security (sessions_tests.tests.DatabaseSessionTests) ... ok\ntest_decode_legacy (sessions_tests.tests.DatabaseSessionTests) ... ok\ntest_default_expiry (sessions_tests.tests.DatabaseSessionTests) ... ok\ntest_delete (sessions_tests.tests.DatabaseSessionTests) ... ok\ntest_flush (sessions_tests.tests.DatabaseSessionTests) ... ok\ntest_get_empty (sessions_tests.tests.DatabaseSessionTests) ... ok\ntest_get_expire_at_browser_close (sessions_tests.tests.DatabaseSessionTests) ... ok\ntest_has_key (sessions_tests.tests.DatabaseSessionTests) ... ok\ntest_invalid_key (sessions_tests.tests.DatabaseSessionTests) ... ok\ntest_items (sessions_tests.tests.DatabaseSessionTests) ... ok\ntest_keys (sessions_tests.tests.DatabaseSessionTests) ... ok\ntest_new_session (sessions_tests.tests.DatabaseSessionTests) ... ok\ntest_pop (sessions_tests.tests.DatabaseSessionTests) ... ok\ntest_pop_default (sessions_tests.tests.DatabaseSessionTests) ... ok\ntest_pop_default_named_argument (sessions_tests.tests.DatabaseSessionTests) ... ok\ntest_pop_no_default_keyerror_raised (sessions_tests.tests.DatabaseSessionTests) ... ok\ntest_save (sessions_tests.tests.DatabaseSessionTests) ... ok\ntest_save_doesnt_clear_data (sessions_tests.tests.DatabaseSessionTests) ... ok\ntest_session_get_decoded (sessions_tests.tests.DatabaseSessionTests) ... ok\ntest_session_key_empty_string_invalid (sessions_tests.tests.DatabaseSessionTests)\nFalsey values (Such as an empty string) are rejected. ... ok\ntest_session_key_is_read_only (sessions_tests.tests.DatabaseSessionTests) ... ok\ntest_session_key_too_short_invalid (sessions_tests.tests.DatabaseSessionTests)\nStrings shorter than 8 characters are rejected. ... ok\ntest_session_key_valid_string_saved (sessions_tests.tests.DatabaseSessionTests)\nStrings of length 8 and up are accepted and stored. ... ok\ntest_session_load_does_not_create_record (sessions_tests.tests.DatabaseSessionTests) ... ok\ntest_session_save_does_not_resurrect_session_logged_out_in_other_context (sessions_tests.tests.DatabaseSessionTests) ... ok\ntest_session_str (sessions_tests.tests.DatabaseSessionTests)\nSession repr should be the session key. ... ok\ntest_sessionmanager_save (sessions_tests.tests.DatabaseSessionTests) ... ok\ntest_setdefault (sessions_tests.tests.DatabaseSessionTests) ... ok\ntest_store (sessions_tests.tests.DatabaseSessionTests) ... ok\ntest_update (sessions_tests.tests.DatabaseSessionTests) ... ok\ntest_values (sessions_tests.tests.DatabaseSessionTests) ... ok\ntest_actual_expiry (sessions_tests.tests.DatabaseSessionWithTimeZoneTests) ... ok\ntest_clear (sessions_tests.tests.DatabaseSessionWithTimeZoneTests) ... ok\ntest_clearsessions_command (sessions_tests.tests.DatabaseSessionWithTimeZoneTests) ... ok\ntest_custom_expiry_datetime (sessions_tests.tests.DatabaseSessionWithTimeZoneTests) ... ok\ntest_custom_expiry_reset (sessions_tests.tests.DatabaseSessionWithTimeZoneTests) ... ok\ntest_custom_expiry_seconds (sessions_tests.tests.DatabaseSessionWithTimeZoneTests) ... ok\ntest_custom_expiry_timedelta (sessions_tests.tests.DatabaseSessionWithTimeZoneTests) ... ok\ntest_cycle (sessions_tests.tests.DatabaseSessionWithTimeZoneTests) ... ok\ntest_cycle_with_no_session_cache (sessions_tests.tests.DatabaseSessionWithTimeZoneTests) ... ok\ntest_decode (sessions_tests.tests.DatabaseSessionWithTimeZoneTests) ... ok\ntest_decode_failure_logged_to_security (sessions_tests.tests.DatabaseSessionWithTimeZoneTests) ... ok\ntest_decode_legacy (sessions_tests.tests.DatabaseSessionWithTimeZoneTests) ... ok\ntest_default_expiry (sessions_tests.tests.DatabaseSessionWithTimeZoneTests) ... ok\ntest_delete (sessions_tests.tests.DatabaseSessionWithTimeZoneTests) ... ok\ntest_flush (sessions_tests.tests.DatabaseSessionWithTimeZoneTests) ... ok\ntest_get_empty (sessions_tests.tests.DatabaseSessionWithTimeZoneTests) ... ok\ntest_get_expire_at_browser_close (sessions_tests.tests.DatabaseSessionWithTimeZoneTests) ... ok\ntest_has_key (sessions_tests.tests.DatabaseSessionWithTimeZoneTests) ... ok\ntest_invalid_key (sessions_tests.tests.DatabaseSessionWithTimeZoneTests) ... ok\ntest_items (sessions_tests.tests.DatabaseSessionWithTimeZoneTests) ... ok\ntest_keys (sessions_tests.tests.DatabaseSessionWithTimeZoneTests) ... ok\ntest_new_session (sessions_tests.tests.DatabaseSessionWithTimeZoneTests) ... ok\ntest_pop (sessions_tests.tests.DatabaseSessionWithTimeZoneTests) ... ok\ntest_pop_default (sessions_tests.tests.DatabaseSessionWithTimeZoneTests) ... ok\ntest_pop_default_named_argument (sessions_tests.tests.DatabaseSessionWithTimeZoneTests) ... ok\ntest_pop_no_default_keyerror_raised (sessions_tests.tests.DatabaseSessionWithTimeZoneTests) ... ok\ntest_save (sessions_tests.tests.DatabaseSessionWithTimeZoneTests) ... ok\ntest_save_doesnt_clear_data (sessions_tests.tests.DatabaseSessionWithTimeZoneTests) ... ok\ntest_session_get_decoded (sessions_tests.tests.DatabaseSessionWithTimeZoneTests) ... ok\ntest_session_key_empty_string_invalid (sessions_tests.tests.DatabaseSessionWithTimeZoneTests)\nFalsey values (Such as an empty string) are rejected. ... ok\ntest_session_key_is_read_only (sessions_tests.tests.DatabaseSessionWithTimeZoneTests) ... ok\ntest_session_key_too_short_invalid (sessions_tests.tests.DatabaseSessionWithTimeZoneTests)\nStrings shorter than 8 characters are rejected. ... ok\ntest_session_key_valid_string_saved (sessions_tests.tests.DatabaseSessionWithTimeZoneTests)\nStrings of length 8 and up are accepted and stored. ... ok\ntest_session_load_does_not_create_record (sessions_tests.tests.DatabaseSessionWithTimeZoneTests) ... ok\ntest_session_save_does_not_resurrect_session_logged_out_in_other_context (sessions_tests.tests.DatabaseSessionWithTimeZoneTests) ... ok\ntest_session_str (sessions_tests.tests.DatabaseSessionWithTimeZoneTests)\nSession repr should be the session key. ... ok\ntest_sessionmanager_save (sessions_tests.tests.DatabaseSessionWithTimeZoneTests) ... ok\ntest_setdefault (sessions_tests.tests.DatabaseSessionWithTimeZoneTests) ... ok\ntest_store (sessions_tests.tests.DatabaseSessionWithTimeZoneTests) ... ok\ntest_update (sessions_tests.tests.DatabaseSessionWithTimeZoneTests) ... ok\ntest_values (sessions_tests.tests.DatabaseSessionWithTimeZoneTests) ... ok\ntest_empty_session_saved (sessions_tests.tests.SessionMiddlewareTests) ... ok\ntest_flush_empty_without_session_cookie_doesnt_set_cookie (sessions_tests.tests.SessionMiddlewareTests) ... ok\ntest_httponly_session_cookie (sessions_tests.tests.SessionMiddlewareTests) ... ok\ntest_no_httponly_session_cookie (sessions_tests.tests.SessionMiddlewareTests) ... ok\ntest_samesite_session_cookie (sessions_tests.tests.SessionMiddlewareTests) ... ok\ntest_secure_session_cookie (sessions_tests.tests.SessionMiddlewareTests) ... ok\ntest_session_delete_on_end (sessions_tests.tests.SessionMiddlewareTests) ... ok\ntest_session_delete_on_end_with_custom_domain_and_path (sessions_tests.tests.SessionMiddlewareTests) ... ok\ntest_session_save_on_500 (sessions_tests.tests.SessionMiddlewareTests) ... ok\ntest_session_update_error_redirect (sessions_tests.tests.SessionMiddlewareTests) ... ok\ntest_default (responses.test_cookie.DeleteCookieTests) ... ok\ntest_delete_cookie_samesite (responses.test_cookie.DeleteCookieTests) ... ok\ntest_delete_cookie_secure_prefix (responses.test_cookie.DeleteCookieTests) ... ok\ntest_delete_cookie_secure_samesite_none (responses.test_cookie.DeleteCookieTests) ... ok\ntest_aware_expiration (responses.test_cookie.SetCookieTests)\nset_cookie() accepts an aware datetime as expiration time. ... ok\ntest_create_cookie_after_deleting_cookie (responses.test_cookie.SetCookieTests)\nSetting a cookie after deletion clears the expiry date. ... ok\ntest_far_expiration (responses.test_cookie.SetCookieTests)\nCookie will expire when a distant expiration time is provided. ... ok\ntest_httponly_cookie (responses.test_cookie.SetCookieTests) ... ok\ntest_invalid_samesite (responses.test_cookie.SetCookieTests) ... ok\ntest_max_age_expiration (responses.test_cookie.SetCookieTests)\nCookie will expire if max_age is provided. ... ok\ntest_near_expiration (responses.test_cookie.SetCookieTests)\nCookie will expire when a near expiration time is provided. ... ok\ntest_samesite (responses.test_cookie.SetCookieTests) ... ok\ntest_unicode_cookie (responses.test_cookie.SetCookieTests)\nHttpResponse.set_cookie() works with Unicode data. ... ok\ntest_cookie (unittest.loader._FailedTest) ... ERROR\ntest_actual_expiry (sessions_tests.tests.CacheSessionTests) ... ok\ntest_clear (sessions_tests.tests.CacheSessionTests) ... ok\ntest_create_and_save (sessions_tests.tests.CacheSessionTests) ... ok\ntest_custom_expiry_datetime (sessions_tests.tests.CacheSessionTests) ... ok\ntest_custom_expiry_reset (sessions_tests.tests.CacheSessionTests) ... ok\ntest_custom_expiry_seconds (sessions_tests.tests.CacheSessionTests) ... ok\ntest_custom_expiry_timedelta (sessions_tests.tests.CacheSessionTests) ... ok\ntest_cycle (sessions_tests.tests.CacheSessionTests) ... ok\ntest_cycle_with_no_session_cache (sessions_tests.tests.CacheSessionTests) ... ok\ntest_decode (sessions_tests.tests.CacheSessionTests) ... ok\ntest_decode_failure_logged_to_security (sessions_tests.tests.CacheSessionTests) ... ok\ntest_decode_legacy (sessions_tests.tests.CacheSessionTests) ... ok\ntest_default_cache (sessions_tests.tests.CacheSessionTests) ... ok\ntest_default_expiry (sessions_tests.tests.CacheSessionTests) ... ok\ntest_delete (sessions_tests.tests.CacheSessionTests) ... ok\ntest_flush (sessions_tests.tests.CacheSessionTests) ... ok\ntest_get_empty (sessions_tests.tests.CacheSessionTests) ... ok\ntest_get_expire_at_browser_close (sessions_tests.tests.CacheSessionTests) ... ok\ntest_has_key (sessions_tests.tests.CacheSessionTests) ... ok\ntest_invalid_key (sessions_tests.tests.CacheSessionTests) ... ok\ntest_items (sessions_tests.tests.CacheSessionTests) ... ok\ntest_keys (sessions_tests.tests.CacheSessionTests) ... ok\ntest_load_overlong_key (sessions_tests.tests.CacheSessionTests) ... ok\ntest_new_session (sessions_tests.tests.CacheSessionTests) ... ok\ntest_non_default_cache (sessions_tests.tests.CacheSessionTests) ... ok\ntest_pop (sessions_tests.tests.CacheSessionTests) ... ok\ntest_pop_default (sessions_tests.tests.CacheSessionTests) ... ok\ntest_pop_default_named_argument (sessions_tests.tests.CacheSessionTests) ... ok\ntest_pop_no_default_keyerror_raised (sessions_tests.tests.CacheSessionTests) ... ok\ntest_save (sessions_tests.tests.CacheSessionTests) ... ok\ntest_save_doesnt_clear_data (sessions_tests.tests.CacheSessionTests) ... ok\ntest_session_key_empty_string_invalid (sessions_tests.tests.CacheSessionTests)\nFalsey values (Such as an empty string) are rejected. ... ok\ntest_session_key_is_read_only (sessions_tests.tests.CacheSessionTests) ... ok\ntest_session_key_too_short_invalid (sessions_tests.tests.CacheSessionTests)\nStrings shorter than 8 characters are rejected. ... ok\ntest_session_key_valid_string_saved (sessions_tests.tests.CacheSessionTests)\nStrings of length 8 and up are accepted and stored. ... ok\ntest_session_load_does_not_create_record (sessions_tests.tests.CacheSessionTests) ... ok\ntest_session_save_does_not_resurrect_session_logged_out_in_other_context (sessions_tests.tests.CacheSessionTests) ... ok\ntest_setdefault (sessions_tests.tests.CacheSessionTests) ... ok\ntest_store (sessions_tests.tests.CacheSessionTests) ... ok\ntest_update (sessions_tests.tests.CacheSessionTests) ... ok\ntest_values (sessions_tests.tests.CacheSessionTests) ... ok\ntest_actual_expiry (sessions_tests.tests.CookieSessionTests) ... expected failure\ntest_clear (sessions_tests.tests.CookieSessionTests) ... ok\ntest_custom_expiry_datetime (sessions_tests.tests.CookieSessionTests) ... ok\ntest_custom_expiry_reset (sessions_tests.tests.CookieSessionTests) ... ok\ntest_custom_expiry_seconds (sessions_tests.tests.CookieSessionTests) ... ok\ntest_custom_expiry_timedelta (sessions_tests.tests.CookieSessionTests) ... ok\ntest_cycle (sessions_tests.tests.CookieSessionTests) ... ok\ntest_cycle_with_no_session_cache (sessions_tests.tests.CookieSessionTests) ... ok\ntest_decode (sessions_tests.tests.CookieSessionTests) ... ok\ntest_decode_failure_logged_to_security (sessions_tests.tests.CookieSessionTests) ... ok\ntest_decode_legacy (sessions_tests.tests.CookieSessionTests) ... ok\ntest_default_expiry (sessions_tests.tests.CookieSessionTests) ... ok\ntest_delete (sessions_tests.tests.CookieSessionTests) ... ok\ntest_flush (sessions_tests.tests.CookieSessionTests) ... ok\ntest_get_empty (sessions_tests.tests.CookieSessionTests) ... ok\ntest_get_expire_at_browser_close (sessions_tests.tests.CookieSessionTests) ... ok\ntest_has_key (sessions_tests.tests.CookieSessionTests) ... ok\ntest_invalid_key (sessions_tests.tests.CookieSessionTests) ... ok\ntest_items (sessions_tests.tests.CookieSessionTests) ... ok\ntest_keys (sessions_tests.tests.CookieSessionTests) ... ok\ntest_new_session (sessions_tests.tests.CookieSessionTests) ... ok\ntest_pop (sessions_tests.tests.CookieSessionTests) ... ok\ntest_pop_default (sessions_tests.tests.CookieSessionTests) ... ok\ntest_pop_default_named_argument (sessions_tests.tests.CookieSessionTests) ... ok\ntest_pop_no_default_keyerror_raised (sessions_tests.tests.CookieSessionTests) ... ok\ntest_save (sessions_tests.tests.CookieSessionTests) ... ok\ntest_save_doesnt_clear_data (sessions_tests.tests.CookieSessionTests) ... ok\ntest_session_key_empty_string_invalid (sessions_tests.tests.CookieSessionTests)\nFalsey values (Such as an empty string) are rejected. ... ok\ntest_session_key_is_read_only (sessions_tests.tests.CookieSessionTests) ... ok\ntest_session_key_too_short_invalid (sessions_tests.tests.CookieSessionTests)\nStrings shorter than 8 characters are rejected. ... ok\ntest_session_key_valid_string_saved (sessions_tests.tests.CookieSessionTests)\nStrings of length 8 and up are accepted and stored. ... ok\ntest_session_load_does_not_create_record (sessions_tests.tests.CookieSessionTests) ... skipped \"Cookie backend doesn't have an external store to create records in.\"\ntest_session_save_does_not_resurrect_session_logged_out_in_other_context (sessions_tests.tests.CookieSessionTests) ... skipped 'CookieSession is stored in the client and there is no way to query it.'\ntest_setdefault (sessions_tests.tests.CookieSessionTests) ... ok\ntest_store (sessions_tests.tests.CookieSessionTests) ... ok\ntest_unpickling_exception (sessions_tests.tests.CookieSessionTests) ... ok\ntest_update (sessions_tests.tests.CookieSessionTests) ... ok\ntest_values (sessions_tests.tests.CookieSessionTests) ... ok\ntest_actual_expiry (sessions_tests.tests.FileSessionPathLibTests) ... ok\ntest_clear (sessions_tests.tests.FileSessionPathLibTests) ... ok\ntest_clearsessions_command (sessions_tests.tests.FileSessionPathLibTests) ... ok\ntest_configuration_check (sessions_tests.tests.FileSessionPathLibTests) ... ok\ntest_custom_expiry_datetime (sessions_tests.tests.FileSessionPathLibTests) ... ok\ntest_custom_expiry_reset (sessions_tests.tests.FileSessionPathLibTests) ... ok\ntest_custom_expiry_seconds (sessions_tests.tests.FileSessionPathLibTests) ... ok\ntest_custom_expiry_timedelta (sessions_tests.tests.FileSessionPathLibTests) ... ok\ntest_cycle (sessions_tests.tests.FileSessionPathLibTests) ... ok\ntest_cycle_with_no_session_cache (sessions_tests.tests.FileSessionPathLibTests) ... ok\ntest_decode (sessions_tests.tests.FileSessionPathLibTests) ... ok\ntest_decode_failure_logged_to_security (sessions_tests.tests.FileSessionPathLibTests) ... ok\ntest_decode_legacy (sessions_tests.tests.FileSessionPathLibTests) ... ok\ntest_default_expiry (sessions_tests.tests.FileSessionPathLibTests) ... ok\ntest_delete (sessions_tests.tests.FileSessionPathLibTests) ... ok\ntest_flush (sessions_tests.tests.FileSessionPathLibTests) ... ok\ntest_get_empty (sessions_tests.tests.FileSessionPathLibTests) ... ok\ntest_get_expire_at_browser_close (sessions_tests.tests.FileSessionPathLibTests) ... ok\ntest_has_key (sessions_tests.tests.FileSessionPathLibTests) ... ok\ntest_invalid_key (sessions_tests.tests.FileSessionPathLibTests) ... ok\ntest_invalid_key_backslash (sessions_tests.tests.FileSessionPathLibTests) ... ok\ntest_invalid_key_forwardslash (sessions_tests.tests.FileSessionPathLibTests) ... ok\ntest_items (sessions_tests.tests.FileSessionPathLibTests) ... ok\ntest_keys (sessions_tests.tests.FileSessionPathLibTests) ... ok\ntest_new_session (sessions_tests.tests.FileSessionPathLibTests) ... ok\ntest_pop (sessions_tests.tests.FileSessionPathLibTests) ... ok\ntest_pop_default (sessions_tests.tests.FileSessionPathLibTests) ... ok\ntest_pop_default_named_argument (sessions_tests.tests.FileSessionPathLibTests) ... ok\ntest_pop_no_default_keyerror_raised (sessions_tests.tests.FileSessionPathLibTests) ... ok\ntest_save (sessions_tests.tests.FileSessionPathLibTests) ... ok\ntest_save_doesnt_clear_data (sessions_tests.tests.FileSessionPathLibTests) ... ok\ntest_session_key_empty_string_invalid (sessions_tests.tests.FileSessionPathLibTests)\nFalsey values (Such as an empty string) are rejected. ... ok\ntest_session_key_is_read_only (sessions_tests.tests.FileSessionPathLibTests) ... ok\ntest_session_key_too_short_invalid (sessions_tests.tests.FileSessionPathLibTests)\nStrings shorter than 8 characters are rejected. ... ok\ntest_session_key_valid_string_saved (sessions_tests.tests.FileSessionPathLibTests)\nStrings of length 8 and up are accepted and stored. ... ok\ntest_session_load_does_not_create_record (sessions_tests.tests.FileSessionPathLibTests) ... ok\ntest_session_save_does_not_resurrect_session_logged_out_in_other_context (sessions_tests.tests.FileSessionPathLibTests) ... ok\ntest_setdefault (sessions_tests.tests.FileSessionPathLibTests) ... ok\ntest_store (sessions_tests.tests.FileSessionPathLibTests) ... ok\ntest_update (sessions_tests.tests.FileSessionPathLibTests) ... ok\ntest_values (sessions_tests.tests.FileSessionPathLibTests) ... ok\ntest_actual_expiry (sessions_tests.tests.FileSessionTests) ... ok\ntest_clear (sessions_tests.tests.FileSessionTests) ... ok\ntest_clearsessions_command (sessions_tests.tests.FileSessionTests) ... ok\ntest_configuration_check (sessions_tests.tests.FileSessionTests) ... ok\ntest_custom_expiry_datetime (sessions_tests.tests.FileSessionTests) ... ok\ntest_custom_expiry_reset (sessions_tests.tests.FileSessionTests) ... ok\ntest_custom_expiry_seconds (sessions_tests.tests.FileSessionTests) ... ok\ntest_custom_expiry_timedelta (sessions_tests.tests.FileSessionTests) ... ok\ntest_cycle (sessions_tests.tests.FileSessionTests) ... ok\ntest_cycle_with_no_session_cache (sessions_tests.tests.FileSessionTests) ... ok\ntest_decode (sessions_tests.tests.FileSessionTests) ... ok\ntest_decode_failure_logged_to_security (sessions_tests.tests.FileSessionTests) ... ok\ntest_decode_legacy (sessions_tests.tests.FileSessionTests) ... ok\ntest_default_expiry (sessions_tests.tests.FileSessionTests) ... ok\ntest_delete (sessions_tests.tests.FileSessionTests) ... ok\ntest_flush (sessions_tests.tests.FileSessionTests) ... ok\ntest_get_empty (sessions_tests.tests.FileSessionTests) ... ok\ntest_get_expire_at_browser_close (sessions_tests.tests.FileSessionTests) ... ok\ntest_has_key (sessions_tests.tests.FileSessionTests) ... ok\ntest_invalid_key (sessions_tests.tests.FileSessionTests) ... ok\ntest_invalid_key_backslash (sessions_tests.tests.FileSessionTests) ... ok\ntest_invalid_key_forwardslash (sessions_tests.tests.FileSessionTests) ... ok\ntest_items (sessions_tests.tests.FileSessionTests) ... ok\ntest_keys (sessions_tests.tests.FileSessionTests) ... ok\ntest_new_session (sessions_tests.tests.FileSessionTests) ... ok\ntest_pop (sessions_tests.tests.FileSessionTests) ... ok\ntest_pop_default (sessions_tests.tests.FileSessionTests) ... ok\ntest_pop_default_named_argument (sessions_tests.tests.FileSessionTests) ... ok\ntest_pop_no_default_keyerror_raised (sessions_tests.tests.FileSessionTests) ... ok\ntest_save (sessions_tests.tests.FileSessionTests) ... ok\ntest_save_doesnt_clear_data (sessions_tests.tests.FileSessionTests) ... ok\ntest_session_key_empty_string_invalid (sessions_tests.tests.FileSessionTests)\nFalsey values (Such as an empty string) are rejected. ... ok\ntest_session_key_is_read_only (sessions_tests.tests.FileSessionTests) ... ok\ntest_session_key_too_short_invalid (sessions_tests.tests.FileSessionTests)\nStrings shorter than 8 characters are rejected. ... ok\ntest_session_key_valid_string_saved (sessions_tests.tests.FileSessionTests)\nStrings of length 8 and up are accepted and stored. ... ok\ntest_session_load_does_not_create_record (sessions_tests.tests.FileSessionTests) ... ok\ntest_session_save_does_not_resurrect_session_logged_out_in_other_context (sessions_tests.tests.FileSessionTests) ... ok\ntest_setdefault (sessions_tests.tests.FileSessionTests) ... ok\ntest_store (sessions_tests.tests.FileSessionTests) ... ok\ntest_update (sessions_tests.tests.FileSessionTests) ... ok\ntest_values (sessions_tests.tests.FileSessionTests) ... ok\n\n======================================================================\nERROR: test_cookie (unittest.loader._FailedTest)\n----------------------------------------------------------------------\nImportError: Failed to import test module: test_cookie\nTraceback (most recent call last):\n  File \"/opt/miniconda3/envs/testbed/lib/python3.6/unittest/loader.py\", line 153, in loadTestsFromName\n    module = __import__(module_name)\n  File \"/testbed/tests/messages_tests/test_cookie.py\", line 6, in <module>\n    from django.contrib.messages.storage.cookie import (\nImportError: cannot import name 'CookieStorage'\n\n\n----------------------------------------------------------------------\nRan 389 tests in 0.439s\n\nFAILED (errors=1, skipped=2, expected failures=1)\nDestroying test database for alias 'default' ('file:memorydb_default?mode=memory&cache=shared')...\n",
+      "graded_report": {
+        "f2p_fail": 1,
+        "f2p_failing": [
+          "test_cookie_setings (messages_tests.test_cookie.CookieTests)"
+        ],
+        "f2p_pass": 4,
+        "found": true,
+        "n_parsed": 363,
+        "p2p_fail": 27,
+        "p2p_failing": [
+          "test_add (messages_tests.test_cookie.CookieTests)",
+          "test_add_lazy_translation (messages_tests.test_cookie.CookieTests)",
+          "test_add_update (messages_tests.test_cookie.CookieTests)",
+          "test_context_processor_message_levels (messages_tests.test_cookie.CookieTests)",
+          "test_custom_tags (messages_tests.test_cookie.CookieTests)",
+          "test_default_level (messages_tests.test_cookie.CookieTests)",
+          "test_existing_add (messages_tests.test_cookie.CookieTests)",
+          "test_existing_add_read_update (messages_tests.test_cookie.CookieTests)",
+          "test_existing_read (messages_tests.test_cookie.CookieTests)",
+          "test_existing_read_add_update (messages_tests.test_cookie.CookieTests)"
+        ],
+        "p2p_pass": 355,
+        "reward": 0.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "transform broke the contract",
+      "tier": "MEDIUM",
+      "verdict": "INVALID"
+    },
+    {
+      "anchor": "SessionMiddleware",
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "coupled": [],
+        "failing": [
+          "test_add (messages_tests.test_cookie.CookieTests)",
+          "test_add_lazy_translation (messages_tests.test_cookie.CookieTests)",
+          "test_add_update (messages_tests.test_cookie.CookieTests)",
+          "test_context_processor_message_levels (messages_tests.test_cookie.CookieTests)",
+          "test_custom_tags (messages_tests.test_cookie.CookieTests)",
+          "test_default_level (messages_tests.test_cookie.CookieTests)",
+          "test_existing_add (messages_tests.test_cookie.CookieTests)",
+          "test_existing_add_read_update (messages_tests.test_cookie.CookieTests)",
+          "test_existing_read (messages_tests.test_cookie.CookieTests)",
+          "test_existing_read_add_update (messages_tests.test_cookie.CookieTests)",
+          "test_cookie_setings (messages_tests.test_cookie.CookieTests)"
+        ],
+        "symbol": "CookieStorage",
+        "unexplained": [
+          "test_add (messages_tests.test_cookie.CookieTests) (no failure section found)",
+          "test_add_lazy_translation (messages_tests.test_cookie.CookieTests) (no failure section found)",
+          "test_add_update (messages_tests.test_cookie.CookieTests) (no failure section found)",
+          "test_context_processor_message_levels (messages_tests.test_cookie.CookieTests) (no failure section found)",
+          "test_custom_tags (messages_tests.test_cookie.CookieTests) (no failure section found)",
+          "test_default_level (messages_tests.test_cookie.CookieTests) (no failure section found)",
+          "test_existing_add (messages_tests.test_cookie.CookieTests) (no failure section found)",
+          "test_existing_add_read_update (messages_tests.test_cookie.CookieTests) (no failure section found)",
+          "test_existing_read (messages_tests.test_cookie.CookieTests) (no failure section found)",
+          "test_existing_read_add_update (messages_tests.test_cookie.CookieTests) (no failure section found)",
+          "test_cookie_setings (messages_tests.test_cookie.CookieTests) (no failure section found)"
+        ]
+      },
+      "file": "django/contrib/sessions/middleware.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 1,
+        "f2p_failing": [
+          "test_cookie_setings (messages_tests.test_cookie.CookieTests)"
+        ],
+        "f2p_pass": 4,
+        "found": true,
+        "n_parsed": 363,
+        "p2p_fail": 27,
+        "p2p_failing": [
+          "test_add (messages_tests.test_cookie.CookieTests)",
+          "test_add_lazy_translation (messages_tests.test_cookie.CookieTests)",
+          "test_add_update (messages_tests.test_cookie.CookieTests)",
+          "test_context_processor_message_levels (messages_tests.test_cookie.CookieTests)",
+          "test_custom_tags (messages_tests.test_cookie.CookieTests)",
+          "test_default_level (messages_tests.test_cookie.CookieTests)",
+          "test_existing_add (messages_tests.test_cookie.CookieTests)",
+          "test_existing_add_read_update (messages_tests.test_cookie.CookieTests)",
+          "test_existing_read (messages_tests.test_cookie.CookieTests)",
+          "test_existing_read_add_update (messages_tests.test_cookie.CookieTests)"
+        ],
+        "p2p_pass": 355,
+        "reward": 0.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "dynamic reach: 'SessionMiddleware' appears in a non-annotation string literal in django/contrib/admin/checks.py line 131 ('django.contrib.sessions.middleware.Sessi'); 7 further hit(s) -- an alpha-rename cannot be argued safe",
+      "tier": "MEDIUM",
+      "verdict": "REFUSED"
+    },
+    {
+      "anchor": "HttpResponseBase",
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "coupled": [],
+        "failing": [
+          "test_add (messages_tests.test_cookie.CookieTests)",
+          "test_add_lazy_translation (messages_tests.test_cookie.CookieTests)",
+          "test_add_update (messages_tests.test_cookie.CookieTests)",
+          "test_context_processor_message_levels (messages_tests.test_cookie.CookieTests)",
+          "test_custom_tags (messages_tests.test_cookie.CookieTests)",
+          "test_default_level (messages_tests.test_cookie.CookieTests)",
+          "test_existing_add (messages_tests.test_cookie.CookieTests)",
+          "test_existing_add_read_update (messages_tests.test_cookie.CookieTests)",
+          "test_existing_read (messages_tests.test_cookie.CookieTests)",
+          "test_existing_read_add_update (messages_tests.test_cookie.CookieTests)",
+          "test_cookie_setings (messages_tests.test_cookie.CookieTests)"
+        ],
+        "symbol": "CookieStorage",
+        "unexplained": [
+          "test_add (messages_tests.test_cookie.CookieTests) (no failure section found)",
+          "test_add_lazy_translation (messages_tests.test_cookie.CookieTests) (no failure section found)",
+          "test_add_update (messages_tests.test_cookie.CookieTests) (no failure section found)",
+          "test_context_processor_message_levels (messages_tests.test_cookie.CookieTests) (no failure section found)",
+          "test_custom_tags (messages_tests.test_cookie.CookieTests) (no failure section found)",
+          "test_default_level (messages_tests.test_cookie.CookieTests) (no failure section found)",
+          "test_existing_add (messages_tests.test_cookie.CookieTests) (no failure section found)",
+          "test_existing_add_read_update (messages_tests.test_cookie.CookieTests) (no failure section found)",
+          "test_existing_read (messages_tests.test_cookie.CookieTests) (no failure section found)",
+          "test_existing_read_add_update (messages_tests.test_cookie.CookieTests) (no failure section found)",
+          "test_cookie_setings (messages_tests.test_cookie.CookieTests) (no failure section found)"
+        ]
+      },
+      "file": "django/http/response.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 1,
+        "f2p_failing": [
+          "test_cookie_setings (messages_tests.test_cookie.CookieTests)"
+        ],
+        "f2p_pass": 4,
+        "found": true,
+        "n_parsed": 363,
+        "p2p_fail": 27,
+        "p2p_failing": [
+          "test_add (messages_tests.test_cookie.CookieTests)",
+          "test_add_lazy_translation (messages_tests.test_cookie.CookieTests)",
+          "test_add_update (messages_tests.test_cookie.CookieTests)",
+          "test_context_processor_message_levels (messages_tests.test_cookie.CookieTests)",
+          "test_custom_tags (messages_tests.test_cookie.CookieTests)",
+          "test_default_level (messages_tests.test_cookie.CookieTests)",
+          "test_existing_add (messages_tests.test_cookie.CookieTests)",
+          "test_existing_add_read_update (messages_tests.test_cookie.CookieTests)",
+          "test_existing_read (messages_tests.test_cookie.CookieTests)",
+          "test_existing_read_add_update (messages_tests.test_cookie.CookieTests)"
+        ],
+        "p2p_pass": 355,
+        "reward": 0.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "BORDER: the issue names 'HttpResponseBase' -- candidate CONTRACT, route to the rubric",
+      "tier": "MEDIUM",
+      "verdict": "REFUSED"
+    },
+    {
+      "anchor": null,
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "coupled": [],
+        "failing": [
+          "test_add (messages_tests.test_cookie.CookieTests)",
+          "test_add_lazy_translation (messages_tests.test_cookie.CookieTests)",
+          "test_add_update (messages_tests.test_cookie.CookieTests)",
+          "test_context_processor_message_levels (messages_tests.test_cookie.CookieTests)",
+          "test_custom_tags (messages_tests.test_cookie.CookieTests)",
+          "test_default_level (messages_tests.test_cookie.CookieTests)",
+          "test_existing_add (messages_tests.test_cookie.CookieTests)",
+          "test_existing_add_read_update (messages_tests.test_cookie.CookieTests)",
+          "test_existing_read (messages_tests.test_cookie.CookieTests)",
+          "test_existing_read_add_update (messages_tests.test_cookie.CookieTests)",
+          "test_cookie_setings (messages_tests.test_cookie.CookieTests)"
+        ],
+        "symbol": "CookieStorage",
+        "unexplained": [
+          "test_add (messages_tests.test_cookie.CookieTests) (no failure section found)",
+          "test_add_lazy_translation (messages_tests.test_cookie.CookieTests) (no failure section found)",
+          "test_add_update (messages_tests.test_cookie.CookieTests) (no failure section found)",
+          "test_context_processor_message_levels (messages_tests.test_cookie.CookieTests) (no failure section found)",
+          "test_custom_tags (messages_tests.test_cookie.CookieTests) (no failure section found)",
+          "test_default_level (messages_tests.test_cookie.CookieTests) (no failure section found)",
+          "test_existing_add (messages_tests.test_cookie.CookieTests) (no failure section found)",
+          "test_existing_add_read_update (messages_tests.test_cookie.CookieTests) (no failure section found)",
+          "test_existing_read (messages_tests.test_cookie.CookieTests) (no failure section found)",
+          "test_existing_read_add_update (messages_tests.test_cookie.CookieTests) (no failure section found)",
+          "test_cookie_setings (messages_tests.test_cookie.CookieTests) (no failure section found)"
+        ]
+      },
+      "file": null,
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 1,
+        "f2p_failing": [
+          "test_cookie_setings (messages_tests.test_cookie.CookieTests)"
+        ],
+        "f2p_pass": 4,
+        "found": true,
+        "n_parsed": 363,
+        "p2p_fail": 27,
+        "p2p_failing": [
+          "test_add (messages_tests.test_cookie.CookieTests)",
+          "test_add_lazy_translation (messages_tests.test_cookie.CookieTests)",
+          "test_add_update (messages_tests.test_cookie.CookieTests)",
+          "test_context_processor_message_levels (messages_tests.test_cookie.CookieTests)",
+          "test_custom_tags (messages_tests.test_cookie.CookieTests)",
+          "test_default_level (messages_tests.test_cookie.CookieTests)",
+          "test_existing_add (messages_tests.test_cookie.CookieTests)",
+          "test_existing_add_read_update (messages_tests.test_cookie.CookieTests)",
+          "test_existing_read (messages_tests.test_cookie.CookieTests)",
+          "test_existing_read_add_update (messages_tests.test_cookie.CookieTests)"
+        ],
+        "p2p_pass": 355,
+        "reward": 0.0
+      },
+      "loud_failure": false,
+      "observable": "order of elements in a returned collection",
+      "operator": "collection_reverse",
+      "reason": "no anchor inside the gold-touched region",
+      "tier": "MEDIUM",
+      "verdict": "NOT_APPLICABLE"
+    },
+    {
+      "anchor": null,
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "coupled": [],
+        "failing": [
+          "test_add (messages_tests.test_cookie.CookieTests)",
+          "test_add_lazy_translation (messages_tests.test_cookie.CookieTests)",
+          "test_add_update (messages_tests.test_cookie.CookieTests)",
+          "test_context_processor_message_levels (messages_tests.test_cookie.CookieTests)",
+          "test_custom_tags (messages_tests.test_cookie.CookieTests)",
+          "test_default_level (messages_tests.test_cookie.CookieTests)",
+          "test_existing_add (messages_tests.test_cookie.CookieTests)",
+          "test_existing_add_read_update (messages_tests.test_cookie.CookieTests)",
+          "test_existing_read (messages_tests.test_cookie.CookieTests)",
+          "test_existing_read_add_update (messages_tests.test_cookie.CookieTests)",
+          "test_cookie_setings (messages_tests.test_cookie.CookieTests)"
+        ],
+        "symbol": "CookieStorage",
+        "unexplained": [
+          "test_add (messages_tests.test_cookie.CookieTests) (no failure section found)",
+          "test_add_lazy_translation (messages_tests.test_cookie.CookieTests) (no failure section found)",
+          "test_add_update (messages_tests.test_cookie.CookieTests) (no failure section found)",
+          "test_context_processor_message_levels (messages_tests.test_cookie.CookieTests) (no failure section found)",
+          "test_custom_tags (messages_tests.test_cookie.CookieTests) (no failure section found)",
+          "test_default_level (messages_tests.test_cookie.CookieTests) (no failure section found)",
+          "test_existing_add (messages_tests.test_cookie.CookieTests) (no failure section found)",
+          "test_existing_add_read_update (messages_tests.test_cookie.CookieTests) (no failure section found)",
+          "test_existing_read (messages_tests.test_cookie.CookieTests) (no failure section found)",
+          "test_existing_read_add_update (messages_tests.test_cookie.CookieTests) (no failure section found)",
+          "test_cookie_setings (messages_tests.test_cookie.CookieTests) (no failure section found)"
+        ]
+      },
+      "file": null,
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 1,
+        "f2p_failing": [
+          "test_cookie_setings (messages_tests.test_cookie.CookieTests)"
+        ],
+        "f2p_pass": 4,
+        "found": true,
+        "n_parsed": 363,
+        "p2p_fail": 27,
+        "p2p_failing": [
+          "test_add (messages_tests.test_cookie.CookieTests)",
+          "test_add_lazy_translation (messages_tests.test_cookie.CookieTests)",
+          "test_add_update (messages_tests.test_cookie.CookieTests)",
+          "test_context_processor_message_levels (messages_tests.test_cookie.CookieTests)",
+          "test_custom_tags (messages_tests.test_cookie.CookieTests)",
+          "test_default_level (messages_tests.test_cookie.CookieTests)",
+          "test_existing_add (messages_tests.test_cookie.CookieTests)",
+          "test_existing_add_read_update (messages_tests.test_cookie.CookieTests)",
+          "test_existing_read (messages_tests.test_cookie.CookieTests)",
+          "test_existing_read_add_update (messages_tests.test_cookie.CookieTests)"
+        ],
+        "p2p_pass": 355,
+        "reward": 0.0
+      },
+      "loud_failure": false,
+      "observable": "human-readable text of an exception message",
+      "operator": "message_reword",
+      "reason": "no anchor inside the gold-touched region; 6 anchor(s) elsewhere in the 3 target(s): django/contrib/messages/storage/cookie.py, django/contrib/sessions/middleware.py, django/http/response.py",
+      "tier": "HIGH",
+      "verdict": "NOT_APPLICABLE"
+    }
+  ],
+  "targets": [
+    "django/contrib/messages/storage/cookie.py",
+    "django/contrib/sessions/middleware.py",
+    "django/http/response.py"
+  ],
+  "version": "3.2",
+  "witnesses": []
+}

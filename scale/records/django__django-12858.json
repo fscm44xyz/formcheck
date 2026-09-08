@@ -6,10 +6,10 @@
   },
   "disk_orphan_reclaimed_bytes": 0,
   "disk_residual_bytes": 0,
-  "elapsed_seconds": 104.16,
+  "elapsed_seconds": 156.09,
   "error": null,
-  "image": "swebench/sweb.eval.x86_64.pallets_1776_flask-5014:latest",
-  "instance_id": "pallets__flask-5014",
+  "image": "swebench/sweb.eval.x86_64.django_1776_django-12858:latest",
+  "instance_id": "django__django-12858",
   "leaked_containers": [],
   "leaked_image": false,
   "log": [
@@ -24,9 +24,9 @@
       "no anchor inside the gold-touched region"
     ],
     [
-      "symbol_rename:Blueprint",
+      "symbol_rename:Model",
       "REFUSED",
-      "BORDER: the issue names 'Blueprint' -- candidate CONTRACT, route to the rubric"
+      "attribute access `.Model` in django/core/serializers/base.py line 223 is not a qualified reference to the defining module -- outside this operator's scope"
     ],
     [
       "collection_reverse:<no anchor>",
@@ -36,7 +36,7 @@
     [
       "message_reword:<no anchor>",
       "NOT_APPLICABLE",
-      "no anchor inside the gold-touched region; 5 anchor(s) elsewhere in the target"
+      "no anchor inside the gold-touched region; 7 anchor(s) elsewhere in the target"
     ]
   ],
   "mountable": true,
@@ -52,14 +52,14 @@
   "operators_with_anchors": [
     "symbol_rename"
   ],
-  "repo": "pallets/flask",
+  "repo": "django/django",
   "row": {
-    "elapsed": 13.71,
+    "elapsed": 25.0,
     "error": null,
     "error_type": null,
     "index": 0,
     "mode": "formcheck",
-    "name": "pallets__flask-5014",
+    "name": "django__django-12858",
     "reason": "unchecked",
     "valid": null
   },
@@ -74,10 +74,10 @@
         "f2p_failing": [],
         "f2p_pass": 1,
         "found": true,
-        "n_parsed": 60,
+        "n_parsed": 76,
         "p2p_fail": 0,
         "p2p_failing": [],
-        "p2p_pass": 59,
+        "p2p_pass": 73,
         "reward": 1.0
       },
       "loud_failure": false,
@@ -88,25 +88,25 @@
       "verdict": "NOT_APPLICABLE"
     },
     {
-      "anchor": "Blueprint",
+      "anchor": "Model",
       "failure_analysis": null,
-      "file": "src/flask/blueprints.py",
+      "file": "django/db/models/base.py",
       "graded_log": null,
       "graded_report": {
         "f2p_fail": 0,
         "f2p_failing": [],
         "f2p_pass": 1,
         "found": true,
-        "n_parsed": 60,
+        "n_parsed": 76,
         "p2p_fail": 0,
         "p2p_failing": [],
-        "p2p_pass": 59,
+        "p2p_pass": 73,
         "reward": 1.0
       },
       "loud_failure": true,
       "observable": "symbol identity (module-level name)",
       "operator": "symbol_rename",
-      "reason": "BORDER: the issue names 'Blueprint' -- candidate CONTRACT, route to the rubric",
+      "reason": "attribute access `.Model` in django/core/serializers/base.py line 223 is not a qualified reference to the defining module -- outside this operator's scope",
       "tier": "MEDIUM",
       "verdict": "REFUSED"
     },
@@ -120,10 +120,10 @@
         "f2p_failing": [],
         "f2p_pass": 1,
         "found": true,
-        "n_parsed": 60,
+        "n_parsed": 76,
         "p2p_fail": 0,
         "p2p_failing": [],
-        "p2p_pass": 59,
+        "p2p_pass": 73,
         "reward": 1.0
       },
       "loud_failure": false,
@@ -143,23 +143,23 @@
         "f2p_failing": [],
         "f2p_pass": 1,
         "found": true,
-        "n_parsed": 60,
+        "n_parsed": 76,
         "p2p_fail": 0,
         "p2p_failing": [],
-        "p2p_pass": 59,
+        "p2p_pass": 73,
         "reward": 1.0
       },
       "loud_failure": false,
       "observable": "human-readable text of an exception message",
       "operator": "message_reword",
-      "reason": "no anchor inside the gold-touched region; 5 anchor(s) elsewhere in the target",
+      "reason": "no anchor inside the gold-touched region; 7 anchor(s) elsewhere in the target",
       "tier": "HIGH",
       "verdict": "NOT_APPLICABLE"
     }
   ],
   "targets": [
-    "src/flask/blueprints.py"
+    "django/db/models/base.py"
   ],
-  "version": "2.3",
+  "version": "3.1",
   "witnesses": []
 }

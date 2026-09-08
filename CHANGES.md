@@ -596,7 +596,44 @@ a task with no witness.
 
 Each target is now hashed individually, a missing file records a distinct
 `MISSING` line rather than nothing, and the output is checked to have one line
-per target or the digest raises.
+per target or the digest raises. An all-`MISSING` result raises too: well-formed,
+but identical for any other all-missing tree. `graded_report` refuses an empty
+key outright.
+
+**THIS IS THE FAILURE CLASS FORMCHECK EXISTS TO DETECT, IN FORMCHECK.** A grader
+returning the wrong answer for a reason invisible in its own output is the entire
+thesis of `writeup.md`. D2 is that, in the tool: the graded memo returns 1.0 for
+a tree it never graded, the row says `CLEAN reward 1.0`, and the results file is
+indistinguishable from a task whose reward is genuinely not form-coupled. It
+biases THE NUMBER *downward*, which is the direction nobody audits, because a
+missing witness looks like good news.
+
+It was found by an audit, not by a suspicious result -- which is the argument
+executed on its own code. Nothing about the outputs would have prompted anyone to
+look.
+
+**Blast radius, measured rather than asserted.** `scale/test_digest.py`
+`test_collapse_makes_everything_clean` drives the real `FormCheckMixin` twice
+with identical inputs, changing only whether the digest collapses:
+
+    collapsed digest -> ['CLEAN']     working digest -> ['WITNESS']
+
+So the consequence is not one wrong row. A collapsed digest is a property of the
+IMAGE (a missing `sha256sum`), so it would hold for every task from that repo,
+and the memo -- populated by the control run before any transform is applied --
+serves the reference solution's 1.0 to every subsequent query. **Every judged
+transform on such a task returns CLEAN and the task reports no witness.**
+
+That signature is also what bounds the damage: a task that produced a WITNESS
+proves its own digest was not collapsed. `pytest-10356` and `xarray-4966` both
+did, so their `CLEAN` rows are sound. The `CLEAN` rows from tasks with no witness
+-- `scikit-learn-14894`, `sphinx-9591`, `sympy-13091` (x3), `pytest-7571` -- are
+the ones that cannot be cleared by that argument and are being re-verified
+in-container with the corrected digest. Result recorded in `REPORT.md`.
+
+Ongoing evidence: M3 runs the corrected digest, which RAISES on any anomaly,
+across 50 tasks and 10 repos. A `sha256sum` missing anywhere in the image family
+would surface as a task error rather than as silence.
 
 **Both verified inert on the live paths before proceeding:** M0 gate IDENTICAL,
 exit 0; `xarray-4966` re-run verdict-for-verdict identical (still WITNESS).
@@ -624,6 +661,12 @@ exists to prevent and which `f2_gate`'s writer does not honour.
 gate would compare the container against a baseline regenerated *by the same
 drifted code*, and pass trivially. A gate whose reference can be rewritten by the
 thing it is gating is not a gate -- it is a tautology with a table.
+
+**Same family as D2, and worth naming as such.** Both are a check that reports
+success for a reason invisible in its output: D2's memo answers a question it
+never asked, and a self-regenerating baseline answers "identical?" by rewriting
+what identical means. Neither would appear in any result. Both were found by
+looking at the machinery rather than at the numbers.
 
 **Rule.** *A baseline is frozen and its identity is checked, not assumed.*
 `scale/fixtures/f2_verdicts.sha256` pins the reference;

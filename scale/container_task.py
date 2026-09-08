@@ -513,6 +513,15 @@ class SweBenchFormcheckTask(ContainerFormcheckTask):
                 f"{len(lines)} -- refusing to return a digest that could "
                 f"collide with another tree's. stderr: "
                 f"{out.stderr.strip()[:200]}")
+        if all(ln.startswith("MISSING ") for ln in lines):
+            # Well-formed but degenerate: every target absent means the tree is
+            # not in a state where grading it says anything, AND the digest
+            # would be identical for any other such tree. Raise rather than
+            # return a value that is technically distinct but semantically
+            # empty.
+            raise RuntimeError(
+                f"tree digest: every target is missing ({', '.join(targets)}) "
+                "-- refusing a degenerate digest")
         return hashlib.sha256("\n".join(lines).encode()).hexdigest()
 
     def test_invocation(self):
@@ -556,6 +565,9 @@ class SweBenchFormcheckTask(ContainerFormcheckTask):
         makes the reuse safe.
         """
         key = self._tree_digest()
+        if not key:
+            raise RuntimeError("tree digest empty -- refusing to key the "
+                               "graded memo on it (see CHANGES.md D2)")
         if key not in self._graded_memo:
             cmd, directives = self.test_invocation()
             full = " ".join([cmd, *directives])

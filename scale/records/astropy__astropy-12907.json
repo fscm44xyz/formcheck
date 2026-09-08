@@ -1,0 +1,303 @@
+{
+  "completed": true,
+  "control": {
+    "passed": true,
+    "reason": "untransformed reference scores 1.0"
+  },
+  "disk_orphan_reclaimed_bytes": 0,
+  "disk_residual_bytes": 0,
+  "elapsed_seconds": 213.86,
+  "error": null,
+  "image": "swebench/sweb.eval.x86_64.astropy_1776_astropy-12907:latest",
+  "instance_id": "astropy__astropy-12907",
+  "leaked_containers": [],
+  "leaked_image": false,
+  "log": [
+    [
+      "<control>",
+      "OK",
+      "untransformed reference scores 1.0"
+    ],
+    [
+      "kwonly_specialize:<no anchor>",
+      "NOT_APPLICABLE",
+      "no anchor inside the gold-touched region"
+    ],
+    [
+      "symbol_rename:_cstack",
+      "INVALID",
+      "transform broke the contract"
+    ],
+    [
+      "collection_reverse:<no anchor>",
+      "NOT_APPLICABLE",
+      "no anchor inside the gold-touched region"
+    ],
+    [
+      "message_reword:<no anchor>",
+      "NOT_APPLICABLE",
+      "no anchor inside the gold-touched region"
+    ]
+  ],
+  "mountable": true,
+  "multi_target": false,
+  "n_targets": 1,
+  "on_prime_hub": null,
+  "on_prime_hub_reason": "not resolvable offline; no hub environment index is reachable from this repo, verifiers or swebench",
+  "operators_not_applicable": [
+    "collection_reverse",
+    "kwonly_specialize",
+    "message_reword"
+  ],
+  "operators_with_anchors": [
+    "symbol_rename"
+  ],
+  "repo": "astropy/astropy",
+  "row": {
+    "elapsed": 34.04,
+    "error": null,
+    "error_type": null,
+    "index": 0,
+    "mode": "formcheck",
+    "name": "astropy__astropy-12907",
+    "reason": "valid",
+    "valid": true
+  },
+  "rows": [
+    {
+      "anchor": null,
+      "failure_analysis": null,
+      "file": null,
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 2,
+        "found": true,
+        "n_parsed": 15,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 13,
+        "reward": 1.0
+      },
+      "loud_failure": false,
+      "observable": "callable signature (arity / parameter names)",
+      "operator": "kwonly_specialize",
+      "reason": "no anchor inside the gold-touched region",
+      "tier": "HIGH",
+      "verdict": "NOT_APPLICABLE"
+    },
+    {
+      "anchor": "_cstack",
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "coupled": [],
+        "failing": [
+          "astropy/modeling/tests/test_separable.py::test_coord_matrix",
+          "astropy/modeling/tests/test_separable.py::test_cdot",
+          "astropy/modeling/tests/test_separable.py::test_cstack",
+          "astropy/modeling/tests/test_separable.py::test_arith_oper",
+          "astropy/modeling/tests/test_separable.py::test_separable[compound_model0-result0]",
+          "astropy/modeling/tests/test_separable.py::test_separable[compound_model1-result1]",
+          "astropy/modeling/tests/test_separable.py::test_separable[compound_model2-result2]",
+          "astropy/modeling/tests/test_separable.py::test_separable[compound_model3-result3]",
+          "astropy/modeling/tests/test_separable.py::test_separable[compound_model4-result4]",
+          "astropy/modeling/tests/test_separable.py::test_separable[compound_model5-result5]",
+          "astropy/modeling/tests/test_separable.py::test_separable[compound_model6-result6]",
+          "astropy/modeling/tests/test_separable.py::test_separable[compound_model9-result9]"
+        ],
+        "symbol": "_cstack",
+        "unexplained": [
+          "astropy/modeling/tests/test_separable.py::test_coord_matrix (no failure section found)",
+          "astropy/modeling/tests/test_separable.py::test_cdot (no failure section found)",
+          "astropy/modeling/tests/test_separable.py::test_cstack (no failure section found)",
+          "astropy/modeling/tests/test_separable.py::test_arith_oper (no failure section found)",
+          "astropy/modeling/tests/test_separable.py::test_separable[compound_model0-result0] (no failure section found)",
+          "astropy/modeling/tests/test_separable.py::test_separable[compound_model1-result1] (no failure section found)",
+          "astropy/modeling/tests/test_separable.py::test_separable[compound_model2-result2] (no failure section found)",
+          "astropy/modeling/tests/test_separable.py::test_separable[compound_model3-result3] (no failure section found)",
+          "astropy/modeling/tests/test_separable.py::test_separable[compound_model4-result4] (no failure section found)",
+          "astropy/modeling/tests/test_separable.py::test_separable[compound_model5-result5] (no failure section found)",
+          "astropy/modeling/tests/test_separable.py::test_separable[compound_model6-result6] (no failure section found)",
+          "astropy/modeling/tests/test_separable.py::test_separable[compound_model9-result9] (no failure section found)"
+        ]
+      },
+      "file": "astropy/modeling/separable.py",
+      "graded_log": "+ pytest -rA astropy/modeling/tests/test_separable.py\n============================= test session starts ==============================\nplatform linux -- Python 3.9.20, pytest-7.4.0, pluggy-1.3.0\n\nRunning tests with Astropy version 5.1.dev623+gd16bfe05a.d20260815.\nRunning tests in astropy/modeling/tests/test_separable.py.\n\nDate: 2026-09-08T14:29:11\n\nPlatform: Linux-6.6.87.2-microsoft-standard-WSL2-x86_64-with-glibc2.35\n\nExecutable: /opt/miniconda3/envs/testbed/bin/python\n\nFull Python Version: \n3.9.20 (main, Oct  3 2024, 07:27:41) \n[GCC 11.2.0]\n\nencodings: sys: utf-8, locale: UTF-8, filesystem: utf-8\nbyteorder: little\nfloat info: dig: 15, mant_dig: 15\n\nPackage versions: \nNumpy: 1.25.2\nScipy: not available\nMatplotlib: not available\nh5py: not available\nPandas: not available\nPyERFA: 2.0.0.3\nCython: not available\nScikit-image: not available\nasdf: not available\npyarrow: not available\n\nUsing Astropy options: remote_data: none.\n\nARCH_ON_CI: undefined\nIS_CRON: undefined\n\nrootdir: /testbed\nconfigfile: setup.cfg\nplugins: hypothesis-6.82.6, xdist-3.3.1, openfiles-0.5.0, remotedata-0.4.0, cov-4.1.0, filter-subpackage-0.1.2, doctestplus-1.0.0, arraydiff-0.5.0, astropy-header-0.2.2, mock-3.11.1, astropy-0.10.0\ncollected 0 items / 2 errors\n\n==================================== ERRORS ====================================\n__________ ERROR collecting astropy/modeling/tests/test_separable.py ___________\n/opt/miniconda3/envs/testbed/lib/python3.9/site-packages/_pytest/runner.py:341: in from_call\n    result: Optional[TResult] = func()\n/opt/miniconda3/envs/testbed/lib/python3.9/site-packages/_pytest/runner.py:372: in <lambda>\n    call = CallInfo.from_call(lambda: list(collector.collect()), \"collect\")\n/opt/miniconda3/envs/testbed/lib/python3.9/site-packages/pytest_doctestplus/plugin.py:250: in collect\n    module = import_path(fspath, root=self.config.rootpath)\n/opt/miniconda3/envs/testbed/lib/python3.9/site-packages/_pytest/pathlib.py:565: in import_path\n    importlib.import_module(module_name)\n/opt/miniconda3/envs/testbed/lib/python3.9/importlib/__init__.py:127: in import_module\n    return _bootstrap._gcd_import(name[level:], package, level)\n<frozen importlib._bootstrap>:1030: in _gcd_import\n    ???\n<frozen importlib._bootstrap>:1007: in _find_and_load\n    ???\n<frozen importlib._bootstrap>:986: in _find_and_load_unlocked\n    ???\n<frozen importlib._bootstrap>:680: in _load_unlocked\n    ???\n/opt/miniconda3/envs/testbed/lib/python3.9/site-packages/_pytest/assertion/rewrite.py:178: in exec_module\n    exec(co, module.__dict__)\nastropy/modeling/tests/test_separable.py:13: in <module>\n    from astropy.modeling.separable import (_coord_matrix, is_separable, _cdot,\nE   ImportError: cannot import name '_cstack' from 'astropy.modeling.separable' (/testbed/astropy/modeling/separable.py)\n__________ ERROR collecting astropy/modeling/tests/test_separable.py ___________\nImportError while importing test module '/testbed/astropy/modeling/tests/test_separable.py'.\nHint: make sure your test modules/packages have valid Python names.\nTraceback:\n/opt/miniconda3/envs/testbed/lib/python3.9/importlib/__init__.py:127: in import_module\n    return _bootstrap._gcd_import(name[level:], package, level)\nastropy/modeling/tests/test_separable.py:13: in <module>\n    from astropy.modeling.separable import (_coord_matrix, is_separable, _cdot,\nE   ImportError: cannot import name '_cstack' from 'astropy.modeling.separable' (/testbed/astropy/modeling/separable.py)\n=========================== short test summary info ============================\nERROR astropy/modeling/tests/test_separable.py - ImportError: cannot import n...\nERROR astropy/modeling/tests/test_separable.py\n!!!!!!!!!!!!!!!!!!! Interrupted: 2 errors during collection !!!!!!!!!!!!!!!!!!!!\n============================== 2 errors in 0.88s ===============================\n\n<frozen importlib._bootstrap>:228: RuntimeWarning: numpy.ndarray size changed, may indicate binary incompatibility. Expected 80 from C header, got 96 from PyObject\n",
+      "graded_report": {
+        "f2p_fail": 2,
+        "f2p_failing": [
+          "astropy/modeling/tests/test_separable.py::test_separable[compound_model6-result6]",
+          "astropy/modeling/tests/test_separable.py::test_separable[compound_model9-result9]"
+        ],
+        "f2p_pass": 0,
+        "found": true,
+        "n_parsed": 1,
+        "p2p_fail": 13,
+        "p2p_failing": [
+          "astropy/modeling/tests/test_separable.py::test_coord_matrix",
+          "astropy/modeling/tests/test_separable.py::test_cdot",
+          "astropy/modeling/tests/test_separable.py::test_cstack",
+          "astropy/modeling/tests/test_separable.py::test_arith_oper",
+          "astropy/modeling/tests/test_separable.py::test_separable[compound_model0-result0]",
+          "astropy/modeling/tests/test_separable.py::test_separable[compound_model1-result1]",
+          "astropy/modeling/tests/test_separable.py::test_separable[compound_model2-result2]",
+          "astropy/modeling/tests/test_separable.py::test_separable[compound_model3-result3]",
+          "astropy/modeling/tests/test_separable.py::test_separable[compound_model4-result4]",
+          "astropy/modeling/tests/test_separable.py::test_separable[compound_model5-result5]"
+        ],
+        "p2p_pass": 0,
+        "reward": 0.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "transform broke the contract",
+      "tier": "HIGH",
+      "verdict": "INVALID"
+    },
+    {
+      "anchor": null,
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "coupled": [],
+        "failing": [
+          "astropy/modeling/tests/test_separable.py::test_coord_matrix",
+          "astropy/modeling/tests/test_separable.py::test_cdot",
+          "astropy/modeling/tests/test_separable.py::test_cstack",
+          "astropy/modeling/tests/test_separable.py::test_arith_oper",
+          "astropy/modeling/tests/test_separable.py::test_separable[compound_model0-result0]",
+          "astropy/modeling/tests/test_separable.py::test_separable[compound_model1-result1]",
+          "astropy/modeling/tests/test_separable.py::test_separable[compound_model2-result2]",
+          "astropy/modeling/tests/test_separable.py::test_separable[compound_model3-result3]",
+          "astropy/modeling/tests/test_separable.py::test_separable[compound_model4-result4]",
+          "astropy/modeling/tests/test_separable.py::test_separable[compound_model5-result5]",
+          "astropy/modeling/tests/test_separable.py::test_separable[compound_model6-result6]",
+          "astropy/modeling/tests/test_separable.py::test_separable[compound_model9-result9]"
+        ],
+        "symbol": "_cstack",
+        "unexplained": [
+          "astropy/modeling/tests/test_separable.py::test_coord_matrix (no failure section found)",
+          "astropy/modeling/tests/test_separable.py::test_cdot (no failure section found)",
+          "astropy/modeling/tests/test_separable.py::test_cstack (no failure section found)",
+          "astropy/modeling/tests/test_separable.py::test_arith_oper (no failure section found)",
+          "astropy/modeling/tests/test_separable.py::test_separable[compound_model0-result0] (no failure section found)",
+          "astropy/modeling/tests/test_separable.py::test_separable[compound_model1-result1] (no failure section found)",
+          "astropy/modeling/tests/test_separable.py::test_separable[compound_model2-result2] (no failure section found)",
+          "astropy/modeling/tests/test_separable.py::test_separable[compound_model3-result3] (no failure section found)",
+          "astropy/modeling/tests/test_separable.py::test_separable[compound_model4-result4] (no failure section found)",
+          "astropy/modeling/tests/test_separable.py::test_separable[compound_model5-result5] (no failure section found)",
+          "astropy/modeling/tests/test_separable.py::test_separable[compound_model6-result6] (no failure section found)",
+          "astropy/modeling/tests/test_separable.py::test_separable[compound_model9-result9] (no failure section found)"
+        ]
+      },
+      "file": null,
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 2,
+        "f2p_failing": [
+          "astropy/modeling/tests/test_separable.py::test_separable[compound_model6-result6]",
+          "astropy/modeling/tests/test_separable.py::test_separable[compound_model9-result9]"
+        ],
+        "f2p_pass": 0,
+        "found": true,
+        "n_parsed": 1,
+        "p2p_fail": 13,
+        "p2p_failing": [
+          "astropy/modeling/tests/test_separable.py::test_coord_matrix",
+          "astropy/modeling/tests/test_separable.py::test_cdot",
+          "astropy/modeling/tests/test_separable.py::test_cstack",
+          "astropy/modeling/tests/test_separable.py::test_arith_oper",
+          "astropy/modeling/tests/test_separable.py::test_separable[compound_model0-result0]",
+          "astropy/modeling/tests/test_separable.py::test_separable[compound_model1-result1]",
+          "astropy/modeling/tests/test_separable.py::test_separable[compound_model2-result2]",
+          "astropy/modeling/tests/test_separable.py::test_separable[compound_model3-result3]",
+          "astropy/modeling/tests/test_separable.py::test_separable[compound_model4-result4]",
+          "astropy/modeling/tests/test_separable.py::test_separable[compound_model5-result5]"
+        ],
+        "p2p_pass": 0,
+        "reward": 0.0
+      },
+      "loud_failure": false,
+      "observable": "order of elements in a returned collection",
+      "operator": "collection_reverse",
+      "reason": "no anchor inside the gold-touched region",
+      "tier": "MEDIUM",
+      "verdict": "NOT_APPLICABLE"
+    },
+    {
+      "anchor": null,
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "coupled": [],
+        "failing": [
+          "astropy/modeling/tests/test_separable.py::test_coord_matrix",
+          "astropy/modeling/tests/test_separable.py::test_cdot",
+          "astropy/modeling/tests/test_separable.py::test_cstack",
+          "astropy/modeling/tests/test_separable.py::test_arith_oper",
+          "astropy/modeling/tests/test_separable.py::test_separable[compound_model0-result0]",
+          "astropy/modeling/tests/test_separable.py::test_separable[compound_model1-result1]",
+          "astropy/modeling/tests/test_separable.py::test_separable[compound_model2-result2]",
+          "astropy/modeling/tests/test_separable.py::test_separable[compound_model3-result3]",
+          "astropy/modeling/tests/test_separable.py::test_separable[compound_model4-result4]",
+          "astropy/modeling/tests/test_separable.py::test_separable[compound_model5-result5]",
+          "astropy/modeling/tests/test_separable.py::test_separable[compound_model6-result6]",
+          "astropy/modeling/tests/test_separable.py::test_separable[compound_model9-result9]"
+        ],
+        "symbol": "_cstack",
+        "unexplained": [
+          "astropy/modeling/tests/test_separable.py::test_coord_matrix (no failure section found)",
+          "astropy/modeling/tests/test_separable.py::test_cdot (no failure section found)",
+          "astropy/modeling/tests/test_separable.py::test_cstack (no failure section found)",
+          "astropy/modeling/tests/test_separable.py::test_arith_oper (no failure section found)",
+          "astropy/modeling/tests/test_separable.py::test_separable[compound_model0-result0] (no failure section found)",
+          "astropy/modeling/tests/test_separable.py::test_separable[compound_model1-result1] (no failure section found)",
+          "astropy/modeling/tests/test_separable.py::test_separable[compound_model2-result2] (no failure section found)",
+          "astropy/modeling/tests/test_separable.py::test_separable[compound_model3-result3] (no failure section found)",
+          "astropy/modeling/tests/test_separable.py::test_separable[compound_model4-result4] (no failure section found)",
+          "astropy/modeling/tests/test_separable.py::test_separable[compound_model5-result5] (no failure section found)",
+          "astropy/modeling/tests/test_separable.py::test_separable[compound_model6-result6] (no failure section found)",
+          "astropy/modeling/tests/test_separable.py::test_separable[compound_model9-result9] (no failure section found)"
+        ]
+      },
+      "file": null,
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 2,
+        "f2p_failing": [
+          "astropy/modeling/tests/test_separable.py::test_separable[compound_model6-result6]",
+          "astropy/modeling/tests/test_separable.py::test_separable[compound_model9-result9]"
+        ],
+        "f2p_pass": 0,
+        "found": true,
+        "n_parsed": 1,
+        "p2p_fail": 13,
+        "p2p_failing": [
+          "astropy/modeling/tests/test_separable.py::test_coord_matrix",
+          "astropy/modeling/tests/test_separable.py::test_cdot",
+          "astropy/modeling/tests/test_separable.py::test_cstack",
+          "astropy/modeling/tests/test_separable.py::test_arith_oper",
+          "astropy/modeling/tests/test_separable.py::test_separable[compound_model0-result0]",
+          "astropy/modeling/tests/test_separable.py::test_separable[compound_model1-result1]",
+          "astropy/modeling/tests/test_separable.py::test_separable[compound_model2-result2]",
+          "astropy/modeling/tests/test_separable.py::test_separable[compound_model3-result3]",
+          "astropy/modeling/tests/test_separable.py::test_separable[compound_model4-result4]",
+          "astropy/modeling/tests/test_separable.py::test_separable[compound_model5-result5]"
+        ],
+        "p2p_pass": 0,
+        "reward": 0.0
+      },
+      "loud_failure": false,
+      "observable": "human-readable text of an exception message",
+      "operator": "message_reword",
+      "reason": "no anchor inside the gold-touched region",
+      "tier": "HIGH",
+      "verdict": "NOT_APPLICABLE"
+    }
+  ],
+  "targets": [
+    "astropy/modeling/separable.py"
+  ],
+  "version": "4.3",
+  "witnesses": []
+}

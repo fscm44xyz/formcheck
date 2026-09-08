@@ -6,10 +6,10 @@
   },
   "disk_orphan_reclaimed_bytes": 0,
   "disk_residual_bytes": 0,
-  "elapsed_seconds": 80.46,
+  "elapsed_seconds": 33.74,
   "error": null,
-  "image": "swebench/sweb.eval.x86_64.pylint-dev_1776_pylint-6903:latest",
-  "instance_id": "pylint-dev__pylint-6903",
+  "image": "swebench/sweb.eval.x86_64.django_1776_django-13279:latest",
+  "instance_id": "django__django-13279",
   "leaked_containers": [],
   "leaked_image": false,
   "log": [
@@ -24,9 +24,9 @@
       "no anchor inside the gold-touched region"
     ],
     [
-      "symbol_rename:_query_cpu",
+      "symbol_rename:SessionBase",
       "REFUSED",
-      "BORDER: the issue names '_query_cpu' -- candidate CONTRACT, route to the rubric"
+      "multi-line import of 'SessionBase' in django/contrib/sessions/backends/cache.py"
     ],
     [
       "collection_reverse:<no anchor>",
@@ -36,7 +36,7 @@
     [
       "message_reword:<no anchor>",
       "NOT_APPLICABLE",
-      "no anchor inside the gold-touched region"
+      "no anchor inside the gold-touched region; 7 anchor(s) elsewhere in the target"
     ]
   ],
   "mountable": true,
@@ -52,14 +52,14 @@
   "operators_with_anchors": [
     "symbol_rename"
   ],
-  "repo": "pylint-dev/pylint",
+  "repo": "django/django",
   "row": {
-    "elapsed": 21.12,
+    "elapsed": 16.67,
     "error": null,
     "error_type": null,
     "index": 0,
     "mode": "formcheck",
-    "name": "pylint-dev__pylint-6903",
+    "name": "django__django-13279",
     "reason": "unchecked",
     "valid": null
   },
@@ -72,12 +72,12 @@
       "graded_report": {
         "f2p_fail": 0,
         "f2p_failing": [],
-        "f2p_pass": 1,
+        "f2p_pass": 9,
         "found": true,
-        "n_parsed": 9,
+        "n_parsed": 357,
         "p2p_fail": 0,
         "p2p_failing": [],
-        "p2p_pass": 8,
+        "p2p_pass": 346,
         "reward": 1.0
       },
       "loud_failure": false,
@@ -88,25 +88,25 @@
       "verdict": "NOT_APPLICABLE"
     },
     {
-      "anchor": "_query_cpu",
+      "anchor": "SessionBase",
       "failure_analysis": null,
-      "file": "pylint/lint/run.py",
+      "file": "django/contrib/sessions/backends/base.py",
       "graded_log": null,
       "graded_report": {
         "f2p_fail": 0,
         "f2p_failing": [],
-        "f2p_pass": 1,
+        "f2p_pass": 9,
         "found": true,
-        "n_parsed": 9,
+        "n_parsed": 357,
         "p2p_fail": 0,
         "p2p_failing": [],
-        "p2p_pass": 8,
+        "p2p_pass": 346,
         "reward": 1.0
       },
       "loud_failure": true,
       "observable": "symbol identity (module-level name)",
       "operator": "symbol_rename",
-      "reason": "BORDER: the issue names '_query_cpu' -- candidate CONTRACT, route to the rubric",
+      "reason": "multi-line import of 'SessionBase' in django/contrib/sessions/backends/cache.py",
       "tier": "MEDIUM",
       "verdict": "REFUSED"
     },
@@ -118,12 +118,12 @@
       "graded_report": {
         "f2p_fail": 0,
         "f2p_failing": [],
-        "f2p_pass": 1,
+        "f2p_pass": 9,
         "found": true,
-        "n_parsed": 9,
+        "n_parsed": 357,
         "p2p_fail": 0,
         "p2p_failing": [],
-        "p2p_pass": 8,
+        "p2p_pass": 346,
         "reward": 1.0
       },
       "loud_failure": false,
@@ -141,25 +141,25 @@
       "graded_report": {
         "f2p_fail": 0,
         "f2p_failing": [],
-        "f2p_pass": 1,
+        "f2p_pass": 9,
         "found": true,
-        "n_parsed": 9,
+        "n_parsed": 357,
         "p2p_fail": 0,
         "p2p_failing": [],
-        "p2p_pass": 8,
+        "p2p_pass": 346,
         "reward": 1.0
       },
       "loud_failure": false,
       "observable": "human-readable text of an exception message",
       "operator": "message_reword",
-      "reason": "no anchor inside the gold-touched region",
+      "reason": "no anchor inside the gold-touched region; 7 anchor(s) elsewhere in the target",
       "tier": "HIGH",
       "verdict": "NOT_APPLICABLE"
     }
   ],
   "targets": [
-    "pylint/lint/run.py"
+    "django/contrib/sessions/backends/base.py"
   ],
-  "version": "2.15",
+  "version": "3.2",
   "witnesses": []
 }

@@ -53,6 +53,26 @@ THE_NUMBER_JUSTIFICATION = (
 JUDGED = ("WITNESS", "CLEAN", "INVALID")
 
 
+def wilson(successes: int, trials: int, z: float = 1.96):
+    """Wilson score interval -- the honest one at small n.
+
+    The normal approximation is wrong exactly where this project lives: at
+    0/12 it gives the interval [0, 0], which would report "no coupling exists"
+    from twelve observations. Wilson does not collapse at the boundary, so a
+    zero numerator still returns an upper bound worth quoting, and that upper
+    bound is the whole content of a null result here.
+    """
+    if not trials:
+        return None
+    import math
+    p = successes / trials
+    d = 1 + z * z / trials
+    centre = (p + z * z / (2 * trials)) / d
+    half = z * math.sqrt(p * (1 - p) / trials
+                         + z * z / (4 * trials * trials)) / d
+    return (round(max(0.0, centre - half), 4), round(min(1.0, centre + half), 4))
+
+
 class MergedRateError(RuntimeError):
     """Raised when a rate would be reported without naming its operator."""
 
@@ -104,6 +124,7 @@ def witness_rate(records, operator):
         "witness_tasks": num,
         "judged_tasks": denom,
         "rate": round(num / denom, 4) if denom else None,
+        "wilson95": wilson(num, denom),
         "denominator": "tasks with >=1 judged case for this operator, "
                        "among tasks whose control passed",
     }
@@ -247,6 +268,21 @@ def build(records):
             for r in records if not r["control"]["passed"]
         ],
         "n_multi_target": sum(1 for r in pool if r["multi_target"]),
+        # M3 samples single- and multi-file tasks as separate strata, so an
+        # anomaly in the newer multi-file path stays visible instead of being
+        # blended into the headline.
+        "by_target_group": {
+            group: {
+                "operator": THE_NUMBER_OPERATOR,
+                "tasks": len(sub),
+                **{k: v for k, v in witness_rate(sub, THE_NUMBER_OPERATOR).items()
+                   if k != "operator"},
+            }
+            for group, sub in (
+                ("single_file", [r for r in records if not r["multi_target"]]),
+                ("multi_file", [r for r in records if r["multi_target"]]),
+            )
+        },
         "the_number": the_number,
         "by_operator_rate": {
             op: witness_rate(records, op)
@@ -281,7 +317,9 @@ def main():
     tn = report["the_number"]
     print(f"THE NUMBER ({tn['operator']} only)")
     print(f"  {tn['witness_tasks']}/{tn['judged_tasks']} tasks = "
-          f"{'n/a' if tn['rate'] is None else format(tn['rate'], '.1%')}")
+          f"{'n/a' if tn['rate'] is None else format(tn['rate'], '.1%')}"
+          + (f"   Wilson 95%: [{tn['wilson95'][0]:.1%}, {tn['wilson95'][1]:.1%}]"
+             if tn.get ("wilson95") else ""))
     print(f"  denominator: {tn['denominator']}\n")
     print("Every operator, by count -- never merged into one percentage:")
     for op, counts in sorted(report["by_operator_counts"].items()):
@@ -296,6 +334,13 @@ def main():
           f"witnesses={ls['loud']['witnesses']} {ls['loud']['operators']}")
     print(f"             silent judged={ls['silent']['judged']} "
           f"witnesses={ls['silent']['witnesses']} {ls['silent']['operators']}")
+    print("\nBy target group (sampling strata, never blended):")
+    for group, g in sorted(report["by_target_group"].items()):
+        r = "n/a" if g["rate"] is None else format(g["rate"], ".1%")
+        ci = (f"  Wilson 95% [{g['wilson95'][0]:.1%}, {g['wilson95'][1]:.1%}]"
+              if g.get("wilson95") else "")
+        print(f"  {group:12s} tasks={g['tasks']:<3} "
+              f"witness {g['witness_tasks']}/{g['judged_tasks']} = {r}{ci}")
     ws = report["witness_split"]
     print(f"\nWitness split: f2p_only={ws['f2p_only']} "
           f"p2p_coupling={ws['p2p_coupling']} "
