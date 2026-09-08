@@ -399,21 +399,41 @@ def classify_failures(log: str, graded: dict, name: str) -> dict:
     sections = failure_sections(log)
     failing = list(graded.get("p2p_failing") or []) + \
         list(graded.get("f2p_failing") or [])
-    coupled, unexplained = [], []
+    coupled, broke, unparsed = [], [], []
     for test_id in failing:
         body = section_for(sections, test_id)
-        if body is not None and names_symbol(body, name):
+        if body is None:
+            # NO FAILURE BLOCK FOUND. This is not evidence that the transform
+            # broke behaviour -- it is evidence that this log has a shape the
+            # parser does not know. `CHANGES.md` 18 is what happens when the two
+            # are conflated: three runner formats existed, one was understood,
+            # and every failure in the other two was silently reported as
+            # breakage. That suppressed four witnesses and inverted M3's
+            # headline while every operational signal stayed green.
+            #
+            # So an unparsed failure makes the case UNJUDGEABLE and says so.
+            # A fourth shape nobody has seen yet lands here, loudly, instead of
+            # becoming an INVALID that looks like a finding.
+            unparsed.append(test_id)
+        elif names_symbol(body, name):
             coupled.append(test_id)
         else:
-            unexplained.append(
-                test_id if body is not None
-                else f"{test_id} (no failure section found)")
+            broke.append(test_id)
     return {
         "symbol": name,
         "failing": failing,
         "coupled": coupled,
-        "unexplained": unexplained,
-        "all_reference_the_symbol": bool(failing) and not unexplained,
+        # Attributed to a real failure block that does NOT name the symbol: the
+        # transform changed behaviour. A verdict.
+        "broke": broke,
+        # No failure block at all: the parser did not understand this log. Not a
+        # verdict -- a gap, and it must be reported as one.
+        "unparsed": unparsed,
+        # Kept for the records written before the split existed.
+        "unexplained": broke + [f"{t} (no failure section found)"
+                                for t in unparsed],
+        "all_reference_the_symbol": bool(failing) and not broke and not unparsed,
+        "unparsed_log_shape": bool(unparsed),
     }
 
 
@@ -466,9 +486,13 @@ class SuiteOracle:
             return None
         graded = await task.graded_report(runtime)
         name = (report or {}).get("name") or (report or {}).get("anchor") or ""
-        self.last_analysis = classify_failures(
-            task.graded_log or "", graded, name)
-        return not self.last_analysis["unexplained"]
+        a = classify_failures(task.graded_log or "", graded, name)
+        self.last_analysis = a
+        if a["unparsed"]:
+            # None means "cannot judge", which the hook renders UNVALIDATED --
+            # never INVALID. See the note in `classify_failures`.
+            return None
+        return not a["broke"]
 
     def observes_for(self, report):
         return {report.get("observable"): bool(report.get("loud_failure"))}

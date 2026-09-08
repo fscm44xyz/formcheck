@@ -264,5 +264,62 @@ def test_a_per_test_block_still_beats_a_collection_error():
     assert len(a["unexplained"]) == 1, a["unexplained"]
 
 
+def test_the_three_known_shapes_are_handled_explicitly():
+    """pytest per-test, pytest collection error, unittest/django _FailedTest."""
+    from f4_formcheck import failure_sections, section_for
+    per_test = "______ test_a ______\nE   AttributeError: no attribute 'S'\n"
+    collect = ("______ ERROR collecting t/test_a.py ______\n"
+               "E   ImportError: cannot import name 'S'\n")
+    django = ("======================================================\n"
+              "ERROR: test_a (mod.pkg.Cls)\n"
+              "------------------------------------------------------\n"
+              "AttributeError: module 'm' has no attribute 'S'\n")
+    assert section_for(failure_sections(per_test), "t/test_a.py::test_a")
+    assert section_for(failure_sections(collect), "t/test_a.py::test_a")
+    assert section_for(failure_sections(django), "test_a (mod.pkg.Cls)")
+
+
+def test_an_unknown_fourth_shape_is_unparsed_not_broken():
+    """THE CONTRACT THAT CLOSES CHANGES.md 18.
+
+    A runner nobody has met must make the case UNJUDGEABLE and say so. It must
+    never be reported as breakage, because that is the exact mechanism that
+    suppressed four witnesses and inverted M3's headline while every operational
+    signal stayed green.
+    """
+    log = "SomeOtherRunner v3\n!!! test_a did not pass !!!\n"
+    graded = {"p2p_failing": ["t/test_a.py::test_a"], "f2p_failing": []}
+    a = classify_failures(log, graded, "S")
+    assert a["unparsed"] == ["t/test_a.py::test_a"], a
+    assert a["broke"] == [], a
+    assert a["unparsed_log_shape"] is True
+
+
+def test_the_oracle_declines_to_judge_an_unparsed_log():
+    """`None`, which the hook renders UNVALIDATED -- not False, which is
+    INVALID."""
+    import asyncio
+
+    from container_task import SuiteOracle
+
+    class FakeTask:
+        graded_log = "SomeOtherRunner\n!!! nope !!!\n"
+
+        async def graded_report(self, runtime):
+            return {"p2p_failing": ["t/x.py::test_a"], "f2p_failing": []}
+
+    report = {"loud_failure": True, "name": "S", "observable": "symbol identity"}
+    assert asyncio.run(SuiteOracle().check(FakeTask(), None, report)) is None
+
+
+def test_genuine_breakage_is_still_invalid():
+    """The partition must not turn every failure into "we could not tell"."""
+    log = "______ test_a ______\nE   ValueError: arithmetic changed\n"
+    graded = {"p2p_failing": ["t/test_a.py::test_a"], "f2p_failing": []}
+    a = classify_failures(log, graded, "S")
+    assert a["broke"] == ["t/test_a.py::test_a"], a
+    assert a["unparsed"] == [], a
+
+
 if __name__ == "__main__":
     sys.exit(main())

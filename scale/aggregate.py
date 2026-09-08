@@ -293,6 +293,17 @@ def build(records):
         "loud_silent": loud_silent_partition(records),
         "witness_split": witness_split(records),
         "coupling_types": coupling_types(records),
+        # An unrecognised log shape is a REPORTED NUMBER, not a silent bucket.
+        # CHANGES.md 18 was invisible precisely because unattributable failures
+        # had nowhere to show up except as INVALID verdicts that looked like
+        # findings.
+        "unparsed_log_shapes": {
+            "operator": THE_NUMBER_OPERATOR,
+            "rows": sum(1 for r in records for x in r["rows"]
+                        if (x.get("failure_analysis") or {}).get("unparsed")),
+            "tasks": sorted({r["instance_id"] for r in records for x in r["rows"]
+                             if (x.get("failure_analysis") or {}).get("unparsed")}),
+        },
         "on_prime_hub_resolved": sum(
             1 for r in records if r["on_prime_hub"] is not None),
     })
@@ -341,6 +352,12 @@ def main():
               if g.get("wilson95") else "")
         print(f"  {group:12s} tasks={g['tasks']:<3} "
               f"witness {g['witness_tasks']}/{g['judged_tasks']} = {r}{ci}")
+    up = report["unparsed_log_shapes"]
+    if up["rows"]:
+        print(f"\n!! UNPARSED LOG SHAPES: {up['rows']} row(s) across "
+              f"{len(up['tasks'])} task(s) -- a runner the attribution does not "
+              f"understand.\n   These are UNVALIDATED, never INVALID. "
+              f"{', '.join(up['tasks'][:5])}")
     ws = report["witness_split"]
     print(f"\nWitness split: f2p_only={ws['f2p_only']} "
           f"p2p_coupling={ws['p2p_coupling']} "

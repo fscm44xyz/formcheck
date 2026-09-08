@@ -203,12 +203,15 @@ class FormCheckMixin:
                     # `observes` gate above already routes to UNVALIDATED, and
                     # `MarkerSetOracle` never returns None. It is written down
                     # because the next oracle need not have either property.
-                    self.formcheck_log.append(
-                        (label, "UNVALIDATED",
-                         "oracle could not judge this transform"))
-                    self._formcheck_row(op, anchor, "UNVALIDATED",
-                                        "oracle could not judge this transform",
-                                        report)
+                    fa = getattr(self, "failure_analysis", None) or {}
+                    why = "oracle could not judge this transform"
+                    if fa.get("unparsed"):
+                        why = (f"{len(fa['unparsed'])} failing test(s) have no "
+                               f"recognisable failure block -- unknown log "
+                               f"shape, not evidence of breakage; first: "
+                               f"{fa['unparsed'][0]}")
+                    self.formcheck_log.append((label, "UNVALIDATED", why))
+                    self._formcheck_row(op, anchor, "UNVALIDATED", why, report)
                     continue
                 if satisfied is not True:
                     self.formcheck_log.append(
