@@ -1,0 +1,117 @@
+{
+  "completed": true,
+  "control": {
+    "passed": true,
+    "reason": "untransformed reference scores 1.0"
+  },
+  "elapsed_seconds": 138.31,
+  "error": null,
+  "image": "swebench/sweb.eval.x86_64.django_1776_django-13810:latest",
+  "instance_id": "django__django-13810",
+  "log": [
+    [
+      "<control>",
+      "OK",
+      "untransformed reference scores 1.0"
+    ],
+    [
+      "kwonly_specialize:<no anchor>",
+      "NOT_APPLICABLE",
+      "no anchor inside the gold-touched region"
+    ],
+    [
+      "symbol_rename:BaseHandler",
+      "INVALID",
+      "transform broke the contract"
+    ],
+    [
+      "collection_reverse:<no anchor>",
+      "NOT_APPLICABLE",
+      "no anchor inside the gold-touched region"
+    ],
+    [
+      "message_reword:<no anchor>",
+      "NOT_APPLICABLE",
+      "no anchor inside the gold-touched region; 2 anchor(s) elsewhere in the target"
+    ]
+  ],
+  "mountable": true,
+  "multi_target": false,
+  "n_targets": 1,
+  "on_prime_hub": null,
+  "on_prime_hub_reason": "not resolvable offline; no hub environment index is reachable from this repo, verifiers or swebench",
+  "operators_not_applicable": [
+    "collection_reverse",
+    "kwonly_specialize",
+    "message_reword"
+  ],
+  "operators_with_anchors": [
+    "symbol_rename"
+  ],
+  "repo": "django/django",
+  "row": {
+    "elapsed": 27.33,
+    "error": null,
+    "error_type": null,
+    "index": 0,
+    "mode": "formcheck",
+    "name": "django__django-13810",
+    "reason": "valid",
+    "valid": true
+  },
+  "rows": [
+    {
+      "anchor": null,
+      "file": null,
+      "graded_log": null,
+      "graded_report": null,
+      "loud_failure": false,
+      "observable": "callable signature (arity / parameter names)",
+      "operator": "kwonly_specialize",
+      "reason": "no anchor inside the gold-touched region",
+      "tier": "HIGH",
+      "verdict": "NOT_APPLICABLE"
+    },
+    {
+      "anchor": "BaseHandler",
+      "file": "django/core/handlers/base.py",
+      "graded_log": null,
+      "graded_report": null,
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "transform broke the contract",
+      "tier": "MEDIUM",
+      "verdict": "INVALID"
+    },
+    {
+      "anchor": null,
+      "file": null,
+      "graded_log": null,
+      "graded_report": null,
+      "loud_failure": false,
+      "observable": "order of elements in a returned collection",
+      "operator": "collection_reverse",
+      "reason": "no anchor inside the gold-touched region",
+      "tier": "MEDIUM",
+      "verdict": "NOT_APPLICABLE"
+    },
+    {
+      "anchor": null,
+      "file": null,
+      "graded_log": null,
+      "graded_report": null,
+      "loud_failure": false,
+      "observable": "human-readable text of an exception message",
+      "operator": "message_reword",
+      "reason": "no anchor inside the gold-touched region; 2 anchor(s) elsewhere in the target",
+      "tier": "HIGH",
+      "verdict": "NOT_APPLICABLE"
+    }
+  ],
+  "targets": [
+    "django/core/handlers/base.py"
+  ],
+  "version": "3.2",
+  "witnesses": []
+}
