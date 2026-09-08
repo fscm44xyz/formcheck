@@ -6,3 +6,7 @@ repro/overlay/
 
 # local environments (see repro/README.md)
 .venv*/
+
+# M1 run state, not results: leases are per-process and their pids are
+# meaningless in another checkout (scale/rotation.py).
+scale/.leases/

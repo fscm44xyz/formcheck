@@ -1,0 +1,113 @@
+{
+  "anchor_availability": {
+    "collection_reverse": {
+      "availability": 0.0,
+      "operator": "collection_reverse",
+      "tasks": 5,
+      "tasks_with_anchor": 0
+    },
+    "kwonly_specialize": {
+      "availability": 0.0,
+      "operator": "kwonly_specialize",
+      "tasks": 5,
+      "tasks_with_anchor": 0
+    },
+    "message_reword": {
+      "availability": 0.0,
+      "operator": "message_reword",
+      "tasks": 5,
+      "tasks_with_anchor": 0
+    },
+    "symbol_rename": {
+      "availability": 1.0,
+      "operator": "symbol_rename",
+      "tasks": 5,
+      "tasks_with_anchor": 5
+    }
+  },
+  "by_operator_counts": {
+    "collection_reverse": {
+      "NOT_APPLICABLE": 5
+    },
+    "kwonly_specialize": {
+      "NOT_APPLICABLE": 5
+    },
+    "message_reword": {
+      "NOT_APPLICABLE": 5
+    },
+    "symbol_rename": {
+      "CLEAN": 5,
+      "INVALID": 1,
+      "REFUSED": 28
+    }
+  },
+  "by_operator_rate": {
+    "collection_reverse": {
+      "denominator": "tasks with >=1 judged case for this operator, among tasks whose control passed",
+      "judged_tasks": 0,
+      "operator": "collection_reverse",
+      "rate": null,
+      "witness_tasks": 0
+    },
+    "kwonly_specialize": {
+      "denominator": "tasks with >=1 judged case for this operator, among tasks whose control passed",
+      "judged_tasks": 0,
+      "operator": "kwonly_specialize",
+      "rate": null,
+      "witness_tasks": 0
+    },
+    "message_reword": {
+      "denominator": "tasks with >=1 judged case for this operator, among tasks whose control passed",
+      "judged_tasks": 0,
+      "operator": "message_reword",
+      "rate": null,
+      "witness_tasks": 0
+    },
+    "symbol_rename": {
+      "denominator": "tasks with >=1 judged case for this operator, among tasks whose control passed",
+      "judged_tasks": 4,
+      "operator": "symbol_rename",
+      "rate": 0.0,
+      "witness_tasks": 0
+    }
+  },
+  "control_failures": [],
+  "coupling_types": {},
+  "loud_silent": {
+    "loud": {
+      "judged": 6,
+      "operators": [
+        "symbol_rename"
+      ],
+      "witnesses": 0
+    },
+    "silent": {
+      "judged": 0,
+      "operators": [
+        "collection_reverse",
+        "kwonly_specialize",
+        "message_reword"
+      ],
+      "witnesses": 0
+    }
+  },
+  "n_control_failed": 0,
+  "n_controlled": 5,
+  "n_multi_target": 1,
+  "n_records": 5,
+  "on_prime_hub_resolved": 0,
+  "the_number": {
+    "denominator": "tasks with >=1 judged case for this operator, among tasks whose control passed",
+    "judged_tasks": 4,
+    "justification": "symbol_rename is the only operator in the family whose failure mode is LOUD: an incomplete alpha-rename raises AttributeError/ImportError/NameError naming the symbol on first use, so the task's own PASS_TO_PASS suite is a sufficient oracle for it. Every other operator fails silently, so on a task with no independently written contract oracle its cases are UNVALIDATED and cannot contribute to a rate.",
+    "operator": "symbol_rename",
+    "rate": 0.0,
+    "witness_tasks": 0
+  },
+  "witness_split": {
+    "f2p_only": 0,
+    "p2p_involved": 0,
+    "unknown": 0,
+    "witnesses": []
+  }
+}

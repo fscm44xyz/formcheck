@@ -28,8 +28,11 @@ implementation that M0 gates against, which is the one thing worth avoiding
 while establishing that the container and the July rig agree.
 """
 
+import ast
+import hashlib
 import json
 import os
+import re
 import subprocess
 import sys
 
@@ -107,7 +110,10 @@ class MarkerSetOracle:
         "human-readable text of an exception message": False,
     }
 
-    async def check(self, task, runtime):
+    async def check(self, task, runtime, report=None):
+        # `report` is ignored: this oracle is written against the issue's own
+        # contract, so its judgeability does not depend on the transform's
+        # failure mode.
         proj = f"{PATCH_DIR}/oracle"
         task.sh(f"rm -rf {proj} && mkdir -p {proj}")
         task.put(f"{proj}/test_repro.py", self.repro)
@@ -237,13 +243,286 @@ class ContainerFormcheckTask(FormCheckMixin, vf.Task):
         self.graded_log = log
         return log, grade_log(log, self.meta)["reward"]
 
-    async def formcheck_oracle(self, runtime):
+    async def formcheck_oracle(self, runtime, report=None):
         if self.oracle is None:
             return None, {}
-        return await self.oracle.check(self, runtime), self.oracle.observes
+        return (await self.oracle.check(self, runtime, report),
+                self.oracle.observes)
 
     def formcheck_in_scope(self, anchor):
         scope = self.spec.get("in_scope")
         if scope is None:
             return True
+        return anchor.get("func", anchor.get("name")) in scope
+
+
+# ===========================================================================
+# M1: the same machinery for any SWE-bench Verified instance.
+# ===========================================================================
+
+_HUNK_HEADER = re.compile(r"^@@ -\d+(?:,\d+)? \+(\d+)(?:,\d+)? @@")
+_DIFF_GIT = re.compile(r"^diff --git a/(.+?) b/(.+)$", re.M)
+
+
+def touched_files(patch: str) -> list:
+    out = []
+    for a, b in _DIFF_GIT.findall(patch):
+        path = a if b == "/dev/null" else b
+        if path not in out:
+            out.append(path)
+    return out
+
+
+def changed_lines(patch: str) -> dict:
+    """`{path: {line numbers on the POST-patch side the diff modifies}}`.
+
+    WHY NOT THE NAME IN THE `@@` HEADER. git prints the nearest PRECEDING
+    definition after `@@`, and that is frequently a function the hunk does not
+    touch. On `pytest-10356` the hunk that rewrites module-level
+    `get_unpacked_marks` carries `def __call__(self, ...)` in its header, because
+    `__call__` is simply the last definition git saw before that line. Reading
+    that name as "touched" admits `MarkDecorator.__call__` and its seven keyword
+    parameters into the anchor set -- symbols the gold patch never modifies.
+
+    That direction is the dangerous one. `writeup.md` 3.3 restricts anchors to
+    what the gold patch touches precisely so the choice of anchor cannot be made
+    in view of the outcome, and a rule admitting untouched symbols widens the
+    sanctioned region and could manufacture a witness outside it. So line numbers
+    are taken from the hunk arithmetic and resolved against the file's real
+    structure by `symbols_covering`, which neither over- nor under-approximates.
+    """
+    out: dict = {}
+    current, new_line = None, 0
+    for line in patch.splitlines():
+        m = _DIFF_GIT.match(line)
+        if m:
+            current = m.group(1) if m.group(2) == "/dev/null" else m.group(2)
+            out.setdefault(current, set())
+            continue
+        if current is None:
+            continue
+        header = _HUNK_HEADER.match(line)
+        if header:
+            new_line = int(header.group(1))
+            continue
+        if line.startswith(("+++", "---")):
+            continue
+        if line.startswith("+"):
+            out[current].add(new_line)
+            new_line += 1
+        elif line.startswith("-"):
+            # A removed line has no post-patch number of its own; the edit lands
+            # between the surrounding lines, so it is attributed to the current
+            # position, which is inside the same definition.
+            out[current].add(new_line)
+        elif line.startswith(" "):
+            new_line += 1
+    return out
+
+
+def symbols_covering(source: str, lines: set) -> set:
+    """Every definition in `source` whose line range contains one of `lines`.
+
+    A class comes back alongside its method, because a patch that edits a method
+    plainly touches the class owning it -- and since the class's range contains
+    the method's, that falls out of the same walk instead of needing a separate
+    rule. That is how `MarkDecorator` enters scope on `pytest-10356`, which is
+    the row `writeup.md` 3.2 turns on.
+    """
+    try:
+        tree = ast.parse(source)
+    except SyntaxError:
+        return set()
+    names = set()
+    for node in ast.walk(tree):
+        if not isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef,
+                                 ast.ClassDef)):
+            continue
+        end = getattr(node, "end_lineno", None) or node.lineno
+        if any(node.lineno <= n <= end for n in lines):
+            names.add(node.name)
+    return names
+
+
+def build_task_spec(instance: dict) -> dict:
+    """A `ContainerFormcheckTask` spec from one raw dataset row.
+
+    `scan_root` is the whole repository, not a guessed source directory. The
+    dynamic-reach precondition of `symbol_rename` is only sound over the entire
+    production tree -- an `__all__` entry in a package `__init__` is invisible to
+    a narrower scan, and an earlier revision refused `MarkDecorator` for the
+    wrong reason because of exactly that (`writeup.md` 3.2).
+    """
+    # `eligibility`, not `select`: a module named `select` on sys.path shadows
+    # the stdlib module asyncio's event loop imports.
+    from eligibility import is_production_python
+
+    gold = instance["patch"]
+    targets = [f for f in touched_files(gold) if is_production_python(f)]
+    return {
+        "instance_id": instance["instance_id"],
+        "meta": {
+            "instance_id": instance["instance_id"],
+            "repo": instance["repo"],
+            "version": instance["version"],
+            "base_commit": instance["base_commit"],
+            "FAIL_TO_PASS": json.loads(instance["FAIL_TO_PASS"]),
+            "PASS_TO_PASS": json.loads(instance["PASS_TO_PASS"]),
+        },
+        "gold_diff": gold,
+        "tests_diff": instance["test_patch"],
+        "issue": instance["problem_statement"],
+        "target": targets[0] if targets else "",
+        "targets": targets,
+        "scan_root": "",
+        "test_files": touched_files(instance["test_patch"]),
+        # Line numbers, not names: names cannot be resolved correctly without the
+        # file's structure, which only exists once the container holds the tree.
+        "changed_lines": {k: sorted(v) for k, v in changed_lines(gold).items()},
+    }
+
+
+class SuiteOracle:
+    """The judgeability rule for a task with no independently written oracle.
+
+    There is no bespoke contract oracle for 500 tasks, and writing 500 would be
+    the whole project. What every task does have is its own PASS_TO_PASS suite --
+    and `writeup.md` 4.2 is why that is not automatically enough: `pytest-10356`
+    had a fix-breaking mutant (`bug_none`) that passed every P2P test, so a green
+    suite does not by itself establish that a transform preserved behaviour.
+
+    `loud_failure` is exactly the condition under which it does. If the operator's
+    only realistic failure mode raises `AttributeError` / `ImportError` /
+    `NameError` naming the symbol the moment the code runs, a green P2P suite
+    genuinely rules that failure out, because the suite reaches the symbol. If
+    the failure mode is silent -- a reordered collection, a reworded message, a
+    widened signature -- the suite cannot see it and the honest verdict is
+    `UNVALIDATED`, however plausible the transform's argument.
+
+    This is what confines THE NUMBER to `symbol_rename`: it is the only operator
+    in the family whose failure mode is loud.
+    """
+
+    async def check(self, task, runtime, report=None):
+        if not (report or {}).get("loud_failure"):
+            return None
+        graded = await task.graded_report(runtime)
+        # P2P is the oracle. F2P is the graded signal the transform is being
+        # tested against, so reading it as evidence of equivalence would be
+        # circular -- it is the very thing whose failure we are interpreting.
+        return graded["p2p_fail"] == 0
+
+    def observes_for(self, report):
+        return {report.get("observable"): bool(report.get("loud_failure"))}
+
+
+class SweBenchFormcheckTask(ContainerFormcheckTask):
+    """Any SWE-bench Verified instance, checked inside its own image."""
+
+    def __init__(self, data, spec):
+        super().__init__(data, spec, SuiteOracle())
+        self.FORMCHECK_TARGETS = tuple(spec["targets"])
+        self._graded_memo = {}
+        self._scope_cache = None
+
+    def _tree_digest(self):
+        """Content hash of the files a transform can rewrite. Only the targets
+        are ever modified, so hashing them decides whether a cached graded result
+        still describes the tree."""
+        paths = " ".join(f"'{t}'" for t in self.FORMCHECK_TARGETS)
+        out = self.sh(f"sha256sum {paths} 2>/dev/null || true").stdout
+        return hashlib.sha256(out.encode()).hexdigest()
+
+    def test_invocation(self):
+        """The command SWE-bench itself would run for this task, plus its own
+        test directives.
+
+        Hardcoding `pytest` was wrong and the pilot proved it: of five sampled
+        tasks, four are repos whose graded suite is not pytest at all -- django
+        runs `./tests/runtests.py` over DOTTED MODULE paths, sympy runs
+        `bin/test`, sphinx runs `tox`. A pytest invocation on those produces a
+        log that `grade_log` cannot parse, the control cannot reach 1.0, and the
+        task is reported `unchecked`. Fail-loud kept that from becoming a false
+        witness, but it would have silently emptied the denominator.
+
+        Both halves come from `swebench` rather than from a rule restated here:
+        `MAP_REPO_VERSION_TO_SPECS[repo][version]["test_cmd"]` is the same string
+        `grade_log` splits the log on, and `get_test_directives` is the same
+        function the real harness uses -- including the django transform that
+        strips `tests/` and turns slashes into dots. Restating either would let
+        this drift out of agreement with the grader silently.
+        """
+        from swebench.harness.constants import MAP_REPO_VERSION_TO_SPECS
+        from swebench.harness.test_spec.python import get_test_directives
+
+        meta = self.meta
+        cmd = MAP_REPO_VERSION_TO_SPECS[meta["repo"]][meta["version"]]["test_cmd"]
+        if isinstance(cmd, list):
+            cmd = cmd[-1]
+        directives = get_test_directives(
+            {"repo": meta["repo"], "test_patch": self.spec["tests_diff"]})
+        return cmd, directives
+
+    async def graded_report(self, runtime):
+        """The full grading dict for the current tree, computed at most once.
+
+        The hook asks the oracle whether the transform preserved behaviour and
+        then, separately, re-applies the same transform and runs the graded
+        tests. Here both questions are answered by one pytest run over a tree
+        that is byte-identical across them, so the result is memoized on the
+        content hash. Keying on content rather than on a call counter is what
+        makes the reuse safe.
+        """
+        key = self._tree_digest()
+        if key not in self._graded_memo:
+            cmd, directives = self.test_invocation()
+            full = " ".join([cmd, *directives])
+            # The env's bin directory goes on PATH rather than activating conda:
+            # `bin/test`, `runtests.py` and `tox` each resolve their own
+            # interpreter, and prepending the path the probe in `setup` already
+            # found gets all three without depending on a login shell.
+            bindir = os.path.dirname(self.python)
+            result = await runtime.run(
+                ["/bin/bash", "-c",
+                 f"export PATH={bindir}:$PATH && cd {WORKDIR} && {full}"], {},
+            )
+            # The echoed line must contain `cmd` verbatim: `grade_log` splits the
+            # log on exactly that string to find where the run begins.
+            log = ("+ " + full + "\n"
+                   + (result.stdout or "") + "\n" + (result.stderr or ""))
+            self._graded_memo = {key: (log, grade_log(log, self.meta))}
+        return self._graded_memo[key][1]
+
+    async def formcheck_graded(self, runtime):
+        await self.graded_report(runtime)
+        log, graded = self._graded_memo[self._tree_digest()]
+        self.graded_log = log
+        self.graded = graded
+        return log, graded["reward"]
+
+    async def formcheck_oracle(self, runtime, report=None):
+        satisfied = await self.oracle.check(self, runtime, report)
+        return satisfied, self.oracle.observes_for(report or {})
+
+    def _scope(self):
+        """The symbols the gold patch touches, resolved against the real files.
+
+        Computed once, after `formcheck_reset` has put the reference solution in
+        the tree, because the post-patch line numbers in `changed_lines` only
+        mean anything against the post-patch file.
+        """
+        if self._scope_cache is None:
+            scope = set()
+            for path in self.FORMCHECK_TARGETS:
+                lines = set(self.spec["changed_lines"].get(path, ()))
+                if not lines:
+                    continue
+                scope |= symbols_covering(self.sh(f"cat '{path}'").stdout, lines)
+            self._scope_cache = scope
+        return self._scope_cache
+
+    def formcheck_in_scope(self, anchor):
+        scope = self._scope()
+        if not scope:
+            return False
         return anchor.get("func", anchor.get("name")) in scope

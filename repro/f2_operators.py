@@ -80,6 +80,11 @@ class Operator:
         return {"operator": self.id, "tier": self.tier,
                 "observable": self.observable, "argument": self.argument,
                 "breaks_if": self.breaks_if, "anchor": anchor["label"],
+                # Carried on the report, not looked up later by operator id: a
+                # task with no bespoke contract oracle decides what it may judge
+                # from this flag, and that decision must be made from the same
+                # object that produced the transform.
+                "loud_failure": self.loud_failure,
                 "evidence": anchor.get("note"), "preconditions": {}}
 
 

@@ -148,3 +148,188 @@ alone, before any container starts.
 `repro/formcheck_hook.py` (`FORMCHECK_TARGET`), `repro/f2_operators.py`
 (`Operator.anchors`, `Operator.apply`), `scale/container_task.py`
 (`spec["target"]`, `formcheck_in_scope`).
+
+---
+
+## 5. The gold-patch scope rule read the wrong thing out of the diff
+
+**Bug, found by running M1's generalized path against the task M0 had already
+answered.** `gold_touched_symbols` derived "the symbols the gold patch touches"
+partly from the name git prints after `@@`. git prints the nearest *preceding*
+definition there, which is very often a function the hunk does not modify. On
+`pytest-10356` the hunk that rewrites module-level `get_unpacked_marks` carries
+`def __call__(self, ...)` in its header, because `__call__` is merely the last
+definition git saw before that line.
+
+**What it produced.** Seven extra rows --
+`kwonly_specialize:__call__(*, ids=...)` and six siblings -- transforms of
+`MarkDecorator.__call__`'s keyword parameters, a method the gold patch never
+touches. All seven happened to be `REFUSED`, so nothing false was reported. That
+is luck, not a defence.
+
+**Why it matters more than under-coverage.** `writeup.md` 3.3 restricts anchors
+to what the gold patch touches so the choice of anchor cannot be made in view of
+the outcome. A rule that admits untouched symbols widens the sanctioned region,
+and a witness found outside it would be exactly the selection effect 3.3 exists
+to prevent. The earlier docstring claimed the rule "under-approximates, which is
+the safe direction". It over-approximated, and the claim was wrong.
+
+**Rule.** *Resolve the region, do not guess it from a label.* Changed line
+numbers come from the hunk arithmetic (`changed_lines`); a symbol is in scope iff
+one of those lines falls inside its own `lineno .. end_lineno` range in the real
+post-patch file (`symbols_covering`). Names are never read from `@@` context. A
+class enters scope alongside a method it owns, because the class's range contains
+the method's -- one walk, no separate rule.
+
+`scale/container_task.py`, `changed_lines` / `symbols_covering`.
+
+---
+
+## 6. The mechanical scope rule is NARROWER than the set Phase 2 used by hand
+
+**Not a bug -- a finding about the July table, recorded before it can be
+mistaken for a regression.**
+
+With the scope resolved mechanically from the patch, `pytest-10356` yields
+`{get_unpacked_marks, store_mark}`. The hand-written set Phase 2 and M0 use is
+`{get_unpacked_marks, store_mark, normalize_mark_list, MarkDecorator}`. The gold
+patch does not touch the latter two: `normalize_mark_list` appears nowhere in
+it, and `MarkDecorator` appears only as the class enclosing the `__call__` that
+git names in a hunk header.
+
+**Consequence, stated plainly.** Two of M0's seven rows --
+`symbol_rename:MarkDecorator` (REFUSED) and `symbol_rename:normalize_mark_list`
+(CLEAN) -- are not reachable from the gold patch alone. They exist because a
+human chose a scope broader than 3.3's stated criterion. The
+`symbol_rename:MarkDecorator` refusal is the row 3.2 turns on, so 3.2's worked
+example rests on that human choice rather than on the mechanical rule.
+
+**Why the rule is NOT widened to reproduce the hand-picked set.** Widening it
+until it recovers rows we already know are interesting is selecting for the
+outcome -- the precise thing 3.3 forbids. The mechanical rule is more faithful to
+the written criterion than the hand-picked set was, and it errs toward reporting
+less. So it stands, and the July table is now understood to have used a wider
+scope than 3.3 describes.
+
+**This does not weaken the M0 gate.** M0 compares the container against the July
+rig over the SAME hand-picked set, on both sides. What changes is what the wider
+set was ever evidence for.
+
+`scale/container_task.py`; `repro/f2_verdicts.json` (the wider set); `writeup.md`
+3.2, 3.3.
+
+---
+
+## 7. A module named `select.py` shadows the stdlib module asyncio runs on
+
+**Bug, caught before it ran.** The eligibility pass was first written as
+`scale/select.py`, and `scale/` goes on `sys.path` ahead of the standard library
+so that `run.py` can import its siblings. `select` is a stdlib module, and it is
+the one asyncio's event loop is built on. Every container in this project is
+driven through asyncio.
+
+**How it surfaced.** An import smoke-test of the M1 modules, before any run.
+
+**Rule.** *A module that goes on `sys.path` may not take a stdlib name.* Renamed
+to `scale/eligibility.py`. The failure this avoids would have appeared as an
+event-loop error with no visible connection to the file that caused it.
+
+`scale/eligibility.py` (was `scale/select.py`).
+
+---
+
+## 8. The graded command was hardcoded to pytest; most repos do not use pytest
+
+**Bug.** `SweBenchFormcheckTask.formcheck_graded` ran
+`python -m pytest -rA <files from the test patch>` for every task. That is right
+for `pytest-dev/pytest`, which is the only repo M0 ever ran, and wrong for most
+of SWE-bench Verified.
+
+**How it surfaced.** The first M1 pilot sampled five tasks and four of them were
+repos whose graded suite is not pytest: `django/django` runs
+`./tests/runtests.py --settings=test_sqlite` over **dotted module paths** rather
+than file paths, `sympy/sympy` runs `bin/test`, `sphinx-doc/sphinx` runs
+`tox --current-env`. Only `scikit-learn` matched.
+
+**What it would have produced.** A log the repo's parser cannot read, so
+`grade_log` scores the untransformed reference below 1.0, so the control fails
+and the task reports `unchecked`. Fail-loud (entry 4.1's rule) means this could
+never have become a false witness -- but it would have silently emptied the
+denominator, and a witness rate over the handful of pytest repos would have been
+reported as a rate over Verified.
+
+**Rule.** *Take both the command and the directives from `swebench`, never
+restate them.* `MAP_REPO_VERSION_TO_SPECS[repo][version]["test_cmd"]` is the same
+string `grade_log` splits the log on, and `get_test_directives` is the function
+the real harness uses -- including the django transform that strips `tests/` and
+turns slashes into dots. Restating either would let this drift out of agreement
+with the grader silently, which is the same argument `images.py` makes for
+getting image refs from `TestSpec.instance_image_key`.
+
+`scale/container_task.py`, `SweBenchFormcheckTask.test_invocation`.
+
+---
+
+## 9. A blocking `docker pull` inside a coroutine serialized every worker
+
+**Bug.** `rotation.ImageLease` was a plain `with`, and every docker call inside
+it was `subprocess.run` executed directly in a worker coroutine. A ~4 GiB pull
+therefore blocked the entire asyncio event loop, so `--workers 2` ran strictly
+one task at a time -- and worse, it froze a task that was already mid-flight
+inside its container while an unrelated worker pulled.
+
+**How it surfaced.** Watching `progress.jsonl` during the first pilot: the second
+worker's `start` landed at exactly the first worker's `pulled`, and at a moment
+when both tasks were nominally in flight `docker ps` showed no running container
+at all.
+
+**Why it matters beyond speed.** The worker count is the one knob M0's resource
+measurements were supposed to set. A worker count that does nothing makes the
+disk-budget reasoning in `rotation.suggested_workers` untestable -- the run would
+have looked well-behaved on disk for the wrong reason.
+
+**Rule.** *No blocking docker call on the event loop.* `ImageLease` is an async
+context manager and its docker calls go through `asyncio.to_thread`; reconcile is
+serialized behind a lock, because two workers reconciling concurrently would each
+see the other's freshly pulled image as unowned in the instant between the pull
+and the lease being written. The short `docker exec` helpers in
+`container_task.py` remain synchronous by the argument in its module docstring;
+they are milliseconds, not minutes, and the long operations are all awaited.
+
+`scale/rotation.py`, `ImageLease`; `scale/run.py`.
+
+---
+
+## 10. Disk accounting is not yet trustworthy enough for a 500-task run
+
+**Open item, recorded because the pilot could not close it and M2 depends on it.**
+
+After the pilot, `docker system df` reports essentially nothing resident -- one
+25.9 kB `hello-world` image, no volumes, no build cache, and `scale/.leases/` is
+empty, so rotation did its job. Yet the filesystem holding the image store shows
+**~5 GiB more used than at the start of the session**, and that growth cannot be
+attributed with the permissions available here: every directory this user can
+read (`~/.cache` 0.7 GiB, `~/.venv-fc` 0.6 GiB, the two repos 29 MB) accounts for
+well under a gigabyte, and `/var/lib/docker` is not readable without root.
+
+**Why it matters.** `rotation.ensure_headroom` refuses a pull when free space is
+below twice the image size, and `suggested_workers` derives the worker count from
+free space. Both are only as good as the number they read. Unattributed growth of
+~1 GiB per task, extrapolated over 500 tasks, is the difference between a run
+that completes and one that dies of a disk error two thirds of the way through --
+and by entry 9's argument it would die reporting something that looks like a
+transport fault.
+
+**What was fixed now.** The storage path is no longer hardcoded: it is read from
+`docker info --format {{.DockerRootDir}}`, because where images live is the
+daemon's business and a headroom check guarding the wrong filesystem passes while
+the image store fills. On this WSL host the two happen to coincide, which is
+exactly why hardcoding it would have gone unnoticed.
+
+**What M2 must do before the full run.** Measure free space at the daemon's root
+dir before and after a task, log the delta per task in `progress.jsonl`, and stop
+the run if the per-task residual is non-zero after `docker rmi`. A budget that
+cannot be reconciled per task cannot be trusted across 500 of them.
+
+`scale/rotation.py`, `docker_root_dir` / `free_bytes` / `ensure_headroom`.
+
