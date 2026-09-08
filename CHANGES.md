@@ -465,41 +465,100 @@ that is, it would silently convert the project's most novel result into apparent
 noise, and the aggregate would show a plausible-looking `INVALID` count rather
 than an obviously broken one.
 
-**Rule (not yet implemented -- M2 stops here for a decision).** *A P2P failure
-whose text names the renamed symbol is coupling, not breakage.* The partition
-belongs in `SuiteOracle`, attributed through each failing test's own failure
-block rather than by scanning the log for `E ` lines, because a passing test that
-runs a nested pytest session prints those too (§6.2).
+**Rule, implemented.** *A failing test whose message names the renamed symbol is
+coupling, not breakage.* `classify_failures` attributes every failing test
+through that test's own pytest failure block -- never by scanning the log for
+`E ` lines, because a passing test that runs a nested pytest session prints those
+too, and the `pytest-10356` baseline log contains such a line with zero
+failures. `SuiteOracle.check` now returns `not unexplained`.
 
-`scale/container_task.py`, `SuiteOracle.check`; `writeup.md` §6.2.
+`failure_sections`, `section_for` and `names_symbol` are **imported from
+`repro/f4_formcheck.py`, not reimplemented.** That is the actual fix: the bug
+arrived twice because the rule was written out a second time in a new file, so
+the second copy has been removed rather than corrected.
+
+**Pinned by a test, because twice is enough.** `scale/test_partition.py`, seven
+cases over a recorded container log (`scale/fixtures/xarray_4966_rename.json`) --
+no docker, no network, milliseconds, because a test needing a 5 GiB pull is a
+test nobody runs. It pins the eight coupled failures, that `SuiteOracle.check`
+itself returns preserved (not merely the helper, which is how the bug slipped in
+the second time), that an unrelated failure stays INVALID, that a missing failure
+section is never assumed to be coupling, and that the collapsed rule genuinely
+disagrees on this fixture so the suite cannot pass vacuously. Verified by
+reverting `SuiteOracle.check` to `p2p_fail == 0`: the suite fails
+`test_suite_oracle_itself_returns_preserved` and exits 1.
+
+`scale/container_task.py` (`classify_failures`, `SuiteOracle.check`);
+`scale/test_partition.py`; `scale/fixtures/`; `writeup.md` §6.2.
 
 ---
 
-## 14. §6.2's FAIL_TO_PASS figure has no artifact behind it, and M2 contradicts it
+## 14. §6.2's FAIL_TO_PASS figure, re-derived in-container -- and §6.2 stands
 
-**Unresolved. Reported rather than reconciled, because guessing which side is
-wrong is exactly what this file exists to prevent.**
+**Resolved by measurement, not by hunting for a July artifact.** No Phase 4
+record for this task exists in the repo, and a July console number would not be
+better evidence than a measurement inside the epoch image anyway. So the result
+was re-derived deliberately and recorded as the artifact that was missing:
+`scale/fixtures/xarray_4966_rename.json`, captured from a real container run.
 
-`writeup.md` §6.2 states that under the `UnsignedIntegerCoder` rename **all 4
-FAIL_TO_PASS tests pass**, and that the reward reaches zero through PASS_TO_PASS
-alone. M2 measures the P2P half exactly as §6.2 reports it -- **17 pass, 4 fail**
--- and the F2P half as **0 pass, 4 fail**, with the four F2P tests
-(`test_decode_signed_from_unsigned[1,2,4,8]`) failing on the same
-`AttributeError` naming the renamed symbol as the four P2P ones.
+**The harness was ruled out first**, since every defect in this file so far has
+been mine (5, 8, 11, 12, 13):
 
-No Phase 4 artifact for this task exists in the repository -- no log, no result
-JSON, no overlay -- so the two numbers cannot be reconciled against a record.
-This is the same class of problem as the `46.44` elapsed figure: a number in the
-writeup with nothing behind it that a reader can check.
+  1. *Directives came from `swebench`, not a pytest default.* `pydata/xarray`
+     version `0.12` -> `test_cmd` `'pytest -rA'`, `get_test_directives` ->
+     `['xarray/tests/test_coding.py']`. Both from
+     `MAP_REPO_VERSION_TO_SPECS` / `get_test_directives`.
+  2. *The four F2P are the four §6.2 is about:*
+     `test_decode_signed_from_unsigned[1,2,4,8]`.
+  3. *Why they fail.* All four carry the identical message:
 
-If M2 is right, §6.2's headline sentence needs narrowing: the reward would reach
-zero through P2P *as well as* F2P, and the finding becomes "coupling also lives
-in P2P" rather than "the coupling lives in P2P, not in the graded test". The
-finding survives either way -- four P2P tests asserting a name is the novel part,
-and M2 confirms those four -- but the sentence as written would be wrong.
+         E   AttributeError: module 'xarray.coding.variables' has no attribute
+             'UnsignedIntegerCoder'
 
-Do not amend §6.2 on M2's number alone. Either recover a Phase 4 artifact, or
-re-derive the F2P result deliberately and record it.
+**So the F2P failures are coupling too**, by exactly the rule that covers the
+P2P ones -- `names_symbol` returns True for all four. §6.2's finding needs **no
+narrowing**: the four P2P tests asserting a name is the novel part, M2 confirms
+those four exactly (17 pass, 4 fail, as §6.2 reports), and a detector inspecting
+only F2P would still miss that class entirely.
 
-`writeup.md` §6.2; `scale/records/pydata__xarray-4966.json`.
+**The one factual difference, recorded and not papered over.** §6.2 states all 4
+F2P *pass* under this rename; in-container they fail, on the same coupling. That
+changes no conclusion -- all eight failures are the same name-assertion, and the
+task is a WITNESS either way -- but the sentence and the measurement disagree,
+and there is no Phase 4 artifact to adjudicate which run the sentence described.
+`writeup.md` is left unamended: the finding is unaffected, and the derivation now
+has an artifact behind it, which is what was actually missing.
 
+`scale/fixtures/xarray_4966_rename.json`; `writeup.md` §6.2.
+
+---
+
+## 15. Audit: two more places compared a count without reading the failure
+
+**Requested after entry 13, on the grounds that comparing a number to a
+threshold without asking what failed is the SHAPE of that bug and `scale/` was
+likely to have more of it. It had two.**
+
+**`witness_side` in `scale/run.py`.** It labelled a witness `p2p_involved`
+whenever `p2p_fail != 0` -- a count, with no attribution. It now reads the
+oracle's attributed failures, so `p2p_coupling` means "P2P tests failed AND each
+one names the renamed symbol", the §6.2 class, rather than merely "P2P failed".
+A third bucket, `p2p_unattributed`, exists so that a P2P failure nobody explained
+can never be silently reported as the §6.2 finding.
+
+**The control failure in `FormCheckMixin.formcheck`.** It recorded only
+`scored 0.0, not 1.0`. `unchecked` is the right verdict either way, so this was
+never a wrong result -- but at 50 or 500 tasks the reason is what decides the
+next action, and a bare score cannot distinguish a task whose F2P never passed
+from one whose P2P broke. The row now carries the F2P/P2P split and the first
+failing test.
+
+**Deliberately left alone, with the reasoning written into the code.**
+`if reward == 0.0: WITNESS` in the hook reads a bare reward -- but only after the
+oracle has attributed every failing test and returned INVALID if any failure did
+not name the symbol. A comment now says so, because the safety of that line is a
+property of the oracle above it, and changing the oracle would silently change
+what it means.
+
+`scale/run.py` (`build_record`); `repro/formcheck_hook.py` (`formcheck`);
+`scale/aggregate.py` (`witness_split`).

@@ -6,7 +6,7 @@
   },
   "disk_orphan_reclaimed_bytes": 0,
   "disk_residual_bytes": 0,
-  "elapsed_seconds": 123.86,
+  "elapsed_seconds": 80.46,
   "error": null,
   "image": "swebench/sweb.eval.x86_64.pylint-dev_1776_pylint-6903:latest",
   "instance_id": "pylint-dev__pylint-6903",
@@ -54,7 +54,7 @@
   ],
   "repo": "pylint-dev/pylint",
   "row": {
-    "elapsed": 26.37,
+    "elapsed": 21.12,
     "error": null,
     "error_type": null,
     "index": 0,
@@ -66,6 +66,7 @@
   "rows": [
     {
       "anchor": null,
+      "failure_analysis": null,
       "file": null,
       "graded_log": null,
       "graded_report": {
@@ -88,6 +89,7 @@
     },
     {
       "anchor": "_query_cpu",
+      "failure_analysis": null,
       "file": "pylint/lint/run.py",
       "graded_log": null,
       "graded_report": {
@@ -110,6 +112,7 @@
     },
     {
       "anchor": null,
+      "failure_analysis": null,
       "file": null,
       "graded_log": null,
       "graded_report": {
@@ -132,6 +135,7 @@
     },
     {
       "anchor": null,
+      "failure_analysis": null,
       "file": null,
       "graded_log": null,
       "graded_report": {

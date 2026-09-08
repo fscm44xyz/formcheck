@@ -95,9 +95,27 @@ class FormCheckMixin:
         self.formcheck_reset()
         _, control = await self.formcheck_graded(runtime)
         if control != 1.0:
+            # A bare score is not triageable. `unchecked` is the right verdict
+            # either way, but at scale the reason decides what to do next: a
+            # task whose F2P never passed is a different problem from one whose
+            # P2P broke, and "scored 0.0" cannot tell them apart. Audited into
+            # existence alongside `CHANGES.md` 13 -- comparing a number to a
+            # threshold without recording what failed is the shape of that bug.
+            g = getattr(self, "graded", None) or {}
+            detail = ""
+            if g:
+                detail = (f"; F2P {g.get('f2p_pass')}/"
+                          f"{(g.get('f2p_pass') or 0) + (g.get('f2p_fail') or 0)}"
+                          f", P2P {g.get('p2p_pass')}/"
+                          f"{(g.get('p2p_pass') or 0) + (g.get('p2p_fail') or 0)}")
+                first = (g.get("f2p_failing") or []) + (g.get("p2p_failing") or [])
+                if first:
+                    detail += f"; first failing: {first[0]}"
+            self.control_graded = g or None
             self.formcheck_log.append(
                 ("<control>", "HARNESS_UNPROVEN",
-                 f"the untransformed reference solution scored {control}, not 1.0"))
+                 f"the untransformed reference solution scored {control}, "
+                 f"not 1.0{detail}"))
             self.formcheck_reset()
             return None
         self.formcheck_log.append(
@@ -187,6 +205,12 @@ class FormCheckMixin:
                                               target, anchor, issue)[0])
                 _, reward = await self.formcheck_graded(runtime)
                 judged += 1
+                # Safe to read `reward` alone HERE, and only here: the oracle
+                # above has already attributed every failing test, and returned
+                # False (-> INVALID) if any failure did not name the symbol. So
+                # a 0.0 reaching this line is a reward rejecting a transform
+                # whose failures are all coupling. Change the oracle and this
+                # line silently changes meaning.
                 if reward == 0.0:
                     witnesses.append(label)
                     self.formcheck_log.append((label, "WITNESS", "reward 0.0"))
@@ -237,6 +261,9 @@ class FormCheckMixin:
             # failed, and re-parsing the log on a different code path is the
             # cross-path inference 4.1 warns about.
             "graded_report": getattr(self, "graded", None),
+            # Which failing tests were coupling and which were unexplained, from
+            # the oracle that judged them (`writeup.md` 6.2).
+            "failure_analysis": getattr(self, "failure_analysis", None),
         })
 
     def formcheck_in_scope(self, anchor) -> bool:

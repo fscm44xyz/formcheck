@@ -85,6 +85,10 @@ class Operator:
                 # from this flag, and that decision must be made from the same
                 # object that produced the transform.
                 "loud_failure": self.loud_failure,
+                # The symbol this anchor is about, needed to ask whether a test
+                # failed because that NAME changed (coupling) or for some other
+                # reason (broken behaviour). See `writeup.md` 6.2.
+                "name": anchor.get("name", anchor.get("func")),
                 "evidence": anchor.get("note"), "preconditions": {}}
 
 

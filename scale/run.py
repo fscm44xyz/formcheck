@@ -154,15 +154,23 @@ def build_record(instance_id, image, spec, row, task, elapsed, error=None):
     witnesses = [r for r in rows if r["verdict"] == "WITNESS"]
     for w in witnesses:
         graded = w.get("graded_report") or {}
-        # Which side of the suite the witness landed on. A witness whose P2P
-        # tests also fail is not a form-coupling witness at all -- it is a broken
-        # transform -- and the oracle should already have caught it; recording
-        # the split is what lets the aggregate verify that rather than assume it.
+        analysis = w.get("failure_analysis") or {}
+        # Which side of the suite the witness landed on. The earlier version
+        # derived this from `p2p_fail == 0` alone -- the same shape as the bug
+        # in `CHANGES.md` 13, comparing a count without asking what the failures
+        # said. It is now read off the attributed failures, so `p2p_coupling`
+        # means "P2P tests failed AND each one names the renamed symbol", which
+        # is the `writeup.md` 6.2 class, rather than merely "P2P failed".
         w["f2p_fail"] = graded.get("f2p_fail")
         w["p2p_fail"] = graded.get("p2p_fail")
+        coupled = set(analysis.get("coupled") or ())
+        p2p_coupled = [t for t in (graded.get("p2p_failing") or []) if t in coupled]
+        w["p2p_coupled_tests"] = p2p_coupled
+        w["all_failures_attributed"] = analysis.get("all_reference_the_symbol")
         w["witness_side"] = (
             None if not graded else
-            "f2p_only" if graded.get("p2p_fail") == 0 else "p2p_involved")
+            "p2p_coupling" if p2p_coupled else
+            "f2p_only" if not graded.get("p2p_fail") else "p2p_unattributed")
 
     operators = sorted({r["operator"] for r in rows})
     return {

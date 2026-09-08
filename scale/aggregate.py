@@ -179,7 +179,8 @@ def witness_split(records):
     caught it upstream. Reporting the split is what lets that be checked instead
     of assumed.
     """
-    out = {"f2p_only": 0, "p2p_involved": 0, "unknown": 0, "witnesses": []}
+    out = {"f2p_only": 0, "p2p_coupling": 0, "p2p_unattributed": 0,
+           "unknown": 0, "witnesses": []}
     for record in records:
         for w in record["witnesses"]:
             side = w.get("witness_side") or "unknown"
@@ -189,6 +190,7 @@ def witness_split(records):
                 "operator": w["operator"], "anchor": w["anchor"],
                 "file": w["file"], "side": side,
                 "f2p_fail": w.get("f2p_fail"), "p2p_fail": w.get("p2p_fail"),
+                "p2p_coupled_tests": w.get("p2p_coupled_tests"),
             })
     return out
 
@@ -296,7 +298,8 @@ def main():
           f"witnesses={ls['silent']['witnesses']} {ls['silent']['operators']}")
     ws = report["witness_split"]
     print(f"\nWitness split: f2p_only={ws['f2p_only']} "
-          f"p2p_involved={ws['p2p_involved']} unknown={ws['unknown']}")
+          f"p2p_coupling={ws['p2p_coupling']} "
+          f"p2p_unattributed={ws['p2p_unattributed']} unknown={ws['unknown']}")
     print(f"\n  -> {args.out}")
     return 0
 

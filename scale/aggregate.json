@@ -39,9 +39,8 @@
     },
     "symbol_rename": {
       "CLEAN": 2,
-      "INVALID": 1,
       "REFUSED": 2,
-      "WITNESS": 1
+      "WITNESS": 2
     }
   },
   "by_operator_rate": {
@@ -70,13 +69,13 @@
       "denominator": "tasks with >=1 judged case for this operator, among tasks whose control passed",
       "judged_tasks": 3,
       "operator": "symbol_rename",
-      "rate": 0.3333,
-      "witness_tasks": 1
+      "rate": 0.6667,
+      "witness_tasks": 2
     }
   },
   "control_failures": [],
   "coupling_types": {
-    "symbol_rename::symbol identity (module-level name)": 1
+    "symbol_rename::symbol identity (module-level name)": 2
   },
   "loud_silent": {
     "loud": {
@@ -84,7 +83,7 @@
       "operators": [
         "symbol_rename"
       ],
-      "witnesses": 1
+      "witnesses": 2
     },
     "silent": {
       "judged": 0,
@@ -106,20 +105,37 @@
     "judged_tasks": 3,
     "justification": "symbol_rename is the only operator in the family whose failure mode is LOUD: an incomplete alpha-rename raises AttributeError/ImportError/NameError naming the symbol on first use, so the task's own PASS_TO_PASS suite is a sufficient oracle for it. Every other operator fails silently, so on a task with no independently written contract oracle its cases are UNVALIDATED and cannot contribute to a rate.",
     "operator": "symbol_rename",
-    "rate": 0.3333,
-    "witness_tasks": 1
+    "rate": 0.6667,
+    "witness_tasks": 2
   },
   "witness_split": {
     "f2p_only": 1,
-    "p2p_involved": 0,
+    "p2p_coupling": 1,
+    "p2p_unattributed": 0,
     "unknown": 0,
     "witnesses": [
+      {
+        "anchor": "UnsignedIntegerCoder",
+        "f2p_fail": 4,
+        "file": "xarray/coding/variables.py",
+        "instance_id": "pydata__xarray-4966",
+        "operator": "symbol_rename",
+        "p2p_coupled_tests": [
+          "xarray/tests/test_coding.py::test_decode_unsigned_from_signed[1]",
+          "xarray/tests/test_coding.py::test_decode_unsigned_from_signed[2]",
+          "xarray/tests/test_coding.py::test_decode_unsigned_from_signed[4]",
+          "xarray/tests/test_coding.py::test_decode_unsigned_from_signed[8]"
+        ],
+        "p2p_fail": 4,
+        "side": "p2p_coupling"
+      },
       {
         "anchor": "get_unpacked_marks",
         "f2p_fail": 1,
         "file": "src/_pytest/mark/structures.py",
         "instance_id": "pytest-dev__pytest-10356",
         "operator": "symbol_rename",
+        "p2p_coupled_tests": [],
         "p2p_fail": 0,
         "side": "f2p_only"
       }

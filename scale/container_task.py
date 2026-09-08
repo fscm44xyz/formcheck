@@ -43,6 +43,12 @@ sys.path.insert(0, REPRO)
 import verifiers.v1 as vf  # noqa: E402
 from formcheck_hook import FormCheckMixin  # noqa: E402
 from m4_grader import grade_log  # noqa: E402
+# The 6.2 partition itself, imported rather than reimplemented. It has now been
+# lost twice by being rewritten in a new file (`CHANGES.md` 13); importing the
+# reference implementation is what stops a third time.
+from f4_formcheck import (  # noqa: E402
+    failure_sections, names_symbol, section_for,
+)
 
 WORKDIR = "/testbed"
 PATCH_DIR = "/tmp/formcheck"
@@ -382,6 +388,35 @@ def build_task_spec(instance: dict) -> dict:
     }
 
 
+def classify_failures(log: str, graded: dict, name: str) -> dict:
+    """Split failing tests into `renamed the symbol` and `something else`.
+
+    F2P failures are partitioned alongside P2P ones, as `f4_formcheck` does. A
+    graded test that fails with `has no attribute 'X'` after an alpha-rename is
+    asserting the name exactly as a P2P test would be; which list it came from
+    does not change what its failure message says.
+    """
+    sections = failure_sections(log)
+    failing = list(graded.get("p2p_failing") or []) + \
+        list(graded.get("f2p_failing") or [])
+    coupled, unexplained = [], []
+    for test_id in failing:
+        body = section_for(sections, test_id)
+        if body is not None and names_symbol(body, name):
+            coupled.append(test_id)
+        else:
+            unexplained.append(
+                test_id if body is not None
+                else f"{test_id} (no failure section found)")
+    return {
+        "symbol": name,
+        "failing": failing,
+        "coupled": coupled,
+        "unexplained": unexplained,
+        "all_reference_the_symbol": bool(failing) and not unexplained,
+    }
+
+
 class SuiteOracle:
     """The judgeability rule for a task with no independently written oracle.
 
@@ -404,13 +439,36 @@ class SuiteOracle:
     """
 
     async def check(self, task, runtime, report=None):
+        """Did the transform change BEHAVIOUR, or only a name?
+
+        A failing test has two very different causes and collapsing them is
+        wrong in both directions (`writeup.md` 6.2):
+
+          * it fails because it REFERENCES the renamed symbol -- `has no
+            attribute 'X'`, `name 'X' is not defined`, `cannot import name 'X'`.
+            An alpha-rename changes no expression's value, so such a test is
+            asserting the symbol's NAME. That is coupling.
+          * it fails any other way -- the rewrite really did change behaviour,
+            and the transform is INVALID.
+
+        The earlier version of this method asked `p2p_fail == 0` and so called
+        every P2P failure broken behaviour. That is verbatim the bug Phase 4
+        found and fixed, reintroduced here in a new file; it classified
+        `xarray-4966` -- the whole evidence for 6.2 -- as INVALID rather than
+        WITNESS. `scale/test_partition.py` pins it so there is no third time.
+
+        Attribution is per failing test, through that test's own pytest failure
+        block, never by scanning the log for `E ` lines: a passing test that
+        deliberately raises prints those too, and the `pytest-10356` baseline
+        log contains one with zero failures.
+        """
         if not (report or {}).get("loud_failure"):
             return None
         graded = await task.graded_report(runtime)
-        # P2P is the oracle. F2P is the graded signal the transform is being
-        # tested against, so reading it as evidence of equivalence would be
-        # circular -- it is the very thing whose failure we are interpreting.
-        return graded["p2p_fail"] == 0
+        name = (report or {}).get("name") or (report or {}).get("anchor") or ""
+        self.last_analysis = classify_failures(
+            task.graded_log or "", graded, name)
+        return not self.last_analysis["unexplained"]
 
     def observes_for(self, report):
         return {report.get("observable"): bool(report.get("loud_failure"))}
@@ -504,6 +562,10 @@ class SweBenchFormcheckTask(ContainerFormcheckTask):
 
     async def formcheck_oracle(self, runtime, report=None):
         satisfied = await self.oracle.check(self, runtime, report)
+        # Kept on the task so the row records WHICH tests were judged coupling
+        # and which unexplained. A verdict of INVALID that cannot name the test
+        # that justified it is not checkable.
+        self.failure_analysis = getattr(self.oracle, "last_analysis", None)
         return satisfied, self.oracle.observes_for(report or {})
 
     def _scope(self):

@@ -5,8 +5,8 @@
     "reason": "untransformed reference scores 1.0"
   },
   "disk_orphan_reclaimed_bytes": 0,
-  "disk_residual_bytes": 266240,
-  "elapsed_seconds": 43.18,
+  "disk_residual_bytes": 0,
+  "elapsed_seconds": 63.68,
   "error": null,
   "image": "swebench/sweb.eval.x86_64.pytest-dev_1776_pytest-7571:latest",
   "instance_id": "pytest-dev__pytest-7571",
@@ -54,7 +54,7 @@
   ],
   "repo": "pytest-dev/pytest",
   "row": {
-    "elapsed": 12.02,
+    "elapsed": 22.97,
     "error": null,
     "error_type": null,
     "index": 0,
@@ -66,6 +66,7 @@
   "rows": [
     {
       "anchor": null,
+      "failure_analysis": null,
       "file": null,
       "graded_log": null,
       "graded_report": {
@@ -88,6 +89,13 @@
     },
     {
       "anchor": "LogCaptureFixture",
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "coupled": [],
+        "failing": [],
+        "symbol": "LogCaptureFixture",
+        "unexplained": []
+      },
       "file": "src/_pytest/logging.py",
       "graded_log": null,
       "graded_report": {
@@ -110,6 +118,13 @@
     },
     {
       "anchor": null,
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "coupled": [],
+        "failing": [],
+        "symbol": "LogCaptureFixture",
+        "unexplained": []
+      },
       "file": null,
       "graded_log": null,
       "graded_report": {
@@ -132,6 +147,13 @@
     },
     {
       "anchor": null,
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "coupled": [],
+        "failing": [],
+        "symbol": "LogCaptureFixture",
+        "unexplained": []
+      },
       "file": null,
       "graded_log": null,
       "graded_report": {
