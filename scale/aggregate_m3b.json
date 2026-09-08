@@ -1,0 +1,225 @@
+{
+  "anchor_availability": {
+    "collection_reverse": {
+      "availability": 0.0,
+      "operator": "collection_reverse",
+      "tasks": 50,
+      "tasks_with_anchor": 0
+    },
+    "kwonly_specialize": {
+      "availability": 0.0,
+      "operator": "kwonly_specialize",
+      "tasks": 50,
+      "tasks_with_anchor": 0
+    },
+    "message_reword": {
+      "availability": 0.0,
+      "operator": "message_reword",
+      "tasks": 50,
+      "tasks_with_anchor": 0
+    },
+    "symbol_rename": {
+      "availability": 1.0,
+      "operator": "symbol_rename",
+      "tasks": 50,
+      "tasks_with_anchor": 50
+    }
+  },
+  "by_operator_counts": {
+    "collection_reverse": {
+      "NOT_APPLICABLE": 50
+    },
+    "kwonly_specialize": {
+      "NOT_APPLICABLE": 50
+    },
+    "message_reword": {
+      "NOT_APPLICABLE": 50
+    },
+    "symbol_rename": {
+      "CLEAN": 9,
+      "REFUSED": 52,
+      "WITNESS": 4
+    }
+  },
+  "by_operator_rate": {
+    "collection_reverse": {
+      "denominator": "tasks with >=1 judged case for this operator, among tasks whose control passed",
+      "judged_tasks": 0,
+      "operator": "collection_reverse",
+      "rate": null,
+      "wilson95": null,
+      "witness_tasks": 0
+    },
+    "kwonly_specialize": {
+      "denominator": "tasks with >=1 judged case for this operator, among tasks whose control passed",
+      "judged_tasks": 0,
+      "operator": "kwonly_specialize",
+      "rate": null,
+      "wilson95": null,
+      "witness_tasks": 0
+    },
+    "message_reword": {
+      "denominator": "tasks with >=1 judged case for this operator, among tasks whose control passed",
+      "judged_tasks": 0,
+      "operator": "message_reword",
+      "rate": null,
+      "wilson95": null,
+      "witness_tasks": 0
+    },
+    "symbol_rename": {
+      "denominator": "tasks with >=1 judged case for this operator, among tasks whose control passed",
+      "judged_tasks": 13,
+      "operator": "symbol_rename",
+      "rate": 0.3077,
+      "wilson95": [
+        0.1268,
+        0.5763
+      ],
+      "witness_tasks": 4
+    }
+  },
+  "by_target_group": {
+    "multi_file": {
+      "denominator": "tasks with >=1 judged case for this operator, among tasks whose control passed",
+      "judged_tasks": 3,
+      "operator": "symbol_rename",
+      "rate": 0.6667,
+      "tasks": 7,
+      "wilson95": [
+        0.2077,
+        0.9385
+      ],
+      "witness_tasks": 2
+    },
+    "single_file": {
+      "denominator": "tasks with >=1 judged case for this operator, among tasks whose control passed",
+      "judged_tasks": 10,
+      "operator": "symbol_rename",
+      "rate": 0.2,
+      "tasks": 43,
+      "wilson95": [
+        0.0567,
+        0.5098
+      ],
+      "witness_tasks": 2
+    }
+  },
+  "control_failures": [],
+  "coupling_types": {
+    "symbol_rename::symbol identity (module-level name)": 4
+  },
+  "loud_silent": {
+    "loud": {
+      "judged": 13,
+      "operators": [
+        "symbol_rename"
+      ],
+      "witnesses": 4
+    },
+    "silent": {
+      "judged": 0,
+      "operators": [
+        "collection_reverse",
+        "kwonly_specialize",
+        "message_reword"
+      ],
+      "witnesses": 0
+    }
+  },
+  "n_control_failed": 0,
+  "n_controlled": 50,
+  "n_multi_target": 7,
+  "n_records": 50,
+  "on_prime_hub_resolved": 0,
+  "the_number": {
+    "denominator": "tasks with >=1 judged case for this operator, among tasks whose control passed",
+    "judged_tasks": 13,
+    "justification": "symbol_rename is the only operator in the family whose failure mode is LOUD: an incomplete alpha-rename raises AttributeError/ImportError/NameError naming the symbol on first use, so the task's own PASS_TO_PASS suite is a sufficient oracle for it. Every other operator fails silently, so on a task with no independently written contract oracle its cases are UNVALIDATED and cannot contribute to a rate.",
+    "operator": "symbol_rename",
+    "rate": 0.3077,
+    "wilson95": [
+      0.1268,
+      0.5763
+    ],
+    "witness_tasks": 4
+  },
+  "unparsed_log_shapes": {
+    "operator": "symbol_rename",
+    "rows": 0,
+    "tasks": []
+  },
+  "witness_split": {
+    "f2p_only": 1,
+    "p2p_coupling": 3,
+    "p2p_unattributed": 0,
+    "unknown": 0,
+    "witnesses": [
+      {
+        "anchor": "_cstack",
+        "f2p_fail": 2,
+        "file": "astropy/modeling/separable.py",
+        "instance_id": "astropy__astropy-12907",
+        "operator": "symbol_rename",
+        "p2p_coupled_tests": [
+          "astropy/modeling/tests/test_separable.py::test_coord_matrix",
+          "astropy/modeling/tests/test_separable.py::test_cdot",
+          "astropy/modeling/tests/test_separable.py::test_cstack",
+          "astropy/modeling/tests/test_separable.py::test_arith_oper",
+          "astropy/modeling/tests/test_separable.py::test_separable[compound_model0-result0]",
+          "astropy/modeling/tests/test_separable.py::test_separable[compound_model1-result1]",
+          "astropy/modeling/tests/test_separable.py::test_separable[compound_model2-result2]",
+          "astropy/modeling/tests/test_separable.py::test_separable[compound_model3-result3]",
+          "astropy/modeling/tests/test_separable.py::test_separable[compound_model4-result4]",
+          "astropy/modeling/tests/test_separable.py::test_separable[compound_model5-result5]"
+        ],
+        "p2p_fail": 13,
+        "side": "p2p_coupling"
+      },
+      {
+        "anchor": "CookieStorage",
+        "f2p_fail": 1,
+        "file": "django/contrib/messages/storage/cookie.py",
+        "instance_id": "django__django-13195",
+        "operator": "symbol_rename",
+        "p2p_coupled_tests": [
+          "test_add (messages_tests.test_cookie.CookieTests)",
+          "test_add_lazy_translation (messages_tests.test_cookie.CookieTests)",
+          "test_add_update (messages_tests.test_cookie.CookieTests)",
+          "test_context_processor_message_levels (messages_tests.test_cookie.CookieTests)",
+          "test_custom_tags (messages_tests.test_cookie.CookieTests)",
+          "test_default_level (messages_tests.test_cookie.CookieTests)",
+          "test_existing_add (messages_tests.test_cookie.CookieTests)",
+          "test_existing_add_read_update (messages_tests.test_cookie.CookieTests)",
+          "test_existing_read (messages_tests.test_cookie.CookieTests)",
+          "test_existing_read_add_update (messages_tests.test_cookie.CookieTests)"
+        ],
+        "p2p_fail": 27,
+        "side": "p2p_coupling"
+      },
+      {
+        "anchor": "get_template_directories",
+        "f2p_fail": 1,
+        "file": "django/template/autoreload.py",
+        "instance_id": "django__django-15572",
+        "operator": "symbol_rename",
+        "p2p_coupled_tests": [
+          "test_get_template_directories (template_tests.test_autoreloader.Jinja2TemplateReloadTests)",
+          "test_get_template_directories (template_tests.test_autoreloader.TemplateReloadTests)",
+          "test_template_dirs_normalized_to_paths (template_tests.test_autoreloader.TemplateReloadTests)"
+        ],
+        "p2p_fail": 3,
+        "side": "p2p_coupling"
+      },
+      {
+        "anchor": "VariablesChecker",
+        "f2p_fail": 21,
+        "file": "pylint/checkers/variables.py",
+        "instance_id": "pylint-dev__pylint-4604",
+        "operator": "symbol_rename",
+        "p2p_coupled_tests": [],
+        "p2p_fail": 0,
+        "side": "f2p_only"
+      }
+    ]
+  }
+}

@@ -211,7 +211,13 @@ class FormCheckMixin:
                                f"shape, not evidence of breakage; first: "
                                f"{fa['unparsed'][0]}")
                     self.formcheck_log.append((label, "UNVALIDATED", why))
-                    self._formcheck_row(op, anchor, "UNVALIDATED", why, report)
+                    # The log is recorded on this row too, not only on WITNESS
+                    # and INVALID: an UNVALIDATED caused by an unknown log shape
+                    # is only actionable if the shape itself is in the record.
+                    self._formcheck_row(
+                        op, anchor, "UNVALIDATED", why, report,
+                        graded_log=(getattr(self, "graded_log", None)
+                                    if fa.get("unparsed") else None))
                     continue
                 if satisfied is not True:
                     self.formcheck_log.append(

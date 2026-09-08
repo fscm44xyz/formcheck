@@ -1,0 +1,205 @@
+{
+  "completed": true,
+  "control": {
+    "passed": true,
+    "reason": "untransformed reference scores 1.0"
+  },
+  "digest_trace": [
+    {
+      "digest": "1b8da777f87bee65f91e64accdfa3301d1530971a3b8ab83086822ec78bef5ad",
+      "memo_hit": false
+    }
+  ],
+  "disk_orphan_reclaimed_bytes": 0,
+  "disk_residual_bytes": 0,
+  "elapsed_seconds": 255.06,
+  "error": null,
+  "image": "swebench/sweb.eval.x86_64.pydata_1776_xarray-3305:latest",
+  "instance_id": "pydata__xarray-3305",
+  "leaked_containers": [],
+  "leaked_image": false,
+  "log": [
+    [
+      "<control>",
+      "OK",
+      "untransformed reference scores 1.0"
+    ],
+    [
+      "kwonly_specialize:<no anchor>",
+      "NOT_APPLICABLE",
+      "no anchor inside the gold-touched region; 4 anchor(s) elsewhere in the 2 target(s): xarray/core/dataset.py, xarray/core/variable.py"
+    ],
+    [
+      "symbol_rename:xarray/core/dataset.py:Dataset",
+      "REFUSED",
+      "attribute access `.Dataset` in xarray/backends/netCDF4_.py line 320 is not a qualified reference to the defining module -- outside this operator's scope"
+    ],
+    [
+      "symbol_rename:xarray/core/variable.py:Variable",
+      "REFUSED",
+      "multi-line import of 'Variable' in xarray/core/dataarray.py"
+    ],
+    [
+      "collection_reverse:<no anchor>",
+      "NOT_APPLICABLE",
+      "no anchor inside the gold-touched region"
+    ],
+    [
+      "message_reword:<no anchor>",
+      "NOT_APPLICABLE",
+      "no anchor inside the gold-touched region; 41 anchor(s) elsewhere in the 2 target(s): xarray/core/dataset.py, xarray/core/variable.py"
+    ]
+  ],
+  "mountable": true,
+  "multi_target": true,
+  "n_targets": 2,
+  "on_prime_hub": null,
+  "on_prime_hub_reason": "not resolvable offline; no hub environment index is reachable from this repo, verifiers or swebench",
+  "operators_not_applicable": [
+    "collection_reverse",
+    "kwonly_specialize",
+    "message_reword"
+  ],
+  "operators_with_anchors": [
+    "symbol_rename"
+  ],
+  "repo": "pydata/xarray",
+  "row": {
+    "elapsed": 49.25,
+    "error": null,
+    "error_type": null,
+    "index": 0,
+    "mode": "formcheck",
+    "name": "pydata__xarray-3305",
+    "reason": "unchecked",
+    "valid": null
+  },
+  "rows": [
+    {
+      "anchor": null,
+      "failure_analysis": null,
+      "file": null,
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 1,
+        "found": true,
+        "n_parsed": 666,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 653,
+        "reward": 1.0
+      },
+      "loud_failure": false,
+      "observable": "callable signature (arity / parameter names)",
+      "operator": "kwonly_specialize",
+      "reason": "no anchor inside the gold-touched region; 4 anchor(s) elsewhere in the 2 target(s): xarray/core/dataset.py, xarray/core/variable.py",
+      "tier": "HIGH",
+      "tree_digest": "1b8da777f87bee65f91e64accdfa3301d1530971a3b8ab83086822ec78bef5ad",
+      "verdict": "NOT_APPLICABLE"
+    },
+    {
+      "anchor": "Dataset",
+      "failure_analysis": null,
+      "file": "xarray/core/dataset.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 1,
+        "found": true,
+        "n_parsed": 666,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 653,
+        "reward": 1.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "attribute access `.Dataset` in xarray/backends/netCDF4_.py line 320 is not a qualified reference to the defining module -- outside this operator's scope",
+      "tier": "MEDIUM",
+      "tree_digest": "1b8da777f87bee65f91e64accdfa3301d1530971a3b8ab83086822ec78bef5ad",
+      "verdict": "REFUSED"
+    },
+    {
+      "anchor": "Variable",
+      "failure_analysis": null,
+      "file": "xarray/core/variable.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 1,
+        "found": true,
+        "n_parsed": 666,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 653,
+        "reward": 1.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "multi-line import of 'Variable' in xarray/core/dataarray.py",
+      "tier": "MEDIUM",
+      "tree_digest": "1b8da777f87bee65f91e64accdfa3301d1530971a3b8ab83086822ec78bef5ad",
+      "verdict": "REFUSED"
+    },
+    {
+      "anchor": null,
+      "failure_analysis": null,
+      "file": null,
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 1,
+        "found": true,
+        "n_parsed": 666,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 653,
+        "reward": 1.0
+      },
+      "loud_failure": false,
+      "observable": "order of elements in a returned collection",
+      "operator": "collection_reverse",
+      "reason": "no anchor inside the gold-touched region",
+      "tier": "MEDIUM",
+      "tree_digest": "1b8da777f87bee65f91e64accdfa3301d1530971a3b8ab83086822ec78bef5ad",
+      "verdict": "NOT_APPLICABLE"
+    },
+    {
+      "anchor": null,
+      "failure_analysis": null,
+      "file": null,
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 1,
+        "found": true,
+        "n_parsed": 666,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 653,
+        "reward": 1.0
+      },
+      "loud_failure": false,
+      "observable": "human-readable text of an exception message",
+      "operator": "message_reword",
+      "reason": "no anchor inside the gold-touched region; 41 anchor(s) elsewhere in the 2 target(s): xarray/core/dataset.py, xarray/core/variable.py",
+      "tier": "HIGH",
+      "tree_digest": "1b8da777f87bee65f91e64accdfa3301d1530971a3b8ab83086822ec78bef5ad",
+      "verdict": "NOT_APPLICABLE"
+    }
+  ],
+  "targets": [
+    "xarray/core/dataset.py",
+    "xarray/core/variable.py"
+  ],
+  "version": "0.12",
+  "witnesses": []
+}
