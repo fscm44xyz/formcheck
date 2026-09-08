@@ -267,7 +267,7 @@ async def run_one(instance, leases, progress, timeout, baseline_free=0):
             task = SweBenchFormcheckTask(data, spec)
             row = await asyncio.wait_for(
                 _run_check(task, cfg, "formcheck"), timeout)
-    except rotation.RateLimited as exc:
+    except rotation.RateLimited as exc:  # noqa: F841 - handled below
         # INFRASTRUCTURE REFUSAL, NOT A TASK RESULT. The registry would not serve
         # the image, so the task was never mounted, never controlled, never
         # judged. No record is written at all: the task stays unattempted and a
@@ -275,6 +275,7 @@ async def run_one(instance, leases, progress, timeout, baseline_free=0):
         # exactly what let 334 refusals look like 334 results.
         progress.write(event="refused", instance_id=instance_id,
                        reason="registry rate limit", detail=str(exc)[:200])
+        await rotation.note_refusal(progress.write)
         return None
     except asyncio.TimeoutError:
         error = f"task exceeded {timeout}s"
@@ -444,9 +445,30 @@ async def main():
             record = await run_one(instance, leases, progress, args.timeout,
                                    baseline_free)
         done += 1
-        if record is None:          # refused: unattempted, not a result
+        if record is None:
+            # REFUSED: unattempted, so no record -- but it IS counted here.
+            #
+            # The first version returned before this line, which put refusals
+            # outside the liveness invariant entirely. That hole was opened by
+            # the very change that separated refusal from failure, and it cost
+            # 107 tasks in 41 seconds while the detector never looked. The two
+            # requirements interacted and only the interaction was wrong.
+            #
+            # A refusal is zero seconds of work, so it counts as exactly what it
+            # is: no progress. The invariant is "the run must be progressing",
+            # not "tasks must be slow".
+            recent.append(0.0)
+            del recent[:-BURN_STREAK]
+            if len(recent) == BURN_STREAK and all(
+                    t < MIN_PLAUSIBLE_TASK_SECONDS for t in recent):
+                progress.write(event="abort", reason="burn pattern (refusals)",
+                               streak=BURN_STREAK)
+                raise BurnDetected(
+                    f"{BURN_STREAK} consecutive tasks made no progress "
+                    "(registry refusals or impossibly fast completions). "
+                    "Stopping instead of cycling the queue.")
             print(f"  [{done}/{len(ids)}] {instance['instance_id']:40s} "
-                  f"{'refused':9s}  (registry rate limit; will be retried)")
+                  f"{'refused':9s}  (registry refusal; requeued, no record)")
             return None
 
         recent.append(record["elapsed_seconds"])

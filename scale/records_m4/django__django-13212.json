@@ -1,0 +1,913 @@
+{
+  "completed": true,
+  "control": {
+    "graded": null,
+    "log": null,
+    "passed": true,
+    "reason": "untransformed reference scores 1.0"
+  },
+  "digest_trace": [
+    {
+      "digest": "38dec4e598b6a2246e45e2bc6357dca6f4ce2c1a2c652abb1d691e64a6f3a18c",
+      "memo_hit": false
+    },
+    {
+      "digest": "bed6e8b68292a92cbac0993b55dfdc48d048ed2a55cd15d826810d72ff3f776d",
+      "memo_hit": false
+    },
+    {
+      "digest": "bed6e8b68292a92cbac0993b55dfdc48d048ed2a55cd15d826810d72ff3f776d",
+      "memo_hit": true
+    },
+    {
+      "digest": "294809a7c0d3dae60c7edccbfa9056ac18cd816d920650c50f54c4a0688c17fe",
+      "memo_hit": false
+    },
+    {
+      "digest": "294809a7c0d3dae60c7edccbfa9056ac18cd816d920650c50f54c4a0688c17fe",
+      "memo_hit": true
+    },
+    {
+      "digest": "f1111bb3df53626476508f47efc77a657e5c76611fabea245e34202f72548bad",
+      "memo_hit": false
+    },
+    {
+      "digest": "f1111bb3df53626476508f47efc77a657e5c76611fabea245e34202f72548bad",
+      "memo_hit": true
+    },
+    {
+      "digest": "9f2afcb691dcdd9f09c7ef0f54cdd66eb3e9dc14c52155defe4a8648485960a0",
+      "memo_hit": false
+    },
+    {
+      "digest": "9f2afcb691dcdd9f09c7ef0f54cdd66eb3e9dc14c52155defe4a8648485960a0",
+      "memo_hit": true
+    },
+    {
+      "digest": "5413843836e42ba33f6a504de75e3061d7a590da2b23c17cbd7e8402e4a3cc82",
+      "memo_hit": false
+    },
+    {
+      "digest": "5413843836e42ba33f6a504de75e3061d7a590da2b23c17cbd7e8402e4a3cc82",
+      "memo_hit": true
+    },
+    {
+      "digest": "8ef3c93ee7fa25c54bd9d527876f5991ed6c8a02b6d97a77ecb18fc6b53d69fd",
+      "memo_hit": false
+    },
+    {
+      "digest": "8ef3c93ee7fa25c54bd9d527876f5991ed6c8a02b6d97a77ecb18fc6b53d69fd",
+      "memo_hit": true
+    },
+    {
+      "digest": "0cc666267fb224c626ae445f2a51e456a1e1313f21d9c503f46daffe1f4175d4",
+      "memo_hit": false
+    },
+    {
+      "digest": "0cc666267fb224c626ae445f2a51e456a1e1313f21d9c503f46daffe1f4175d4",
+      "memo_hit": true
+    },
+    {
+      "digest": "ed5518b421a598ed4826d1705babf5c26138cf0e6b5d0d4e77a25aa46f31c365",
+      "memo_hit": false
+    },
+    {
+      "digest": "ed5518b421a598ed4826d1705babf5c26138cf0e6b5d0d4e77a25aa46f31c365",
+      "memo_hit": true
+    },
+    {
+      "digest": "2f9a2ad01c0be498b5458d0babcb0d4d36af6894d6804d2231dc93c22fe5162d",
+      "memo_hit": false
+    },
+    {
+      "digest": "2f9a2ad01c0be498b5458d0babcb0d4d36af6894d6804d2231dc93c22fe5162d",
+      "memo_hit": true
+    }
+  ],
+  "disk_orphan_reclaimed_bytes": 0,
+  "disk_residual_bytes": 0,
+  "elapsed_seconds": 162.17,
+  "error": null,
+  "image": "swebench/sweb.eval.x86_64.django_1776_django-13212:latest",
+  "instance_id": "django__django-13212",
+  "leaked_containers": [],
+  "leaked_image": false,
+  "log": [
+    [
+      "<control>",
+      "OK",
+      "untransformed reference scores 1.0"
+    ],
+    [
+      "kwonly_specialize:<no anchor>",
+      "NOT_APPLICABLE",
+      "no anchor inside the gold-touched region; 35 anchor(s) elsewhere in the 2 target(s): django/core/validators.py, django/forms/fields.py"
+    ],
+    [
+      "symbol_rename:django/core/validators.py:RegexValidator",
+      "WITNESS",
+      "reward 0.0"
+    ],
+    [
+      "symbol_rename:django/core/validators.py:URLValidator",
+      "WITNESS",
+      "reward 0.0"
+    ],
+    [
+      "symbol_rename:django/core/validators.py:EmailValidator",
+      "CLEAN",
+      "reward 1.0"
+    ],
+    [
+      "symbol_rename:django/core/validators.py:validate_ipv4_address",
+      "WITNESS",
+      "reward 0.0"
+    ],
+    [
+      "symbol_rename:django/core/validators.py:validate_ipv6_address",
+      "WITNESS",
+      "reward 0.0"
+    ],
+    [
+      "symbol_rename:django/core/validators.py:validate_ipv46_address",
+      "WITNESS",
+      "reward 0.0"
+    ],
+    [
+      "symbol_rename:django/core/validators.py:DecimalValidator",
+      "CLEAN",
+      "reward 1.0"
+    ],
+    [
+      "symbol_rename:django/core/validators.py:FileExtensionValidator",
+      "CLEAN",
+      "reward 1.0"
+    ],
+    [
+      "symbol_rename:django/core/validators.py:ProhibitNullCharactersValidator",
+      "CLEAN",
+      "reward 1.0"
+    ],
+    [
+      "symbol_rename:django/forms/fields.py:DecimalField",
+      "REFUSED",
+      "attribute access `.DecimalField` in django/contrib/gis/utils/layermapping.py line 72 is not a qualified reference to the defining module -- outside this operator's scope"
+    ],
+    [
+      "collection_reverse:<no anchor>",
+      "NOT_APPLICABLE",
+      "no anchor inside the gold-touched region; 2 anchor(s) elsewhere in the 2 target(s): django/core/validators.py, django/forms/fields.py"
+    ],
+    [
+      "message_reword:<no anchor>",
+      "NOT_APPLICABLE",
+      "no anchor inside the gold-touched region; 4 anchor(s) elsewhere in the 2 target(s): django/core/validators.py, django/forms/fields.py"
+    ]
+  ],
+  "mountable": true,
+  "multi_target": true,
+  "n_targets": 2,
+  "on_prime_hub": null,
+  "on_prime_hub_reason": "not resolvable offline; no hub environment index is reachable from this repo, verifiers or swebench",
+  "operators_not_applicable": [
+    "collection_reverse",
+    "kwonly_specialize",
+    "message_reword"
+  ],
+  "operators_with_anchors": [
+    "symbol_rename"
+  ],
+  "repo": "django/django",
+  "row": {
+    "elapsed": 144.33,
+    "error": null,
+    "error_type": null,
+    "index": 0,
+    "mode": "formcheck",
+    "name": "django__django-13212",
+    "reason": "invalid",
+    "valid": false
+  },
+  "rows": [
+    {
+      "anchor": null,
+      "failure_analysis": null,
+      "file": null,
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 5,
+        "found": true,
+        "n_parsed": 7,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 2,
+        "reward": 1.0
+      },
+      "loud_failure": false,
+      "observable": "callable signature (arity / parameter names)",
+      "operator": "kwonly_specialize",
+      "reason": "no anchor inside the gold-touched region; 35 anchor(s) elsewhere in the 2 target(s): django/core/validators.py, django/forms/fields.py",
+      "tier": "HIGH",
+      "tree_digest": "38dec4e598b6a2246e45e2bc6357dca6f4ce2c1a2c652abb1d691e64a6f3a18c",
+      "verdict": "NOT_APPLICABLE"
+    },
+    {
+      "all_failures_attributed": true,
+      "anchor": "RegexValidator",
+      "f2p_fail": 1,
+      "failure_analysis": {
+        "all_reference_the_symbol": true,
+        "broke": [],
+        "coupled": [
+          "test_all_errors_get_reported (forms_tests.tests.test_validators.TestFieldWithValidators)",
+          "test_value_placeholder_with_char_field (forms_tests.tests.test_validators.ValidatorCustomMessageTests)"
+        ],
+        "failing": [
+          "test_all_errors_get_reported (forms_tests.tests.test_validators.TestFieldWithValidators)",
+          "test_value_placeholder_with_char_field (forms_tests.tests.test_validators.ValidatorCustomMessageTests)"
+        ],
+        "symbol": "RegexValidator",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": "django/core/validators.py",
+      "graded_log": "+ ./tests/runtests.py --verbosity 2 --settings=test_sqlite --parallel 1 forms_tests.tests.test_validators\nTesting against Django installed in '/testbed/django'\nImporting application forms_tests\nSkipping setup of unused database(s): default, other.\nSystem check identified no issues (0 silenced).\n\ntest_all_errors_get_reported (forms_tests.tests.test_validators.TestFieldWithValidators) ... ERROR\ntest_field_validators_can_be_any_iterable (forms_tests.tests.test_validators.TestFieldWithValidators) ... ok\ntest_value_placeholder_with_char_field (forms_tests.tests.test_validators.ValidatorCustomMessageTests) ... ERROR\ntest_value_placeholder_with_decimal_field (forms_tests.tests.test_validators.ValidatorCustomMessageTests) ... ok\ntest_value_placeholder_with_file_field (forms_tests.tests.test_validators.ValidatorCustomMessageTests) ... ok\ntest_value_placeholder_with_integer_field (forms_tests.tests.test_validators.ValidatorCustomMessageTests) ... ok\ntest_value_placeholder_with_null_character (forms_tests.tests.test_validators.ValidatorCustomMessageTests) ... ok\n\n======================================================================\nERROR: test_all_errors_get_reported (forms_tests.tests.test_validators.TestFieldWithValidators)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/testbed/tests/forms_tests/tests/test_validators.py\", line 13, in test_all_errors_get_reported\n    class UserForm(forms.Form):\n  File \"/testbed/tests/forms_tests/tests/test_validators.py\", line 24, in UserForm\n    validators.RegexValidator(\nAttributeError: module 'django.core.validators' has no attribute 'RegexValidator'\n\n======================================================================\nERROR: test_value_placeholder_with_char_field (forms_tests.tests.test_validators.ValidatorCustomMessageTests)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/testbed/tests/forms_tests/tests/test_validators.py\", line 93, in test_value_placeholder_with_char_field\n    (validators.RegexValidator('[0-9]+'), 'xxxxxx', 'invalid'),\nAttributeError: module 'django.core.validators' has no attribute 'RegexValidator'\n\n----------------------------------------------------------------------\nRan 7 tests in 0.033s\n\nFAILED (errors=2)\n",
+      "graded_report": {
+        "f2p_fail": 1,
+        "f2p_failing": [
+          "test_value_placeholder_with_char_field (forms_tests.tests.test_validators.ValidatorCustomMessageTests)"
+        ],
+        "f2p_pass": 4,
+        "found": true,
+        "n_parsed": 9,
+        "p2p_fail": 1,
+        "p2p_failing": [
+          "test_all_errors_get_reported (forms_tests.tests.test_validators.TestFieldWithValidators)"
+        ],
+        "p2p_pass": 1,
+        "reward": 0.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "p2p_coupled_tests": [
+        "test_all_errors_get_reported (forms_tests.tests.test_validators.TestFieldWithValidators)"
+      ],
+      "p2p_fail": 1,
+      "reason": "reward 0.0",
+      "tier": "MEDIUM",
+      "tree_digest": "bed6e8b68292a92cbac0993b55dfdc48d048ed2a55cd15d826810d72ff3f776d",
+      "verdict": "WITNESS",
+      "witness_side": "p2p_coupling"
+    },
+    {
+      "all_failures_attributed": true,
+      "anchor": "URLValidator",
+      "f2p_fail": 2,
+      "failure_analysis": {
+        "all_reference_the_symbol": true,
+        "broke": [],
+        "coupled": [
+          "test_value_placeholder_with_char_field (forms_tests.tests.test_validators.ValidatorCustomMessageTests)",
+          "test_value_placeholder_with_integer_field (forms_tests.tests.test_validators.ValidatorCustomMessageTests)"
+        ],
+        "failing": [
+          "test_value_placeholder_with_char_field (forms_tests.tests.test_validators.ValidatorCustomMessageTests)",
+          "test_value_placeholder_with_integer_field (forms_tests.tests.test_validators.ValidatorCustomMessageTests)"
+        ],
+        "symbol": "URLValidator",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": "django/core/validators.py",
+      "graded_log": "+ ./tests/runtests.py --verbosity 2 --settings=test_sqlite --parallel 1 forms_tests.tests.test_validators\nTesting against Django installed in '/testbed/django'\nImporting application forms_tests\nSkipping setup of unused database(s): default, other.\nSystem check identified no issues (0 silenced).\n\ntest_all_errors_get_reported (forms_tests.tests.test_validators.TestFieldWithValidators) ... ok\ntest_field_validators_can_be_any_iterable (forms_tests.tests.test_validators.TestFieldWithValidators) ... ok\ntest_value_placeholder_with_char_field (forms_tests.tests.test_validators.ValidatorCustomMessageTests) ... ERROR\ntest_value_placeholder_with_decimal_field (forms_tests.tests.test_validators.ValidatorCustomMessageTests) ... ok\ntest_value_placeholder_with_file_field (forms_tests.tests.test_validators.ValidatorCustomMessageTests) ... ok\ntest_value_placeholder_with_integer_field (forms_tests.tests.test_validators.ValidatorCustomMessageTests) ... ERROR\ntest_value_placeholder_with_null_character (forms_tests.tests.test_validators.ValidatorCustomMessageTests) ... ok\n\n======================================================================\nERROR: test_value_placeholder_with_char_field (forms_tests.tests.test_validators.ValidatorCustomMessageTests)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/testbed/tests/forms_tests/tests/test_validators.py\", line 85, in test_value_placeholder_with_char_field\n    (validators.URLValidator(), 'no_scheme', 'invalid'),\nAttributeError: module 'django.core.validators' has no attribute 'URLValidator'\n\n======================================================================\nERROR: test_value_placeholder_with_integer_field (forms_tests.tests.test_validators.ValidatorCustomMessageTests)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/testbed/tests/forms_tests/tests/test_validators.py\", line 125, in test_value_placeholder_with_integer_field\n    (validators.URLValidator(), '1', 'invalid'),\nAttributeError: module 'django.core.validators' has no attribute 'URLValidator'\n\n----------------------------------------------------------------------\nRan 7 tests in 0.034s\n\nFAILED (errors=2)\n",
+      "graded_report": {
+        "f2p_fail": 2,
+        "f2p_failing": [
+          "test_value_placeholder_with_char_field (forms_tests.tests.test_validators.ValidatorCustomMessageTests)",
+          "test_value_placeholder_with_integer_field (forms_tests.tests.test_validators.ValidatorCustomMessageTests)"
+        ],
+        "f2p_pass": 3,
+        "found": true,
+        "n_parsed": 9,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 2,
+        "reward": 0.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "p2p_coupled_tests": [],
+      "p2p_fail": 0,
+      "reason": "reward 0.0",
+      "tier": "MEDIUM",
+      "tree_digest": "294809a7c0d3dae60c7edccbfa9056ac18cd816d920650c50f54c4a0688c17fe",
+      "verdict": "WITNESS",
+      "witness_side": "f2p_only"
+    },
+    {
+      "anchor": "EmailValidator",
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "broke": [],
+        "coupled": [],
+        "failing": [],
+        "symbol": "EmailValidator",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": "django/core/validators.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 5,
+        "found": true,
+        "n_parsed": 7,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 2,
+        "reward": 1.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "reward 1.0",
+      "tier": "MEDIUM",
+      "tree_digest": "f1111bb3df53626476508f47efc77a657e5c76611fabea245e34202f72548bad",
+      "verdict": "CLEAN"
+    },
+    {
+      "all_failures_attributed": true,
+      "anchor": "validate_ipv4_address",
+      "f2p_fail": 1,
+      "failure_analysis": {
+        "all_reference_the_symbol": true,
+        "broke": [],
+        "coupled": [
+          "test_value_placeholder_with_char_field (forms_tests.tests.test_validators.ValidatorCustomMessageTests)"
+        ],
+        "failing": [
+          "test_value_placeholder_with_char_field (forms_tests.tests.test_validators.ValidatorCustomMessageTests)"
+        ],
+        "symbol": "validate_ipv4_address",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": "django/core/validators.py",
+      "graded_log": "+ ./tests/runtests.py --verbosity 2 --settings=test_sqlite --parallel 1 forms_tests.tests.test_validators\nTesting against Django installed in '/testbed/django'\nImporting application forms_tests\nSkipping setup of unused database(s): default, other.\nSystem check identified no issues (0 silenced).\n\ntest_all_errors_get_reported (forms_tests.tests.test_validators.TestFieldWithValidators) ... ok\ntest_field_validators_can_be_any_iterable (forms_tests.tests.test_validators.TestFieldWithValidators) ... ok\ntest_value_placeholder_with_char_field (forms_tests.tests.test_validators.ValidatorCustomMessageTests) ... ERROR\ntest_value_placeholder_with_decimal_field (forms_tests.tests.test_validators.ValidatorCustomMessageTests) ... ok\ntest_value_placeholder_with_file_field (forms_tests.tests.test_validators.ValidatorCustomMessageTests) ... ok\ntest_value_placeholder_with_integer_field (forms_tests.tests.test_validators.ValidatorCustomMessageTests) ... ok\ntest_value_placeholder_with_null_character (forms_tests.tests.test_validators.ValidatorCustomMessageTests) ... ok\n\n======================================================================\nERROR: test_value_placeholder_with_char_field (forms_tests.tests.test_validators.ValidatorCustomMessageTests)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/testbed/tests/forms_tests/tests/test_validators.py\", line 78, in test_value_placeholder_with_char_field\n    (validators.validate_ipv4_address, '256.1.1.1', 'invalid'),\nAttributeError: module 'django.core.validators' has no attribute 'validate_ipv4_address'\n\n----------------------------------------------------------------------\nRan 7 tests in 0.037s\n\nFAILED (errors=1)\n",
+      "graded_report": {
+        "f2p_fail": 1,
+        "f2p_failing": [
+          "test_value_placeholder_with_char_field (forms_tests.tests.test_validators.ValidatorCustomMessageTests)"
+        ],
+        "f2p_pass": 4,
+        "found": true,
+        "n_parsed": 8,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 2,
+        "reward": 0.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "p2p_coupled_tests": [],
+      "p2p_fail": 0,
+      "reason": "reward 0.0",
+      "tier": "MEDIUM",
+      "tree_digest": "9f2afcb691dcdd9f09c7ef0f54cdd66eb3e9dc14c52155defe4a8648485960a0",
+      "verdict": "WITNESS",
+      "witness_side": "f2p_only"
+    },
+    {
+      "all_failures_attributed": true,
+      "anchor": "validate_ipv6_address",
+      "f2p_fail": 1,
+      "failure_analysis": {
+        "all_reference_the_symbol": true,
+        "broke": [],
+        "coupled": [
+          "test_value_placeholder_with_char_field (forms_tests.tests.test_validators.ValidatorCustomMessageTests)"
+        ],
+        "failing": [
+          "test_value_placeholder_with_char_field (forms_tests.tests.test_validators.ValidatorCustomMessageTests)"
+        ],
+        "symbol": "validate_ipv6_address",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": "django/core/validators.py",
+      "graded_log": "+ ./tests/runtests.py --verbosity 2 --settings=test_sqlite --parallel 1 forms_tests.tests.test_validators\nTesting against Django installed in '/testbed/django'\nImporting application forms_tests\nSkipping setup of unused database(s): default, other.\nSystem check identified no issues (0 silenced).\n\ntest_all_errors_get_reported (forms_tests.tests.test_validators.TestFieldWithValidators) ... ok\ntest_field_validators_can_be_any_iterable (forms_tests.tests.test_validators.TestFieldWithValidators) ... ok\ntest_value_placeholder_with_char_field (forms_tests.tests.test_validators.ValidatorCustomMessageTests) ... ERROR\ntest_value_placeholder_with_decimal_field (forms_tests.tests.test_validators.ValidatorCustomMessageTests) ... ok\ntest_value_placeholder_with_file_field (forms_tests.tests.test_validators.ValidatorCustomMessageTests) ... ok\ntest_value_placeholder_with_integer_field (forms_tests.tests.test_validators.ValidatorCustomMessageTests) ... ok\ntest_value_placeholder_with_null_character (forms_tests.tests.test_validators.ValidatorCustomMessageTests) ... ok\n\n======================================================================\nERROR: test_value_placeholder_with_char_field (forms_tests.tests.test_validators.ValidatorCustomMessageTests)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/testbed/tests/forms_tests/tests/test_validators.py\", line 79, in test_value_placeholder_with_char_field\n    (validators.validate_ipv6_address, '1:2', 'invalid'),\nAttributeError: module 'django.core.validators' has no attribute 'validate_ipv6_address'\n\n----------------------------------------------------------------------\nRan 7 tests in 0.028s\n\nFAILED (errors=1)\n",
+      "graded_report": {
+        "f2p_fail": 1,
+        "f2p_failing": [
+          "test_value_placeholder_with_char_field (forms_tests.tests.test_validators.ValidatorCustomMessageTests)"
+        ],
+        "f2p_pass": 4,
+        "found": true,
+        "n_parsed": 8,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 2,
+        "reward": 0.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "p2p_coupled_tests": [],
+      "p2p_fail": 0,
+      "reason": "reward 0.0",
+      "tier": "MEDIUM",
+      "tree_digest": "5413843836e42ba33f6a504de75e3061d7a590da2b23c17cbd7e8402e4a3cc82",
+      "verdict": "WITNESS",
+      "witness_side": "f2p_only"
+    },
+    {
+      "all_failures_attributed": true,
+      "anchor": "validate_ipv46_address",
+      "f2p_fail": 1,
+      "failure_analysis": {
+        "all_reference_the_symbol": true,
+        "broke": [],
+        "coupled": [
+          "test_value_placeholder_with_char_field (forms_tests.tests.test_validators.ValidatorCustomMessageTests)"
+        ],
+        "failing": [
+          "test_value_placeholder_with_char_field (forms_tests.tests.test_validators.ValidatorCustomMessageTests)"
+        ],
+        "symbol": "validate_ipv46_address",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": "django/core/validators.py",
+      "graded_log": "+ ./tests/runtests.py --verbosity 2 --settings=test_sqlite --parallel 1 forms_tests.tests.test_validators\nTesting against Django installed in '/testbed/django'\nImporting application forms_tests\nSkipping setup of unused database(s): default, other.\nSystem check identified no issues (0 silenced).\n\ntest_all_errors_get_reported (forms_tests.tests.test_validators.TestFieldWithValidators) ... ok\ntest_field_validators_can_be_any_iterable (forms_tests.tests.test_validators.TestFieldWithValidators) ... ok\ntest_value_placeholder_with_char_field (forms_tests.tests.test_validators.ValidatorCustomMessageTests) ... ERROR\ntest_value_placeholder_with_decimal_field (forms_tests.tests.test_validators.ValidatorCustomMessageTests) ... ok\ntest_value_placeholder_with_file_field (forms_tests.tests.test_validators.ValidatorCustomMessageTests) ... ok\ntest_value_placeholder_with_integer_field (forms_tests.tests.test_validators.ValidatorCustomMessageTests) ... ok\ntest_value_placeholder_with_null_character (forms_tests.tests.test_validators.ValidatorCustomMessageTests) ... ok\n\n======================================================================\nERROR: test_value_placeholder_with_char_field (forms_tests.tests.test_validators.ValidatorCustomMessageTests)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/testbed/tests/forms_tests/tests/test_validators.py\", line 80, in test_value_placeholder_with_char_field\n    (validators.validate_ipv46_address, '256.1.1.1', 'invalid'),\nAttributeError: module 'django.core.validators' has no attribute 'validate_ipv46_address'\n\n----------------------------------------------------------------------\nRan 7 tests in 0.028s\n\nFAILED (errors=1)\n",
+      "graded_report": {
+        "f2p_fail": 1,
+        "f2p_failing": [
+          "test_value_placeholder_with_char_field (forms_tests.tests.test_validators.ValidatorCustomMessageTests)"
+        ],
+        "f2p_pass": 4,
+        "found": true,
+        "n_parsed": 8,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 2,
+        "reward": 0.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "p2p_coupled_tests": [],
+      "p2p_fail": 0,
+      "reason": "reward 0.0",
+      "tier": "MEDIUM",
+      "tree_digest": "8ef3c93ee7fa25c54bd9d527876f5991ed6c8a02b6d97a77ecb18fc6b53d69fd",
+      "verdict": "WITNESS",
+      "witness_side": "f2p_only"
+    },
+    {
+      "anchor": "DecimalValidator",
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "broke": [],
+        "coupled": [],
+        "failing": [],
+        "symbol": "DecimalValidator",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": "django/core/validators.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 5,
+        "found": true,
+        "n_parsed": 7,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 2,
+        "reward": 1.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "reward 1.0",
+      "tier": "MEDIUM",
+      "tree_digest": "0cc666267fb224c626ae445f2a51e456a1e1313f21d9c503f46daffe1f4175d4",
+      "verdict": "CLEAN"
+    },
+    {
+      "anchor": "FileExtensionValidator",
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "broke": [],
+        "coupled": [],
+        "failing": [],
+        "symbol": "FileExtensionValidator",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": "django/core/validators.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 5,
+        "found": true,
+        "n_parsed": 7,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 2,
+        "reward": 1.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "reward 1.0",
+      "tier": "MEDIUM",
+      "tree_digest": "ed5518b421a598ed4826d1705babf5c26138cf0e6b5d0d4e77a25aa46f31c365",
+      "verdict": "CLEAN"
+    },
+    {
+      "anchor": "ProhibitNullCharactersValidator",
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "broke": [],
+        "coupled": [],
+        "failing": [],
+        "symbol": "ProhibitNullCharactersValidator",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": "django/core/validators.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 5,
+        "found": true,
+        "n_parsed": 7,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 2,
+        "reward": 1.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "reward 1.0",
+      "tier": "MEDIUM",
+      "tree_digest": "2f9a2ad01c0be498b5458d0babcb0d4d36af6894d6804d2231dc93c22fe5162d",
+      "verdict": "CLEAN"
+    },
+    {
+      "anchor": "DecimalField",
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "broke": [],
+        "coupled": [],
+        "failing": [],
+        "symbol": "ProhibitNullCharactersValidator",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": "django/forms/fields.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 5,
+        "found": true,
+        "n_parsed": 7,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 2,
+        "reward": 1.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "attribute access `.DecimalField` in django/contrib/gis/utils/layermapping.py line 72 is not a qualified reference to the defining module -- outside this operator's scope",
+      "tier": "MEDIUM",
+      "tree_digest": "2f9a2ad01c0be498b5458d0babcb0d4d36af6894d6804d2231dc93c22fe5162d",
+      "verdict": "REFUSED"
+    },
+    {
+      "anchor": null,
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "broke": [],
+        "coupled": [],
+        "failing": [],
+        "symbol": "ProhibitNullCharactersValidator",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": null,
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 5,
+        "found": true,
+        "n_parsed": 7,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 2,
+        "reward": 1.0
+      },
+      "loud_failure": false,
+      "observable": "order of elements in a returned collection",
+      "operator": "collection_reverse",
+      "reason": "no anchor inside the gold-touched region; 2 anchor(s) elsewhere in the 2 target(s): django/core/validators.py, django/forms/fields.py",
+      "tier": "MEDIUM",
+      "tree_digest": "2f9a2ad01c0be498b5458d0babcb0d4d36af6894d6804d2231dc93c22fe5162d",
+      "verdict": "NOT_APPLICABLE"
+    },
+    {
+      "anchor": null,
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "broke": [],
+        "coupled": [],
+        "failing": [],
+        "symbol": "ProhibitNullCharactersValidator",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": null,
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 5,
+        "found": true,
+        "n_parsed": 7,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 2,
+        "reward": 1.0
+      },
+      "loud_failure": false,
+      "observable": "human-readable text of an exception message",
+      "operator": "message_reword",
+      "reason": "no anchor inside the gold-touched region; 4 anchor(s) elsewhere in the 2 target(s): django/core/validators.py, django/forms/fields.py",
+      "tier": "HIGH",
+      "tree_digest": "2f9a2ad01c0be498b5458d0babcb0d4d36af6894d6804d2231dc93c22fe5162d",
+      "verdict": "NOT_APPLICABLE"
+    }
+  ],
+  "targets": [
+    "django/core/validators.py",
+    "django/forms/fields.py"
+  ],
+  "version": "3.2",
+  "witnesses": [
+    {
+      "all_failures_attributed": true,
+      "anchor": "RegexValidator",
+      "f2p_fail": 1,
+      "failure_analysis": {
+        "all_reference_the_symbol": true,
+        "broke": [],
+        "coupled": [
+          "test_all_errors_get_reported (forms_tests.tests.test_validators.TestFieldWithValidators)",
+          "test_value_placeholder_with_char_field (forms_tests.tests.test_validators.ValidatorCustomMessageTests)"
+        ],
+        "failing": [
+          "test_all_errors_get_reported (forms_tests.tests.test_validators.TestFieldWithValidators)",
+          "test_value_placeholder_with_char_field (forms_tests.tests.test_validators.ValidatorCustomMessageTests)"
+        ],
+        "symbol": "RegexValidator",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": "django/core/validators.py",
+      "graded_log": "+ ./tests/runtests.py --verbosity 2 --settings=test_sqlite --parallel 1 forms_tests.tests.test_validators\nTesting against Django installed in '/testbed/django'\nImporting application forms_tests\nSkipping setup of unused database(s): default, other.\nSystem check identified no issues (0 silenced).\n\ntest_all_errors_get_reported (forms_tests.tests.test_validators.TestFieldWithValidators) ... ERROR\ntest_field_validators_can_be_any_iterable (forms_tests.tests.test_validators.TestFieldWithValidators) ... ok\ntest_value_placeholder_with_char_field (forms_tests.tests.test_validators.ValidatorCustomMessageTests) ... ERROR\ntest_value_placeholder_with_decimal_field (forms_tests.tests.test_validators.ValidatorCustomMessageTests) ... ok\ntest_value_placeholder_with_file_field (forms_tests.tests.test_validators.ValidatorCustomMessageTests) ... ok\ntest_value_placeholder_with_integer_field (forms_tests.tests.test_validators.ValidatorCustomMessageTests) ... ok\ntest_value_placeholder_with_null_character (forms_tests.tests.test_validators.ValidatorCustomMessageTests) ... ok\n\n======================================================================\nERROR: test_all_errors_get_reported (forms_tests.tests.test_validators.TestFieldWithValidators)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/testbed/tests/forms_tests/tests/test_validators.py\", line 13, in test_all_errors_get_reported\n    class UserForm(forms.Form):\n  File \"/testbed/tests/forms_tests/tests/test_validators.py\", line 24, in UserForm\n    validators.RegexValidator(\nAttributeError: module 'django.core.validators' has no attribute 'RegexValidator'\n\n======================================================================\nERROR: test_value_placeholder_with_char_field (forms_tests.tests.test_validators.ValidatorCustomMessageTests)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/testbed/tests/forms_tests/tests/test_validators.py\", line 93, in test_value_placeholder_with_char_field\n    (validators.RegexValidator('[0-9]+'), 'xxxxxx', 'invalid'),\nAttributeError: module 'django.core.validators' has no attribute 'RegexValidator'\n\n----------------------------------------------------------------------\nRan 7 tests in 0.033s\n\nFAILED (errors=2)\n",
+      "graded_report": {
+        "f2p_fail": 1,
+        "f2p_failing": [
+          "test_value_placeholder_with_char_field (forms_tests.tests.test_validators.ValidatorCustomMessageTests)"
+        ],
+        "f2p_pass": 4,
+        "found": true,
+        "n_parsed": 9,
+        "p2p_fail": 1,
+        "p2p_failing": [
+          "test_all_errors_get_reported (forms_tests.tests.test_validators.TestFieldWithValidators)"
+        ],
+        "p2p_pass": 1,
+        "reward": 0.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "p2p_coupled_tests": [
+        "test_all_errors_get_reported (forms_tests.tests.test_validators.TestFieldWithValidators)"
+      ],
+      "p2p_fail": 1,
+      "reason": "reward 0.0",
+      "tier": "MEDIUM",
+      "tree_digest": "bed6e8b68292a92cbac0993b55dfdc48d048ed2a55cd15d826810d72ff3f776d",
+      "verdict": "WITNESS",
+      "witness_side": "p2p_coupling"
+    },
+    {
+      "all_failures_attributed": true,
+      "anchor": "URLValidator",
+      "f2p_fail": 2,
+      "failure_analysis": {
+        "all_reference_the_symbol": true,
+        "broke": [],
+        "coupled": [
+          "test_value_placeholder_with_char_field (forms_tests.tests.test_validators.ValidatorCustomMessageTests)",
+          "test_value_placeholder_with_integer_field (forms_tests.tests.test_validators.ValidatorCustomMessageTests)"
+        ],
+        "failing": [
+          "test_value_placeholder_with_char_field (forms_tests.tests.test_validators.ValidatorCustomMessageTests)",
+          "test_value_placeholder_with_integer_field (forms_tests.tests.test_validators.ValidatorCustomMessageTests)"
+        ],
+        "symbol": "URLValidator",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": "django/core/validators.py",
+      "graded_log": "+ ./tests/runtests.py --verbosity 2 --settings=test_sqlite --parallel 1 forms_tests.tests.test_validators\nTesting against Django installed in '/testbed/django'\nImporting application forms_tests\nSkipping setup of unused database(s): default, other.\nSystem check identified no issues (0 silenced).\n\ntest_all_errors_get_reported (forms_tests.tests.test_validators.TestFieldWithValidators) ... ok\ntest_field_validators_can_be_any_iterable (forms_tests.tests.test_validators.TestFieldWithValidators) ... ok\ntest_value_placeholder_with_char_field (forms_tests.tests.test_validators.ValidatorCustomMessageTests) ... ERROR\ntest_value_placeholder_with_decimal_field (forms_tests.tests.test_validators.ValidatorCustomMessageTests) ... ok\ntest_value_placeholder_with_file_field (forms_tests.tests.test_validators.ValidatorCustomMessageTests) ... ok\ntest_value_placeholder_with_integer_field (forms_tests.tests.test_validators.ValidatorCustomMessageTests) ... ERROR\ntest_value_placeholder_with_null_character (forms_tests.tests.test_validators.ValidatorCustomMessageTests) ... ok\n\n======================================================================\nERROR: test_value_placeholder_with_char_field (forms_tests.tests.test_validators.ValidatorCustomMessageTests)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/testbed/tests/forms_tests/tests/test_validators.py\", line 85, in test_value_placeholder_with_char_field\n    (validators.URLValidator(), 'no_scheme', 'invalid'),\nAttributeError: module 'django.core.validators' has no attribute 'URLValidator'\n\n======================================================================\nERROR: test_value_placeholder_with_integer_field (forms_tests.tests.test_validators.ValidatorCustomMessageTests)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/testbed/tests/forms_tests/tests/test_validators.py\", line 125, in test_value_placeholder_with_integer_field\n    (validators.URLValidator(), '1', 'invalid'),\nAttributeError: module 'django.core.validators' has no attribute 'URLValidator'\n\n----------------------------------------------------------------------\nRan 7 tests in 0.034s\n\nFAILED (errors=2)\n",
+      "graded_report": {
+        "f2p_fail": 2,
+        "f2p_failing": [
+          "test_value_placeholder_with_char_field (forms_tests.tests.test_validators.ValidatorCustomMessageTests)",
+          "test_value_placeholder_with_integer_field (forms_tests.tests.test_validators.ValidatorCustomMessageTests)"
+        ],
+        "f2p_pass": 3,
+        "found": true,
+        "n_parsed": 9,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 2,
+        "reward": 0.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "p2p_coupled_tests": [],
+      "p2p_fail": 0,
+      "reason": "reward 0.0",
+      "tier": "MEDIUM",
+      "tree_digest": "294809a7c0d3dae60c7edccbfa9056ac18cd816d920650c50f54c4a0688c17fe",
+      "verdict": "WITNESS",
+      "witness_side": "f2p_only"
+    },
+    {
+      "all_failures_attributed": true,
+      "anchor": "validate_ipv4_address",
+      "f2p_fail": 1,
+      "failure_analysis": {
+        "all_reference_the_symbol": true,
+        "broke": [],
+        "coupled": [
+          "test_value_placeholder_with_char_field (forms_tests.tests.test_validators.ValidatorCustomMessageTests)"
+        ],
+        "failing": [
+          "test_value_placeholder_with_char_field (forms_tests.tests.test_validators.ValidatorCustomMessageTests)"
+        ],
+        "symbol": "validate_ipv4_address",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": "django/core/validators.py",
+      "graded_log": "+ ./tests/runtests.py --verbosity 2 --settings=test_sqlite --parallel 1 forms_tests.tests.test_validators\nTesting against Django installed in '/testbed/django'\nImporting application forms_tests\nSkipping setup of unused database(s): default, other.\nSystem check identified no issues (0 silenced).\n\ntest_all_errors_get_reported (forms_tests.tests.test_validators.TestFieldWithValidators) ... ok\ntest_field_validators_can_be_any_iterable (forms_tests.tests.test_validators.TestFieldWithValidators) ... ok\ntest_value_placeholder_with_char_field (forms_tests.tests.test_validators.ValidatorCustomMessageTests) ... ERROR\ntest_value_placeholder_with_decimal_field (forms_tests.tests.test_validators.ValidatorCustomMessageTests) ... ok\ntest_value_placeholder_with_file_field (forms_tests.tests.test_validators.ValidatorCustomMessageTests) ... ok\ntest_value_placeholder_with_integer_field (forms_tests.tests.test_validators.ValidatorCustomMessageTests) ... ok\ntest_value_placeholder_with_null_character (forms_tests.tests.test_validators.ValidatorCustomMessageTests) ... ok\n\n======================================================================\nERROR: test_value_placeholder_with_char_field (forms_tests.tests.test_validators.ValidatorCustomMessageTests)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/testbed/tests/forms_tests/tests/test_validators.py\", line 78, in test_value_placeholder_with_char_field\n    (validators.validate_ipv4_address, '256.1.1.1', 'invalid'),\nAttributeError: module 'django.core.validators' has no attribute 'validate_ipv4_address'\n\n----------------------------------------------------------------------\nRan 7 tests in 0.037s\n\nFAILED (errors=1)\n",
+      "graded_report": {
+        "f2p_fail": 1,
+        "f2p_failing": [
+          "test_value_placeholder_with_char_field (forms_tests.tests.test_validators.ValidatorCustomMessageTests)"
+        ],
+        "f2p_pass": 4,
+        "found": true,
+        "n_parsed": 8,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 2,
+        "reward": 0.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "p2p_coupled_tests": [],
+      "p2p_fail": 0,
+      "reason": "reward 0.0",
+      "tier": "MEDIUM",
+      "tree_digest": "9f2afcb691dcdd9f09c7ef0f54cdd66eb3e9dc14c52155defe4a8648485960a0",
+      "verdict": "WITNESS",
+      "witness_side": "f2p_only"
+    },
+    {
+      "all_failures_attributed": true,
+      "anchor": "validate_ipv6_address",
+      "f2p_fail": 1,
+      "failure_analysis": {
+        "all_reference_the_symbol": true,
+        "broke": [],
+        "coupled": [
+          "test_value_placeholder_with_char_field (forms_tests.tests.test_validators.ValidatorCustomMessageTests)"
+        ],
+        "failing": [
+          "test_value_placeholder_with_char_field (forms_tests.tests.test_validators.ValidatorCustomMessageTests)"
+        ],
+        "symbol": "validate_ipv6_address",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": "django/core/validators.py",
+      "graded_log": "+ ./tests/runtests.py --verbosity 2 --settings=test_sqlite --parallel 1 forms_tests.tests.test_validators\nTesting against Django installed in '/testbed/django'\nImporting application forms_tests\nSkipping setup of unused database(s): default, other.\nSystem check identified no issues (0 silenced).\n\ntest_all_errors_get_reported (forms_tests.tests.test_validators.TestFieldWithValidators) ... ok\ntest_field_validators_can_be_any_iterable (forms_tests.tests.test_validators.TestFieldWithValidators) ... ok\ntest_value_placeholder_with_char_field (forms_tests.tests.test_validators.ValidatorCustomMessageTests) ... ERROR\ntest_value_placeholder_with_decimal_field (forms_tests.tests.test_validators.ValidatorCustomMessageTests) ... ok\ntest_value_placeholder_with_file_field (forms_tests.tests.test_validators.ValidatorCustomMessageTests) ... ok\ntest_value_placeholder_with_integer_field (forms_tests.tests.test_validators.ValidatorCustomMessageTests) ... ok\ntest_value_placeholder_with_null_character (forms_tests.tests.test_validators.ValidatorCustomMessageTests) ... ok\n\n======================================================================\nERROR: test_value_placeholder_with_char_field (forms_tests.tests.test_validators.ValidatorCustomMessageTests)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/testbed/tests/forms_tests/tests/test_validators.py\", line 79, in test_value_placeholder_with_char_field\n    (validators.validate_ipv6_address, '1:2', 'invalid'),\nAttributeError: module 'django.core.validators' has no attribute 'validate_ipv6_address'\n\n----------------------------------------------------------------------\nRan 7 tests in 0.028s\n\nFAILED (errors=1)\n",
+      "graded_report": {
+        "f2p_fail": 1,
+        "f2p_failing": [
+          "test_value_placeholder_with_char_field (forms_tests.tests.test_validators.ValidatorCustomMessageTests)"
+        ],
+        "f2p_pass": 4,
+        "found": true,
+        "n_parsed": 8,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 2,
+        "reward": 0.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "p2p_coupled_tests": [],
+      "p2p_fail": 0,
+      "reason": "reward 0.0",
+      "tier": "MEDIUM",
+      "tree_digest": "5413843836e42ba33f6a504de75e3061d7a590da2b23c17cbd7e8402e4a3cc82",
+      "verdict": "WITNESS",
+      "witness_side": "f2p_only"
+    },
+    {
+      "all_failures_attributed": true,
+      "anchor": "validate_ipv46_address",
+      "f2p_fail": 1,
+      "failure_analysis": {
+        "all_reference_the_symbol": true,
+        "broke": [],
+        "coupled": [
+          "test_value_placeholder_with_char_field (forms_tests.tests.test_validators.ValidatorCustomMessageTests)"
+        ],
+        "failing": [
+          "test_value_placeholder_with_char_field (forms_tests.tests.test_validators.ValidatorCustomMessageTests)"
+        ],
+        "symbol": "validate_ipv46_address",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": "django/core/validators.py",
+      "graded_log": "+ ./tests/runtests.py --verbosity 2 --settings=test_sqlite --parallel 1 forms_tests.tests.test_validators\nTesting against Django installed in '/testbed/django'\nImporting application forms_tests\nSkipping setup of unused database(s): default, other.\nSystem check identified no issues (0 silenced).\n\ntest_all_errors_get_reported (forms_tests.tests.test_validators.TestFieldWithValidators) ... ok\ntest_field_validators_can_be_any_iterable (forms_tests.tests.test_validators.TestFieldWithValidators) ... ok\ntest_value_placeholder_with_char_field (forms_tests.tests.test_validators.ValidatorCustomMessageTests) ... ERROR\ntest_value_placeholder_with_decimal_field (forms_tests.tests.test_validators.ValidatorCustomMessageTests) ... ok\ntest_value_placeholder_with_file_field (forms_tests.tests.test_validators.ValidatorCustomMessageTests) ... ok\ntest_value_placeholder_with_integer_field (forms_tests.tests.test_validators.ValidatorCustomMessageTests) ... ok\ntest_value_placeholder_with_null_character (forms_tests.tests.test_validators.ValidatorCustomMessageTests) ... ok\n\n======================================================================\nERROR: test_value_placeholder_with_char_field (forms_tests.tests.test_validators.ValidatorCustomMessageTests)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/testbed/tests/forms_tests/tests/test_validators.py\", line 80, in test_value_placeholder_with_char_field\n    (validators.validate_ipv46_address, '256.1.1.1', 'invalid'),\nAttributeError: module 'django.core.validators' has no attribute 'validate_ipv46_address'\n\n----------------------------------------------------------------------\nRan 7 tests in 0.028s\n\nFAILED (errors=1)\n",
+      "graded_report": {
+        "f2p_fail": 1,
+        "f2p_failing": [
+          "test_value_placeholder_with_char_field (forms_tests.tests.test_validators.ValidatorCustomMessageTests)"
+        ],
+        "f2p_pass": 4,
+        "found": true,
+        "n_parsed": 8,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 2,
+        "reward": 0.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "p2p_coupled_tests": [],
+      "p2p_fail": 0,
+      "reason": "reward 0.0",
+      "tier": "MEDIUM",
+      "tree_digest": "8ef3c93ee7fa25c54bd9d527876f5991ed6c8a02b6d97a77ecb18fc6b53d69fd",
+      "verdict": "WITNESS",
+      "witness_side": "f2p_only"
+    }
+  ]
+}

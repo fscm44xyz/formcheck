@@ -1,0 +1,281 @@
+{
+  "completed": true,
+  "control": {
+    "graded": null,
+    "log": null,
+    "passed": true,
+    "reason": "untransformed reference scores 1.0"
+  },
+  "digest_trace": [
+    {
+      "digest": "fcc579583f3b9c5610de513e08d79cc19362466d58e257aea26c70a24f711d09",
+      "memo_hit": false
+    },
+    {
+      "digest": "30c9248cb9da8441d3551fcfd923f67376f61a8c2548d7d64442d50884edb69c",
+      "memo_hit": false
+    },
+    {
+      "digest": "30c9248cb9da8441d3551fcfd923f67376f61a8c2548d7d64442d50884edb69c",
+      "memo_hit": true
+    }
+  ],
+  "disk_orphan_reclaimed_bytes": 0,
+  "disk_residual_bytes": 0,
+  "elapsed_seconds": 134.35,
+  "error": null,
+  "image": "swebench/sweb.eval.x86_64.django_1776_django-11734:latest",
+  "instance_id": "django__django-11734",
+  "leaked_containers": [],
+  "leaked_image": false,
+  "log": [
+    [
+      "<control>",
+      "OK",
+      "untransformed reference scores 1.0"
+    ],
+    [
+      "kwonly_specialize:<no anchor>",
+      "NOT_APPLICABLE",
+      "no anchor inside the gold-touched region; 3 anchor(s) elsewhere in the 3 target(s): django/db/models/fields/__init__.py, django/db/models/fields/related_lookups.py, django/db/models/sql/query.py"
+    ],
+    [
+      "symbol_rename:django/db/models/fields/__init__.py:AutoFieldMixin",
+      "REFUSED",
+      "dynamic reach: 'AutoFieldMixin' appears in a non-annotation string literal in django/db/models/fields/__init__.py line 2348 ('\\n    Metaclass to maintain backward inhe') -- an alpha-rename cannot be argued safe"
+    ],
+    [
+      "symbol_rename:django/db/models/fields/related_lookups.py:RelatedLookupMixin",
+      "CLEAN",
+      "reward 1.0"
+    ],
+    [
+      "symbol_rename:django/db/models/sql/query.py:Query",
+      "REFUSED",
+      "BORDER: the issue names 'Query' -- candidate CONTRACT, route to the rubric"
+    ],
+    [
+      "collection_reverse:<no anchor>",
+      "NOT_APPLICABLE",
+      "no anchor inside the gold-touched region"
+    ],
+    [
+      "message_reword:<no anchor>",
+      "NOT_APPLICABLE",
+      "no anchor inside the gold-touched region; 10 anchor(s) elsewhere in the 3 target(s): django/db/models/fields/__init__.py, django/db/models/fields/related_lookups.py, django/db/models/sql/query.py"
+    ]
+  ],
+  "mountable": true,
+  "multi_target": true,
+  "n_targets": 3,
+  "on_prime_hub": null,
+  "on_prime_hub_reason": "not resolvable offline; no hub environment index is reachable from this repo, verifiers or swebench",
+  "operators_not_applicable": [
+    "collection_reverse",
+    "kwonly_specialize",
+    "message_reword"
+  ],
+  "operators_with_anchors": [
+    "symbol_rename"
+  ],
+  "repo": "django/django",
+  "row": {
+    "elapsed": 51.81,
+    "error": null,
+    "error_type": null,
+    "index": 0,
+    "mode": "formcheck",
+    "name": "django__django-11734",
+    "reason": "valid",
+    "valid": true
+  },
+  "rows": [
+    {
+      "anchor": null,
+      "failure_analysis": null,
+      "file": null,
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 1,
+        "found": true,
+        "n_parsed": 279,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 275,
+        "reward": 1.0
+      },
+      "loud_failure": false,
+      "observable": "callable signature (arity / parameter names)",
+      "operator": "kwonly_specialize",
+      "reason": "no anchor inside the gold-touched region; 3 anchor(s) elsewhere in the 3 target(s): django/db/models/fields/__init__.py, django/db/models/fields/related_lookups.py, django/db/models/sql/query.py",
+      "tier": "HIGH",
+      "tree_digest": "fcc579583f3b9c5610de513e08d79cc19362466d58e257aea26c70a24f711d09",
+      "verdict": "NOT_APPLICABLE"
+    },
+    {
+      "anchor": "AutoFieldMixin",
+      "failure_analysis": null,
+      "file": "django/db/models/fields/__init__.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 1,
+        "found": true,
+        "n_parsed": 279,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 275,
+        "reward": 1.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "dynamic reach: 'AutoFieldMixin' appears in a non-annotation string literal in django/db/models/fields/__init__.py line 2348 ('\\n    Metaclass to maintain backward inhe') -- an alpha-rename cannot be argued safe",
+      "tier": "MEDIUM",
+      "tree_digest": "fcc579583f3b9c5610de513e08d79cc19362466d58e257aea26c70a24f711d09",
+      "verdict": "REFUSED"
+    },
+    {
+      "anchor": "RelatedLookupMixin",
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "broke": [],
+        "coupled": [],
+        "failing": [],
+        "symbol": "RelatedLookupMixin",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": "django/db/models/fields/related_lookups.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 1,
+        "found": true,
+        "n_parsed": 279,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 275,
+        "reward": 1.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "reward 1.0",
+      "tier": "MEDIUM",
+      "tree_digest": "30c9248cb9da8441d3551fcfd923f67376f61a8c2548d7d64442d50884edb69c",
+      "verdict": "CLEAN"
+    },
+    {
+      "anchor": "Query",
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "broke": [],
+        "coupled": [],
+        "failing": [],
+        "symbol": "RelatedLookupMixin",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": "django/db/models/sql/query.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 1,
+        "found": true,
+        "n_parsed": 279,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 275,
+        "reward": 1.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "BORDER: the issue names 'Query' -- candidate CONTRACT, route to the rubric",
+      "tier": "MEDIUM",
+      "tree_digest": "30c9248cb9da8441d3551fcfd923f67376f61a8c2548d7d64442d50884edb69c",
+      "verdict": "REFUSED"
+    },
+    {
+      "anchor": null,
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "broke": [],
+        "coupled": [],
+        "failing": [],
+        "symbol": "RelatedLookupMixin",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": null,
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 1,
+        "found": true,
+        "n_parsed": 279,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 275,
+        "reward": 1.0
+      },
+      "loud_failure": false,
+      "observable": "order of elements in a returned collection",
+      "operator": "collection_reverse",
+      "reason": "no anchor inside the gold-touched region",
+      "tier": "MEDIUM",
+      "tree_digest": "30c9248cb9da8441d3551fcfd923f67376f61a8c2548d7d64442d50884edb69c",
+      "verdict": "NOT_APPLICABLE"
+    },
+    {
+      "anchor": null,
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "broke": [],
+        "coupled": [],
+        "failing": [],
+        "symbol": "RelatedLookupMixin",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": null,
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 1,
+        "found": true,
+        "n_parsed": 279,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 275,
+        "reward": 1.0
+      },
+      "loud_failure": false,
+      "observable": "human-readable text of an exception message",
+      "operator": "message_reword",
+      "reason": "no anchor inside the gold-touched region; 10 anchor(s) elsewhere in the 3 target(s): django/db/models/fields/__init__.py, django/db/models/fields/related_lookups.py, django/db/models/sql/query.py",
+      "tier": "HIGH",
+      "tree_digest": "30c9248cb9da8441d3551fcfd923f67376f61a8c2548d7d64442d50884edb69c",
+      "verdict": "NOT_APPLICABLE"
+    }
+  ],
+  "targets": [
+    "django/db/models/fields/__init__.py",
+    "django/db/models/fields/related_lookups.py",
+    "django/db/models/sql/query.py"
+  ],
+  "version": "3.0",
+  "witnesses": []
+}

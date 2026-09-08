@@ -19,6 +19,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
 sys.path.insert(0, os.path.join(os.path.dirname(HERE), "repro"))
 
+import rotation  # noqa: E402,F401
 import run  # noqa: E402
 
 
@@ -63,6 +64,59 @@ def main():
             print(f"  FAIL  {fn.__name__}\n        {exc}")
     print(f"\n{len(tests) - failed}/{len(tests)} passed")
     return 1 if failed else 0
+
+
+def test_a_refusal_counts_as_no_progress():
+    """THE HOLE THAT COST 107 TASKS.
+
+    Separating refusal from failure (correct) put refusals outside the liveness
+    invariant (wrong). The two requirements interacted and only the interaction
+    was broken: 107 refusals in 41 seconds, and the detector never looked,
+    because `return None` came before the duration was recorded.
+
+    A refusal is zero seconds of work. It counts as exactly that.
+    """
+    recent = [0.0] * run.BURN_STREAK
+    assert all(t < run.MIN_PLAUSIBLE_TASK_SECONDS for t in recent), (
+        "a refusal must fall under the floor, or a refusal storm is invisible")
+
+
+def test_one_real_task_breaks_a_refusal_streak():
+    recent = [0.0] * (run.BURN_STREAK - 1) + [180.0]
+    assert not all(t < run.MIN_PLAUSIBLE_TASK_SECONDS for t in recent)
+
+
+def test_backoff_grows_and_is_capped():
+    import asyncio
+
+    import rotation
+    naps = []
+    original = asyncio.sleep
+
+    async def fake_sleep(n):
+        naps.append(n)
+
+    asyncio.sleep = fake_sleep
+    rotation._consecutive_refusals = 0
+    try:
+        for _ in range(12):
+            asyncio.get_event_loop_policy()
+            asyncio.run(rotation.note_refusal())
+    finally:
+        asyncio.sleep = original
+        rotation._consecutive_refusals = 0
+
+    assert naps[:1] == [rotation.BACKOFF_BASE_SECONDS], naps[:3]
+    assert naps == sorted(naps), "backoff must be monotonic"
+    assert max(naps) == rotation.BACKOFF_CAP_SECONDS, max(naps)
+    assert len(naps) == 12 - rotation.REFUSAL_STREAK + 1, len(naps)
+
+
+def test_a_success_resets_the_streak():
+    import rotation
+    rotation._consecutive_refusals = 7
+    rotation.note_pull_success()
+    assert rotation._consecutive_refusals == 0
 
 
 if __name__ == "__main__":

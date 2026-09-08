@@ -1,0 +1,426 @@
+{
+  "completed": true,
+  "control": {
+    "graded": null,
+    "log": null,
+    "passed": true,
+    "reason": "untransformed reference scores 1.0"
+  },
+  "digest_trace": [
+    {
+      "digest": "11d7aee02c0d0d6c0b0a8d71b95804cb957db700b7ad7c8adeecc1179877d538",
+      "memo_hit": false
+    },
+    {
+      "digest": "1cf8ab58a66269c60cf5b19cd275a334012420cc57337e8643ebf3be108c8045",
+      "memo_hit": false
+    },
+    {
+      "digest": "1cf8ab58a66269c60cf5b19cd275a334012420cc57337e8643ebf3be108c8045",
+      "memo_hit": true
+    }
+  ],
+  "disk_orphan_reclaimed_bytes": 0,
+  "disk_residual_bytes": 0,
+  "elapsed_seconds": 189.47,
+  "error": null,
+  "image": "swebench/sweb.eval.x86_64.django_1776_django-11433:latest",
+  "instance_id": "django__django-11433",
+  "leaked_containers": [],
+  "leaked_image": false,
+  "log": [
+    [
+      "<control>",
+      "OK",
+      "untransformed reference scores 1.0"
+    ],
+    [
+      "kwonly_specialize:<no anchor>",
+      "NOT_APPLICABLE",
+      "no anchor inside the gold-touched region; 12 anchor(s) elsewhere in the target"
+    ],
+    [
+      "symbol_rename:construct_instance",
+      "WITNESS",
+      "reward 0.0"
+    ],
+    [
+      "collection_reverse:<no anchor>",
+      "NOT_APPLICABLE",
+      "no anchor inside the gold-touched region; 1 anchor(s) elsewhere in the target"
+    ],
+    [
+      "message_reword:<no anchor>",
+      "NOT_APPLICABLE",
+      "no anchor inside the gold-touched region; 4 anchor(s) elsewhere in the target"
+    ]
+  ],
+  "mountable": true,
+  "multi_target": false,
+  "n_targets": 1,
+  "on_prime_hub": null,
+  "on_prime_hub_reason": "not resolvable offline; no hub environment index is reachable from this repo, verifiers or swebench",
+  "operators_not_applicable": [
+    "collection_reverse",
+    "kwonly_specialize",
+    "message_reword"
+  ],
+  "operators_with_anchors": [
+    "symbol_rename"
+  ],
+  "repo": "django/django",
+  "row": {
+    "elapsed": 47.21,
+    "error": null,
+    "error_type": null,
+    "index": 0,
+    "mode": "formcheck",
+    "name": "django__django-11433",
+    "reason": "invalid",
+    "valid": false
+  },
+  "rows": [
+    {
+      "anchor": null,
+      "failure_analysis": null,
+      "file": null,
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 1,
+        "found": true,
+        "n_parsed": 143,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 142,
+        "reward": 1.0
+      },
+      "loud_failure": false,
+      "observable": "callable signature (arity / parameter names)",
+      "operator": "kwonly_specialize",
+      "reason": "no anchor inside the gold-touched region; 12 anchor(s) elsewhere in the target",
+      "tier": "HIGH",
+      "tree_digest": "11d7aee02c0d0d6c0b0a8d71b95804cb957db700b7ad7c8adeecc1179877d538",
+      "verdict": "NOT_APPLICABLE"
+    },
+    {
+      "all_failures_attributed": true,
+      "anchor": "construct_instance",
+      "f2p_fail": 1,
+      "failure_analysis": {
+        "all_reference_the_symbol": true,
+        "broke": [],
+        "coupled": [
+          "test_model_form_clean_applies_to_model (model_forms.tests.CustomCleanTests)",
+          "test_override_clean (model_forms.tests.CustomCleanTests)",
+          "test_model_form_applies_localize_to_all_fields (model_forms.tests.LocalizedModelFormTest)",
+          "test_model_form_applies_localize_to_some_fields (model_forms.tests.LocalizedModelFormTest)",
+          "test_model_form_refuses_arbitrary_string (model_forms.tests.LocalizedModelFormTest)",
+          "test_callable_called_each_time_form_is_instantiated (model_forms.tests.LimitChoicesToTests)",
+          "test_custom_field_with_queryset_but_no_limit_choices_to (model_forms.tests.LimitChoicesToTests)",
+          "test_fields_for_model_applies_limit_choices_to (model_forms.tests.LimitChoicesToTests)",
+          "test_limit_choices_to_callable_for_fk_rel (model_forms.tests.LimitChoicesToTests)",
+          "test_limit_choices_to_callable_for_m2m_rel (model_forms.tests.LimitChoicesToTests)",
+          "test_default_not_populated_on_non_empty_value_in_cleaned_data (model_forms.tests.ModelFormBaseTest)"
+        ],
+        "failing": [
+          "test_model_form_clean_applies_to_model (model_forms.tests.CustomCleanTests)",
+          "test_override_clean (model_forms.tests.CustomCleanTests)",
+          "test_model_form_applies_localize_to_all_fields (model_forms.tests.LocalizedModelFormTest)",
+          "test_model_form_applies_localize_to_some_fields (model_forms.tests.LocalizedModelFormTest)",
+          "test_model_form_refuses_arbitrary_string (model_forms.tests.LocalizedModelFormTest)",
+          "test_callable_called_each_time_form_is_instantiated (model_forms.tests.LimitChoicesToTests)",
+          "test_custom_field_with_queryset_but_no_limit_choices_to (model_forms.tests.LimitChoicesToTests)",
+          "test_fields_for_model_applies_limit_choices_to (model_forms.tests.LimitChoicesToTests)",
+          "test_limit_choices_to_callable_for_fk_rel (model_forms.tests.LimitChoicesToTests)",
+          "test_limit_choices_to_callable_for_m2m_rel (model_forms.tests.LimitChoicesToTests)",
+          "test_default_not_populated_on_non_empty_value_in_cleaned_data (model_forms.tests.ModelFormBaseTest)"
+        ],
+        "symbol": "construct_instance",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": "django/forms/models.py",
+      "graded_log": "+ ./tests/runtests.py --verbosity 2 --settings=test_sqlite --parallel 1 model_forms.tests\nTesting against Django installed in '/testbed/django'\nImporting application model_forms\nSkipping setup of unused database(s): default, other.\nSystem check identified no issues (0 silenced).\n\ntests (unittest.loader._FailedTest) ... ERROR\n\n======================================================================\nERROR: tests (unittest.loader._FailedTest)\n----------------------------------------------------------------------\nImportError: Failed to import test module: tests\nTraceback (most recent call last):\n  File \"/opt/miniconda3/envs/testbed/lib/python3.6/unittest/loader.py\", line 153, in loadTestsFromName\n    module = __import__(module_name)\n  File \"/testbed/tests/model_forms/tests.py\", line 14, in <module>\n    from django.forms.models import (\nImportError: cannot import name 'construct_instance'\n\n\n----------------------------------------------------------------------\nRan 1 test in 0.000s\n\nFAILED (errors=1)\n",
+      "graded_report": {
+        "f2p_fail": 1,
+        "f2p_failing": [
+          "test_default_not_populated_on_non_empty_value_in_cleaned_data (model_forms.tests.ModelFormBaseTest)"
+        ],
+        "f2p_pass": 0,
+        "found": true,
+        "n_parsed": 2,
+        "p2p_fail": 142,
+        "p2p_failing": [
+          "test_model_form_clean_applies_to_model (model_forms.tests.CustomCleanTests)",
+          "test_override_clean (model_forms.tests.CustomCleanTests)",
+          "test_model_form_applies_localize_to_all_fields (model_forms.tests.LocalizedModelFormTest)",
+          "test_model_form_applies_localize_to_some_fields (model_forms.tests.LocalizedModelFormTest)",
+          "test_model_form_refuses_arbitrary_string (model_forms.tests.LocalizedModelFormTest)",
+          "test_callable_called_each_time_form_is_instantiated (model_forms.tests.LimitChoicesToTests)",
+          "test_custom_field_with_queryset_but_no_limit_choices_to (model_forms.tests.LimitChoicesToTests)",
+          "test_fields_for_model_applies_limit_choices_to (model_forms.tests.LimitChoicesToTests)",
+          "test_limit_choices_to_callable_for_fk_rel (model_forms.tests.LimitChoicesToTests)",
+          "test_limit_choices_to_callable_for_m2m_rel (model_forms.tests.LimitChoicesToTests)"
+        ],
+        "p2p_pass": 0,
+        "reward": 0.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "p2p_coupled_tests": [
+        "test_model_form_clean_applies_to_model (model_forms.tests.CustomCleanTests)",
+        "test_override_clean (model_forms.tests.CustomCleanTests)",
+        "test_model_form_applies_localize_to_all_fields (model_forms.tests.LocalizedModelFormTest)",
+        "test_model_form_applies_localize_to_some_fields (model_forms.tests.LocalizedModelFormTest)",
+        "test_model_form_refuses_arbitrary_string (model_forms.tests.LocalizedModelFormTest)",
+        "test_callable_called_each_time_form_is_instantiated (model_forms.tests.LimitChoicesToTests)",
+        "test_custom_field_with_queryset_but_no_limit_choices_to (model_forms.tests.LimitChoicesToTests)",
+        "test_fields_for_model_applies_limit_choices_to (model_forms.tests.LimitChoicesToTests)",
+        "test_limit_choices_to_callable_for_fk_rel (model_forms.tests.LimitChoicesToTests)",
+        "test_limit_choices_to_callable_for_m2m_rel (model_forms.tests.LimitChoicesToTests)"
+      ],
+      "p2p_fail": 142,
+      "reason": "reward 0.0",
+      "tier": "MEDIUM",
+      "tree_digest": "1cf8ab58a66269c60cf5b19cd275a334012420cc57337e8643ebf3be108c8045",
+      "verdict": "WITNESS",
+      "witness_side": "p2p_coupling"
+    },
+    {
+      "anchor": null,
+      "failure_analysis": {
+        "all_reference_the_symbol": true,
+        "broke": [],
+        "coupled": [
+          "test_model_form_clean_applies_to_model (model_forms.tests.CustomCleanTests)",
+          "test_override_clean (model_forms.tests.CustomCleanTests)",
+          "test_model_form_applies_localize_to_all_fields (model_forms.tests.LocalizedModelFormTest)",
+          "test_model_form_applies_localize_to_some_fields (model_forms.tests.LocalizedModelFormTest)",
+          "test_model_form_refuses_arbitrary_string (model_forms.tests.LocalizedModelFormTest)",
+          "test_callable_called_each_time_form_is_instantiated (model_forms.tests.LimitChoicesToTests)",
+          "test_custom_field_with_queryset_but_no_limit_choices_to (model_forms.tests.LimitChoicesToTests)",
+          "test_fields_for_model_applies_limit_choices_to (model_forms.tests.LimitChoicesToTests)",
+          "test_limit_choices_to_callable_for_fk_rel (model_forms.tests.LimitChoicesToTests)",
+          "test_limit_choices_to_callable_for_m2m_rel (model_forms.tests.LimitChoicesToTests)",
+          "test_default_not_populated_on_non_empty_value_in_cleaned_data (model_forms.tests.ModelFormBaseTest)"
+        ],
+        "failing": [
+          "test_model_form_clean_applies_to_model (model_forms.tests.CustomCleanTests)",
+          "test_override_clean (model_forms.tests.CustomCleanTests)",
+          "test_model_form_applies_localize_to_all_fields (model_forms.tests.LocalizedModelFormTest)",
+          "test_model_form_applies_localize_to_some_fields (model_forms.tests.LocalizedModelFormTest)",
+          "test_model_form_refuses_arbitrary_string (model_forms.tests.LocalizedModelFormTest)",
+          "test_callable_called_each_time_form_is_instantiated (model_forms.tests.LimitChoicesToTests)",
+          "test_custom_field_with_queryset_but_no_limit_choices_to (model_forms.tests.LimitChoicesToTests)",
+          "test_fields_for_model_applies_limit_choices_to (model_forms.tests.LimitChoicesToTests)",
+          "test_limit_choices_to_callable_for_fk_rel (model_forms.tests.LimitChoicesToTests)",
+          "test_limit_choices_to_callable_for_m2m_rel (model_forms.tests.LimitChoicesToTests)",
+          "test_default_not_populated_on_non_empty_value_in_cleaned_data (model_forms.tests.ModelFormBaseTest)"
+        ],
+        "symbol": "construct_instance",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": null,
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 1,
+        "f2p_failing": [
+          "test_default_not_populated_on_non_empty_value_in_cleaned_data (model_forms.tests.ModelFormBaseTest)"
+        ],
+        "f2p_pass": 0,
+        "found": true,
+        "n_parsed": 2,
+        "p2p_fail": 142,
+        "p2p_failing": [
+          "test_model_form_clean_applies_to_model (model_forms.tests.CustomCleanTests)",
+          "test_override_clean (model_forms.tests.CustomCleanTests)",
+          "test_model_form_applies_localize_to_all_fields (model_forms.tests.LocalizedModelFormTest)",
+          "test_model_form_applies_localize_to_some_fields (model_forms.tests.LocalizedModelFormTest)",
+          "test_model_form_refuses_arbitrary_string (model_forms.tests.LocalizedModelFormTest)",
+          "test_callable_called_each_time_form_is_instantiated (model_forms.tests.LimitChoicesToTests)",
+          "test_custom_field_with_queryset_but_no_limit_choices_to (model_forms.tests.LimitChoicesToTests)",
+          "test_fields_for_model_applies_limit_choices_to (model_forms.tests.LimitChoicesToTests)",
+          "test_limit_choices_to_callable_for_fk_rel (model_forms.tests.LimitChoicesToTests)",
+          "test_limit_choices_to_callable_for_m2m_rel (model_forms.tests.LimitChoicesToTests)"
+        ],
+        "p2p_pass": 0,
+        "reward": 0.0
+      },
+      "loud_failure": false,
+      "observable": "order of elements in a returned collection",
+      "operator": "collection_reverse",
+      "reason": "no anchor inside the gold-touched region; 1 anchor(s) elsewhere in the target",
+      "tier": "MEDIUM",
+      "tree_digest": "1cf8ab58a66269c60cf5b19cd275a334012420cc57337e8643ebf3be108c8045",
+      "verdict": "NOT_APPLICABLE"
+    },
+    {
+      "anchor": null,
+      "failure_analysis": {
+        "all_reference_the_symbol": true,
+        "broke": [],
+        "coupled": [
+          "test_model_form_clean_applies_to_model (model_forms.tests.CustomCleanTests)",
+          "test_override_clean (model_forms.tests.CustomCleanTests)",
+          "test_model_form_applies_localize_to_all_fields (model_forms.tests.LocalizedModelFormTest)",
+          "test_model_form_applies_localize_to_some_fields (model_forms.tests.LocalizedModelFormTest)",
+          "test_model_form_refuses_arbitrary_string (model_forms.tests.LocalizedModelFormTest)",
+          "test_callable_called_each_time_form_is_instantiated (model_forms.tests.LimitChoicesToTests)",
+          "test_custom_field_with_queryset_but_no_limit_choices_to (model_forms.tests.LimitChoicesToTests)",
+          "test_fields_for_model_applies_limit_choices_to (model_forms.tests.LimitChoicesToTests)",
+          "test_limit_choices_to_callable_for_fk_rel (model_forms.tests.LimitChoicesToTests)",
+          "test_limit_choices_to_callable_for_m2m_rel (model_forms.tests.LimitChoicesToTests)",
+          "test_default_not_populated_on_non_empty_value_in_cleaned_data (model_forms.tests.ModelFormBaseTest)"
+        ],
+        "failing": [
+          "test_model_form_clean_applies_to_model (model_forms.tests.CustomCleanTests)",
+          "test_override_clean (model_forms.tests.CustomCleanTests)",
+          "test_model_form_applies_localize_to_all_fields (model_forms.tests.LocalizedModelFormTest)",
+          "test_model_form_applies_localize_to_some_fields (model_forms.tests.LocalizedModelFormTest)",
+          "test_model_form_refuses_arbitrary_string (model_forms.tests.LocalizedModelFormTest)",
+          "test_callable_called_each_time_form_is_instantiated (model_forms.tests.LimitChoicesToTests)",
+          "test_custom_field_with_queryset_but_no_limit_choices_to (model_forms.tests.LimitChoicesToTests)",
+          "test_fields_for_model_applies_limit_choices_to (model_forms.tests.LimitChoicesToTests)",
+          "test_limit_choices_to_callable_for_fk_rel (model_forms.tests.LimitChoicesToTests)",
+          "test_limit_choices_to_callable_for_m2m_rel (model_forms.tests.LimitChoicesToTests)",
+          "test_default_not_populated_on_non_empty_value_in_cleaned_data (model_forms.tests.ModelFormBaseTest)"
+        ],
+        "symbol": "construct_instance",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": null,
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 1,
+        "f2p_failing": [
+          "test_default_not_populated_on_non_empty_value_in_cleaned_data (model_forms.tests.ModelFormBaseTest)"
+        ],
+        "f2p_pass": 0,
+        "found": true,
+        "n_parsed": 2,
+        "p2p_fail": 142,
+        "p2p_failing": [
+          "test_model_form_clean_applies_to_model (model_forms.tests.CustomCleanTests)",
+          "test_override_clean (model_forms.tests.CustomCleanTests)",
+          "test_model_form_applies_localize_to_all_fields (model_forms.tests.LocalizedModelFormTest)",
+          "test_model_form_applies_localize_to_some_fields (model_forms.tests.LocalizedModelFormTest)",
+          "test_model_form_refuses_arbitrary_string (model_forms.tests.LocalizedModelFormTest)",
+          "test_callable_called_each_time_form_is_instantiated (model_forms.tests.LimitChoicesToTests)",
+          "test_custom_field_with_queryset_but_no_limit_choices_to (model_forms.tests.LimitChoicesToTests)",
+          "test_fields_for_model_applies_limit_choices_to (model_forms.tests.LimitChoicesToTests)",
+          "test_limit_choices_to_callable_for_fk_rel (model_forms.tests.LimitChoicesToTests)",
+          "test_limit_choices_to_callable_for_m2m_rel (model_forms.tests.LimitChoicesToTests)"
+        ],
+        "p2p_pass": 0,
+        "reward": 0.0
+      },
+      "loud_failure": false,
+      "observable": "human-readable text of an exception message",
+      "operator": "message_reword",
+      "reason": "no anchor inside the gold-touched region; 4 anchor(s) elsewhere in the target",
+      "tier": "HIGH",
+      "tree_digest": "1cf8ab58a66269c60cf5b19cd275a334012420cc57337e8643ebf3be108c8045",
+      "verdict": "NOT_APPLICABLE"
+    }
+  ],
+  "targets": [
+    "django/forms/models.py"
+  ],
+  "version": "3.0",
+  "witnesses": [
+    {
+      "all_failures_attributed": true,
+      "anchor": "construct_instance",
+      "f2p_fail": 1,
+      "failure_analysis": {
+        "all_reference_the_symbol": true,
+        "broke": [],
+        "coupled": [
+          "test_model_form_clean_applies_to_model (model_forms.tests.CustomCleanTests)",
+          "test_override_clean (model_forms.tests.CustomCleanTests)",
+          "test_model_form_applies_localize_to_all_fields (model_forms.tests.LocalizedModelFormTest)",
+          "test_model_form_applies_localize_to_some_fields (model_forms.tests.LocalizedModelFormTest)",
+          "test_model_form_refuses_arbitrary_string (model_forms.tests.LocalizedModelFormTest)",
+          "test_callable_called_each_time_form_is_instantiated (model_forms.tests.LimitChoicesToTests)",
+          "test_custom_field_with_queryset_but_no_limit_choices_to (model_forms.tests.LimitChoicesToTests)",
+          "test_fields_for_model_applies_limit_choices_to (model_forms.tests.LimitChoicesToTests)",
+          "test_limit_choices_to_callable_for_fk_rel (model_forms.tests.LimitChoicesToTests)",
+          "test_limit_choices_to_callable_for_m2m_rel (model_forms.tests.LimitChoicesToTests)",
+          "test_default_not_populated_on_non_empty_value_in_cleaned_data (model_forms.tests.ModelFormBaseTest)"
+        ],
+        "failing": [
+          "test_model_form_clean_applies_to_model (model_forms.tests.CustomCleanTests)",
+          "test_override_clean (model_forms.tests.CustomCleanTests)",
+          "test_model_form_applies_localize_to_all_fields (model_forms.tests.LocalizedModelFormTest)",
+          "test_model_form_applies_localize_to_some_fields (model_forms.tests.LocalizedModelFormTest)",
+          "test_model_form_refuses_arbitrary_string (model_forms.tests.LocalizedModelFormTest)",
+          "test_callable_called_each_time_form_is_instantiated (model_forms.tests.LimitChoicesToTests)",
+          "test_custom_field_with_queryset_but_no_limit_choices_to (model_forms.tests.LimitChoicesToTests)",
+          "test_fields_for_model_applies_limit_choices_to (model_forms.tests.LimitChoicesToTests)",
+          "test_limit_choices_to_callable_for_fk_rel (model_forms.tests.LimitChoicesToTests)",
+          "test_limit_choices_to_callable_for_m2m_rel (model_forms.tests.LimitChoicesToTests)",
+          "test_default_not_populated_on_non_empty_value_in_cleaned_data (model_forms.tests.ModelFormBaseTest)"
+        ],
+        "symbol": "construct_instance",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": "django/forms/models.py",
+      "graded_log": "+ ./tests/runtests.py --verbosity 2 --settings=test_sqlite --parallel 1 model_forms.tests\nTesting against Django installed in '/testbed/django'\nImporting application model_forms\nSkipping setup of unused database(s): default, other.\nSystem check identified no issues (0 silenced).\n\ntests (unittest.loader._FailedTest) ... ERROR\n\n======================================================================\nERROR: tests (unittest.loader._FailedTest)\n----------------------------------------------------------------------\nImportError: Failed to import test module: tests\nTraceback (most recent call last):\n  File \"/opt/miniconda3/envs/testbed/lib/python3.6/unittest/loader.py\", line 153, in loadTestsFromName\n    module = __import__(module_name)\n  File \"/testbed/tests/model_forms/tests.py\", line 14, in <module>\n    from django.forms.models import (\nImportError: cannot import name 'construct_instance'\n\n\n----------------------------------------------------------------------\nRan 1 test in 0.000s\n\nFAILED (errors=1)\n",
+      "graded_report": {
+        "f2p_fail": 1,
+        "f2p_failing": [
+          "test_default_not_populated_on_non_empty_value_in_cleaned_data (model_forms.tests.ModelFormBaseTest)"
+        ],
+        "f2p_pass": 0,
+        "found": true,
+        "n_parsed": 2,
+        "p2p_fail": 142,
+        "p2p_failing": [
+          "test_model_form_clean_applies_to_model (model_forms.tests.CustomCleanTests)",
+          "test_override_clean (model_forms.tests.CustomCleanTests)",
+          "test_model_form_applies_localize_to_all_fields (model_forms.tests.LocalizedModelFormTest)",
+          "test_model_form_applies_localize_to_some_fields (model_forms.tests.LocalizedModelFormTest)",
+          "test_model_form_refuses_arbitrary_string (model_forms.tests.LocalizedModelFormTest)",
+          "test_callable_called_each_time_form_is_instantiated (model_forms.tests.LimitChoicesToTests)",
+          "test_custom_field_with_queryset_but_no_limit_choices_to (model_forms.tests.LimitChoicesToTests)",
+          "test_fields_for_model_applies_limit_choices_to (model_forms.tests.LimitChoicesToTests)",
+          "test_limit_choices_to_callable_for_fk_rel (model_forms.tests.LimitChoicesToTests)",
+          "test_limit_choices_to_callable_for_m2m_rel (model_forms.tests.LimitChoicesToTests)"
+        ],
+        "p2p_pass": 0,
+        "reward": 0.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "p2p_coupled_tests": [
+        "test_model_form_clean_applies_to_model (model_forms.tests.CustomCleanTests)",
+        "test_override_clean (model_forms.tests.CustomCleanTests)",
+        "test_model_form_applies_localize_to_all_fields (model_forms.tests.LocalizedModelFormTest)",
+        "test_model_form_applies_localize_to_some_fields (model_forms.tests.LocalizedModelFormTest)",
+        "test_model_form_refuses_arbitrary_string (model_forms.tests.LocalizedModelFormTest)",
+        "test_callable_called_each_time_form_is_instantiated (model_forms.tests.LimitChoicesToTests)",
+        "test_custom_field_with_queryset_but_no_limit_choices_to (model_forms.tests.LimitChoicesToTests)",
+        "test_fields_for_model_applies_limit_choices_to (model_forms.tests.LimitChoicesToTests)",
+        "test_limit_choices_to_callable_for_fk_rel (model_forms.tests.LimitChoicesToTests)",
+        "test_limit_choices_to_callable_for_m2m_rel (model_forms.tests.LimitChoicesToTests)"
+      ],
+      "p2p_fail": 142,
+      "reason": "reward 0.0",
+      "tier": "MEDIUM",
+      "tree_digest": "1cf8ab58a66269c60cf5b19cd275a334012420cc57337e8643ebf3be108c8045",
+      "verdict": "WITNESS",
+      "witness_side": "p2p_coupling"
+    }
+  ]
+}

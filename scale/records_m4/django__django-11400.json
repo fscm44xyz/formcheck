@@ -1,0 +1,266 @@
+{
+  "completed": true,
+  "control": {
+    "graded": null,
+    "log": null,
+    "passed": true,
+    "reason": "untransformed reference scores 1.0"
+  },
+  "digest_trace": [
+    {
+      "digest": "845235fee594af66eec9c6d930e6cddb7077b0d498366333ccea17389613b666",
+      "memo_hit": false
+    }
+  ],
+  "disk_orphan_reclaimed_bytes": 0,
+  "disk_residual_bytes": 0,
+  "elapsed_seconds": 187.05,
+  "error": null,
+  "image": "swebench/sweb.eval.x86_64.django_1776_django-11400:latest",
+  "instance_id": "django__django-11400",
+  "leaked_containers": [],
+  "leaked_image": false,
+  "log": [
+    [
+      "<control>",
+      "OK",
+      "untransformed reference scores 1.0"
+    ],
+    [
+      "kwonly_specialize:<no anchor>",
+      "NOT_APPLICABLE",
+      "no anchor inside the gold-touched region; 3 anchor(s) elsewhere in the 3 target(s): django/contrib/admin/filters.py, django/db/models/fields/__init__.py, django/db/models/fields/reverse_related.py"
+    ],
+    [
+      "symbol_rename:django/contrib/admin/filters.py:RelatedFieldListFilter",
+      "REFUSED",
+      "BORDER: the issue names 'RelatedFieldListFilter' -- candidate CONTRACT, route to the rubric"
+    ],
+    [
+      "symbol_rename:django/contrib/admin/filters.py:RelatedOnlyFieldListFilter",
+      "REFUSED",
+      "BORDER: the issue names 'RelatedOnlyFieldListFilter' -- candidate CONTRACT, route to the rubric"
+    ],
+    [
+      "symbol_rename:django/db/models/fields/__init__.py:Field",
+      "REFUSED",
+      "BORDER: the issue names 'Field' -- candidate CONTRACT, route to the rubric"
+    ],
+    [
+      "symbol_rename:django/db/models/fields/reverse_related.py:ForeignObjectRel",
+      "REFUSED",
+      "multi-line import of 'ForeignObjectRel' in django/contrib/contenttypes/fields.py"
+    ],
+    [
+      "collection_reverse:<no anchor>",
+      "NOT_APPLICABLE",
+      "no anchor inside the gold-touched region"
+    ],
+    [
+      "message_reword:<no anchor>",
+      "NOT_APPLICABLE",
+      "no anchor inside the gold-touched region; 9 anchor(s) elsewhere in the 3 target(s): django/contrib/admin/filters.py, django/db/models/fields/__init__.py, django/db/models/fields/reverse_related.py"
+    ]
+  ],
+  "mountable": true,
+  "multi_target": true,
+  "n_targets": 3,
+  "on_prime_hub": null,
+  "on_prime_hub_reason": "not resolvable offline; no hub environment index is reachable from this repo, verifiers or swebench",
+  "operators_not_applicable": [
+    "collection_reverse",
+    "kwonly_specialize",
+    "message_reword"
+  ],
+  "operators_with_anchors": [
+    "symbol_rename"
+  ],
+  "repo": "django/django",
+  "row": {
+    "elapsed": 41.57,
+    "error": null,
+    "error_type": null,
+    "index": 0,
+    "mode": "formcheck",
+    "name": "django__django-11400",
+    "reason": "unchecked",
+    "valid": null
+  },
+  "rows": [
+    {
+      "anchor": null,
+      "failure_analysis": null,
+      "file": null,
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 6,
+        "found": true,
+        "n_parsed": 64,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 58,
+        "reward": 1.0
+      },
+      "loud_failure": false,
+      "observable": "callable signature (arity / parameter names)",
+      "operator": "kwonly_specialize",
+      "reason": "no anchor inside the gold-touched region; 3 anchor(s) elsewhere in the 3 target(s): django/contrib/admin/filters.py, django/db/models/fields/__init__.py, django/db/models/fields/reverse_related.py",
+      "tier": "HIGH",
+      "tree_digest": "845235fee594af66eec9c6d930e6cddb7077b0d498366333ccea17389613b666",
+      "verdict": "NOT_APPLICABLE"
+    },
+    {
+      "anchor": "RelatedFieldListFilter",
+      "failure_analysis": null,
+      "file": "django/contrib/admin/filters.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 6,
+        "found": true,
+        "n_parsed": 64,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 58,
+        "reward": 1.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "BORDER: the issue names 'RelatedFieldListFilter' -- candidate CONTRACT, route to the rubric",
+      "tier": "MEDIUM",
+      "tree_digest": "845235fee594af66eec9c6d930e6cddb7077b0d498366333ccea17389613b666",
+      "verdict": "REFUSED"
+    },
+    {
+      "anchor": "RelatedOnlyFieldListFilter",
+      "failure_analysis": null,
+      "file": "django/contrib/admin/filters.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 6,
+        "found": true,
+        "n_parsed": 64,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 58,
+        "reward": 1.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "BORDER: the issue names 'RelatedOnlyFieldListFilter' -- candidate CONTRACT, route to the rubric",
+      "tier": "MEDIUM",
+      "tree_digest": "845235fee594af66eec9c6d930e6cddb7077b0d498366333ccea17389613b666",
+      "verdict": "REFUSED"
+    },
+    {
+      "anchor": "Field",
+      "failure_analysis": null,
+      "file": "django/db/models/fields/__init__.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 6,
+        "found": true,
+        "n_parsed": 64,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 58,
+        "reward": 1.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "BORDER: the issue names 'Field' -- candidate CONTRACT, route to the rubric",
+      "tier": "MEDIUM",
+      "tree_digest": "845235fee594af66eec9c6d930e6cddb7077b0d498366333ccea17389613b666",
+      "verdict": "REFUSED"
+    },
+    {
+      "anchor": "ForeignObjectRel",
+      "failure_analysis": null,
+      "file": "django/db/models/fields/reverse_related.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 6,
+        "found": true,
+        "n_parsed": 64,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 58,
+        "reward": 1.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "multi-line import of 'ForeignObjectRel' in django/contrib/contenttypes/fields.py",
+      "tier": "MEDIUM",
+      "tree_digest": "845235fee594af66eec9c6d930e6cddb7077b0d498366333ccea17389613b666",
+      "verdict": "REFUSED"
+    },
+    {
+      "anchor": null,
+      "failure_analysis": null,
+      "file": null,
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 6,
+        "found": true,
+        "n_parsed": 64,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 58,
+        "reward": 1.0
+      },
+      "loud_failure": false,
+      "observable": "order of elements in a returned collection",
+      "operator": "collection_reverse",
+      "reason": "no anchor inside the gold-touched region",
+      "tier": "MEDIUM",
+      "tree_digest": "845235fee594af66eec9c6d930e6cddb7077b0d498366333ccea17389613b666",
+      "verdict": "NOT_APPLICABLE"
+    },
+    {
+      "anchor": null,
+      "failure_analysis": null,
+      "file": null,
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 6,
+        "found": true,
+        "n_parsed": 64,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 58,
+        "reward": 1.0
+      },
+      "loud_failure": false,
+      "observable": "human-readable text of an exception message",
+      "operator": "message_reword",
+      "reason": "no anchor inside the gold-touched region; 9 anchor(s) elsewhere in the 3 target(s): django/contrib/admin/filters.py, django/db/models/fields/__init__.py, django/db/models/fields/reverse_related.py",
+      "tier": "HIGH",
+      "tree_digest": "845235fee594af66eec9c6d930e6cddb7077b0d498366333ccea17389613b666",
+      "verdict": "NOT_APPLICABLE"
+    }
+  ],
+  "targets": [
+    "django/contrib/admin/filters.py",
+    "django/db/models/fields/__init__.py",
+    "django/db/models/fields/reverse_related.py"
+  ],
+  "version": "3.0",
+  "witnesses": []
+}

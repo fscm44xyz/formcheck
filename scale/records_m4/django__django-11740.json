@@ -1,0 +1,337 @@
+{
+  "completed": true,
+  "control": {
+    "graded": null,
+    "log": null,
+    "passed": true,
+    "reason": "untransformed reference scores 1.0"
+  },
+  "digest_trace": [
+    {
+      "digest": "03bf083e3111696172c60203b4314a64ff1ffcd2bde62874c155233bc8c1546b",
+      "memo_hit": false
+    },
+    {
+      "digest": "885d0e913767c719da2ad0ec8f2579b7356c605a2c7bd41bdd84e8168a69b4dd",
+      "memo_hit": false
+    }
+  ],
+  "disk_orphan_reclaimed_bytes": 0,
+  "disk_residual_bytes": 0,
+  "elapsed_seconds": 121.74,
+  "error": null,
+  "image": "swebench/sweb.eval.x86_64.django_1776_django-11740:latest",
+  "instance_id": "django__django-11740",
+  "leaked_containers": [],
+  "leaked_image": false,
+  "log": [
+    [
+      "<control>",
+      "OK",
+      "untransformed reference scores 1.0"
+    ],
+    [
+      "kwonly_specialize:<no anchor>",
+      "NOT_APPLICABLE",
+      "no anchor inside the gold-touched region"
+    ],
+    [
+      "symbol_rename:MigrationAutodetector",
+      "UNVALIDATED",
+      "4 failing test(s) have no recognisable failure block -- unknown log shape, not evidence of breakage; first: Test change detection of new constraints."
+    ],
+    [
+      "collection_reverse:<no anchor>",
+      "NOT_APPLICABLE",
+      "no anchor inside the gold-touched region"
+    ],
+    [
+      "message_reword:<no anchor>",
+      "NOT_APPLICABLE",
+      "no anchor inside the gold-touched region"
+    ]
+  ],
+  "mountable": true,
+  "multi_target": false,
+  "n_targets": 1,
+  "on_prime_hub": null,
+  "on_prime_hub_reason": "not resolvable offline; no hub environment index is reachable from this repo, verifiers or swebench",
+  "operators_not_applicable": [
+    "collection_reverse",
+    "kwonly_specialize",
+    "message_reword"
+  ],
+  "operators_with_anchors": [
+    "symbol_rename"
+  ],
+  "repo": "django/django",
+  "row": {
+    "elapsed": 53.25,
+    "error": null,
+    "error_type": null,
+    "index": 0,
+    "mode": "formcheck",
+    "name": "django__django-11740",
+    "reason": "unchecked",
+    "valid": null
+  },
+  "rows": [
+    {
+      "anchor": null,
+      "failure_analysis": null,
+      "file": null,
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 1,
+        "found": true,
+        "n_parsed": 110,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 109,
+        "reward": 1.0
+      },
+      "loud_failure": false,
+      "observable": "callable signature (arity / parameter names)",
+      "operator": "kwonly_specialize",
+      "reason": "no anchor inside the gold-touched region",
+      "tier": "HIGH",
+      "tree_digest": "03bf083e3111696172c60203b4314a64ff1ffcd2bde62874c155233bc8c1546b",
+      "verdict": "NOT_APPLICABLE"
+    },
+    {
+      "anchor": "MigrationAutodetector",
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "broke": [],
+        "coupled": [
+          "test_add_alter_order_with_respect_to (migrations.test_autodetector.AutodetectorTests)",
+          "test_add_blank_textfield_and_charfield (migrations.test_autodetector.AutodetectorTests)",
+          "test_add_date_fields_with_auto_now_add_asking_for_default (migrations.test_autodetector.AutodetectorTests)",
+          "test_add_date_fields_with_auto_now_add_not_asking_for_null_addition (migrations.test_autodetector.AutodetectorTests)",
+          "test_add_date_fields_with_auto_now_not_asking_for_default (migrations.test_autodetector.AutodetectorTests)",
+          "test_add_field_and_foo_together (migrations.test_autodetector.AutodetectorTests)",
+          "test_alter_field_to_fk_dependency_other_app (migrations.test_autodetector.AutodetectorTests)"
+        ],
+        "failing": [
+          "test_add_alter_order_with_respect_to (migrations.test_autodetector.AutodetectorTests)",
+          "test_add_blank_textfield_and_charfield (migrations.test_autodetector.AutodetectorTests)",
+          "Test change detection of new constraints.",
+          "test_add_date_fields_with_auto_now_add_asking_for_default (migrations.test_autodetector.AutodetectorTests)",
+          "test_add_date_fields_with_auto_now_add_not_asking_for_null_addition (migrations.test_autodetector.AutodetectorTests)",
+          "test_add_date_fields_with_auto_now_not_asking_for_default (migrations.test_autodetector.AutodetectorTests)",
+          "Tests autodetection of new fields.",
+          "test_add_field_and_foo_together (migrations.test_autodetector.AutodetectorTests)",
+          "#22030 - Adding a field with a default should work.",
+          "Tests index/unique_together detection.",
+          "test_alter_field_to_fk_dependency_other_app (migrations.test_autodetector.AutodetectorTests)"
+        ],
+        "symbol": "MigrationAutodetector",
+        "unexplained": [
+          "Test change detection of new constraints. (no failure section found)",
+          "Tests autodetection of new fields. (no failure section found)",
+          "#22030 - Adding a field with a default should work. (no failure section found)",
+          "Tests index/unique_together detection. (no failure section found)"
+        ],
+        "unparsed": [
+          "Test change detection of new constraints.",
+          "Tests autodetection of new fields.",
+          "#22030 - Adding a field with a default should work.",
+          "Tests index/unique_together detection."
+        ],
+        "unparsed_log_shape": true
+      },
+      "file": "django/db/migrations/autodetector.py",
+      "graded_log": "+ ./tests/runtests.py --verbosity 2 --settings=test_sqlite --parallel 1 migrations.test_autodetector\nTesting against Django installed in '/testbed/django'\nImporting application migrations\nSkipping setup of unused database(s): default, other.\nSystem check identified no issues (0 silenced).\n\ntest_autodetector (unittest.loader._FailedTest) ... ERROR\n\n======================================================================\nERROR: test_autodetector (unittest.loader._FailedTest)\n----------------------------------------------------------------------\nImportError: Failed to import test module: test_autodetector\nTraceback (most recent call last):\n  File \"/opt/miniconda3/envs/testbed/lib/python3.6/unittest/loader.py\", line 153, in loadTestsFromName\n    module = __import__(module_name)\n  File \"/testbed/tests/migrations/test_autodetector.py\", line 10, in <module>\n    from django.db.migrations.autodetector import MigrationAutodetector\nImportError: cannot import name 'MigrationAutodetector'\n\n\n----------------------------------------------------------------------\nRan 1 test in 0.000s\n\nFAILED (errors=1)\n",
+      "graded_report": {
+        "f2p_fail": 1,
+        "f2p_failing": [
+          "test_alter_field_to_fk_dependency_other_app (migrations.test_autodetector.AutodetectorTests)"
+        ],
+        "f2p_pass": 0,
+        "found": true,
+        "n_parsed": 2,
+        "p2p_fail": 109,
+        "p2p_failing": [
+          "test_add_alter_order_with_respect_to (migrations.test_autodetector.AutodetectorTests)",
+          "test_add_blank_textfield_and_charfield (migrations.test_autodetector.AutodetectorTests)",
+          "Test change detection of new constraints.",
+          "test_add_date_fields_with_auto_now_add_asking_for_default (migrations.test_autodetector.AutodetectorTests)",
+          "test_add_date_fields_with_auto_now_add_not_asking_for_null_addition (migrations.test_autodetector.AutodetectorTests)",
+          "test_add_date_fields_with_auto_now_not_asking_for_default (migrations.test_autodetector.AutodetectorTests)",
+          "Tests autodetection of new fields.",
+          "test_add_field_and_foo_together (migrations.test_autodetector.AutodetectorTests)",
+          "#22030 - Adding a field with a default should work.",
+          "Tests index/unique_together detection."
+        ],
+        "p2p_pass": 0,
+        "reward": 0.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "4 failing test(s) have no recognisable failure block -- unknown log shape, not evidence of breakage; first: Test change detection of new constraints.",
+      "tier": "MEDIUM",
+      "tree_digest": "885d0e913767c719da2ad0ec8f2579b7356c605a2c7bd41bdd84e8168a69b4dd",
+      "verdict": "UNVALIDATED"
+    },
+    {
+      "anchor": null,
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "broke": [],
+        "coupled": [
+          "test_add_alter_order_with_respect_to (migrations.test_autodetector.AutodetectorTests)",
+          "test_add_blank_textfield_and_charfield (migrations.test_autodetector.AutodetectorTests)",
+          "test_add_date_fields_with_auto_now_add_asking_for_default (migrations.test_autodetector.AutodetectorTests)",
+          "test_add_date_fields_with_auto_now_add_not_asking_for_null_addition (migrations.test_autodetector.AutodetectorTests)",
+          "test_add_date_fields_with_auto_now_not_asking_for_default (migrations.test_autodetector.AutodetectorTests)",
+          "test_add_field_and_foo_together (migrations.test_autodetector.AutodetectorTests)",
+          "test_alter_field_to_fk_dependency_other_app (migrations.test_autodetector.AutodetectorTests)"
+        ],
+        "failing": [
+          "test_add_alter_order_with_respect_to (migrations.test_autodetector.AutodetectorTests)",
+          "test_add_blank_textfield_and_charfield (migrations.test_autodetector.AutodetectorTests)",
+          "Test change detection of new constraints.",
+          "test_add_date_fields_with_auto_now_add_asking_for_default (migrations.test_autodetector.AutodetectorTests)",
+          "test_add_date_fields_with_auto_now_add_not_asking_for_null_addition (migrations.test_autodetector.AutodetectorTests)",
+          "test_add_date_fields_with_auto_now_not_asking_for_default (migrations.test_autodetector.AutodetectorTests)",
+          "Tests autodetection of new fields.",
+          "test_add_field_and_foo_together (migrations.test_autodetector.AutodetectorTests)",
+          "#22030 - Adding a field with a default should work.",
+          "Tests index/unique_together detection.",
+          "test_alter_field_to_fk_dependency_other_app (migrations.test_autodetector.AutodetectorTests)"
+        ],
+        "symbol": "MigrationAutodetector",
+        "unexplained": [
+          "Test change detection of new constraints. (no failure section found)",
+          "Tests autodetection of new fields. (no failure section found)",
+          "#22030 - Adding a field with a default should work. (no failure section found)",
+          "Tests index/unique_together detection. (no failure section found)"
+        ],
+        "unparsed": [
+          "Test change detection of new constraints.",
+          "Tests autodetection of new fields.",
+          "#22030 - Adding a field with a default should work.",
+          "Tests index/unique_together detection."
+        ],
+        "unparsed_log_shape": true
+      },
+      "file": null,
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 1,
+        "f2p_failing": [
+          "test_alter_field_to_fk_dependency_other_app (migrations.test_autodetector.AutodetectorTests)"
+        ],
+        "f2p_pass": 0,
+        "found": true,
+        "n_parsed": 2,
+        "p2p_fail": 109,
+        "p2p_failing": [
+          "test_add_alter_order_with_respect_to (migrations.test_autodetector.AutodetectorTests)",
+          "test_add_blank_textfield_and_charfield (migrations.test_autodetector.AutodetectorTests)",
+          "Test change detection of new constraints.",
+          "test_add_date_fields_with_auto_now_add_asking_for_default (migrations.test_autodetector.AutodetectorTests)",
+          "test_add_date_fields_with_auto_now_add_not_asking_for_null_addition (migrations.test_autodetector.AutodetectorTests)",
+          "test_add_date_fields_with_auto_now_not_asking_for_default (migrations.test_autodetector.AutodetectorTests)",
+          "Tests autodetection of new fields.",
+          "test_add_field_and_foo_together (migrations.test_autodetector.AutodetectorTests)",
+          "#22030 - Adding a field with a default should work.",
+          "Tests index/unique_together detection."
+        ],
+        "p2p_pass": 0,
+        "reward": 0.0
+      },
+      "loud_failure": false,
+      "observable": "order of elements in a returned collection",
+      "operator": "collection_reverse",
+      "reason": "no anchor inside the gold-touched region",
+      "tier": "MEDIUM",
+      "tree_digest": "885d0e913767c719da2ad0ec8f2579b7356c605a2c7bd41bdd84e8168a69b4dd",
+      "verdict": "NOT_APPLICABLE"
+    },
+    {
+      "anchor": null,
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "broke": [],
+        "coupled": [
+          "test_add_alter_order_with_respect_to (migrations.test_autodetector.AutodetectorTests)",
+          "test_add_blank_textfield_and_charfield (migrations.test_autodetector.AutodetectorTests)",
+          "test_add_date_fields_with_auto_now_add_asking_for_default (migrations.test_autodetector.AutodetectorTests)",
+          "test_add_date_fields_with_auto_now_add_not_asking_for_null_addition (migrations.test_autodetector.AutodetectorTests)",
+          "test_add_date_fields_with_auto_now_not_asking_for_default (migrations.test_autodetector.AutodetectorTests)",
+          "test_add_field_and_foo_together (migrations.test_autodetector.AutodetectorTests)",
+          "test_alter_field_to_fk_dependency_other_app (migrations.test_autodetector.AutodetectorTests)"
+        ],
+        "failing": [
+          "test_add_alter_order_with_respect_to (migrations.test_autodetector.AutodetectorTests)",
+          "test_add_blank_textfield_and_charfield (migrations.test_autodetector.AutodetectorTests)",
+          "Test change detection of new constraints.",
+          "test_add_date_fields_with_auto_now_add_asking_for_default (migrations.test_autodetector.AutodetectorTests)",
+          "test_add_date_fields_with_auto_now_add_not_asking_for_null_addition (migrations.test_autodetector.AutodetectorTests)",
+          "test_add_date_fields_with_auto_now_not_asking_for_default (migrations.test_autodetector.AutodetectorTests)",
+          "Tests autodetection of new fields.",
+          "test_add_field_and_foo_together (migrations.test_autodetector.AutodetectorTests)",
+          "#22030 - Adding a field with a default should work.",
+          "Tests index/unique_together detection.",
+          "test_alter_field_to_fk_dependency_other_app (migrations.test_autodetector.AutodetectorTests)"
+        ],
+        "symbol": "MigrationAutodetector",
+        "unexplained": [
+          "Test change detection of new constraints. (no failure section found)",
+          "Tests autodetection of new fields. (no failure section found)",
+          "#22030 - Adding a field with a default should work. (no failure section found)",
+          "Tests index/unique_together detection. (no failure section found)"
+        ],
+        "unparsed": [
+          "Test change detection of new constraints.",
+          "Tests autodetection of new fields.",
+          "#22030 - Adding a field with a default should work.",
+          "Tests index/unique_together detection."
+        ],
+        "unparsed_log_shape": true
+      },
+      "file": null,
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 1,
+        "f2p_failing": [
+          "test_alter_field_to_fk_dependency_other_app (migrations.test_autodetector.AutodetectorTests)"
+        ],
+        "f2p_pass": 0,
+        "found": true,
+        "n_parsed": 2,
+        "p2p_fail": 109,
+        "p2p_failing": [
+          "test_add_alter_order_with_respect_to (migrations.test_autodetector.AutodetectorTests)",
+          "test_add_blank_textfield_and_charfield (migrations.test_autodetector.AutodetectorTests)",
+          "Test change detection of new constraints.",
+          "test_add_date_fields_with_auto_now_add_asking_for_default (migrations.test_autodetector.AutodetectorTests)",
+          "test_add_date_fields_with_auto_now_add_not_asking_for_null_addition (migrations.test_autodetector.AutodetectorTests)",
+          "test_add_date_fields_with_auto_now_not_asking_for_default (migrations.test_autodetector.AutodetectorTests)",
+          "Tests autodetection of new fields.",
+          "test_add_field_and_foo_together (migrations.test_autodetector.AutodetectorTests)",
+          "#22030 - Adding a field with a default should work.",
+          "Tests index/unique_together detection."
+        ],
+        "p2p_pass": 0,
+        "reward": 0.0
+      },
+      "loud_failure": false,
+      "observable": "human-readable text of an exception message",
+      "operator": "message_reword",
+      "reason": "no anchor inside the gold-touched region",
+      "tier": "HIGH",
+      "tree_digest": "885d0e913767c719da2ad0ec8f2579b7356c605a2c7bd41bdd84e8168a69b4dd",
+      "verdict": "NOT_APPLICABLE"
+    }
+  ],
+  "targets": [
+    "django/db/migrations/autodetector.py"
+  ],
+  "version": "3.0",
+  "witnesses": []
+}

@@ -866,3 +866,94 @@ survives only because it has headroom is not fixed.
 `RateLimited`); `scale/run.py` (`MIN_PLAUSIBLE_TASK_SECONDS`, `BURN_STREAK`,
 `BurnDetected`); `scale/test_burn.py`.
 
+---
+
+## 22. Authenticating removed a ceiling and added a failure mode; the retry loop then prolonged its own block
+
+**The episode, in order, because no part of it was predictable from the quota
+arithmetic.**
+
+The anonymous quota (100 pulls/hour) was measured, paced against, and working:
+the governor logged 76 waits and the run was progressing at 33s/task. To buy
+headroom the operator authenticated — and rotated the token twice. Docker Hub
+responded by blocking **login attempts** for the IP. Every subsequent pull then
+failed, not on the pull quota but on `POST https://auth.docker.io/token`:
+
+    429 Too Many Requests
+    failed to authorize: failed to fetch oauth token
+
+**Two lessons, neither derivable from the numbers.**
+
+*Authentication is not a strictly larger allowance.* It raised the pull ceiling
+from 100 to 200/hour and simultaneously introduced a failure mode anonymous
+operation does not have — a login-attempt block, which no amount of pull-pacing
+can avoid or clear. "More quota" was the wrong model. The remedy was
+`docker logout`: the anonymous path that had been working all along.
+
+*A tight retry loop against a rate-limited registry prolongs its own block.*
+Four workers cycled the queue at 2.6 tasks/second, each attempt hitting the same
+blocked endpoint. The run was not waiting out the block; it was continuously
+re-triggering it.
+
+**And a defect of mine underneath both.** `wait_for_pull_slot` probed
+`ratelimitpreview/test` and read `remaining: 100` while every real pull was
+refused. That probe measures the pull quota; the block was on token issuance.
+**A measurement that looks right and means nothing** — instance seven of the
+family, in the code written to prevent instance six. It was worse than no
+governor, because it reported healthy throughout.
+
+**Rules.**
+
+1. *A refusal storm must quiet the run down, not speed it up.* Three consecutive
+   refusals (one can be a worker race, two its tail, three is systematic) trigger
+   a backoff doubling from 60s — the least that can free a slot at 100/hour — to
+   a 900s cap. Every refusing worker waits, so the run goes quiet.
+2. *The liveness invariant counts refusals.* See entry 23; this is the part that
+   actually failed.
+3. *A validity marker needs an end.* `progress.jsonl` carries a
+   `quota_readings_suspect` record with `from_t` AND `to_t`, closed when the
+   operator logged out and anonymous access was verified by a real layer pull. A
+   marker that outlives its condition makes a correct field look wrong, which is
+   the same defect family as a field that looks right and is wrong.
+
+`scale/rotation.py` (`note_refusal`, `note_pull_success`, `REFUSAL_STREAK`,
+`BACKOFF_*`); `scale/progress.jsonl` (`quota_readings_suspect`).
+
+---
+
+## 23. Separating refusal from failure put refusals outside the liveness check
+
+**The requirement that fixed one thing broke another, and only the interaction
+was wrong.**
+
+Entry 21 established two rules from the same incident: assert something
+causally necessary (the burn detector), and never bucket an infrastructure
+refusal as a task result. Both were implemented. The second was implemented as
+`return None` before a record is written — and that return sat **before** the
+line that feeds the burn detector.
+
+So refusals were invisible to the invariant written to catch exactly this. When
+the registry blocked us, **107 tasks were cycled in 41 seconds and the detector
+never looked.** The run was stopped by hand.
+
+**This must be recorded accurately.** It is tempting, and was briefly proposed,
+to describe this as the invariant earning its keep by firing on a cause it was
+not written for. It did not fire. `progress.jsonl` contains zero `burn pattern`
+events and the log contains no `BurnDetected`; the run ends mid-queue at task
+174 because a human killed the process. Recording a guard as having worked when
+it did not is the same failure as a check reporting success it did not earn --
+and it would have been written into the permanent record as evidence FOR the
+design.
+
+**What did work**, and is worth keeping: not one of those 107 refusals wrote a
+record, fabricated a row, or produced an `INVALID` from an infrastructure cause.
+Every refused task was verified still absent from `records_m4/` and returned to
+the queue. Entry 21's rule 3 held exactly as designed.
+
+**Rule.** *The invariant is "the run must be progressing", not "tasks must be
+slow".* A refusal counts as zero seconds of work and enters the streak like any
+other non-progress. Eight consecutive non-progress outcomes — refusals, fast
+failures, or any mix — abort the run.
+
+`scale/run.py` (`guarded`); `scale/test_burn.py`.
+

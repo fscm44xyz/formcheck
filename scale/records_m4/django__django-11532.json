@@ -1,0 +1,697 @@
+{
+  "completed": true,
+  "control": {
+    "graded": null,
+    "log": null,
+    "passed": true,
+    "reason": "untransformed reference scores 1.0"
+  },
+  "digest_trace": [
+    {
+      "digest": "2d6bc2db8106ccbbe5259dd2d47773d6cbca243cd9ccc41161b5d48dd8452414",
+      "memo_hit": false
+    },
+    {
+      "digest": "4cd18d090b3eaef33e01d09e849f997b934c9b22160be63d560db13bf5ce3df3",
+      "memo_hit": false
+    },
+    {
+      "digest": "f5cb8897751cb2d13357a88f774cf10a58e40d0a3e63ced73fe81295f767c8cc",
+      "memo_hit": false
+    },
+    {
+      "digest": "f5cb8897751cb2d13357a88f774cf10a58e40d0a3e63ced73fe81295f767c8cc",
+      "memo_hit": true
+    },
+    {
+      "digest": "dcccc0f6e3b65a18b8172a10bd6ed27894514b8e72b321ff9fc04ba5f6ea6c45",
+      "memo_hit": false
+    },
+    {
+      "digest": "dcccc0f6e3b65a18b8172a10bd6ed27894514b8e72b321ff9fc04ba5f6ea6c45",
+      "memo_hit": true
+    },
+    {
+      "digest": "efbd8e28ba9600bdb5eb8b8595e51d3dd70e6ad91c4aa10bc529e621647a67ed",
+      "memo_hit": false
+    },
+    {
+      "digest": "efbd8e28ba9600bdb5eb8b8595e51d3dd70e6ad91c4aa10bc529e621647a67ed",
+      "memo_hit": true
+    },
+    {
+      "digest": "7dd6df8c6163d0472676351292eb6bfc9084b030c3c239a45225df75d7260902",
+      "memo_hit": false
+    }
+  ],
+  "disk_orphan_reclaimed_bytes": 0,
+  "disk_residual_bytes": 0,
+  "elapsed_seconds": 215.6,
+  "error": null,
+  "image": "swebench/sweb.eval.x86_64.django_1776_django-11532:latest",
+  "instance_id": "django__django-11532",
+  "leaked_containers": [],
+  "leaked_image": false,
+  "log": [
+    [
+      "<control>",
+      "OK",
+      "untransformed reference scores 1.0"
+    ],
+    [
+      "kwonly_specialize:<no anchor>",
+      "NOT_APPLICABLE",
+      "no anchor inside the gold-touched region"
+    ],
+    [
+      "symbol_rename:django/core/mail/message.py:sanitize_address",
+      "UNVALIDATED",
+      "2 failing test(s) have no recognisable failure block -- unknown log shape, not evidence of breakage; first: Test html_message argument to mail_admins"
+    ],
+    [
+      "symbol_rename:django/core/mail/utils.py:CachedDnsName",
+      "REFUSED",
+      "dynamic reach: 'CachedDnsName' appears in a non-annotation string literal in django/core/mail/__init__.py line 18 ('CachedDnsName') -- an `__all__` entry -- an alpha-rename cannot be argued safe"
+    ],
+    [
+      "symbol_rename:django/core/validators.py:URLValidator",
+      "CLEAN",
+      "reward 1.0"
+    ],
+    [
+      "symbol_rename:django/core/validators.py:EmailValidator",
+      "CLEAN",
+      "reward 1.0"
+    ],
+    [
+      "symbol_rename:django/utils/encoding.py:punycode",
+      "REFUSED",
+      "BORDER: the issue names 'punycode' -- candidate CONTRACT, route to the rubric"
+    ],
+    [
+      "symbol_rename:django/utils/html.py:smart_urlquote",
+      "CLEAN",
+      "reward 1.0"
+    ],
+    [
+      "symbol_rename:django/utils/html.py:urlize",
+      "UNVALIDATED",
+      "11 failing test(s) have no recognisable failure block -- unknown log shape, not evidence of breakage; first: test_7bit (mail.tests.PythonGlobalState)"
+    ],
+    [
+      "collection_reverse:<no anchor>",
+      "NOT_APPLICABLE",
+      "no anchor inside the gold-touched region"
+    ],
+    [
+      "message_reword:<no anchor>",
+      "NOT_APPLICABLE",
+      "no anchor inside the gold-touched region; 6 anchor(s) elsewhere in the 5 target(s): django/core/mail/message.py, django/core/mail/utils.py, django/core/validators.py, django/utils/encoding.py, django/utils/html.py"
+    ]
+  ],
+  "mountable": true,
+  "multi_target": true,
+  "n_targets": 5,
+  "on_prime_hub": null,
+  "on_prime_hub_reason": "not resolvable offline; no hub environment index is reachable from this repo, verifiers or swebench",
+  "operators_not_applicable": [
+    "collection_reverse",
+    "kwonly_specialize",
+    "message_reword"
+  ],
+  "operators_with_anchors": [
+    "symbol_rename"
+  ],
+  "repo": "django/django",
+  "row": {
+    "elapsed": 117.35,
+    "error": null,
+    "error_type": null,
+    "index": 0,
+    "mode": "formcheck",
+    "name": "django__django-11532",
+    "reason": "valid",
+    "valid": true
+  },
+  "rows": [
+    {
+      "anchor": null,
+      "failure_analysis": null,
+      "file": null,
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 1,
+        "found": true,
+        "n_parsed": 149,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 148,
+        "reward": 1.0
+      },
+      "loud_failure": false,
+      "observable": "callable signature (arity / parameter names)",
+      "operator": "kwonly_specialize",
+      "reason": "no anchor inside the gold-touched region",
+      "tier": "HIGH",
+      "tree_digest": "2d6bc2db8106ccbbe5259dd2d47773d6cbca243cd9ccc41161b5d48dd8452414",
+      "verdict": "NOT_APPLICABLE"
+    },
+    {
+      "anchor": "sanitize_address",
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "broke": [],
+        "coupled": [
+          "test_7bit (mail.tests.PythonGlobalState)",
+          "test_8bit_latin (mail.tests.PythonGlobalState)",
+          "test_8bit_non_latin (mail.tests.PythonGlobalState)",
+          "test_utf8 (mail.tests.PythonGlobalState)",
+          "test_date_header_localtime (mail.tests.MailTimeZoneTests)",
+          "test_date_header_utc (mail.tests.MailTimeZoneTests)",
+          "test_close_connection (mail.tests.LocmemBackendTests)",
+          "test_empty_admins (mail.tests.LocmemBackendTests)",
+          "test_non_ascii_dns_non_unicode_email (mail.tests.MailTests)"
+        ],
+        "failing": [
+          "test_7bit (mail.tests.PythonGlobalState)",
+          "test_8bit_latin (mail.tests.PythonGlobalState)",
+          "test_8bit_non_latin (mail.tests.PythonGlobalState)",
+          "test_utf8 (mail.tests.PythonGlobalState)",
+          "test_date_header_localtime (mail.tests.MailTimeZoneTests)",
+          "test_date_header_utc (mail.tests.MailTimeZoneTests)",
+          "test_close_connection (mail.tests.LocmemBackendTests)",
+          "test_empty_admins (mail.tests.LocmemBackendTests)",
+          "Test html_message argument to mail_admins",
+          "Test html_message argument to mail_managers",
+          "test_non_ascii_dns_non_unicode_email (mail.tests.MailTests)"
+        ],
+        "symbol": "sanitize_address",
+        "unexplained": [
+          "Test html_message argument to mail_admins (no failure section found)",
+          "Test html_message argument to mail_managers (no failure section found)"
+        ],
+        "unparsed": [
+          "Test html_message argument to mail_admins",
+          "Test html_message argument to mail_managers"
+        ],
+        "unparsed_log_shape": true
+      },
+      "file": "django/core/mail/message.py",
+      "graded_log": "+ ./tests/runtests.py --verbosity 2 --settings=test_sqlite --parallel 1 mail.tests\nTesting against Django installed in '/testbed/django'\nImporting application mail\nSkipping setup of unused database(s): default, other.\nSystem check identified no issues (0 silenced).\n\ntests (unittest.loader._FailedTest) ... ERROR\n\n======================================================================\nERROR: tests (unittest.loader._FailedTest)\n----------------------------------------------------------------------\nImportError: Failed to import test module: tests\nTraceback (most recent call last):\n  File \"/opt/miniconda3/envs/testbed/lib/python3.6/unittest/loader.py\", line 153, in loadTestsFromName\n    module = __import__(module_name)\n  File \"/testbed/tests/mail/tests.py\", line 25, in <module>\n    from django.core.mail.message import BadHeaderError, sanitize_address\nImportError: cannot import name 'sanitize_address'\n\n\n----------------------------------------------------------------------\nRan 1 test in 0.000s\n\nFAILED (errors=1)\n",
+      "graded_report": {
+        "f2p_fail": 1,
+        "f2p_failing": [
+          "test_non_ascii_dns_non_unicode_email (mail.tests.MailTests)"
+        ],
+        "f2p_pass": 0,
+        "found": true,
+        "n_parsed": 2,
+        "p2p_fail": 148,
+        "p2p_failing": [
+          "test_7bit (mail.tests.PythonGlobalState)",
+          "test_8bit_latin (mail.tests.PythonGlobalState)",
+          "test_8bit_non_latin (mail.tests.PythonGlobalState)",
+          "test_utf8 (mail.tests.PythonGlobalState)",
+          "test_date_header_localtime (mail.tests.MailTimeZoneTests)",
+          "test_date_header_utc (mail.tests.MailTimeZoneTests)",
+          "test_close_connection (mail.tests.LocmemBackendTests)",
+          "test_empty_admins (mail.tests.LocmemBackendTests)",
+          "Test html_message argument to mail_admins",
+          "Test html_message argument to mail_managers"
+        ],
+        "p2p_pass": 0,
+        "reward": 0.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "2 failing test(s) have no recognisable failure block -- unknown log shape, not evidence of breakage; first: Test html_message argument to mail_admins",
+      "tier": "MEDIUM",
+      "tree_digest": "4cd18d090b3eaef33e01d09e849f997b934c9b22160be63d560db13bf5ce3df3",
+      "verdict": "UNVALIDATED"
+    },
+    {
+      "anchor": "CachedDnsName",
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "broke": [],
+        "coupled": [
+          "test_7bit (mail.tests.PythonGlobalState)",
+          "test_8bit_latin (mail.tests.PythonGlobalState)",
+          "test_8bit_non_latin (mail.tests.PythonGlobalState)",
+          "test_utf8 (mail.tests.PythonGlobalState)",
+          "test_date_header_localtime (mail.tests.MailTimeZoneTests)",
+          "test_date_header_utc (mail.tests.MailTimeZoneTests)",
+          "test_close_connection (mail.tests.LocmemBackendTests)",
+          "test_empty_admins (mail.tests.LocmemBackendTests)",
+          "test_non_ascii_dns_non_unicode_email (mail.tests.MailTests)"
+        ],
+        "failing": [
+          "test_7bit (mail.tests.PythonGlobalState)",
+          "test_8bit_latin (mail.tests.PythonGlobalState)",
+          "test_8bit_non_latin (mail.tests.PythonGlobalState)",
+          "test_utf8 (mail.tests.PythonGlobalState)",
+          "test_date_header_localtime (mail.tests.MailTimeZoneTests)",
+          "test_date_header_utc (mail.tests.MailTimeZoneTests)",
+          "test_close_connection (mail.tests.LocmemBackendTests)",
+          "test_empty_admins (mail.tests.LocmemBackendTests)",
+          "Test html_message argument to mail_admins",
+          "Test html_message argument to mail_managers",
+          "test_non_ascii_dns_non_unicode_email (mail.tests.MailTests)"
+        ],
+        "symbol": "sanitize_address",
+        "unexplained": [
+          "Test html_message argument to mail_admins (no failure section found)",
+          "Test html_message argument to mail_managers (no failure section found)"
+        ],
+        "unparsed": [
+          "Test html_message argument to mail_admins",
+          "Test html_message argument to mail_managers"
+        ],
+        "unparsed_log_shape": true
+      },
+      "file": "django/core/mail/utils.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 1,
+        "f2p_failing": [
+          "test_non_ascii_dns_non_unicode_email (mail.tests.MailTests)"
+        ],
+        "f2p_pass": 0,
+        "found": true,
+        "n_parsed": 2,
+        "p2p_fail": 148,
+        "p2p_failing": [
+          "test_7bit (mail.tests.PythonGlobalState)",
+          "test_8bit_latin (mail.tests.PythonGlobalState)",
+          "test_8bit_non_latin (mail.tests.PythonGlobalState)",
+          "test_utf8 (mail.tests.PythonGlobalState)",
+          "test_date_header_localtime (mail.tests.MailTimeZoneTests)",
+          "test_date_header_utc (mail.tests.MailTimeZoneTests)",
+          "test_close_connection (mail.tests.LocmemBackendTests)",
+          "test_empty_admins (mail.tests.LocmemBackendTests)",
+          "Test html_message argument to mail_admins",
+          "Test html_message argument to mail_managers"
+        ],
+        "p2p_pass": 0,
+        "reward": 0.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "dynamic reach: 'CachedDnsName' appears in a non-annotation string literal in django/core/mail/__init__.py line 18 ('CachedDnsName') -- an `__all__` entry -- an alpha-rename cannot be argued safe",
+      "tier": "MEDIUM",
+      "tree_digest": "4cd18d090b3eaef33e01d09e849f997b934c9b22160be63d560db13bf5ce3df3",
+      "verdict": "REFUSED"
+    },
+    {
+      "anchor": "URLValidator",
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "broke": [],
+        "coupled": [],
+        "failing": [],
+        "symbol": "URLValidator",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": "django/core/validators.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 1,
+        "found": true,
+        "n_parsed": 149,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 148,
+        "reward": 1.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "reward 1.0",
+      "tier": "MEDIUM",
+      "tree_digest": "f5cb8897751cb2d13357a88f774cf10a58e40d0a3e63ced73fe81295f767c8cc",
+      "verdict": "CLEAN"
+    },
+    {
+      "anchor": "EmailValidator",
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "broke": [],
+        "coupled": [],
+        "failing": [],
+        "symbol": "EmailValidator",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": "django/core/validators.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 1,
+        "found": true,
+        "n_parsed": 149,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 148,
+        "reward": 1.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "reward 1.0",
+      "tier": "MEDIUM",
+      "tree_digest": "dcccc0f6e3b65a18b8172a10bd6ed27894514b8e72b321ff9fc04ba5f6ea6c45",
+      "verdict": "CLEAN"
+    },
+    {
+      "anchor": "punycode",
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "broke": [],
+        "coupled": [],
+        "failing": [],
+        "symbol": "EmailValidator",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": "django/utils/encoding.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 1,
+        "found": true,
+        "n_parsed": 149,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 148,
+        "reward": 1.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "BORDER: the issue names 'punycode' -- candidate CONTRACT, route to the rubric",
+      "tier": "MEDIUM",
+      "tree_digest": "dcccc0f6e3b65a18b8172a10bd6ed27894514b8e72b321ff9fc04ba5f6ea6c45",
+      "verdict": "REFUSED"
+    },
+    {
+      "anchor": "smart_urlquote",
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "broke": [],
+        "coupled": [],
+        "failing": [],
+        "symbol": "smart_urlquote",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": "django/utils/html.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 1,
+        "found": true,
+        "n_parsed": 149,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 148,
+        "reward": 1.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "reward 1.0",
+      "tier": "MEDIUM",
+      "tree_digest": "efbd8e28ba9600bdb5eb8b8595e51d3dd70e6ad91c4aa10bc529e621647a67ed",
+      "verdict": "CLEAN"
+    },
+    {
+      "anchor": "urlize",
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "broke": [],
+        "coupled": [],
+        "failing": [
+          "test_7bit (mail.tests.PythonGlobalState)",
+          "test_8bit_latin (mail.tests.PythonGlobalState)",
+          "test_8bit_non_latin (mail.tests.PythonGlobalState)",
+          "test_utf8 (mail.tests.PythonGlobalState)",
+          "test_date_header_localtime (mail.tests.MailTimeZoneTests)",
+          "test_date_header_utc (mail.tests.MailTimeZoneTests)",
+          "test_close_connection (mail.tests.LocmemBackendTests)",
+          "test_empty_admins (mail.tests.LocmemBackendTests)",
+          "Test html_message argument to mail_admins",
+          "Test html_message argument to mail_managers",
+          "test_non_ascii_dns_non_unicode_email (mail.tests.MailTests)"
+        ],
+        "symbol": "urlize",
+        "unexplained": [
+          "test_7bit (mail.tests.PythonGlobalState) (no failure section found)",
+          "test_8bit_latin (mail.tests.PythonGlobalState) (no failure section found)",
+          "test_8bit_non_latin (mail.tests.PythonGlobalState) (no failure section found)",
+          "test_utf8 (mail.tests.PythonGlobalState) (no failure section found)",
+          "test_date_header_localtime (mail.tests.MailTimeZoneTests) (no failure section found)",
+          "test_date_header_utc (mail.tests.MailTimeZoneTests) (no failure section found)",
+          "test_close_connection (mail.tests.LocmemBackendTests) (no failure section found)",
+          "test_empty_admins (mail.tests.LocmemBackendTests) (no failure section found)",
+          "Test html_message argument to mail_admins (no failure section found)",
+          "Test html_message argument to mail_managers (no failure section found)",
+          "test_non_ascii_dns_non_unicode_email (mail.tests.MailTests) (no failure section found)"
+        ],
+        "unparsed": [
+          "test_7bit (mail.tests.PythonGlobalState)",
+          "test_8bit_latin (mail.tests.PythonGlobalState)",
+          "test_8bit_non_latin (mail.tests.PythonGlobalState)",
+          "test_utf8 (mail.tests.PythonGlobalState)",
+          "test_date_header_localtime (mail.tests.MailTimeZoneTests)",
+          "test_date_header_utc (mail.tests.MailTimeZoneTests)",
+          "test_close_connection (mail.tests.LocmemBackendTests)",
+          "test_empty_admins (mail.tests.LocmemBackendTests)",
+          "Test html_message argument to mail_admins",
+          "Test html_message argument to mail_managers",
+          "test_non_ascii_dns_non_unicode_email (mail.tests.MailTests)"
+        ],
+        "unparsed_log_shape": true
+      },
+      "file": "django/utils/html.py",
+      "graded_log": "+ ./tests/runtests.py --verbosity 2 --settings=test_sqlite --parallel 1 mail.tests\n\nTraceback (most recent call last):\n  File \"./tests/runtests.py\", line 23, in <module>\n    from django.test import TestCase, TransactionTestCase\n  File \"/testbed/django/test/__init__.py\", line 3, in <module>\n    from django.test.client import Client, RequestFactory\n  File \"/testbed/django/test/client.py\", line 14, in <module>\n    from django.core.handlers.base import BaseHandler\n  File \"/testbed/django/core/handlers/base.py\", line 9, in <module>\n    from django.utils.log import log_response\n  File \"/testbed/django/utils/log.py\", line 10, in <module>\n    from django.views.debug import ExceptionReporter\n  File \"/testbed/django/views/debug.py\", line 10, in <module>\n    from django.template.defaultfilters import pprint\n  File \"/testbed/django/template/defaultfilters.py\", line 14, in <module>\n    from django.utils.html import (\nImportError: cannot import name 'urlize'\n",
+      "graded_report": {
+        "f2p_fail": 1,
+        "f2p_failing": [
+          "test_non_ascii_dns_non_unicode_email (mail.tests.MailTests)"
+        ],
+        "f2p_pass": 0,
+        "found": true,
+        "n_parsed": 0,
+        "p2p_fail": 148,
+        "p2p_failing": [
+          "test_7bit (mail.tests.PythonGlobalState)",
+          "test_8bit_latin (mail.tests.PythonGlobalState)",
+          "test_8bit_non_latin (mail.tests.PythonGlobalState)",
+          "test_utf8 (mail.tests.PythonGlobalState)",
+          "test_date_header_localtime (mail.tests.MailTimeZoneTests)",
+          "test_date_header_utc (mail.tests.MailTimeZoneTests)",
+          "test_close_connection (mail.tests.LocmemBackendTests)",
+          "test_empty_admins (mail.tests.LocmemBackendTests)",
+          "Test html_message argument to mail_admins",
+          "Test html_message argument to mail_managers"
+        ],
+        "p2p_pass": 0,
+        "reward": 0.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "11 failing test(s) have no recognisable failure block -- unknown log shape, not evidence of breakage; first: test_7bit (mail.tests.PythonGlobalState)",
+      "tier": "MEDIUM",
+      "tree_digest": "7dd6df8c6163d0472676351292eb6bfc9084b030c3c239a45225df75d7260902",
+      "verdict": "UNVALIDATED"
+    },
+    {
+      "anchor": null,
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "broke": [],
+        "coupled": [],
+        "failing": [
+          "test_7bit (mail.tests.PythonGlobalState)",
+          "test_8bit_latin (mail.tests.PythonGlobalState)",
+          "test_8bit_non_latin (mail.tests.PythonGlobalState)",
+          "test_utf8 (mail.tests.PythonGlobalState)",
+          "test_date_header_localtime (mail.tests.MailTimeZoneTests)",
+          "test_date_header_utc (mail.tests.MailTimeZoneTests)",
+          "test_close_connection (mail.tests.LocmemBackendTests)",
+          "test_empty_admins (mail.tests.LocmemBackendTests)",
+          "Test html_message argument to mail_admins",
+          "Test html_message argument to mail_managers",
+          "test_non_ascii_dns_non_unicode_email (mail.tests.MailTests)"
+        ],
+        "symbol": "urlize",
+        "unexplained": [
+          "test_7bit (mail.tests.PythonGlobalState) (no failure section found)",
+          "test_8bit_latin (mail.tests.PythonGlobalState) (no failure section found)",
+          "test_8bit_non_latin (mail.tests.PythonGlobalState) (no failure section found)",
+          "test_utf8 (mail.tests.PythonGlobalState) (no failure section found)",
+          "test_date_header_localtime (mail.tests.MailTimeZoneTests) (no failure section found)",
+          "test_date_header_utc (mail.tests.MailTimeZoneTests) (no failure section found)",
+          "test_close_connection (mail.tests.LocmemBackendTests) (no failure section found)",
+          "test_empty_admins (mail.tests.LocmemBackendTests) (no failure section found)",
+          "Test html_message argument to mail_admins (no failure section found)",
+          "Test html_message argument to mail_managers (no failure section found)",
+          "test_non_ascii_dns_non_unicode_email (mail.tests.MailTests) (no failure section found)"
+        ],
+        "unparsed": [
+          "test_7bit (mail.tests.PythonGlobalState)",
+          "test_8bit_latin (mail.tests.PythonGlobalState)",
+          "test_8bit_non_latin (mail.tests.PythonGlobalState)",
+          "test_utf8 (mail.tests.PythonGlobalState)",
+          "test_date_header_localtime (mail.tests.MailTimeZoneTests)",
+          "test_date_header_utc (mail.tests.MailTimeZoneTests)",
+          "test_close_connection (mail.tests.LocmemBackendTests)",
+          "test_empty_admins (mail.tests.LocmemBackendTests)",
+          "Test html_message argument to mail_admins",
+          "Test html_message argument to mail_managers",
+          "test_non_ascii_dns_non_unicode_email (mail.tests.MailTests)"
+        ],
+        "unparsed_log_shape": true
+      },
+      "file": null,
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 1,
+        "f2p_failing": [
+          "test_non_ascii_dns_non_unicode_email (mail.tests.MailTests)"
+        ],
+        "f2p_pass": 0,
+        "found": true,
+        "n_parsed": 0,
+        "p2p_fail": 148,
+        "p2p_failing": [
+          "test_7bit (mail.tests.PythonGlobalState)",
+          "test_8bit_latin (mail.tests.PythonGlobalState)",
+          "test_8bit_non_latin (mail.tests.PythonGlobalState)",
+          "test_utf8 (mail.tests.PythonGlobalState)",
+          "test_date_header_localtime (mail.tests.MailTimeZoneTests)",
+          "test_date_header_utc (mail.tests.MailTimeZoneTests)",
+          "test_close_connection (mail.tests.LocmemBackendTests)",
+          "test_empty_admins (mail.tests.LocmemBackendTests)",
+          "Test html_message argument to mail_admins",
+          "Test html_message argument to mail_managers"
+        ],
+        "p2p_pass": 0,
+        "reward": 0.0
+      },
+      "loud_failure": false,
+      "observable": "order of elements in a returned collection",
+      "operator": "collection_reverse",
+      "reason": "no anchor inside the gold-touched region",
+      "tier": "MEDIUM",
+      "tree_digest": "7dd6df8c6163d0472676351292eb6bfc9084b030c3c239a45225df75d7260902",
+      "verdict": "NOT_APPLICABLE"
+    },
+    {
+      "anchor": null,
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "broke": [],
+        "coupled": [],
+        "failing": [
+          "test_7bit (mail.tests.PythonGlobalState)",
+          "test_8bit_latin (mail.tests.PythonGlobalState)",
+          "test_8bit_non_latin (mail.tests.PythonGlobalState)",
+          "test_utf8 (mail.tests.PythonGlobalState)",
+          "test_date_header_localtime (mail.tests.MailTimeZoneTests)",
+          "test_date_header_utc (mail.tests.MailTimeZoneTests)",
+          "test_close_connection (mail.tests.LocmemBackendTests)",
+          "test_empty_admins (mail.tests.LocmemBackendTests)",
+          "Test html_message argument to mail_admins",
+          "Test html_message argument to mail_managers",
+          "test_non_ascii_dns_non_unicode_email (mail.tests.MailTests)"
+        ],
+        "symbol": "urlize",
+        "unexplained": [
+          "test_7bit (mail.tests.PythonGlobalState) (no failure section found)",
+          "test_8bit_latin (mail.tests.PythonGlobalState) (no failure section found)",
+          "test_8bit_non_latin (mail.tests.PythonGlobalState) (no failure section found)",
+          "test_utf8 (mail.tests.PythonGlobalState) (no failure section found)",
+          "test_date_header_localtime (mail.tests.MailTimeZoneTests) (no failure section found)",
+          "test_date_header_utc (mail.tests.MailTimeZoneTests) (no failure section found)",
+          "test_close_connection (mail.tests.LocmemBackendTests) (no failure section found)",
+          "test_empty_admins (mail.tests.LocmemBackendTests) (no failure section found)",
+          "Test html_message argument to mail_admins (no failure section found)",
+          "Test html_message argument to mail_managers (no failure section found)",
+          "test_non_ascii_dns_non_unicode_email (mail.tests.MailTests) (no failure section found)"
+        ],
+        "unparsed": [
+          "test_7bit (mail.tests.PythonGlobalState)",
+          "test_8bit_latin (mail.tests.PythonGlobalState)",
+          "test_8bit_non_latin (mail.tests.PythonGlobalState)",
+          "test_utf8 (mail.tests.PythonGlobalState)",
+          "test_date_header_localtime (mail.tests.MailTimeZoneTests)",
+          "test_date_header_utc (mail.tests.MailTimeZoneTests)",
+          "test_close_connection (mail.tests.LocmemBackendTests)",
+          "test_empty_admins (mail.tests.LocmemBackendTests)",
+          "Test html_message argument to mail_admins",
+          "Test html_message argument to mail_managers",
+          "test_non_ascii_dns_non_unicode_email (mail.tests.MailTests)"
+        ],
+        "unparsed_log_shape": true
+      },
+      "file": null,
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 1,
+        "f2p_failing": [
+          "test_non_ascii_dns_non_unicode_email (mail.tests.MailTests)"
+        ],
+        "f2p_pass": 0,
+        "found": true,
+        "n_parsed": 0,
+        "p2p_fail": 148,
+        "p2p_failing": [
+          "test_7bit (mail.tests.PythonGlobalState)",
+          "test_8bit_latin (mail.tests.PythonGlobalState)",
+          "test_8bit_non_latin (mail.tests.PythonGlobalState)",
+          "test_utf8 (mail.tests.PythonGlobalState)",
+          "test_date_header_localtime (mail.tests.MailTimeZoneTests)",
+          "test_date_header_utc (mail.tests.MailTimeZoneTests)",
+          "test_close_connection (mail.tests.LocmemBackendTests)",
+          "test_empty_admins (mail.tests.LocmemBackendTests)",
+          "Test html_message argument to mail_admins",
+          "Test html_message argument to mail_managers"
+        ],
+        "p2p_pass": 0,
+        "reward": 0.0
+      },
+      "loud_failure": false,
+      "observable": "human-readable text of an exception message",
+      "operator": "message_reword",
+      "reason": "no anchor inside the gold-touched region; 6 anchor(s) elsewhere in the 5 target(s): django/core/mail/message.py, django/core/mail/utils.py, django/core/validators.py, django/utils/encoding.py, django/utils/html.py",
+      "tier": "HIGH",
+      "tree_digest": "7dd6df8c6163d0472676351292eb6bfc9084b030c3c239a45225df75d7260902",
+      "verdict": "NOT_APPLICABLE"
+    }
+  ],
+  "targets": [
+    "django/core/mail/message.py",
+    "django/core/mail/utils.py",
+    "django/core/validators.py",
+    "django/utils/encoding.py",
+    "django/utils/html.py"
+  ],
+  "version": "3.0",
+  "witnesses": []
+}

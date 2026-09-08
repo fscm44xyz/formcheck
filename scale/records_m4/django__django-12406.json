@@ -1,0 +1,584 @@
+{
+  "completed": true,
+  "control": {
+    "graded": null,
+    "log": null,
+    "passed": true,
+    "reason": "untransformed reference scores 1.0"
+  },
+  "digest_trace": [
+    {
+      "digest": "e98c6f80ec214aafb34c818df50623615d82fd6d9ed6f35aad7a586fa4e5e08d",
+      "memo_hit": false
+    }
+  ],
+  "disk_orphan_reclaimed_bytes": 0,
+  "disk_residual_bytes": 0,
+  "elapsed_seconds": 111.23,
+  "error": null,
+  "image": "swebench/sweb.eval.x86_64.django_1776_django-12406:latest",
+  "instance_id": "django__django-12406",
+  "leaked_containers": [],
+  "leaked_image": false,
+  "log": [
+    [
+      "<control>",
+      "OK",
+      "untransformed reference scores 1.0"
+    ],
+    [
+      "kwonly_specialize:django/db/models/fields/related.py:formfield(*, using=...)",
+      "REFUSED",
+      "P1: 'using' is not a keyword-only parameter of formfield"
+    ],
+    [
+      "kwonly_specialize:django/db/models/fields/related.py:formfield(*, using=...)",
+      "REFUSED",
+      "P1: 'using' is not a keyword-only parameter of formfield"
+    ],
+    [
+      "kwonly_specialize:django/forms/models.py:__init__(*, initial=...)",
+      "REFUSED",
+      "P1: 'initial' is not a keyword-only parameter of __init__"
+    ],
+    [
+      "kwonly_specialize:django/forms/models.py:__init__(*, pk_field=...)",
+      "REFUSED",
+      "P1: 'pk_field' is not a keyword-only parameter of __init__"
+    ],
+    [
+      "kwonly_specialize:django/forms/models.py:__init__(*, to_field=...)",
+      "REFUSED",
+      "P1: 'to_field' is not a keyword-only parameter of __init__"
+    ],
+    [
+      "kwonly_specialize:django/forms/models.py:__init__(*, empty_label=...)",
+      "REFUSED",
+      "P1: 'empty_label' is not a keyword-only parameter of __init__"
+    ],
+    [
+      "kwonly_specialize:django/forms/models.py:__init__(*, required=...)",
+      "REFUSED",
+      "P1: 'required' is not a keyword-only parameter of __init__"
+    ],
+    [
+      "kwonly_specialize:django/forms/models.py:__init__(*, widget=...)",
+      "REFUSED",
+      "P1: 'widget' is not a keyword-only parameter of __init__"
+    ],
+    [
+      "kwonly_specialize:django/forms/models.py:__init__(*, label=...)",
+      "REFUSED",
+      "P1: 'label' is not a keyword-only parameter of __init__"
+    ],
+    [
+      "kwonly_specialize:django/forms/models.py:__init__(*, initial=...)",
+      "REFUSED",
+      "P1: 'initial' is not a keyword-only parameter of __init__"
+    ],
+    [
+      "kwonly_specialize:django/forms/models.py:__init__(*, help_text=...)",
+      "REFUSED",
+      "P1: 'help_text' is not a keyword-only parameter of __init__"
+    ],
+    [
+      "kwonly_specialize:django/forms/models.py:__init__(*, to_field_name=...)",
+      "REFUSED",
+      "P1: 'to_field_name' is not a keyword-only parameter of __init__"
+    ],
+    [
+      "kwonly_specialize:django/forms/models.py:__init__(*, limit_choices_to=...)",
+      "REFUSED",
+      "P1: 'limit_choices_to' is not a keyword-only parameter of __init__"
+    ],
+    [
+      "kwonly_specialize:django/forms/models.py:__init__(*, blank=...)",
+      "REFUSED",
+      "P1: 'blank' is not a keyword-only parameter of __init__"
+    ],
+    [
+      "symbol_rename:django/db/models/fields/related.py:ForeignKey",
+      "REFUSED",
+      "BORDER: the issue names 'ForeignKey' -- candidate CONTRACT, route to the rubric"
+    ],
+    [
+      "symbol_rename:django/forms/models.py:ModelChoiceField",
+      "REFUSED",
+      "attribute access `.ModelChoiceField` in django/db/models/fields/related.py line 979 is not a qualified reference to the defining module -- outside this operator's scope"
+    ],
+    [
+      "collection_reverse:<no anchor>",
+      "NOT_APPLICABLE",
+      "no anchor inside the gold-touched region; 1 anchor(s) elsewhere in the 2 target(s): django/db/models/fields/related.py, django/forms/models.py"
+    ],
+    [
+      "message_reword:<no anchor>",
+      "NOT_APPLICABLE",
+      "no anchor inside the gold-touched region; 8 anchor(s) elsewhere in the 2 target(s): django/db/models/fields/related.py, django/forms/models.py"
+    ]
+  ],
+  "mountable": true,
+  "multi_target": true,
+  "n_targets": 2,
+  "on_prime_hub": null,
+  "on_prime_hub_reason": "not resolvable offline; no hub environment index is reachable from this repo, verifiers or swebench",
+  "operators_not_applicable": [
+    "collection_reverse",
+    "message_reword"
+  ],
+  "operators_with_anchors": [
+    "kwonly_specialize",
+    "symbol_rename"
+  ],
+  "repo": "django/django",
+  "row": {
+    "elapsed": 50.27,
+    "error": null,
+    "error_type": null,
+    "index": 0,
+    "mode": "formcheck",
+    "name": "django__django-12406",
+    "reason": "unchecked",
+    "valid": null
+  },
+  "rows": [
+    {
+      "anchor": "formfield(*, using=...)",
+      "failure_analysis": null,
+      "file": "django/db/models/fields/related.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 3,
+        "found": true,
+        "n_parsed": 168,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 165,
+        "reward": 1.0
+      },
+      "loud_failure": false,
+      "observable": "callable signature (arity / parameter names)",
+      "operator": "kwonly_specialize",
+      "reason": "P1: 'using' is not a keyword-only parameter of formfield",
+      "tier": "HIGH",
+      "tree_digest": "e98c6f80ec214aafb34c818df50623615d82fd6d9ed6f35aad7a586fa4e5e08d",
+      "verdict": "REFUSED"
+    },
+    {
+      "anchor": "formfield(*, using=...)",
+      "failure_analysis": null,
+      "file": "django/db/models/fields/related.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 3,
+        "found": true,
+        "n_parsed": 168,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 165,
+        "reward": 1.0
+      },
+      "loud_failure": false,
+      "observable": "callable signature (arity / parameter names)",
+      "operator": "kwonly_specialize",
+      "reason": "P1: 'using' is not a keyword-only parameter of formfield",
+      "tier": "HIGH",
+      "tree_digest": "e98c6f80ec214aafb34c818df50623615d82fd6d9ed6f35aad7a586fa4e5e08d",
+      "verdict": "REFUSED"
+    },
+    {
+      "anchor": "__init__(*, initial=...)",
+      "failure_analysis": null,
+      "file": "django/forms/models.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 3,
+        "found": true,
+        "n_parsed": 168,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 165,
+        "reward": 1.0
+      },
+      "loud_failure": false,
+      "observable": "callable signature (arity / parameter names)",
+      "operator": "kwonly_specialize",
+      "reason": "P1: 'initial' is not a keyword-only parameter of __init__",
+      "tier": "HIGH",
+      "tree_digest": "e98c6f80ec214aafb34c818df50623615d82fd6d9ed6f35aad7a586fa4e5e08d",
+      "verdict": "REFUSED"
+    },
+    {
+      "anchor": "__init__(*, pk_field=...)",
+      "failure_analysis": null,
+      "file": "django/forms/models.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 3,
+        "found": true,
+        "n_parsed": 168,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 165,
+        "reward": 1.0
+      },
+      "loud_failure": false,
+      "observable": "callable signature (arity / parameter names)",
+      "operator": "kwonly_specialize",
+      "reason": "P1: 'pk_field' is not a keyword-only parameter of __init__",
+      "tier": "HIGH",
+      "tree_digest": "e98c6f80ec214aafb34c818df50623615d82fd6d9ed6f35aad7a586fa4e5e08d",
+      "verdict": "REFUSED"
+    },
+    {
+      "anchor": "__init__(*, to_field=...)",
+      "failure_analysis": null,
+      "file": "django/forms/models.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 3,
+        "found": true,
+        "n_parsed": 168,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 165,
+        "reward": 1.0
+      },
+      "loud_failure": false,
+      "observable": "callable signature (arity / parameter names)",
+      "operator": "kwonly_specialize",
+      "reason": "P1: 'to_field' is not a keyword-only parameter of __init__",
+      "tier": "HIGH",
+      "tree_digest": "e98c6f80ec214aafb34c818df50623615d82fd6d9ed6f35aad7a586fa4e5e08d",
+      "verdict": "REFUSED"
+    },
+    {
+      "anchor": "__init__(*, empty_label=...)",
+      "failure_analysis": null,
+      "file": "django/forms/models.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 3,
+        "found": true,
+        "n_parsed": 168,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 165,
+        "reward": 1.0
+      },
+      "loud_failure": false,
+      "observable": "callable signature (arity / parameter names)",
+      "operator": "kwonly_specialize",
+      "reason": "P1: 'empty_label' is not a keyword-only parameter of __init__",
+      "tier": "HIGH",
+      "tree_digest": "e98c6f80ec214aafb34c818df50623615d82fd6d9ed6f35aad7a586fa4e5e08d",
+      "verdict": "REFUSED"
+    },
+    {
+      "anchor": "__init__(*, required=...)",
+      "failure_analysis": null,
+      "file": "django/forms/models.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 3,
+        "found": true,
+        "n_parsed": 168,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 165,
+        "reward": 1.0
+      },
+      "loud_failure": false,
+      "observable": "callable signature (arity / parameter names)",
+      "operator": "kwonly_specialize",
+      "reason": "P1: 'required' is not a keyword-only parameter of __init__",
+      "tier": "HIGH",
+      "tree_digest": "e98c6f80ec214aafb34c818df50623615d82fd6d9ed6f35aad7a586fa4e5e08d",
+      "verdict": "REFUSED"
+    },
+    {
+      "anchor": "__init__(*, widget=...)",
+      "failure_analysis": null,
+      "file": "django/forms/models.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 3,
+        "found": true,
+        "n_parsed": 168,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 165,
+        "reward": 1.0
+      },
+      "loud_failure": false,
+      "observable": "callable signature (arity / parameter names)",
+      "operator": "kwonly_specialize",
+      "reason": "P1: 'widget' is not a keyword-only parameter of __init__",
+      "tier": "HIGH",
+      "tree_digest": "e98c6f80ec214aafb34c818df50623615d82fd6d9ed6f35aad7a586fa4e5e08d",
+      "verdict": "REFUSED"
+    },
+    {
+      "anchor": "__init__(*, label=...)",
+      "failure_analysis": null,
+      "file": "django/forms/models.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 3,
+        "found": true,
+        "n_parsed": 168,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 165,
+        "reward": 1.0
+      },
+      "loud_failure": false,
+      "observable": "callable signature (arity / parameter names)",
+      "operator": "kwonly_specialize",
+      "reason": "P1: 'label' is not a keyword-only parameter of __init__",
+      "tier": "HIGH",
+      "tree_digest": "e98c6f80ec214aafb34c818df50623615d82fd6d9ed6f35aad7a586fa4e5e08d",
+      "verdict": "REFUSED"
+    },
+    {
+      "anchor": "__init__(*, initial=...)",
+      "failure_analysis": null,
+      "file": "django/forms/models.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 3,
+        "found": true,
+        "n_parsed": 168,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 165,
+        "reward": 1.0
+      },
+      "loud_failure": false,
+      "observable": "callable signature (arity / parameter names)",
+      "operator": "kwonly_specialize",
+      "reason": "P1: 'initial' is not a keyword-only parameter of __init__",
+      "tier": "HIGH",
+      "tree_digest": "e98c6f80ec214aafb34c818df50623615d82fd6d9ed6f35aad7a586fa4e5e08d",
+      "verdict": "REFUSED"
+    },
+    {
+      "anchor": "__init__(*, help_text=...)",
+      "failure_analysis": null,
+      "file": "django/forms/models.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 3,
+        "found": true,
+        "n_parsed": 168,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 165,
+        "reward": 1.0
+      },
+      "loud_failure": false,
+      "observable": "callable signature (arity / parameter names)",
+      "operator": "kwonly_specialize",
+      "reason": "P1: 'help_text' is not a keyword-only parameter of __init__",
+      "tier": "HIGH",
+      "tree_digest": "e98c6f80ec214aafb34c818df50623615d82fd6d9ed6f35aad7a586fa4e5e08d",
+      "verdict": "REFUSED"
+    },
+    {
+      "anchor": "__init__(*, to_field_name=...)",
+      "failure_analysis": null,
+      "file": "django/forms/models.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 3,
+        "found": true,
+        "n_parsed": 168,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 165,
+        "reward": 1.0
+      },
+      "loud_failure": false,
+      "observable": "callable signature (arity / parameter names)",
+      "operator": "kwonly_specialize",
+      "reason": "P1: 'to_field_name' is not a keyword-only parameter of __init__",
+      "tier": "HIGH",
+      "tree_digest": "e98c6f80ec214aafb34c818df50623615d82fd6d9ed6f35aad7a586fa4e5e08d",
+      "verdict": "REFUSED"
+    },
+    {
+      "anchor": "__init__(*, limit_choices_to=...)",
+      "failure_analysis": null,
+      "file": "django/forms/models.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 3,
+        "found": true,
+        "n_parsed": 168,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 165,
+        "reward": 1.0
+      },
+      "loud_failure": false,
+      "observable": "callable signature (arity / parameter names)",
+      "operator": "kwonly_specialize",
+      "reason": "P1: 'limit_choices_to' is not a keyword-only parameter of __init__",
+      "tier": "HIGH",
+      "tree_digest": "e98c6f80ec214aafb34c818df50623615d82fd6d9ed6f35aad7a586fa4e5e08d",
+      "verdict": "REFUSED"
+    },
+    {
+      "anchor": "__init__(*, blank=...)",
+      "failure_analysis": null,
+      "file": "django/forms/models.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 3,
+        "found": true,
+        "n_parsed": 168,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 165,
+        "reward": 1.0
+      },
+      "loud_failure": false,
+      "observable": "callable signature (arity / parameter names)",
+      "operator": "kwonly_specialize",
+      "reason": "P1: 'blank' is not a keyword-only parameter of __init__",
+      "tier": "HIGH",
+      "tree_digest": "e98c6f80ec214aafb34c818df50623615d82fd6d9ed6f35aad7a586fa4e5e08d",
+      "verdict": "REFUSED"
+    },
+    {
+      "anchor": "ForeignKey",
+      "failure_analysis": null,
+      "file": "django/db/models/fields/related.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 3,
+        "found": true,
+        "n_parsed": 168,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 165,
+        "reward": 1.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "BORDER: the issue names 'ForeignKey' -- candidate CONTRACT, route to the rubric",
+      "tier": "MEDIUM",
+      "tree_digest": "e98c6f80ec214aafb34c818df50623615d82fd6d9ed6f35aad7a586fa4e5e08d",
+      "verdict": "REFUSED"
+    },
+    {
+      "anchor": "ModelChoiceField",
+      "failure_analysis": null,
+      "file": "django/forms/models.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 3,
+        "found": true,
+        "n_parsed": 168,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 165,
+        "reward": 1.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "attribute access `.ModelChoiceField` in django/db/models/fields/related.py line 979 is not a qualified reference to the defining module -- outside this operator's scope",
+      "tier": "MEDIUM",
+      "tree_digest": "e98c6f80ec214aafb34c818df50623615d82fd6d9ed6f35aad7a586fa4e5e08d",
+      "verdict": "REFUSED"
+    },
+    {
+      "anchor": null,
+      "failure_analysis": null,
+      "file": null,
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 3,
+        "found": true,
+        "n_parsed": 168,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 165,
+        "reward": 1.0
+      },
+      "loud_failure": false,
+      "observable": "order of elements in a returned collection",
+      "operator": "collection_reverse",
+      "reason": "no anchor inside the gold-touched region; 1 anchor(s) elsewhere in the 2 target(s): django/db/models/fields/related.py, django/forms/models.py",
+      "tier": "MEDIUM",
+      "tree_digest": "e98c6f80ec214aafb34c818df50623615d82fd6d9ed6f35aad7a586fa4e5e08d",
+      "verdict": "NOT_APPLICABLE"
+    },
+    {
+      "anchor": null,
+      "failure_analysis": null,
+      "file": null,
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 3,
+        "found": true,
+        "n_parsed": 168,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 165,
+        "reward": 1.0
+      },
+      "loud_failure": false,
+      "observable": "human-readable text of an exception message",
+      "operator": "message_reword",
+      "reason": "no anchor inside the gold-touched region; 8 anchor(s) elsewhere in the 2 target(s): django/db/models/fields/related.py, django/forms/models.py",
+      "tier": "HIGH",
+      "tree_digest": "e98c6f80ec214aafb34c818df50623615d82fd6d9ed6f35aad7a586fa4e5e08d",
+      "verdict": "NOT_APPLICABLE"
+    }
+  ],
+  "targets": [
+    "django/db/models/fields/related.py",
+    "django/forms/models.py"
+  ],
+  "version": "3.1",
+  "witnesses": []
+}

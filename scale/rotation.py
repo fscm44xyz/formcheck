@@ -129,6 +129,53 @@ def wait_for_pull_slot(log=None):
         time.sleep(nap)
 
 
+# BACKOFF ON A REFUSAL STORM.
+#
+# A refusal storm must quiet the run down, not make it cycle the queue faster.
+# When the registry refused us, 4 workers burned 107 tasks in 41 SECONDS -- the
+# queue was being consumed at 2.6 tasks/second by doing nothing at all.
+#
+# REFUSAL_STREAK = 3: one refusal can be a race between workers that each saw
+# quota and pulled together; two can be the tail of that. Three consecutive means
+# the registry is systematically refusing, not that we mis-paced.
+#
+# Window doubles from 60s to a 900s cap. 60s is the smallest wait that frees a
+# slot at 100 pulls/hour, so it is the least that can possibly help. Doubling
+# covers a block that is NOT quota arithmetic -- the auth-endpoint block that
+# actually stopped us was not, and no amount of pull-pacing would have cleared
+# it. The 15-minute cap keeps a long block from turning into an unbounded stall
+# with no evidence being gathered; past that the progress invariant aborts.
+REFUSAL_STREAK = 3
+BACKOFF_BASE_SECONDS = 60
+BACKOFF_CAP_SECONDS = 900
+
+_consecutive_refusals = 0
+
+
+def note_pull_success() -> None:
+    global _consecutive_refusals
+    _consecutive_refusals = 0
+
+
+async def note_refusal(log=None) -> int:
+    """Count a refusal and, past the streak, stop pulling for a while.
+
+    Every refusing worker waits, which is the point: the run goes quiet instead
+    of racing through its own queue.
+    """
+    global _consecutive_refusals
+    log = log or (lambda **kw: None)
+    _consecutive_refusals += 1
+    if _consecutive_refusals < REFUSAL_STREAK:
+        return 0
+    k = _consecutive_refusals - REFUSAL_STREAK
+    nap = min(BACKOFF_CAP_SECONDS, BACKOFF_BASE_SECONDS * (2 ** k))
+    log(event="refusal_backoff", consecutive=_consecutive_refusals,
+        sleep_s=nap)
+    await asyncio.sleep(nap)
+    return nap
+
+
 def is_rate_limited(text: str) -> bool:
     t = (text or "").lower()
     return "429" in t or "toomanyrequests" in t or "too many requests" in t
@@ -497,6 +544,7 @@ class ImageLease:
                     f"{pull.stderr.strip()[:200]}")
             raise RuntimeError(f"docker pull {self.ref}: "
                                f"{pull.stderr.strip()[:300]}")
+        note_pull_success()
         self.size = await asyncio.to_thread(image_size, self.ref)
         self.log(event="pulled", instance_id=self.instance_id, ref=self.ref,
                  bytes=self.size, seconds=round(time.time() - t0, 1),
