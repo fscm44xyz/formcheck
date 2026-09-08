@@ -562,3 +562,76 @@ what it means.
 
 `scale/run.py` (`build_record`); `repro/formcheck_hook.py` (`formcheck`);
 `scale/aggregate.py` (`witness_split`).
+
+---
+
+## 16. Two more of the class, found by exhausting it deliberately
+
+**The audit was widened to every comparison in `scale/` against a reward, a pass
+count, a failure count or a timeout, with a one-line justification required for
+each. Two could not be justified.**
+
+**D1 -- "the oracle cannot judge" was reported as "the transform broke the
+contract".** `FormCheckMixin.formcheck` tested `if satisfied is not True`, which
+catches `False` (judged, broke behaviour) and `None` (could not judge) alike. The
+`None` case would have been logged `INVALID` with the reason "transform broke the
+contract" and **counted in the `judged` denominator** -- manufacturing evidence
+out of an absence, which is the inversion `writeup.md` 4.1 exists to prevent.
+
+Not currently reachable: `SuiteOracle` returns `None` only for SILENT operators,
+which the `observes` gate routes to `UNVALIDATED` first, and `MarkerSetOracle`
+never returns `None`. It is fixed anyway, because its unreachability is a
+property of today's two oracles and not of the hook. `None` now yields
+`UNVALIDATED` with the reason "oracle could not judge this transform" and does
+not increment `judged`.
+
+**D2 -- a failed digest collided with the control's, silently.** `_tree_digest`
+ran `sha256sum <paths> 2>/dev/null || true`. Any failure -- a missing file, an
+unreadable one, a path the shell mangled -- yields EMPTY output and therefore the
+**same digest for every tree**. The graded memo is keyed on that digest, so the
+transformed tree would have been served the control's cached grading: reward 1.0,
+verdict `CLEAN`. A silent false negative, in the one direction that cannot be
+noticed by reading the results -- a witness that never appears looks exactly like
+a task with no witness.
+
+Each target is now hashed individually, a missing file records a distinct
+`MISSING` line rather than nothing, and the output is checked to have one line
+per target or the digest raises.
+
+**Both verified inert on the live paths before proceeding:** M0 gate IDENTICAL,
+exit 0; `xarray-4966` re-run verdict-for-verdict identical (still WITNESS).
+
+`repro/formcheck_hook.py` (`formcheck`); `scale/container_task.py`
+(`_tree_digest`).
+
+---
+
+## 17. The M0 gate's reference could be rewritten by running the test suite
+
+**Found by doing the thing the audit asked for -- running everything runnable in
+the repo -- and watching what it touched.**
+
+`repro/f2_gate.py` regenerates `repro/f2_verdicts.json` as a side effect of
+running. That file is the July baseline the M0 gate compares the container
+against. Running the gate during a routine sweep rewrote it.
+
+**This time it was harmless**: the regenerated file was semantically identical
+(`json.dumps(..., sort_keys=True)` equal, every gate-relevant field equal); the
+245-line diff was line endings only, which the byte-exactness work of `86102a2`
+exists to prevent and which `f2_gate`'s writer does not honour.
+
+**The hazard is structural, not this diff.** If the operators had drifted, the
+gate would compare the container against a baseline regenerated *by the same
+drifted code*, and pass trivially. A gate whose reference can be rewritten by the
+thing it is gating is not a gate -- it is a tautology with a table.
+
+**Rule.** *A baseline is frozen and its identity is checked, not assumed.*
+`scale/fixtures/f2_verdicts.sha256` pins the reference;
+`diff_verdicts.compare` verifies it before comparing anything and raises,
+naming `f2_gate` as the likely cause and `git checkout` as the remedy. If the
+baseline is ever meant to move, the pin is re-recorded in the same commit that
+explains why.
+
+`scale/diff_verdicts.py` (`assert_reference_unmodified`);
+`scale/fixtures/f2_verdicts.sha256`; `repro/f2_gate.py`.
+

@@ -484,12 +484,36 @@ class SweBenchFormcheckTask(ContainerFormcheckTask):
         self._scope_cache = None
 
     def _tree_digest(self):
-        """Content hash of the files a transform can rewrite. Only the targets
-        are ever modified, so hashing them decides whether a cached graded result
-        still describes the tree."""
-        paths = " ".join(f"'{t}'" for t in self.FORMCHECK_TARGETS)
-        out = self.sh(f"sha256sum {paths} 2>/dev/null || true").stdout
-        return hashlib.sha256(out.encode()).hexdigest()
+        """Content hash of the files a transform can rewrite.
+
+        Only the targets are ever modified, so hashing them decides whether a
+        cached graded result still describes the tree.
+
+        THIS MUST NEVER FAIL QUIETLY. The first version ran
+        `sha256sum <paths> 2>/dev/null || true`, so any failure -- a missing
+        file, an unreadable one, a path the shell mangled -- produced EMPTY
+        output and therefore the SAME digest for every tree. The memo would then
+        return the control's grading for a transformed tree: reward 1.0, verdict
+        CLEAN, a silent false negative in the one direction that matters. A
+        witness that never appears cannot be noticed by looking at the results.
+
+        So each target is hashed individually and a missing file is recorded as
+        a distinct `MISSING` line rather than as nothing, and the output is
+        checked to have one line per target.
+        """
+        targets = self.FORMCHECK_TARGETS
+        script = "; ".join(
+            f"if [ -f '{t}' ]; then sha256sum '{t}'; else echo 'MISSING {t}'; fi"
+            for t in targets)
+        out = self.sh(script)
+        lines = [ln for ln in out.stdout.splitlines() if ln.strip()]
+        if len(lines) != len(targets):
+            raise RuntimeError(
+                f"tree digest: expected {len(targets)} line(s), got "
+                f"{len(lines)} -- refusing to return a digest that could "
+                f"collide with another tree's. stderr: "
+                f"{out.stderr.strip()[:200]}")
+        return hashlib.sha256("\n".join(lines).encode()).hexdigest()
 
     def test_invocation(self):
         """The command SWE-bench itself would run for this task, plus its own

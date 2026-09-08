@@ -192,6 +192,24 @@ class FormCheckMixin:
                     self._formcheck_row(op, anchor, "UNVALIDATED",
                                         self.formcheck_log[-1][2], report)
                     continue
+                if satisfied is None:
+                    # An oracle that CANNOT judge is not an oracle that judged
+                    # and found breakage. Collapsing the two would report
+                    # "transform broke the contract" on a case nobody assessed,
+                    # and count it in the judged denominator -- inventing
+                    # evidence out of an absence, which is the inversion 4.1
+                    # exists to prevent. Not currently reachable: `SuiteOracle`
+                    # returns None only for SILENT operators, which the
+                    # `observes` gate above already routes to UNVALIDATED, and
+                    # `MarkerSetOracle` never returns None. It is written down
+                    # because the next oracle need not have either property.
+                    self.formcheck_log.append(
+                        (label, "UNVALIDATED",
+                         "oracle could not judge this transform"))
+                    self._formcheck_row(op, anchor, "UNVALIDATED",
+                                        "oracle could not judge this transform",
+                                        report)
+                    continue
                 if satisfied is not True:
                     self.formcheck_log.append(
                         (label, "INVALID", "transform broke the contract"))
