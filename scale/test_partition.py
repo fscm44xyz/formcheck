@@ -161,7 +161,15 @@ def test_suite_oracle_refuses_to_judge_a_silent_operator():
     assert asyncio.run(SuiteOracle().check(object(), None, report)) is None
 
 
-TESTS = [v for k, v in sorted(globals().items()) if k.startswith("test_")]
+def collect():
+    """Collected at CALL time, not import time.
+
+    A module-level `TESTS = [...]` binds before anything defined below it, so a
+    test appended to the end of the file is silently never run -- which happened
+    here, to the four tests pinning CHANGES.md 18, and a suite that quietly skips
+    tests is the same silent-omission class this project keeps finding.
+    """
+    return [v for k, v in sorted(globals().items()) if k.startswith("test_")]
 
 
 def main():
@@ -171,16 +179,89 @@ def main():
               "  ~/.venv-fc/bin/python scale/run.py "
               "--instance-id pydata__xarray-4966")
         return 2
+    tests = collect()
     failed = 0
-    for fn in TESTS:
+    for fn in tests:
         try:
             fn()
             print(f"  PASS  {fn.__name__}")
         except AssertionError as exc:
             failed += 1
             print(f"  FAIL  {fn.__name__}\n        {exc}")
-    print(f"\n{len(TESTS) - failed}/{len(TESTS)} passed")
+    print(f"\n{len(tests) - failed}/{len(tests)} passed")
     return 1 if failed else 0
+
+
+
+
+# ---------------------------------------------------------------------------
+# CHANGES.md 18: SWE-bench is not one test runner, and the attribution has to
+# understand every shape it emits or it reports coupling as breakage.
+# ---------------------------------------------------------------------------
+
+M3_FIXTURE = os.path.join(HERE, "fixtures", "m3_misattributed_logs.json")
+
+
+def _m3_cases():
+    with open(M3_FIXTURE, encoding="utf-8") as f:
+        return json.load(f)
+
+
+def test_pytest_collection_error_is_attributed():
+    """`______ ERROR collecting path ______` -- one block for a whole module
+    that would not import. An alpha-rename a test imports by name produces
+    exactly this and no per-test blocks at all."""
+    case = _m3_cases()["astropy__astropy-12907"]
+    a = classify_failures(case["log"], case["graded"], case["symbol"])
+    assert a["unexplained"] == [], a["unexplained"][:2]
+    assert len(a["coupled"]) == 12, len(a["coupled"])
+
+
+def test_django_unittest_error_blocks_are_attributed():
+    """django runs `runtests.py`, whose output has no underscore rules at all:
+    `====` then `ERROR: name (mod.Class)` then `----` then the traceback."""
+    case = _m3_cases()["django__django-15572"]
+    a = classify_failures(case["log"], case["graded"], case["symbol"])
+    assert a["unexplained"] == [], a["unexplained"][:2]
+    assert len(a["coupled"]) == 4, len(a["coupled"])
+
+
+def test_django_module_import_failure_is_attributed():
+    """The hardest shape: django reports a module that would not import as a
+    synthetic `test_cookie (unittest.loader._FailedTest)`, naming the MODULE and
+    never the tests that were wanted."""
+    case = _m3_cases()["django__django-13195"]
+    a = classify_failures(case["log"], case["graded"], case["symbol"])
+    assert a["unexplained"] == [], a["unexplained"][:2]
+    assert len(a["coupled"]) == 11, len(a["coupled"])
+
+
+def test_pylint_collection_error_is_attributed():
+    case = _m3_cases()["pylint-dev__pylint-4604"]
+    a = classify_failures(case["log"], case["graded"], case["symbol"])
+    assert a["unexplained"] == [], a["unexplained"][:2]
+    assert len(a["coupled"]) == 21, len(a["coupled"])
+
+
+def test_every_m3_misattribution_is_now_coupling():
+    """All four together: these were reported INVALID, and every one is a
+    WITNESS. Reported W over M3 went from 0 to 4 on this fix alone."""
+    for iid, case in _m3_cases().items():
+        a = classify_failures(case["log"], case["graded"], case["symbol"])
+        assert a["all_reference_the_symbol"] is True, (iid, a["unexplained"][:2])
+
+
+def test_a_per_test_block_still_beats_a_collection_error():
+    """Order matters: a test with its own failure block failed on its own terms.
+    Only a test with no block of its own may be explained by the module."""
+    log = ("______ ERROR collecting t/test_x.py ______\n"
+           "E   ImportError: cannot import name 'Sym'\n"
+           "______ test_real ______\n"
+           "E   ValueError: genuinely broken\n")
+    graded = {"p2p_failing": ["t/test_x.py::test_real"], "f2p_failing": []}
+    a = classify_failures(log, graded, "Sym")
+    assert a["coupled"] == [], a["coupled"]
+    assert len(a["unexplained"]) == 1, a["unexplained"]
 
 
 if __name__ == "__main__":

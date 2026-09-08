@@ -210,19 +210,28 @@ def test_collapse_makes_everything_clean():
         "test proves nothing")
 
 
-TESTS = [v for k, v in sorted(globals().items()) if k.startswith("test_")]
+def collect():
+    """Collected at CALL time, not import time.
+
+    A module-level `TESTS = [...]` binds before anything defined below it, so a
+    test appended to the end of the file is silently never run -- which happened
+    here, to the four tests pinning CHANGES.md 18, and a suite that quietly skips
+    tests is the same silent-omission class this project keeps finding.
+    """
+    return [v for k, v in sorted(globals().items()) if k.startswith("test_")]
 
 
 def main():
+    tests = collect()
     failed = 0
-    for fn in TESTS:
+    for fn in tests:
         try:
             fn()
             print(f"  PASS  {fn.__name__}")
         except AssertionError as exc:
             failed += 1
             print(f"  FAIL  {fn.__name__}\n        {exc}")
-    print(f"\n{len(TESTS) - failed}/{len(TESTS)} passed")
+    print(f"\n{len(tests) - failed}/{len(tests)} passed")
     return 1 if failed else 0
 
 

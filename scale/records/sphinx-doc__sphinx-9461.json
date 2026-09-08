@@ -1,0 +1,321 @@
+{
+  "completed": true,
+  "control": {
+    "passed": true,
+    "reason": "untransformed reference scores 1.0"
+  },
+  "disk_orphan_reclaimed_bytes": 0,
+  "disk_residual_bytes": 0,
+  "elapsed_seconds": 133.13,
+  "error": null,
+  "image": "swebench/sweb.eval.x86_64.sphinx-doc_1776_sphinx-9461:latest",
+  "instance_id": "sphinx-doc__sphinx-9461",
+  "leaked_containers": [],
+  "leaked_image": false,
+  "log": [
+    [
+      "<control>",
+      "OK",
+      "untransformed reference scores 1.0"
+    ],
+    [
+      "kwonly_specialize:<no anchor>",
+      "NOT_APPLICABLE",
+      "no anchor inside the gold-touched region; 1 anchor(s) elsewhere in the 3 target(s): sphinx/domains/python.py, sphinx/ext/autodoc/__init__.py, sphinx/util/inspect.py"
+    ],
+    [
+      "symbol_rename:sphinx/domains/python.py:PyProperty",
+      "CLEAN",
+      "reward 1.0"
+    ],
+    [
+      "symbol_rename:sphinx/ext/autodoc/__init__.py:Documenter",
+      "REFUSED",
+      "dynamic reach: 'Documenter' appears in a non-annotation string literal in sphinx/application.py line 1086 ('Register a new documenter class for the '); 29 further hit(s) -- an alpha-rename cannot be argued safe"
+    ],
+    [
+      "symbol_rename:sphinx/ext/autodoc/__init__.py:PropertyDocumenter",
+      "REFUSED",
+      "multi-line import of 'PropertyDocumenter' in sphinx/ext/autosummary/generate.py"
+    ],
+    [
+      "symbol_rename:sphinx/util/inspect.py:isclassmethod",
+      "REFUSED",
+      "attribute access `.isclassmethod` in sphinx/ext/autodoc/__init__.py line 2688 is not a qualified reference to the defining module -- outside this operator's scope"
+    ],
+    [
+      "symbol_rename:sphinx/util/inspect.py:getdoc",
+      "REFUSED",
+      "attribute access `.getdoc` in sphinx/ext/autosummary/generate.py line 488 is not a qualified reference to the defining module -- outside this operator's scope"
+    ],
+    [
+      "collection_reverse:<no anchor>",
+      "NOT_APPLICABLE",
+      "no anchor inside the gold-touched region; 3 anchor(s) elsewhere in the 3 target(s): sphinx/domains/python.py, sphinx/ext/autodoc/__init__.py, sphinx/util/inspect.py"
+    ],
+    [
+      "message_reword:<no anchor>",
+      "NOT_APPLICABLE",
+      "no anchor inside the gold-touched region; 3 anchor(s) elsewhere in the 3 target(s): sphinx/domains/python.py, sphinx/ext/autodoc/__init__.py, sphinx/util/inspect.py"
+    ]
+  ],
+  "mountable": true,
+  "multi_target": true,
+  "n_targets": 3,
+  "on_prime_hub": null,
+  "on_prime_hub_reason": "not resolvable offline; no hub environment index is reachable from this repo, verifiers or swebench",
+  "operators_not_applicable": [
+    "collection_reverse",
+    "kwonly_specialize",
+    "message_reword"
+  ],
+  "operators_with_anchors": [
+    "symbol_rename"
+  ],
+  "repo": "sphinx-doc/sphinx",
+  "row": {
+    "elapsed": 31.91,
+    "error": null,
+    "error_type": null,
+    "index": 0,
+    "mode": "formcheck",
+    "name": "sphinx-doc__sphinx-9461",
+    "reason": "valid",
+    "valid": true
+  },
+  "rows": [
+    {
+      "anchor": null,
+      "failure_analysis": null,
+      "file": null,
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 3,
+        "found": true,
+        "n_parsed": 62,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 59,
+        "reward": 1.0
+      },
+      "loud_failure": false,
+      "observable": "callable signature (arity / parameter names)",
+      "operator": "kwonly_specialize",
+      "reason": "no anchor inside the gold-touched region; 1 anchor(s) elsewhere in the 3 target(s): sphinx/domains/python.py, sphinx/ext/autodoc/__init__.py, sphinx/util/inspect.py",
+      "tier": "HIGH",
+      "verdict": "NOT_APPLICABLE"
+    },
+    {
+      "anchor": "PyProperty",
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "coupled": [],
+        "failing": [],
+        "symbol": "PyProperty",
+        "unexplained": []
+      },
+      "file": "sphinx/domains/python.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 3,
+        "found": true,
+        "n_parsed": 62,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 59,
+        "reward": 1.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "reward 1.0",
+      "tier": "MEDIUM",
+      "verdict": "CLEAN"
+    },
+    {
+      "anchor": "Documenter",
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "coupled": [],
+        "failing": [],
+        "symbol": "PyProperty",
+        "unexplained": []
+      },
+      "file": "sphinx/ext/autodoc/__init__.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 3,
+        "found": true,
+        "n_parsed": 62,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 59,
+        "reward": 1.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "dynamic reach: 'Documenter' appears in a non-annotation string literal in sphinx/application.py line 1086 ('Register a new documenter class for the '); 29 further hit(s) -- an alpha-rename cannot be argued safe",
+      "tier": "MEDIUM",
+      "verdict": "REFUSED"
+    },
+    {
+      "anchor": "PropertyDocumenter",
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "coupled": [],
+        "failing": [],
+        "symbol": "PyProperty",
+        "unexplained": []
+      },
+      "file": "sphinx/ext/autodoc/__init__.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 3,
+        "found": true,
+        "n_parsed": 62,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 59,
+        "reward": 1.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "multi-line import of 'PropertyDocumenter' in sphinx/ext/autosummary/generate.py",
+      "tier": "MEDIUM",
+      "verdict": "REFUSED"
+    },
+    {
+      "anchor": "isclassmethod",
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "coupled": [],
+        "failing": [],
+        "symbol": "PyProperty",
+        "unexplained": []
+      },
+      "file": "sphinx/util/inspect.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 3,
+        "found": true,
+        "n_parsed": 62,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 59,
+        "reward": 1.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "attribute access `.isclassmethod` in sphinx/ext/autodoc/__init__.py line 2688 is not a qualified reference to the defining module -- outside this operator's scope",
+      "tier": "MEDIUM",
+      "verdict": "REFUSED"
+    },
+    {
+      "anchor": "getdoc",
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "coupled": [],
+        "failing": [],
+        "symbol": "PyProperty",
+        "unexplained": []
+      },
+      "file": "sphinx/util/inspect.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 3,
+        "found": true,
+        "n_parsed": 62,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 59,
+        "reward": 1.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "attribute access `.getdoc` in sphinx/ext/autosummary/generate.py line 488 is not a qualified reference to the defining module -- outside this operator's scope",
+      "tier": "MEDIUM",
+      "verdict": "REFUSED"
+    },
+    {
+      "anchor": null,
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "coupled": [],
+        "failing": [],
+        "symbol": "PyProperty",
+        "unexplained": []
+      },
+      "file": null,
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 3,
+        "found": true,
+        "n_parsed": 62,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 59,
+        "reward": 1.0
+      },
+      "loud_failure": false,
+      "observable": "order of elements in a returned collection",
+      "operator": "collection_reverse",
+      "reason": "no anchor inside the gold-touched region; 3 anchor(s) elsewhere in the 3 target(s): sphinx/domains/python.py, sphinx/ext/autodoc/__init__.py, sphinx/util/inspect.py",
+      "tier": "MEDIUM",
+      "verdict": "NOT_APPLICABLE"
+    },
+    {
+      "anchor": null,
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "coupled": [],
+        "failing": [],
+        "symbol": "PyProperty",
+        "unexplained": []
+      },
+      "file": null,
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 3,
+        "found": true,
+        "n_parsed": 62,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 59,
+        "reward": 1.0
+      },
+      "loud_failure": false,
+      "observable": "human-readable text of an exception message",
+      "operator": "message_reword",
+      "reason": "no anchor inside the gold-touched region; 3 anchor(s) elsewhere in the 3 target(s): sphinx/domains/python.py, sphinx/ext/autodoc/__init__.py, sphinx/util/inspect.py",
+      "tier": "HIGH",
+      "verdict": "NOT_APPLICABLE"
+    }
+  ],
+  "targets": [
+    "sphinx/domains/python.py",
+    "sphinx/ext/autodoc/__init__.py",
+    "sphinx/util/inspect.py"
+  ],
+  "version": "4.2",
+  "witnesses": []
+}

@@ -678,3 +678,89 @@ explains why.
 `scale/diff_verdicts.py` (`assert_reference_unmodified`);
 `scale/fixtures/f2_verdicts.sha256`; `repro/f2_gate.py`.
 
+---
+
+## 18. The failure attribution understood one test runner. SWE-bench has three.
+
+**The most consequential defect in this project. It inverted M3's headline, and
+it stops M3.**
+
+`failure_sections` parsed pytest's per-test blocks (`______ test_name ______`)
+and nothing else. Phase 4 ran only pytest repos, so that was sufficient and
+looked complete. M3 ran ten repos and found two more shapes:
+
+  * **pytest collection errors** -- `______ ERROR collecting path/to/test_x.py
+    ______`, ONE block for a whole module that failed to import. This is exactly
+    what an alpha-rename produces when a test imports the symbol by name: there
+    are no per-test blocks at all.
+  * **unittest / django** -- `====` then `ERROR: name (mod.Class)` then `----`
+    then the traceback. No underscore rules anywhere, so the parser found
+    literally nothing. Worse, a module that will not import is reported as a
+    synthetic `test_cookie (unittest.loader._FailedTest)` naming the MODULE and
+    never the tests that were wanted.
+
+**Consequence.** Every failing test in those logs came back "no failure section
+found", so every one landed in `unexplained`, so the oracle said the transform
+broke behaviour, so the row was `INVALID`. That is coupling reported as breakage
+-- the same misclassification as `CHANGES.md` 13, arriving by a different route
+after 13 was fixed.
+
+**Measured, on M3's own recorded logs.** All four `INVALID` rows name the symbol:
+
+    astropy-12907   ImportError: cannot import name '_cstack' from
+                    'astropy.modeling.separable'
+    django-13195    ImportError: cannot import name 'CookieStorage'
+    django-15572    AttributeError: module 'django.template.autoreload' has no
+                    attribute 'get_template_directories'
+    pylint-4604     AttributeError: module 'pylint.checkers.variables' has no
+                    attribute 'VariablesChecker'
+
+Re-classified with the extended attribution: **4 of 4 are WITNESS**, 48 failures
+attributed, 0 unexplained.
+
+**What it did to the headline.** M3 as run reported `W = 0` over 50 tasks, which
+under `STOPPING_RULE.md` means M4 is optional and the deliverable stops being
+"the number". Corrected, `W = 4`, which is the `W >= 3` branch: M4 is worth the
+weekend and the number leads. **A parsing gap decided whether a weekend of
+compute was worth spending**, in the direction that suppresses witnesses --
+downward, again, which is the direction nobody audits.
+
+**Rule.** *Attribution must understand every runner the corpus uses, and an
+unattributable failure is a defect to investigate, not a verdict to report.* The
+three shapes are handled in `f4_formcheck.failure_sections` / `section_for` --
+extended in place, because `CHANGES.md` 13's lesson is that a second copy is how
+this rule gets lost. Per-test blocks are preferred over module-wide collection
+errors: a test with its own failure block failed on its own terms.
+
+Pinned by six tests over the four real M3 logs
+(`scale/fixtures/m3_misattributed_logs.json`), including that a per-test block
+still beats a collection error.
+
+**Not yet re-run.** M3's `scale/records/` are kept as the raw evidence. The
+corrected figures are an offline re-classification of those recorded logs, and a
+confirming re-run has not been performed.
+
+`repro/f4_formcheck.py` (`failure_sections`, `section_for`);
+`scale/test_partition.py`; `scale/fixtures/m3_misattributed_logs.json`.
+
+---
+
+## 19. The test files silently skipped tests appended after the collector
+
+**Found immediately, while adding the tests for 18.**
+
+Each suite ended with `TESTS = [...globals()...]` at module level, which binds
+when that line executes. Six tests appended below it were never collected, and
+the runner reported `7/7 passed` -- a green result that had not run the tests
+written to pin the defect that had just inverted the headline.
+
+`collect()` is now called inside `main()`, and the `if __name__` entry point sits
+at the end of every file.
+
+Same family as 17 and D2: a check that reports success without doing the work,
+where the output is indistinguishable from the honest case. `53/53 across 5
+suites` after the fix, against `40/40` before it -- and the 13 that were missing
+are the ones that matter most.
+
+`scale/test_*.py`.
+

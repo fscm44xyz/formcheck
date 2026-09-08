@@ -1,0 +1,183 @@
+{
+  "completed": true,
+  "control": {
+    "passed": true,
+    "reason": "untransformed reference scores 1.0"
+  },
+  "disk_orphan_reclaimed_bytes": 0,
+  "disk_residual_bytes": 1859584,
+  "elapsed_seconds": 87.83,
+  "error": null,
+  "image": "swebench/sweb.eval.x86_64.sympy_1776_sympy-23413:latest",
+  "instance_id": "sympy__sympy-23413",
+  "leaked_containers": [],
+  "leaked_image": false,
+  "log": [
+    [
+      "<control>",
+      "OK",
+      "untransformed reference scores 1.0"
+    ],
+    [
+      "kwonly_specialize:<no anchor>",
+      "NOT_APPLICABLE",
+      "no anchor inside the gold-touched region; 2 anchor(s) elsewhere in the target"
+    ],
+    [
+      "symbol_rename:_hermite_normal_form",
+      "CLEAN",
+      "reward 1.0"
+    ],
+    [
+      "collection_reverse:<no anchor>",
+      "NOT_APPLICABLE",
+      "no anchor inside the gold-touched region"
+    ],
+    [
+      "message_reword:<no anchor>",
+      "NOT_APPLICABLE",
+      "no anchor inside the gold-touched region; 5 anchor(s) elsewhere in the target"
+    ]
+  ],
+  "mountable": true,
+  "multi_target": false,
+  "n_targets": 1,
+  "on_prime_hub": null,
+  "on_prime_hub_reason": "not resolvable offline; no hub environment index is reachable from this repo, verifiers or swebench",
+  "operators_not_applicable": [
+    "collection_reverse",
+    "kwonly_specialize",
+    "message_reword"
+  ],
+  "operators_with_anchors": [
+    "symbol_rename"
+  ],
+  "repo": "sympy/sympy",
+  "row": {
+    "elapsed": 64.7,
+    "error": null,
+    "error_type": null,
+    "index": 0,
+    "mode": "formcheck",
+    "name": "sympy__sympy-23413",
+    "reason": "valid",
+    "valid": true
+  },
+  "rows": [
+    {
+      "anchor": null,
+      "failure_analysis": null,
+      "file": null,
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 1,
+        "found": true,
+        "n_parsed": 3,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 2,
+        "reward": 1.0
+      },
+      "loud_failure": false,
+      "observable": "callable signature (arity / parameter names)",
+      "operator": "kwonly_specialize",
+      "reason": "no anchor inside the gold-touched region; 2 anchor(s) elsewhere in the target",
+      "tier": "HIGH",
+      "verdict": "NOT_APPLICABLE"
+    },
+    {
+      "anchor": "_hermite_normal_form",
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "coupled": [],
+        "failing": [],
+        "symbol": "_hermite_normal_form",
+        "unexplained": []
+      },
+      "file": "sympy/polys/matrices/normalforms.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 1,
+        "found": true,
+        "n_parsed": 3,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 2,
+        "reward": 1.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "reward 1.0",
+      "tier": "HIGH",
+      "verdict": "CLEAN"
+    },
+    {
+      "anchor": null,
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "coupled": [],
+        "failing": [],
+        "symbol": "_hermite_normal_form",
+        "unexplained": []
+      },
+      "file": null,
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 1,
+        "found": true,
+        "n_parsed": 3,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 2,
+        "reward": 1.0
+      },
+      "loud_failure": false,
+      "observable": "order of elements in a returned collection",
+      "operator": "collection_reverse",
+      "reason": "no anchor inside the gold-touched region",
+      "tier": "MEDIUM",
+      "verdict": "NOT_APPLICABLE"
+    },
+    {
+      "anchor": null,
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "coupled": [],
+        "failing": [],
+        "symbol": "_hermite_normal_form",
+        "unexplained": []
+      },
+      "file": null,
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 1,
+        "found": true,
+        "n_parsed": 3,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 2,
+        "reward": 1.0
+      },
+      "loud_failure": false,
+      "observable": "human-readable text of an exception message",
+      "operator": "message_reword",
+      "reason": "no anchor inside the gold-touched region; 5 anchor(s) elsewhere in the target",
+      "tier": "HIGH",
+      "verdict": "NOT_APPLICABLE"
+    }
+  ],
+  "targets": [
+    "sympy/polys/matrices/normalforms.py"
+  ],
+  "version": "1.11",
+  "witnesses": []
+}

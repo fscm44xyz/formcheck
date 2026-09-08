@@ -164,12 +164,27 @@ class MountedTask:
 
 
 def failure_sections(log):
-    """pytest's per-test failure blocks: `____ test_name ____` -> its text.
+    """Per-test failure blocks, keyed by whatever the runner calls the test.
 
     Scanning the whole log for `E ` lines does NOT work: a passing test that
     deliberately raises prints `E TypeError: ...` too. Measured, not assumed --
     the pytest-10356 baseline log has such a line with zero failures, which
-    would have forced every verdict to INVALID."""
+    would have forced every verdict to INVALID.
+
+    THREE BLOCK SHAPES, because SWE-bench is not one test runner. Phase 4 ran
+    only pytest repos and this function only understood pytest's per-test form;
+    M3 ran ten repos and found the other two, misattributing every failure in
+    them (`CHANGES.md` 18):
+
+      pytest per-test    `______ test_name ______`
+      pytest collection  `______ ERROR collecting path/to/test_x.py ______`
+                         -- one block for a whole module that failed to import,
+                         which is precisely what an alpha-rename causes when a
+                         test imports the symbol by name
+      unittest / django  `====...` then `ERROR: test_name (mod.Class)` then
+                         `----...` then the traceback. No underscore rules at
+                         all, so the old parser found nothing whatsoever.
+    """
     out, current, buf = {}, None, []
     for line in log.splitlines():
         m = re.match(r"^_{3,}\s+(.+?)\s+_{3,}$", line)
@@ -181,18 +196,70 @@ def failure_sections(log):
             buf.append(line)
     if current is not None:
         out[current] = "\n".join(buf)
+
+    # unittest / django: `ERROR: name (mod.Class)` or `FAIL: ...`, body running
+    # to the next `====` separator.
+    lines = log.splitlines()
+    for i, line in enumerate(lines):
+        m = re.match(r"^(?:ERROR|FAIL):\s+(.+?)\s*$", line)
+        if not m:
+            continue
+        body = []
+        for nxt in lines[i + 1:]:
+            if re.match(r"^={10,}$", nxt):
+                break
+            body.append(nxt)
+        out.setdefault(m.group(1).strip(), "\n".join(body))
     return out
 
 
 def section_for(sections, test_id):
-    """The failure block for `path::Class::test[param]`, matched on pytest's
-    header form (which drops the path and joins with dots)."""
+    """The failure block for a test id, across the runners SWE-bench uses.
+
+    Order matters: the per-test block is preferred, and the module-wide
+    collection error is a FALLBACK. A test that has its own failure block failed
+    on its own terms; only a test with no block of its own can be explained by
+    the module having failed to import.
+    """
     tail = test_id.split("::")[-1]
     base = tail.split("[")[0]
+
+    # 1. pytest per-test, and unittest `name (mod.Class)` which arrives already
+    #    in that form from swebench's django parser.
     for header, body in sections.items():
         head_tail = header.split(".")[-1]
         if header == tail or head_tail == tail \
                 or head_tail.split("[")[0] == base:
+            return body
+    if test_id in sections:
+        return sections[test_id]
+
+    # 2. pytest collection error: the whole module failed to import, so no test
+    #    in it has a block of its own. An alpha-rename that a test imports by
+    #    name produces exactly this and nothing else.
+    path = test_id.split("::")[0]
+    if path and path != test_id:
+        for header, body in sections.items():
+            if header.startswith("ERROR collecting") and path in header:
+                return body
+
+    # 3. unittest module-level import failure. django reports it as a synthetic
+    #    test `test_cookie (unittest.loader._FailedTest)` naming the MODULE that
+    #    would not import -- never the tests that were wanted. So the id's
+    #    dotted path is decomposed and any component may be the module named in
+    #    the synthetic failure: `test_add (messages_tests.test_cookie.CookieTests)`
+    #    is explained by `test_cookie (unittest.loader._FailedTest)`.
+    parts = re.findall(r"\(([^)]*)\)", test_id)
+    components = set()
+    for part in parts:
+        components.update(c for c in part.split(".") if c)
+    components.update(c for c in test_id.split("::")[0].split("/") if c)
+    for header, body in sections.items():
+        if "_FailedTest" not in header:
+            continue
+        named = header.split(" ")[0].strip()
+        if named and (named in components
+                      or named.removesuffix(".py") in components):
             return body
     return None
 
