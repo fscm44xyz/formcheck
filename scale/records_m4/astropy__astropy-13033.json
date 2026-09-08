@@ -1,0 +1,175 @@
+{
+  "completed": true,
+  "control": {
+    "passed": true,
+    "reason": "untransformed reference scores 1.0"
+  },
+  "digest_trace": [
+    {
+      "digest": "f64524352cbb455d0d58928fe8ca42aa26d528420a08d0a244a9031a12afa97b",
+      "memo_hit": false
+    }
+  ],
+  "disk_orphan_reclaimed_bytes": 0,
+  "disk_residual_bytes": 0,
+  "elapsed_seconds": 140.95,
+  "error": null,
+  "image": "swebench/sweb.eval.x86_64.astropy_1776_astropy-13033:latest",
+  "instance_id": "astropy__astropy-13033",
+  "leaked_containers": [],
+  "leaked_image": false,
+  "log": [
+    [
+      "<control>",
+      "OK",
+      "untransformed reference scores 1.0"
+    ],
+    [
+      "kwonly_specialize:<no anchor>",
+      "NOT_APPLICABLE",
+      "no anchor inside the gold-touched region"
+    ],
+    [
+      "symbol_rename:BaseTimeSeries",
+      "REFUSED",
+      "dynamic reach: 'BaseTimeSeries' appears in a non-annotation string literal in astropy/timeseries/core.py line 9 ('BaseTimeSeries') -- an `__all__` entry -- an alpha-rename cannot be argued safe"
+    ],
+    [
+      "collection_reverse:<no anchor>",
+      "NOT_APPLICABLE",
+      "no anchor inside the gold-touched region"
+    ],
+    [
+      "message_reword:<no anchor>",
+      "NOT_APPLICABLE",
+      "no anchor inside the gold-touched region"
+    ]
+  ],
+  "mountable": true,
+  "multi_target": false,
+  "n_targets": 1,
+  "on_prime_hub": null,
+  "on_prime_hub_reason": "not resolvable offline; no hub environment index is reachable from this repo, verifiers or swebench",
+  "operators_not_applicable": [
+    "collection_reverse",
+    "kwonly_specialize",
+    "message_reword"
+  ],
+  "operators_with_anchors": [
+    "symbol_rename"
+  ],
+  "repo": "astropy/astropy",
+  "row": {
+    "elapsed": 43.27,
+    "error": null,
+    "error_type": null,
+    "index": 0,
+    "mode": "formcheck",
+    "name": "astropy__astropy-13033",
+    "reason": "unchecked",
+    "valid": null
+  },
+  "rows": [
+    {
+      "anchor": null,
+      "failure_analysis": null,
+      "file": null,
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 1,
+        "found": true,
+        "n_parsed": 24,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 20,
+        "reward": 1.0
+      },
+      "loud_failure": false,
+      "observable": "callable signature (arity / parameter names)",
+      "operator": "kwonly_specialize",
+      "reason": "no anchor inside the gold-touched region",
+      "tier": "HIGH",
+      "tree_digest": "f64524352cbb455d0d58928fe8ca42aa26d528420a08d0a244a9031a12afa97b",
+      "verdict": "NOT_APPLICABLE"
+    },
+    {
+      "anchor": "BaseTimeSeries",
+      "failure_analysis": null,
+      "file": "astropy/timeseries/core.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 1,
+        "found": true,
+        "n_parsed": 24,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 20,
+        "reward": 1.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "dynamic reach: 'BaseTimeSeries' appears in a non-annotation string literal in astropy/timeseries/core.py line 9 ('BaseTimeSeries') -- an `__all__` entry -- an alpha-rename cannot be argued safe",
+      "tier": "MEDIUM",
+      "tree_digest": "f64524352cbb455d0d58928fe8ca42aa26d528420a08d0a244a9031a12afa97b",
+      "verdict": "REFUSED"
+    },
+    {
+      "anchor": null,
+      "failure_analysis": null,
+      "file": null,
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 1,
+        "found": true,
+        "n_parsed": 24,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 20,
+        "reward": 1.0
+      },
+      "loud_failure": false,
+      "observable": "order of elements in a returned collection",
+      "operator": "collection_reverse",
+      "reason": "no anchor inside the gold-touched region",
+      "tier": "MEDIUM",
+      "tree_digest": "f64524352cbb455d0d58928fe8ca42aa26d528420a08d0a244a9031a12afa97b",
+      "verdict": "NOT_APPLICABLE"
+    },
+    {
+      "anchor": null,
+      "failure_analysis": null,
+      "file": null,
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 1,
+        "found": true,
+        "n_parsed": 24,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 20,
+        "reward": 1.0
+      },
+      "loud_failure": false,
+      "observable": "human-readable text of an exception message",
+      "operator": "message_reword",
+      "reason": "no anchor inside the gold-touched region",
+      "tier": "HIGH",
+      "tree_digest": "f64524352cbb455d0d58928fe8ca42aa26d528420a08d0a244a9031a12afa97b",
+      "verdict": "NOT_APPLICABLE"
+    }
+  ],
+  "targets": [
+    "astropy/timeseries/core.py"
+  ],
+  "version": "4.3",
+  "witnesses": []
+}

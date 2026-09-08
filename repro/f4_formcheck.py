@@ -234,6 +234,19 @@ def section_for(sections, test_id):
     if test_id in sections:
         return sections[test_id]
 
+    # 1b. sympy's `bin/test`. Its blocks ARE underscore-delimited, so they parse,
+    #     but the label is `path/to/test_x.py:test_name` while swebench's sympy
+    #     parser reports failing tests by their BARE name (it reads lines ending
+    #     in ` F` / ` E`). `header.split(".")[-1]` therefore yields
+    #     `py:test_name`, which matches nothing -- the header is right there and
+    #     is missed on punctuation. Compare on the part after the last colon.
+    for header, body in sections.items():
+        if ".py:" not in header:
+            continue
+        name = header.rsplit(":", 1)[-1].strip()
+        if name == tail or name.split("[")[0] == base or header == test_id:
+            return body
+
     # 2. pytest collection error: the whole module failed to import, so no test
     #    in it has a block of its own. An alpha-rename that a test imports by
     #    name produces exactly this and nothing else.

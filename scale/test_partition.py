@@ -321,5 +321,45 @@ def test_genuine_breakage_is_still_invalid():
     assert a["unparsed"] == [], a
 
 
+SYMPY_LOG = """
+________________ sympy/polys/tests/test_rings.py:test_bug_sqrt ________________
+Traceback (most recent call last):
+  File "/testbed/sympy/polys/tests/test_rings.py", line 12, in test_bug_sqrt
+    from sympy.polys.rings import FracField
+ImportError: cannot import name 'FracField'
+"""
+
+
+def test_sympy_bin_test_shape_is_attributed():
+    """The FOURTH shape, found by the closure rather than by a wrong number.
+
+    sympy's blocks ARE underscore-delimited so they parse, but the label is
+    `path/to/test_x.py:test_name` while swebench's sympy parser reports failing
+    tests by their BARE name. `header.split(".")[-1]` yields `py:test_name`, so
+    the header was sitting right there and was missed on punctuation.
+    """
+    a = classify_failures(SYMPY_LOG,
+                          {"p2p_failing": ["test_bug_sqrt"], "f2p_failing": []},
+                          "FracField")
+    assert a["coupled"] == ["test_bug_sqrt"], a
+    assert a["unparsed"] == [] and a["broke"] == [], a
+
+
+def test_sympy_path_form_test_id_also_matches():
+    a = classify_failures(
+        SYMPY_LOG,
+        {"p2p_failing": ["sympy/polys/tests/test_rings.py:test_bug_sqrt"],
+         "f2p_failing": []}, "FracField")
+    assert a["unparsed"] == [], a
+
+
+def test_the_sympy_rule_does_not_swallow_unrelated_failures():
+    """Matching after the last colon must not make everything match."""
+    a = classify_failures(SYMPY_LOG,
+                          {"p2p_failing": ["test_something_else"],
+                           "f2p_failing": []}, "FracField")
+    assert a["unparsed"] == ["test_something_else"], a
+
+
 if __name__ == "__main__":
     sys.exit(main())
