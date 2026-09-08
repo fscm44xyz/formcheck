@@ -47,8 +47,16 @@ class Operator:
     breaks_if = None
     loud_failure = False
     """Whether this operator's ONLY realistic failure mode is loud -- an
-    incomplete rewrite that raises `NameError`/`ImportError` the moment the code
-    runs, so the task's own pre-existing (PASS_TO_PASS) suite detects it.
+    incomplete rewrite that raises `AttributeError`/`ImportError`/`NameError`
+    NAMING the symbol the moment the code runs, so the task's own pre-existing
+    (PASS_TO_PASS) suite detects it. `AttributeError` is listed first because it
+    is the one the `xarray#4966` witness actually produced, through a P2P test
+    that reached the symbol as a module attribute.
+
+    The converse -- SILENT failure -- is the criterion for UNVALIDATED: a
+    reordered collection, a reworded message, or a changed signature acceptance
+    produces no exception at all, so a suite that passes cannot be read as
+    confirming equivalence.
 
     This gates what may be judged on a task with NO independently written
     contract oracle. There, the only behavioural check available is the
