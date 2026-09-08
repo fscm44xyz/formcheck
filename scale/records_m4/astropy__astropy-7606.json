@@ -1,0 +1,52 @@
+{
+  "completed": true,
+  "control": {
+    "passed": false,
+    "reason": "the untransformed reference solution scored 0.0, not 1.0; F2P 1/1, P2P 240/241; first failing: astropy/units/tests/test_units.py::test_compose_roundtrip[]"
+  },
+  "digest_trace": [
+    {
+      "digest": "870b43a724ec3f31847425926136885a8ca35cb80533d953b42ac1805f0f9ac0",
+      "memo_hit": false
+    }
+  ],
+  "disk_orphan_reclaimed_bytes": 0,
+  "disk_residual_bytes": 0,
+  "elapsed_seconds": 197.07,
+  "error": null,
+  "image": "swebench/sweb.eval.x86_64.astropy_1776_astropy-7606:latest",
+  "instance_id": "astropy__astropy-7606",
+  "leaked_containers": [],
+  "leaked_image": false,
+  "log": [
+    [
+      "<control>",
+      "HARNESS_UNPROVEN",
+      "the untransformed reference solution scored 0.0, not 1.0; F2P 1/1, P2P 240/241; first failing: astropy/units/tests/test_units.py::test_compose_roundtrip[]"
+    ]
+  ],
+  "mountable": true,
+  "multi_target": false,
+  "n_targets": 1,
+  "on_prime_hub": null,
+  "on_prime_hub_reason": "not resolvable offline; no hub environment index is reachable from this repo, verifiers or swebench",
+  "operators_not_applicable": [],
+  "operators_with_anchors": [],
+  "repo": "astropy/astropy",
+  "row": {
+    "elapsed": 31.17,
+    "error": null,
+    "error_type": null,
+    "index": 0,
+    "mode": "formcheck",
+    "name": "astropy__astropy-7606",
+    "reason": "unchecked",
+    "valid": null
+  },
+  "rows": [],
+  "targets": [
+    "astropy/units/core.py"
+  ],
+  "version": "1.3",
+  "witnesses": []
+}

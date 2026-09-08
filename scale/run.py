@@ -207,7 +207,10 @@ def build_record(instance_id, image, spec, row, task, elapsed, error=None):
             "this repo, verifiers or swebench"),
         "elapsed_seconds": elapsed,
         "error": error,
-        "completed": True,
+        # A task that raised is NOT complete: `--resume` must retry it. A control
+        # FAILURE is a legitimate result and stays complete -- the distinction is
+        # "the harness broke" versus "the task could not be checked".
+        "completed": error is None,
     }
 
 

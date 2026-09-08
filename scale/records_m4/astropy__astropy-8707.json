@@ -1,0 +1,33 @@
+{
+  "completed": true,
+  "control": {
+    "passed": false,
+    "reason": "control never ran"
+  },
+  "digest_trace": [],
+  "disk_orphan_reclaimed_bytes": 0,
+  "disk_residual_bytes": 0,
+  "elapsed_seconds": 0.75,
+  "error": "FileNotFoundError: [Errno 2] No such file or directory: '/home/fscm44/formcheck-scale/scale/.leases/swebench_sweb.eval.x86_64.astropy_1776_astropy-7166_latest'",
+  "image": "swebench/sweb.eval.x86_64.astropy_1776_astropy-8707:latest",
+  "instance_id": "astropy__astropy-8707",
+  "leaked_containers": [],
+  "leaked_image": false,
+  "log": [],
+  "mountable": false,
+  "multi_target": true,
+  "n_targets": 2,
+  "on_prime_hub": null,
+  "on_prime_hub_reason": "not resolvable offline; no hub environment index is reachable from this repo, verifiers or swebench",
+  "operators_not_applicable": [],
+  "operators_with_anchors": [],
+  "repo": "astropy/astropy",
+  "row": null,
+  "rows": [],
+  "targets": [
+    "astropy/io/fits/card.py",
+    "astropy/io/fits/header.py"
+  ],
+  "version": "3.1",
+  "witnesses": []
+}

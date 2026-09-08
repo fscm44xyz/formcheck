@@ -1,0 +1,52 @@
+{
+  "completed": true,
+  "control": {
+    "passed": false,
+    "reason": "the untransformed reference solution scored 0.0, not 1.0; F2P 0/1, P2P 0/55; first failing: test_count_distinct_expression (aggregation.tests.AggregateTestCase)"
+  },
+  "digest_trace": [
+    {
+      "digest": "f4e57386d5753b4ffb79fd5680f5d620256c8fa8d0dc224bd3fb45cd61028c8d",
+      "memo_hit": false
+    }
+  ],
+  "disk_orphan_reclaimed_bytes": 0,
+  "disk_residual_bytes": 0,
+  "elapsed_seconds": 153.01,
+  "error": null,
+  "image": "swebench/sweb.eval.x86_64.django_1776_django-10880:latest",
+  "instance_id": "django__django-10880",
+  "leaked_containers": [],
+  "leaked_image": false,
+  "log": [
+    [
+      "<control>",
+      "HARNESS_UNPROVEN",
+      "the untransformed reference solution scored 0.0, not 1.0; F2P 0/1, P2P 0/55; first failing: test_count_distinct_expression (aggregation.tests.AggregateTestCase)"
+    ]
+  ],
+  "mountable": true,
+  "multi_target": false,
+  "n_targets": 1,
+  "on_prime_hub": null,
+  "on_prime_hub_reason": "not resolvable offline; no hub environment index is reachable from this repo, verifiers or swebench",
+  "operators_not_applicable": [],
+  "operators_with_anchors": [],
+  "repo": "django/django",
+  "row": {
+    "elapsed": 23.38,
+    "error": null,
+    "error_type": null,
+    "index": 0,
+    "mode": "formcheck",
+    "name": "django__django-10880",
+    "reason": "unchecked",
+    "valid": null
+  },
+  "rows": [],
+  "targets": [
+    "django/db/models/aggregates.py"
+  ],
+  "version": "3.0",
+  "witnesses": []
+}

@@ -764,3 +764,44 @@ are the ones that matter most.
 
 `scale/test_*.py`.
 
+---
+
+## 20. `live_refs` raced another worker's `release` and killed the task
+
+**Found by M4's own monitor, 0.8s into `astropy-8707`, at four workers.**
+
+`Leases.live_refs()` iterates `os.listdir(self.dir)` and opens each lease. That
+listing is a SNAPSHOT: another worker can release its lease between the listdir
+and the open. The `except (OSError, ValueError)` did catch the failed open --
+but then called `os.remove(path)` inside the handler, and that raised
+`FileNotFoundError` again, unhandled, out of `reconcile`, out of `ImageLease`,
+and the task died before its container ever started.
+
+The give-away in the record is that the missing file names a **different task**:
+
+    astropy__astropy-8707 failed with
+    FileNotFoundError: .../scale/.leases/..._astropy-7166_latest
+
+**Not the silent class.** It crashes loudly, the task is recorded `unchecked`
+with `mountable: false` and the exception in `error`, and no result is
+fabricated. It costs coverage, not correctness -- but at four workers over 500
+tasks it costs it repeatedly.
+
+**Rule.** *Every removal in the lease directory races every other worker, so
+"already gone" is the SUCCESS case.* `_unlink` swallows `FileNotFoundError` and
+is used on both removal paths. Two tests pin it: a lease vanishing mid-scan, and
+`release` being idempotent.
+
+**Resume semantics, fixed alongside.** `build_record` set `completed: True`
+unconditionally, so `--resume` would have SKIPPED a task that crashed -- silently
+dropping it from the denominator, which is the silent class. `completed` is now
+`error is None`. A control FAILURE stays complete, because "the task could not be
+checked" is a legitimate result; only "the harness broke" is retried.
+
+M4 is running with the pre-fix module loaded, so the race can still cost it
+tasks. Those are identifiable (`error` is non-null) and will be re-run with the
+fixed code into the same records directory rather than restarting a 7-hour run.
+
+`scale/rotation.py` (`_unlink`, `Leases.live_refs`); `scale/run.py`
+(`build_record`).
+

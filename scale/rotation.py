@@ -142,13 +142,31 @@ class Leases:
                 with open(path, encoding="utf-8") as f:
                     lease = json.load(f)
             except (OSError, ValueError):
-                os.remove(path)
+                # Unreadable OR already gone. With several workers the listing
+                # above is a snapshot: another worker can release its lease
+                # between `listdir` and this `open`, and the removal below then
+                # raced too. That is a real crash, not a hypothetical -- M4 lost
+                # `astropy-8707` to it 0.8s in, with a FileNotFoundError naming
+                # a DIFFERENT task's lease file.
+                _unlink(path)
                 continue
             if _pid_alive(lease.get("pid", -1)):
                 live.add(lease["ref"])
             else:
-                os.remove(path)
+                _unlink(path)
         return live
+
+
+def _unlink(path: str) -> None:
+    """Remove a lease, tolerating another worker having removed it first.
+
+    Every removal here is racing every other worker's `release`, so "it is
+    already gone" is the SUCCESS case, not an error.
+    """
+    try:
+        os.remove(path)
+    except FileNotFoundError:
+        pass
 
 
 def _pid_alive(pid: int) -> bool:

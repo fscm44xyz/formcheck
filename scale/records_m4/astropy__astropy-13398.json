@@ -1,0 +1,798 @@
+{
+  "completed": true,
+  "control": {
+    "passed": true,
+    "reason": "untransformed reference scores 1.0"
+  },
+  "digest_trace": [
+    {
+      "digest": "b6a2e43d497f8f6fe39b6ec4afbeff400d1aa5ac7ad6fe663a1933a32cda66ae",
+      "memo_hit": false
+    },
+    {
+      "digest": "aa1ebe39ad53a03a942ec8fb5d5356ddbe7f3306307d56257711dc8ece9ec495",
+      "memo_hit": false
+    },
+    {
+      "digest": "40b03414ac15d04eb7da0e803750fa5ddf2e7f18ee4c17c97c7518de578a4f0b",
+      "memo_hit": false
+    },
+    {
+      "digest": "40b03414ac15d04eb7da0e803750fa5ddf2e7f18ee4c17c97c7518de578a4f0b",
+      "memo_hit": true
+    },
+    {
+      "digest": "05ff05b8b40c94c771674e71c4a71fc9e518f0c2821c6258ba412ca1bb155c6e",
+      "memo_hit": false
+    },
+    {
+      "digest": "05ff05b8b40c94c771674e71c4a71fc9e518f0c2821c6258ba412ca1bb155c6e",
+      "memo_hit": true
+    },
+    {
+      "digest": "ff13a1ac65e97abafb9b44d88a2e2d2a6844e9219ade631f2d0863ec838a2d0c",
+      "memo_hit": false
+    },
+    {
+      "digest": "ff13a1ac65e97abafb9b44d88a2e2d2a6844e9219ade631f2d0863ec838a2d0c",
+      "memo_hit": true
+    },
+    {
+      "digest": "1ebf6f00492c5c5326b0a6b921c74dcc2e611730d694ddf7aa448eeb2bf8ee3f",
+      "memo_hit": false
+    },
+    {
+      "digest": "1ebf6f00492c5c5326b0a6b921c74dcc2e611730d694ddf7aa448eeb2bf8ee3f",
+      "memo_hit": true
+    },
+    {
+      "digest": "b94033ed665c1b39b954d5478e23bf8a5d0b2ef5f02e18e12c022d17b6c59f40",
+      "memo_hit": false
+    },
+    {
+      "digest": "b94033ed665c1b39b954d5478e23bf8a5d0b2ef5f02e18e12c022d17b6c59f40",
+      "memo_hit": true
+    },
+    {
+      "digest": "8afb0df21ab899d7d54b3f92ed9b21a9f54aaf72b303cb3051ee12cff7a97b37",
+      "memo_hit": false
+    },
+    {
+      "digest": "8afb0df21ab899d7d54b3f92ed9b21a9f54aaf72b303cb3051ee12cff7a97b37",
+      "memo_hit": true
+    },
+    {
+      "digest": "a57319bab659e96f9e789b4bb31d2e983d14c7aa09d7e3aeab6fb765ab45e3ea",
+      "memo_hit": false
+    },
+    {
+      "digest": "a57319bab659e96f9e789b4bb31d2e983d14c7aa09d7e3aeab6fb765ab45e3ea",
+      "memo_hit": true
+    },
+    {
+      "digest": "a1a194f7f007866a41803f0d18eb299d4849b98bbdcdf61fd16421dc1900ac9f",
+      "memo_hit": false
+    },
+    {
+      "digest": "a1a194f7f007866a41803f0d18eb299d4849b98bbdcdf61fd16421dc1900ac9f",
+      "memo_hit": true
+    },
+    {
+      "digest": "b1aadf31b29465130494ed1bc6e25caa44a28210ef2f6a831e8af0a8d2b0d4c8",
+      "memo_hit": false
+    },
+    {
+      "digest": "b1aadf31b29465130494ed1bc6e25caa44a28210ef2f6a831e8af0a8d2b0d4c8",
+      "memo_hit": true
+    }
+  ],
+  "disk_orphan_reclaimed_bytes": 0,
+  "disk_residual_bytes": 0,
+  "elapsed_seconds": 441.54,
+  "error": null,
+  "image": "swebench/sweb.eval.x86_64.astropy_1776_astropy-13398:latest",
+  "instance_id": "astropy__astropy-13398",
+  "leaked_containers": [],
+  "leaked_image": false,
+  "log": [
+    [
+      "<control>",
+      "OK",
+      "untransformed reference scores 1.0"
+    ],
+    [
+      "kwonly_specialize:<no anchor>",
+      "NOT_APPLICABLE",
+      "no anchor inside the gold-touched region"
+    ],
+    [
+      "symbol_rename:astropy/coordinates/builtin_frames/intermediate_rotation_transforms.py:tete_to_itrs_mat",
+      "UNVALIDATED",
+      "14 failing test(s) have no recognisable failure block -- unknown log shape, not evidence of breakage; first: astropy/coordinates/tests/test_intermediate_transformations.py::test_icrs_gcrs[icoo0]"
+    ],
+    [
+      "symbol_rename:astropy/coordinates/builtin_frames/intermediate_rotation_transforms.py:tete_to_itrs",
+      "CLEAN",
+      "reward 1.0"
+    ],
+    [
+      "symbol_rename:astropy/coordinates/builtin_frames/intermediate_rotation_transforms.py:itrs_to_tete",
+      "CLEAN",
+      "reward 1.0"
+    ],
+    [
+      "symbol_rename:astropy/coordinates/builtin_frames/intermediate_rotation_transforms.py:cirs_to_itrs",
+      "CLEAN",
+      "reward 1.0"
+    ],
+    [
+      "symbol_rename:astropy/coordinates/builtin_frames/intermediate_rotation_transforms.py:itrs_to_cirs",
+      "CLEAN",
+      "reward 1.0"
+    ],
+    [
+      "symbol_rename:astropy/coordinates/builtin_frames/itrs.py:ITRS",
+      "REFUSED",
+      "BORDER: the issue names 'ITRS' -- candidate CONTRACT, route to the rubric"
+    ],
+    [
+      "symbol_rename:astropy/coordinates/builtin_frames/itrs_observed_transforms.py:itrs_to_altaz_mat",
+      "CLEAN",
+      "reward 1.0"
+    ],
+    [
+      "symbol_rename:astropy/coordinates/builtin_frames/itrs_observed_transforms.py:itrs_to_hadec_mat",
+      "CLEAN",
+      "reward 1.0"
+    ],
+    [
+      "symbol_rename:astropy/coordinates/builtin_frames/itrs_observed_transforms.py:altaz_to_hadec_mat",
+      "CLEAN",
+      "reward 1.0"
+    ],
+    [
+      "symbol_rename:astropy/coordinates/builtin_frames/itrs_observed_transforms.py:add_refraction",
+      "CLEAN",
+      "reward 1.0"
+    ],
+    [
+      "symbol_rename:astropy/coordinates/builtin_frames/itrs_observed_transforms.py:remove_refraction",
+      "CLEAN",
+      "reward 1.0"
+    ],
+    [
+      "symbol_rename:astropy/coordinates/builtin_frames/itrs_observed_transforms.py:itrs_to_observed",
+      "REFUSED",
+      "BORDER: the issue names 'itrs_to_observed' -- candidate CONTRACT, route to the rubric"
+    ],
+    [
+      "symbol_rename:astropy/coordinates/builtin_frames/itrs_observed_transforms.py:observed_to_itrs",
+      "REFUSED",
+      "BORDER: the issue names 'observed_to_itrs' -- candidate CONTRACT, route to the rubric"
+    ],
+    [
+      "collection_reverse:<no anchor>",
+      "NOT_APPLICABLE",
+      "no anchor inside the gold-touched region"
+    ],
+    [
+      "message_reword:<no anchor>",
+      "NOT_APPLICABLE",
+      "no anchor inside the gold-touched region"
+    ]
+  ],
+  "mountable": true,
+  "multi_target": true,
+  "n_targets": 4,
+  "on_prime_hub": null,
+  "on_prime_hub_reason": "not resolvable offline; no hub environment index is reachable from this repo, verifiers or swebench",
+  "operators_not_applicable": [
+    "collection_reverse",
+    "kwonly_specialize",
+    "message_reword"
+  ],
+  "operators_with_anchors": [
+    "symbol_rename"
+  ],
+  "repo": "astropy/astropy",
+  "row": {
+    "elapsed": 270.89,
+    "error": null,
+    "error_type": null,
+    "index": 0,
+    "mode": "formcheck",
+    "name": "astropy__astropy-13398",
+    "reason": "valid",
+    "valid": true
+  },
+  "rows": [
+    {
+      "anchor": null,
+      "failure_analysis": null,
+      "file": null,
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 4,
+        "found": true,
+        "n_parsed": 74,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 68,
+        "reward": 1.0
+      },
+      "loud_failure": false,
+      "observable": "callable signature (arity / parameter names)",
+      "operator": "kwonly_specialize",
+      "reason": "no anchor inside the gold-touched region",
+      "tier": "HIGH",
+      "tree_digest": "b6a2e43d497f8f6fe39b6ec4afbeff400d1aa5ac7ad6fe663a1933a32cda66ae",
+      "verdict": "NOT_APPLICABLE"
+    },
+    {
+      "anchor": "tete_to_itrs_mat",
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "broke": [],
+        "coupled": [],
+        "failing": [
+          "astropy/coordinates/tests/test_intermediate_transformations.py::test_icrs_gcrs[icoo0]",
+          "astropy/coordinates/tests/test_intermediate_transformations.py::test_icrs_gcrs[icoo1]",
+          "astropy/coordinates/tests/test_intermediate_transformations.py::test_icrs_gcrs_dist_diff[gframe0]",
+          "astropy/coordinates/tests/test_intermediate_transformations.py::test_icrs_gcrs_dist_diff[gframe1]",
+          "astropy/coordinates/tests/test_intermediate_transformations.py::test_cirs_to_altaz",
+          "astropy/coordinates/tests/test_intermediate_transformations.py::test_cirs_to_hadec",
+          "astropy/coordinates/tests/test_intermediate_transformations.py::test_gcrs_itrs",
+          "astropy/coordinates/tests/test_intermediate_transformations.py::test_cirs_itrs",
+          "astropy/coordinates/tests/test_intermediate_transformations.py::test_gcrs_cirs",
+          "astropy/coordinates/tests/test_intermediate_transformations.py::test_gcrs_altaz",
+          "astropy/coordinates/tests/test_intermediate_transformations.py::test_itrs_topo_to_altaz_with_refraction",
+          "astropy/coordinates/tests/test_intermediate_transformations.py::test_itrs_topo_to_hadec_with_refraction",
+          "astropy/coordinates/tests/test_intermediate_transformations.py::test_cirs_itrs_topo",
+          "astropy/coordinates/tests/test_intermediate_transformations.py::test_itrs_straight_overhead"
+        ],
+        "symbol": "tete_to_itrs_mat",
+        "unexplained": [
+          "astropy/coordinates/tests/test_intermediate_transformations.py::test_icrs_gcrs[icoo0] (no failure section found)",
+          "astropy/coordinates/tests/test_intermediate_transformations.py::test_icrs_gcrs[icoo1] (no failure section found)",
+          "astropy/coordinates/tests/test_intermediate_transformations.py::test_icrs_gcrs_dist_diff[gframe0] (no failure section found)",
+          "astropy/coordinates/tests/test_intermediate_transformations.py::test_icrs_gcrs_dist_diff[gframe1] (no failure section found)",
+          "astropy/coordinates/tests/test_intermediate_transformations.py::test_cirs_to_altaz (no failure section found)",
+          "astropy/coordinates/tests/test_intermediate_transformations.py::test_cirs_to_hadec (no failure section found)",
+          "astropy/coordinates/tests/test_intermediate_transformations.py::test_gcrs_itrs (no failure section found)",
+          "astropy/coordinates/tests/test_intermediate_transformations.py::test_cirs_itrs (no failure section found)",
+          "astropy/coordinates/tests/test_intermediate_transformations.py::test_gcrs_cirs (no failure section found)",
+          "astropy/coordinates/tests/test_intermediate_transformations.py::test_gcrs_altaz (no failure section found)",
+          "astropy/coordinates/tests/test_intermediate_transformations.py::test_itrs_topo_to_altaz_with_refraction (no failure section found)",
+          "astropy/coordinates/tests/test_intermediate_transformations.py::test_itrs_topo_to_hadec_with_refraction (no failure section found)",
+          "astropy/coordinates/tests/test_intermediate_transformations.py::test_cirs_itrs_topo (no failure section found)",
+          "astropy/coordinates/tests/test_intermediate_transformations.py::test_itrs_straight_overhead (no failure section found)"
+        ],
+        "unparsed": [
+          "astropy/coordinates/tests/test_intermediate_transformations.py::test_icrs_gcrs[icoo0]",
+          "astropy/coordinates/tests/test_intermediate_transformations.py::test_icrs_gcrs[icoo1]",
+          "astropy/coordinates/tests/test_intermediate_transformations.py::test_icrs_gcrs_dist_diff[gframe0]",
+          "astropy/coordinates/tests/test_intermediate_transformations.py::test_icrs_gcrs_dist_diff[gframe1]",
+          "astropy/coordinates/tests/test_intermediate_transformations.py::test_cirs_to_altaz",
+          "astropy/coordinates/tests/test_intermediate_transformations.py::test_cirs_to_hadec",
+          "astropy/coordinates/tests/test_intermediate_transformations.py::test_gcrs_itrs",
+          "astropy/coordinates/tests/test_intermediate_transformations.py::test_cirs_itrs",
+          "astropy/coordinates/tests/test_intermediate_transformations.py::test_gcrs_cirs",
+          "astropy/coordinates/tests/test_intermediate_transformations.py::test_gcrs_altaz",
+          "astropy/coordinates/tests/test_intermediate_transformations.py::test_itrs_topo_to_altaz_with_refraction",
+          "astropy/coordinates/tests/test_intermediate_transformations.py::test_itrs_topo_to_hadec_with_refraction",
+          "astropy/coordinates/tests/test_intermediate_transformations.py::test_cirs_itrs_topo",
+          "astropy/coordinates/tests/test_intermediate_transformations.py::test_itrs_straight_overhead"
+        ],
+        "unparsed_log_shape": true
+      },
+      "file": "astropy/coordinates/builtin_frames/intermediate_rotation_transforms.py",
+      "graded_log": "+ pytest -rA astropy/coordinates/tests/test_intermediate_transformations.py\n============================= test session starts ==============================\nplatform linux -- Python 3.9.20, pytest-7.4.0, pluggy-1.3.0\n\nRunning tests with Astropy version 5.2.dev287+g6500928dc.d20260813.\nRunning tests in astropy/coordinates/tests/test_intermediate_transformations.py.\n\nDate: 2026-09-08T16:27:59\n\nPlatform: Linux-6.6.87.2-microsoft-standard-WSL2-x86_64-with-glibc2.35\n\nExecutable: /opt/miniconda3/envs/testbed/bin/python\n\nFull Python Version: \n3.9.20 (main, Oct  3 2024, 07:27:41) \n[GCC 11.2.0]\n\nencodings: sys: utf-8, locale: UTF-8, filesystem: utf-8\nbyteorder: little\nfloat info: dig: 15, mant_dig: 15\n\nPackage versions: \nNumpy: 1.25.2\nScipy: not available\nMatplotlib: not available\nh5py: not available\nPandas: not available\nPyERFA: 2.0.0.3\nCython: not available\nScikit-image: not available\nasdf: not available\npyarrow: not available\n\nUsing Astropy options: remote_data: none.\n\nARCH_ON_CI: undefined\nIS_CRON: undefined\n\nrootdir: /testbed\nconfigfile: setup.cfg\nplugins: hypothesis-6.46.7, xdist-3.3.1, openfiles-0.5.0, remotedata-0.4.0, cov-4.1.0, filter-subpackage-0.1.2, doctestplus-1.0.0, arraydiff-0.5.0, astropy-header-0.2.2, mock-3.11.1, astropy-0.10.0\ncollected 0 items / 2 errors\n\n==================================== ERRORS ====================================\n_ ERROR collecting astropy/coordinates/tests/test_intermediate_transformations.py _\n/opt/miniconda3/envs/testbed/lib/python3.9/site-packages/_pytest/runner.py:341: in from_call\n    result: Optional[TResult] = func()\n/opt/miniconda3/envs/testbed/lib/python3.9/site-packages/_pytest/runner.py:372: in <lambda>\n    call = CallInfo.from_call(lambda: list(collector.collect()), \"collect\")\n/opt/miniconda3/envs/testbed/lib/python3.9/site-packages/pytest_doctestplus/plugin.py:250: in collect\n    module = import_path(fspath, root=self.config.rootpath)\n/opt/miniconda3/envs/testbed/lib/python3.9/site-packages/_pytest/pathlib.py:565: in import_path\n    importlib.import_module(module_name)\n/opt/miniconda3/envs/testbed/lib/python3.9/importlib/__init__.py:127: in import_module\n    return _bootstrap._gcd_import(name[level:], package, level)\n<frozen importlib._bootstrap>:1030: in _gcd_import\n    ???\n<frozen importlib._bootstrap>:1007: in _find_and_load\n    ???\n<frozen importlib._bootstrap>:986: in _find_and_load_unlocked\n    ???\n<frozen importlib._bootstrap>:680: in _load_unlocked\n    ???\n/opt/miniconda3/envs/testbed/lib/python3.9/site-packages/_pytest/assertion/rewrite.py:178: in exec_module\n    exec(co, module.__dict__)\nastropy/coordinates/tests/test_intermediate_transformations.py:27: in <module>\n    from astropy.coordinates.builtin_frames.intermediate_rotation_transforms import (\nE   ImportError: cannot import name 'tete_to_itrs_mat' from 'astropy.coordinates.builtin_frames.intermediate_rotation_transforms' (/testbed/astropy/coordinates/builtin_frames/intermediate_rotation_transforms.py)\n_ ERROR collecting astropy/coordinates/tests/test_intermediate_transformations.py _\nImportError while importing test module '/testbed/astropy/coordinates/tests/test_intermediate_transformations.py'.\nHint: make sure your test modules/packages have valid Python names.\nTraceback:\n/opt/miniconda3/envs/testbed/lib/python3.9/importlib/__init__.py:127: in import_module\n    return _bootstrap._gcd_import(name[level:], package, level)\nastropy/coordinates/tests/test_intermediate_transformations.py:27: in <module>\n    from astropy.coordinates.builtin_frames.intermediate_rotation_transforms import (\nE   ImportError: cannot import name 'tete_to_itrs_mat' from 'astropy.coordinates.builtin_frames.intermediate_rotation_transforms' (/testbed/astropy/coordinates/builtin_frames/intermediate_rotation_transforms.py)\n=========================== short test summary info ============================\nERROR astropy/coordinates/tests/test_intermediate_transformations.py - Import...\nERROR astropy/coordinates/tests/test_intermediate_transformations.py\n!!!!!!!!!!!!!!!!!!! Interrupted: 2 errors during collection !!!!!!!!!!!!!!!!!!!!\n============================== 2 errors in 0.36s ===============================\n\n<frozen importlib._bootstrap>:228: RuntimeWarning: numpy.ndarray size changed, may indicate binary incompatibility. Expected 80 from C header, got 96 from PyObject\n",
+      "graded_report": {
+        "f2p_fail": 4,
+        "f2p_failing": [
+          "astropy/coordinates/tests/test_intermediate_transformations.py::test_itrs_topo_to_altaz_with_refraction",
+          "astropy/coordinates/tests/test_intermediate_transformations.py::test_itrs_topo_to_hadec_with_refraction",
+          "astropy/coordinates/tests/test_intermediate_transformations.py::test_cirs_itrs_topo",
+          "astropy/coordinates/tests/test_intermediate_transformations.py::test_itrs_straight_overhead"
+        ],
+        "f2p_pass": 0,
+        "found": true,
+        "n_parsed": 1,
+        "p2p_fail": 68,
+        "p2p_failing": [
+          "astropy/coordinates/tests/test_intermediate_transformations.py::test_icrs_gcrs[icoo0]",
+          "astropy/coordinates/tests/test_intermediate_transformations.py::test_icrs_gcrs[icoo1]",
+          "astropy/coordinates/tests/test_intermediate_transformations.py::test_icrs_gcrs_dist_diff[gframe0]",
+          "astropy/coordinates/tests/test_intermediate_transformations.py::test_icrs_gcrs_dist_diff[gframe1]",
+          "astropy/coordinates/tests/test_intermediate_transformations.py::test_cirs_to_altaz",
+          "astropy/coordinates/tests/test_intermediate_transformations.py::test_cirs_to_hadec",
+          "astropy/coordinates/tests/test_intermediate_transformations.py::test_gcrs_itrs",
+          "astropy/coordinates/tests/test_intermediate_transformations.py::test_cirs_itrs",
+          "astropy/coordinates/tests/test_intermediate_transformations.py::test_gcrs_cirs",
+          "astropy/coordinates/tests/test_intermediate_transformations.py::test_gcrs_altaz"
+        ],
+        "p2p_pass": 0,
+        "reward": 0.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "14 failing test(s) have no recognisable failure block -- unknown log shape, not evidence of breakage; first: astropy/coordinates/tests/test_intermediate_transformations.py::test_icrs_gcrs[icoo0]",
+      "tier": "MEDIUM",
+      "tree_digest": "aa1ebe39ad53a03a942ec8fb5d5356ddbe7f3306307d56257711dc8ece9ec495",
+      "verdict": "UNVALIDATED"
+    },
+    {
+      "anchor": "tete_to_itrs",
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "broke": [],
+        "coupled": [],
+        "failing": [],
+        "symbol": "tete_to_itrs",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": "astropy/coordinates/builtin_frames/intermediate_rotation_transforms.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 4,
+        "found": true,
+        "n_parsed": 74,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 68,
+        "reward": 1.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "reward 1.0",
+      "tier": "MEDIUM",
+      "tree_digest": "40b03414ac15d04eb7da0e803750fa5ddf2e7f18ee4c17c97c7518de578a4f0b",
+      "verdict": "CLEAN"
+    },
+    {
+      "anchor": "itrs_to_tete",
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "broke": [],
+        "coupled": [],
+        "failing": [],
+        "symbol": "itrs_to_tete",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": "astropy/coordinates/builtin_frames/intermediate_rotation_transforms.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 4,
+        "found": true,
+        "n_parsed": 74,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 68,
+        "reward": 1.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "reward 1.0",
+      "tier": "MEDIUM",
+      "tree_digest": "05ff05b8b40c94c771674e71c4a71fc9e518f0c2821c6258ba412ca1bb155c6e",
+      "verdict": "CLEAN"
+    },
+    {
+      "anchor": "cirs_to_itrs",
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "broke": [],
+        "coupled": [],
+        "failing": [],
+        "symbol": "cirs_to_itrs",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": "astropy/coordinates/builtin_frames/intermediate_rotation_transforms.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 4,
+        "found": true,
+        "n_parsed": 74,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 68,
+        "reward": 1.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "reward 1.0",
+      "tier": "MEDIUM",
+      "tree_digest": "ff13a1ac65e97abafb9b44d88a2e2d2a6844e9219ade631f2d0863ec838a2d0c",
+      "verdict": "CLEAN"
+    },
+    {
+      "anchor": "itrs_to_cirs",
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "broke": [],
+        "coupled": [],
+        "failing": [],
+        "symbol": "itrs_to_cirs",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": "astropy/coordinates/builtin_frames/intermediate_rotation_transforms.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 4,
+        "found": true,
+        "n_parsed": 74,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 68,
+        "reward": 1.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "reward 1.0",
+      "tier": "MEDIUM",
+      "tree_digest": "1ebf6f00492c5c5326b0a6b921c74dcc2e611730d694ddf7aa448eeb2bf8ee3f",
+      "verdict": "CLEAN"
+    },
+    {
+      "anchor": "ITRS",
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "broke": [],
+        "coupled": [],
+        "failing": [],
+        "symbol": "itrs_to_cirs",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": "astropy/coordinates/builtin_frames/itrs.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 4,
+        "found": true,
+        "n_parsed": 74,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 68,
+        "reward": 1.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "BORDER: the issue names 'ITRS' -- candidate CONTRACT, route to the rubric",
+      "tier": "MEDIUM",
+      "tree_digest": "1ebf6f00492c5c5326b0a6b921c74dcc2e611730d694ddf7aa448eeb2bf8ee3f",
+      "verdict": "REFUSED"
+    },
+    {
+      "anchor": "itrs_to_altaz_mat",
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "broke": [],
+        "coupled": [],
+        "failing": [],
+        "symbol": "itrs_to_altaz_mat",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": "astropy/coordinates/builtin_frames/itrs_observed_transforms.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 4,
+        "found": true,
+        "n_parsed": 74,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 68,
+        "reward": 1.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "reward 1.0",
+      "tier": "MEDIUM",
+      "tree_digest": "b94033ed665c1b39b954d5478e23bf8a5d0b2ef5f02e18e12c022d17b6c59f40",
+      "verdict": "CLEAN"
+    },
+    {
+      "anchor": "itrs_to_hadec_mat",
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "broke": [],
+        "coupled": [],
+        "failing": [],
+        "symbol": "itrs_to_hadec_mat",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": "astropy/coordinates/builtin_frames/itrs_observed_transforms.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 4,
+        "found": true,
+        "n_parsed": 74,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 68,
+        "reward": 1.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "reward 1.0",
+      "tier": "MEDIUM",
+      "tree_digest": "8afb0df21ab899d7d54b3f92ed9b21a9f54aaf72b303cb3051ee12cff7a97b37",
+      "verdict": "CLEAN"
+    },
+    {
+      "anchor": "altaz_to_hadec_mat",
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "broke": [],
+        "coupled": [],
+        "failing": [],
+        "symbol": "altaz_to_hadec_mat",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": "astropy/coordinates/builtin_frames/itrs_observed_transforms.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 4,
+        "found": true,
+        "n_parsed": 74,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 68,
+        "reward": 1.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "reward 1.0",
+      "tier": "MEDIUM",
+      "tree_digest": "a57319bab659e96f9e789b4bb31d2e983d14c7aa09d7e3aeab6fb765ab45e3ea",
+      "verdict": "CLEAN"
+    },
+    {
+      "anchor": "add_refraction",
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "broke": [],
+        "coupled": [],
+        "failing": [],
+        "symbol": "add_refraction",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": "astropy/coordinates/builtin_frames/itrs_observed_transforms.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 4,
+        "found": true,
+        "n_parsed": 74,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 68,
+        "reward": 1.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "reward 1.0",
+      "tier": "MEDIUM",
+      "tree_digest": "a1a194f7f007866a41803f0d18eb299d4849b98bbdcdf61fd16421dc1900ac9f",
+      "verdict": "CLEAN"
+    },
+    {
+      "anchor": "remove_refraction",
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "broke": [],
+        "coupled": [],
+        "failing": [],
+        "symbol": "remove_refraction",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": "astropy/coordinates/builtin_frames/itrs_observed_transforms.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 4,
+        "found": true,
+        "n_parsed": 74,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 68,
+        "reward": 1.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "reward 1.0",
+      "tier": "MEDIUM",
+      "tree_digest": "b1aadf31b29465130494ed1bc6e25caa44a28210ef2f6a831e8af0a8d2b0d4c8",
+      "verdict": "CLEAN"
+    },
+    {
+      "anchor": "itrs_to_observed",
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "broke": [],
+        "coupled": [],
+        "failing": [],
+        "symbol": "remove_refraction",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": "astropy/coordinates/builtin_frames/itrs_observed_transforms.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 4,
+        "found": true,
+        "n_parsed": 74,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 68,
+        "reward": 1.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "BORDER: the issue names 'itrs_to_observed' -- candidate CONTRACT, route to the rubric",
+      "tier": "MEDIUM",
+      "tree_digest": "b1aadf31b29465130494ed1bc6e25caa44a28210ef2f6a831e8af0a8d2b0d4c8",
+      "verdict": "REFUSED"
+    },
+    {
+      "anchor": "observed_to_itrs",
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "broke": [],
+        "coupled": [],
+        "failing": [],
+        "symbol": "remove_refraction",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": "astropy/coordinates/builtin_frames/itrs_observed_transforms.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 4,
+        "found": true,
+        "n_parsed": 74,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 68,
+        "reward": 1.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "BORDER: the issue names 'observed_to_itrs' -- candidate CONTRACT, route to the rubric",
+      "tier": "MEDIUM",
+      "tree_digest": "b1aadf31b29465130494ed1bc6e25caa44a28210ef2f6a831e8af0a8d2b0d4c8",
+      "verdict": "REFUSED"
+    },
+    {
+      "anchor": null,
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "broke": [],
+        "coupled": [],
+        "failing": [],
+        "symbol": "remove_refraction",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": null,
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 4,
+        "found": true,
+        "n_parsed": 74,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 68,
+        "reward": 1.0
+      },
+      "loud_failure": false,
+      "observable": "order of elements in a returned collection",
+      "operator": "collection_reverse",
+      "reason": "no anchor inside the gold-touched region",
+      "tier": "MEDIUM",
+      "tree_digest": "b1aadf31b29465130494ed1bc6e25caa44a28210ef2f6a831e8af0a8d2b0d4c8",
+      "verdict": "NOT_APPLICABLE"
+    },
+    {
+      "anchor": null,
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "broke": [],
+        "coupled": [],
+        "failing": [],
+        "symbol": "remove_refraction",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": null,
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 4,
+        "found": true,
+        "n_parsed": 74,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 68,
+        "reward": 1.0
+      },
+      "loud_failure": false,
+      "observable": "human-readable text of an exception message",
+      "operator": "message_reword",
+      "reason": "no anchor inside the gold-touched region",
+      "tier": "HIGH",
+      "tree_digest": "b1aadf31b29465130494ed1bc6e25caa44a28210ef2f6a831e8af0a8d2b0d4c8",
+      "verdict": "NOT_APPLICABLE"
+    }
+  ],
+  "targets": [
+    "astropy/coordinates/builtin_frames/__init__.py",
+    "astropy/coordinates/builtin_frames/intermediate_rotation_transforms.py",
+    "astropy/coordinates/builtin_frames/itrs.py",
+    "astropy/coordinates/builtin_frames/itrs_observed_transforms.py"
+  ],
+  "version": "5.0",
+  "witnesses": []
+}

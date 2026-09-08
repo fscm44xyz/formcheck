@@ -218,5 +218,49 @@ def main():
     return 1 if failed else 0
 
 
+def test_live_refs_tolerates_a_lease_vanishing_mid_scan():
+    """The M4 race: `listdir` is a snapshot, and another worker's `release`
+    can delete an entry before this loop reaches it.
+
+    Reproduced by making the read fail the way a concurrent removal does, and
+    asserting `live_refs` returns rather than raising. M4 lost `astropy-8707`
+    0.8s in to a FileNotFoundError naming a DIFFERENT task's lease.
+    """
+    d = tempfile.mkdtemp()
+    try:
+        leases = rotation.Leases(d)
+        leases.take("swebench/gone:latest", "task-gone")
+        path = leases._path("swebench/gone:latest")
+
+        real_open = open
+
+        def vanishing_open(p, *a, **kw):
+            if p == path:
+                os.remove(p)          # another worker released it, right now
+                raise FileNotFoundError(2, "No such file or directory", p)
+            return real_open(p, *a, **kw)
+
+        import builtins
+        builtins.open = vanishing_open
+        try:
+            assert leases.live_refs() == set()
+        finally:
+            builtins.open = real_open
+    finally:
+        shutil.rmtree(d, ignore_errors=True)
+
+
+def test_release_is_idempotent():
+    """Two workers releasing the same ref must not make the second one crash."""
+    d = tempfile.mkdtemp()
+    try:
+        leases = rotation.Leases(d)
+        leases.take("swebench/x:latest", "t")
+        leases.release("swebench/x:latest")
+        leases.release("swebench/x:latest")
+    finally:
+        shutil.rmtree(d, ignore_errors=True)
+
+
 if __name__ == "__main__":
     sys.exit(main())
