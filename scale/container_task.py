@@ -482,6 +482,13 @@ class SweBenchFormcheckTask(ContainerFormcheckTask):
         self.FORMCHECK_TARGETS = tuple(spec["targets"])
         self._graded_memo = {}
         self._scope_cache = None
+        # Every digest this task computes, in order, with whether it served a
+        # cached grading. This is the ONLY evidence that distinguishes a genuine
+        # CLEAN from a D2 false CLEAN: both produce `reward 1.0`, so the verdict
+        # cannot discriminate. A transformed tree whose digest equals the
+        # control's is D2 firing, whatever the row says.
+        self.digest_trace = []
+        self.last_digest = None
 
     def _tree_digest(self):
         """Content hash of the files a transform can rewrite.
@@ -568,7 +575,10 @@ class SweBenchFormcheckTask(ContainerFormcheckTask):
         if not key:
             raise RuntimeError("tree digest empty -- refusing to key the "
                                "graded memo on it (see CHANGES.md D2)")
-        if key not in self._graded_memo:
+        hit = key in self._graded_memo
+        self.last_digest = key
+        self.digest_trace.append({"digest": key, "memo_hit": hit})
+        if not hit:
             cmd, directives = self.test_invocation()
             full = " ".join([cmd, *directives])
             # The env's bin directory goes on PATH rather than activating conda:

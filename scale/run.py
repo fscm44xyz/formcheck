@@ -282,6 +282,7 @@ async def run_one(instance, leases, progress, timeout, baseline_free=0):
                           round(time.time() - t0, 2), error)
     record["disk_residual_bytes"] = residual
     record["disk_orphan_reclaimed_bytes"] = orphan_reclaimed
+    record["digest_trace"] = list(getattr(task, "digest_trace", []) or [])
     record["leaked_image"] = leaked_image
     record["leaked_containers"] = leaked_containers
     write_record(record)
@@ -335,8 +336,15 @@ async def main():
     ap.add_argument("--timeout", type=int, default=DEFAULT_TASK_TIMEOUT)
     ap.add_argument("--resume", action="store_true",
                     help="skip tasks whose record says completed")
+    ap.add_argument("--records-dir",
+                    help="write records here instead of scale/records, so a "
+                         "targeted re-run cannot clobber a completed run's "
+                         "evidence")
     args = ap.parse_args()
 
+    global RESULTS
+    if args.records_dir:
+        RESULTS = os.path.abspath(args.records_dir)
     os.makedirs(RESULTS, exist_ok=True)
     leases = rotation.Leases(LEASES)
     progress = Progress(PROGRESS)

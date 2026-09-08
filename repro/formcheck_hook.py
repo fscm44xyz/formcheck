@@ -282,6 +282,11 @@ class FormCheckMixin:
             # Which failing tests were coupling and which were unexplained, from
             # the oracle that judged them (`writeup.md` 6.2).
             "failure_analysis": getattr(self, "failure_analysis", None),
+            # The digest of the tree this row was graded on. A CLEAN whose
+            # digest equals the control's is CHANGES.md D2 firing; a CLEAN with
+            # a distinct digest is genuinely clean. The verdict alone cannot
+            # tell those apart, which is what made D2 invisible.
+            "tree_digest": getattr(self, "last_digest", None),
         })
 
     def formcheck_in_scope(self, anchor) -> bool:
