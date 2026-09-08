@@ -921,39 +921,73 @@ governor, because it reported healthy throughout.
 
 ---
 
-## 23. Separating refusal from failure put refusals outside the liveness check
+## 23. Two correct guards cancelled at the seam, and nothing reported it
 
-**The requirement that fixed one thing broke another, and only the interaction
-was wrong.**
+**The strongest instance of the family, and the only one found by noticing the
+ABSENCE of an event.**
 
-Entry 21 established two rules from the same incident: assert something
-causally necessary (the burn detector), and never bucket an infrastructure
-refusal as a task result. Both were implemented. The second was implemented as
-`return None` before a record is written — and that return sat **before** the
-line that feeds the burn detector.
+Entry 21 produced two requirements from one incident. Both were right:
 
-So refusals were invisible to the invariant written to catch exactly this. When
-the registry blocked us, **107 tasks were cycled in 41 seconds and the detector
-never looked.** The run was stopped by hand.
+  * *separate an infrastructure refusal from a task result* — a 429 must leave
+    the task unattempted, not failed;
+  * *assert something causally necessary* — a real task cannot be fast, so a
+    streak of impossibly fast outcomes aborts the run.
 
-**This must be recorded accurately.** It is tempting, and was briefly proposed,
-to describe this as the invariant earning its keep by firing on a cause it was
-not written for. It did not fire. `progress.jsonl` contains zero `burn pattern`
-events and the log contains no `BurnDetected`; the run ends mid-queue at task
-174 because a human killed the process. Recording a guard as having worked when
-it did not is the same failure as a check reporting success it did not earn --
-and it would have been written into the permanent record as evidence FOR the
-design.
+Both were implemented. Both were individually correct. The first was implemented
+as `return None` before a record is written — and that return sat **before** the
+line feeding the second. The refusal path skipped the liveness check entirely.
 
-**What did work**, and is worth keeping: not one of those 107 refusals wrote a
-record, fabricated a row, or produced an `INVALID` from an infrastructure cause.
-Every refused task was verified still absent from `records_m4/` and returned to
-the queue. Entry 21's rule 3 held exactly as designed.
+So when the registry blocked us, **107 tasks were cycled in 41 seconds and the
+detector never looked.** The run was stopped by hand.
+
+**Why this one is worse than the other seven.**
+
+  * *Correctness of parts does not compose.* No review of either requirement
+    alone would have found this. Each is right. The defect lives only in their
+    interaction, at a seam neither owns.
+  * *A safety mechanism was silently disabled by another safety mechanism*, and
+    the system reported nothing — no warning, no degraded mode, no event.
+  * *It was found by an operator noticing that an event was missing*, not by any
+    check. Nothing in the machinery is capable of observing its own silence.
+
+**And it was nearly recorded backwards.** Reading a dead process and a frozen
+log, the conclusion drawn was that the invariant had worked — that it had fired
+on a cause it was not written for. It had not. `progress.jsonl` contains zero
+`burn pattern` events and the log contains no `BurnDetected`; the run ends
+mid-queue at task 174 because a human killed the process. Accepting that credit
+would have written a guard's success into the permanent record as evidence FOR
+the design, on the basis of a clean-looking outcome nobody asked the cause of --
+which is precisely the failure this project exists to detect, committed about
+this project's own safety mechanism.
+
+**What did hold**, and is worth keeping separate from what did not: none of
+those 107 refusals wrote a record, fabricated a row, or produced an `INVALID`
+from an infrastructure cause. Every refused task was verified still absent from
+`records_m4/` and back in the queue. Entry 21's rule 3 worked exactly as
+designed. Rule 1 was disabled by it.
 
 **Rule.** *The invariant is "the run must be progressing", not "tasks must be
-slow".* A refusal counts as zero seconds of work and enters the streak like any
-other non-progress. Eight consecutive non-progress outcomes — refusals, fast
-failures, or any mix — abort the run.
+slow".* A refusal is zero seconds of work and enters the streak like any other
+non-progress outcome; eight consecutive non-progress results, in any mix, abort.
 
-`scale/run.py` (`guarded`); `scale/test_burn.py`.
+**The general rule this forces, which is the part that outlives the incident.**
 
+> A guard that has never fired in production is indistinguishable from a guard
+> that CANNOT fire.
+
+Both look identical from the outside: silence. The partition already had this
+property by accident — reverting `SuiteOracle.check` makes the suite fail, so it
+is proven capable of firing. Nothing else did. `scale/test_guards_fire.py` now
+proves, for every guard, that it fires: the burn detector on fast completions
+AND on a refusal storm, that it emits its abort event when it does, the cleanup
+guard on a leaked image and on a leaked container, the frozen-baseline pin on a
+modified reference, the headroom guard, the merged-rate guard, the digest guard.
+
+Guards were also **extracted into callable functions** (`check_progress`,
+`check_task_cleanup`) to make that possible: an invariant inlined in a loop
+cannot be driven to its raise by a test, and one that cannot be tested cannot be
+proven capable of firing. A test that only checks the predicate — `all(t <
+floor)` — proves arithmetic, not that anything happens.
+
+`scale/run.py` (`check_progress`, `check_task_cleanup`, `guarded`);
+`scale/test_guards_fire.py`.

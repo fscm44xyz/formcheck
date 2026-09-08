@@ -80,6 +80,48 @@ class BurnDetected(RuntimeError):
     """Consecutive tasks finished faster than any real task can."""
 
 
+def check_progress(recent, progress=None):
+    """Raise if the last `BURN_STREAK` outcomes were all non-progress.
+
+    EXTRACTED SO IT CAN BE PROVEN TO FIRE. This guard sat inline in `guarded`
+    for its whole life and never triggered once, which made it
+    indistinguishable from a guard that COULD not trigger -- and for refusals it
+    could not, because another guard's early `return` skipped the line that fed
+    it (`CHANGES.md` 23). An invariant that has never fired in production needs a
+    test proving it is capable of firing, and a test can only do that against
+    something it can call.
+    """
+    if len(recent) < BURN_STREAK:
+        return
+    if not all(t < MIN_PLAUSIBLE_TASK_SECONDS for t in recent[-BURN_STREAK:]):
+        return
+    if progress is not None:
+        progress(event="abort", reason="burn pattern", streak=BURN_STREAK,
+                 seconds=list(recent[-BURN_STREAK:]),
+                 threshold=MIN_PLAUSIBLE_TASK_SECONDS)
+    raise BurnDetected(
+        f"{BURN_STREAK} consecutive outcomes made no progress "
+        f"(all under the {MIN_PLAUSIBLE_TASK_SECONDS}s floor a real task "
+        "cannot beat: pull + container + control suite). Something is refusing "
+        "the work rather than doing it. Stopping instead of burning the queue.")
+
+
+def check_task_cleanup(image, leaked_image, leaked_containers, progress=None,
+                       instance_id=""):
+    """Raise if this task's own image or containers outlived it."""
+    if not (leaked_image or leaked_containers):
+        return
+    if progress is not None:
+        progress(event="abort", instance_id=instance_id,
+                 reason="the task's own image or container survived it",
+                 leaked_image=leaked_image, leaked_containers=leaked_containers)
+    raise rotation.DiskBudgetError(
+        f"{instance_id}: its own image or container outlived the task and "
+        f"could not be reclaimed (image_present={leaked_image}, "
+        f"containers={leaked_containers}). At ~4 GiB each these fill the budget "
+        "silently and the next pull fails looking like a transport error.")
+
+
 class Progress:
     """Append-only, one JSON object per line, flushed on every write.
 
@@ -334,17 +376,8 @@ async def run_one(instance, leases, progress, timeout, baseline_free=0):
         leaked_image=leaked_image, leaked_containers=leaked_containers,
         free_gib=round(rotation.free_bytes() / 1024**3, 2))
 
-    if leaked_image or leaked_containers:
-        progress.write(event="abort", instance_id=instance_id,
-                       reason="the task's own image or container survived it",
-                       leaked_image=leaked_image,
-                       leaked_containers=leaked_containers)
-        raise rotation.DiskBudgetError(
-            f"{instance_id}: its own image or container outlived the task and "
-            f"could not be reclaimed (image_present={leaked_image}, "
-            f"containers={leaked_containers}). Stopping: at ~4 GiB each these "
-            "fill the budget silently and the next pull fails looking like a "
-            "transport error.")
+    check_task_cleanup(image, leaked_image, leaked_containers,
+                       progress.write, instance_id)
     if residual > rotation.RESIDUAL_ABORT_MIB * 1024**2:
         progress.write(event="abort", instance_id=instance_id,
                        reason="run-wide disk did not return to baseline",
@@ -459,32 +492,14 @@ async def main():
             # not "tasks must be slow".
             recent.append(0.0)
             del recent[:-BURN_STREAK]
-            if len(recent) == BURN_STREAK and all(
-                    t < MIN_PLAUSIBLE_TASK_SECONDS for t in recent):
-                progress.write(event="abort", reason="burn pattern (refusals)",
-                               streak=BURN_STREAK)
-                raise BurnDetected(
-                    f"{BURN_STREAK} consecutive tasks made no progress "
-                    "(registry refusals or impossibly fast completions). "
-                    "Stopping instead of cycling the queue.")
+            check_progress(recent, progress.write)
             print(f"  [{done}/{len(ids)}] {instance['instance_id']:40s} "
                   f"{'refused':9s}  (registry refusal; requeued, no record)")
             return None
 
         recent.append(record["elapsed_seconds"])
         del recent[:-BURN_STREAK]
-        if (len(recent) == BURN_STREAK
-                and all(t < MIN_PLAUSIBLE_TASK_SECONDS for t in recent)):
-            progress.write(event="abort", reason="burn pattern",
-                           streak=BURN_STREAK, seconds=list(recent),
-                           threshold=MIN_PLAUSIBLE_TASK_SECONDS)
-            raise BurnDetected(
-                f"{BURN_STREAK} consecutive tasks finished in "
-                f"{min(recent):.1f}-{max(recent):.1f}s, all under the "
-                f"{MIN_PLAUSIBLE_TASK_SECONDS}s floor a real task cannot beat "
-                "(pull + container + control suite). Something is refusing the "
-                "work rather than doing it. Stopping instead of burning the "
-                "task list.")
+        check_progress(recent, progress.write)
 
         flag = ("witness" if record["witnesses"]
                 else "ok" if record["control"]["passed"] else "UNCHECKED")
