@@ -112,6 +112,12 @@ class FormCheckMixin:
                 if first:
                     detail += f"; first failing: {first[0]}"
             self.control_graded = g or None
+            # The control's own log, kept on the task so a failure is
+            # diagnosable after the fact. A control that fails with F2P 0/n AND
+            # P2P 0/m did not "fail" -- nothing ran, and that is a harness
+            # question, not a task result. Without the log the two are
+            # indistinguishable in the record.
+            self.control_log = getattr(self, "graded_log", None)
             self.formcheck_log.append(
                 ("<control>", "HARNESS_UNPROVEN",
                  f"the untransformed reference solution scored {control}, "

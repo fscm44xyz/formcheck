@@ -186,6 +186,11 @@ def build_record(instance_id, image, spec, row, task, elapsed, error=None):
         "control": {
             "passed": control_ok,
             "reason": control[2] if control else "control never ran",
+            "graded": getattr(task, "control_graded", None),
+            # Present only on a FAILED control, where it is the difference
+            # between "one test regressed" and "nothing ran at all".
+            "log": (getattr(task, "control_log", None) if not control_ok
+                    else None),
         },
         "row": row,
         "rows": rows,
