@@ -14,7 +14,13 @@ distinguishes correct from incorrect) AND the alt fix is behaviorally correct.
 """
 import os, sys, subprocess, tempfile, shutil
 sys.path.insert(0, os.path.dirname(__file__))
-from run_case import REPO, git, apply_alt, restore, PY  # reuse exact same edit
+
+# `run_case` is the July host rig: it raises SystemExit at import time unless a
+# pytest checkout and an editable venv exist beside it. Importing it here made
+# that rig a precondition for reading REPRO/CONFTEST below, which are two
+# task-level strings that depend on nothing. The import is deferred into the
+# one function that uses it, so running this file as a script is unchanged --
+# `main` calls `run_mode` first, and the same SystemExit still fires there.
 
 REPRO = '''import pytest
 
@@ -40,6 +46,8 @@ CONFTEST = '''def pytest_collection_modifyitems(items):
 '''
 
 def run_mode(mode):
+    from run_case import apply_alt, restore, PY  # reuse exact same edit
+
     restore()
     if mode == "alt":
         apply_alt()
