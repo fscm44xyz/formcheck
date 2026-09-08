@@ -212,6 +212,33 @@ because the two-file scan we used at the time could not see the `__all__` entrie
 at all; the relaxation shipped together with widening the scan from 2 files to the
 whole production tree (67 files for pytest). Same verdict, sound reason.
 
+**The anchor set above was chosen by hand, and it is wider than §3.3's stated
+criterion.** §3.3 says an operator is offered symbols whose definition the
+reference patch overlaps. When that rule is applied mechanically — changed line
+numbers taken from the diff's hunk arithmetic, resolved against the definitions'
+real line ranges in the post-patch file — `pytest#10356` yields
+`{get_unpacked_marks, store_mark}`. The set actually used in Phase 2 was
+`{get_unpacked_marks, store_mark, normalize_mark_list, MarkDecorator}`. The gold
+patch touches neither of the last two: `normalize_mark_list` appears nowhere in
+it, and `MarkDecorator` appears only as the class enclosing the `__call__` that
+git happens to print in a hunk header — git prints the nearest *preceding*
+definition there, which is frequently one the hunk does not modify.
+
+So two of the seven Phase 2 rows are **not reachable from the gold patch alone**:
+`symbol_rename:MarkDecorator` (REFUSED — the refusal worked through immediately
+above) and `symbol_rename:normalize_mark_list` (CLEAN). Everything reported in
+this section was really run and the verdicts are real; what cannot be claimed is
+that the criterion in §3.3 produced this anchor set. A human did. The rule has
+not been widened to recover those rows, because widening it until known-
+interesting rows come back is selecting for the outcome — the exact thing §3.3
+exists to prevent.
+
+Both rows the headline rests on survive the correction:
+`symbol_rename:get_unpacked_marks` and
+`kwonly_specialize:get_unpacked_marks(*, consider_mro=...)` are anchored under
+the mechanical rule, and the former is still a WITNESS under it. `scale/SCOPE.md`
+sets out the two rules side by side, row by row.
+
 ### 3.3 Anchors are restricted to what the gold patch touches
 
 An operator is only offered symbols whose definition the reference patch actually
@@ -339,24 +366,48 @@ called the library's own `_run_check(task, cfg, "formcheck")`. It provisioned a
 runtime, ran `Task.setup`, dispatched to the hook, and classified with the
 untouched `_classify`. The row it produced is the row `validate` would persist:
 
+The July rig, `SubprocessRuntime` (see the retraction below for what has since
+changed):
+
 ```
 index=0  name='pytest-dev__pytest-10356'  mode='formcheck'
-valid=False  reason='invalid'  elapsed=46.44  error=None
+valid=False  reason='invalid'  elapsed=37.88  error=None
 ```
+
+*On `elapsed`.* This row is `repro/f3_result.json`, which is the only persisted
+artifact of a Phase 3 run and has held `37.88` unchanged since the first commit
+of this document. An earlier draft of this section printed `46.44`, a figure that
+appears nowhere but in that sentence: it came from a console session that was not
+saved, of the same task on the same subprocess path. A third figure, `26.65`,
+circulated from a demo rehearsal and is not in this repository or its history at
+all, so nothing here can say what it measured. The three are not the same run
+reported three ways -- they are separate runs of one task whose cost is dominated
+by a pytest invocation, and only one of them left an artifact. The artifact is
+what is quoted.
 
 For comparison, `validate --only-gold` on this same task: our local stand-in
 implements the gold check, so it reports `valid` — the gold patch passes its own
 tests. A real code taskset, which returns `None` from `validate` (§1), reports
 `unchecked`. In both cases `formcheck` reports `invalid`.
 
-**Limits, stated because they matter:** the runtime is `subprocess`, not a
-container; the taskset is a local stand-in. No SWE-bench taskset lives in
-`verifiers` any more — the whole v0 stack was removed on 2026-08-31 (commit
-`66a6064`) — and SWE-like tasks now route through Harbor, where the reward is
-produced by a verifier *inside the task image* and read back from
-`/logs/verifier/reward.json` (`verifiers/v1/tasksets/harbor/taskset.py:284-324`).
-So this demonstrates the hook works on the real path. It does **not** demonstrate
-it running against a hub SWE environment.
+**Limits — one of these has since been retracted.** This section first read: *the
+runtime is `subprocess`, not a container; the taskset is a local stand-in.* The
+first half was true of the July rig and is now true of nothing. `formcheck` runs
+on verifiers' own `DockerRuntime`, with the image resolved through
+`resolve_runtime_config` from `task.data.image` — the same call, on the same
+path, by which a Harbor task reaches its container. §7 argued on paper that the
+check belonged inside the task's own image; M0 (commit `65ba7e1`) executed it,
+and the seven verdicts came back identical to the July rig's on operator, anchor,
+verdict and refusal reason.
+
+What remains not-real is the taskset. It is still a local stand-in, because no
+SWE-bench taskset lives in `verifiers` any more — the whole v0 stack was removed
+on 2026-08-31 (commit `66a6064`) — and SWE-like tasks now route through Harbor,
+where the reward is produced by a verifier *inside the task image* and read back
+from `/logs/verifier/reward.json`
+(`verifiers/v1/tasksets/harbor/taskset.py:284-324`). So the hook is demonstrated
+on the real runtime path, in the real image. It is still **not** demonstrated
+against a hub SWE environment.
 
 ---
 
