@@ -410,7 +410,7 @@ first half was true of the July rig and is now true of nothing. `formcheck` runs
 on verifiers' own `DockerRuntime`, with the image resolved through
 `resolve_runtime_config` from `task.data.image` — the same call, on the same
 path, by which a Harbor task reaches its container. §7 argued on paper that the
-check belonged inside the task's own image; M0 (`evidence/m0-gate`, `a390c7e`)
+check belonged inside the task's own image; M0 (`evidence/m0-gate`, `4ab9760`)
 executed it,
 and the seven verdicts came back identical to the July rig's on operator, anchor,
 verdict and refusal reason.
@@ -725,7 +725,7 @@ real corpus. Behaviour inside Harbor images. Any non-Python corpus.
    shim, and importing `swebench` installs an asyncio policy that breaks every
    subprocess the runtime starts. That was true of the July rig and is now true
    of nothing, for the same reason recorded in §5: M0 (`evidence/m0-gate`,
-   `a390c7e`) moved
+   `4ab9760`) moved
    the check onto verifiers' own `DockerRuntime`, inside the task's own image,
    and returned seven verdicts identical to the July rig's on operator, anchor,
    verdict and refusal reason. Both shims belong to the host-side rig and are

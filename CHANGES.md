@@ -1145,14 +1145,24 @@ threshold was not chosen to fit the answer. **All three hashes were dead.** The
 repository's history had been rewritten, every commit from the M4 series onward
 got a new hash, and six citations across three files silently stopped resolving:
 
-| cited | where | now |
+The six hashes in the left column below **are dead, deliberately, and stay that
+way**: they are the historical record of what the documents used to cite, not
+live references. `git show 0d6e786` failing is the point of the entry. Any
+automated check over citations in this repository must exempt this table.
+
+| dead hash, as it was cited | where it was cited | durable handle now |
 |---|---|---|
-| `0d6e786` | REPORT.md §1 ×2 | `evidence/stopping-rule` (`165e778`) |
-| `664a3ab` | REPORT.md §1 | `evidence/ids-frozen` (`98119c8`) |
-| `18d22b5` | REPORT.md §1 | `evidence/m3-results` (`47ac9b7`) |
-| `79694c9` | REPORT.md §2, `records_m1_pilot/README.md` | `evidence/m1-pilot` (`0008aa2`) |
-| `a1bbbfa` | REPORT.md Appendix A | `evidence/m4-run` (`cc0ad6b`) |
-| `65ba7e1` | writeup.md §5, §9.3 | `evidence/m0-gate` (`a390c7e`) |
+| `0d6e786` | REPORT.md §1 ×2 | `evidence/stopping-rule` (`78c547b`) |
+| `664a3ab` | REPORT.md §1 | `evidence/ids-frozen` (`fb930c8`) |
+| `18d22b5` | REPORT.md §1 | `evidence/m3-results` (`294ef59`) |
+| `79694c9` | REPORT.md §2, `records_m1_pilot/README.md` | `evidence/m1-pilot` (`e8f3c0c`) |
+| `a1bbbfa` | REPORT.md Appendix A | `evidence/m4-run` (`38a26e2`) |
+| `65ba7e1` | writeup.md §5, §9.3 | `evidence/m0-gate` (`4ab9760`) |
+
+The right column has itself been rewritten once since: a third history rewrite,
+to strip commit-message trailers, moved every one of those commits again. The
+tags absorbed it — that is what they are for — and the hashes shown are the
+values after it.
 
 **The shape is the family's.** A citation renders as a plausible hash whether or
 not it resolves; nothing about reading the document reveals that

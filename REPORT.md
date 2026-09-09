@@ -103,7 +103,7 @@ The task-level rate leads because `STOPPING_RULE.md` fixed that unit before any
 result existed, verbatim: *"W counts **tasks**, not rows: a task with three
 witness rows counts once. The extrapolation below is to tasks, so the numerator
 must be tasks too."* That is the only reason it leads, and it is checkable in a
-commit that predates the data — tag `evidence/stopping-rule` (`165e778`).
+commit that predates the data — tag `evidence/stopping-rule` (`78c547b`).
 
 **Why the two differ, since "any-of" rates usually differ for a bad reason.** The
 obvious inflation — witness tasks winning by having more anchors to try — is not
@@ -181,9 +181,9 @@ percentage requires deleting a guard, which shows up in a diff.
 
 `scale/STOPPING_RULE.md` fixes the threshold at W ≥ 3 witness tasks in 50 for
 "M4 is worth the weekend, and the number leads"; it was committed at
-`evidence/stopping-rule` (`165e778`) at 14:39 on 2026-09-08, before M3's ids were
-frozen at `evidence/ids-frozen` (`98119c8`) at 16:25 and before M3's results
-existed at `evidence/m3-results` (`47ac9b7`) at 18:24. M3 returned W = 4, with
+`evidence/stopping-rule` (`78c547b`) at 14:39 on 2026-09-08, before M3's ids were
+frozen at `evidence/ids-frozen` (`fb930c8`) at 16:25 and before M3's results
+existed at `evidence/m3-results` (`294ef59`) at 18:24. M3 returned W = 4, with
 the rule's validity precondition of at least 40 of 50 controlled met at 50/50.
 
 Those three tags are the durable handles, and the hashes beside them are only
@@ -317,7 +317,7 @@ and calling the point a measurement.
 invented for this table. `symbol_rename` has carried "HIGH if `_`-private, else
 MEDIUM" in `repro/f2_operators.py` since `evidence/tier-axis` (`a95db58`,
 2026-09-07 15:48) — before the first pilot records exist
-(`evidence/m1-pilot`, `0008aa2`, the following afternoon), and long
+(`evidence/m1-pilot`, `e8f3c0c`, the following afternoon), and long
 before any witness was known. The M4 run reads its tier from that same module
 through the hook, so the column is the operator's own pre-committed confidence in
 its equivalence argument, not a post-hoc split chosen with the answers visible.
