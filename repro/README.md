@@ -32,7 +32,7 @@ if your layout differs. Default layout:
 ├── .venv/               # venv with swebench (runs the grader)
 ├── verifiers/           # verifiers at 04b0bf5 with ../verifiers-formcheck.patch applied
 ├── .venv-vf/            # venv with that verifiers installed editable + swebench (runs f3_run.py)
-└── rewardpatch/repro/   # these scripts + gold.diff, tests.diff, meta.json
+└── formcheck/repro/     # these scripts + gold.diff, tests.diff, meta.json
 ```
 
 - `run_case.py` finds the pytest clone at `../../pytest`; override with
@@ -70,7 +70,7 @@ primein/.venv/Scripts/python -m pip install "swebench==4.0.3"
 # 4. verifiers at the patch's base commit, with the formcheck patch applied
 git clone https://github.com/PrimeIntellect-ai/verifiers.git primein/verifiers
 git -C primein/verifiers checkout 04b0bf5
-git -C primein/verifiers apply primein/rewardpatch/verifiers-formcheck.patch
+git -C primein/verifiers apply primein/formcheck/verifiers-formcheck.patch
 
 # 5. verifiers venv (Python 3.11): editable verifiers + swebench (f3 grades in-process)
 python -m venv primein/.venv-vf
@@ -92,7 +92,7 @@ Windows note: `swebench` imports the Unix-only `resource` module at import time;
 
 Let `PYT = primein/.venv-pytest/Scripts/python` (runs tests), `PYG =
 primein/.venv/Scripts/python` (runs grader), `PYV = primein/.venv-vf/Scripts/python`
-(verifiers). From `primein/rewardpatch/repro/`:
+(verifiers). From `primein/formcheck/repro/`:
 
 ```bash
 # --- the false negative on the ORIGINAL inherited test ---

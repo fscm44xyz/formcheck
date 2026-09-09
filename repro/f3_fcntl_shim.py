@@ -41,5 +41,5 @@ if "fcntl" not in sys.modules:
         _stub.fcntl = _fcntl
         _stub.ioctl = _ioctl
         _stub.lockf = _flock
-        _stub.__doc__ = "no-op Windows stub installed by rewardpatch f3_fcntl_shim"
+        _stub.__doc__ = "no-op Windows stub installed by formcheck f3_fcntl_shim"
         sys.modules["fcntl"] = _stub

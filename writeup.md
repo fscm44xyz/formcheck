@@ -791,7 +791,7 @@ move this from a demonstration to something that could sweep a corpus.
 
 Every quantitative claim above has a script and an exact command. Let
 `PYT` = the pytest-editable venv, `PYG` = the grader venv (swebench),
-`PYV` = the venv with `verifiers` `main`. From `rewardpatch/repro/`.
+`PYV` = the venv with `verifiers` `main`. From `formcheck/repro/`.
 
 **The original false negative, and the mechanical witness that reproduces it**
 

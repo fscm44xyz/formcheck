@@ -1,6 +1,8 @@
 # Localization Judge — Contract-vs-Form Rubric
 
-An **auditable rubric** for the semantic step of `rewardpatch`'s locator. Given a
+An **auditable rubric** for the semantic step that adjudicates cases the
+mechanical operators refuse. (Written for `rewardpatch`, the repair-framed
+predecessor of `formcheck`; the rubric itself is unchanged.) Given a
 task's issue text and one implementation-coupled assertion found in its graded
 tests, it decides whether that assertion pins the task's **contract** (leave it
 alone) or an incidental **form** the PR happened to choose (a candidate for
