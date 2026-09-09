@@ -1169,6 +1169,16 @@ paragraph. It was **already dead at the moment it was written**, and it was
 copied rather than checked. A citation was propagated on the authority of another
 citation, which is precisely the failure this file keeps recording.
 
+**And the investigation that found all this made the same mistake in miniature.**
+Asked whether a push had landed, the check run was `git rev-parse` against one
+ref — `origin/m0-in-container` — and the conclusion reported was that *the
+changes were not on the remote*. They were: they had gone to `origin/main`, which
+was never looked at. The check was real and its result was accurate; **the claim
+was wider than the check**. That is the family's shape with the object swapped:
+not a check reporting success it did not earn, but a true observation about one
+ref restated as a conclusion about all of them. A verification is only as broad
+as the thing it enumerated, and "the remote" is not one ref.
+
 **Why hashes were the wrong handle, and tags are the fix.** These commits are not
 referenced for their content; they are referenced for their *position in time* —
 the report's argument is that one thing was committed before another. A proof of
