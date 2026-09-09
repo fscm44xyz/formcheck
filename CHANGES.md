@@ -991,3 +991,109 @@ floor)` — proves arithmetic, not that anything happens.
 
 `scale/run.py` (`check_progress`, `check_task_cleanup`, `guarded`);
 `scale/test_guards_fire.py`.
+
+---
+
+## 24. The run-wide disk guard fired for the first time, and it was wrong
+
+**The ninth instance of the family, and the first found by a guard reporting
+something rather than nothing.**
+
+M4's final task, `sympy__sympy-24661`, completed valid — control true, no leaked
+containers, `leaked_image` false, zero witnesses — and the run aborted on the
+line after it:
+
+```json
+{"event":"abort","instance_id":"sympy__sympy-24661",
+ "reason":"run-wide disk did not return to baseline","residual_mib":325.0}
+```
+
+The arithmetic was exact. `baseline_free` was `1021130674176`; free space at the
+check was `1020789870592`; the difference is `340803584` bytes, 325.0 MiB, over a
+256 MiB threshold. Nothing was mis-subtracted. The defect is one level up: **the
+quantity it computed was not a property of the run.**
+
+`free_bytes()` is `shutil.disk_usage(docker_root_dir()).free` — statvfs on the
+filesystem holding the docker root. On this host that is `/`, which also holds
+`$HOME` and the repo. Every writer on the machine is charged to the run.
+
+**What actually consumed it.** `~/.npm/_cacache` gained 100.2 MiB inside the run
+window, 97,003,648 of those bytes in a single blob written at 22:44:44. Its own
+log names the writer:
+
+```
+verbose title npm view @anthropic-ai/claude-code@latest version
+```
+
+An editor's update check, re-caching a registry document, on a filesystem the
+harness happens to share. The free-space high-water mark returned to within
+**1.5 MiB** of baseline at 18:35 and to 5.7 MiB at 20:17; from 22:44 onward it
+never came back below 318.9 MiB and stayed flat there for three hours. A step,
+not accumulation.
+
+**Docker was clean, and the per-task guard proved it.** Across 393 logged tasks:
+`1,956,741,070,109` bytes pulled and `1,956,741,070,109` removed — **a difference
+of zero**, every pulled image accounted for, no image pulled and not removed,
+`leaked_image` false and `leaked_containers` empty on every task, `reclaim_orphans`
+returning 0 every time. The structural per-task check — *is MY image gone, are MY
+containers gone* — was right 500 times and reconciles to the byte. It is the
+guard that works.
+
+**Two defects, and a threshold change fixes neither.**
+
+1. *It measures the wrong quantity.* Whole-filesystem free space cannot separate
+   this run's bytes from a co-tenant's. It also charges the run for its own
+   output: `records_m4/` plus `progress.jsonl` are ~4 MB the run must write and
+   can never give back, so the guarded quantity cannot reach zero by
+   construction. Raising the threshold buys silence, not correctness — and the
+   next false positive is whatever writes more than the new number.
+2. *It is structurally tail-only.* The check was gated on `not leases.live_refs()`,
+   and a lease is held from the start of a pull. Under four workers that
+   condition is essentially only true when the run drains. Free space was below
+   threshold at every quiet moment from 22:44 onward and no abort fired, because
+   another worker always held a lease. A guard written to catch mid-run
+   accumulation could only ever fire on the last task — which is why the audit
+   found it had never fired, and why, when it finally did, it fired on three
+   hours of unrelated drift with the last task's name attached to it.
+
+**The fix: ask the run-wide question the way the per-task one is already asked.**
+`rotation.unowned_footprint(leases)` returns the images and containers belonging
+to this harness that no live lease accounts for — `docker images` filtered by
+`NAMESPACE`, `docker ps` filtered by `CONTAINER_PREFIX`. `run.check_run_footprint`
+raises on a non-empty answer. The three things that made the old version wrong
+cannot affect it: a co-tenant is in neither namespace; the run's own records are
+neither images nor containers; and a worker still holding an image is holding a
+lease, so its image is *owned* rather than residue — which means the check is
+evaluable at any moment instead of only once the run has drained.
+
+`CHANGES.md` 10 still stands and is not reopened: docker's own space accounting
+is still not usable as a budget, orphaned layer data is still collected by
+`reclaim_orphans` and still measured with a `df` delta. What changed is only what
+may **abort** a run. Free space is still recorded on every task as
+`disk_residual_bytes`; it is now an observation, not a budget, and the record
+schema is unchanged so M4's 500 records stay comparable.
+
+**Guards tests.** Five added to `scale/test_guards_fire.py`: it fires on an
+unowned image, fires on an unowned container, emits its abort event when it
+fires — and, the two that are the actual point, **stays silent** while another
+worker's lease holds an image, and **stays silent when `free_bytes()` returns
+zero**. That last one is the regression test for this entry: free space is now
+irrelevant to the decision, so collapsing it entirely must change nothing.
+
+**Where this sits in the family.** The other eight are checks that reported
+success for a reason invisible in their own output. This one reported *failure*
+for a reason invisible in its own output, which is the same defect with the sign
+flipped and is worth naming separately, because the operational consequence
+differs: a false green is believed, and a false red is retuned. The temptation
+here was to move 256 to 512 and move on. That would have preserved both defects
+and bought a quieter run.
+
+It also cost nothing and could have cost the run. `write_record` completes before
+the raise, so `sympy-24661`'s record is intact and all 500 are present; the
+abort landed on the last task of the queue. Fired eighty tasks earlier — which
+the arithmetic permitted from 22:44 onward, and only the lease gate prevented —
+it would have killed a run that was working perfectly.
+
+`scale/rotation.py` (`unowned_footprint`, `_validate_containers`;
+`RESIDUAL_ABORT_MIB` removed); `scale/run.py` (`check_run_footprint`, `run_one`);
+`scale/test_guards_fire.py`.

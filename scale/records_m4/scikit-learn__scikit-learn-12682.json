@@ -1,0 +1,533 @@
+{
+  "completed": true,
+  "control": {
+    "graded": null,
+    "log": null,
+    "passed": true,
+    "reason": "untransformed reference scores 1.0"
+  },
+  "digest_trace": [
+    {
+      "digest": "efeab2621cc1d5ac1ff5af71fe1bbd4a5d15710f4dd73282bfdce6de7ca80a2b",
+      "memo_hit": false
+    },
+    {
+      "digest": "a36d39c7418c5a0e0eae297abfd9980b687dc32a618d0f8c3fb3e68ca16f033e",
+      "memo_hit": false
+    },
+    {
+      "digest": "a36d39c7418c5a0e0eae297abfd9980b687dc32a618d0f8c3fb3e68ca16f033e",
+      "memo_hit": true
+    },
+    {
+      "digest": "41f0a578e747c75e16022b20c086267b9a278f1df8db7734008fd89b9038d423",
+      "memo_hit": false
+    },
+    {
+      "digest": "41f0a578e747c75e16022b20c086267b9a278f1df8db7734008fd89b9038d423",
+      "memo_hit": true
+    },
+    {
+      "digest": "de24454c46ffd599caa9606bc43602f89783e2b547fbeb00d39582d59671ae33",
+      "memo_hit": false
+    },
+    {
+      "digest": "de24454c46ffd599caa9606bc43602f89783e2b547fbeb00d39582d59671ae33",
+      "memo_hit": true
+    }
+  ],
+  "disk_orphan_reclaimed_bytes": 0,
+  "disk_residual_bytes": 0,
+  "elapsed_seconds": 1342.5,
+  "error": null,
+  "image": "swebench/sweb.eval.x86_64.scikit-learn_1776_scikit-learn-12682:latest",
+  "instance_id": "scikit-learn__scikit-learn-12682",
+  "leaked_containers": [],
+  "leaked_image": false,
+  "log": [
+    [
+      "<control>",
+      "OK",
+      "untransformed reference scores 1.0"
+    ],
+    [
+      "kwonly_specialize:<no anchor>",
+      "NOT_APPLICABLE",
+      "no anchor inside the gold-touched region"
+    ],
+    [
+      "symbol_rename:examples/decomposition/plot_sparse_coding.py:ricker_function",
+      "CLEAN",
+      "reward 1.0"
+    ],
+    [
+      "symbol_rename:sklearn/decomposition/dict_learning.py:_sparse_encode",
+      "CLEAN",
+      "reward 1.0"
+    ],
+    [
+      "symbol_rename:sklearn/decomposition/dict_learning.py:sparse_encode",
+      "REFUSED",
+      "dynamic reach: 'sparse_encode' appears in a non-annotation string literal in sklearn/decomposition/__init__.py line 36 ('sparse_encode') -- an `__all__` entry; 12 further hit(s) -- an alpha-rename cannot be argued safe"
+    ],
+    [
+      "symbol_rename:sklearn/decomposition/dict_learning.py:dict_learning",
+      "REFUSED",
+      "dynamic reach: 'dict_learning' appears in a non-annotation string literal in sklearn/decomposition/__init__.py line 31 ('dict_learning') -- an `__all__` entry; 3 further hit(s) -- an alpha-rename cannot be argued safe"
+    ],
+    [
+      "symbol_rename:sklearn/decomposition/dict_learning.py:dict_learning_online",
+      "REFUSED",
+      "dynamic reach: 'dict_learning_online' appears in a non-annotation string literal in sklearn/decomposition/__init__.py line 32 ('dict_learning_online') -- an `__all__` entry; 1 further hit(s) -- an alpha-rename cannot be argued safe"
+    ],
+    [
+      "symbol_rename:sklearn/decomposition/dict_learning.py:SparseCodingMixin",
+      "CLEAN",
+      "reward 1.0"
+    ],
+    [
+      "symbol_rename:sklearn/decomposition/dict_learning.py:SparseCoder",
+      "REFUSED",
+      "BORDER: the issue names 'SparseCoder' -- candidate CONTRACT, route to the rubric"
+    ],
+    [
+      "symbol_rename:sklearn/decomposition/dict_learning.py:DictionaryLearning",
+      "REFUSED",
+      "multi-line import of 'DictionaryLearning' in sklearn/decomposition/__init__.py"
+    ],
+    [
+      "symbol_rename:sklearn/decomposition/dict_learning.py:MiniBatchDictionaryLearning",
+      "REFUSED",
+      "attribute access `.MiniBatchDictionaryLearning` in examples/decomposition/plot_faces_decomposition.py line 87 is not a qualified reference to the defining module -- outside this operator's scope"
+    ],
+    [
+      "collection_reverse:<no anchor>",
+      "NOT_APPLICABLE",
+      "no anchor inside the gold-touched region"
+    ],
+    [
+      "message_reword:<no anchor>",
+      "NOT_APPLICABLE",
+      "no anchor inside the gold-touched region; 1 anchor(s) elsewhere in the 2 target(s): examples/decomposition/plot_sparse_coding.py, sklearn/decomposition/dict_learning.py"
+    ]
+  ],
+  "mountable": true,
+  "multi_target": true,
+  "n_targets": 2,
+  "on_prime_hub": null,
+  "on_prime_hub_reason": "not resolvable offline; no hub environment index is reachable from this repo, verifiers or swebench",
+  "operators_not_applicable": [
+    "collection_reverse",
+    "kwonly_specialize",
+    "message_reword"
+  ],
+  "operators_with_anchors": [
+    "symbol_rename"
+  ],
+  "repo": "scikit-learn/scikit-learn",
+  "row": {
+    "elapsed": 184.63,
+    "error": null,
+    "error_type": null,
+    "index": 0,
+    "mode": "formcheck",
+    "name": "scikit-learn__scikit-learn-12682",
+    "reason": "valid",
+    "valid": true
+  },
+  "rows": [
+    {
+      "anchor": null,
+      "failure_analysis": null,
+      "file": null,
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 1,
+        "found": true,
+        "n_parsed": 67,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 66,
+        "reward": 1.0
+      },
+      "loud_failure": false,
+      "observable": "callable signature (arity / parameter names)",
+      "operator": "kwonly_specialize",
+      "reason": "no anchor inside the gold-touched region",
+      "tier": "HIGH",
+      "tree_digest": "efeab2621cc1d5ac1ff5af71fe1bbd4a5d15710f4dd73282bfdce6de7ca80a2b",
+      "verdict": "NOT_APPLICABLE"
+    },
+    {
+      "anchor": "ricker_function",
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "broke": [],
+        "coupled": [],
+        "failing": [],
+        "symbol": "ricker_function",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": "examples/decomposition/plot_sparse_coding.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 1,
+        "found": true,
+        "n_parsed": 67,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 66,
+        "reward": 1.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "reward 1.0",
+      "tier": "MEDIUM",
+      "tree_digest": "a36d39c7418c5a0e0eae297abfd9980b687dc32a618d0f8c3fb3e68ca16f033e",
+      "verdict": "CLEAN"
+    },
+    {
+      "anchor": "_sparse_encode",
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "broke": [],
+        "coupled": [],
+        "failing": [],
+        "symbol": "_sparse_encode",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": "sklearn/decomposition/dict_learning.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 1,
+        "found": true,
+        "n_parsed": 67,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 66,
+        "reward": 1.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "reward 1.0",
+      "tier": "HIGH",
+      "tree_digest": "41f0a578e747c75e16022b20c086267b9a278f1df8db7734008fd89b9038d423",
+      "verdict": "CLEAN"
+    },
+    {
+      "anchor": "sparse_encode",
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "broke": [],
+        "coupled": [],
+        "failing": [],
+        "symbol": "_sparse_encode",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": "sklearn/decomposition/dict_learning.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 1,
+        "found": true,
+        "n_parsed": 67,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 66,
+        "reward": 1.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "dynamic reach: 'sparse_encode' appears in a non-annotation string literal in sklearn/decomposition/__init__.py line 36 ('sparse_encode') -- an `__all__` entry; 12 further hit(s) -- an alpha-rename cannot be argued safe",
+      "tier": "MEDIUM",
+      "tree_digest": "41f0a578e747c75e16022b20c086267b9a278f1df8db7734008fd89b9038d423",
+      "verdict": "REFUSED"
+    },
+    {
+      "anchor": "dict_learning",
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "broke": [],
+        "coupled": [],
+        "failing": [],
+        "symbol": "_sparse_encode",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": "sklearn/decomposition/dict_learning.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 1,
+        "found": true,
+        "n_parsed": 67,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 66,
+        "reward": 1.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "dynamic reach: 'dict_learning' appears in a non-annotation string literal in sklearn/decomposition/__init__.py line 31 ('dict_learning') -- an `__all__` entry; 3 further hit(s) -- an alpha-rename cannot be argued safe",
+      "tier": "MEDIUM",
+      "tree_digest": "41f0a578e747c75e16022b20c086267b9a278f1df8db7734008fd89b9038d423",
+      "verdict": "REFUSED"
+    },
+    {
+      "anchor": "dict_learning_online",
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "broke": [],
+        "coupled": [],
+        "failing": [],
+        "symbol": "_sparse_encode",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": "sklearn/decomposition/dict_learning.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 1,
+        "found": true,
+        "n_parsed": 67,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 66,
+        "reward": 1.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "dynamic reach: 'dict_learning_online' appears in a non-annotation string literal in sklearn/decomposition/__init__.py line 32 ('dict_learning_online') -- an `__all__` entry; 1 further hit(s) -- an alpha-rename cannot be argued safe",
+      "tier": "MEDIUM",
+      "tree_digest": "41f0a578e747c75e16022b20c086267b9a278f1df8db7734008fd89b9038d423",
+      "verdict": "REFUSED"
+    },
+    {
+      "anchor": "SparseCodingMixin",
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "broke": [],
+        "coupled": [],
+        "failing": [],
+        "symbol": "SparseCodingMixin",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": "sklearn/decomposition/dict_learning.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 1,
+        "found": true,
+        "n_parsed": 67,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 66,
+        "reward": 1.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "reward 1.0",
+      "tier": "MEDIUM",
+      "tree_digest": "de24454c46ffd599caa9606bc43602f89783e2b547fbeb00d39582d59671ae33",
+      "verdict": "CLEAN"
+    },
+    {
+      "anchor": "SparseCoder",
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "broke": [],
+        "coupled": [],
+        "failing": [],
+        "symbol": "SparseCodingMixin",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": "sklearn/decomposition/dict_learning.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 1,
+        "found": true,
+        "n_parsed": 67,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 66,
+        "reward": 1.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "BORDER: the issue names 'SparseCoder' -- candidate CONTRACT, route to the rubric",
+      "tier": "MEDIUM",
+      "tree_digest": "de24454c46ffd599caa9606bc43602f89783e2b547fbeb00d39582d59671ae33",
+      "verdict": "REFUSED"
+    },
+    {
+      "anchor": "DictionaryLearning",
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "broke": [],
+        "coupled": [],
+        "failing": [],
+        "symbol": "SparseCodingMixin",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": "sklearn/decomposition/dict_learning.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 1,
+        "found": true,
+        "n_parsed": 67,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 66,
+        "reward": 1.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "multi-line import of 'DictionaryLearning' in sklearn/decomposition/__init__.py",
+      "tier": "MEDIUM",
+      "tree_digest": "de24454c46ffd599caa9606bc43602f89783e2b547fbeb00d39582d59671ae33",
+      "verdict": "REFUSED"
+    },
+    {
+      "anchor": "MiniBatchDictionaryLearning",
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "broke": [],
+        "coupled": [],
+        "failing": [],
+        "symbol": "SparseCodingMixin",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": "sklearn/decomposition/dict_learning.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 1,
+        "found": true,
+        "n_parsed": 67,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 66,
+        "reward": 1.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "attribute access `.MiniBatchDictionaryLearning` in examples/decomposition/plot_faces_decomposition.py line 87 is not a qualified reference to the defining module -- outside this operator's scope",
+      "tier": "MEDIUM",
+      "tree_digest": "de24454c46ffd599caa9606bc43602f89783e2b547fbeb00d39582d59671ae33",
+      "verdict": "REFUSED"
+    },
+    {
+      "anchor": null,
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "broke": [],
+        "coupled": [],
+        "failing": [],
+        "symbol": "SparseCodingMixin",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": null,
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 1,
+        "found": true,
+        "n_parsed": 67,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 66,
+        "reward": 1.0
+      },
+      "loud_failure": false,
+      "observable": "order of elements in a returned collection",
+      "operator": "collection_reverse",
+      "reason": "no anchor inside the gold-touched region",
+      "tier": "MEDIUM",
+      "tree_digest": "de24454c46ffd599caa9606bc43602f89783e2b547fbeb00d39582d59671ae33",
+      "verdict": "NOT_APPLICABLE"
+    },
+    {
+      "anchor": null,
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "broke": [],
+        "coupled": [],
+        "failing": [],
+        "symbol": "SparseCodingMixin",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": null,
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 1,
+        "found": true,
+        "n_parsed": 67,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 66,
+        "reward": 1.0
+      },
+      "loud_failure": false,
+      "observable": "human-readable text of an exception message",
+      "operator": "message_reword",
+      "reason": "no anchor inside the gold-touched region; 1 anchor(s) elsewhere in the 2 target(s): examples/decomposition/plot_sparse_coding.py, sklearn/decomposition/dict_learning.py",
+      "tier": "HIGH",
+      "tree_digest": "de24454c46ffd599caa9606bc43602f89783e2b547fbeb00d39582d59671ae33",
+      "verdict": "NOT_APPLICABLE"
+    }
+  ],
+  "targets": [
+    "examples/decomposition/plot_sparse_coding.py",
+    "sklearn/decomposition/dict_learning.py"
+  ],
+  "version": "0.22",
+  "witnesses": []
+}

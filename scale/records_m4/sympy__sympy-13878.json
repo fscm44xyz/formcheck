@@ -1,0 +1,1180 @@
+{
+  "completed": true,
+  "control": {
+    "graded": null,
+    "log": null,
+    "passed": true,
+    "reason": "untransformed reference scores 1.0"
+  },
+  "digest_trace": [
+    {
+      "digest": "f0157fbc2f8db3ac09a34cb54c8d3e5bf04995b5ca50c5a6c2527946c22445c0",
+      "memo_hit": false
+    },
+    {
+      "digest": "573706bcb82a3828de048fc60da531745fa902655f6c87cae4016942e45e7b71",
+      "memo_hit": false
+    },
+    {
+      "digest": "573706bcb82a3828de048fc60da531745fa902655f6c87cae4016942e45e7b71",
+      "memo_hit": true
+    },
+    {
+      "digest": "4102b0aa24bef1a43c5d7042464ac581159025f36b3743716f4b9210b93d703c",
+      "memo_hit": false
+    },
+    {
+      "digest": "4102b0aa24bef1a43c5d7042464ac581159025f36b3743716f4b9210b93d703c",
+      "memo_hit": true
+    },
+    {
+      "digest": "4b830fb13924cb06ad054c5deb077a35ebd8d18a6c4f0107e657657119aa89f3",
+      "memo_hit": false
+    },
+    {
+      "digest": "4b830fb13924cb06ad054c5deb077a35ebd8d18a6c4f0107e657657119aa89f3",
+      "memo_hit": true
+    },
+    {
+      "digest": "6419baf35b9828228796ec42ee571901ac192222fbb767bf33da0fa00cd835b3",
+      "memo_hit": false
+    },
+    {
+      "digest": "6419baf35b9828228796ec42ee571901ac192222fbb767bf33da0fa00cd835b3",
+      "memo_hit": true
+    },
+    {
+      "digest": "890887f8a49542479f36231587343ecca240c33ae86d81752748427468fa1911",
+      "memo_hit": false
+    },
+    {
+      "digest": "890887f8a49542479f36231587343ecca240c33ae86d81752748427468fa1911",
+      "memo_hit": true
+    },
+    {
+      "digest": "9e3705ee1121832e813064e355576b7c579e13153c6b1f9aa00997067b702081",
+      "memo_hit": false
+    },
+    {
+      "digest": "9e3705ee1121832e813064e355576b7c579e13153c6b1f9aa00997067b702081",
+      "memo_hit": true
+    },
+    {
+      "digest": "6b6d9bf4bbb9133af5063dc7b9192d9dc843e4fc57820e5a0ebbb503fb6e971c",
+      "memo_hit": false
+    },
+    {
+      "digest": "6b6d9bf4bbb9133af5063dc7b9192d9dc843e4fc57820e5a0ebbb503fb6e971c",
+      "memo_hit": true
+    },
+    {
+      "digest": "246b12d5ef92cd767aeacfad46d617bee443f427f4c4df64284a6364cafd8e6a",
+      "memo_hit": false
+    },
+    {
+      "digest": "246b12d5ef92cd767aeacfad46d617bee443f427f4c4df64284a6364cafd8e6a",
+      "memo_hit": true
+    }
+  ],
+  "disk_orphan_reclaimed_bytes": 0,
+  "disk_residual_bytes": 0,
+  "elapsed_seconds": 1064.47,
+  "error": null,
+  "image": "swebench/sweb.eval.x86_64.sympy_1776_sympy-13878:latest",
+  "instance_id": "sympy__sympy-13878",
+  "leaked_containers": [],
+  "leaked_image": false,
+  "log": [
+    [
+      "<control>",
+      "OK",
+      "untransformed reference scores 1.0"
+    ],
+    [
+      "kwonly_specialize:<no anchor>",
+      "NOT_APPLICABLE",
+      "no anchor inside the gold-touched region"
+    ],
+    [
+      "symbol_rename:ArcsinDistribution",
+      "CLEAN",
+      "reward 1.0"
+    ],
+    [
+      "symbol_rename:Arcsin",
+      "REFUSED",
+      "BORDER: the issue names 'Arcsin' -- candidate CONTRACT, route to the rubric"
+    ],
+    [
+      "symbol_rename:ChiSquaredDistribution",
+      "CLEAN",
+      "reward 1.0"
+    ],
+    [
+      "symbol_rename:DagumDistribution",
+      "CLEAN",
+      "reward 1.0"
+    ],
+    [
+      "symbol_rename:Dagum",
+      "REFUSED",
+      "BORDER: the issue names 'Dagum' -- candidate CONTRACT, route to the rubric"
+    ],
+    [
+      "symbol_rename:Erlang",
+      "REFUSED",
+      "BORDER: the issue names 'Erlang' -- candidate CONTRACT, route to the rubric"
+    ],
+    [
+      "symbol_rename:ExponentialDistribution",
+      "REFUSED",
+      "dynamic reach: 'ExponentialDistribution' appears in a non-annotation string literal in sympy/stats/crv_types.py line 847 ('\\n    Create a continuous random variable') -- an alpha-rename cannot be argued safe"
+    ],
+    [
+      "symbol_rename:FrechetDistribution",
+      "CLEAN",
+      "reward 1.0"
+    ],
+    [
+      "symbol_rename:Frechet",
+      "REFUSED",
+      "BORDER: the issue names 'Frechet' -- candidate CONTRACT, route to the rubric"
+    ],
+    [
+      "symbol_rename:GammaDistribution",
+      "REFUSED",
+      "dynamic reach: 'GammaDistribution' appears in a non-annotation string literal in sympy/stats/crv_types.py line 1156 ('\\n    Create a continuous random variable') -- an alpha-rename cannot be argued safe"
+    ],
+    [
+      "symbol_rename:GammaInverseDistribution",
+      "CLEAN",
+      "reward 1.0"
+    ],
+    [
+      "symbol_rename:GammaInverse",
+      "REFUSED",
+      "BORDER: the issue names 'GammaInverse' -- candidate CONTRACT, route to the rubric"
+    ],
+    [
+      "symbol_rename:KumaraswamyDistribution",
+      "CLEAN",
+      "reward 1.0"
+    ],
+    [
+      "symbol_rename:Kumaraswamy",
+      "REFUSED",
+      "BORDER: the issue names 'Kumaraswamy' -- candidate CONTRACT, route to the rubric"
+    ],
+    [
+      "symbol_rename:LaplaceDistribution",
+      "REFUSED",
+      "dynamic reach: 'LaplaceDistribution' appears in a non-annotation string literal in sympy/stats/crv_types.py line 1523 ('\\n    Create a continuous random variable') -- an alpha-rename cannot be argued safe"
+    ],
+    [
+      "symbol_rename:Laplace",
+      "REFUSED",
+      "BORDER: the issue names 'Laplace' -- candidate CONTRACT, route to the rubric"
+    ],
+    [
+      "symbol_rename:LogisticDistribution",
+      "REFUSED",
+      "dynamic reach: 'LogisticDistribution' appears in a non-annotation string literal in sympy/stats/crv_types.py line 1587 ('\\n    Create a continuous random variable') -- an alpha-rename cannot be argued safe"
+    ],
+    [
+      "symbol_rename:Logistic",
+      "REFUSED",
+      "BORDER: the issue names 'Logistic' -- candidate CONTRACT, route to the rubric"
+    ],
+    [
+      "symbol_rename:LogNormalDistribution",
+      "REFUSED",
+      "dynamic reach: 'LogNormalDistribution' appears in a non-annotation string literal in sympy/stats/crv_types.py line 1658 ('\\n    Create a continuous random variable') -- an alpha-rename cannot be argued safe"
+    ],
+    [
+      "symbol_rename:NakagamiDistribution",
+      "CLEAN",
+      "reward 1.0"
+    ],
+    [
+      "symbol_rename:Nakagami",
+      "REFUSED",
+      "BORDER: the issue names 'Nakagami' -- candidate CONTRACT, route to the rubric"
+    ],
+    [
+      "symbol_rename:StudentTDistribution",
+      "CLEAN",
+      "reward 1.0"
+    ],
+    [
+      "symbol_rename:StudentT",
+      "REFUSED",
+      "BORDER: the issue names 'StudentT' -- candidate CONTRACT, route to the rubric"
+    ],
+    [
+      "symbol_rename:UniformSumDistribution",
+      "REFUSED",
+      "dynamic reach: 'UniformSumDistribution' appears in a non-annotation string literal in sympy/stats/crv_types.py line 2676 ('\\n    Create a continuous random variable') -- an alpha-rename cannot be argued safe"
+    ],
+    [
+      "symbol_rename:UniformSum",
+      "REFUSED",
+      "BORDER: the issue names 'UniformSum' -- candidate CONTRACT, route to the rubric"
+    ],
+    [
+      "collection_reverse:<no anchor>",
+      "NOT_APPLICABLE",
+      "no anchor inside the gold-touched region"
+    ],
+    [
+      "message_reword:<no anchor>",
+      "NOT_APPLICABLE",
+      "no anchor inside the gold-touched region"
+    ]
+  ],
+  "mountable": true,
+  "multi_target": false,
+  "n_targets": 1,
+  "on_prime_hub": null,
+  "on_prime_hub_reason": "not resolvable offline; no hub environment index is reachable from this repo, verifiers or swebench",
+  "operators_not_applicable": [
+    "collection_reverse",
+    "kwonly_specialize",
+    "message_reword"
+  ],
+  "operators_with_anchors": [
+    "symbol_rename"
+  ],
+  "repo": "sympy/sympy",
+  "row": {
+    "elapsed": 1026.16,
+    "error": null,
+    "error_type": null,
+    "index": 0,
+    "mode": "formcheck",
+    "name": "sympy__sympy-13878",
+    "reason": "valid",
+    "valid": true
+  },
+  "rows": [
+    {
+      "anchor": null,
+      "failure_analysis": null,
+      "file": null,
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 1,
+        "found": true,
+        "n_parsed": 92,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 19,
+        "reward": 1.0
+      },
+      "loud_failure": false,
+      "observable": "callable signature (arity / parameter names)",
+      "operator": "kwonly_specialize",
+      "reason": "no anchor inside the gold-touched region",
+      "tier": "HIGH",
+      "tree_digest": "f0157fbc2f8db3ac09a34cb54c8d3e5bf04995b5ca50c5a6c2527946c22445c0",
+      "verdict": "NOT_APPLICABLE"
+    },
+    {
+      "anchor": "ArcsinDistribution",
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "broke": [],
+        "coupled": [],
+        "failing": [],
+        "symbol": "ArcsinDistribution",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": "sympy/stats/crv_types.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 1,
+        "found": true,
+        "n_parsed": 92,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 19,
+        "reward": 1.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "reward 1.0",
+      "tier": "MEDIUM",
+      "tree_digest": "573706bcb82a3828de048fc60da531745fa902655f6c87cae4016942e45e7b71",
+      "verdict": "CLEAN"
+    },
+    {
+      "anchor": "Arcsin",
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "broke": [],
+        "coupled": [],
+        "failing": [],
+        "symbol": "ArcsinDistribution",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": "sympy/stats/crv_types.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 1,
+        "found": true,
+        "n_parsed": 92,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 19,
+        "reward": 1.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "BORDER: the issue names 'Arcsin' -- candidate CONTRACT, route to the rubric",
+      "tier": "MEDIUM",
+      "tree_digest": "573706bcb82a3828de048fc60da531745fa902655f6c87cae4016942e45e7b71",
+      "verdict": "REFUSED"
+    },
+    {
+      "anchor": "ChiSquaredDistribution",
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "broke": [],
+        "coupled": [],
+        "failing": [],
+        "symbol": "ChiSquaredDistribution",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": "sympy/stats/crv_types.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 1,
+        "found": true,
+        "n_parsed": 92,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 19,
+        "reward": 1.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "reward 1.0",
+      "tier": "MEDIUM",
+      "tree_digest": "4102b0aa24bef1a43c5d7042464ac581159025f36b3743716f4b9210b93d703c",
+      "verdict": "CLEAN"
+    },
+    {
+      "anchor": "DagumDistribution",
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "broke": [],
+        "coupled": [],
+        "failing": [],
+        "symbol": "DagumDistribution",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": "sympy/stats/crv_types.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 1,
+        "found": true,
+        "n_parsed": 92,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 19,
+        "reward": 1.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "reward 1.0",
+      "tier": "MEDIUM",
+      "tree_digest": "4b830fb13924cb06ad054c5deb077a35ebd8d18a6c4f0107e657657119aa89f3",
+      "verdict": "CLEAN"
+    },
+    {
+      "anchor": "Dagum",
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "broke": [],
+        "coupled": [],
+        "failing": [],
+        "symbol": "DagumDistribution",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": "sympy/stats/crv_types.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 1,
+        "found": true,
+        "n_parsed": 92,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 19,
+        "reward": 1.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "BORDER: the issue names 'Dagum' -- candidate CONTRACT, route to the rubric",
+      "tier": "MEDIUM",
+      "tree_digest": "4b830fb13924cb06ad054c5deb077a35ebd8d18a6c4f0107e657657119aa89f3",
+      "verdict": "REFUSED"
+    },
+    {
+      "anchor": "Erlang",
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "broke": [],
+        "coupled": [],
+        "failing": [],
+        "symbol": "DagumDistribution",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": "sympy/stats/crv_types.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 1,
+        "found": true,
+        "n_parsed": 92,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 19,
+        "reward": 1.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "BORDER: the issue names 'Erlang' -- candidate CONTRACT, route to the rubric",
+      "tier": "MEDIUM",
+      "tree_digest": "4b830fb13924cb06ad054c5deb077a35ebd8d18a6c4f0107e657657119aa89f3",
+      "verdict": "REFUSED"
+    },
+    {
+      "anchor": "ExponentialDistribution",
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "broke": [],
+        "coupled": [],
+        "failing": [],
+        "symbol": "DagumDistribution",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": "sympy/stats/crv_types.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 1,
+        "found": true,
+        "n_parsed": 92,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 19,
+        "reward": 1.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "dynamic reach: 'ExponentialDistribution' appears in a non-annotation string literal in sympy/stats/crv_types.py line 847 ('\\n    Create a continuous random variable') -- an alpha-rename cannot be argued safe",
+      "tier": "MEDIUM",
+      "tree_digest": "4b830fb13924cb06ad054c5deb077a35ebd8d18a6c4f0107e657657119aa89f3",
+      "verdict": "REFUSED"
+    },
+    {
+      "anchor": "FrechetDistribution",
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "broke": [],
+        "coupled": [],
+        "failing": [],
+        "symbol": "FrechetDistribution",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": "sympy/stats/crv_types.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 1,
+        "found": true,
+        "n_parsed": 92,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 19,
+        "reward": 1.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "reward 1.0",
+      "tier": "MEDIUM",
+      "tree_digest": "6419baf35b9828228796ec42ee571901ac192222fbb767bf33da0fa00cd835b3",
+      "verdict": "CLEAN"
+    },
+    {
+      "anchor": "Frechet",
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "broke": [],
+        "coupled": [],
+        "failing": [],
+        "symbol": "FrechetDistribution",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": "sympy/stats/crv_types.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 1,
+        "found": true,
+        "n_parsed": 92,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 19,
+        "reward": 1.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "BORDER: the issue names 'Frechet' -- candidate CONTRACT, route to the rubric",
+      "tier": "MEDIUM",
+      "tree_digest": "6419baf35b9828228796ec42ee571901ac192222fbb767bf33da0fa00cd835b3",
+      "verdict": "REFUSED"
+    },
+    {
+      "anchor": "GammaDistribution",
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "broke": [],
+        "coupled": [],
+        "failing": [],
+        "symbol": "FrechetDistribution",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": "sympy/stats/crv_types.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 1,
+        "found": true,
+        "n_parsed": 92,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 19,
+        "reward": 1.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "dynamic reach: 'GammaDistribution' appears in a non-annotation string literal in sympy/stats/crv_types.py line 1156 ('\\n    Create a continuous random variable') -- an alpha-rename cannot be argued safe",
+      "tier": "MEDIUM",
+      "tree_digest": "6419baf35b9828228796ec42ee571901ac192222fbb767bf33da0fa00cd835b3",
+      "verdict": "REFUSED"
+    },
+    {
+      "anchor": "GammaInverseDistribution",
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "broke": [],
+        "coupled": [],
+        "failing": [],
+        "symbol": "GammaInverseDistribution",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": "sympy/stats/crv_types.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 1,
+        "found": true,
+        "n_parsed": 92,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 19,
+        "reward": 1.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "reward 1.0",
+      "tier": "MEDIUM",
+      "tree_digest": "890887f8a49542479f36231587343ecca240c33ae86d81752748427468fa1911",
+      "verdict": "CLEAN"
+    },
+    {
+      "anchor": "GammaInverse",
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "broke": [],
+        "coupled": [],
+        "failing": [],
+        "symbol": "GammaInverseDistribution",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": "sympy/stats/crv_types.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 1,
+        "found": true,
+        "n_parsed": 92,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 19,
+        "reward": 1.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "BORDER: the issue names 'GammaInverse' -- candidate CONTRACT, route to the rubric",
+      "tier": "MEDIUM",
+      "tree_digest": "890887f8a49542479f36231587343ecca240c33ae86d81752748427468fa1911",
+      "verdict": "REFUSED"
+    },
+    {
+      "anchor": "KumaraswamyDistribution",
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "broke": [],
+        "coupled": [],
+        "failing": [],
+        "symbol": "KumaraswamyDistribution",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": "sympy/stats/crv_types.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 1,
+        "found": true,
+        "n_parsed": 92,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 19,
+        "reward": 1.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "reward 1.0",
+      "tier": "MEDIUM",
+      "tree_digest": "9e3705ee1121832e813064e355576b7c579e13153c6b1f9aa00997067b702081",
+      "verdict": "CLEAN"
+    },
+    {
+      "anchor": "Kumaraswamy",
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "broke": [],
+        "coupled": [],
+        "failing": [],
+        "symbol": "KumaraswamyDistribution",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": "sympy/stats/crv_types.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 1,
+        "found": true,
+        "n_parsed": 92,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 19,
+        "reward": 1.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "BORDER: the issue names 'Kumaraswamy' -- candidate CONTRACT, route to the rubric",
+      "tier": "MEDIUM",
+      "tree_digest": "9e3705ee1121832e813064e355576b7c579e13153c6b1f9aa00997067b702081",
+      "verdict": "REFUSED"
+    },
+    {
+      "anchor": "LaplaceDistribution",
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "broke": [],
+        "coupled": [],
+        "failing": [],
+        "symbol": "KumaraswamyDistribution",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": "sympy/stats/crv_types.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 1,
+        "found": true,
+        "n_parsed": 92,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 19,
+        "reward": 1.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "dynamic reach: 'LaplaceDistribution' appears in a non-annotation string literal in sympy/stats/crv_types.py line 1523 ('\\n    Create a continuous random variable') -- an alpha-rename cannot be argued safe",
+      "tier": "MEDIUM",
+      "tree_digest": "9e3705ee1121832e813064e355576b7c579e13153c6b1f9aa00997067b702081",
+      "verdict": "REFUSED"
+    },
+    {
+      "anchor": "Laplace",
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "broke": [],
+        "coupled": [],
+        "failing": [],
+        "symbol": "KumaraswamyDistribution",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": "sympy/stats/crv_types.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 1,
+        "found": true,
+        "n_parsed": 92,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 19,
+        "reward": 1.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "BORDER: the issue names 'Laplace' -- candidate CONTRACT, route to the rubric",
+      "tier": "MEDIUM",
+      "tree_digest": "9e3705ee1121832e813064e355576b7c579e13153c6b1f9aa00997067b702081",
+      "verdict": "REFUSED"
+    },
+    {
+      "anchor": "LogisticDistribution",
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "broke": [],
+        "coupled": [],
+        "failing": [],
+        "symbol": "KumaraswamyDistribution",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": "sympy/stats/crv_types.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 1,
+        "found": true,
+        "n_parsed": 92,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 19,
+        "reward": 1.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "dynamic reach: 'LogisticDistribution' appears in a non-annotation string literal in sympy/stats/crv_types.py line 1587 ('\\n    Create a continuous random variable') -- an alpha-rename cannot be argued safe",
+      "tier": "MEDIUM",
+      "tree_digest": "9e3705ee1121832e813064e355576b7c579e13153c6b1f9aa00997067b702081",
+      "verdict": "REFUSED"
+    },
+    {
+      "anchor": "Logistic",
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "broke": [],
+        "coupled": [],
+        "failing": [],
+        "symbol": "KumaraswamyDistribution",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": "sympy/stats/crv_types.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 1,
+        "found": true,
+        "n_parsed": 92,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 19,
+        "reward": 1.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "BORDER: the issue names 'Logistic' -- candidate CONTRACT, route to the rubric",
+      "tier": "MEDIUM",
+      "tree_digest": "9e3705ee1121832e813064e355576b7c579e13153c6b1f9aa00997067b702081",
+      "verdict": "REFUSED"
+    },
+    {
+      "anchor": "LogNormalDistribution",
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "broke": [],
+        "coupled": [],
+        "failing": [],
+        "symbol": "KumaraswamyDistribution",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": "sympy/stats/crv_types.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 1,
+        "found": true,
+        "n_parsed": 92,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 19,
+        "reward": 1.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "dynamic reach: 'LogNormalDistribution' appears in a non-annotation string literal in sympy/stats/crv_types.py line 1658 ('\\n    Create a continuous random variable') -- an alpha-rename cannot be argued safe",
+      "tier": "MEDIUM",
+      "tree_digest": "9e3705ee1121832e813064e355576b7c579e13153c6b1f9aa00997067b702081",
+      "verdict": "REFUSED"
+    },
+    {
+      "anchor": "NakagamiDistribution",
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "broke": [],
+        "coupled": [],
+        "failing": [],
+        "symbol": "NakagamiDistribution",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": "sympy/stats/crv_types.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 1,
+        "found": true,
+        "n_parsed": 92,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 19,
+        "reward": 1.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "reward 1.0",
+      "tier": "MEDIUM",
+      "tree_digest": "6b6d9bf4bbb9133af5063dc7b9192d9dc843e4fc57820e5a0ebbb503fb6e971c",
+      "verdict": "CLEAN"
+    },
+    {
+      "anchor": "Nakagami",
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "broke": [],
+        "coupled": [],
+        "failing": [],
+        "symbol": "NakagamiDistribution",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": "sympy/stats/crv_types.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 1,
+        "found": true,
+        "n_parsed": 92,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 19,
+        "reward": 1.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "BORDER: the issue names 'Nakagami' -- candidate CONTRACT, route to the rubric",
+      "tier": "MEDIUM",
+      "tree_digest": "6b6d9bf4bbb9133af5063dc7b9192d9dc843e4fc57820e5a0ebbb503fb6e971c",
+      "verdict": "REFUSED"
+    },
+    {
+      "anchor": "StudentTDistribution",
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "broke": [],
+        "coupled": [],
+        "failing": [],
+        "symbol": "StudentTDistribution",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": "sympy/stats/crv_types.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 1,
+        "found": true,
+        "n_parsed": 92,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 19,
+        "reward": 1.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "reward 1.0",
+      "tier": "MEDIUM",
+      "tree_digest": "246b12d5ef92cd767aeacfad46d617bee443f427f4c4df64284a6364cafd8e6a",
+      "verdict": "CLEAN"
+    },
+    {
+      "anchor": "StudentT",
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "broke": [],
+        "coupled": [],
+        "failing": [],
+        "symbol": "StudentTDistribution",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": "sympy/stats/crv_types.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 1,
+        "found": true,
+        "n_parsed": 92,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 19,
+        "reward": 1.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "BORDER: the issue names 'StudentT' -- candidate CONTRACT, route to the rubric",
+      "tier": "MEDIUM",
+      "tree_digest": "246b12d5ef92cd767aeacfad46d617bee443f427f4c4df64284a6364cafd8e6a",
+      "verdict": "REFUSED"
+    },
+    {
+      "anchor": "UniformSumDistribution",
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "broke": [],
+        "coupled": [],
+        "failing": [],
+        "symbol": "StudentTDistribution",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": "sympy/stats/crv_types.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 1,
+        "found": true,
+        "n_parsed": 92,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 19,
+        "reward": 1.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "dynamic reach: 'UniformSumDistribution' appears in a non-annotation string literal in sympy/stats/crv_types.py line 2676 ('\\n    Create a continuous random variable') -- an alpha-rename cannot be argued safe",
+      "tier": "MEDIUM",
+      "tree_digest": "246b12d5ef92cd767aeacfad46d617bee443f427f4c4df64284a6364cafd8e6a",
+      "verdict": "REFUSED"
+    },
+    {
+      "anchor": "UniformSum",
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "broke": [],
+        "coupled": [],
+        "failing": [],
+        "symbol": "StudentTDistribution",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": "sympy/stats/crv_types.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 1,
+        "found": true,
+        "n_parsed": 92,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 19,
+        "reward": 1.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "BORDER: the issue names 'UniformSum' -- candidate CONTRACT, route to the rubric",
+      "tier": "MEDIUM",
+      "tree_digest": "246b12d5ef92cd767aeacfad46d617bee443f427f4c4df64284a6364cafd8e6a",
+      "verdict": "REFUSED"
+    },
+    {
+      "anchor": null,
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "broke": [],
+        "coupled": [],
+        "failing": [],
+        "symbol": "StudentTDistribution",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": null,
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 1,
+        "found": true,
+        "n_parsed": 92,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 19,
+        "reward": 1.0
+      },
+      "loud_failure": false,
+      "observable": "order of elements in a returned collection",
+      "operator": "collection_reverse",
+      "reason": "no anchor inside the gold-touched region",
+      "tier": "MEDIUM",
+      "tree_digest": "246b12d5ef92cd767aeacfad46d617bee443f427f4c4df64284a6364cafd8e6a",
+      "verdict": "NOT_APPLICABLE"
+    },
+    {
+      "anchor": null,
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "broke": [],
+        "coupled": [],
+        "failing": [],
+        "symbol": "StudentTDistribution",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": null,
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 1,
+        "found": true,
+        "n_parsed": 92,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 19,
+        "reward": 1.0
+      },
+      "loud_failure": false,
+      "observable": "human-readable text of an exception message",
+      "operator": "message_reword",
+      "reason": "no anchor inside the gold-touched region",
+      "tier": "HIGH",
+      "tree_digest": "246b12d5ef92cd767aeacfad46d617bee443f427f4c4df64284a6364cafd8e6a",
+      "verdict": "NOT_APPLICABLE"
+    }
+  ],
+  "targets": [
+    "sympy/stats/crv_types.py"
+  ],
+  "version": "1.1",
+  "witnesses": []
+}

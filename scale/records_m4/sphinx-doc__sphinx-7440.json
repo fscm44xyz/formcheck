@@ -1,0 +1,206 @@
+{
+  "completed": true,
+  "control": {
+    "graded": null,
+    "log": null,
+    "passed": true,
+    "reason": "untransformed reference scores 1.0"
+  },
+  "digest_trace": [
+    {
+      "digest": "d224b3f1b340a2088a1d6f0dbec98436dfb339bf0738bf2ab9f676eeb919a4e5",
+      "memo_hit": false
+    }
+  ],
+  "disk_orphan_reclaimed_bytes": 0,
+  "disk_residual_bytes": 0,
+  "elapsed_seconds": 73.57,
+  "error": null,
+  "image": "swebench/sweb.eval.x86_64.sphinx-doc_1776_sphinx-7440:latest",
+  "instance_id": "sphinx-doc__sphinx-7440",
+  "leaked_containers": [],
+  "leaked_image": false,
+  "log": [
+    [
+      "<control>",
+      "OK",
+      "untransformed reference scores 1.0"
+    ],
+    [
+      "kwonly_specialize:<no anchor>",
+      "NOT_APPLICABLE",
+      "no anchor inside the gold-touched region"
+    ],
+    [
+      "symbol_rename:make_glossary_term",
+      "REFUSED",
+      "dynamic reach: 'make_glossary_term' appears in a non-annotation string literal in sphinx/domains/std.py line 294 ('make_glossary_term() expects document is') -- an alpha-rename cannot be argued safe"
+    ],
+    [
+      "symbol_rename:StandardDomain",
+      "REFUSED",
+      "dynamic reach: 'StandardDomain' appears in a non-annotation string literal in sphinx/domains/std.py line 623 ('Add a hyperlink target for cross referen'); 4 further hit(s) -- an alpha-rename cannot be argued safe"
+    ],
+    [
+      "collection_reverse:<no anchor>",
+      "NOT_APPLICABLE",
+      "no anchor inside the gold-touched region"
+    ],
+    [
+      "message_reword:<no anchor>",
+      "NOT_APPLICABLE",
+      "no anchor inside the gold-touched region"
+    ]
+  ],
+  "mountable": true,
+  "multi_target": false,
+  "n_targets": 1,
+  "on_prime_hub": null,
+  "on_prime_hub_reason": "not resolvable offline; no hub environment index is reachable from this repo, verifiers or swebench",
+  "operators_not_applicable": [
+    "collection_reverse",
+    "kwonly_specialize",
+    "message_reword"
+  ],
+  "operators_with_anchors": [
+    "symbol_rename"
+  ],
+  "repo": "sphinx-doc/sphinx",
+  "row": {
+    "elapsed": 19.78,
+    "error": null,
+    "error_type": null,
+    "index": 0,
+    "mode": "formcheck",
+    "name": "sphinx-doc__sphinx-7440",
+    "reason": "unchecked",
+    "valid": null
+  },
+  "rows": [
+    {
+      "anchor": null,
+      "failure_analysis": null,
+      "file": null,
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 1,
+        "found": true,
+        "n_parsed": 14,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 12,
+        "reward": 1.0
+      },
+      "loud_failure": false,
+      "observable": "callable signature (arity / parameter names)",
+      "operator": "kwonly_specialize",
+      "reason": "no anchor inside the gold-touched region",
+      "tier": "HIGH",
+      "tree_digest": "d224b3f1b340a2088a1d6f0dbec98436dfb339bf0738bf2ab9f676eeb919a4e5",
+      "verdict": "NOT_APPLICABLE"
+    },
+    {
+      "anchor": "make_glossary_term",
+      "failure_analysis": null,
+      "file": "sphinx/domains/std.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 1,
+        "found": true,
+        "n_parsed": 14,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 12,
+        "reward": 1.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "dynamic reach: 'make_glossary_term' appears in a non-annotation string literal in sphinx/domains/std.py line 294 ('make_glossary_term() expects document is') -- an alpha-rename cannot be argued safe",
+      "tier": "MEDIUM",
+      "tree_digest": "d224b3f1b340a2088a1d6f0dbec98436dfb339bf0738bf2ab9f676eeb919a4e5",
+      "verdict": "REFUSED"
+    },
+    {
+      "anchor": "StandardDomain",
+      "failure_analysis": null,
+      "file": "sphinx/domains/std.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 1,
+        "found": true,
+        "n_parsed": 14,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 12,
+        "reward": 1.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "dynamic reach: 'StandardDomain' appears in a non-annotation string literal in sphinx/domains/std.py line 623 ('Add a hyperlink target for cross referen'); 4 further hit(s) -- an alpha-rename cannot be argued safe",
+      "tier": "MEDIUM",
+      "tree_digest": "d224b3f1b340a2088a1d6f0dbec98436dfb339bf0738bf2ab9f676eeb919a4e5",
+      "verdict": "REFUSED"
+    },
+    {
+      "anchor": null,
+      "failure_analysis": null,
+      "file": null,
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 1,
+        "found": true,
+        "n_parsed": 14,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 12,
+        "reward": 1.0
+      },
+      "loud_failure": false,
+      "observable": "order of elements in a returned collection",
+      "operator": "collection_reverse",
+      "reason": "no anchor inside the gold-touched region",
+      "tier": "MEDIUM",
+      "tree_digest": "d224b3f1b340a2088a1d6f0dbec98436dfb339bf0738bf2ab9f676eeb919a4e5",
+      "verdict": "NOT_APPLICABLE"
+    },
+    {
+      "anchor": null,
+      "failure_analysis": null,
+      "file": null,
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 1,
+        "found": true,
+        "n_parsed": 14,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 12,
+        "reward": 1.0
+      },
+      "loud_failure": false,
+      "observable": "human-readable text of an exception message",
+      "operator": "message_reword",
+      "reason": "no anchor inside the gold-touched region",
+      "tier": "HIGH",
+      "tree_digest": "d224b3f1b340a2088a1d6f0dbec98436dfb339bf0738bf2ab9f676eeb919a4e5",
+      "verdict": "NOT_APPLICABLE"
+    }
+  ],
+  "targets": [
+    "sphinx/domains/std.py"
+  ],
+  "version": "3.0",
+  "witnesses": []
+}

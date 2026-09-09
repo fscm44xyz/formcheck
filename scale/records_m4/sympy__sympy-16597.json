@@ -1,0 +1,327 @@
+{
+  "completed": true,
+  "control": {
+    "graded": null,
+    "log": null,
+    "passed": true,
+    "reason": "untransformed reference scores 1.0"
+  },
+  "digest_trace": [
+    {
+      "digest": "2554a6ef9c4e909d5116b73b187b072325a9ff7a302dfe7723198dd3d6616353",
+      "memo_hit": false
+    }
+  ],
+  "disk_orphan_reclaimed_bytes": 0,
+  "disk_residual_bytes": 0,
+  "elapsed_seconds": 239.66,
+  "error": null,
+  "image": "swebench/sweb.eval.x86_64.sympy_1776_sympy-16597:latest",
+  "instance_id": "sympy__sympy-16597",
+  "leaked_containers": [],
+  "leaked_image": false,
+  "log": [
+    [
+      "<control>",
+      "OK",
+      "untransformed reference scores 1.0"
+    ],
+    [
+      "kwonly_specialize:<no anchor>",
+      "NOT_APPLICABLE",
+      "no anchor inside the gold-touched region"
+    ],
+    [
+      "symbol_rename:sympy/assumptions/ask.py:get_known_facts",
+      "REFUSED",
+      "multi-line import of 'get_known_facts' in bin/ask_update.py"
+    ],
+    [
+      "symbol_rename:sympy/assumptions/ask_generated.py:get_known_facts_cnf",
+      "REFUSED",
+      "multi-line import of 'get_known_facts_cnf' in sympy/assumptions/ask.py"
+    ],
+    [
+      "symbol_rename:sympy/assumptions/ask_generated.py:get_known_facts_dict",
+      "REFUSED",
+      "multi-line import of 'get_known_facts_dict' in sympy/assumptions/ask.py"
+    ],
+    [
+      "symbol_rename:sympy/core/power.py:Pow",
+      "REFUSED",
+      "attribute access `.Pow` in sympy/printing/tensorflow.py line 44 is not a qualified reference to the defining module -- outside this operator's scope"
+    ],
+    [
+      "symbol_rename:sympy/printing/tree.py:print_tree",
+      "REFUSED",
+      "attribute access `.print_tree` in bin/sympy_time_cache.py line 53 is not a qualified reference to the defining module -- outside this operator's scope"
+    ],
+    [
+      "symbol_rename:sympy/tensor/indexed.py:Idx",
+      "REFUSED",
+      "dynamic reach: 'Idx' appears in a non-annotation string literal in sympy/calculus/finite_diff.py line 199 ('\\n    Calculates the finite difference ap'); 35 further hit(s) -- an alpha-rename cannot be argued safe"
+    ],
+    [
+      "collection_reverse:<no anchor>",
+      "NOT_APPLICABLE",
+      "no anchor inside the gold-touched region"
+    ],
+    [
+      "message_reword:<no anchor>",
+      "NOT_APPLICABLE",
+      "no anchor inside the gold-touched region; 13 anchor(s) elsewhere in the 6 target(s): sympy/assumptions/ask.py, sympy/assumptions/ask_generated.py, sympy/core/assumptions.py, sympy/core/power.py, sympy/printing/tree.py, sympy/tensor/indexed.py"
+    ]
+  ],
+  "mountable": true,
+  "multi_target": true,
+  "n_targets": 6,
+  "on_prime_hub": null,
+  "on_prime_hub_reason": "not resolvable offline; no hub environment index is reachable from this repo, verifiers or swebench",
+  "operators_not_applicable": [
+    "collection_reverse",
+    "kwonly_specialize",
+    "message_reword"
+  ],
+  "operators_with_anchors": [
+    "symbol_rename"
+  ],
+  "repo": "sympy/sympy",
+  "row": {
+    "elapsed": 121.22,
+    "error": null,
+    "error_type": null,
+    "index": 0,
+    "mode": "formcheck",
+    "name": "sympy__sympy-16597",
+    "reason": "unchecked",
+    "valid": null
+  },
+  "rows": [
+    {
+      "anchor": null,
+      "failure_analysis": null,
+      "file": null,
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 3,
+        "found": true,
+        "n_parsed": 77,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 74,
+        "reward": 1.0
+      },
+      "loud_failure": false,
+      "observable": "callable signature (arity / parameter names)",
+      "operator": "kwonly_specialize",
+      "reason": "no anchor inside the gold-touched region",
+      "tier": "HIGH",
+      "tree_digest": "2554a6ef9c4e909d5116b73b187b072325a9ff7a302dfe7723198dd3d6616353",
+      "verdict": "NOT_APPLICABLE"
+    },
+    {
+      "anchor": "get_known_facts",
+      "failure_analysis": null,
+      "file": "sympy/assumptions/ask.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 3,
+        "found": true,
+        "n_parsed": 77,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 74,
+        "reward": 1.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "multi-line import of 'get_known_facts' in bin/ask_update.py",
+      "tier": "MEDIUM",
+      "tree_digest": "2554a6ef9c4e909d5116b73b187b072325a9ff7a302dfe7723198dd3d6616353",
+      "verdict": "REFUSED"
+    },
+    {
+      "anchor": "get_known_facts_cnf",
+      "failure_analysis": null,
+      "file": "sympy/assumptions/ask_generated.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 3,
+        "found": true,
+        "n_parsed": 77,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 74,
+        "reward": 1.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "multi-line import of 'get_known_facts_cnf' in sympy/assumptions/ask.py",
+      "tier": "MEDIUM",
+      "tree_digest": "2554a6ef9c4e909d5116b73b187b072325a9ff7a302dfe7723198dd3d6616353",
+      "verdict": "REFUSED"
+    },
+    {
+      "anchor": "get_known_facts_dict",
+      "failure_analysis": null,
+      "file": "sympy/assumptions/ask_generated.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 3,
+        "found": true,
+        "n_parsed": 77,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 74,
+        "reward": 1.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "multi-line import of 'get_known_facts_dict' in sympy/assumptions/ask.py",
+      "tier": "MEDIUM",
+      "tree_digest": "2554a6ef9c4e909d5116b73b187b072325a9ff7a302dfe7723198dd3d6616353",
+      "verdict": "REFUSED"
+    },
+    {
+      "anchor": "Pow",
+      "failure_analysis": null,
+      "file": "sympy/core/power.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 3,
+        "found": true,
+        "n_parsed": 77,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 74,
+        "reward": 1.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "attribute access `.Pow` in sympy/printing/tensorflow.py line 44 is not a qualified reference to the defining module -- outside this operator's scope",
+      "tier": "MEDIUM",
+      "tree_digest": "2554a6ef9c4e909d5116b73b187b072325a9ff7a302dfe7723198dd3d6616353",
+      "verdict": "REFUSED"
+    },
+    {
+      "anchor": "print_tree",
+      "failure_analysis": null,
+      "file": "sympy/printing/tree.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 3,
+        "found": true,
+        "n_parsed": 77,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 74,
+        "reward": 1.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "attribute access `.print_tree` in bin/sympy_time_cache.py line 53 is not a qualified reference to the defining module -- outside this operator's scope",
+      "tier": "MEDIUM",
+      "tree_digest": "2554a6ef9c4e909d5116b73b187b072325a9ff7a302dfe7723198dd3d6616353",
+      "verdict": "REFUSED"
+    },
+    {
+      "anchor": "Idx",
+      "failure_analysis": null,
+      "file": "sympy/tensor/indexed.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 3,
+        "found": true,
+        "n_parsed": 77,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 74,
+        "reward": 1.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "dynamic reach: 'Idx' appears in a non-annotation string literal in sympy/calculus/finite_diff.py line 199 ('\\n    Calculates the finite difference ap'); 35 further hit(s) -- an alpha-rename cannot be argued safe",
+      "tier": "MEDIUM",
+      "tree_digest": "2554a6ef9c4e909d5116b73b187b072325a9ff7a302dfe7723198dd3d6616353",
+      "verdict": "REFUSED"
+    },
+    {
+      "anchor": null,
+      "failure_analysis": null,
+      "file": null,
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 3,
+        "found": true,
+        "n_parsed": 77,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 74,
+        "reward": 1.0
+      },
+      "loud_failure": false,
+      "observable": "order of elements in a returned collection",
+      "operator": "collection_reverse",
+      "reason": "no anchor inside the gold-touched region",
+      "tier": "MEDIUM",
+      "tree_digest": "2554a6ef9c4e909d5116b73b187b072325a9ff7a302dfe7723198dd3d6616353",
+      "verdict": "NOT_APPLICABLE"
+    },
+    {
+      "anchor": null,
+      "failure_analysis": null,
+      "file": null,
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 3,
+        "found": true,
+        "n_parsed": 77,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 74,
+        "reward": 1.0
+      },
+      "loud_failure": false,
+      "observable": "human-readable text of an exception message",
+      "operator": "message_reword",
+      "reason": "no anchor inside the gold-touched region; 13 anchor(s) elsewhere in the 6 target(s): sympy/assumptions/ask.py, sympy/assumptions/ask_generated.py, sympy/core/assumptions.py, sympy/core/power.py, sympy/printing/tree.py, sympy/tensor/indexed.py",
+      "tier": "HIGH",
+      "tree_digest": "2554a6ef9c4e909d5116b73b187b072325a9ff7a302dfe7723198dd3d6616353",
+      "verdict": "NOT_APPLICABLE"
+    }
+  ],
+  "targets": [
+    "sympy/assumptions/ask.py",
+    "sympy/assumptions/ask_generated.py",
+    "sympy/core/assumptions.py",
+    "sympy/core/power.py",
+    "sympy/printing/tree.py",
+    "sympy/tensor/indexed.py"
+  ],
+  "version": "1.5",
+  "witnesses": []
+}

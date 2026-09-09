@@ -1,0 +1,496 @@
+{
+  "completed": true,
+  "control": {
+    "graded": null,
+    "log": null,
+    "passed": true,
+    "reason": "untransformed reference scores 1.0"
+  },
+  "digest_trace": [
+    {
+      "digest": "faac82ce41ce767aab87b4671218a65855f35f6915104c5cbf9b276f8b856ba6",
+      "memo_hit": false
+    }
+  ],
+  "disk_orphan_reclaimed_bytes": 0,
+  "disk_residual_bytes": 0,
+  "elapsed_seconds": 289.97,
+  "error": null,
+  "image": "swebench/sweb.eval.x86_64.scikit-learn_1776_scikit-learn-25232:latest",
+  "instance_id": "scikit-learn__scikit-learn-25232",
+  "leaked_containers": [],
+  "leaked_image": false,
+  "log": [
+    [
+      "<control>",
+      "OK",
+      "untransformed reference scores 1.0"
+    ],
+    [
+      "kwonly_specialize:__init__(*, sample_posterior=...)",
+      "REFUSED",
+      "P4: 'sample_posterior' is read outside a param-only `if` (line(s) [331])"
+    ],
+    [
+      "kwonly_specialize:__init__(*, max_iter=...)",
+      "REFUSED",
+      "P4: 'max_iter' is read outside a param-only `if` (line(s) [332])"
+    ],
+    [
+      "kwonly_specialize:__init__(*, tol=...)",
+      "REFUSED",
+      "P4: 'tol' is read outside a param-only `if` (line(s) [333])"
+    ],
+    [
+      "kwonly_specialize:__init__(*, n_nearest_features=...)",
+      "REFUSED",
+      "P4: 'n_nearest_features' is read outside a param-only `if` (line(s) [334])"
+    ],
+    [
+      "kwonly_specialize:__init__(*, initial_strategy=...)",
+      "REFUSED",
+      "P2: the issue names ['initial_strategy'] -- candidate CONTRACT, route to the rubric rather than transforming"
+    ],
+    [
+      "kwonly_specialize:__init__(*, fill_value=...)",
+      "REFUSED",
+      "P2: the issue names ['fill_value'] -- candidate CONTRACT, route to the rubric rather than transforming"
+    ],
+    [
+      "kwonly_specialize:__init__(*, imputation_order=...)",
+      "REFUSED",
+      "P4: 'imputation_order' is read outside a param-only `if` (line(s) [337])"
+    ],
+    [
+      "kwonly_specialize:__init__(*, skip_complete=...)",
+      "REFUSED",
+      "P4: 'skip_complete' is read outside a param-only `if` (line(s) [338])"
+    ],
+    [
+      "kwonly_specialize:__init__(*, verbose=...)",
+      "REFUSED",
+      "P4: 'verbose' is read outside a param-only `if` (line(s) [341])"
+    ],
+    [
+      "kwonly_specialize:__init__(*, random_state=...)",
+      "REFUSED",
+      "P4: 'random_state' is read outside a param-only `if` (line(s) [342])"
+    ],
+    [
+      "kwonly_specialize:__init__(*, add_indicator=...)",
+      "REFUSED",
+      "P4: 'add_indicator' is read outside a param-only `if` (line(s) [326])"
+    ],
+    [
+      "kwonly_specialize:__init__(*, keep_empty_features=...)",
+      "REFUSED",
+      "P4: 'keep_empty_features' is read outside a param-only `if` (line(s) [327])"
+    ],
+    [
+      "symbol_rename:IterativeImputer",
+      "REFUSED",
+      "BORDER: the issue names 'IterativeImputer' -- candidate CONTRACT, route to the rubric"
+    ],
+    [
+      "collection_reverse:<no anchor>",
+      "NOT_APPLICABLE",
+      "no anchor inside the gold-touched region"
+    ],
+    [
+      "message_reword:<no anchor>",
+      "NOT_APPLICABLE",
+      "no anchor inside the gold-touched region; 2 anchor(s) elsewhere in the target"
+    ]
+  ],
+  "mountable": true,
+  "multi_target": false,
+  "n_targets": 1,
+  "on_prime_hub": null,
+  "on_prime_hub_reason": "not resolvable offline; no hub environment index is reachable from this repo, verifiers or swebench",
+  "operators_not_applicable": [
+    "collection_reverse",
+    "message_reword"
+  ],
+  "operators_with_anchors": [
+    "kwonly_specialize",
+    "symbol_rename"
+  ],
+  "repo": "scikit-learn/scikit-learn",
+  "row": {
+    "elapsed": 180.79,
+    "error": null,
+    "error_type": null,
+    "index": 0,
+    "mode": "formcheck",
+    "name": "scikit-learn__scikit-learn-25232",
+    "reason": "unchecked",
+    "valid": null
+  },
+  "rows": [
+    {
+      "anchor": "__init__(*, sample_posterior=...)",
+      "failure_analysis": null,
+      "file": "sklearn/impute/_iterative.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 1,
+        "found": true,
+        "n_parsed": 215,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 214,
+        "reward": 1.0
+      },
+      "loud_failure": false,
+      "observable": "callable signature (arity / parameter names)",
+      "operator": "kwonly_specialize",
+      "reason": "P4: 'sample_posterior' is read outside a param-only `if` (line(s) [331])",
+      "tier": "HIGH",
+      "tree_digest": "faac82ce41ce767aab87b4671218a65855f35f6915104c5cbf9b276f8b856ba6",
+      "verdict": "REFUSED"
+    },
+    {
+      "anchor": "__init__(*, max_iter=...)",
+      "failure_analysis": null,
+      "file": "sklearn/impute/_iterative.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 1,
+        "found": true,
+        "n_parsed": 215,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 214,
+        "reward": 1.0
+      },
+      "loud_failure": false,
+      "observable": "callable signature (arity / parameter names)",
+      "operator": "kwonly_specialize",
+      "reason": "P4: 'max_iter' is read outside a param-only `if` (line(s) [332])",
+      "tier": "HIGH",
+      "tree_digest": "faac82ce41ce767aab87b4671218a65855f35f6915104c5cbf9b276f8b856ba6",
+      "verdict": "REFUSED"
+    },
+    {
+      "anchor": "__init__(*, tol=...)",
+      "failure_analysis": null,
+      "file": "sklearn/impute/_iterative.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 1,
+        "found": true,
+        "n_parsed": 215,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 214,
+        "reward": 1.0
+      },
+      "loud_failure": false,
+      "observable": "callable signature (arity / parameter names)",
+      "operator": "kwonly_specialize",
+      "reason": "P4: 'tol' is read outside a param-only `if` (line(s) [333])",
+      "tier": "HIGH",
+      "tree_digest": "faac82ce41ce767aab87b4671218a65855f35f6915104c5cbf9b276f8b856ba6",
+      "verdict": "REFUSED"
+    },
+    {
+      "anchor": "__init__(*, n_nearest_features=...)",
+      "failure_analysis": null,
+      "file": "sklearn/impute/_iterative.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 1,
+        "found": true,
+        "n_parsed": 215,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 214,
+        "reward": 1.0
+      },
+      "loud_failure": false,
+      "observable": "callable signature (arity / parameter names)",
+      "operator": "kwonly_specialize",
+      "reason": "P4: 'n_nearest_features' is read outside a param-only `if` (line(s) [334])",
+      "tier": "HIGH",
+      "tree_digest": "faac82ce41ce767aab87b4671218a65855f35f6915104c5cbf9b276f8b856ba6",
+      "verdict": "REFUSED"
+    },
+    {
+      "anchor": "__init__(*, initial_strategy=...)",
+      "failure_analysis": null,
+      "file": "sklearn/impute/_iterative.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 1,
+        "found": true,
+        "n_parsed": 215,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 214,
+        "reward": 1.0
+      },
+      "loud_failure": false,
+      "observable": "callable signature (arity / parameter names)",
+      "operator": "kwonly_specialize",
+      "reason": "P2: the issue names ['initial_strategy'] -- candidate CONTRACT, route to the rubric rather than transforming",
+      "tier": "HIGH",
+      "tree_digest": "faac82ce41ce767aab87b4671218a65855f35f6915104c5cbf9b276f8b856ba6",
+      "verdict": "REFUSED"
+    },
+    {
+      "anchor": "__init__(*, fill_value=...)",
+      "failure_analysis": null,
+      "file": "sklearn/impute/_iterative.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 1,
+        "found": true,
+        "n_parsed": 215,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 214,
+        "reward": 1.0
+      },
+      "loud_failure": false,
+      "observable": "callable signature (arity / parameter names)",
+      "operator": "kwonly_specialize",
+      "reason": "P2: the issue names ['fill_value'] -- candidate CONTRACT, route to the rubric rather than transforming",
+      "tier": "HIGH",
+      "tree_digest": "faac82ce41ce767aab87b4671218a65855f35f6915104c5cbf9b276f8b856ba6",
+      "verdict": "REFUSED"
+    },
+    {
+      "anchor": "__init__(*, imputation_order=...)",
+      "failure_analysis": null,
+      "file": "sklearn/impute/_iterative.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 1,
+        "found": true,
+        "n_parsed": 215,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 214,
+        "reward": 1.0
+      },
+      "loud_failure": false,
+      "observable": "callable signature (arity / parameter names)",
+      "operator": "kwonly_specialize",
+      "reason": "P4: 'imputation_order' is read outside a param-only `if` (line(s) [337])",
+      "tier": "HIGH",
+      "tree_digest": "faac82ce41ce767aab87b4671218a65855f35f6915104c5cbf9b276f8b856ba6",
+      "verdict": "REFUSED"
+    },
+    {
+      "anchor": "__init__(*, skip_complete=...)",
+      "failure_analysis": null,
+      "file": "sklearn/impute/_iterative.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 1,
+        "found": true,
+        "n_parsed": 215,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 214,
+        "reward": 1.0
+      },
+      "loud_failure": false,
+      "observable": "callable signature (arity / parameter names)",
+      "operator": "kwonly_specialize",
+      "reason": "P4: 'skip_complete' is read outside a param-only `if` (line(s) [338])",
+      "tier": "HIGH",
+      "tree_digest": "faac82ce41ce767aab87b4671218a65855f35f6915104c5cbf9b276f8b856ba6",
+      "verdict": "REFUSED"
+    },
+    {
+      "anchor": "__init__(*, verbose=...)",
+      "failure_analysis": null,
+      "file": "sklearn/impute/_iterative.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 1,
+        "found": true,
+        "n_parsed": 215,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 214,
+        "reward": 1.0
+      },
+      "loud_failure": false,
+      "observable": "callable signature (arity / parameter names)",
+      "operator": "kwonly_specialize",
+      "reason": "P4: 'verbose' is read outside a param-only `if` (line(s) [341])",
+      "tier": "HIGH",
+      "tree_digest": "faac82ce41ce767aab87b4671218a65855f35f6915104c5cbf9b276f8b856ba6",
+      "verdict": "REFUSED"
+    },
+    {
+      "anchor": "__init__(*, random_state=...)",
+      "failure_analysis": null,
+      "file": "sklearn/impute/_iterative.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 1,
+        "found": true,
+        "n_parsed": 215,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 214,
+        "reward": 1.0
+      },
+      "loud_failure": false,
+      "observable": "callable signature (arity / parameter names)",
+      "operator": "kwonly_specialize",
+      "reason": "P4: 'random_state' is read outside a param-only `if` (line(s) [342])",
+      "tier": "HIGH",
+      "tree_digest": "faac82ce41ce767aab87b4671218a65855f35f6915104c5cbf9b276f8b856ba6",
+      "verdict": "REFUSED"
+    },
+    {
+      "anchor": "__init__(*, add_indicator=...)",
+      "failure_analysis": null,
+      "file": "sklearn/impute/_iterative.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 1,
+        "found": true,
+        "n_parsed": 215,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 214,
+        "reward": 1.0
+      },
+      "loud_failure": false,
+      "observable": "callable signature (arity / parameter names)",
+      "operator": "kwonly_specialize",
+      "reason": "P4: 'add_indicator' is read outside a param-only `if` (line(s) [326])",
+      "tier": "HIGH",
+      "tree_digest": "faac82ce41ce767aab87b4671218a65855f35f6915104c5cbf9b276f8b856ba6",
+      "verdict": "REFUSED"
+    },
+    {
+      "anchor": "__init__(*, keep_empty_features=...)",
+      "failure_analysis": null,
+      "file": "sklearn/impute/_iterative.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 1,
+        "found": true,
+        "n_parsed": 215,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 214,
+        "reward": 1.0
+      },
+      "loud_failure": false,
+      "observable": "callable signature (arity / parameter names)",
+      "operator": "kwonly_specialize",
+      "reason": "P4: 'keep_empty_features' is read outside a param-only `if` (line(s) [327])",
+      "tier": "HIGH",
+      "tree_digest": "faac82ce41ce767aab87b4671218a65855f35f6915104c5cbf9b276f8b856ba6",
+      "verdict": "REFUSED"
+    },
+    {
+      "anchor": "IterativeImputer",
+      "failure_analysis": null,
+      "file": "sklearn/impute/_iterative.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 1,
+        "found": true,
+        "n_parsed": 215,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 214,
+        "reward": 1.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "BORDER: the issue names 'IterativeImputer' -- candidate CONTRACT, route to the rubric",
+      "tier": "MEDIUM",
+      "tree_digest": "faac82ce41ce767aab87b4671218a65855f35f6915104c5cbf9b276f8b856ba6",
+      "verdict": "REFUSED"
+    },
+    {
+      "anchor": null,
+      "failure_analysis": null,
+      "file": null,
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 1,
+        "found": true,
+        "n_parsed": 215,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 214,
+        "reward": 1.0
+      },
+      "loud_failure": false,
+      "observable": "order of elements in a returned collection",
+      "operator": "collection_reverse",
+      "reason": "no anchor inside the gold-touched region",
+      "tier": "MEDIUM",
+      "tree_digest": "faac82ce41ce767aab87b4671218a65855f35f6915104c5cbf9b276f8b856ba6",
+      "verdict": "NOT_APPLICABLE"
+    },
+    {
+      "anchor": null,
+      "failure_analysis": null,
+      "file": null,
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 1,
+        "found": true,
+        "n_parsed": 215,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 214,
+        "reward": 1.0
+      },
+      "loud_failure": false,
+      "observable": "human-readable text of an exception message",
+      "operator": "message_reword",
+      "reason": "no anchor inside the gold-touched region; 2 anchor(s) elsewhere in the target",
+      "tier": "HIGH",
+      "tree_digest": "faac82ce41ce767aab87b4671218a65855f35f6915104c5cbf9b276f8b856ba6",
+      "verdict": "NOT_APPLICABLE"
+    }
+  ],
+  "targets": [
+    "sklearn/impute/_iterative.py"
+  ],
+  "version": "1.3",
+  "witnesses": []
+}

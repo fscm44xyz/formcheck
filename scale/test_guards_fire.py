@@ -93,6 +93,87 @@ def test_cleanup_guard_is_silent_when_the_task_cleaned_up():
     run.check_task_cleanup("img", False, [], None, "t")
 
 
+# --- the run-wide footprint guard, which REPLACED one that fired falsely ---
+#
+# `CHANGES.md` 24. The guard it replaces did fire, once, on M4's last task -- and
+# it was wrong: it compared whole-filesystem free space to a run-start baseline,
+# so an unrelated 97 MB `npm` write became "325 MiB of run residue". The last two
+# tests here are the regression tests for that, and they are the point: they
+# assert the guard STAYS SILENT for the two reasons it used to fire.
+
+
+class _FakeLeases:
+    def __init__(self, refs=()):
+        self.refs = set(refs)
+
+    def live_refs(self):
+        return set(self.refs)
+
+
+def _with_docker_state(images, containers, fn):
+    real_images, real_containers = rotation.resident_images, rotation._validate_containers
+    rotation.resident_images = lambda: dict(images)
+    rotation._validate_containers = lambda: list(containers)
+    try:
+        return fn()
+    finally:
+        rotation.resident_images = real_images
+        rotation._validate_containers = real_containers
+
+
+def test_run_footprint_guard_fires_on_an_unowned_image():
+    fp = _with_docker_state({"swebench/x:latest": 4 * 1024 ** 3}, [],
+                            lambda: rotation.unowned_footprint(_FakeLeases()))
+    _must_raise(rotation.DiskBudgetError,
+                lambda: run.check_run_footprint(fp, None, "task-x"),
+                "run footprint guard on an unowned image")
+
+
+def test_run_footprint_guard_fires_on_an_unowned_container():
+    fp = _with_docker_state({}, [("validate-formcheck-0-abcdef01", "swebench/x:latest")],
+                            lambda: rotation.unowned_footprint(_FakeLeases()))
+    _must_raise(rotation.DiskBudgetError,
+                lambda: run.check_run_footprint(fp, None, "task-x"),
+                "run footprint guard on an unowned container")
+
+
+def test_run_footprint_guard_emits_an_abort_event_when_it_fires():
+    events = []
+    fp = _with_docker_state({"swebench/x:latest": 42}, [],
+                            lambda: rotation.unowned_footprint(_FakeLeases()))
+    try:
+        run.check_run_footprint(fp, lambda **kw: events.append(kw), "task-x")
+    except rotation.DiskBudgetError:
+        pass
+    assert events and events[0]["event"] == "abort", events
+    assert events[0]["reason"] == "the run owns residue no live lease accounts for", events
+    assert events[0]["images"] == ["swebench/x:latest"], events
+
+
+def test_run_footprint_guard_is_silent_while_a_worker_holds_its_image():
+    """The concurrency case the per-task free-space budget got wrong first
+    (`CHANGES.md` 12) and the run-wide one got wrong again (24): another
+    worker's live image is owned, not residue."""
+    fp = _with_docker_state(
+        {"swebench/held:latest": 4 * 1024 ** 3},
+        [("validate-formcheck-1-beefbeef", "swebench/held:latest")],
+        lambda: rotation.unowned_footprint(_FakeLeases({"swebench/held:latest"})))
+    run.check_run_footprint(fp, None, "task-x")
+
+
+def test_run_footprint_guard_ignores_a_co_tenant_filling_the_disk():
+    """THE regression test for 24. The old guard aborted M4's last task because
+    `npm` wrote 97 MB to the same filesystem. Free space is now irrelevant to
+    the decision, so collapsing it entirely must change nothing."""
+    original = rotation.free_bytes
+    rotation.free_bytes = lambda path=None: 0
+    try:
+        fp = _with_docker_state({}, [], lambda: rotation.unowned_footprint(_FakeLeases()))
+        run.check_run_footprint(fp, None, "task-x")
+    finally:
+        rotation.free_bytes = original
+
+
 # --- the frozen-baseline pin, which had never fired ------------------------
 
 def test_baseline_pin_fires_when_the_reference_changes(tmp=None):

@@ -1,0 +1,721 @@
+{
+  "completed": true,
+  "control": {
+    "graded": null,
+    "log": null,
+    "passed": true,
+    "reason": "untransformed reference scores 1.0"
+  },
+  "digest_trace": [
+    {
+      "digest": "e7578cce91177848fad0d239f65fe65c30577ee8766d62a894e3cca10a57923f",
+      "memo_hit": false
+    },
+    {
+      "digest": "c8a63f0756e79db57df9bb9f3578109848c7775f5fad8ac6e461d710b157f2df",
+      "memo_hit": false
+    },
+    {
+      "digest": "c8a63f0756e79db57df9bb9f3578109848c7775f5fad8ac6e461d710b157f2df",
+      "memo_hit": true
+    },
+    {
+      "digest": "ff335a401b7199164973ac4a1112958232d78a02ccf7876dcc0da9feae8f2574",
+      "memo_hit": false
+    },
+    {
+      "digest": "ff335a401b7199164973ac4a1112958232d78a02ccf7876dcc0da9feae8f2574",
+      "memo_hit": true
+    },
+    {
+      "digest": "09750114a281e544116f92b5ad47767a8dab2f3fd43619368f837552b7cb004f",
+      "memo_hit": false
+    },
+    {
+      "digest": "09750114a281e544116f92b5ad47767a8dab2f3fd43619368f837552b7cb004f",
+      "memo_hit": true
+    }
+  ],
+  "disk_orphan_reclaimed_bytes": 0,
+  "disk_residual_bytes": 0,
+  "elapsed_seconds": 131.04,
+  "error": null,
+  "image": "swebench/sweb.eval.x86_64.pylint-dev_1776_pylint-4551:latest",
+  "instance_id": "pylint-dev__pylint-4551",
+  "leaked_containers": [],
+  "leaked_image": false,
+  "log": [
+    [
+      "<control>",
+      "OK",
+      "untransformed reference scores 1.0"
+    ],
+    [
+      "kwonly_specialize:<no anchor>",
+      "NOT_APPLICABLE",
+      "no anchor inside the gold-touched region"
+    ],
+    [
+      "symbol_rename:pylint/pyreverse/diagrams.py:ClassDiagram",
+      "REFUSED",
+      "dynamic reach: 'ClassDiagram' appears in a non-annotation string literal in pylint/pyreverse/diadefslib.py line 219 ('Get the diagrams configuration data\\n\\n   ') -- an alpha-rename cannot be argued safe"
+    ],
+    [
+      "symbol_rename:pylint/pyreverse/inspector.py:Linker",
+      "REFUSED",
+      "dynamic reach: 'Linker' appears in a non-annotation string literal in pylint/pyreverse/diadefslib.py line 219 ('Get the diagrams configuration data\\n\\n   ') -- an alpha-rename cannot be argued safe"
+    ],
+    [
+      "symbol_rename:pylint/pyreverse/utils.py:get_annotation_label",
+      "CLEAN",
+      "reward 1.0"
+    ],
+    [
+      "symbol_rename:pylint/pyreverse/utils.py:get_annotation",
+      "WITNESS",
+      "reward 0.0"
+    ],
+    [
+      "symbol_rename:pylint/pyreverse/utils.py:infer_node",
+      "WITNESS",
+      "reward 0.0"
+    ],
+    [
+      "symbol_rename:pylint/pyreverse/writer.py:DotWriter",
+      "REFUSED",
+      "dynamic reach: 'DotWriter' appears in a non-annotation string literal in pylint/pyreverse/writer.py line 117 ('initialize DotWriter and add options for') -- an alpha-rename cannot be argued safe"
+    ],
+    [
+      "collection_reverse:<no anchor>",
+      "NOT_APPLICABLE",
+      "no anchor inside the gold-touched region"
+    ],
+    [
+      "message_reword:<no anchor>",
+      "NOT_APPLICABLE",
+      "no anchor inside the gold-touched region"
+    ]
+  ],
+  "mountable": true,
+  "multi_target": true,
+  "n_targets": 4,
+  "on_prime_hub": null,
+  "on_prime_hub_reason": "not resolvable offline; no hub environment index is reachable from this repo, verifiers or swebench",
+  "operators_not_applicable": [
+    "collection_reverse",
+    "kwonly_specialize",
+    "message_reword"
+  ],
+  "operators_with_anchors": [
+    "symbol_rename"
+  ],
+  "repo": "pylint-dev/pylint",
+  "row": {
+    "elapsed": 64.71,
+    "error": null,
+    "error_type": null,
+    "index": 0,
+    "mode": "formcheck",
+    "name": "pylint-dev__pylint-4551",
+    "reason": "invalid",
+    "valid": false
+  },
+  "rows": [
+    {
+      "anchor": null,
+      "failure_analysis": null,
+      "file": null,
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 10,
+        "found": true,
+        "n_parsed": 10,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 0,
+        "reward": 1.0
+      },
+      "loud_failure": false,
+      "observable": "callable signature (arity / parameter names)",
+      "operator": "kwonly_specialize",
+      "reason": "no anchor inside the gold-touched region",
+      "tier": "HIGH",
+      "tree_digest": "e7578cce91177848fad0d239f65fe65c30577ee8766d62a894e3cca10a57923f",
+      "verdict": "NOT_APPLICABLE"
+    },
+    {
+      "anchor": "ClassDiagram",
+      "failure_analysis": null,
+      "file": "pylint/pyreverse/diagrams.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 10,
+        "found": true,
+        "n_parsed": 10,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 0,
+        "reward": 1.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "dynamic reach: 'ClassDiagram' appears in a non-annotation string literal in pylint/pyreverse/diadefslib.py line 219 ('Get the diagrams configuration data\\n\\n   ') -- an alpha-rename cannot be argued safe",
+      "tier": "MEDIUM",
+      "tree_digest": "e7578cce91177848fad0d239f65fe65c30577ee8766d62a894e3cca10a57923f",
+      "verdict": "REFUSED"
+    },
+    {
+      "anchor": "Linker",
+      "failure_analysis": null,
+      "file": "pylint/pyreverse/inspector.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 10,
+        "found": true,
+        "n_parsed": 10,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 0,
+        "reward": 1.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "dynamic reach: 'Linker' appears in a non-annotation string literal in pylint/pyreverse/diadefslib.py line 219 ('Get the diagrams configuration data\\n\\n   ') -- an alpha-rename cannot be argued safe",
+      "tier": "MEDIUM",
+      "tree_digest": "e7578cce91177848fad0d239f65fe65c30577ee8766d62a894e3cca10a57923f",
+      "verdict": "REFUSED"
+    },
+    {
+      "anchor": "get_annotation_label",
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "broke": [],
+        "coupled": [],
+        "failing": [],
+        "symbol": "get_annotation_label",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": "pylint/pyreverse/utils.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 10,
+        "found": true,
+        "n_parsed": 10,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 0,
+        "reward": 1.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "reward 1.0",
+      "tier": "MEDIUM",
+      "tree_digest": "c8a63f0756e79db57df9bb9f3578109848c7775f5fad8ac6e461d710b157f2df",
+      "verdict": "CLEAN"
+    },
+    {
+      "all_failures_attributed": true,
+      "anchor": "get_annotation",
+      "f2p_fail": 10,
+      "failure_analysis": {
+        "all_reference_the_symbol": true,
+        "broke": [],
+        "coupled": [
+          "tests/unittest_pyreverse_writer.py::test_dot_files[packages_No_Name.dot]",
+          "tests/unittest_pyreverse_writer.py::test_dot_files[classes_No_Name.dot]",
+          "tests/unittest_pyreverse_writer.py::test_get_visibility[names0-special]",
+          "tests/unittest_pyreverse_writer.py::test_get_visibility[names1-private]",
+          "tests/unittest_pyreverse_writer.py::test_get_visibility[names2-public]",
+          "tests/unittest_pyreverse_writer.py::test_get_visibility[names3-protected]",
+          "tests/unittest_pyreverse_writer.py::test_get_annotation_annassign[a:",
+          "tests/unittest_pyreverse_writer.py::test_get_annotation_assignattr[def",
+          "tests/unittest_pyreverse_writer.py::test_infer_node_1",
+          "tests/unittest_pyreverse_writer.py::test_infer_node_2"
+        ],
+        "failing": [
+          "tests/unittest_pyreverse_writer.py::test_dot_files[packages_No_Name.dot]",
+          "tests/unittest_pyreverse_writer.py::test_dot_files[classes_No_Name.dot]",
+          "tests/unittest_pyreverse_writer.py::test_get_visibility[names0-special]",
+          "tests/unittest_pyreverse_writer.py::test_get_visibility[names1-private]",
+          "tests/unittest_pyreverse_writer.py::test_get_visibility[names2-public]",
+          "tests/unittest_pyreverse_writer.py::test_get_visibility[names3-protected]",
+          "tests/unittest_pyreverse_writer.py::test_get_annotation_annassign[a:",
+          "tests/unittest_pyreverse_writer.py::test_get_annotation_assignattr[def",
+          "tests/unittest_pyreverse_writer.py::test_infer_node_1",
+          "tests/unittest_pyreverse_writer.py::test_infer_node_2"
+        ],
+        "symbol": "get_annotation",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": "pylint/pyreverse/utils.py",
+      "graded_log": "+ pytest -rA tests/unittest_pyreverse_writer.py\n============================= test session starts ==============================\nplatform linux -- Python 3.9.20, pytest-6.2.5, py-1.11.0, pluggy-1.5.0\nbenchmark: 3.4.1 (defaults: timer=time.perf_counter disable_gc=False min_rounds=5 min_time=0.000005 max_time=1.0 calibration_precision=10 warmup=False warmup_iterations=100000)\nrootdir: /testbed, configfile: setup.cfg\nplugins: benchmark-3.4.1, xdist-2.5.0, forked-1.6.0, profiling-1.7.0, cov-2.12.1\ncollected 0 items / 1 error\n\n==================================== ERRORS ====================================\n_____________ ERROR collecting tests/unittest_pyreverse_writer.py ______________\nImportError while importing test module '/testbed/tests/unittest_pyreverse_writer.py'.\nHint: make sure your test modules/packages have valid Python names.\nTraceback:\n/opt/miniconda3/envs/testbed/lib/python3.9/importlib/__init__.py:127: in import_module\n    return _bootstrap._gcd_import(name[level:], package, level)\ntests/unittest_pyreverse_writer.py:32: in <module>\n    from pylint.pyreverse.utils import get_annotation, get_visibility, infer_node\nE   ImportError: cannot import name 'get_annotation' from 'pylint.pyreverse.utils' (/testbed/pylint/pyreverse/utils.py)\n=============================== warnings summary ===============================\n../opt/miniconda3/envs/testbed/lib/python3.9/site-packages/astroid/interpreter/_import/util.py:6\n  /opt/miniconda3/envs/testbed/lib/python3.9/site-packages/astroid/interpreter/_import/util.py:6: DeprecationWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html\n    import pkg_resources\n\n-- Docs: https://docs.pytest.org/en/stable/warnings.html\n=========================== short test summary info ============================\nERROR tests/unittest_pyreverse_writer.py\n!!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!!\n========================= 1 warning, 1 error in 0.11s ==========================\n\n",
+      "graded_report": {
+        "f2p_fail": 10,
+        "f2p_failing": [
+          "tests/unittest_pyreverse_writer.py::test_dot_files[packages_No_Name.dot]",
+          "tests/unittest_pyreverse_writer.py::test_dot_files[classes_No_Name.dot]",
+          "tests/unittest_pyreverse_writer.py::test_get_visibility[names0-special]",
+          "tests/unittest_pyreverse_writer.py::test_get_visibility[names1-private]",
+          "tests/unittest_pyreverse_writer.py::test_get_visibility[names2-public]",
+          "tests/unittest_pyreverse_writer.py::test_get_visibility[names3-protected]",
+          "tests/unittest_pyreverse_writer.py::test_get_annotation_annassign[a:",
+          "tests/unittest_pyreverse_writer.py::test_get_annotation_assignattr[def",
+          "tests/unittest_pyreverse_writer.py::test_infer_node_1",
+          "tests/unittest_pyreverse_writer.py::test_infer_node_2"
+        ],
+        "f2p_pass": 0,
+        "found": true,
+        "n_parsed": 1,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 0,
+        "reward": 0.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "p2p_coupled_tests": [],
+      "p2p_fail": 0,
+      "reason": "reward 0.0",
+      "tier": "MEDIUM",
+      "tree_digest": "ff335a401b7199164973ac4a1112958232d78a02ccf7876dcc0da9feae8f2574",
+      "verdict": "WITNESS",
+      "witness_side": "f2p_only"
+    },
+    {
+      "all_failures_attributed": true,
+      "anchor": "infer_node",
+      "f2p_fail": 10,
+      "failure_analysis": {
+        "all_reference_the_symbol": true,
+        "broke": [],
+        "coupled": [
+          "tests/unittest_pyreverse_writer.py::test_dot_files[packages_No_Name.dot]",
+          "tests/unittest_pyreverse_writer.py::test_dot_files[classes_No_Name.dot]",
+          "tests/unittest_pyreverse_writer.py::test_get_visibility[names0-special]",
+          "tests/unittest_pyreverse_writer.py::test_get_visibility[names1-private]",
+          "tests/unittest_pyreverse_writer.py::test_get_visibility[names2-public]",
+          "tests/unittest_pyreverse_writer.py::test_get_visibility[names3-protected]",
+          "tests/unittest_pyreverse_writer.py::test_get_annotation_annassign[a:",
+          "tests/unittest_pyreverse_writer.py::test_get_annotation_assignattr[def",
+          "tests/unittest_pyreverse_writer.py::test_infer_node_1",
+          "tests/unittest_pyreverse_writer.py::test_infer_node_2"
+        ],
+        "failing": [
+          "tests/unittest_pyreverse_writer.py::test_dot_files[packages_No_Name.dot]",
+          "tests/unittest_pyreverse_writer.py::test_dot_files[classes_No_Name.dot]",
+          "tests/unittest_pyreverse_writer.py::test_get_visibility[names0-special]",
+          "tests/unittest_pyreverse_writer.py::test_get_visibility[names1-private]",
+          "tests/unittest_pyreverse_writer.py::test_get_visibility[names2-public]",
+          "tests/unittest_pyreverse_writer.py::test_get_visibility[names3-protected]",
+          "tests/unittest_pyreverse_writer.py::test_get_annotation_annassign[a:",
+          "tests/unittest_pyreverse_writer.py::test_get_annotation_assignattr[def",
+          "tests/unittest_pyreverse_writer.py::test_infer_node_1",
+          "tests/unittest_pyreverse_writer.py::test_infer_node_2"
+        ],
+        "symbol": "infer_node",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": "pylint/pyreverse/utils.py",
+      "graded_log": "+ pytest -rA tests/unittest_pyreverse_writer.py\n============================= test session starts ==============================\nplatform linux -- Python 3.9.20, pytest-6.2.5, py-1.11.0, pluggy-1.5.0\nbenchmark: 3.4.1 (defaults: timer=time.perf_counter disable_gc=False min_rounds=5 min_time=0.000005 max_time=1.0 calibration_precision=10 warmup=False warmup_iterations=100000)\nrootdir: /testbed, configfile: setup.cfg\nplugins: benchmark-3.4.1, xdist-2.5.0, forked-1.6.0, profiling-1.7.0, cov-2.12.1\ncollected 0 items / 1 error\n\n==================================== ERRORS ====================================\n_____________ ERROR collecting tests/unittest_pyreverse_writer.py ______________\nImportError while importing test module '/testbed/tests/unittest_pyreverse_writer.py'.\nHint: make sure your test modules/packages have valid Python names.\nTraceback:\n/opt/miniconda3/envs/testbed/lib/python3.9/importlib/__init__.py:127: in import_module\n    return _bootstrap._gcd_import(name[level:], package, level)\ntests/unittest_pyreverse_writer.py:32: in <module>\n    from pylint.pyreverse.utils import get_annotation, get_visibility, infer_node\nE   ImportError: cannot import name 'infer_node' from 'pylint.pyreverse.utils' (/testbed/pylint/pyreverse/utils.py)\n=============================== warnings summary ===============================\n../opt/miniconda3/envs/testbed/lib/python3.9/site-packages/astroid/interpreter/_import/util.py:6\n  /opt/miniconda3/envs/testbed/lib/python3.9/site-packages/astroid/interpreter/_import/util.py:6: DeprecationWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html\n    import pkg_resources\n\n-- Docs: https://docs.pytest.org/en/stable/warnings.html\n=========================== short test summary info ============================\nERROR tests/unittest_pyreverse_writer.py\n!!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!!\n========================= 1 warning, 1 error in 0.11s ==========================\n\n",
+      "graded_report": {
+        "f2p_fail": 10,
+        "f2p_failing": [
+          "tests/unittest_pyreverse_writer.py::test_dot_files[packages_No_Name.dot]",
+          "tests/unittest_pyreverse_writer.py::test_dot_files[classes_No_Name.dot]",
+          "tests/unittest_pyreverse_writer.py::test_get_visibility[names0-special]",
+          "tests/unittest_pyreverse_writer.py::test_get_visibility[names1-private]",
+          "tests/unittest_pyreverse_writer.py::test_get_visibility[names2-public]",
+          "tests/unittest_pyreverse_writer.py::test_get_visibility[names3-protected]",
+          "tests/unittest_pyreverse_writer.py::test_get_annotation_annassign[a:",
+          "tests/unittest_pyreverse_writer.py::test_get_annotation_assignattr[def",
+          "tests/unittest_pyreverse_writer.py::test_infer_node_1",
+          "tests/unittest_pyreverse_writer.py::test_infer_node_2"
+        ],
+        "f2p_pass": 0,
+        "found": true,
+        "n_parsed": 1,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 0,
+        "reward": 0.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "p2p_coupled_tests": [],
+      "p2p_fail": 0,
+      "reason": "reward 0.0",
+      "tier": "MEDIUM",
+      "tree_digest": "09750114a281e544116f92b5ad47767a8dab2f3fd43619368f837552b7cb004f",
+      "verdict": "WITNESS",
+      "witness_side": "f2p_only"
+    },
+    {
+      "anchor": "DotWriter",
+      "failure_analysis": {
+        "all_reference_the_symbol": true,
+        "broke": [],
+        "coupled": [
+          "tests/unittest_pyreverse_writer.py::test_dot_files[packages_No_Name.dot]",
+          "tests/unittest_pyreverse_writer.py::test_dot_files[classes_No_Name.dot]",
+          "tests/unittest_pyreverse_writer.py::test_get_visibility[names0-special]",
+          "tests/unittest_pyreverse_writer.py::test_get_visibility[names1-private]",
+          "tests/unittest_pyreverse_writer.py::test_get_visibility[names2-public]",
+          "tests/unittest_pyreverse_writer.py::test_get_visibility[names3-protected]",
+          "tests/unittest_pyreverse_writer.py::test_get_annotation_annassign[a:",
+          "tests/unittest_pyreverse_writer.py::test_get_annotation_assignattr[def",
+          "tests/unittest_pyreverse_writer.py::test_infer_node_1",
+          "tests/unittest_pyreverse_writer.py::test_infer_node_2"
+        ],
+        "failing": [
+          "tests/unittest_pyreverse_writer.py::test_dot_files[packages_No_Name.dot]",
+          "tests/unittest_pyreverse_writer.py::test_dot_files[classes_No_Name.dot]",
+          "tests/unittest_pyreverse_writer.py::test_get_visibility[names0-special]",
+          "tests/unittest_pyreverse_writer.py::test_get_visibility[names1-private]",
+          "tests/unittest_pyreverse_writer.py::test_get_visibility[names2-public]",
+          "tests/unittest_pyreverse_writer.py::test_get_visibility[names3-protected]",
+          "tests/unittest_pyreverse_writer.py::test_get_annotation_annassign[a:",
+          "tests/unittest_pyreverse_writer.py::test_get_annotation_assignattr[def",
+          "tests/unittest_pyreverse_writer.py::test_infer_node_1",
+          "tests/unittest_pyreverse_writer.py::test_infer_node_2"
+        ],
+        "symbol": "infer_node",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": "pylint/pyreverse/writer.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 10,
+        "f2p_failing": [
+          "tests/unittest_pyreverse_writer.py::test_dot_files[packages_No_Name.dot]",
+          "tests/unittest_pyreverse_writer.py::test_dot_files[classes_No_Name.dot]",
+          "tests/unittest_pyreverse_writer.py::test_get_visibility[names0-special]",
+          "tests/unittest_pyreverse_writer.py::test_get_visibility[names1-private]",
+          "tests/unittest_pyreverse_writer.py::test_get_visibility[names2-public]",
+          "tests/unittest_pyreverse_writer.py::test_get_visibility[names3-protected]",
+          "tests/unittest_pyreverse_writer.py::test_get_annotation_annassign[a:",
+          "tests/unittest_pyreverse_writer.py::test_get_annotation_assignattr[def",
+          "tests/unittest_pyreverse_writer.py::test_infer_node_1",
+          "tests/unittest_pyreverse_writer.py::test_infer_node_2"
+        ],
+        "f2p_pass": 0,
+        "found": true,
+        "n_parsed": 1,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 0,
+        "reward": 0.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "dynamic reach: 'DotWriter' appears in a non-annotation string literal in pylint/pyreverse/writer.py line 117 ('initialize DotWriter and add options for') -- an alpha-rename cannot be argued safe",
+      "tier": "MEDIUM",
+      "tree_digest": "09750114a281e544116f92b5ad47767a8dab2f3fd43619368f837552b7cb004f",
+      "verdict": "REFUSED"
+    },
+    {
+      "anchor": null,
+      "failure_analysis": {
+        "all_reference_the_symbol": true,
+        "broke": [],
+        "coupled": [
+          "tests/unittest_pyreverse_writer.py::test_dot_files[packages_No_Name.dot]",
+          "tests/unittest_pyreverse_writer.py::test_dot_files[classes_No_Name.dot]",
+          "tests/unittest_pyreverse_writer.py::test_get_visibility[names0-special]",
+          "tests/unittest_pyreverse_writer.py::test_get_visibility[names1-private]",
+          "tests/unittest_pyreverse_writer.py::test_get_visibility[names2-public]",
+          "tests/unittest_pyreverse_writer.py::test_get_visibility[names3-protected]",
+          "tests/unittest_pyreverse_writer.py::test_get_annotation_annassign[a:",
+          "tests/unittest_pyreverse_writer.py::test_get_annotation_assignattr[def",
+          "tests/unittest_pyreverse_writer.py::test_infer_node_1",
+          "tests/unittest_pyreverse_writer.py::test_infer_node_2"
+        ],
+        "failing": [
+          "tests/unittest_pyreverse_writer.py::test_dot_files[packages_No_Name.dot]",
+          "tests/unittest_pyreverse_writer.py::test_dot_files[classes_No_Name.dot]",
+          "tests/unittest_pyreverse_writer.py::test_get_visibility[names0-special]",
+          "tests/unittest_pyreverse_writer.py::test_get_visibility[names1-private]",
+          "tests/unittest_pyreverse_writer.py::test_get_visibility[names2-public]",
+          "tests/unittest_pyreverse_writer.py::test_get_visibility[names3-protected]",
+          "tests/unittest_pyreverse_writer.py::test_get_annotation_annassign[a:",
+          "tests/unittest_pyreverse_writer.py::test_get_annotation_assignattr[def",
+          "tests/unittest_pyreverse_writer.py::test_infer_node_1",
+          "tests/unittest_pyreverse_writer.py::test_infer_node_2"
+        ],
+        "symbol": "infer_node",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": null,
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 10,
+        "f2p_failing": [
+          "tests/unittest_pyreverse_writer.py::test_dot_files[packages_No_Name.dot]",
+          "tests/unittest_pyreverse_writer.py::test_dot_files[classes_No_Name.dot]",
+          "tests/unittest_pyreverse_writer.py::test_get_visibility[names0-special]",
+          "tests/unittest_pyreverse_writer.py::test_get_visibility[names1-private]",
+          "tests/unittest_pyreverse_writer.py::test_get_visibility[names2-public]",
+          "tests/unittest_pyreverse_writer.py::test_get_visibility[names3-protected]",
+          "tests/unittest_pyreverse_writer.py::test_get_annotation_annassign[a:",
+          "tests/unittest_pyreverse_writer.py::test_get_annotation_assignattr[def",
+          "tests/unittest_pyreverse_writer.py::test_infer_node_1",
+          "tests/unittest_pyreverse_writer.py::test_infer_node_2"
+        ],
+        "f2p_pass": 0,
+        "found": true,
+        "n_parsed": 1,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 0,
+        "reward": 0.0
+      },
+      "loud_failure": false,
+      "observable": "order of elements in a returned collection",
+      "operator": "collection_reverse",
+      "reason": "no anchor inside the gold-touched region",
+      "tier": "MEDIUM",
+      "tree_digest": "09750114a281e544116f92b5ad47767a8dab2f3fd43619368f837552b7cb004f",
+      "verdict": "NOT_APPLICABLE"
+    },
+    {
+      "anchor": null,
+      "failure_analysis": {
+        "all_reference_the_symbol": true,
+        "broke": [],
+        "coupled": [
+          "tests/unittest_pyreverse_writer.py::test_dot_files[packages_No_Name.dot]",
+          "tests/unittest_pyreverse_writer.py::test_dot_files[classes_No_Name.dot]",
+          "tests/unittest_pyreverse_writer.py::test_get_visibility[names0-special]",
+          "tests/unittest_pyreverse_writer.py::test_get_visibility[names1-private]",
+          "tests/unittest_pyreverse_writer.py::test_get_visibility[names2-public]",
+          "tests/unittest_pyreverse_writer.py::test_get_visibility[names3-protected]",
+          "tests/unittest_pyreverse_writer.py::test_get_annotation_annassign[a:",
+          "tests/unittest_pyreverse_writer.py::test_get_annotation_assignattr[def",
+          "tests/unittest_pyreverse_writer.py::test_infer_node_1",
+          "tests/unittest_pyreverse_writer.py::test_infer_node_2"
+        ],
+        "failing": [
+          "tests/unittest_pyreverse_writer.py::test_dot_files[packages_No_Name.dot]",
+          "tests/unittest_pyreverse_writer.py::test_dot_files[classes_No_Name.dot]",
+          "tests/unittest_pyreverse_writer.py::test_get_visibility[names0-special]",
+          "tests/unittest_pyreverse_writer.py::test_get_visibility[names1-private]",
+          "tests/unittest_pyreverse_writer.py::test_get_visibility[names2-public]",
+          "tests/unittest_pyreverse_writer.py::test_get_visibility[names3-protected]",
+          "tests/unittest_pyreverse_writer.py::test_get_annotation_annassign[a:",
+          "tests/unittest_pyreverse_writer.py::test_get_annotation_assignattr[def",
+          "tests/unittest_pyreverse_writer.py::test_infer_node_1",
+          "tests/unittest_pyreverse_writer.py::test_infer_node_2"
+        ],
+        "symbol": "infer_node",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": null,
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 10,
+        "f2p_failing": [
+          "tests/unittest_pyreverse_writer.py::test_dot_files[packages_No_Name.dot]",
+          "tests/unittest_pyreverse_writer.py::test_dot_files[classes_No_Name.dot]",
+          "tests/unittest_pyreverse_writer.py::test_get_visibility[names0-special]",
+          "tests/unittest_pyreverse_writer.py::test_get_visibility[names1-private]",
+          "tests/unittest_pyreverse_writer.py::test_get_visibility[names2-public]",
+          "tests/unittest_pyreverse_writer.py::test_get_visibility[names3-protected]",
+          "tests/unittest_pyreverse_writer.py::test_get_annotation_annassign[a:",
+          "tests/unittest_pyreverse_writer.py::test_get_annotation_assignattr[def",
+          "tests/unittest_pyreverse_writer.py::test_infer_node_1",
+          "tests/unittest_pyreverse_writer.py::test_infer_node_2"
+        ],
+        "f2p_pass": 0,
+        "found": true,
+        "n_parsed": 1,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 0,
+        "reward": 0.0
+      },
+      "loud_failure": false,
+      "observable": "human-readable text of an exception message",
+      "operator": "message_reword",
+      "reason": "no anchor inside the gold-touched region",
+      "tier": "HIGH",
+      "tree_digest": "09750114a281e544116f92b5ad47767a8dab2f3fd43619368f837552b7cb004f",
+      "verdict": "NOT_APPLICABLE"
+    }
+  ],
+  "targets": [
+    "pylint/pyreverse/diagrams.py",
+    "pylint/pyreverse/inspector.py",
+    "pylint/pyreverse/utils.py",
+    "pylint/pyreverse/writer.py"
+  ],
+  "version": "2.9",
+  "witnesses": [
+    {
+      "all_failures_attributed": true,
+      "anchor": "get_annotation",
+      "f2p_fail": 10,
+      "failure_analysis": {
+        "all_reference_the_symbol": true,
+        "broke": [],
+        "coupled": [
+          "tests/unittest_pyreverse_writer.py::test_dot_files[packages_No_Name.dot]",
+          "tests/unittest_pyreverse_writer.py::test_dot_files[classes_No_Name.dot]",
+          "tests/unittest_pyreverse_writer.py::test_get_visibility[names0-special]",
+          "tests/unittest_pyreverse_writer.py::test_get_visibility[names1-private]",
+          "tests/unittest_pyreverse_writer.py::test_get_visibility[names2-public]",
+          "tests/unittest_pyreverse_writer.py::test_get_visibility[names3-protected]",
+          "tests/unittest_pyreverse_writer.py::test_get_annotation_annassign[a:",
+          "tests/unittest_pyreverse_writer.py::test_get_annotation_assignattr[def",
+          "tests/unittest_pyreverse_writer.py::test_infer_node_1",
+          "tests/unittest_pyreverse_writer.py::test_infer_node_2"
+        ],
+        "failing": [
+          "tests/unittest_pyreverse_writer.py::test_dot_files[packages_No_Name.dot]",
+          "tests/unittest_pyreverse_writer.py::test_dot_files[classes_No_Name.dot]",
+          "tests/unittest_pyreverse_writer.py::test_get_visibility[names0-special]",
+          "tests/unittest_pyreverse_writer.py::test_get_visibility[names1-private]",
+          "tests/unittest_pyreverse_writer.py::test_get_visibility[names2-public]",
+          "tests/unittest_pyreverse_writer.py::test_get_visibility[names3-protected]",
+          "tests/unittest_pyreverse_writer.py::test_get_annotation_annassign[a:",
+          "tests/unittest_pyreverse_writer.py::test_get_annotation_assignattr[def",
+          "tests/unittest_pyreverse_writer.py::test_infer_node_1",
+          "tests/unittest_pyreverse_writer.py::test_infer_node_2"
+        ],
+        "symbol": "get_annotation",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": "pylint/pyreverse/utils.py",
+      "graded_log": "+ pytest -rA tests/unittest_pyreverse_writer.py\n============================= test session starts ==============================\nplatform linux -- Python 3.9.20, pytest-6.2.5, py-1.11.0, pluggy-1.5.0\nbenchmark: 3.4.1 (defaults: timer=time.perf_counter disable_gc=False min_rounds=5 min_time=0.000005 max_time=1.0 calibration_precision=10 warmup=False warmup_iterations=100000)\nrootdir: /testbed, configfile: setup.cfg\nplugins: benchmark-3.4.1, xdist-2.5.0, forked-1.6.0, profiling-1.7.0, cov-2.12.1\ncollected 0 items / 1 error\n\n==================================== ERRORS ====================================\n_____________ ERROR collecting tests/unittest_pyreverse_writer.py ______________\nImportError while importing test module '/testbed/tests/unittest_pyreverse_writer.py'.\nHint: make sure your test modules/packages have valid Python names.\nTraceback:\n/opt/miniconda3/envs/testbed/lib/python3.9/importlib/__init__.py:127: in import_module\n    return _bootstrap._gcd_import(name[level:], package, level)\ntests/unittest_pyreverse_writer.py:32: in <module>\n    from pylint.pyreverse.utils import get_annotation, get_visibility, infer_node\nE   ImportError: cannot import name 'get_annotation' from 'pylint.pyreverse.utils' (/testbed/pylint/pyreverse/utils.py)\n=============================== warnings summary ===============================\n../opt/miniconda3/envs/testbed/lib/python3.9/site-packages/astroid/interpreter/_import/util.py:6\n  /opt/miniconda3/envs/testbed/lib/python3.9/site-packages/astroid/interpreter/_import/util.py:6: DeprecationWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html\n    import pkg_resources\n\n-- Docs: https://docs.pytest.org/en/stable/warnings.html\n=========================== short test summary info ============================\nERROR tests/unittest_pyreverse_writer.py\n!!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!!\n========================= 1 warning, 1 error in 0.11s ==========================\n\n",
+      "graded_report": {
+        "f2p_fail": 10,
+        "f2p_failing": [
+          "tests/unittest_pyreverse_writer.py::test_dot_files[packages_No_Name.dot]",
+          "tests/unittest_pyreverse_writer.py::test_dot_files[classes_No_Name.dot]",
+          "tests/unittest_pyreverse_writer.py::test_get_visibility[names0-special]",
+          "tests/unittest_pyreverse_writer.py::test_get_visibility[names1-private]",
+          "tests/unittest_pyreverse_writer.py::test_get_visibility[names2-public]",
+          "tests/unittest_pyreverse_writer.py::test_get_visibility[names3-protected]",
+          "tests/unittest_pyreverse_writer.py::test_get_annotation_annassign[a:",
+          "tests/unittest_pyreverse_writer.py::test_get_annotation_assignattr[def",
+          "tests/unittest_pyreverse_writer.py::test_infer_node_1",
+          "tests/unittest_pyreverse_writer.py::test_infer_node_2"
+        ],
+        "f2p_pass": 0,
+        "found": true,
+        "n_parsed": 1,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 0,
+        "reward": 0.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "p2p_coupled_tests": [],
+      "p2p_fail": 0,
+      "reason": "reward 0.0",
+      "tier": "MEDIUM",
+      "tree_digest": "ff335a401b7199164973ac4a1112958232d78a02ccf7876dcc0da9feae8f2574",
+      "verdict": "WITNESS",
+      "witness_side": "f2p_only"
+    },
+    {
+      "all_failures_attributed": true,
+      "anchor": "infer_node",
+      "f2p_fail": 10,
+      "failure_analysis": {
+        "all_reference_the_symbol": true,
+        "broke": [],
+        "coupled": [
+          "tests/unittest_pyreverse_writer.py::test_dot_files[packages_No_Name.dot]",
+          "tests/unittest_pyreverse_writer.py::test_dot_files[classes_No_Name.dot]",
+          "tests/unittest_pyreverse_writer.py::test_get_visibility[names0-special]",
+          "tests/unittest_pyreverse_writer.py::test_get_visibility[names1-private]",
+          "tests/unittest_pyreverse_writer.py::test_get_visibility[names2-public]",
+          "tests/unittest_pyreverse_writer.py::test_get_visibility[names3-protected]",
+          "tests/unittest_pyreverse_writer.py::test_get_annotation_annassign[a:",
+          "tests/unittest_pyreverse_writer.py::test_get_annotation_assignattr[def",
+          "tests/unittest_pyreverse_writer.py::test_infer_node_1",
+          "tests/unittest_pyreverse_writer.py::test_infer_node_2"
+        ],
+        "failing": [
+          "tests/unittest_pyreverse_writer.py::test_dot_files[packages_No_Name.dot]",
+          "tests/unittest_pyreverse_writer.py::test_dot_files[classes_No_Name.dot]",
+          "tests/unittest_pyreverse_writer.py::test_get_visibility[names0-special]",
+          "tests/unittest_pyreverse_writer.py::test_get_visibility[names1-private]",
+          "tests/unittest_pyreverse_writer.py::test_get_visibility[names2-public]",
+          "tests/unittest_pyreverse_writer.py::test_get_visibility[names3-protected]",
+          "tests/unittest_pyreverse_writer.py::test_get_annotation_annassign[a:",
+          "tests/unittest_pyreverse_writer.py::test_get_annotation_assignattr[def",
+          "tests/unittest_pyreverse_writer.py::test_infer_node_1",
+          "tests/unittest_pyreverse_writer.py::test_infer_node_2"
+        ],
+        "symbol": "infer_node",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": "pylint/pyreverse/utils.py",
+      "graded_log": "+ pytest -rA tests/unittest_pyreverse_writer.py\n============================= test session starts ==============================\nplatform linux -- Python 3.9.20, pytest-6.2.5, py-1.11.0, pluggy-1.5.0\nbenchmark: 3.4.1 (defaults: timer=time.perf_counter disable_gc=False min_rounds=5 min_time=0.000005 max_time=1.0 calibration_precision=10 warmup=False warmup_iterations=100000)\nrootdir: /testbed, configfile: setup.cfg\nplugins: benchmark-3.4.1, xdist-2.5.0, forked-1.6.0, profiling-1.7.0, cov-2.12.1\ncollected 0 items / 1 error\n\n==================================== ERRORS ====================================\n_____________ ERROR collecting tests/unittest_pyreverse_writer.py ______________\nImportError while importing test module '/testbed/tests/unittest_pyreverse_writer.py'.\nHint: make sure your test modules/packages have valid Python names.\nTraceback:\n/opt/miniconda3/envs/testbed/lib/python3.9/importlib/__init__.py:127: in import_module\n    return _bootstrap._gcd_import(name[level:], package, level)\ntests/unittest_pyreverse_writer.py:32: in <module>\n    from pylint.pyreverse.utils import get_annotation, get_visibility, infer_node\nE   ImportError: cannot import name 'infer_node' from 'pylint.pyreverse.utils' (/testbed/pylint/pyreverse/utils.py)\n=============================== warnings summary ===============================\n../opt/miniconda3/envs/testbed/lib/python3.9/site-packages/astroid/interpreter/_import/util.py:6\n  /opt/miniconda3/envs/testbed/lib/python3.9/site-packages/astroid/interpreter/_import/util.py:6: DeprecationWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html\n    import pkg_resources\n\n-- Docs: https://docs.pytest.org/en/stable/warnings.html\n=========================== short test summary info ============================\nERROR tests/unittest_pyreverse_writer.py\n!!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!!\n========================= 1 warning, 1 error in 0.11s ==========================\n\n",
+      "graded_report": {
+        "f2p_fail": 10,
+        "f2p_failing": [
+          "tests/unittest_pyreverse_writer.py::test_dot_files[packages_No_Name.dot]",
+          "tests/unittest_pyreverse_writer.py::test_dot_files[classes_No_Name.dot]",
+          "tests/unittest_pyreverse_writer.py::test_get_visibility[names0-special]",
+          "tests/unittest_pyreverse_writer.py::test_get_visibility[names1-private]",
+          "tests/unittest_pyreverse_writer.py::test_get_visibility[names2-public]",
+          "tests/unittest_pyreverse_writer.py::test_get_visibility[names3-protected]",
+          "tests/unittest_pyreverse_writer.py::test_get_annotation_annassign[a:",
+          "tests/unittest_pyreverse_writer.py::test_get_annotation_assignattr[def",
+          "tests/unittest_pyreverse_writer.py::test_infer_node_1",
+          "tests/unittest_pyreverse_writer.py::test_infer_node_2"
+        ],
+        "f2p_pass": 0,
+        "found": true,
+        "n_parsed": 1,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 0,
+        "reward": 0.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "p2p_coupled_tests": [],
+      "p2p_fail": 0,
+      "reason": "reward 0.0",
+      "tier": "MEDIUM",
+      "tree_digest": "09750114a281e544116f92b5ad47767a8dab2f3fd43619368f837552b7cb004f",
+      "verdict": "WITNESS",
+      "witness_side": "f2p_only"
+    }
+  ]
+}

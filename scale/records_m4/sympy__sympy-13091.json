@@ -1,0 +1,1242 @@
+{
+  "completed": true,
+  "control": {
+    "graded": null,
+    "log": null,
+    "passed": true,
+    "reason": "untransformed reference scores 1.0"
+  },
+  "digest_trace": [
+    {
+      "digest": "d8954f8f08bf8861b67e42e4cd80b0da701be43194699746ac1adf9da3984617",
+      "memo_hit": false
+    },
+    {
+      "digest": "9bb699145b752e610cd415ae42bb65069c50b4944bde3c089bcf82cda91b44b0",
+      "memo_hit": false
+    },
+    {
+      "digest": "9bb699145b752e610cd415ae42bb65069c50b4944bde3c089bcf82cda91b44b0",
+      "memo_hit": true
+    },
+    {
+      "digest": "a6ee2a5eb0da029fb6d23a4cbe350e9e7de6648b38c34f9cf26ab9f15726d298",
+      "memo_hit": false
+    },
+    {
+      "digest": "a6ee2a5eb0da029fb6d23a4cbe350e9e7de6648b38c34f9cf26ab9f15726d298",
+      "memo_hit": true
+    },
+    {
+      "digest": "fe10e4aaed0303b6084dc932a6de2d895a6189a6aae2e68fe4ba12350ed82028",
+      "memo_hit": false
+    },
+    {
+      "digest": "fe10e4aaed0303b6084dc932a6de2d895a6189a6aae2e68fe4ba12350ed82028",
+      "memo_hit": true
+    }
+  ],
+  "disk_orphan_reclaimed_bytes": 0,
+  "disk_residual_bytes": 0,
+  "elapsed_seconds": 329.44,
+  "error": null,
+  "image": "swebench/sweb.eval.x86_64.sympy_1776_sympy-13091:latest",
+  "instance_id": "sympy__sympy-13091",
+  "leaked_containers": [],
+  "leaked_image": false,
+  "log": [
+    [
+      "<control>",
+      "OK",
+      "untransformed reference scores 1.0"
+    ],
+    [
+      "kwonly_specialize:<no anchor>",
+      "NOT_APPLICABLE",
+      "no anchor inside the gold-touched region"
+    ],
+    [
+      "symbol_rename:sympy/core/basic.py:Basic",
+      "REFUSED",
+      "BORDER: the issue names 'Basic' -- candidate CONTRACT, route to the rubric"
+    ],
+    [
+      "symbol_rename:sympy/core/exprtools.py:Factors",
+      "REFUSED",
+      "dynamic reach: 'Factors' appears in a non-annotation string literal in sympy/core/exprtools.py line 285 ('Initialize Factors from dict or expr.\\n\\n '); 13 further hit(s) -- an alpha-rename cannot be argued safe"
+    ],
+    [
+      "symbol_rename:sympy/core/exprtools.py:Term",
+      "REFUSED",
+      "dynamic reach: 'Term' appears in a non-annotation string literal in sympy/core/exprtools.py line 848 ('Term(%s, %s, %s)'); 3 further hit(s) -- an alpha-rename cannot be argued safe"
+    ],
+    [
+      "symbol_rename:sympy/core/numbers.py:Float",
+      "REFUSED",
+      "attribute access `.Float` in examples/beginner/substitution.py line 25 is not a qualified reference to the defining module -- outside this operator's scope"
+    ],
+    [
+      "symbol_rename:sympy/core/numbers.py:Rational",
+      "REFUSED",
+      "multi-line import of 'Rational' in examples/intermediate/coupled_cluster.py"
+    ],
+    [
+      "symbol_rename:sympy/core/numbers.py:Integer",
+      "REFUSED",
+      "multi-line import of 'Integer' in sympy/polys/polytools.py"
+    ],
+    [
+      "symbol_rename:sympy/core/numbers.py:NumberSymbol",
+      "REFUSED",
+      "dynamic reach: 'NumberSymbol' appears in a non-annotation string literal in sympy/core/basic.py line 395 ('Returns the atoms that form the current '); 1 further hit(s) -- an alpha-rename cannot be argued safe"
+    ],
+    [
+      "symbol_rename:sympy/geometry/entity.py:GeometryEntity",
+      "REFUSED",
+      "dynamic reach: 'GeometryEntity' appears in a non-annotation string literal in sympy/geometry/curve.py line 312 ('Override GeometryEntity.scale since Curv'); 32 further hit(s) -- an alpha-rename cannot be argued safe"
+    ],
+    [
+      "symbol_rename:sympy/physics/optics/medium.py:Medium",
+      "REFUSED",
+      "dynamic reach: 'Medium' appears in a non-annotation string literal in sympy/physics/optics/medium.py line 10 ('Medium') -- an `__all__` entry; 11 further hit(s) -- an alpha-rename cannot be argued safe"
+    ],
+    [
+      "symbol_rename:sympy/physics/vector/dyadic.py:Dyadic",
+      "REFUSED",
+      "dynamic reach: 'Dyadic' appears in a non-annotation string literal in sympy/physics/vector/dyadic.py line 6 ('Dyadic') -- an `__all__` entry; 33 further hit(s) -- an alpha-rename cannot be argued safe"
+    ],
+    [
+      "symbol_rename:sympy/physics/vector/frame.py:CoordinateSym",
+      "REFUSED",
+      "dynamic reach: 'CoordinateSym' appears in a non-annotation string literal in sympy/physics/vector/frame.py line 7 ('CoordinateSym') -- an `__all__` entry; 2 further hit(s) -- an alpha-rename cannot be argued safe"
+    ],
+    [
+      "symbol_rename:sympy/physics/vector/vector.py:Vector",
+      "REFUSED",
+      "attribute access `.Vector` in sympy/vector/coordsysrect.py line 62 is not a qualified reference to the defining module -- outside this operator's scope"
+    ],
+    [
+      "symbol_rename:sympy/polys/agca/modules.py:ModuleElement",
+      "CLEAN",
+      "reward 1.0"
+    ],
+    [
+      "symbol_rename:sympy/polys/domains/domain.py:Domain",
+      "REFUSED",
+      "attribute access `.Domain` in sympy/polys/polyoptions.py line 414 is not a qualified reference to the defining module -- outside this operator's scope"
+    ],
+    [
+      "symbol_rename:sympy/polys/domains/expressiondomain.py:ExpressionDomain",
+      "REFUSED",
+      "dynamic reach: 'ExpressionDomain' appears in a non-annotation string literal in sympy/polys/domains/expressiondomain.py line 1 ('Implementation of :class:`ExpressionDoma') -- an alpha-rename cannot be argued safe"
+    ],
+    [
+      "symbol_rename:sympy/polys/domains/pythonrational.py:PythonRational",
+      "REFUSED",
+      "dynamic reach: 'PythonRational' appears in a non-annotation string literal in sympy/polys/domains/pythonrational.py line 18 ('\\n    Rational number type based on Pytho'); 1 further hit(s) -- an alpha-rename cannot be argued safe"
+    ],
+    [
+      "symbol_rename:sympy/polys/domains/quotientring.py:QuotientRingElement",
+      "CLEAN",
+      "reward 1.0"
+    ],
+    [
+      "symbol_rename:sympy/polys/fields.py:FracField",
+      "CLEAN",
+      "reward 1.0"
+    ],
+    [
+      "symbol_rename:sympy/polys/fields.py:FracElement",
+      "REFUSED",
+      "dynamic reach: 'FracElement' appears in a non-annotation string literal in sympy/polys/fields.py line 116 ('FracElement'); 2 further hit(s) -- an alpha-rename cannot be argued safe"
+    ],
+    [
+      "symbol_rename:sympy/polys/monomials.py:Monomial",
+      "REFUSED",
+      "dynamic reach: 'Monomial' appears in a non-annotation string literal in sympy/polys/monomials.py line 501 ('an instance of Monomial class expected, '); 1 further hit(s) -- an alpha-rename cannot be argued safe"
+    ],
+    [
+      "symbol_rename:sympy/polys/polyclasses.py:DMP",
+      "REFUSED",
+      "dynamic reach: 'DMP' appears in a non-annotation string literal in sympy/polys/domains/expressiondomain.py line 179 ('Convert a ``DMP`` object to ``dtype``. '); 9 further hit(s) -- an alpha-rename cannot be argued safe"
+    ],
+    [
+      "symbol_rename:sympy/polys/polyclasses.py:DMF",
+      "REFUSED",
+      "dynamic reach: 'DMF' appears in a non-annotation string literal in sympy/polys/domains/expressiondomain.py line 183 ('Convert a ``DMF`` object to ``dtype``. '); 5 further hit(s) -- an alpha-rename cannot be argued safe"
+    ],
+    [
+      "symbol_rename:sympy/polys/polyclasses.py:ANP",
+      "REFUSED",
+      "dynamic reach: 'ANP' appears in a non-annotation string literal in sympy/polys/domains/integerring.py line 36 ('Convert a ``ANP`` object to ``dtype``. '); 2 further hit(s) -- an alpha-rename cannot be argued safe"
+    ],
+    [
+      "symbol_rename:sympy/polys/polytools.py:Poly",
+      "REFUSED",
+      "multi-line import of 'Poly' in sympy/polys/numberfields.py"
+    ],
+    [
+      "symbol_rename:sympy/polys/polytools.py:GroebnerBasis",
+      "REFUSED",
+      "dynamic reach: 'GroebnerBasis' appears in a non-annotation string literal in sympy/polys/polytools.py line 6548 ('\\n    Computes the reduced Groebner basis') -- an alpha-rename cannot be argued safe"
+    ],
+    [
+      "symbol_rename:sympy/polys/rings.py:PolyRing",
+      "REFUSED",
+      "dynamic reach: 'PolyRing' appears in a non-annotation string literal in sympy/combinatorics/free_groups.py line 116 ('\\n    Free group with finite or infinite '); 6 further hit(s) -- an alpha-rename cannot be argued safe"
+    ],
+    [
+      "symbol_rename:sympy/polys/rings.py:PolyElement",
+      "REFUSED",
+      "dynamic reach: 'PolyElement' appears in a non-annotation string literal in sympy/polys/modulargcd.py line 61 ('\\n    Compute an upper bound for the degr'); 36 further hit(s) -- an alpha-rename cannot be argued safe"
+    ],
+    [
+      "symbol_rename:sympy/polys/rootoftools.py:ComplexRootOf",
+      "REFUSED",
+      "dynamic reach: 'ComplexRootOf' appears in a non-annotation string literal in sympy/polys/rootoftools.py line 52 ('An indexed root of a univariate polynomi'); 1 further hit(s) -- an alpha-rename cannot be argued safe"
+    ],
+    [
+      "symbol_rename:sympy/tensor/array/ndim_array.py:NDimArray",
+      "REFUSED",
+      "dynamic reach: 'NDimArray' appears in a non-annotation string literal in sympy/tensor/array/ndim_array.py line 338 ('unsupported operation on NDimArray'); 1 further hit(s) -- an alpha-rename cannot be argued safe"
+    ],
+    [
+      "symbol_rename:sympy/utilities/enumerative.py:PartComponent",
+      "REFUSED",
+      "dynamic reach: 'PartComponent' appears in a non-annotation string literal in sympy/utilities/enumerative.py line 150 ('Enumerates partitions of a multiset.\\n\\n  '); 1 further hit(s) -- an alpha-rename cannot be argued safe"
+    ],
+    [
+      "collection_reverse:<no anchor>",
+      "NOT_APPLICABLE",
+      "no anchor inside the gold-touched region; 12 anchor(s) elsewhere in the 21 target(s): sympy/core/basic.py, sympy/core/exprtools.py, sympy/core/numbers.py, sympy/geometry/entity.py, sympy/physics/optics/medium.py, sympy/physics/vector/dyadic.py, sympy/physics/vector/frame.py, sympy/physics/vector/vector.py, sympy/polys/agca/modules.py, sympy/polys/domains/domain.py, sympy/polys/domains/expressiondomain.py, sympy/polys/domains/pythonrational.py, sympy/polys/domains/quotientring.py, sympy/polys/fields.py, sympy/polys/monomials.py, sympy/polys/polyclasses.py, sympy/polys/polytools.py, sympy/polys/rings.py, sympy/polys/rootoftools.py, sympy/tensor/array/ndim_array.py, sympy/utilities/enumerative.py"
+    ],
+    [
+      "message_reword:<no anchor>",
+      "NOT_APPLICABLE",
+      "no anchor inside the gold-touched region; 242 anchor(s) elsewhere in the 21 target(s): sympy/core/basic.py, sympy/core/exprtools.py, sympy/core/numbers.py, sympy/geometry/entity.py, sympy/physics/optics/medium.py, sympy/physics/vector/dyadic.py, sympy/physics/vector/frame.py, sympy/physics/vector/vector.py, sympy/polys/agca/modules.py, sympy/polys/domains/domain.py, sympy/polys/domains/expressiondomain.py, sympy/polys/domains/pythonrational.py, sympy/polys/domains/quotientring.py, sympy/polys/fields.py, sympy/polys/monomials.py, sympy/polys/polyclasses.py, sympy/polys/polytools.py, sympy/polys/rings.py, sympy/polys/rootoftools.py, sympy/tensor/array/ndim_array.py, sympy/utilities/enumerative.py"
+    ]
+  ],
+  "mountable": true,
+  "multi_target": true,
+  "n_targets": 21,
+  "on_prime_hub": null,
+  "on_prime_hub_reason": "not resolvable offline; no hub environment index is reachable from this repo, verifiers or swebench",
+  "operators_not_applicable": [
+    "collection_reverse",
+    "kwonly_specialize",
+    "message_reword"
+  ],
+  "operators_with_anchors": [
+    "symbol_rename"
+  ],
+  "repo": "sympy/sympy",
+  "row": {
+    "elapsed": 307.17,
+    "error": null,
+    "error_type": null,
+    "index": 0,
+    "mode": "formcheck",
+    "name": "sympy__sympy-13091",
+    "reason": "valid",
+    "valid": true
+  },
+  "rows": [
+    {
+      "anchor": null,
+      "failure_analysis": null,
+      "file": null,
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 2,
+        "found": true,
+        "n_parsed": 98,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 89,
+        "reward": 1.0
+      },
+      "loud_failure": false,
+      "observable": "callable signature (arity / parameter names)",
+      "operator": "kwonly_specialize",
+      "reason": "no anchor inside the gold-touched region",
+      "tier": "HIGH",
+      "tree_digest": "d8954f8f08bf8861b67e42e4cd80b0da701be43194699746ac1adf9da3984617",
+      "verdict": "NOT_APPLICABLE"
+    },
+    {
+      "anchor": "Basic",
+      "failure_analysis": null,
+      "file": "sympy/core/basic.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 2,
+        "found": true,
+        "n_parsed": 98,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 89,
+        "reward": 1.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "BORDER: the issue names 'Basic' -- candidate CONTRACT, route to the rubric",
+      "tier": "MEDIUM",
+      "tree_digest": "d8954f8f08bf8861b67e42e4cd80b0da701be43194699746ac1adf9da3984617",
+      "verdict": "REFUSED"
+    },
+    {
+      "anchor": "Factors",
+      "failure_analysis": null,
+      "file": "sympy/core/exprtools.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 2,
+        "found": true,
+        "n_parsed": 98,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 89,
+        "reward": 1.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "dynamic reach: 'Factors' appears in a non-annotation string literal in sympy/core/exprtools.py line 285 ('Initialize Factors from dict or expr.\\n\\n '); 13 further hit(s) -- an alpha-rename cannot be argued safe",
+      "tier": "MEDIUM",
+      "tree_digest": "d8954f8f08bf8861b67e42e4cd80b0da701be43194699746ac1adf9da3984617",
+      "verdict": "REFUSED"
+    },
+    {
+      "anchor": "Term",
+      "failure_analysis": null,
+      "file": "sympy/core/exprtools.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 2,
+        "found": true,
+        "n_parsed": 98,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 89,
+        "reward": 1.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "dynamic reach: 'Term' appears in a non-annotation string literal in sympy/core/exprtools.py line 848 ('Term(%s, %s, %s)'); 3 further hit(s) -- an alpha-rename cannot be argued safe",
+      "tier": "MEDIUM",
+      "tree_digest": "d8954f8f08bf8861b67e42e4cd80b0da701be43194699746ac1adf9da3984617",
+      "verdict": "REFUSED"
+    },
+    {
+      "anchor": "Float",
+      "failure_analysis": null,
+      "file": "sympy/core/numbers.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 2,
+        "found": true,
+        "n_parsed": 98,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 89,
+        "reward": 1.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "attribute access `.Float` in examples/beginner/substitution.py line 25 is not a qualified reference to the defining module -- outside this operator's scope",
+      "tier": "MEDIUM",
+      "tree_digest": "d8954f8f08bf8861b67e42e4cd80b0da701be43194699746ac1adf9da3984617",
+      "verdict": "REFUSED"
+    },
+    {
+      "anchor": "Rational",
+      "failure_analysis": null,
+      "file": "sympy/core/numbers.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 2,
+        "found": true,
+        "n_parsed": 98,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 89,
+        "reward": 1.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "multi-line import of 'Rational' in examples/intermediate/coupled_cluster.py",
+      "tier": "MEDIUM",
+      "tree_digest": "d8954f8f08bf8861b67e42e4cd80b0da701be43194699746ac1adf9da3984617",
+      "verdict": "REFUSED"
+    },
+    {
+      "anchor": "Integer",
+      "failure_analysis": null,
+      "file": "sympy/core/numbers.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 2,
+        "found": true,
+        "n_parsed": 98,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 89,
+        "reward": 1.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "multi-line import of 'Integer' in sympy/polys/polytools.py",
+      "tier": "MEDIUM",
+      "tree_digest": "d8954f8f08bf8861b67e42e4cd80b0da701be43194699746ac1adf9da3984617",
+      "verdict": "REFUSED"
+    },
+    {
+      "anchor": "NumberSymbol",
+      "failure_analysis": null,
+      "file": "sympy/core/numbers.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 2,
+        "found": true,
+        "n_parsed": 98,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 89,
+        "reward": 1.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "dynamic reach: 'NumberSymbol' appears in a non-annotation string literal in sympy/core/basic.py line 395 ('Returns the atoms that form the current '); 1 further hit(s) -- an alpha-rename cannot be argued safe",
+      "tier": "MEDIUM",
+      "tree_digest": "d8954f8f08bf8861b67e42e4cd80b0da701be43194699746ac1adf9da3984617",
+      "verdict": "REFUSED"
+    },
+    {
+      "anchor": "GeometryEntity",
+      "failure_analysis": null,
+      "file": "sympy/geometry/entity.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 2,
+        "found": true,
+        "n_parsed": 98,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 89,
+        "reward": 1.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "dynamic reach: 'GeometryEntity' appears in a non-annotation string literal in sympy/geometry/curve.py line 312 ('Override GeometryEntity.scale since Curv'); 32 further hit(s) -- an alpha-rename cannot be argued safe",
+      "tier": "MEDIUM",
+      "tree_digest": "d8954f8f08bf8861b67e42e4cd80b0da701be43194699746ac1adf9da3984617",
+      "verdict": "REFUSED"
+    },
+    {
+      "anchor": "Medium",
+      "failure_analysis": null,
+      "file": "sympy/physics/optics/medium.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 2,
+        "found": true,
+        "n_parsed": 98,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 89,
+        "reward": 1.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "dynamic reach: 'Medium' appears in a non-annotation string literal in sympy/physics/optics/medium.py line 10 ('Medium') -- an `__all__` entry; 11 further hit(s) -- an alpha-rename cannot be argued safe",
+      "tier": "MEDIUM",
+      "tree_digest": "d8954f8f08bf8861b67e42e4cd80b0da701be43194699746ac1adf9da3984617",
+      "verdict": "REFUSED"
+    },
+    {
+      "anchor": "Dyadic",
+      "failure_analysis": null,
+      "file": "sympy/physics/vector/dyadic.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 2,
+        "found": true,
+        "n_parsed": 98,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 89,
+        "reward": 1.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "dynamic reach: 'Dyadic' appears in a non-annotation string literal in sympy/physics/vector/dyadic.py line 6 ('Dyadic') -- an `__all__` entry; 33 further hit(s) -- an alpha-rename cannot be argued safe",
+      "tier": "MEDIUM",
+      "tree_digest": "d8954f8f08bf8861b67e42e4cd80b0da701be43194699746ac1adf9da3984617",
+      "verdict": "REFUSED"
+    },
+    {
+      "anchor": "CoordinateSym",
+      "failure_analysis": null,
+      "file": "sympy/physics/vector/frame.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 2,
+        "found": true,
+        "n_parsed": 98,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 89,
+        "reward": 1.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "dynamic reach: 'CoordinateSym' appears in a non-annotation string literal in sympy/physics/vector/frame.py line 7 ('CoordinateSym') -- an `__all__` entry; 2 further hit(s) -- an alpha-rename cannot be argued safe",
+      "tier": "MEDIUM",
+      "tree_digest": "d8954f8f08bf8861b67e42e4cd80b0da701be43194699746ac1adf9da3984617",
+      "verdict": "REFUSED"
+    },
+    {
+      "anchor": "Vector",
+      "failure_analysis": null,
+      "file": "sympy/physics/vector/vector.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 2,
+        "found": true,
+        "n_parsed": 98,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 89,
+        "reward": 1.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "attribute access `.Vector` in sympy/vector/coordsysrect.py line 62 is not a qualified reference to the defining module -- outside this operator's scope",
+      "tier": "MEDIUM",
+      "tree_digest": "d8954f8f08bf8861b67e42e4cd80b0da701be43194699746ac1adf9da3984617",
+      "verdict": "REFUSED"
+    },
+    {
+      "anchor": "ModuleElement",
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "broke": [],
+        "coupled": [],
+        "failing": [],
+        "symbol": "ModuleElement",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": "sympy/polys/agca/modules.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 2,
+        "found": true,
+        "n_parsed": 97,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 89,
+        "reward": 1.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "reward 1.0",
+      "tier": "MEDIUM",
+      "tree_digest": "9bb699145b752e610cd415ae42bb65069c50b4944bde3c089bcf82cda91b44b0",
+      "verdict": "CLEAN"
+    },
+    {
+      "anchor": "Domain",
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "broke": [],
+        "coupled": [],
+        "failing": [],
+        "symbol": "ModuleElement",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": "sympy/polys/domains/domain.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 2,
+        "found": true,
+        "n_parsed": 97,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 89,
+        "reward": 1.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "attribute access `.Domain` in sympy/polys/polyoptions.py line 414 is not a qualified reference to the defining module -- outside this operator's scope",
+      "tier": "MEDIUM",
+      "tree_digest": "9bb699145b752e610cd415ae42bb65069c50b4944bde3c089bcf82cda91b44b0",
+      "verdict": "REFUSED"
+    },
+    {
+      "anchor": "ExpressionDomain",
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "broke": [],
+        "coupled": [],
+        "failing": [],
+        "symbol": "ModuleElement",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": "sympy/polys/domains/expressiondomain.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 2,
+        "found": true,
+        "n_parsed": 97,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 89,
+        "reward": 1.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "dynamic reach: 'ExpressionDomain' appears in a non-annotation string literal in sympy/polys/domains/expressiondomain.py line 1 ('Implementation of :class:`ExpressionDoma') -- an alpha-rename cannot be argued safe",
+      "tier": "MEDIUM",
+      "tree_digest": "9bb699145b752e610cd415ae42bb65069c50b4944bde3c089bcf82cda91b44b0",
+      "verdict": "REFUSED"
+    },
+    {
+      "anchor": "PythonRational",
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "broke": [],
+        "coupled": [],
+        "failing": [],
+        "symbol": "ModuleElement",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": "sympy/polys/domains/pythonrational.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 2,
+        "found": true,
+        "n_parsed": 97,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 89,
+        "reward": 1.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "dynamic reach: 'PythonRational' appears in a non-annotation string literal in sympy/polys/domains/pythonrational.py line 18 ('\\n    Rational number type based on Pytho'); 1 further hit(s) -- an alpha-rename cannot be argued safe",
+      "tier": "MEDIUM",
+      "tree_digest": "9bb699145b752e610cd415ae42bb65069c50b4944bde3c089bcf82cda91b44b0",
+      "verdict": "REFUSED"
+    },
+    {
+      "anchor": "QuotientRingElement",
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "broke": [],
+        "coupled": [],
+        "failing": [],
+        "symbol": "QuotientRingElement",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": "sympy/polys/domains/quotientring.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 2,
+        "found": true,
+        "n_parsed": 98,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 89,
+        "reward": 1.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "reward 1.0",
+      "tier": "MEDIUM",
+      "tree_digest": "a6ee2a5eb0da029fb6d23a4cbe350e9e7de6648b38c34f9cf26ab9f15726d298",
+      "verdict": "CLEAN"
+    },
+    {
+      "anchor": "FracField",
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "broke": [],
+        "coupled": [],
+        "failing": [],
+        "symbol": "FracField",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": "sympy/polys/fields.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 2,
+        "found": true,
+        "n_parsed": 97,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 89,
+        "reward": 1.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "reward 1.0",
+      "tier": "MEDIUM",
+      "tree_digest": "fe10e4aaed0303b6084dc932a6de2d895a6189a6aae2e68fe4ba12350ed82028",
+      "verdict": "CLEAN"
+    },
+    {
+      "anchor": "FracElement",
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "broke": [],
+        "coupled": [],
+        "failing": [],
+        "symbol": "FracField",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": "sympy/polys/fields.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 2,
+        "found": true,
+        "n_parsed": 97,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 89,
+        "reward": 1.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "dynamic reach: 'FracElement' appears in a non-annotation string literal in sympy/polys/fields.py line 116 ('FracElement'); 2 further hit(s) -- an alpha-rename cannot be argued safe",
+      "tier": "MEDIUM",
+      "tree_digest": "fe10e4aaed0303b6084dc932a6de2d895a6189a6aae2e68fe4ba12350ed82028",
+      "verdict": "REFUSED"
+    },
+    {
+      "anchor": "Monomial",
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "broke": [],
+        "coupled": [],
+        "failing": [],
+        "symbol": "FracField",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": "sympy/polys/monomials.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 2,
+        "found": true,
+        "n_parsed": 97,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 89,
+        "reward": 1.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "dynamic reach: 'Monomial' appears in a non-annotation string literal in sympy/polys/monomials.py line 501 ('an instance of Monomial class expected, '); 1 further hit(s) -- an alpha-rename cannot be argued safe",
+      "tier": "MEDIUM",
+      "tree_digest": "fe10e4aaed0303b6084dc932a6de2d895a6189a6aae2e68fe4ba12350ed82028",
+      "verdict": "REFUSED"
+    },
+    {
+      "anchor": "DMP",
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "broke": [],
+        "coupled": [],
+        "failing": [],
+        "symbol": "FracField",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": "sympy/polys/polyclasses.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 2,
+        "found": true,
+        "n_parsed": 97,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 89,
+        "reward": 1.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "dynamic reach: 'DMP' appears in a non-annotation string literal in sympy/polys/domains/expressiondomain.py line 179 ('Convert a ``DMP`` object to ``dtype``. '); 9 further hit(s) -- an alpha-rename cannot be argued safe",
+      "tier": "MEDIUM",
+      "tree_digest": "fe10e4aaed0303b6084dc932a6de2d895a6189a6aae2e68fe4ba12350ed82028",
+      "verdict": "REFUSED"
+    },
+    {
+      "anchor": "DMF",
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "broke": [],
+        "coupled": [],
+        "failing": [],
+        "symbol": "FracField",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": "sympy/polys/polyclasses.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 2,
+        "found": true,
+        "n_parsed": 97,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 89,
+        "reward": 1.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "dynamic reach: 'DMF' appears in a non-annotation string literal in sympy/polys/domains/expressiondomain.py line 183 ('Convert a ``DMF`` object to ``dtype``. '); 5 further hit(s) -- an alpha-rename cannot be argued safe",
+      "tier": "MEDIUM",
+      "tree_digest": "fe10e4aaed0303b6084dc932a6de2d895a6189a6aae2e68fe4ba12350ed82028",
+      "verdict": "REFUSED"
+    },
+    {
+      "anchor": "ANP",
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "broke": [],
+        "coupled": [],
+        "failing": [],
+        "symbol": "FracField",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": "sympy/polys/polyclasses.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 2,
+        "found": true,
+        "n_parsed": 97,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 89,
+        "reward": 1.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "dynamic reach: 'ANP' appears in a non-annotation string literal in sympy/polys/domains/integerring.py line 36 ('Convert a ``ANP`` object to ``dtype``. '); 2 further hit(s) -- an alpha-rename cannot be argued safe",
+      "tier": "MEDIUM",
+      "tree_digest": "fe10e4aaed0303b6084dc932a6de2d895a6189a6aae2e68fe4ba12350ed82028",
+      "verdict": "REFUSED"
+    },
+    {
+      "anchor": "Poly",
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "broke": [],
+        "coupled": [],
+        "failing": [],
+        "symbol": "FracField",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": "sympy/polys/polytools.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 2,
+        "found": true,
+        "n_parsed": 97,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 89,
+        "reward": 1.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "multi-line import of 'Poly' in sympy/polys/numberfields.py",
+      "tier": "MEDIUM",
+      "tree_digest": "fe10e4aaed0303b6084dc932a6de2d895a6189a6aae2e68fe4ba12350ed82028",
+      "verdict": "REFUSED"
+    },
+    {
+      "anchor": "GroebnerBasis",
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "broke": [],
+        "coupled": [],
+        "failing": [],
+        "symbol": "FracField",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": "sympy/polys/polytools.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 2,
+        "found": true,
+        "n_parsed": 97,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 89,
+        "reward": 1.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "dynamic reach: 'GroebnerBasis' appears in a non-annotation string literal in sympy/polys/polytools.py line 6548 ('\\n    Computes the reduced Groebner basis') -- an alpha-rename cannot be argued safe",
+      "tier": "MEDIUM",
+      "tree_digest": "fe10e4aaed0303b6084dc932a6de2d895a6189a6aae2e68fe4ba12350ed82028",
+      "verdict": "REFUSED"
+    },
+    {
+      "anchor": "PolyRing",
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "broke": [],
+        "coupled": [],
+        "failing": [],
+        "symbol": "FracField",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": "sympy/polys/rings.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 2,
+        "found": true,
+        "n_parsed": 97,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 89,
+        "reward": 1.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "dynamic reach: 'PolyRing' appears in a non-annotation string literal in sympy/combinatorics/free_groups.py line 116 ('\\n    Free group with finite or infinite '); 6 further hit(s) -- an alpha-rename cannot be argued safe",
+      "tier": "MEDIUM",
+      "tree_digest": "fe10e4aaed0303b6084dc932a6de2d895a6189a6aae2e68fe4ba12350ed82028",
+      "verdict": "REFUSED"
+    },
+    {
+      "anchor": "PolyElement",
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "broke": [],
+        "coupled": [],
+        "failing": [],
+        "symbol": "FracField",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": "sympy/polys/rings.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 2,
+        "found": true,
+        "n_parsed": 97,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 89,
+        "reward": 1.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "dynamic reach: 'PolyElement' appears in a non-annotation string literal in sympy/polys/modulargcd.py line 61 ('\\n    Compute an upper bound for the degr'); 36 further hit(s) -- an alpha-rename cannot be argued safe",
+      "tier": "MEDIUM",
+      "tree_digest": "fe10e4aaed0303b6084dc932a6de2d895a6189a6aae2e68fe4ba12350ed82028",
+      "verdict": "REFUSED"
+    },
+    {
+      "anchor": "ComplexRootOf",
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "broke": [],
+        "coupled": [],
+        "failing": [],
+        "symbol": "FracField",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": "sympy/polys/rootoftools.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 2,
+        "found": true,
+        "n_parsed": 97,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 89,
+        "reward": 1.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "dynamic reach: 'ComplexRootOf' appears in a non-annotation string literal in sympy/polys/rootoftools.py line 52 ('An indexed root of a univariate polynomi'); 1 further hit(s) -- an alpha-rename cannot be argued safe",
+      "tier": "MEDIUM",
+      "tree_digest": "fe10e4aaed0303b6084dc932a6de2d895a6189a6aae2e68fe4ba12350ed82028",
+      "verdict": "REFUSED"
+    },
+    {
+      "anchor": "NDimArray",
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "broke": [],
+        "coupled": [],
+        "failing": [],
+        "symbol": "FracField",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": "sympy/tensor/array/ndim_array.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 2,
+        "found": true,
+        "n_parsed": 97,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 89,
+        "reward": 1.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "dynamic reach: 'NDimArray' appears in a non-annotation string literal in sympy/tensor/array/ndim_array.py line 338 ('unsupported operation on NDimArray'); 1 further hit(s) -- an alpha-rename cannot be argued safe",
+      "tier": "MEDIUM",
+      "tree_digest": "fe10e4aaed0303b6084dc932a6de2d895a6189a6aae2e68fe4ba12350ed82028",
+      "verdict": "REFUSED"
+    },
+    {
+      "anchor": "PartComponent",
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "broke": [],
+        "coupled": [],
+        "failing": [],
+        "symbol": "FracField",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": "sympy/utilities/enumerative.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 2,
+        "found": true,
+        "n_parsed": 97,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 89,
+        "reward": 1.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "dynamic reach: 'PartComponent' appears in a non-annotation string literal in sympy/utilities/enumerative.py line 150 ('Enumerates partitions of a multiset.\\n\\n  '); 1 further hit(s) -- an alpha-rename cannot be argued safe",
+      "tier": "MEDIUM",
+      "tree_digest": "fe10e4aaed0303b6084dc932a6de2d895a6189a6aae2e68fe4ba12350ed82028",
+      "verdict": "REFUSED"
+    },
+    {
+      "anchor": null,
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "broke": [],
+        "coupled": [],
+        "failing": [],
+        "symbol": "FracField",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": null,
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 2,
+        "found": true,
+        "n_parsed": 97,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 89,
+        "reward": 1.0
+      },
+      "loud_failure": false,
+      "observable": "order of elements in a returned collection",
+      "operator": "collection_reverse",
+      "reason": "no anchor inside the gold-touched region; 12 anchor(s) elsewhere in the 21 target(s): sympy/core/basic.py, sympy/core/exprtools.py, sympy/core/numbers.py, sympy/geometry/entity.py, sympy/physics/optics/medium.py, sympy/physics/vector/dyadic.py, sympy/physics/vector/frame.py, sympy/physics/vector/vector.py, sympy/polys/agca/modules.py, sympy/polys/domains/domain.py, sympy/polys/domains/expressiondomain.py, sympy/polys/domains/pythonrational.py, sympy/polys/domains/quotientring.py, sympy/polys/fields.py, sympy/polys/monomials.py, sympy/polys/polyclasses.py, sympy/polys/polytools.py, sympy/polys/rings.py, sympy/polys/rootoftools.py, sympy/tensor/array/ndim_array.py, sympy/utilities/enumerative.py",
+      "tier": "MEDIUM",
+      "tree_digest": "fe10e4aaed0303b6084dc932a6de2d895a6189a6aae2e68fe4ba12350ed82028",
+      "verdict": "NOT_APPLICABLE"
+    },
+    {
+      "anchor": null,
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "broke": [],
+        "coupled": [],
+        "failing": [],
+        "symbol": "FracField",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": null,
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 2,
+        "found": true,
+        "n_parsed": 97,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 89,
+        "reward": 1.0
+      },
+      "loud_failure": false,
+      "observable": "human-readable text of an exception message",
+      "operator": "message_reword",
+      "reason": "no anchor inside the gold-touched region; 242 anchor(s) elsewhere in the 21 target(s): sympy/core/basic.py, sympy/core/exprtools.py, sympy/core/numbers.py, sympy/geometry/entity.py, sympy/physics/optics/medium.py, sympy/physics/vector/dyadic.py, sympy/physics/vector/frame.py, sympy/physics/vector/vector.py, sympy/polys/agca/modules.py, sympy/polys/domains/domain.py, sympy/polys/domains/expressiondomain.py, sympy/polys/domains/pythonrational.py, sympy/polys/domains/quotientring.py, sympy/polys/fields.py, sympy/polys/monomials.py, sympy/polys/polyclasses.py, sympy/polys/polytools.py, sympy/polys/rings.py, sympy/polys/rootoftools.py, sympy/tensor/array/ndim_array.py, sympy/utilities/enumerative.py",
+      "tier": "HIGH",
+      "tree_digest": "fe10e4aaed0303b6084dc932a6de2d895a6189a6aae2e68fe4ba12350ed82028",
+      "verdict": "NOT_APPLICABLE"
+    }
+  ],
+  "targets": [
+    "sympy/core/basic.py",
+    "sympy/core/exprtools.py",
+    "sympy/core/numbers.py",
+    "sympy/geometry/entity.py",
+    "sympy/physics/optics/medium.py",
+    "sympy/physics/vector/dyadic.py",
+    "sympy/physics/vector/frame.py",
+    "sympy/physics/vector/vector.py",
+    "sympy/polys/agca/modules.py",
+    "sympy/polys/domains/domain.py",
+    "sympy/polys/domains/expressiondomain.py",
+    "sympy/polys/domains/pythonrational.py",
+    "sympy/polys/domains/quotientring.py",
+    "sympy/polys/fields.py",
+    "sympy/polys/monomials.py",
+    "sympy/polys/polyclasses.py",
+    "sympy/polys/polytools.py",
+    "sympy/polys/rings.py",
+    "sympy/polys/rootoftools.py",
+    "sympy/tensor/array/ndim_array.py",
+    "sympy/utilities/enumerative.py"
+  ],
+  "version": "1.1",
+  "witnesses": []
+}

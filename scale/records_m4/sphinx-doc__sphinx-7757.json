@@ -1,0 +1,370 @@
+{
+  "completed": true,
+  "control": {
+    "graded": null,
+    "log": null,
+    "passed": true,
+    "reason": "untransformed reference scores 1.0"
+  },
+  "digest_trace": [
+    {
+      "digest": "4d9148d058adc1afa2eb5606041c6f23df7c844caf982128eef0219395933d96",
+      "memo_hit": false
+    },
+    {
+      "digest": "28903284861fe7957adb11c0484a253551750e80df22b01192bad7b9c18d466f",
+      "memo_hit": false
+    },
+    {
+      "digest": "28903284861fe7957adb11c0484a253551750e80df22b01192bad7b9c18d466f",
+      "memo_hit": true
+    }
+  ],
+  "disk_orphan_reclaimed_bytes": 0,
+  "disk_residual_bytes": 0,
+  "elapsed_seconds": 46.41,
+  "error": null,
+  "image": "swebench/sweb.eval.x86_64.sphinx-doc_1776_sphinx-7757:latest",
+  "instance_id": "sphinx-doc__sphinx-7757",
+  "leaked_containers": [],
+  "leaked_image": false,
+  "log": [
+    [
+      "<control>",
+      "OK",
+      "untransformed reference scores 1.0"
+    ],
+    [
+      "kwonly_specialize:<no anchor>",
+      "NOT_APPLICABLE",
+      "no anchor inside the gold-touched region; 1 anchor(s) elsewhere in the target"
+    ],
+    [
+      "symbol_rename:signature_from_str",
+      "WITNESS",
+      "reward 0.0"
+    ],
+    [
+      "collection_reverse:<no anchor>",
+      "NOT_APPLICABLE",
+      "no anchor inside the gold-touched region"
+    ],
+    [
+      "message_reword:<no anchor>",
+      "NOT_APPLICABLE",
+      "no anchor inside the gold-touched region"
+    ]
+  ],
+  "mountable": true,
+  "multi_target": false,
+  "n_targets": 1,
+  "on_prime_hub": null,
+  "on_prime_hub_reason": "not resolvable offline; no hub environment index is reachable from this repo, verifiers or swebench",
+  "operators_not_applicable": [
+    "collection_reverse",
+    "kwonly_specialize",
+    "message_reword"
+  ],
+  "operators_with_anchors": [
+    "symbol_rename"
+  ],
+  "repo": "sphinx-doc/sphinx",
+  "row": {
+    "elapsed": 25.92,
+    "error": null,
+    "error_type": null,
+    "index": 0,
+    "mode": "formcheck",
+    "name": "sphinx-doc__sphinx-7757",
+    "reason": "invalid",
+    "valid": false
+  },
+  "rows": [
+    {
+      "anchor": null,
+      "failure_analysis": null,
+      "file": null,
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 1,
+        "found": true,
+        "n_parsed": 34,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 33,
+        "reward": 1.0
+      },
+      "loud_failure": false,
+      "observable": "callable signature (arity / parameter names)",
+      "operator": "kwonly_specialize",
+      "reason": "no anchor inside the gold-touched region; 1 anchor(s) elsewhere in the target",
+      "tier": "HIGH",
+      "tree_digest": "4d9148d058adc1afa2eb5606041c6f23df7c844caf982128eef0219395933d96",
+      "verdict": "NOT_APPLICABLE"
+    },
+    {
+      "all_failures_attributed": true,
+      "anchor": "signature_from_str",
+      "f2p_fail": 1,
+      "failure_analysis": {
+        "all_reference_the_symbol": true,
+        "broke": [],
+        "coupled": [
+          "tests/test_util_inspect.py::test_signature_from_str_basic",
+          "tests/test_util_inspect.py::test_signature_from_str_default_values",
+          "tests/test_util_inspect.py::test_signature_from_str_annotations",
+          "tests/test_util_inspect.py::test_signature_from_str_complex_annotations",
+          "tests/test_util_inspect.py::test_signature_from_str_kwonly_args",
+          "tests/test_util_inspect.py::test_signature_from_str_invalid",
+          "tests/test_util_inspect.py::test_signature_from_str_positionaly_only_args"
+        ],
+        "failing": [
+          "tests/test_util_inspect.py::test_signature_from_str_basic",
+          "tests/test_util_inspect.py::test_signature_from_str_default_values",
+          "tests/test_util_inspect.py::test_signature_from_str_annotations",
+          "tests/test_util_inspect.py::test_signature_from_str_complex_annotations",
+          "tests/test_util_inspect.py::test_signature_from_str_kwonly_args",
+          "tests/test_util_inspect.py::test_signature_from_str_invalid",
+          "tests/test_util_inspect.py::test_signature_from_str_positionaly_only_args"
+        ],
+        "symbol": "signature_from_str",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": "sphinx/util/inspect.py",
+      "graded_log": "+ tox --current-env -epy39 -v -- tests/test_util_inspect.py\npy39: commands[0]> pytest -rA --durations 25 tests/test_util_inspect.py\n============================= test session starts ==============================\nplatform linux -- Python 3.9.20, pytest-8.3.3, pluggy-1.5.0\ncachedir: .tox/py39/.pytest_cache\nlibraries: Sphinx-3.1.0+/c7bbdd751, docutils-0.21.2\nbase tempdir: /tmp/pytest-of-root/pytest-1\nrootdir: /testbed\nconfigfile: setup.cfg\nplugins: cov-5.0.0\ncollected 34 items\n\ntests/test_util_inspect.py ......FFFFFFF.....................            [100%]\n\n=================================== FAILURES ===================================\n________________________ test_signature_from_str_basic _________________________\n\n    def test_signature_from_str_basic():\n        signature = '(a, b, *args, c=0, d=\"blah\", **kwargs)'\n>       sig = inspect.signature_from_str(signature)\nE       AttributeError: module 'sphinx.util.inspect' has no attribute 'signature_from_str'\n\ntests/test_util_inspect.py:258: AttributeError\n____________________ test_signature_from_str_default_values ____________________\n\n    def test_signature_from_str_default_values():\n        signature = ('(a=0, b=0.0, c=\"str\", d=b\"bytes\", e=..., f=True, '\n                     'g=[1, 2, 3], h={\"a\": 1}, i={1, 2, 3}, '\n                     'j=lambda x, y: None, k=None, l=object(), m=foo.bar.CONSTANT)')\n>       sig = inspect.signature_from_str(signature)\nE       AttributeError: module 'sphinx.util.inspect' has no attribute 'signature_from_str'\n\ntests/test_util_inspect.py:291: AttributeError\n_____________________ test_signature_from_str_annotations ______________________\n\n    def test_signature_from_str_annotations():\n        signature = '(a: int, *args: bytes, b: str = \"blah\", **kwargs: float) -> None'\n>       sig = inspect.signature_from_str(signature)\nE       AttributeError: module 'sphinx.util.inspect' has no attribute 'signature_from_str'\n\ntests/test_util_inspect.py:309: AttributeError\n_________________ test_signature_from_str_complex_annotations __________________\n\n    def test_signature_from_str_complex_annotations():\n>       sig = inspect.signature_from_str('() -> Tuple[str, int, ...]')\nE       AttributeError: module 'sphinx.util.inspect' has no attribute 'signature_from_str'\n\ntests/test_util_inspect.py:319: AttributeError\n_____________________ test_signature_from_str_kwonly_args ______________________\n\n    def test_signature_from_str_kwonly_args():\n>       sig = inspect.signature_from_str('(a, *, b)')\nE       AttributeError: module 'sphinx.util.inspect' has no attribute 'signature_from_str'\n\ntests/test_util_inspect.py:327: AttributeError\n________________ test_signature_from_str_positionaly_only_args _________________\n\n    @pytest.mark.skipif(sys.version_info < (3, 8),\n                        reason='python-3.8 or above is required')\n    def test_signature_from_str_positionaly_only_args():\n>       sig = inspect.signature_from_str('(a, b=0, /, c=1)')\nE       AttributeError: module 'sphinx.util.inspect' has no attribute 'signature_from_str'\n\ntests/test_util_inspect.py:338: AttributeError\n_______________________ test_signature_from_str_invalid ________________________\n\n    def test_signature_from_str_invalid():\n        with pytest.raises(SyntaxError):\n>           inspect.signature_from_str('')\nE           AttributeError: module 'sphinx.util.inspect' has no attribute 'signature_from_str'\n\ntests/test_util_inspect.py:350: AttributeError\n=============================== warnings summary ===============================\nsphinx/util/docutils.py:45\n  /testbed/sphinx/util/docutils.py:45: DeprecationWarning: distutils Version classes are deprecated. Use packaging.version instead.\n    __version_info__ = tuple(LooseVersion(docutils.__version__).version)\n\nsphinx/registry.py:22\n  /testbed/sphinx/registry.py:22: DeprecationWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html\n    from pkg_resources import iter_entry_points\n\n../opt/miniconda3/envs/testbed/lib/python3.9/site-packages/pkg_resources/__init__.py:3154\n../opt/miniconda3/envs/testbed/lib/python3.9/site-packages/pkg_resources/__init__.py:3154\n../opt/miniconda3/envs/testbed/lib/python3.9/site-packages/pkg_resources/__init__.py:3154\n../opt/miniconda3/envs/testbed/lib/python3.9/site-packages/pkg_resources/__init__.py:3154\n  /opt/miniconda3/envs/testbed/lib/python3.9/site-packages/pkg_resources/__init__.py:3154: DeprecationWarning: Deprecated call to `pkg_resources.declare_namespace('sphinxcontrib')`.\n  Implementing implicit namespace packages (as specified in PEP 420) is preferred to `pkg_resources.declare_namespace`. See https://setuptools.pypa.io/en/latest/references/keywords.html#keyword-namespace-packages\n    declare_namespace(pkg)\n\nsphinx/directives/patches.py:15\n  /testbed/sphinx/directives/patches.py:15: DeprecationWarning: The `docutils.parsers.rst.directive.html` module will be removed in Docutils 2.0. Since Docutils 0.18, the \"Meta\" node is defined in `docutils.parsers.rst.directives.misc`.\n    from docutils.parsers.rst.directives import images, html, tables\n\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n==================================== PASSES ====================================\n--------------------------- Captured stdout teardown ---------------------------\n# testroot: root\n# builder: html\n# srcdir: /tmp/pytest-of-root/pytest-1/ext-autodoc\n# outdir: /tmp/pytest-of-root/pytest-1/ext-autodoc/_build/html\n# status: \n\u001b[01mRunning Sphinx v3.1.0+/c7bbdd751\u001b[39;49;00m\n\n# warning: \n\u001b[91mWARNING: while setting up extension sphinx.addnodes: node class 'meta' is already registered, its visitors will be overridden\u001b[39;49;00m\n\n--------------------------- Captured stdout teardown ---------------------------\n# testroot: root\n# builder: html\n# srcdir: /tmp/pytest-of-root/pytest-1/ext-autodoc\n# outdir: /tmp/pytest-of-root/pytest-1/ext-autodoc/_build/html\n# status: \n\u001b[01mRunning Sphinx v3.1.0+/c7bbdd751\u001b[39;49;00m\n\n# warning: \n\u001b[91mWARNING: while setting up extension sphinx.addnodes: node class 'meta' is already registered, its visitors will be overridden\u001b[39;49;00m\n\n--------------------------- Captured stdout teardown ---------------------------\n# testroot: root\n# builder: html\n# srcdir: /tmp/pytest-of-root/pytest-1/ext-autodoc\n# outdir: /tmp/pytest-of-root/pytest-1/ext-autodoc/_build/html\n# status: \n\u001b[01mRunning Sphinx v3.1.0+/c7bbdd751\u001b[39;49;00m\n\n# warning: \n\u001b[91mWARNING: while setting up extension sphinx.addnodes: node class 'meta' is already registered, its visitors will be overridden\u001b[39;49;00m\n\n--------------------------- Captured stdout teardown ---------------------------\n# testroot: root\n# builder: html\n# srcdir: /tmp/pytest-of-root/pytest-1/ext-autodoc\n# outdir: /tmp/pytest-of-root/pytest-1/ext-autodoc/_build/html\n# status: \n\u001b[01mRunning Sphinx v3.1.0+/c7bbdd751\u001b[39;49;00m\n\n# warning: \n\u001b[91mWARNING: while setting up extension sphinx.addnodes: node class 'meta' is already registered, its visitors will be overridden\u001b[39;49;00m\n\n--------------------------- Captured stdout teardown ---------------------------\n# testroot: root\n# builder: html\n# srcdir: /tmp/pytest-of-root/pytest-1/ext-autodoc\n# outdir: /tmp/pytest-of-root/pytest-1/ext-autodoc/_build/html\n# status: \n\u001b[01mRunning Sphinx v3.1.0+/c7bbdd751\u001b[39;49;00m\n\n# warning: \n\u001b[91mWARNING: while setting up extension sphinx.addnodes: node class 'meta' is already registered, its visitors will be overridden\u001b[39;49;00m\n\n--------------------------- Captured stdout teardown ---------------------------\n# testroot: root\n# builder: html\n# srcdir: /tmp/pytest-of-root/pytest-1/ext-autodoc\n# outdir: /tmp/pytest-of-root/pytest-1/ext-autodoc/_build/html\n# status: \n\u001b[01mRunning Sphinx v3.1.0+/c7bbdd751\u001b[39;49;00m\n\n# warning: \n\u001b[91mWARNING: while setting up extension sphinx.addnodes: node class 'meta' is already registered, its visitors will be overridden\u001b[39;49;00m\n\n--------------------------- Captured stdout teardown ---------------------------\n# testroot: root\n# builder: html\n# srcdir: /tmp/pytest-of-root/pytest-1/ext-autodoc\n# outdir: /tmp/pytest-of-root/pytest-1/ext-autodoc/_build/html\n# status: \n\u001b[01mRunning Sphinx v3.1.0+/c7bbdd751\u001b[39;49;00m\n\n# warning: \n\u001b[91mWARNING: while setting up extension sphinx.addnodes: node class 'meta' is already registered, its visitors will be overridden\u001b[39;49;00m\n\n--------------------------- Captured stdout teardown ---------------------------\n# testroot: root\n# builder: html\n# srcdir: /tmp/pytest-of-root/pytest-1/ext-autodoc\n# outdir: /tmp/pytest-of-root/pytest-1/ext-autodoc/_build/html\n# status: \n\u001b[01mRunning Sphinx v3.1.0+/c7bbdd751\u001b[39;49;00m\n\n# warning: \n\u001b[91mWARNING: while setting up extension sphinx.addnodes: node class 'meta' is already registered, its visitors will be overridden\u001b[39;49;00m\n\n--------------------------- Captured stdout teardown ---------------------------\n# testroot: root\n# builder: html\n# srcdir: /tmp/pytest-of-root/pytest-1/root\n# outdir: /tmp/pytest-of-root/pytest-1/root/_build/html\n# status: \n\u001b[01mRunning Sphinx v3.1.0+/c7bbdd751\u001b[39;49;00m\n\n# warning: \n\u001b[91mWARNING: while setting up extension sphinx.addnodes: node class 'meta' is already registered, its visitors will be overridden\u001b[39;49;00m\n\n============================= slowest 25 durations =============================\n0.41s setup    tests/test_util_inspect.py::test_signature_annotations_py38\n0.03s setup    tests/test_util_inspect.py::test_isproperty\n0.02s setup    tests/test_util_inspect.py::test_isclassmethod\n0.02s setup    tests/test_util_inspect.py::test_iscoroutinefunction\n0.01s setup    tests/test_util_inspect.py::test_isstaticmethod\n0.01s setup    tests/test_util_inspect.py::test_isdescriptor\n0.01s setup    tests/test_util_inspect.py::test_isfunction\n0.01s setup    tests/test_util_inspect.py::test_isbuiltin\n0.01s setup    tests/test_util_inspect.py::test_isattributedescriptor\n\n(16 durations < 0.005s hidden.  Use -vv to show these durations.)\n=========================== short test summary info ============================\nPASSED tests/test_util_inspect.py::test_signature\nPASSED tests/test_util_inspect.py::test_signature_partial\nPASSED tests/test_util_inspect.py::test_signature_methods\nPASSED tests/test_util_inspect.py::test_signature_partialmethod\nPASSED tests/test_util_inspect.py::test_signature_annotations\nPASSED tests/test_util_inspect.py::test_signature_annotations_py38\nPASSED tests/test_util_inspect.py::test_safe_getattr_with_default\nPASSED tests/test_util_inspect.py::test_safe_getattr_with_exception\nPASSED tests/test_util_inspect.py::test_safe_getattr_with_property_exception\nPASSED tests/test_util_inspect.py::test_safe_getattr_with___dict___override\nPASSED tests/test_util_inspect.py::test_dictionary_sorting\nPASSED tests/test_util_inspect.py::test_set_sorting\nPASSED tests/test_util_inspect.py::test_set_sorting_fallback\nPASSED tests/test_util_inspect.py::test_frozenset_sorting\nPASSED tests/test_util_inspect.py::test_frozenset_sorting_fallback\nPASSED tests/test_util_inspect.py::test_dict_customtype\nPASSED tests/test_util_inspect.py::test_isclassmethod\nPASSED tests/test_util_inspect.py::test_isstaticmethod\nPASSED tests/test_util_inspect.py::test_iscoroutinefunction\nPASSED tests/test_util_inspect.py::test_isfunction\nPASSED tests/test_util_inspect.py::test_isbuiltin\nPASSED tests/test_util_inspect.py::test_isdescriptor\nPASSED tests/test_util_inspect.py::test_isattributedescriptor\nPASSED tests/test_util_inspect.py::test_isproperty\nPASSED tests/test_util_inspect.py::test_unpartial\nPASSED tests/test_util_inspect.py::test_getdoc_inherited_decorated_method\nPASSED tests/test_util_inspect.py::test_is_builtin_class_method\nFAILED tests/test_util_inspect.py::test_signature_from_str_basic - AttributeE...\nFAILED tests/test_util_inspect.py::test_signature_from_str_default_values - A...\nFAILED tests/test_util_inspect.py::test_signature_from_str_annotations - Attr...\nFAILED tests/test_util_inspect.py::test_signature_from_str_complex_annotations\nFAILED tests/test_util_inspect.py::test_signature_from_str_kwonly_args - Attr...\nFAILED tests/test_util_inspect.py::test_signature_from_str_positionaly_only_args\nFAILED tests/test_util_inspect.py::test_signature_from_str_invalid - Attribut...\n=================== 7 failed, 27 passed, 7 warnings in 0.81s ===================\npy39: exit 1 (1.41 seconds) /testbed> pytest -rA --durations 25 tests/test_util_inspect.py pid=268\n  py39: FAIL code 1 (1.42=setup[0.01]+cmd[1.41] seconds)\n  evaluation failed :( (1.53 seconds)\n\n",
+      "graded_report": {
+        "f2p_fail": 1,
+        "f2p_failing": [
+          "tests/test_util_inspect.py::test_signature_from_str_positionaly_only_args"
+        ],
+        "f2p_pass": 0,
+        "found": true,
+        "n_parsed": 34,
+        "p2p_fail": 6,
+        "p2p_failing": [
+          "tests/test_util_inspect.py::test_signature_from_str_basic",
+          "tests/test_util_inspect.py::test_signature_from_str_default_values",
+          "tests/test_util_inspect.py::test_signature_from_str_annotations",
+          "tests/test_util_inspect.py::test_signature_from_str_complex_annotations",
+          "tests/test_util_inspect.py::test_signature_from_str_kwonly_args",
+          "tests/test_util_inspect.py::test_signature_from_str_invalid"
+        ],
+        "p2p_pass": 27,
+        "reward": 0.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "p2p_coupled_tests": [
+        "tests/test_util_inspect.py::test_signature_from_str_basic",
+        "tests/test_util_inspect.py::test_signature_from_str_default_values",
+        "tests/test_util_inspect.py::test_signature_from_str_annotations",
+        "tests/test_util_inspect.py::test_signature_from_str_complex_annotations",
+        "tests/test_util_inspect.py::test_signature_from_str_kwonly_args",
+        "tests/test_util_inspect.py::test_signature_from_str_invalid"
+      ],
+      "p2p_fail": 6,
+      "reason": "reward 0.0",
+      "tier": "MEDIUM",
+      "tree_digest": "28903284861fe7957adb11c0484a253551750e80df22b01192bad7b9c18d466f",
+      "verdict": "WITNESS",
+      "witness_side": "p2p_coupling"
+    },
+    {
+      "anchor": null,
+      "failure_analysis": {
+        "all_reference_the_symbol": true,
+        "broke": [],
+        "coupled": [
+          "tests/test_util_inspect.py::test_signature_from_str_basic",
+          "tests/test_util_inspect.py::test_signature_from_str_default_values",
+          "tests/test_util_inspect.py::test_signature_from_str_annotations",
+          "tests/test_util_inspect.py::test_signature_from_str_complex_annotations",
+          "tests/test_util_inspect.py::test_signature_from_str_kwonly_args",
+          "tests/test_util_inspect.py::test_signature_from_str_invalid",
+          "tests/test_util_inspect.py::test_signature_from_str_positionaly_only_args"
+        ],
+        "failing": [
+          "tests/test_util_inspect.py::test_signature_from_str_basic",
+          "tests/test_util_inspect.py::test_signature_from_str_default_values",
+          "tests/test_util_inspect.py::test_signature_from_str_annotations",
+          "tests/test_util_inspect.py::test_signature_from_str_complex_annotations",
+          "tests/test_util_inspect.py::test_signature_from_str_kwonly_args",
+          "tests/test_util_inspect.py::test_signature_from_str_invalid",
+          "tests/test_util_inspect.py::test_signature_from_str_positionaly_only_args"
+        ],
+        "symbol": "signature_from_str",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": null,
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 1,
+        "f2p_failing": [
+          "tests/test_util_inspect.py::test_signature_from_str_positionaly_only_args"
+        ],
+        "f2p_pass": 0,
+        "found": true,
+        "n_parsed": 34,
+        "p2p_fail": 6,
+        "p2p_failing": [
+          "tests/test_util_inspect.py::test_signature_from_str_basic",
+          "tests/test_util_inspect.py::test_signature_from_str_default_values",
+          "tests/test_util_inspect.py::test_signature_from_str_annotations",
+          "tests/test_util_inspect.py::test_signature_from_str_complex_annotations",
+          "tests/test_util_inspect.py::test_signature_from_str_kwonly_args",
+          "tests/test_util_inspect.py::test_signature_from_str_invalid"
+        ],
+        "p2p_pass": 27,
+        "reward": 0.0
+      },
+      "loud_failure": false,
+      "observable": "order of elements in a returned collection",
+      "operator": "collection_reverse",
+      "reason": "no anchor inside the gold-touched region",
+      "tier": "MEDIUM",
+      "tree_digest": "28903284861fe7957adb11c0484a253551750e80df22b01192bad7b9c18d466f",
+      "verdict": "NOT_APPLICABLE"
+    },
+    {
+      "anchor": null,
+      "failure_analysis": {
+        "all_reference_the_symbol": true,
+        "broke": [],
+        "coupled": [
+          "tests/test_util_inspect.py::test_signature_from_str_basic",
+          "tests/test_util_inspect.py::test_signature_from_str_default_values",
+          "tests/test_util_inspect.py::test_signature_from_str_annotations",
+          "tests/test_util_inspect.py::test_signature_from_str_complex_annotations",
+          "tests/test_util_inspect.py::test_signature_from_str_kwonly_args",
+          "tests/test_util_inspect.py::test_signature_from_str_invalid",
+          "tests/test_util_inspect.py::test_signature_from_str_positionaly_only_args"
+        ],
+        "failing": [
+          "tests/test_util_inspect.py::test_signature_from_str_basic",
+          "tests/test_util_inspect.py::test_signature_from_str_default_values",
+          "tests/test_util_inspect.py::test_signature_from_str_annotations",
+          "tests/test_util_inspect.py::test_signature_from_str_complex_annotations",
+          "tests/test_util_inspect.py::test_signature_from_str_kwonly_args",
+          "tests/test_util_inspect.py::test_signature_from_str_invalid",
+          "tests/test_util_inspect.py::test_signature_from_str_positionaly_only_args"
+        ],
+        "symbol": "signature_from_str",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": null,
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 1,
+        "f2p_failing": [
+          "tests/test_util_inspect.py::test_signature_from_str_positionaly_only_args"
+        ],
+        "f2p_pass": 0,
+        "found": true,
+        "n_parsed": 34,
+        "p2p_fail": 6,
+        "p2p_failing": [
+          "tests/test_util_inspect.py::test_signature_from_str_basic",
+          "tests/test_util_inspect.py::test_signature_from_str_default_values",
+          "tests/test_util_inspect.py::test_signature_from_str_annotations",
+          "tests/test_util_inspect.py::test_signature_from_str_complex_annotations",
+          "tests/test_util_inspect.py::test_signature_from_str_kwonly_args",
+          "tests/test_util_inspect.py::test_signature_from_str_invalid"
+        ],
+        "p2p_pass": 27,
+        "reward": 0.0
+      },
+      "loud_failure": false,
+      "observable": "human-readable text of an exception message",
+      "operator": "message_reword",
+      "reason": "no anchor inside the gold-touched region",
+      "tier": "HIGH",
+      "tree_digest": "28903284861fe7957adb11c0484a253551750e80df22b01192bad7b9c18d466f",
+      "verdict": "NOT_APPLICABLE"
+    }
+  ],
+  "targets": [
+    "sphinx/util/inspect.py"
+  ],
+  "version": "3.1",
+  "witnesses": [
+    {
+      "all_failures_attributed": true,
+      "anchor": "signature_from_str",
+      "f2p_fail": 1,
+      "failure_analysis": {
+        "all_reference_the_symbol": true,
+        "broke": [],
+        "coupled": [
+          "tests/test_util_inspect.py::test_signature_from_str_basic",
+          "tests/test_util_inspect.py::test_signature_from_str_default_values",
+          "tests/test_util_inspect.py::test_signature_from_str_annotations",
+          "tests/test_util_inspect.py::test_signature_from_str_complex_annotations",
+          "tests/test_util_inspect.py::test_signature_from_str_kwonly_args",
+          "tests/test_util_inspect.py::test_signature_from_str_invalid",
+          "tests/test_util_inspect.py::test_signature_from_str_positionaly_only_args"
+        ],
+        "failing": [
+          "tests/test_util_inspect.py::test_signature_from_str_basic",
+          "tests/test_util_inspect.py::test_signature_from_str_default_values",
+          "tests/test_util_inspect.py::test_signature_from_str_annotations",
+          "tests/test_util_inspect.py::test_signature_from_str_complex_annotations",
+          "tests/test_util_inspect.py::test_signature_from_str_kwonly_args",
+          "tests/test_util_inspect.py::test_signature_from_str_invalid",
+          "tests/test_util_inspect.py::test_signature_from_str_positionaly_only_args"
+        ],
+        "symbol": "signature_from_str",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": "sphinx/util/inspect.py",
+      "graded_log": "+ tox --current-env -epy39 -v -- tests/test_util_inspect.py\npy39: commands[0]> pytest -rA --durations 25 tests/test_util_inspect.py\n============================= test session starts ==============================\nplatform linux -- Python 3.9.20, pytest-8.3.3, pluggy-1.5.0\ncachedir: .tox/py39/.pytest_cache\nlibraries: Sphinx-3.1.0+/c7bbdd751, docutils-0.21.2\nbase tempdir: /tmp/pytest-of-root/pytest-1\nrootdir: /testbed\nconfigfile: setup.cfg\nplugins: cov-5.0.0\ncollected 34 items\n\ntests/test_util_inspect.py ......FFFFFFF.....................            [100%]\n\n=================================== FAILURES ===================================\n________________________ test_signature_from_str_basic _________________________\n\n    def test_signature_from_str_basic():\n        signature = '(a, b, *args, c=0, d=\"blah\", **kwargs)'\n>       sig = inspect.signature_from_str(signature)\nE       AttributeError: module 'sphinx.util.inspect' has no attribute 'signature_from_str'\n\ntests/test_util_inspect.py:258: AttributeError\n____________________ test_signature_from_str_default_values ____________________\n\n    def test_signature_from_str_default_values():\n        signature = ('(a=0, b=0.0, c=\"str\", d=b\"bytes\", e=..., f=True, '\n                     'g=[1, 2, 3], h={\"a\": 1}, i={1, 2, 3}, '\n                     'j=lambda x, y: None, k=None, l=object(), m=foo.bar.CONSTANT)')\n>       sig = inspect.signature_from_str(signature)\nE       AttributeError: module 'sphinx.util.inspect' has no attribute 'signature_from_str'\n\ntests/test_util_inspect.py:291: AttributeError\n_____________________ test_signature_from_str_annotations ______________________\n\n    def test_signature_from_str_annotations():\n        signature = '(a: int, *args: bytes, b: str = \"blah\", **kwargs: float) -> None'\n>       sig = inspect.signature_from_str(signature)\nE       AttributeError: module 'sphinx.util.inspect' has no attribute 'signature_from_str'\n\ntests/test_util_inspect.py:309: AttributeError\n_________________ test_signature_from_str_complex_annotations __________________\n\n    def test_signature_from_str_complex_annotations():\n>       sig = inspect.signature_from_str('() -> Tuple[str, int, ...]')\nE       AttributeError: module 'sphinx.util.inspect' has no attribute 'signature_from_str'\n\ntests/test_util_inspect.py:319: AttributeError\n_____________________ test_signature_from_str_kwonly_args ______________________\n\n    def test_signature_from_str_kwonly_args():\n>       sig = inspect.signature_from_str('(a, *, b)')\nE       AttributeError: module 'sphinx.util.inspect' has no attribute 'signature_from_str'\n\ntests/test_util_inspect.py:327: AttributeError\n________________ test_signature_from_str_positionaly_only_args _________________\n\n    @pytest.mark.skipif(sys.version_info < (3, 8),\n                        reason='python-3.8 or above is required')\n    def test_signature_from_str_positionaly_only_args():\n>       sig = inspect.signature_from_str('(a, b=0, /, c=1)')\nE       AttributeError: module 'sphinx.util.inspect' has no attribute 'signature_from_str'\n\ntests/test_util_inspect.py:338: AttributeError\n_______________________ test_signature_from_str_invalid ________________________\n\n    def test_signature_from_str_invalid():\n        with pytest.raises(SyntaxError):\n>           inspect.signature_from_str('')\nE           AttributeError: module 'sphinx.util.inspect' has no attribute 'signature_from_str'\n\ntests/test_util_inspect.py:350: AttributeError\n=============================== warnings summary ===============================\nsphinx/util/docutils.py:45\n  /testbed/sphinx/util/docutils.py:45: DeprecationWarning: distutils Version classes are deprecated. Use packaging.version instead.\n    __version_info__ = tuple(LooseVersion(docutils.__version__).version)\n\nsphinx/registry.py:22\n  /testbed/sphinx/registry.py:22: DeprecationWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html\n    from pkg_resources import iter_entry_points\n\n../opt/miniconda3/envs/testbed/lib/python3.9/site-packages/pkg_resources/__init__.py:3154\n../opt/miniconda3/envs/testbed/lib/python3.9/site-packages/pkg_resources/__init__.py:3154\n../opt/miniconda3/envs/testbed/lib/python3.9/site-packages/pkg_resources/__init__.py:3154\n../opt/miniconda3/envs/testbed/lib/python3.9/site-packages/pkg_resources/__init__.py:3154\n  /opt/miniconda3/envs/testbed/lib/python3.9/site-packages/pkg_resources/__init__.py:3154: DeprecationWarning: Deprecated call to `pkg_resources.declare_namespace('sphinxcontrib')`.\n  Implementing implicit namespace packages (as specified in PEP 420) is preferred to `pkg_resources.declare_namespace`. See https://setuptools.pypa.io/en/latest/references/keywords.html#keyword-namespace-packages\n    declare_namespace(pkg)\n\nsphinx/directives/patches.py:15\n  /testbed/sphinx/directives/patches.py:15: DeprecationWarning: The `docutils.parsers.rst.directive.html` module will be removed in Docutils 2.0. Since Docutils 0.18, the \"Meta\" node is defined in `docutils.parsers.rst.directives.misc`.\n    from docutils.parsers.rst.directives import images, html, tables\n\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n==================================== PASSES ====================================\n--------------------------- Captured stdout teardown ---------------------------\n# testroot: root\n# builder: html\n# srcdir: /tmp/pytest-of-root/pytest-1/ext-autodoc\n# outdir: /tmp/pytest-of-root/pytest-1/ext-autodoc/_build/html\n# status: \n\u001b[01mRunning Sphinx v3.1.0+/c7bbdd751\u001b[39;49;00m\n\n# warning: \n\u001b[91mWARNING: while setting up extension sphinx.addnodes: node class 'meta' is already registered, its visitors will be overridden\u001b[39;49;00m\n\n--------------------------- Captured stdout teardown ---------------------------\n# testroot: root\n# builder: html\n# srcdir: /tmp/pytest-of-root/pytest-1/ext-autodoc\n# outdir: /tmp/pytest-of-root/pytest-1/ext-autodoc/_build/html\n# status: \n\u001b[01mRunning Sphinx v3.1.0+/c7bbdd751\u001b[39;49;00m\n\n# warning: \n\u001b[91mWARNING: while setting up extension sphinx.addnodes: node class 'meta' is already registered, its visitors will be overridden\u001b[39;49;00m\n\n--------------------------- Captured stdout teardown ---------------------------\n# testroot: root\n# builder: html\n# srcdir: /tmp/pytest-of-root/pytest-1/ext-autodoc\n# outdir: /tmp/pytest-of-root/pytest-1/ext-autodoc/_build/html\n# status: \n\u001b[01mRunning Sphinx v3.1.0+/c7bbdd751\u001b[39;49;00m\n\n# warning: \n\u001b[91mWARNING: while setting up extension sphinx.addnodes: node class 'meta' is already registered, its visitors will be overridden\u001b[39;49;00m\n\n--------------------------- Captured stdout teardown ---------------------------\n# testroot: root\n# builder: html\n# srcdir: /tmp/pytest-of-root/pytest-1/ext-autodoc\n# outdir: /tmp/pytest-of-root/pytest-1/ext-autodoc/_build/html\n# status: \n\u001b[01mRunning Sphinx v3.1.0+/c7bbdd751\u001b[39;49;00m\n\n# warning: \n\u001b[91mWARNING: while setting up extension sphinx.addnodes: node class 'meta' is already registered, its visitors will be overridden\u001b[39;49;00m\n\n--------------------------- Captured stdout teardown ---------------------------\n# testroot: root\n# builder: html\n# srcdir: /tmp/pytest-of-root/pytest-1/ext-autodoc\n# outdir: /tmp/pytest-of-root/pytest-1/ext-autodoc/_build/html\n# status: \n\u001b[01mRunning Sphinx v3.1.0+/c7bbdd751\u001b[39;49;00m\n\n# warning: \n\u001b[91mWARNING: while setting up extension sphinx.addnodes: node class 'meta' is already registered, its visitors will be overridden\u001b[39;49;00m\n\n--------------------------- Captured stdout teardown ---------------------------\n# testroot: root\n# builder: html\n# srcdir: /tmp/pytest-of-root/pytest-1/ext-autodoc\n# outdir: /tmp/pytest-of-root/pytest-1/ext-autodoc/_build/html\n# status: \n\u001b[01mRunning Sphinx v3.1.0+/c7bbdd751\u001b[39;49;00m\n\n# warning: \n\u001b[91mWARNING: while setting up extension sphinx.addnodes: node class 'meta' is already registered, its visitors will be overridden\u001b[39;49;00m\n\n--------------------------- Captured stdout teardown ---------------------------\n# testroot: root\n# builder: html\n# srcdir: /tmp/pytest-of-root/pytest-1/ext-autodoc\n# outdir: /tmp/pytest-of-root/pytest-1/ext-autodoc/_build/html\n# status: \n\u001b[01mRunning Sphinx v3.1.0+/c7bbdd751\u001b[39;49;00m\n\n# warning: \n\u001b[91mWARNING: while setting up extension sphinx.addnodes: node class 'meta' is already registered, its visitors will be overridden\u001b[39;49;00m\n\n--------------------------- Captured stdout teardown ---------------------------\n# testroot: root\n# builder: html\n# srcdir: /tmp/pytest-of-root/pytest-1/ext-autodoc\n# outdir: /tmp/pytest-of-root/pytest-1/ext-autodoc/_build/html\n# status: \n\u001b[01mRunning Sphinx v3.1.0+/c7bbdd751\u001b[39;49;00m\n\n# warning: \n\u001b[91mWARNING: while setting up extension sphinx.addnodes: node class 'meta' is already registered, its visitors will be overridden\u001b[39;49;00m\n\n--------------------------- Captured stdout teardown ---------------------------\n# testroot: root\n# builder: html\n# srcdir: /tmp/pytest-of-root/pytest-1/root\n# outdir: /tmp/pytest-of-root/pytest-1/root/_build/html\n# status: \n\u001b[01mRunning Sphinx v3.1.0+/c7bbdd751\u001b[39;49;00m\n\n# warning: \n\u001b[91mWARNING: while setting up extension sphinx.addnodes: node class 'meta' is already registered, its visitors will be overridden\u001b[39;49;00m\n\n============================= slowest 25 durations =============================\n0.41s setup    tests/test_util_inspect.py::test_signature_annotations_py38\n0.03s setup    tests/test_util_inspect.py::test_isproperty\n0.02s setup    tests/test_util_inspect.py::test_isclassmethod\n0.02s setup    tests/test_util_inspect.py::test_iscoroutinefunction\n0.01s setup    tests/test_util_inspect.py::test_isstaticmethod\n0.01s setup    tests/test_util_inspect.py::test_isdescriptor\n0.01s setup    tests/test_util_inspect.py::test_isfunction\n0.01s setup    tests/test_util_inspect.py::test_isbuiltin\n0.01s setup    tests/test_util_inspect.py::test_isattributedescriptor\n\n(16 durations < 0.005s hidden.  Use -vv to show these durations.)\n=========================== short test summary info ============================\nPASSED tests/test_util_inspect.py::test_signature\nPASSED tests/test_util_inspect.py::test_signature_partial\nPASSED tests/test_util_inspect.py::test_signature_methods\nPASSED tests/test_util_inspect.py::test_signature_partialmethod\nPASSED tests/test_util_inspect.py::test_signature_annotations\nPASSED tests/test_util_inspect.py::test_signature_annotations_py38\nPASSED tests/test_util_inspect.py::test_safe_getattr_with_default\nPASSED tests/test_util_inspect.py::test_safe_getattr_with_exception\nPASSED tests/test_util_inspect.py::test_safe_getattr_with_property_exception\nPASSED tests/test_util_inspect.py::test_safe_getattr_with___dict___override\nPASSED tests/test_util_inspect.py::test_dictionary_sorting\nPASSED tests/test_util_inspect.py::test_set_sorting\nPASSED tests/test_util_inspect.py::test_set_sorting_fallback\nPASSED tests/test_util_inspect.py::test_frozenset_sorting\nPASSED tests/test_util_inspect.py::test_frozenset_sorting_fallback\nPASSED tests/test_util_inspect.py::test_dict_customtype\nPASSED tests/test_util_inspect.py::test_isclassmethod\nPASSED tests/test_util_inspect.py::test_isstaticmethod\nPASSED tests/test_util_inspect.py::test_iscoroutinefunction\nPASSED tests/test_util_inspect.py::test_isfunction\nPASSED tests/test_util_inspect.py::test_isbuiltin\nPASSED tests/test_util_inspect.py::test_isdescriptor\nPASSED tests/test_util_inspect.py::test_isattributedescriptor\nPASSED tests/test_util_inspect.py::test_isproperty\nPASSED tests/test_util_inspect.py::test_unpartial\nPASSED tests/test_util_inspect.py::test_getdoc_inherited_decorated_method\nPASSED tests/test_util_inspect.py::test_is_builtin_class_method\nFAILED tests/test_util_inspect.py::test_signature_from_str_basic - AttributeE...\nFAILED tests/test_util_inspect.py::test_signature_from_str_default_values - A...\nFAILED tests/test_util_inspect.py::test_signature_from_str_annotations - Attr...\nFAILED tests/test_util_inspect.py::test_signature_from_str_complex_annotations\nFAILED tests/test_util_inspect.py::test_signature_from_str_kwonly_args - Attr...\nFAILED tests/test_util_inspect.py::test_signature_from_str_positionaly_only_args\nFAILED tests/test_util_inspect.py::test_signature_from_str_invalid - Attribut...\n=================== 7 failed, 27 passed, 7 warnings in 0.81s ===================\npy39: exit 1 (1.41 seconds) /testbed> pytest -rA --durations 25 tests/test_util_inspect.py pid=268\n  py39: FAIL code 1 (1.42=setup[0.01]+cmd[1.41] seconds)\n  evaluation failed :( (1.53 seconds)\n\n",
+      "graded_report": {
+        "f2p_fail": 1,
+        "f2p_failing": [
+          "tests/test_util_inspect.py::test_signature_from_str_positionaly_only_args"
+        ],
+        "f2p_pass": 0,
+        "found": true,
+        "n_parsed": 34,
+        "p2p_fail": 6,
+        "p2p_failing": [
+          "tests/test_util_inspect.py::test_signature_from_str_basic",
+          "tests/test_util_inspect.py::test_signature_from_str_default_values",
+          "tests/test_util_inspect.py::test_signature_from_str_annotations",
+          "tests/test_util_inspect.py::test_signature_from_str_complex_annotations",
+          "tests/test_util_inspect.py::test_signature_from_str_kwonly_args",
+          "tests/test_util_inspect.py::test_signature_from_str_invalid"
+        ],
+        "p2p_pass": 27,
+        "reward": 0.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "p2p_coupled_tests": [
+        "tests/test_util_inspect.py::test_signature_from_str_basic",
+        "tests/test_util_inspect.py::test_signature_from_str_default_values",
+        "tests/test_util_inspect.py::test_signature_from_str_annotations",
+        "tests/test_util_inspect.py::test_signature_from_str_complex_annotations",
+        "tests/test_util_inspect.py::test_signature_from_str_kwonly_args",
+        "tests/test_util_inspect.py::test_signature_from_str_invalid"
+      ],
+      "p2p_fail": 6,
+      "reason": "reward 0.0",
+      "tier": "MEDIUM",
+      "tree_digest": "28903284861fe7957adb11c0484a253551750e80df22b01192bad7b9c18d466f",
+      "verdict": "WITNESS",
+      "witness_side": "p2p_coupling"
+    }
+  ]
+}

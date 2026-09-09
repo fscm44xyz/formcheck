@@ -1,0 +1,250 @@
+{
+  "completed": true,
+  "control": {
+    "graded": null,
+    "log": null,
+    "passed": true,
+    "reason": "untransformed reference scores 1.0"
+  },
+  "digest_trace": [
+    {
+      "digest": "b96a8a28f5f2383b0fde62f0df56133b9016b146e8ba8bf89f832c2f65ece1f1",
+      "memo_hit": false
+    },
+    {
+      "digest": "ea80afa1ba549a10e6a373aeecdb685b40596b165768828b5c209f612ac6dff5",
+      "memo_hit": false
+    },
+    {
+      "digest": "ea80afa1ba549a10e6a373aeecdb685b40596b165768828b5c209f612ac6dff5",
+      "memo_hit": true
+    }
+  ],
+  "disk_orphan_reclaimed_bytes": 0,
+  "disk_residual_bytes": 0,
+  "elapsed_seconds": 78.66,
+  "error": null,
+  "image": "swebench/sweb.eval.x86_64.psf_1776_requests-2931:latest",
+  "instance_id": "psf__requests-2931",
+  "leaked_containers": [],
+  "leaked_image": false,
+  "log": [
+    [
+      "<control>",
+      "OK",
+      "untransformed reference scores 1.0"
+    ],
+    [
+      "kwonly_specialize:<no anchor>",
+      "NOT_APPLICABLE",
+      "no anchor inside the gold-touched region"
+    ],
+    [
+      "symbol_rename:RequestEncodingMixin",
+      "CLEAN",
+      "reward 1.0"
+    ],
+    [
+      "symbol_rename:PreparedRequest",
+      "REFUSED",
+      "dynamic reach: 'PreparedRequest' appears in a non-annotation string literal in build/lib/requests/adapters.py line 207 ('Builds a :class:`Response <requests.Resp'); 21 further hit(s) -- an alpha-rename cannot be argued safe"
+    ],
+    [
+      "collection_reverse:<no anchor>",
+      "NOT_APPLICABLE",
+      "no anchor inside the gold-touched region"
+    ],
+    [
+      "message_reword:<no anchor>",
+      "NOT_APPLICABLE",
+      "no anchor inside the gold-touched region; 5 anchor(s) elsewhere in the target"
+    ]
+  ],
+  "mountable": true,
+  "multi_target": false,
+  "n_targets": 1,
+  "on_prime_hub": null,
+  "on_prime_hub_reason": "not resolvable offline; no hub environment index is reachable from this repo, verifiers or swebench",
+  "operators_not_applicable": [
+    "collection_reverse",
+    "kwonly_specialize",
+    "message_reword"
+  ],
+  "operators_with_anchors": [
+    "symbol_rename"
+  ],
+  "repo": "psf/requests",
+  "row": {
+    "elapsed": 43.61,
+    "error": null,
+    "error_type": null,
+    "index": 0,
+    "mode": "formcheck",
+    "name": "psf__requests-2931",
+    "reason": "valid",
+    "valid": true
+  },
+  "rows": [
+    {
+      "anchor": null,
+      "failure_analysis": null,
+      "file": null,
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 1,
+        "found": true,
+        "n_parsed": 168,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 84,
+        "reward": 1.0
+      },
+      "loud_failure": false,
+      "observable": "callable signature (arity / parameter names)",
+      "operator": "kwonly_specialize",
+      "reason": "no anchor inside the gold-touched region",
+      "tier": "HIGH",
+      "tree_digest": "b96a8a28f5f2383b0fde62f0df56133b9016b146e8ba8bf89f832c2f65ece1f1",
+      "verdict": "NOT_APPLICABLE"
+    },
+    {
+      "anchor": "RequestEncodingMixin",
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "broke": [],
+        "coupled": [],
+        "failing": [],
+        "symbol": "RequestEncodingMixin",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": "requests/models.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 1,
+        "found": true,
+        "n_parsed": 168,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 84,
+        "reward": 1.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "reward 1.0",
+      "tier": "MEDIUM",
+      "tree_digest": "ea80afa1ba549a10e6a373aeecdb685b40596b165768828b5c209f612ac6dff5",
+      "verdict": "CLEAN"
+    },
+    {
+      "anchor": "PreparedRequest",
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "broke": [],
+        "coupled": [],
+        "failing": [],
+        "symbol": "RequestEncodingMixin",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": "requests/models.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 1,
+        "found": true,
+        "n_parsed": 168,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 84,
+        "reward": 1.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "dynamic reach: 'PreparedRequest' appears in a non-annotation string literal in build/lib/requests/adapters.py line 207 ('Builds a :class:`Response <requests.Resp'); 21 further hit(s) -- an alpha-rename cannot be argued safe",
+      "tier": "MEDIUM",
+      "tree_digest": "ea80afa1ba549a10e6a373aeecdb685b40596b165768828b5c209f612ac6dff5",
+      "verdict": "REFUSED"
+    },
+    {
+      "anchor": null,
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "broke": [],
+        "coupled": [],
+        "failing": [],
+        "symbol": "RequestEncodingMixin",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": null,
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 1,
+        "found": true,
+        "n_parsed": 168,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 84,
+        "reward": 1.0
+      },
+      "loud_failure": false,
+      "observable": "order of elements in a returned collection",
+      "operator": "collection_reverse",
+      "reason": "no anchor inside the gold-touched region",
+      "tier": "MEDIUM",
+      "tree_digest": "ea80afa1ba549a10e6a373aeecdb685b40596b165768828b5c209f612ac6dff5",
+      "verdict": "NOT_APPLICABLE"
+    },
+    {
+      "anchor": null,
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "broke": [],
+        "coupled": [],
+        "failing": [],
+        "symbol": "RequestEncodingMixin",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": null,
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 1,
+        "found": true,
+        "n_parsed": 168,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 84,
+        "reward": 1.0
+      },
+      "loud_failure": false,
+      "observable": "human-readable text of an exception message",
+      "operator": "message_reword",
+      "reason": "no anchor inside the gold-touched region; 5 anchor(s) elsewhere in the target",
+      "tier": "HIGH",
+      "tree_digest": "ea80afa1ba549a10e6a373aeecdb685b40596b165768828b5c209f612ac6dff5",
+      "verdict": "NOT_APPLICABLE"
+    }
+  ],
+  "targets": [
+    "requests/models.py"
+  ],
+  "version": "2.9",
+  "witnesses": []
+}

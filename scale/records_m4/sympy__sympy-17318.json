@@ -1,0 +1,265 @@
+{
+  "completed": true,
+  "control": {
+    "graded": null,
+    "log": null,
+    "passed": true,
+    "reason": "untransformed reference scores 1.0"
+  },
+  "digest_trace": [
+    {
+      "digest": "041932f38b312306300bedb374034b5b3b2765619229a27cf0d71edb14adc3d9",
+      "memo_hit": false
+    }
+  ],
+  "disk_orphan_reclaimed_bytes": 0,
+  "disk_residual_bytes": 0,
+  "elapsed_seconds": 205.28,
+  "error": null,
+  "image": "swebench/sweb.eval.x86_64.sympy_1776_sympy-17318:latest",
+  "instance_id": "sympy__sympy-17318",
+  "leaked_containers": [],
+  "leaked_image": false,
+  "log": [
+    [
+      "<control>",
+      "OK",
+      "untransformed reference scores 1.0"
+    ],
+    [
+      "kwonly_specialize:<no anchor>",
+      "NOT_APPLICABLE",
+      "no anchor inside the gold-touched region"
+    ],
+    [
+      "symbol_rename:sympy/simplify/radsimp.py:rad_rationalize",
+      "REFUSED",
+      "dynamic reach: 'rad_rationalize' appears in a non-annotation string literal in sympy/simplify/radsimp.py line 921 ('\\n    Rationalize num/den by removing squ') -- an alpha-rename cannot be argued safe"
+    ],
+    [
+      "symbol_rename:sympy/simplify/radsimp.py:split_surds",
+      "REFUSED",
+      "BORDER: the issue names 'split_surds' -- candidate CONTRACT, route to the rubric"
+    ],
+    [
+      "symbol_rename:sympy/simplify/sqrtdenest.py:_sqrt_match",
+      "REFUSED",
+      "BORDER: the issue names '_sqrt_match' -- candidate CONTRACT, route to the rubric"
+    ],
+    [
+      "collection_reverse:sympy/simplify/sqrtdenest.py:_sqrt_match -> return list(...)",
+      "UNVALIDATED",
+      "oracle cannot observe 'order of elements in a returned collection'"
+    ],
+    [
+      "collection_reverse:sympy/simplify/sqrtdenest.py:_sqrt_match -> return list(...)",
+      "UNVALIDATED",
+      "oracle cannot observe 'order of elements in a returned collection'"
+    ],
+    [
+      "message_reword:<no anchor>",
+      "NOT_APPLICABLE",
+      "no anchor inside the gold-touched region; 3 anchor(s) elsewhere in the 2 target(s): sympy/simplify/radsimp.py, sympy/simplify/sqrtdenest.py"
+    ]
+  ],
+  "mountable": true,
+  "multi_target": true,
+  "n_targets": 2,
+  "on_prime_hub": null,
+  "on_prime_hub_reason": "not resolvable offline; no hub environment index is reachable from this repo, verifiers or swebench",
+  "operators_not_applicable": [
+    "kwonly_specialize",
+    "message_reword"
+  ],
+  "operators_with_anchors": [
+    "collection_reverse",
+    "symbol_rename"
+  ],
+  "repo": "sympy/sympy",
+  "row": {
+    "elapsed": 75.64,
+    "error": null,
+    "error_type": null,
+    "index": 0,
+    "mode": "formcheck",
+    "name": "sympy__sympy-17318",
+    "reason": "unchecked",
+    "valid": null
+  },
+  "rows": [
+    {
+      "anchor": null,
+      "failure_analysis": null,
+      "file": null,
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 1,
+        "found": true,
+        "n_parsed": 11,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 10,
+        "reward": 1.0
+      },
+      "loud_failure": false,
+      "observable": "callable signature (arity / parameter names)",
+      "operator": "kwonly_specialize",
+      "reason": "no anchor inside the gold-touched region",
+      "tier": "HIGH",
+      "tree_digest": "041932f38b312306300bedb374034b5b3b2765619229a27cf0d71edb14adc3d9",
+      "verdict": "NOT_APPLICABLE"
+    },
+    {
+      "anchor": "rad_rationalize",
+      "failure_analysis": null,
+      "file": "sympy/simplify/radsimp.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 1,
+        "found": true,
+        "n_parsed": 11,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 10,
+        "reward": 1.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "dynamic reach: 'rad_rationalize' appears in a non-annotation string literal in sympy/simplify/radsimp.py line 921 ('\\n    Rationalize num/den by removing squ') -- an alpha-rename cannot be argued safe",
+      "tier": "MEDIUM",
+      "tree_digest": "041932f38b312306300bedb374034b5b3b2765619229a27cf0d71edb14adc3d9",
+      "verdict": "REFUSED"
+    },
+    {
+      "anchor": "split_surds",
+      "failure_analysis": null,
+      "file": "sympy/simplify/radsimp.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 1,
+        "found": true,
+        "n_parsed": 11,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 10,
+        "reward": 1.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "BORDER: the issue names 'split_surds' -- candidate CONTRACT, route to the rubric",
+      "tier": "MEDIUM",
+      "tree_digest": "041932f38b312306300bedb374034b5b3b2765619229a27cf0d71edb14adc3d9",
+      "verdict": "REFUSED"
+    },
+    {
+      "anchor": "_sqrt_match",
+      "failure_analysis": null,
+      "file": "sympy/simplify/sqrtdenest.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 1,
+        "found": true,
+        "n_parsed": 11,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 10,
+        "reward": 1.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "BORDER: the issue names '_sqrt_match' -- candidate CONTRACT, route to the rubric",
+      "tier": "MEDIUM",
+      "tree_digest": "041932f38b312306300bedb374034b5b3b2765619229a27cf0d71edb14adc3d9",
+      "verdict": "REFUSED"
+    },
+    {
+      "anchor": "_sqrt_match -> return list(...)",
+      "failure_analysis": null,
+      "file": "sympy/simplify/sqrtdenest.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 1,
+        "found": true,
+        "n_parsed": 11,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 10,
+        "reward": 1.0
+      },
+      "loud_failure": false,
+      "observable": "order of elements in a returned collection",
+      "operator": "collection_reverse",
+      "reason": "oracle cannot observe 'order of elements in a returned collection'",
+      "tier": "MEDIUM",
+      "tree_digest": "041932f38b312306300bedb374034b5b3b2765619229a27cf0d71edb14adc3d9",
+      "verdict": "UNVALIDATED"
+    },
+    {
+      "anchor": "_sqrt_match -> return list(...)",
+      "failure_analysis": null,
+      "file": "sympy/simplify/sqrtdenest.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 1,
+        "found": true,
+        "n_parsed": 11,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 10,
+        "reward": 1.0
+      },
+      "loud_failure": false,
+      "observable": "order of elements in a returned collection",
+      "operator": "collection_reverse",
+      "reason": "oracle cannot observe 'order of elements in a returned collection'",
+      "tier": "MEDIUM",
+      "tree_digest": "041932f38b312306300bedb374034b5b3b2765619229a27cf0d71edb14adc3d9",
+      "verdict": "UNVALIDATED"
+    },
+    {
+      "anchor": null,
+      "failure_analysis": null,
+      "file": null,
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 1,
+        "found": true,
+        "n_parsed": 11,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 10,
+        "reward": 1.0
+      },
+      "loud_failure": false,
+      "observable": "human-readable text of an exception message",
+      "operator": "message_reword",
+      "reason": "no anchor inside the gold-touched region; 3 anchor(s) elsewhere in the 2 target(s): sympy/simplify/radsimp.py, sympy/simplify/sqrtdenest.py",
+      "tier": "HIGH",
+      "tree_digest": "041932f38b312306300bedb374034b5b3b2765619229a27cf0d71edb14adc3d9",
+      "verdict": "NOT_APPLICABLE"
+    }
+  ],
+  "targets": [
+    "sympy/simplify/radsimp.py",
+    "sympy/simplify/sqrtdenest.py"
+  ],
+  "version": "1.5",
+  "witnesses": []
+}

@@ -1,0 +1,398 @@
+{
+  "completed": true,
+  "control": {
+    "graded": null,
+    "log": null,
+    "passed": true,
+    "reason": "untransformed reference scores 1.0"
+  },
+  "digest_trace": [
+    {
+      "digest": "3104c322d93387fa87afd9627e3cbf94718b28ca2bf4d04edfbeb18b5c18b77d",
+      "memo_hit": false
+    },
+    {
+      "digest": "f93ed0725f9b0d813bbd24bb3bd5abd208fbcb717be3fc1e21a7a393895eaca7",
+      "memo_hit": false
+    },
+    {
+      "digest": "f93ed0725f9b0d813bbd24bb3bd5abd208fbcb717be3fc1e21a7a393895eaca7",
+      "memo_hit": true
+    }
+  ],
+  "disk_orphan_reclaimed_bytes": 0,
+  "disk_residual_bytes": 0,
+  "elapsed_seconds": 241.77,
+  "error": null,
+  "image": "swebench/sweb.eval.x86_64.django_1776_django-15851:latest",
+  "instance_id": "django__django-15851",
+  "leaked_containers": [],
+  "leaked_image": false,
+  "log": [
+    [
+      "<control>",
+      "OK",
+      "untransformed reference scores 1.0"
+    ],
+    [
+      "kwonly_specialize:<no anchor>",
+      "NOT_APPLICABLE",
+      "no anchor inside the gold-touched region"
+    ],
+    [
+      "symbol_rename:DatabaseClient",
+      "WITNESS",
+      "reward 0.0"
+    ],
+    [
+      "collection_reverse:<no anchor>",
+      "NOT_APPLICABLE",
+      "no anchor inside the gold-touched region"
+    ],
+    [
+      "message_reword:<no anchor>",
+      "NOT_APPLICABLE",
+      "no anchor inside the gold-touched region"
+    ]
+  ],
+  "mountable": true,
+  "multi_target": false,
+  "n_targets": 1,
+  "on_prime_hub": null,
+  "on_prime_hub_reason": "not resolvable offline; no hub environment index is reachable from this repo, verifiers or swebench",
+  "operators_not_applicable": [
+    "collection_reverse",
+    "kwonly_specialize",
+    "message_reword"
+  ],
+  "operators_with_anchors": [
+    "symbol_rename"
+  ],
+  "repo": "django/django",
+  "row": {
+    "elapsed": 67.75,
+    "error": null,
+    "error_type": null,
+    "index": 0,
+    "mode": "formcheck",
+    "name": "django__django-15851",
+    "reason": "invalid",
+    "valid": false
+  },
+  "rows": [
+    {
+      "anchor": null,
+      "failure_analysis": null,
+      "file": null,
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 1,
+        "found": true,
+        "n_parsed": 10,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 8,
+        "reward": 1.0
+      },
+      "loud_failure": false,
+      "observable": "callable signature (arity / parameter names)",
+      "operator": "kwonly_specialize",
+      "reason": "no anchor inside the gold-touched region",
+      "tier": "HIGH",
+      "tree_digest": "3104c322d93387fa87afd9627e3cbf94718b28ca2bf4d04edfbeb18b5c18b77d",
+      "verdict": "NOT_APPLICABLE"
+    },
+    {
+      "all_failures_attributed": true,
+      "anchor": "DatabaseClient",
+      "f2p_fail": 1,
+      "failure_analysis": {
+        "all_reference_the_symbol": true,
+        "broke": [],
+        "coupled": [
+          "test_accent (dbshell.test_postgresql.PostgreSqlDbshellCommandTestCase)",
+          "test_basic (dbshell.test_postgresql.PostgreSqlDbshellCommandTestCase)",
+          "test_column (dbshell.test_postgresql.PostgreSqlDbshellCommandTestCase)",
+          "test_crash_password_does_not_leak (dbshell.test_postgresql.PostgreSqlDbshellCommandTestCase)",
+          "test_nopass (dbshell.test_postgresql.PostgreSqlDbshellCommandTestCase)",
+          "test_passfile (dbshell.test_postgresql.PostgreSqlDbshellCommandTestCase)",
+          "test_service (dbshell.test_postgresql.PostgreSqlDbshellCommandTestCase)",
+          "test_ssl_certificate (dbshell.test_postgresql.PostgreSqlDbshellCommandTestCase)",
+          "test_parameters (dbshell.test_postgresql.PostgreSqlDbshellCommandTestCase)"
+        ],
+        "failing": [
+          "test_accent (dbshell.test_postgresql.PostgreSqlDbshellCommandTestCase)",
+          "test_basic (dbshell.test_postgresql.PostgreSqlDbshellCommandTestCase)",
+          "test_column (dbshell.test_postgresql.PostgreSqlDbshellCommandTestCase)",
+          "test_crash_password_does_not_leak (dbshell.test_postgresql.PostgreSqlDbshellCommandTestCase)",
+          "test_nopass (dbshell.test_postgresql.PostgreSqlDbshellCommandTestCase)",
+          "test_passfile (dbshell.test_postgresql.PostgreSqlDbshellCommandTestCase)",
+          "test_service (dbshell.test_postgresql.PostgreSqlDbshellCommandTestCase)",
+          "test_ssl_certificate (dbshell.test_postgresql.PostgreSqlDbshellCommandTestCase)",
+          "test_parameters (dbshell.test_postgresql.PostgreSqlDbshellCommandTestCase)"
+        ],
+        "symbol": "DatabaseClient",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": "django/db/backends/postgresql/client.py",
+      "graded_log": "+ ./tests/runtests.py --verbosity 2 --settings=test_sqlite --parallel 1 dbshell.test_postgresql\nTesting against Django installed in '/testbed/django'\nImporting application dbshell\nFound 1 test(s).\nSkipping setup of unused database(s): default, other.\nSystem check identified no issues (0 silenced).\n\ntest_postgresql (unittest.loader._FailedTest) ... ERROR\n\n======================================================================\nERROR: test_postgresql (unittest.loader._FailedTest)\n----------------------------------------------------------------------\nImportError: Failed to import test module: test_postgresql\nTraceback (most recent call last):\n  File \"/opt/miniconda3/envs/testbed/lib/python3.9/unittest/loader.py\", line 154, in loadTestsFromName\n    module = __import__(module_name)\n  File \"/testbed/tests/dbshell/test_postgresql.py\", line 9, in <module>\n    from django.db.backends.postgresql.client import DatabaseClient\nImportError: cannot import name 'DatabaseClient' from 'django.db.backends.postgresql.client' (/testbed/django/db/backends/postgresql/client.py)\n\n\n----------------------------------------------------------------------\nRan 1 test in 0.000s\n\nFAILED (errors=1)\n",
+      "graded_report": {
+        "f2p_fail": 1,
+        "f2p_failing": [
+          "test_parameters (dbshell.test_postgresql.PostgreSqlDbshellCommandTestCase)"
+        ],
+        "f2p_pass": 0,
+        "found": true,
+        "n_parsed": 2,
+        "p2p_fail": 8,
+        "p2p_failing": [
+          "test_accent (dbshell.test_postgresql.PostgreSqlDbshellCommandTestCase)",
+          "test_basic (dbshell.test_postgresql.PostgreSqlDbshellCommandTestCase)",
+          "test_column (dbshell.test_postgresql.PostgreSqlDbshellCommandTestCase)",
+          "test_crash_password_does_not_leak (dbshell.test_postgresql.PostgreSqlDbshellCommandTestCase)",
+          "test_nopass (dbshell.test_postgresql.PostgreSqlDbshellCommandTestCase)",
+          "test_passfile (dbshell.test_postgresql.PostgreSqlDbshellCommandTestCase)",
+          "test_service (dbshell.test_postgresql.PostgreSqlDbshellCommandTestCase)",
+          "test_ssl_certificate (dbshell.test_postgresql.PostgreSqlDbshellCommandTestCase)"
+        ],
+        "p2p_pass": 0,
+        "reward": 0.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "p2p_coupled_tests": [
+        "test_accent (dbshell.test_postgresql.PostgreSqlDbshellCommandTestCase)",
+        "test_basic (dbshell.test_postgresql.PostgreSqlDbshellCommandTestCase)",
+        "test_column (dbshell.test_postgresql.PostgreSqlDbshellCommandTestCase)",
+        "test_crash_password_does_not_leak (dbshell.test_postgresql.PostgreSqlDbshellCommandTestCase)",
+        "test_nopass (dbshell.test_postgresql.PostgreSqlDbshellCommandTestCase)",
+        "test_passfile (dbshell.test_postgresql.PostgreSqlDbshellCommandTestCase)",
+        "test_service (dbshell.test_postgresql.PostgreSqlDbshellCommandTestCase)",
+        "test_ssl_certificate (dbshell.test_postgresql.PostgreSqlDbshellCommandTestCase)"
+      ],
+      "p2p_fail": 8,
+      "reason": "reward 0.0",
+      "tier": "MEDIUM",
+      "tree_digest": "f93ed0725f9b0d813bbd24bb3bd5abd208fbcb717be3fc1e21a7a393895eaca7",
+      "verdict": "WITNESS",
+      "witness_side": "p2p_coupling"
+    },
+    {
+      "anchor": null,
+      "failure_analysis": {
+        "all_reference_the_symbol": true,
+        "broke": [],
+        "coupled": [
+          "test_accent (dbshell.test_postgresql.PostgreSqlDbshellCommandTestCase)",
+          "test_basic (dbshell.test_postgresql.PostgreSqlDbshellCommandTestCase)",
+          "test_column (dbshell.test_postgresql.PostgreSqlDbshellCommandTestCase)",
+          "test_crash_password_does_not_leak (dbshell.test_postgresql.PostgreSqlDbshellCommandTestCase)",
+          "test_nopass (dbshell.test_postgresql.PostgreSqlDbshellCommandTestCase)",
+          "test_passfile (dbshell.test_postgresql.PostgreSqlDbshellCommandTestCase)",
+          "test_service (dbshell.test_postgresql.PostgreSqlDbshellCommandTestCase)",
+          "test_ssl_certificate (dbshell.test_postgresql.PostgreSqlDbshellCommandTestCase)",
+          "test_parameters (dbshell.test_postgresql.PostgreSqlDbshellCommandTestCase)"
+        ],
+        "failing": [
+          "test_accent (dbshell.test_postgresql.PostgreSqlDbshellCommandTestCase)",
+          "test_basic (dbshell.test_postgresql.PostgreSqlDbshellCommandTestCase)",
+          "test_column (dbshell.test_postgresql.PostgreSqlDbshellCommandTestCase)",
+          "test_crash_password_does_not_leak (dbshell.test_postgresql.PostgreSqlDbshellCommandTestCase)",
+          "test_nopass (dbshell.test_postgresql.PostgreSqlDbshellCommandTestCase)",
+          "test_passfile (dbshell.test_postgresql.PostgreSqlDbshellCommandTestCase)",
+          "test_service (dbshell.test_postgresql.PostgreSqlDbshellCommandTestCase)",
+          "test_ssl_certificate (dbshell.test_postgresql.PostgreSqlDbshellCommandTestCase)",
+          "test_parameters (dbshell.test_postgresql.PostgreSqlDbshellCommandTestCase)"
+        ],
+        "symbol": "DatabaseClient",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": null,
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 1,
+        "f2p_failing": [
+          "test_parameters (dbshell.test_postgresql.PostgreSqlDbshellCommandTestCase)"
+        ],
+        "f2p_pass": 0,
+        "found": true,
+        "n_parsed": 2,
+        "p2p_fail": 8,
+        "p2p_failing": [
+          "test_accent (dbshell.test_postgresql.PostgreSqlDbshellCommandTestCase)",
+          "test_basic (dbshell.test_postgresql.PostgreSqlDbshellCommandTestCase)",
+          "test_column (dbshell.test_postgresql.PostgreSqlDbshellCommandTestCase)",
+          "test_crash_password_does_not_leak (dbshell.test_postgresql.PostgreSqlDbshellCommandTestCase)",
+          "test_nopass (dbshell.test_postgresql.PostgreSqlDbshellCommandTestCase)",
+          "test_passfile (dbshell.test_postgresql.PostgreSqlDbshellCommandTestCase)",
+          "test_service (dbshell.test_postgresql.PostgreSqlDbshellCommandTestCase)",
+          "test_ssl_certificate (dbshell.test_postgresql.PostgreSqlDbshellCommandTestCase)"
+        ],
+        "p2p_pass": 0,
+        "reward": 0.0
+      },
+      "loud_failure": false,
+      "observable": "order of elements in a returned collection",
+      "operator": "collection_reverse",
+      "reason": "no anchor inside the gold-touched region",
+      "tier": "MEDIUM",
+      "tree_digest": "f93ed0725f9b0d813bbd24bb3bd5abd208fbcb717be3fc1e21a7a393895eaca7",
+      "verdict": "NOT_APPLICABLE"
+    },
+    {
+      "anchor": null,
+      "failure_analysis": {
+        "all_reference_the_symbol": true,
+        "broke": [],
+        "coupled": [
+          "test_accent (dbshell.test_postgresql.PostgreSqlDbshellCommandTestCase)",
+          "test_basic (dbshell.test_postgresql.PostgreSqlDbshellCommandTestCase)",
+          "test_column (dbshell.test_postgresql.PostgreSqlDbshellCommandTestCase)",
+          "test_crash_password_does_not_leak (dbshell.test_postgresql.PostgreSqlDbshellCommandTestCase)",
+          "test_nopass (dbshell.test_postgresql.PostgreSqlDbshellCommandTestCase)",
+          "test_passfile (dbshell.test_postgresql.PostgreSqlDbshellCommandTestCase)",
+          "test_service (dbshell.test_postgresql.PostgreSqlDbshellCommandTestCase)",
+          "test_ssl_certificate (dbshell.test_postgresql.PostgreSqlDbshellCommandTestCase)",
+          "test_parameters (dbshell.test_postgresql.PostgreSqlDbshellCommandTestCase)"
+        ],
+        "failing": [
+          "test_accent (dbshell.test_postgresql.PostgreSqlDbshellCommandTestCase)",
+          "test_basic (dbshell.test_postgresql.PostgreSqlDbshellCommandTestCase)",
+          "test_column (dbshell.test_postgresql.PostgreSqlDbshellCommandTestCase)",
+          "test_crash_password_does_not_leak (dbshell.test_postgresql.PostgreSqlDbshellCommandTestCase)",
+          "test_nopass (dbshell.test_postgresql.PostgreSqlDbshellCommandTestCase)",
+          "test_passfile (dbshell.test_postgresql.PostgreSqlDbshellCommandTestCase)",
+          "test_service (dbshell.test_postgresql.PostgreSqlDbshellCommandTestCase)",
+          "test_ssl_certificate (dbshell.test_postgresql.PostgreSqlDbshellCommandTestCase)",
+          "test_parameters (dbshell.test_postgresql.PostgreSqlDbshellCommandTestCase)"
+        ],
+        "symbol": "DatabaseClient",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": null,
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 1,
+        "f2p_failing": [
+          "test_parameters (dbshell.test_postgresql.PostgreSqlDbshellCommandTestCase)"
+        ],
+        "f2p_pass": 0,
+        "found": true,
+        "n_parsed": 2,
+        "p2p_fail": 8,
+        "p2p_failing": [
+          "test_accent (dbshell.test_postgresql.PostgreSqlDbshellCommandTestCase)",
+          "test_basic (dbshell.test_postgresql.PostgreSqlDbshellCommandTestCase)",
+          "test_column (dbshell.test_postgresql.PostgreSqlDbshellCommandTestCase)",
+          "test_crash_password_does_not_leak (dbshell.test_postgresql.PostgreSqlDbshellCommandTestCase)",
+          "test_nopass (dbshell.test_postgresql.PostgreSqlDbshellCommandTestCase)",
+          "test_passfile (dbshell.test_postgresql.PostgreSqlDbshellCommandTestCase)",
+          "test_service (dbshell.test_postgresql.PostgreSqlDbshellCommandTestCase)",
+          "test_ssl_certificate (dbshell.test_postgresql.PostgreSqlDbshellCommandTestCase)"
+        ],
+        "p2p_pass": 0,
+        "reward": 0.0
+      },
+      "loud_failure": false,
+      "observable": "human-readable text of an exception message",
+      "operator": "message_reword",
+      "reason": "no anchor inside the gold-touched region",
+      "tier": "HIGH",
+      "tree_digest": "f93ed0725f9b0d813bbd24bb3bd5abd208fbcb717be3fc1e21a7a393895eaca7",
+      "verdict": "NOT_APPLICABLE"
+    }
+  ],
+  "targets": [
+    "django/db/backends/postgresql/client.py"
+  ],
+  "version": "4.2",
+  "witnesses": [
+    {
+      "all_failures_attributed": true,
+      "anchor": "DatabaseClient",
+      "f2p_fail": 1,
+      "failure_analysis": {
+        "all_reference_the_symbol": true,
+        "broke": [],
+        "coupled": [
+          "test_accent (dbshell.test_postgresql.PostgreSqlDbshellCommandTestCase)",
+          "test_basic (dbshell.test_postgresql.PostgreSqlDbshellCommandTestCase)",
+          "test_column (dbshell.test_postgresql.PostgreSqlDbshellCommandTestCase)",
+          "test_crash_password_does_not_leak (dbshell.test_postgresql.PostgreSqlDbshellCommandTestCase)",
+          "test_nopass (dbshell.test_postgresql.PostgreSqlDbshellCommandTestCase)",
+          "test_passfile (dbshell.test_postgresql.PostgreSqlDbshellCommandTestCase)",
+          "test_service (dbshell.test_postgresql.PostgreSqlDbshellCommandTestCase)",
+          "test_ssl_certificate (dbshell.test_postgresql.PostgreSqlDbshellCommandTestCase)",
+          "test_parameters (dbshell.test_postgresql.PostgreSqlDbshellCommandTestCase)"
+        ],
+        "failing": [
+          "test_accent (dbshell.test_postgresql.PostgreSqlDbshellCommandTestCase)",
+          "test_basic (dbshell.test_postgresql.PostgreSqlDbshellCommandTestCase)",
+          "test_column (dbshell.test_postgresql.PostgreSqlDbshellCommandTestCase)",
+          "test_crash_password_does_not_leak (dbshell.test_postgresql.PostgreSqlDbshellCommandTestCase)",
+          "test_nopass (dbshell.test_postgresql.PostgreSqlDbshellCommandTestCase)",
+          "test_passfile (dbshell.test_postgresql.PostgreSqlDbshellCommandTestCase)",
+          "test_service (dbshell.test_postgresql.PostgreSqlDbshellCommandTestCase)",
+          "test_ssl_certificate (dbshell.test_postgresql.PostgreSqlDbshellCommandTestCase)",
+          "test_parameters (dbshell.test_postgresql.PostgreSqlDbshellCommandTestCase)"
+        ],
+        "symbol": "DatabaseClient",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": "django/db/backends/postgresql/client.py",
+      "graded_log": "+ ./tests/runtests.py --verbosity 2 --settings=test_sqlite --parallel 1 dbshell.test_postgresql\nTesting against Django installed in '/testbed/django'\nImporting application dbshell\nFound 1 test(s).\nSkipping setup of unused database(s): default, other.\nSystem check identified no issues (0 silenced).\n\ntest_postgresql (unittest.loader._FailedTest) ... ERROR\n\n======================================================================\nERROR: test_postgresql (unittest.loader._FailedTest)\n----------------------------------------------------------------------\nImportError: Failed to import test module: test_postgresql\nTraceback (most recent call last):\n  File \"/opt/miniconda3/envs/testbed/lib/python3.9/unittest/loader.py\", line 154, in loadTestsFromName\n    module = __import__(module_name)\n  File \"/testbed/tests/dbshell/test_postgresql.py\", line 9, in <module>\n    from django.db.backends.postgresql.client import DatabaseClient\nImportError: cannot import name 'DatabaseClient' from 'django.db.backends.postgresql.client' (/testbed/django/db/backends/postgresql/client.py)\n\n\n----------------------------------------------------------------------\nRan 1 test in 0.000s\n\nFAILED (errors=1)\n",
+      "graded_report": {
+        "f2p_fail": 1,
+        "f2p_failing": [
+          "test_parameters (dbshell.test_postgresql.PostgreSqlDbshellCommandTestCase)"
+        ],
+        "f2p_pass": 0,
+        "found": true,
+        "n_parsed": 2,
+        "p2p_fail": 8,
+        "p2p_failing": [
+          "test_accent (dbshell.test_postgresql.PostgreSqlDbshellCommandTestCase)",
+          "test_basic (dbshell.test_postgresql.PostgreSqlDbshellCommandTestCase)",
+          "test_column (dbshell.test_postgresql.PostgreSqlDbshellCommandTestCase)",
+          "test_crash_password_does_not_leak (dbshell.test_postgresql.PostgreSqlDbshellCommandTestCase)",
+          "test_nopass (dbshell.test_postgresql.PostgreSqlDbshellCommandTestCase)",
+          "test_passfile (dbshell.test_postgresql.PostgreSqlDbshellCommandTestCase)",
+          "test_service (dbshell.test_postgresql.PostgreSqlDbshellCommandTestCase)",
+          "test_ssl_certificate (dbshell.test_postgresql.PostgreSqlDbshellCommandTestCase)"
+        ],
+        "p2p_pass": 0,
+        "reward": 0.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "p2p_coupled_tests": [
+        "test_accent (dbshell.test_postgresql.PostgreSqlDbshellCommandTestCase)",
+        "test_basic (dbshell.test_postgresql.PostgreSqlDbshellCommandTestCase)",
+        "test_column (dbshell.test_postgresql.PostgreSqlDbshellCommandTestCase)",
+        "test_crash_password_does_not_leak (dbshell.test_postgresql.PostgreSqlDbshellCommandTestCase)",
+        "test_nopass (dbshell.test_postgresql.PostgreSqlDbshellCommandTestCase)",
+        "test_passfile (dbshell.test_postgresql.PostgreSqlDbshellCommandTestCase)",
+        "test_service (dbshell.test_postgresql.PostgreSqlDbshellCommandTestCase)",
+        "test_ssl_certificate (dbshell.test_postgresql.PostgreSqlDbshellCommandTestCase)"
+      ],
+      "p2p_fail": 8,
+      "reason": "reward 0.0",
+      "tier": "MEDIUM",
+      "tree_digest": "f93ed0725f9b0d813bbd24bb3bd5abd208fbcb717be3fc1e21a7a393895eaca7",
+      "verdict": "WITNESS",
+      "witness_side": "p2p_coupling"
+    }
+  ]
+}

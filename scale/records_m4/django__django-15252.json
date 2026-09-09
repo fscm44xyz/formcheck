@@ -1,0 +1,358 @@
+{
+  "completed": true,
+  "control": {
+    "graded": null,
+    "log": null,
+    "passed": true,
+    "reason": "untransformed reference scores 1.0"
+  },
+  "digest_trace": [
+    {
+      "digest": "2145ad5d312659927d5c5cdf7f6f92261cc8f9c940b85268ef22804352488a5a",
+      "memo_hit": false
+    },
+    {
+      "digest": "ff5e9b0654141c208b5d5db9a898aef57e69cbcfe2c1ab198dcc8a1bc3f1c29f",
+      "memo_hit": false
+    }
+  ],
+  "disk_orphan_reclaimed_bytes": 0,
+  "disk_residual_bytes": 0,
+  "elapsed_seconds": 224.14,
+  "error": null,
+  "image": "swebench/sweb.eval.x86_64.django_1776_django-15252:latest",
+  "instance_id": "django__django-15252",
+  "leaked_containers": [],
+  "leaked_image": false,
+  "log": [
+    [
+      "<control>",
+      "OK",
+      "untransformed reference scores 1.0"
+    ],
+    [
+      "kwonly_specialize:<no anchor>",
+      "NOT_APPLICABLE",
+      "no anchor inside the gold-touched region"
+    ],
+    [
+      "symbol_rename:MigrationExecutor",
+      "UNVALIDATED",
+      "8 failing test(s) have no recognisable failure block -- unknown log shape, not evidence of breakage; first: If the current state satisfies the given target, do nothing."
+    ],
+    [
+      "collection_reverse:<no anchor>",
+      "NOT_APPLICABLE",
+      "no anchor inside the gold-touched region"
+    ],
+    [
+      "message_reword:<no anchor>",
+      "NOT_APPLICABLE",
+      "no anchor inside the gold-touched region; 1 anchor(s) elsewhere in the target"
+    ]
+  ],
+  "mountable": true,
+  "multi_target": false,
+  "n_targets": 1,
+  "on_prime_hub": null,
+  "on_prime_hub_reason": "not resolvable offline; no hub environment index is reachable from this repo, verifiers or swebench",
+  "operators_not_applicable": [
+    "collection_reverse",
+    "kwonly_specialize",
+    "message_reword"
+  ],
+  "operators_with_anchors": [
+    "symbol_rename"
+  ],
+  "repo": "django/django",
+  "row": {
+    "elapsed": 71.31,
+    "error": null,
+    "error_type": null,
+    "index": 0,
+    "mode": "formcheck",
+    "name": "django__django-15252",
+    "reason": "unchecked",
+    "valid": null
+  },
+  "rows": [
+    {
+      "anchor": null,
+      "failure_analysis": null,
+      "file": null,
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 2,
+        "found": true,
+        "n_parsed": 36,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 34,
+        "reward": 1.0
+      },
+      "loud_failure": false,
+      "observable": "callable signature (arity / parameter names)",
+      "operator": "kwonly_specialize",
+      "reason": "no anchor inside the gold-touched region",
+      "tier": "HIGH",
+      "tree_digest": "2145ad5d312659927d5c5cdf7f6f92261cc8f9c940b85268ef22804352488a5a",
+      "verdict": "NOT_APPLICABLE"
+    },
+    {
+      "anchor": "MigrationExecutor",
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "broke": [
+          "test_migrate_test_setting_false (backends.base.test_creation.TestDbCreationTests)",
+          "test_migrate_test_setting_true (backends.base.test_creation.TestDbCreationTests)"
+        ],
+        "coupled": [
+          "test_alter_id_type_with_fk (migrations.test_executor.ExecutorTests)"
+        ],
+        "failing": [
+          "If the current state satisfies the given target, do nothing.",
+          "Minimize unnecessary rollbacks in connected apps.",
+          "Minimize rollbacks when target has multiple in-app children.",
+          "mark_expected_failures_and_skips() isn't called unless",
+          "test_migrate_test_setting_false (backends.base.test_creation.TestDbCreationTests)",
+          "test_migrate_test_setting_true (backends.base.test_creation.TestDbCreationTests)",
+          "test_alter_id_type_with_fk (migrations.test_executor.ExecutorTests)",
+          "Applying all replaced migrations marks replacement as applied (#24628).",
+          "An atomic operation is properly rolled back inside a non-atomic",
+          "Regression test for #22325 - references to a custom user model defined in the",
+          "The django_migrations table is not created if there are no migrations"
+        ],
+        "symbol": "MigrationExecutor",
+        "unexplained": [
+          "test_migrate_test_setting_false (backends.base.test_creation.TestDbCreationTests)",
+          "test_migrate_test_setting_true (backends.base.test_creation.TestDbCreationTests)",
+          "If the current state satisfies the given target, do nothing. (no failure section found)",
+          "Minimize unnecessary rollbacks in connected apps. (no failure section found)",
+          "Minimize rollbacks when target has multiple in-app children. (no failure section found)",
+          "mark_expected_failures_and_skips() isn't called unless (no failure section found)",
+          "Applying all replaced migrations marks replacement as applied (#24628). (no failure section found)",
+          "An atomic operation is properly rolled back inside a non-atomic (no failure section found)",
+          "Regression test for #22325 - references to a custom user model defined in the (no failure section found)",
+          "The django_migrations table is not created if there are no migrations (no failure section found)"
+        ],
+        "unparsed": [
+          "If the current state satisfies the given target, do nothing.",
+          "Minimize unnecessary rollbacks in connected apps.",
+          "Minimize rollbacks when target has multiple in-app children.",
+          "mark_expected_failures_and_skips() isn't called unless",
+          "Applying all replaced migrations marks replacement as applied (#24628).",
+          "An atomic operation is properly rolled back inside a non-atomic",
+          "Regression test for #22325 - references to a custom user model defined in the",
+          "The django_migrations table is not created if there are no migrations"
+        ],
+        "unparsed_log_shape": true
+      },
+      "file": "django/db/migrations/executor.py",
+      "graded_log": "+ ./tests/runtests.py --verbosity 2 --settings=test_sqlite --parallel 1 backends.base.test_creation migrations.test_executor\nTesting against Django installed in '/testbed/django'\nImporting application backends\nImporting application migrations\nFound 13 test(s).\nSkipping setup of unused database(s): other.\nOperations to perform:\n  Synchronize unmigrated apps: auth, backends, contenttypes, messages, migrations, sessions, staticfiles\n  Apply all migrations: admin, sites\nSynchronizing apps without migrations:\n  Creating tables...\n    Creating table django_content_type\n    Creating table auth_permission\n    Creating table auth_group\n    Creating table auth_user\n    Creating table django_session\n    Creating table backends_square\n    Creating table backends_person\n    Creating table backends_schoolclass\n    Creating table backends_verylongmodelnamezzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz\n    Creating table backends_tag\n    Creating table CaseSensitive_Post\n    Creating table backends_reporter\n    Creating table backends_article\n    Creating table backends_item\n    Creating table backends_object\n    Creating table backends_objectreference\n    Creating table backends_objectselfreference\n    Creating table backends_circulara\n    Creating table backends_circularb\n    Creating table backends_rawdata\n    Creating table backends_author\n    Creating table backends_book\n    Creating table order\n    Creating table migrations_modelwithcustombase\n    Creating table migrations_unmigratedmodel\n    Running deferred SQL...\nRunning migrations:\n  Applying admin.0001_initial... OK\n  Applying admin.0002_logentry_remove_auto_add... OK\n  Applying admin.0003_logentry_add_action_flag_choices... OK\n  Applying sites.0001_initial... OK\n  Applying sites.0002_alter_domain_unique... OK\nSystem check identified no issues (0 silenced).\n\nCreating test database for alias 'default' ('file:memorydb_default?mode=memory&cache=shared')...\ntest_executor (unittest.loader._FailedTest) ... ERROR\ntest_mark_expected_failures_and_skips_call (backends.base.test_creation.TestDbCreationTests)\nmark_expected_failures_and_skips() isn't called unless ... ERROR\ntest_migrate_test_setting_false (backends.base.test_creation.TestDbCreationTests) ... ERROR\ntest_migrate_test_setting_false_ensure_schema (backends.base.test_creation.TestDbCreationTests) ... ok\ntest_migrate_test_setting_true (backends.base.test_creation.TestDbCreationTests) ... ERROR\ntest_custom_test_name (backends.base.test_creation.TestDbSignatureTests) ... ok\ntest_custom_test_name_with_test_prefix (backends.base.test_creation.TestDbSignatureTests) ... ok\ntest_default_name (backends.base.test_creation.TestDbSignatureTests) ... ok\ntest_circular_reference (backends.base.test_creation.TestDeserializeDbFromString) ... ok\ntest_circular_reference_with_natural_key (backends.base.test_creation.TestDeserializeDbFromString) ... ok\ntest_self_reference (backends.base.test_creation.TestDeserializeDbFromString) ... ok\ntest_serialize_db_to_string_base_manager (backends.base.test_creation.TestDeserializeDbFromString) ... ok\ntest_mark_expected_failures_and_skips (backends.base.test_creation.TestMarkTests) ... ok\n\n======================================================================\nERROR: test_executor (unittest.loader._FailedTest)\n----------------------------------------------------------------------\nImportError: Failed to import test module: test_executor\nTraceback (most recent call last):\n  File \"/opt/miniconda3/envs/testbed/lib/python3.9/unittest/loader.py\", line 154, in loadTestsFromName\n    module = __import__(module_name)\n  File \"/testbed/tests/migrations/test_executor.py\", line 6, in <module>\n    from django.db.migrations.executor import MigrationExecutor\nImportError: cannot import name 'MigrationExecutor' from 'django.db.migrations.executor' (/testbed/django/db/migrations/executor.py)\n\n\n======================================================================\nERROR: test_mark_expected_failures_and_skips_call (backends.base.test_creation.TestDbCreationTests)\nmark_expected_failures_and_skips() isn't called unless\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/opt/miniconda3/envs/testbed/lib/python3.9/unittest/mock.py\", line 1768, in _inner\n    return f(*args, **kw)\n  File \"/opt/miniconda3/envs/testbed/lib/python3.9/unittest/mock.py\", line 1333, in patched\n    with self.decoration_helper(patched,\n  File \"/opt/miniconda3/envs/testbed/lib/python3.9/contextlib.py\", line 119, in __enter__\n    return next(self.gen)\n  File \"/opt/miniconda3/envs/testbed/lib/python3.9/unittest/mock.py\", line 1315, in decoration_helper\n    arg = exit_stack.enter_context(patching)\n  File \"/opt/miniconda3/envs/testbed/lib/python3.9/contextlib.py\", line 448, in enter_context\n    result = _cm_type.__enter__(cm)\n  File \"/opt/miniconda3/envs/testbed/lib/python3.9/unittest/mock.py\", line 1388, in __enter__\n    self.target = self.getter()\n  File \"/opt/miniconda3/envs/testbed/lib/python3.9/unittest/mock.py\", line 1563, in <lambda>\n    getter = lambda: _importer(target)\n  File \"/opt/miniconda3/envs/testbed/lib/python3.9/unittest/mock.py\", line 1239, in _importer\n    thing = _dot_lookup(thing, comp, import_path)\n  File \"/opt/miniconda3/envs/testbed/lib/python3.9/unittest/mock.py\", line 1228, in _dot_lookup\n    __import__(import_path)\nModuleNotFoundError: No module named 'django.db.migrations.executor.MigrationExecutor'; 'django.db.migrations.executor' is not a package\n\n======================================================================\nERROR: test_migrate_test_setting_false (backends.base.test_creation.TestDbCreationTests)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/opt/miniconda3/envs/testbed/lib/python3.9/unittest/mock.py\", line 1333, in patched\n    with self.decoration_helper(patched,\n  File \"/opt/miniconda3/envs/testbed/lib/python3.9/contextlib.py\", line 119, in __enter__\n    return next(self.gen)\n  File \"/opt/miniconda3/envs/testbed/lib/python3.9/unittest/mock.py\", line 1315, in decoration_helper\n    arg = exit_stack.enter_context(patching)\n  File \"/opt/miniconda3/envs/testbed/lib/python3.9/contextlib.py\", line 448, in enter_context\n    result = _cm_type.__enter__(cm)\n  File \"/opt/miniconda3/envs/testbed/lib/python3.9/unittest/mock.py\", line 1388, in __enter__\n    self.target = self.getter()\n  File \"/opt/miniconda3/envs/testbed/lib/python3.9/unittest/mock.py\", line 1563, in <lambda>\n    getter = lambda: _importer(target)\n  File \"/opt/miniconda3/envs/testbed/lib/python3.9/unittest/mock.py\", line 1239, in _importer\n    thing = _dot_lookup(thing, comp, import_path)\n  File \"/opt/miniconda3/envs/testbed/lib/python3.9/unittest/mock.py\", line 1228, in _dot_lookup\n    __import__(import_path)\nModuleNotFoundError: No module named 'django.db.migrations.executor.MigrationExecutor'; 'django.db.migrations.executor' is not a package\n\n======================================================================\nERROR: test_migrate_test_setting_true (backends.base.test_creation.TestDbCreationTests)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/opt/miniconda3/envs/testbed/lib/python3.9/unittest/mock.py\", line 1333, in patched\n    with self.decoration_helper(patched,\n  File \"/opt/miniconda3/envs/testbed/lib/python3.9/contextlib.py\", line 119, in __enter__\n    return next(self.gen)\n  File \"/opt/miniconda3/envs/testbed/lib/python3.9/unittest/mock.py\", line 1315, in decoration_helper\n    arg = exit_stack.enter_context(patching)\n  File \"/opt/miniconda3/envs/testbed/lib/python3.9/contextlib.py\", line 448, in enter_context\n    result = _cm_type.__enter__(cm)\n  File \"/opt/miniconda3/envs/testbed/lib/python3.9/unittest/mock.py\", line 1388, in __enter__\n    self.target = self.getter()\n  File \"/opt/miniconda3/envs/testbed/lib/python3.9/unittest/mock.py\", line 1563, in <lambda>\n    getter = lambda: _importer(target)\n  File \"/opt/miniconda3/envs/testbed/lib/python3.9/unittest/mock.py\", line 1239, in _importer\n    thing = _dot_lookup(thing, comp, import_path)\n  File \"/opt/miniconda3/envs/testbed/lib/python3.9/unittest/mock.py\", line 1228, in _dot_lookup\n    __import__(import_path)\nModuleNotFoundError: No module named 'django.db.migrations.executor.MigrationExecutor'; 'django.db.migrations.executor' is not a package\n\n----------------------------------------------------------------------\nRan 13 tests in 0.180s\n\nFAILED (errors=4)\nDestroying test database for alias 'default' ('file:memorydb_default?mode=memory&cache=shared')...\n",
+      "graded_report": {
+        "f2p_fail": 1,
+        "f2p_failing": [
+          "The django_migrations table is not created if there are no migrations"
+        ],
+        "f2p_pass": 1,
+        "found": true,
+        "n_parsed": 17,
+        "p2p_fail": 26,
+        "p2p_failing": [
+          "If the current state satisfies the given target, do nothing.",
+          "Minimize unnecessary rollbacks in connected apps.",
+          "Minimize rollbacks when target has multiple in-app children.",
+          "mark_expected_failures_and_skips() isn't called unless",
+          "test_migrate_test_setting_false (backends.base.test_creation.TestDbCreationTests)",
+          "test_migrate_test_setting_true (backends.base.test_creation.TestDbCreationTests)",
+          "test_alter_id_type_with_fk (migrations.test_executor.ExecutorTests)",
+          "Applying all replaced migrations marks replacement as applied (#24628).",
+          "An atomic operation is properly rolled back inside a non-atomic",
+          "Regression test for #22325 - references to a custom user model defined in the"
+        ],
+        "p2p_pass": 8,
+        "reward": 0.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "8 failing test(s) have no recognisable failure block -- unknown log shape, not evidence of breakage; first: If the current state satisfies the given target, do nothing.",
+      "tier": "MEDIUM",
+      "tree_digest": "ff5e9b0654141c208b5d5db9a898aef57e69cbcfe2c1ab198dcc8a1bc3f1c29f",
+      "verdict": "UNVALIDATED"
+    },
+    {
+      "anchor": null,
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "broke": [
+          "test_migrate_test_setting_false (backends.base.test_creation.TestDbCreationTests)",
+          "test_migrate_test_setting_true (backends.base.test_creation.TestDbCreationTests)"
+        ],
+        "coupled": [
+          "test_alter_id_type_with_fk (migrations.test_executor.ExecutorTests)"
+        ],
+        "failing": [
+          "If the current state satisfies the given target, do nothing.",
+          "Minimize unnecessary rollbacks in connected apps.",
+          "Minimize rollbacks when target has multiple in-app children.",
+          "mark_expected_failures_and_skips() isn't called unless",
+          "test_migrate_test_setting_false (backends.base.test_creation.TestDbCreationTests)",
+          "test_migrate_test_setting_true (backends.base.test_creation.TestDbCreationTests)",
+          "test_alter_id_type_with_fk (migrations.test_executor.ExecutorTests)",
+          "Applying all replaced migrations marks replacement as applied (#24628).",
+          "An atomic operation is properly rolled back inside a non-atomic",
+          "Regression test for #22325 - references to a custom user model defined in the",
+          "The django_migrations table is not created if there are no migrations"
+        ],
+        "symbol": "MigrationExecutor",
+        "unexplained": [
+          "test_migrate_test_setting_false (backends.base.test_creation.TestDbCreationTests)",
+          "test_migrate_test_setting_true (backends.base.test_creation.TestDbCreationTests)",
+          "If the current state satisfies the given target, do nothing. (no failure section found)",
+          "Minimize unnecessary rollbacks in connected apps. (no failure section found)",
+          "Minimize rollbacks when target has multiple in-app children. (no failure section found)",
+          "mark_expected_failures_and_skips() isn't called unless (no failure section found)",
+          "Applying all replaced migrations marks replacement as applied (#24628). (no failure section found)",
+          "An atomic operation is properly rolled back inside a non-atomic (no failure section found)",
+          "Regression test for #22325 - references to a custom user model defined in the (no failure section found)",
+          "The django_migrations table is not created if there are no migrations (no failure section found)"
+        ],
+        "unparsed": [
+          "If the current state satisfies the given target, do nothing.",
+          "Minimize unnecessary rollbacks in connected apps.",
+          "Minimize rollbacks when target has multiple in-app children.",
+          "mark_expected_failures_and_skips() isn't called unless",
+          "Applying all replaced migrations marks replacement as applied (#24628).",
+          "An atomic operation is properly rolled back inside a non-atomic",
+          "Regression test for #22325 - references to a custom user model defined in the",
+          "The django_migrations table is not created if there are no migrations"
+        ],
+        "unparsed_log_shape": true
+      },
+      "file": null,
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 1,
+        "f2p_failing": [
+          "The django_migrations table is not created if there are no migrations"
+        ],
+        "f2p_pass": 1,
+        "found": true,
+        "n_parsed": 17,
+        "p2p_fail": 26,
+        "p2p_failing": [
+          "If the current state satisfies the given target, do nothing.",
+          "Minimize unnecessary rollbacks in connected apps.",
+          "Minimize rollbacks when target has multiple in-app children.",
+          "mark_expected_failures_and_skips() isn't called unless",
+          "test_migrate_test_setting_false (backends.base.test_creation.TestDbCreationTests)",
+          "test_migrate_test_setting_true (backends.base.test_creation.TestDbCreationTests)",
+          "test_alter_id_type_with_fk (migrations.test_executor.ExecutorTests)",
+          "Applying all replaced migrations marks replacement as applied (#24628).",
+          "An atomic operation is properly rolled back inside a non-atomic",
+          "Regression test for #22325 - references to a custom user model defined in the"
+        ],
+        "p2p_pass": 8,
+        "reward": 0.0
+      },
+      "loud_failure": false,
+      "observable": "order of elements in a returned collection",
+      "operator": "collection_reverse",
+      "reason": "no anchor inside the gold-touched region",
+      "tier": "MEDIUM",
+      "tree_digest": "ff5e9b0654141c208b5d5db9a898aef57e69cbcfe2c1ab198dcc8a1bc3f1c29f",
+      "verdict": "NOT_APPLICABLE"
+    },
+    {
+      "anchor": null,
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "broke": [
+          "test_migrate_test_setting_false (backends.base.test_creation.TestDbCreationTests)",
+          "test_migrate_test_setting_true (backends.base.test_creation.TestDbCreationTests)"
+        ],
+        "coupled": [
+          "test_alter_id_type_with_fk (migrations.test_executor.ExecutorTests)"
+        ],
+        "failing": [
+          "If the current state satisfies the given target, do nothing.",
+          "Minimize unnecessary rollbacks in connected apps.",
+          "Minimize rollbacks when target has multiple in-app children.",
+          "mark_expected_failures_and_skips() isn't called unless",
+          "test_migrate_test_setting_false (backends.base.test_creation.TestDbCreationTests)",
+          "test_migrate_test_setting_true (backends.base.test_creation.TestDbCreationTests)",
+          "test_alter_id_type_with_fk (migrations.test_executor.ExecutorTests)",
+          "Applying all replaced migrations marks replacement as applied (#24628).",
+          "An atomic operation is properly rolled back inside a non-atomic",
+          "Regression test for #22325 - references to a custom user model defined in the",
+          "The django_migrations table is not created if there are no migrations"
+        ],
+        "symbol": "MigrationExecutor",
+        "unexplained": [
+          "test_migrate_test_setting_false (backends.base.test_creation.TestDbCreationTests)",
+          "test_migrate_test_setting_true (backends.base.test_creation.TestDbCreationTests)",
+          "If the current state satisfies the given target, do nothing. (no failure section found)",
+          "Minimize unnecessary rollbacks in connected apps. (no failure section found)",
+          "Minimize rollbacks when target has multiple in-app children. (no failure section found)",
+          "mark_expected_failures_and_skips() isn't called unless (no failure section found)",
+          "Applying all replaced migrations marks replacement as applied (#24628). (no failure section found)",
+          "An atomic operation is properly rolled back inside a non-atomic (no failure section found)",
+          "Regression test for #22325 - references to a custom user model defined in the (no failure section found)",
+          "The django_migrations table is not created if there are no migrations (no failure section found)"
+        ],
+        "unparsed": [
+          "If the current state satisfies the given target, do nothing.",
+          "Minimize unnecessary rollbacks in connected apps.",
+          "Minimize rollbacks when target has multiple in-app children.",
+          "mark_expected_failures_and_skips() isn't called unless",
+          "Applying all replaced migrations marks replacement as applied (#24628).",
+          "An atomic operation is properly rolled back inside a non-atomic",
+          "Regression test for #22325 - references to a custom user model defined in the",
+          "The django_migrations table is not created if there are no migrations"
+        ],
+        "unparsed_log_shape": true
+      },
+      "file": null,
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 1,
+        "f2p_failing": [
+          "The django_migrations table is not created if there are no migrations"
+        ],
+        "f2p_pass": 1,
+        "found": true,
+        "n_parsed": 17,
+        "p2p_fail": 26,
+        "p2p_failing": [
+          "If the current state satisfies the given target, do nothing.",
+          "Minimize unnecessary rollbacks in connected apps.",
+          "Minimize rollbacks when target has multiple in-app children.",
+          "mark_expected_failures_and_skips() isn't called unless",
+          "test_migrate_test_setting_false (backends.base.test_creation.TestDbCreationTests)",
+          "test_migrate_test_setting_true (backends.base.test_creation.TestDbCreationTests)",
+          "test_alter_id_type_with_fk (migrations.test_executor.ExecutorTests)",
+          "Applying all replaced migrations marks replacement as applied (#24628).",
+          "An atomic operation is properly rolled back inside a non-atomic",
+          "Regression test for #22325 - references to a custom user model defined in the"
+        ],
+        "p2p_pass": 8,
+        "reward": 0.0
+      },
+      "loud_failure": false,
+      "observable": "human-readable text of an exception message",
+      "operator": "message_reword",
+      "reason": "no anchor inside the gold-touched region; 1 anchor(s) elsewhere in the target",
+      "tier": "HIGH",
+      "tree_digest": "ff5e9b0654141c208b5d5db9a898aef57e69cbcfe2c1ab198dcc8a1bc3f1c29f",
+      "verdict": "NOT_APPLICABLE"
+    }
+  ],
+  "targets": [
+    "django/db/migrations/executor.py"
+  ],
+  "version": "4.1",
+  "witnesses": []
+}

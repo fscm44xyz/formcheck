@@ -1,0 +1,212 @@
+{
+  "completed": true,
+  "control": {
+    "graded": null,
+    "log": null,
+    "passed": true,
+    "reason": "untransformed reference scores 1.0"
+  },
+  "digest_trace": [
+    {
+      "digest": "6be7acd0acfe124104926b512b191bf50e8e7a5144e01809fcdf6f23b593b04a",
+      "memo_hit": false
+    },
+    {
+      "digest": "76b7fe68df805fede4658fba623e66295d53974c8e9fd1d666100e4a619c98e9",
+      "memo_hit": false
+    },
+    {
+      "digest": "76b7fe68df805fede4658fba623e66295d53974c8e9fd1d666100e4a619c98e9",
+      "memo_hit": true
+    }
+  ],
+  "disk_orphan_reclaimed_bytes": 0,
+  "disk_residual_bytes": 0,
+  "elapsed_seconds": 159.55,
+  "error": null,
+  "image": "swebench/sweb.eval.x86_64.django_1776_django-14787:latest",
+  "instance_id": "django__django-14787",
+  "leaked_containers": [],
+  "leaked_image": false,
+  "log": [
+    [
+      "<control>",
+      "OK",
+      "untransformed reference scores 1.0"
+    ],
+    [
+      "kwonly_specialize:<no anchor>",
+      "NOT_APPLICABLE",
+      "no anchor inside the gold-touched region"
+    ],
+    [
+      "symbol_rename:_multi_decorate",
+      "CLEAN",
+      "reward 1.0"
+    ],
+    [
+      "collection_reverse:<no anchor>",
+      "NOT_APPLICABLE",
+      "no anchor inside the gold-touched region"
+    ],
+    [
+      "message_reword:<no anchor>",
+      "NOT_APPLICABLE",
+      "no anchor inside the gold-touched region; 1 anchor(s) elsewhere in the target"
+    ]
+  ],
+  "mountable": true,
+  "multi_target": false,
+  "n_targets": 1,
+  "on_prime_hub": null,
+  "on_prime_hub_reason": "not resolvable offline; no hub environment index is reachable from this repo, verifiers or swebench",
+  "operators_not_applicable": [
+    "collection_reverse",
+    "kwonly_specialize",
+    "message_reword"
+  ],
+  "operators_with_anchors": [
+    "symbol_rename"
+  ],
+  "repo": "django/django",
+  "row": {
+    "elapsed": 27.27,
+    "error": null,
+    "error_type": null,
+    "index": 0,
+    "mode": "formcheck",
+    "name": "django__django-14787",
+    "reason": "valid",
+    "valid": true
+  },
+  "rows": [
+    {
+      "anchor": null,
+      "failure_analysis": null,
+      "file": null,
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 1,
+        "found": true,
+        "n_parsed": 21,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 20,
+        "reward": 1.0
+      },
+      "loud_failure": false,
+      "observable": "callable signature (arity / parameter names)",
+      "operator": "kwonly_specialize",
+      "reason": "no anchor inside the gold-touched region",
+      "tier": "HIGH",
+      "tree_digest": "6be7acd0acfe124104926b512b191bf50e8e7a5144e01809fcdf6f23b593b04a",
+      "verdict": "NOT_APPLICABLE"
+    },
+    {
+      "anchor": "_multi_decorate",
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "broke": [],
+        "coupled": [],
+        "failing": [],
+        "symbol": "_multi_decorate",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": "django/utils/decorators.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 1,
+        "found": true,
+        "n_parsed": 21,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 20,
+        "reward": 1.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "reward 1.0",
+      "tier": "HIGH",
+      "tree_digest": "76b7fe68df805fede4658fba623e66295d53974c8e9fd1d666100e4a619c98e9",
+      "verdict": "CLEAN"
+    },
+    {
+      "anchor": null,
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "broke": [],
+        "coupled": [],
+        "failing": [],
+        "symbol": "_multi_decorate",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": null,
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 1,
+        "found": true,
+        "n_parsed": 21,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 20,
+        "reward": 1.0
+      },
+      "loud_failure": false,
+      "observable": "order of elements in a returned collection",
+      "operator": "collection_reverse",
+      "reason": "no anchor inside the gold-touched region",
+      "tier": "MEDIUM",
+      "tree_digest": "76b7fe68df805fede4658fba623e66295d53974c8e9fd1d666100e4a619c98e9",
+      "verdict": "NOT_APPLICABLE"
+    },
+    {
+      "anchor": null,
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "broke": [],
+        "coupled": [],
+        "failing": [],
+        "symbol": "_multi_decorate",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": null,
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 1,
+        "found": true,
+        "n_parsed": 21,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 20,
+        "reward": 1.0
+      },
+      "loud_failure": false,
+      "observable": "human-readable text of an exception message",
+      "operator": "message_reword",
+      "reason": "no anchor inside the gold-touched region; 1 anchor(s) elsewhere in the target",
+      "tier": "HIGH",
+      "tree_digest": "76b7fe68df805fede4658fba623e66295d53974c8e9fd1d666100e4a619c98e9",
+      "verdict": "NOT_APPLICABLE"
+    }
+  ],
+  "targets": [
+    "django/utils/decorators.py"
+  ],
+  "version": "4.1",
+  "witnesses": []
+}

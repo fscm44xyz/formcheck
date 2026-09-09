@@ -1,0 +1,288 @@
+{
+  "completed": true,
+  "control": {
+    "graded": null,
+    "log": null,
+    "passed": true,
+    "reason": "untransformed reference scores 1.0"
+  },
+  "digest_trace": [
+    {
+      "digest": "6c4e022d38808975f8972fbed8223bc3065209c269ebf616396369f75bb19245",
+      "memo_hit": false
+    },
+    {
+      "digest": "dcc4036da784e9504833a08531579ad4f5c55630cc411cb638fea7b20312a520",
+      "memo_hit": false
+    },
+    {
+      "digest": "dcc4036da784e9504833a08531579ad4f5c55630cc411cb638fea7b20312a520",
+      "memo_hit": true
+    }
+  ],
+  "disk_orphan_reclaimed_bytes": 0,
+  "disk_residual_bytes": 0,
+  "elapsed_seconds": 65.72,
+  "error": null,
+  "image": "swebench/sweb.eval.x86_64.pytest-dev_1776_pytest-6197:latest",
+  "instance_id": "pytest-dev__pytest-6197",
+  "leaked_containers": [],
+  "leaked_image": false,
+  "log": [
+    [
+      "<control>",
+      "OK",
+      "untransformed reference scores 1.0"
+    ],
+    [
+      "kwonly_specialize:<no anchor>",
+      "NOT_APPLICABLE",
+      "no anchor inside the gold-touched region"
+    ],
+    [
+      "symbol_rename:PyobjMixin",
+      "CLEAN",
+      "reward 1.0"
+    ],
+    [
+      "symbol_rename:Module",
+      "REFUSED",
+      "BORDER: the issue names 'Module' -- candidate CONTRACT, route to the rubric"
+    ],
+    [
+      "symbol_rename:Package",
+      "REFUSED",
+      "BORDER: the issue names 'Package' -- candidate CONTRACT, route to the rubric"
+    ],
+    [
+      "collection_reverse:<no anchor>",
+      "NOT_APPLICABLE",
+      "no anchor inside the gold-touched region"
+    ],
+    [
+      "message_reword:<no anchor>",
+      "NOT_APPLICABLE",
+      "no anchor inside the gold-touched region; 2 anchor(s) elsewhere in the target"
+    ]
+  ],
+  "mountable": true,
+  "multi_target": false,
+  "n_targets": 1,
+  "on_prime_hub": null,
+  "on_prime_hub_reason": "not resolvable offline; no hub environment index is reachable from this repo, verifiers or swebench",
+  "operators_not_applicable": [
+    "collection_reverse",
+    "kwonly_specialize",
+    "message_reword"
+  ],
+  "operators_with_anchors": [
+    "symbol_rename"
+  ],
+  "repo": "pytest-dev/pytest",
+  "row": {
+    "elapsed": 48.23,
+    "error": null,
+    "error_type": null,
+    "index": 0,
+    "mode": "formcheck",
+    "name": "pytest-dev__pytest-6197",
+    "reason": "valid",
+    "valid": true
+  },
+  "rows": [
+    {
+      "anchor": null,
+      "failure_analysis": null,
+      "file": null,
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 2,
+        "found": true,
+        "n_parsed": 165,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 145,
+        "reward": 1.0
+      },
+      "loud_failure": false,
+      "observable": "callable signature (arity / parameter names)",
+      "operator": "kwonly_specialize",
+      "reason": "no anchor inside the gold-touched region",
+      "tier": "HIGH",
+      "tree_digest": "6c4e022d38808975f8972fbed8223bc3065209c269ebf616396369f75bb19245",
+      "verdict": "NOT_APPLICABLE"
+    },
+    {
+      "anchor": "PyobjMixin",
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "broke": [],
+        "coupled": [],
+        "failing": [],
+        "symbol": "PyobjMixin",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": "src/_pytest/python.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 2,
+        "found": true,
+        "n_parsed": 165,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 145,
+        "reward": 1.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "reward 1.0",
+      "tier": "MEDIUM",
+      "tree_digest": "dcc4036da784e9504833a08531579ad4f5c55630cc411cb638fea7b20312a520",
+      "verdict": "CLEAN"
+    },
+    {
+      "anchor": "Module",
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "broke": [],
+        "coupled": [],
+        "failing": [],
+        "symbol": "PyobjMixin",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": "src/_pytest/python.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 2,
+        "found": true,
+        "n_parsed": 165,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 145,
+        "reward": 1.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "BORDER: the issue names 'Module' -- candidate CONTRACT, route to the rubric",
+      "tier": "MEDIUM",
+      "tree_digest": "dcc4036da784e9504833a08531579ad4f5c55630cc411cb638fea7b20312a520",
+      "verdict": "REFUSED"
+    },
+    {
+      "anchor": "Package",
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "broke": [],
+        "coupled": [],
+        "failing": [],
+        "symbol": "PyobjMixin",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": "src/_pytest/python.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 2,
+        "found": true,
+        "n_parsed": 165,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 145,
+        "reward": 1.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "BORDER: the issue names 'Package' -- candidate CONTRACT, route to the rubric",
+      "tier": "MEDIUM",
+      "tree_digest": "dcc4036da784e9504833a08531579ad4f5c55630cc411cb638fea7b20312a520",
+      "verdict": "REFUSED"
+    },
+    {
+      "anchor": null,
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "broke": [],
+        "coupled": [],
+        "failing": [],
+        "symbol": "PyobjMixin",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": null,
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 2,
+        "found": true,
+        "n_parsed": 165,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 145,
+        "reward": 1.0
+      },
+      "loud_failure": false,
+      "observable": "order of elements in a returned collection",
+      "operator": "collection_reverse",
+      "reason": "no anchor inside the gold-touched region",
+      "tier": "MEDIUM",
+      "tree_digest": "dcc4036da784e9504833a08531579ad4f5c55630cc411cb638fea7b20312a520",
+      "verdict": "NOT_APPLICABLE"
+    },
+    {
+      "anchor": null,
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "broke": [],
+        "coupled": [],
+        "failing": [],
+        "symbol": "PyobjMixin",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": null,
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 2,
+        "found": true,
+        "n_parsed": 165,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 145,
+        "reward": 1.0
+      },
+      "loud_failure": false,
+      "observable": "human-readable text of an exception message",
+      "operator": "message_reword",
+      "reason": "no anchor inside the gold-touched region; 2 anchor(s) elsewhere in the target",
+      "tier": "HIGH",
+      "tree_digest": "dcc4036da784e9504833a08531579ad4f5c55630cc411cb638fea7b20312a520",
+      "verdict": "NOT_APPLICABLE"
+    }
+  ],
+  "targets": [
+    "src/_pytest/python.py"
+  ],
+  "version": "5.2",
+  "witnesses": []
+}

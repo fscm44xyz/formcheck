@@ -1,0 +1,250 @@
+{
+  "completed": true,
+  "control": {
+    "graded": null,
+    "log": null,
+    "passed": true,
+    "reason": "untransformed reference scores 1.0"
+  },
+  "digest_trace": [
+    {
+      "digest": "f68816b7ced897661fbb999139d2477a1850e667aa7ae84d8fae9cd9f3fb8dac",
+      "memo_hit": false
+    },
+    {
+      "digest": "85582665f054262ac052e0906927035341b21ebf8677fb8cce73ea4ff53d439f",
+      "memo_hit": false
+    },
+    {
+      "digest": "85582665f054262ac052e0906927035341b21ebf8677fb8cce73ea4ff53d439f",
+      "memo_hit": true
+    }
+  ],
+  "disk_orphan_reclaimed_bytes": 0,
+  "disk_residual_bytes": 0,
+  "elapsed_seconds": 56.88,
+  "error": null,
+  "image": "swebench/sweb.eval.x86_64.sphinx-doc_1776_sphinx-7748:latest",
+  "instance_id": "sphinx-doc__sphinx-7748",
+  "leaked_containers": [],
+  "leaked_image": false,
+  "log": [
+    [
+      "<control>",
+      "OK",
+      "untransformed reference scores 1.0"
+    ],
+    [
+      "kwonly_specialize:<no anchor>",
+      "NOT_APPLICABLE",
+      "no anchor inside the gold-touched region"
+    ],
+    [
+      "symbol_rename:DocstringSignatureMixin",
+      "CLEAN",
+      "reward 1.0"
+    ],
+    [
+      "symbol_rename:FunctionDocumenter",
+      "REFUSED",
+      "multi-line import of 'FunctionDocumenter' in sphinx/ext/autosummary/generate.py"
+    ],
+    [
+      "collection_reverse:<no anchor>",
+      "NOT_APPLICABLE",
+      "no anchor inside the gold-touched region"
+    ],
+    [
+      "message_reword:<no anchor>",
+      "NOT_APPLICABLE",
+      "no anchor inside the gold-touched region; 2 anchor(s) elsewhere in the target"
+    ]
+  ],
+  "mountable": true,
+  "multi_target": false,
+  "n_targets": 1,
+  "on_prime_hub": null,
+  "on_prime_hub_reason": "not resolvable offline; no hub environment index is reachable from this repo, verifiers or swebench",
+  "operators_not_applicable": [
+    "collection_reverse",
+    "kwonly_specialize",
+    "message_reword"
+  ],
+  "operators_with_anchors": [
+    "symbol_rename"
+  ],
+  "repo": "sphinx-doc/sphinx",
+  "row": {
+    "elapsed": 38.55,
+    "error": null,
+    "error_type": null,
+    "index": 0,
+    "mode": "formcheck",
+    "name": "sphinx-doc__sphinx-7748",
+    "reason": "valid",
+    "valid": true
+  },
+  "rows": [
+    {
+      "anchor": null,
+      "failure_analysis": null,
+      "file": null,
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 2,
+        "found": true,
+        "n_parsed": 14,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 12,
+        "reward": 1.0
+      },
+      "loud_failure": false,
+      "observable": "callable signature (arity / parameter names)",
+      "operator": "kwonly_specialize",
+      "reason": "no anchor inside the gold-touched region",
+      "tier": "HIGH",
+      "tree_digest": "f68816b7ced897661fbb999139d2477a1850e667aa7ae84d8fae9cd9f3fb8dac",
+      "verdict": "NOT_APPLICABLE"
+    },
+    {
+      "anchor": "DocstringSignatureMixin",
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "broke": [],
+        "coupled": [],
+        "failing": [],
+        "symbol": "DocstringSignatureMixin",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": "sphinx/ext/autodoc/__init__.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 2,
+        "found": true,
+        "n_parsed": 14,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 12,
+        "reward": 1.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "reward 1.0",
+      "tier": "MEDIUM",
+      "tree_digest": "85582665f054262ac052e0906927035341b21ebf8677fb8cce73ea4ff53d439f",
+      "verdict": "CLEAN"
+    },
+    {
+      "anchor": "FunctionDocumenter",
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "broke": [],
+        "coupled": [],
+        "failing": [],
+        "symbol": "DocstringSignatureMixin",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": "sphinx/ext/autodoc/__init__.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 2,
+        "found": true,
+        "n_parsed": 14,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 12,
+        "reward": 1.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "multi-line import of 'FunctionDocumenter' in sphinx/ext/autosummary/generate.py",
+      "tier": "MEDIUM",
+      "tree_digest": "85582665f054262ac052e0906927035341b21ebf8677fb8cce73ea4ff53d439f",
+      "verdict": "REFUSED"
+    },
+    {
+      "anchor": null,
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "broke": [],
+        "coupled": [],
+        "failing": [],
+        "symbol": "DocstringSignatureMixin",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": null,
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 2,
+        "found": true,
+        "n_parsed": 14,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 12,
+        "reward": 1.0
+      },
+      "loud_failure": false,
+      "observable": "order of elements in a returned collection",
+      "operator": "collection_reverse",
+      "reason": "no anchor inside the gold-touched region",
+      "tier": "MEDIUM",
+      "tree_digest": "85582665f054262ac052e0906927035341b21ebf8677fb8cce73ea4ff53d439f",
+      "verdict": "NOT_APPLICABLE"
+    },
+    {
+      "anchor": null,
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "broke": [],
+        "coupled": [],
+        "failing": [],
+        "symbol": "DocstringSignatureMixin",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": null,
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 2,
+        "found": true,
+        "n_parsed": 14,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 12,
+        "reward": 1.0
+      },
+      "loud_failure": false,
+      "observable": "human-readable text of an exception message",
+      "operator": "message_reword",
+      "reason": "no anchor inside the gold-touched region; 2 anchor(s) elsewhere in the target",
+      "tier": "HIGH",
+      "tree_digest": "85582665f054262ac052e0906927035341b21ebf8677fb8cce73ea4ff53d439f",
+      "verdict": "NOT_APPLICABLE"
+    }
+  ],
+  "targets": [
+    "sphinx/ext/autodoc/__init__.py"
+  ],
+  "version": "3.1",
+  "witnesses": []
+}

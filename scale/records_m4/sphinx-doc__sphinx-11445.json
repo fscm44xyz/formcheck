@@ -1,0 +1,343 @@
+{
+  "completed": true,
+  "control": {
+    "graded": null,
+    "log": null,
+    "passed": true,
+    "reason": "untransformed reference scores 1.0"
+  },
+  "digest_trace": [
+    {
+      "digest": "93c5fbf350523f8136d40f167674c7e0fba1a13b09aeaa2a581be6b962709f09",
+      "memo_hit": false
+    },
+    {
+      "digest": "2627602efb44c85f140e78b5b38b8e946b8d957523efc51224557895ca426aed",
+      "memo_hit": false
+    }
+  ],
+  "disk_orphan_reclaimed_bytes": 0,
+  "disk_residual_bytes": 0,
+  "elapsed_seconds": 161.0,
+  "error": null,
+  "image": "swebench/sweb.eval.x86_64.sphinx-doc_1776_sphinx-11445:latest",
+  "instance_id": "sphinx-doc__sphinx-11445",
+  "leaked_containers": [],
+  "leaked_image": false,
+  "log": [
+    [
+      "<control>",
+      "OK",
+      "untransformed reference scores 1.0"
+    ],
+    [
+      "kwonly_specialize:<no anchor>",
+      "NOT_APPLICABLE",
+      "no anchor inside the gold-touched region"
+    ],
+    [
+      "symbol_rename:prepend_prolog",
+      "UNVALIDATED",
+      "10 failing test(s) have no recognisable failure block -- unknown log shape, not evidence of breakage; first: tests/test_util_rst.py::test_escape"
+    ],
+    [
+      "collection_reverse:<no anchor>",
+      "NOT_APPLICABLE",
+      "no anchor inside the gold-touched region"
+    ],
+    [
+      "message_reword:<no anchor>",
+      "NOT_APPLICABLE",
+      "no anchor inside the gold-touched region"
+    ]
+  ],
+  "mountable": true,
+  "multi_target": false,
+  "n_targets": 1,
+  "on_prime_hub": null,
+  "on_prime_hub_reason": "not resolvable offline; no hub environment index is reachable from this repo, verifiers or swebench",
+  "operators_not_applicable": [
+    "collection_reverse",
+    "kwonly_specialize",
+    "message_reword"
+  ],
+  "operators_with_anchors": [
+    "symbol_rename"
+  ],
+  "repo": "sphinx-doc/sphinx",
+  "row": {
+    "elapsed": 34.45,
+    "error": null,
+    "error_type": null,
+    "index": 0,
+    "mode": "formcheck",
+    "name": "sphinx-doc__sphinx-11445",
+    "reason": "unchecked",
+    "valid": null
+  },
+  "rows": [
+    {
+      "anchor": null,
+      "failure_analysis": null,
+      "file": null,
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 2,
+        "found": true,
+        "n_parsed": 10,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 8,
+        "reward": 1.0
+      },
+      "loud_failure": false,
+      "observable": "callable signature (arity / parameter names)",
+      "operator": "kwonly_specialize",
+      "reason": "no anchor inside the gold-touched region",
+      "tier": "HIGH",
+      "tree_digest": "93c5fbf350523f8136d40f167674c7e0fba1a13b09aeaa2a581be6b962709f09",
+      "verdict": "NOT_APPLICABLE"
+    },
+    {
+      "anchor": "prepend_prolog",
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "broke": [],
+        "coupled": [],
+        "failing": [
+          "tests/test_util_rst.py::test_escape",
+          "tests/test_util_rst.py::test_append_epilog",
+          "tests/test_util_rst.py::test_prepend_prolog",
+          "tests/test_util_rst.py::test_prepend_prolog_with_CR",
+          "tests/test_util_rst.py::test_prepend_prolog_without_CR",
+          "tests/test_util_rst.py::test_prepend_prolog_with_roles_in_sections",
+          "tests/test_util_rst.py::test_textwidth",
+          "tests/test_util_rst.py::test_heading",
+          "tests/test_util_rst.py::test_prepend_prolog_with_roles_in_sections_with_newline",
+          "tests/test_util_rst.py::test_prepend_prolog_with_roles_in_sections_without_newline"
+        ],
+        "symbol": "prepend_prolog",
+        "unexplained": [
+          "tests/test_util_rst.py::test_escape (no failure section found)",
+          "tests/test_util_rst.py::test_append_epilog (no failure section found)",
+          "tests/test_util_rst.py::test_prepend_prolog (no failure section found)",
+          "tests/test_util_rst.py::test_prepend_prolog_with_CR (no failure section found)",
+          "tests/test_util_rst.py::test_prepend_prolog_without_CR (no failure section found)",
+          "tests/test_util_rst.py::test_prepend_prolog_with_roles_in_sections (no failure section found)",
+          "tests/test_util_rst.py::test_textwidth (no failure section found)",
+          "tests/test_util_rst.py::test_heading (no failure section found)",
+          "tests/test_util_rst.py::test_prepend_prolog_with_roles_in_sections_with_newline (no failure section found)",
+          "tests/test_util_rst.py::test_prepend_prolog_with_roles_in_sections_without_newline (no failure section found)"
+        ],
+        "unparsed": [
+          "tests/test_util_rst.py::test_escape",
+          "tests/test_util_rst.py::test_append_epilog",
+          "tests/test_util_rst.py::test_prepend_prolog",
+          "tests/test_util_rst.py::test_prepend_prolog_with_CR",
+          "tests/test_util_rst.py::test_prepend_prolog_without_CR",
+          "tests/test_util_rst.py::test_prepend_prolog_with_roles_in_sections",
+          "tests/test_util_rst.py::test_textwidth",
+          "tests/test_util_rst.py::test_heading",
+          "tests/test_util_rst.py::test_prepend_prolog_with_roles_in_sections_with_newline",
+          "tests/test_util_rst.py::test_prepend_prolog_with_roles_in_sections_without_newline"
+        ],
+        "unparsed_log_shape": true
+      },
+      "file": "sphinx/util/rst.py",
+      "graded_log": "+ tox --current-env -epy39 -v -- tests/test_util_rst.py\npy39: commands[0]> python -X dev -X warn_default_encoding -m pytest -rA --durations 25 tests/test_util_rst.py\n\u001b[1m============================= test session starts ==============================\u001b[0m\nplatform linux -- Python 3.9.20, pytest-8.3.3, pluggy-1.5.0\ncachedir: .tox/py39/.pytest_cache\nlibraries: Sphinx-7.1.0+/c4293c6a6, docutils-0.20.1\nbase tempdir: /tmp/pytest-of-root/pytest-1\nrootdir: /testbed\nconfigfile: pyproject.toml\ncollected 0 items / 1 error\n\n==================================== ERRORS ====================================\n\u001b[31m\u001b[1m___________________ ERROR collecting tests/test_util_rst.py ____________________\u001b[0m\n\u001b[31mImportError while importing test module '/testbed/tests/test_util_rst.py'.\nHint: make sure your test modules/packages have valid Python names.\nTraceback:\n/opt/miniconda3/envs/testbed/lib/python3.9/importlib/__init__.py:127: in import_module\n    return _bootstrap._gcd_import(name[level:], package, level)\ntests/test_util_rst.py:6: in <module>\n    from sphinx.util.rst import append_epilog, escape, heading, prepend_prolog, textwidth\nE   ImportError: cannot import name 'prepend_prolog' from 'sphinx.util.rst' (/testbed/sphinx/util/rst.py)\u001b[0m\n\u001b[36m\u001b[1m=========================== short test summary info ============================\u001b[0m\n\u001b[31mERROR\u001b[0m tests/test_util_rst.py\n!!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!!\n\u001b[31m=============================== \u001b[31m\u001b[1m1 error\u001b[0m\u001b[31m in 0.21s\u001b[0m\u001b[31m ===============================\u001b[0m\npy39: exit 2 (1.20 seconds) /testbed> python -X dev -X warn_default_encoding -m pytest -rA --durations 25 tests/test_util_rst.py pid=244\n  py39: FAIL code 2 (1.21=setup[0.01]+cmd[1.20] seconds)\n  evaluation failed :( (1.34 seconds)\n\n",
+      "graded_report": {
+        "f2p_fail": 2,
+        "f2p_failing": [
+          "tests/test_util_rst.py::test_prepend_prolog_with_roles_in_sections_with_newline",
+          "tests/test_util_rst.py::test_prepend_prolog_with_roles_in_sections_without_newline"
+        ],
+        "f2p_pass": 0,
+        "found": true,
+        "n_parsed": 1,
+        "p2p_fail": 8,
+        "p2p_failing": [
+          "tests/test_util_rst.py::test_escape",
+          "tests/test_util_rst.py::test_append_epilog",
+          "tests/test_util_rst.py::test_prepend_prolog",
+          "tests/test_util_rst.py::test_prepend_prolog_with_CR",
+          "tests/test_util_rst.py::test_prepend_prolog_without_CR",
+          "tests/test_util_rst.py::test_prepend_prolog_with_roles_in_sections",
+          "tests/test_util_rst.py::test_textwidth",
+          "tests/test_util_rst.py::test_heading"
+        ],
+        "p2p_pass": 0,
+        "reward": 0.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "10 failing test(s) have no recognisable failure block -- unknown log shape, not evidence of breakage; first: tests/test_util_rst.py::test_escape",
+      "tier": "MEDIUM",
+      "tree_digest": "2627602efb44c85f140e78b5b38b8e946b8d957523efc51224557895ca426aed",
+      "verdict": "UNVALIDATED"
+    },
+    {
+      "anchor": null,
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "broke": [],
+        "coupled": [],
+        "failing": [
+          "tests/test_util_rst.py::test_escape",
+          "tests/test_util_rst.py::test_append_epilog",
+          "tests/test_util_rst.py::test_prepend_prolog",
+          "tests/test_util_rst.py::test_prepend_prolog_with_CR",
+          "tests/test_util_rst.py::test_prepend_prolog_without_CR",
+          "tests/test_util_rst.py::test_prepend_prolog_with_roles_in_sections",
+          "tests/test_util_rst.py::test_textwidth",
+          "tests/test_util_rst.py::test_heading",
+          "tests/test_util_rst.py::test_prepend_prolog_with_roles_in_sections_with_newline",
+          "tests/test_util_rst.py::test_prepend_prolog_with_roles_in_sections_without_newline"
+        ],
+        "symbol": "prepend_prolog",
+        "unexplained": [
+          "tests/test_util_rst.py::test_escape (no failure section found)",
+          "tests/test_util_rst.py::test_append_epilog (no failure section found)",
+          "tests/test_util_rst.py::test_prepend_prolog (no failure section found)",
+          "tests/test_util_rst.py::test_prepend_prolog_with_CR (no failure section found)",
+          "tests/test_util_rst.py::test_prepend_prolog_without_CR (no failure section found)",
+          "tests/test_util_rst.py::test_prepend_prolog_with_roles_in_sections (no failure section found)",
+          "tests/test_util_rst.py::test_textwidth (no failure section found)",
+          "tests/test_util_rst.py::test_heading (no failure section found)",
+          "tests/test_util_rst.py::test_prepend_prolog_with_roles_in_sections_with_newline (no failure section found)",
+          "tests/test_util_rst.py::test_prepend_prolog_with_roles_in_sections_without_newline (no failure section found)"
+        ],
+        "unparsed": [
+          "tests/test_util_rst.py::test_escape",
+          "tests/test_util_rst.py::test_append_epilog",
+          "tests/test_util_rst.py::test_prepend_prolog",
+          "tests/test_util_rst.py::test_prepend_prolog_with_CR",
+          "tests/test_util_rst.py::test_prepend_prolog_without_CR",
+          "tests/test_util_rst.py::test_prepend_prolog_with_roles_in_sections",
+          "tests/test_util_rst.py::test_textwidth",
+          "tests/test_util_rst.py::test_heading",
+          "tests/test_util_rst.py::test_prepend_prolog_with_roles_in_sections_with_newline",
+          "tests/test_util_rst.py::test_prepend_prolog_with_roles_in_sections_without_newline"
+        ],
+        "unparsed_log_shape": true
+      },
+      "file": null,
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 2,
+        "f2p_failing": [
+          "tests/test_util_rst.py::test_prepend_prolog_with_roles_in_sections_with_newline",
+          "tests/test_util_rst.py::test_prepend_prolog_with_roles_in_sections_without_newline"
+        ],
+        "f2p_pass": 0,
+        "found": true,
+        "n_parsed": 1,
+        "p2p_fail": 8,
+        "p2p_failing": [
+          "tests/test_util_rst.py::test_escape",
+          "tests/test_util_rst.py::test_append_epilog",
+          "tests/test_util_rst.py::test_prepend_prolog",
+          "tests/test_util_rst.py::test_prepend_prolog_with_CR",
+          "tests/test_util_rst.py::test_prepend_prolog_without_CR",
+          "tests/test_util_rst.py::test_prepend_prolog_with_roles_in_sections",
+          "tests/test_util_rst.py::test_textwidth",
+          "tests/test_util_rst.py::test_heading"
+        ],
+        "p2p_pass": 0,
+        "reward": 0.0
+      },
+      "loud_failure": false,
+      "observable": "order of elements in a returned collection",
+      "operator": "collection_reverse",
+      "reason": "no anchor inside the gold-touched region",
+      "tier": "MEDIUM",
+      "tree_digest": "2627602efb44c85f140e78b5b38b8e946b8d957523efc51224557895ca426aed",
+      "verdict": "NOT_APPLICABLE"
+    },
+    {
+      "anchor": null,
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "broke": [],
+        "coupled": [],
+        "failing": [
+          "tests/test_util_rst.py::test_escape",
+          "tests/test_util_rst.py::test_append_epilog",
+          "tests/test_util_rst.py::test_prepend_prolog",
+          "tests/test_util_rst.py::test_prepend_prolog_with_CR",
+          "tests/test_util_rst.py::test_prepend_prolog_without_CR",
+          "tests/test_util_rst.py::test_prepend_prolog_with_roles_in_sections",
+          "tests/test_util_rst.py::test_textwidth",
+          "tests/test_util_rst.py::test_heading",
+          "tests/test_util_rst.py::test_prepend_prolog_with_roles_in_sections_with_newline",
+          "tests/test_util_rst.py::test_prepend_prolog_with_roles_in_sections_without_newline"
+        ],
+        "symbol": "prepend_prolog",
+        "unexplained": [
+          "tests/test_util_rst.py::test_escape (no failure section found)",
+          "tests/test_util_rst.py::test_append_epilog (no failure section found)",
+          "tests/test_util_rst.py::test_prepend_prolog (no failure section found)",
+          "tests/test_util_rst.py::test_prepend_prolog_with_CR (no failure section found)",
+          "tests/test_util_rst.py::test_prepend_prolog_without_CR (no failure section found)",
+          "tests/test_util_rst.py::test_prepend_prolog_with_roles_in_sections (no failure section found)",
+          "tests/test_util_rst.py::test_textwidth (no failure section found)",
+          "tests/test_util_rst.py::test_heading (no failure section found)",
+          "tests/test_util_rst.py::test_prepend_prolog_with_roles_in_sections_with_newline (no failure section found)",
+          "tests/test_util_rst.py::test_prepend_prolog_with_roles_in_sections_without_newline (no failure section found)"
+        ],
+        "unparsed": [
+          "tests/test_util_rst.py::test_escape",
+          "tests/test_util_rst.py::test_append_epilog",
+          "tests/test_util_rst.py::test_prepend_prolog",
+          "tests/test_util_rst.py::test_prepend_prolog_with_CR",
+          "tests/test_util_rst.py::test_prepend_prolog_without_CR",
+          "tests/test_util_rst.py::test_prepend_prolog_with_roles_in_sections",
+          "tests/test_util_rst.py::test_textwidth",
+          "tests/test_util_rst.py::test_heading",
+          "tests/test_util_rst.py::test_prepend_prolog_with_roles_in_sections_with_newline",
+          "tests/test_util_rst.py::test_prepend_prolog_with_roles_in_sections_without_newline"
+        ],
+        "unparsed_log_shape": true
+      },
+      "file": null,
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 2,
+        "f2p_failing": [
+          "tests/test_util_rst.py::test_prepend_prolog_with_roles_in_sections_with_newline",
+          "tests/test_util_rst.py::test_prepend_prolog_with_roles_in_sections_without_newline"
+        ],
+        "f2p_pass": 0,
+        "found": true,
+        "n_parsed": 1,
+        "p2p_fail": 8,
+        "p2p_failing": [
+          "tests/test_util_rst.py::test_escape",
+          "tests/test_util_rst.py::test_append_epilog",
+          "tests/test_util_rst.py::test_prepend_prolog",
+          "tests/test_util_rst.py::test_prepend_prolog_with_CR",
+          "tests/test_util_rst.py::test_prepend_prolog_without_CR",
+          "tests/test_util_rst.py::test_prepend_prolog_with_roles_in_sections",
+          "tests/test_util_rst.py::test_textwidth",
+          "tests/test_util_rst.py::test_heading"
+        ],
+        "p2p_pass": 0,
+        "reward": 0.0
+      },
+      "loud_failure": false,
+      "observable": "human-readable text of an exception message",
+      "operator": "message_reword",
+      "reason": "no anchor inside the gold-touched region",
+      "tier": "HIGH",
+      "tree_digest": "2627602efb44c85f140e78b5b38b8e946b8d957523efc51224557895ca426aed",
+      "verdict": "NOT_APPLICABLE"
+    }
+  ],
+  "targets": [
+    "sphinx/util/rst.py"
+  ],
+  "version": "7.1",
+  "witnesses": []
+}

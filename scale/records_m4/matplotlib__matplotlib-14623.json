@@ -1,0 +1,498 @@
+{
+  "completed": true,
+  "control": {
+    "graded": null,
+    "log": null,
+    "passed": true,
+    "reason": "untransformed reference scores 1.0"
+  },
+  "digest_trace": [
+    {
+      "digest": "d1d97750678b3876ea72b76bcd373538d544abeba325e0251014fe9267bef4ad",
+      "memo_hit": false
+    }
+  ],
+  "disk_orphan_reclaimed_bytes": 0,
+  "disk_residual_bytes": 0,
+  "elapsed_seconds": 513.7,
+  "error": null,
+  "image": "swebench/sweb.eval.x86_64.matplotlib_1776_matplotlib-14623:latest",
+  "instance_id": "matplotlib__matplotlib-14623",
+  "leaked_containers": [],
+  "leaked_image": false,
+  "log": [
+    [
+      "<control>",
+      "OK",
+      "untransformed reference scores 1.0"
+    ],
+    [
+      "kwonly_specialize:lib/matplotlib/axes/_base.py:set_xlim(*, xmin=...)",
+      "REFUSED",
+      "P4: 'xmin' is read outside a param-only `if` (line(s) [3231, 3234])"
+    ],
+    [
+      "kwonly_specialize:lib/matplotlib/axes/_base.py:set_xlim(*, xmax=...)",
+      "REFUSED",
+      "P4: 'xmax' is read outside a param-only `if` (line(s) [3235, 3238])"
+    ],
+    [
+      "kwonly_specialize:lib/matplotlib/axes/_base.py:set_ylim(*, ymin=...)",
+      "REFUSED",
+      "P2: the issue names ['set_ylim'] -- candidate CONTRACT, route to the rubric rather than transforming"
+    ],
+    [
+      "kwonly_specialize:lib/matplotlib/axes/_base.py:set_ylim(*, ymax=...)",
+      "REFUSED",
+      "P2: the issue names ['set_ylim'] -- candidate CONTRACT, route to the rubric rather than transforming"
+    ],
+    [
+      "kwonly_specialize:lib/mpl_toolkits/mplot3d/axes3d.py:set_xlim3d(*, xmin=...)",
+      "REFUSED",
+      "P4: 'xmin' is read outside a param-only `if` (line(s) [599, 604])"
+    ],
+    [
+      "kwonly_specialize:lib/mpl_toolkits/mplot3d/axes3d.py:set_xlim3d(*, xmax=...)",
+      "REFUSED",
+      "P4: 'xmax' is read outside a param-only `if` (line(s) [605, 610])"
+    ],
+    [
+      "kwonly_specialize:lib/mpl_toolkits/mplot3d/axes3d.py:set_ylim3d(*, ymin=...)",
+      "REFUSED",
+      "P4: 'ymin' is read outside a param-only `if` (line(s) [659, 664])"
+    ],
+    [
+      "kwonly_specialize:lib/mpl_toolkits/mplot3d/axes3d.py:set_ylim3d(*, ymax=...)",
+      "REFUSED",
+      "P4: 'ymax' is read outside a param-only `if` (line(s) [665, 670])"
+    ],
+    [
+      "kwonly_specialize:lib/mpl_toolkits/mplot3d/axes3d.py:set_zlim3d(*, zmin=...)",
+      "REFUSED",
+      "P4: 'zmin' is read outside a param-only `if` (line(s) [720, 725])"
+    ],
+    [
+      "kwonly_specialize:lib/mpl_toolkits/mplot3d/axes3d.py:set_zlim3d(*, zmax=...)",
+      "REFUSED",
+      "P4: 'zmax' is read outside a param-only `if` (line(s) [726, 731])"
+    ],
+    [
+      "symbol_rename:lib/matplotlib/axes/_base.py:_AxesBase",
+      "REFUSED",
+      "dynamic reach: '_AxesBase' appears in a non-annotation string literal in lib/matplotlib/artist.py line 1306 ('_base._AxesBase') -- an alpha-rename cannot be argued safe"
+    ],
+    [
+      "symbol_rename:lib/matplotlib/ticker.py:Locator",
+      "REFUSED",
+      "attribute access `.Locator` in lib/matplotlib/collections.py line 986 is not a qualified reference to the defining module -- outside this operator's scope"
+    ],
+    [
+      "symbol_rename:lib/mpl_toolkits/mplot3d/axes3d.py:Axes3D",
+      "REFUSED",
+      "attribute access `.Axes3D` in examples/animation/random_walk.py line 46 is not a qualified reference to the defining module -- outside this operator's scope"
+    ],
+    [
+      "collection_reverse:<no anchor>",
+      "NOT_APPLICABLE",
+      "no anchor inside the gold-touched region"
+    ],
+    [
+      "message_reword:<no anchor>",
+      "NOT_APPLICABLE",
+      "no anchor inside the gold-touched region; 63 anchor(s) elsewhere in the 3 target(s): lib/matplotlib/axes/_base.py, lib/matplotlib/ticker.py, lib/mpl_toolkits/mplot3d/axes3d.py"
+    ]
+  ],
+  "mountable": true,
+  "multi_target": true,
+  "n_targets": 3,
+  "on_prime_hub": null,
+  "on_prime_hub_reason": "not resolvable offline; no hub environment index is reachable from this repo, verifiers or swebench",
+  "operators_not_applicable": [
+    "collection_reverse",
+    "message_reword"
+  ],
+  "operators_with_anchors": [
+    "kwonly_specialize",
+    "symbol_rename"
+  ],
+  "repo": "matplotlib/matplotlib",
+  "row": {
+    "elapsed": 237.04,
+    "error": null,
+    "error_type": null,
+    "index": 0,
+    "mode": "formcheck",
+    "name": "matplotlib__matplotlib-14623",
+    "reason": "unchecked",
+    "valid": null
+  },
+  "rows": [
+    {
+      "anchor": "set_xlim(*, xmin=...)",
+      "failure_analysis": null,
+      "file": "lib/matplotlib/axes/_base.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 1,
+        "found": true,
+        "n_parsed": 582,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 400,
+        "reward": 1.0
+      },
+      "loud_failure": false,
+      "observable": "callable signature (arity / parameter names)",
+      "operator": "kwonly_specialize",
+      "reason": "P4: 'xmin' is read outside a param-only `if` (line(s) [3231, 3234])",
+      "tier": "HIGH",
+      "tree_digest": "d1d97750678b3876ea72b76bcd373538d544abeba325e0251014fe9267bef4ad",
+      "verdict": "REFUSED"
+    },
+    {
+      "anchor": "set_xlim(*, xmax=...)",
+      "failure_analysis": null,
+      "file": "lib/matplotlib/axes/_base.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 1,
+        "found": true,
+        "n_parsed": 582,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 400,
+        "reward": 1.0
+      },
+      "loud_failure": false,
+      "observable": "callable signature (arity / parameter names)",
+      "operator": "kwonly_specialize",
+      "reason": "P4: 'xmax' is read outside a param-only `if` (line(s) [3235, 3238])",
+      "tier": "HIGH",
+      "tree_digest": "d1d97750678b3876ea72b76bcd373538d544abeba325e0251014fe9267bef4ad",
+      "verdict": "REFUSED"
+    },
+    {
+      "anchor": "set_ylim(*, ymin=...)",
+      "failure_analysis": null,
+      "file": "lib/matplotlib/axes/_base.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 1,
+        "found": true,
+        "n_parsed": 582,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 400,
+        "reward": 1.0
+      },
+      "loud_failure": false,
+      "observable": "callable signature (arity / parameter names)",
+      "operator": "kwonly_specialize",
+      "reason": "P2: the issue names ['set_ylim'] -- candidate CONTRACT, route to the rubric rather than transforming",
+      "tier": "HIGH",
+      "tree_digest": "d1d97750678b3876ea72b76bcd373538d544abeba325e0251014fe9267bef4ad",
+      "verdict": "REFUSED"
+    },
+    {
+      "anchor": "set_ylim(*, ymax=...)",
+      "failure_analysis": null,
+      "file": "lib/matplotlib/axes/_base.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 1,
+        "found": true,
+        "n_parsed": 582,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 400,
+        "reward": 1.0
+      },
+      "loud_failure": false,
+      "observable": "callable signature (arity / parameter names)",
+      "operator": "kwonly_specialize",
+      "reason": "P2: the issue names ['set_ylim'] -- candidate CONTRACT, route to the rubric rather than transforming",
+      "tier": "HIGH",
+      "tree_digest": "d1d97750678b3876ea72b76bcd373538d544abeba325e0251014fe9267bef4ad",
+      "verdict": "REFUSED"
+    },
+    {
+      "anchor": "set_xlim3d(*, xmin=...)",
+      "failure_analysis": null,
+      "file": "lib/mpl_toolkits/mplot3d/axes3d.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 1,
+        "found": true,
+        "n_parsed": 582,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 400,
+        "reward": 1.0
+      },
+      "loud_failure": false,
+      "observable": "callable signature (arity / parameter names)",
+      "operator": "kwonly_specialize",
+      "reason": "P4: 'xmin' is read outside a param-only `if` (line(s) [599, 604])",
+      "tier": "HIGH",
+      "tree_digest": "d1d97750678b3876ea72b76bcd373538d544abeba325e0251014fe9267bef4ad",
+      "verdict": "REFUSED"
+    },
+    {
+      "anchor": "set_xlim3d(*, xmax=...)",
+      "failure_analysis": null,
+      "file": "lib/mpl_toolkits/mplot3d/axes3d.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 1,
+        "found": true,
+        "n_parsed": 582,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 400,
+        "reward": 1.0
+      },
+      "loud_failure": false,
+      "observable": "callable signature (arity / parameter names)",
+      "operator": "kwonly_specialize",
+      "reason": "P4: 'xmax' is read outside a param-only `if` (line(s) [605, 610])",
+      "tier": "HIGH",
+      "tree_digest": "d1d97750678b3876ea72b76bcd373538d544abeba325e0251014fe9267bef4ad",
+      "verdict": "REFUSED"
+    },
+    {
+      "anchor": "set_ylim3d(*, ymin=...)",
+      "failure_analysis": null,
+      "file": "lib/mpl_toolkits/mplot3d/axes3d.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 1,
+        "found": true,
+        "n_parsed": 582,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 400,
+        "reward": 1.0
+      },
+      "loud_failure": false,
+      "observable": "callable signature (arity / parameter names)",
+      "operator": "kwonly_specialize",
+      "reason": "P4: 'ymin' is read outside a param-only `if` (line(s) [659, 664])",
+      "tier": "HIGH",
+      "tree_digest": "d1d97750678b3876ea72b76bcd373538d544abeba325e0251014fe9267bef4ad",
+      "verdict": "REFUSED"
+    },
+    {
+      "anchor": "set_ylim3d(*, ymax=...)",
+      "failure_analysis": null,
+      "file": "lib/mpl_toolkits/mplot3d/axes3d.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 1,
+        "found": true,
+        "n_parsed": 582,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 400,
+        "reward": 1.0
+      },
+      "loud_failure": false,
+      "observable": "callable signature (arity / parameter names)",
+      "operator": "kwonly_specialize",
+      "reason": "P4: 'ymax' is read outside a param-only `if` (line(s) [665, 670])",
+      "tier": "HIGH",
+      "tree_digest": "d1d97750678b3876ea72b76bcd373538d544abeba325e0251014fe9267bef4ad",
+      "verdict": "REFUSED"
+    },
+    {
+      "anchor": "set_zlim3d(*, zmin=...)",
+      "failure_analysis": null,
+      "file": "lib/mpl_toolkits/mplot3d/axes3d.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 1,
+        "found": true,
+        "n_parsed": 582,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 400,
+        "reward": 1.0
+      },
+      "loud_failure": false,
+      "observable": "callable signature (arity / parameter names)",
+      "operator": "kwonly_specialize",
+      "reason": "P4: 'zmin' is read outside a param-only `if` (line(s) [720, 725])",
+      "tier": "HIGH",
+      "tree_digest": "d1d97750678b3876ea72b76bcd373538d544abeba325e0251014fe9267bef4ad",
+      "verdict": "REFUSED"
+    },
+    {
+      "anchor": "set_zlim3d(*, zmax=...)",
+      "failure_analysis": null,
+      "file": "lib/mpl_toolkits/mplot3d/axes3d.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 1,
+        "found": true,
+        "n_parsed": 582,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 400,
+        "reward": 1.0
+      },
+      "loud_failure": false,
+      "observable": "callable signature (arity / parameter names)",
+      "operator": "kwonly_specialize",
+      "reason": "P4: 'zmax' is read outside a param-only `if` (line(s) [726, 731])",
+      "tier": "HIGH",
+      "tree_digest": "d1d97750678b3876ea72b76bcd373538d544abeba325e0251014fe9267bef4ad",
+      "verdict": "REFUSED"
+    },
+    {
+      "anchor": "_AxesBase",
+      "failure_analysis": null,
+      "file": "lib/matplotlib/axes/_base.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 1,
+        "found": true,
+        "n_parsed": 582,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 400,
+        "reward": 1.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "dynamic reach: '_AxesBase' appears in a non-annotation string literal in lib/matplotlib/artist.py line 1306 ('_base._AxesBase') -- an alpha-rename cannot be argued safe",
+      "tier": "MEDIUM",
+      "tree_digest": "d1d97750678b3876ea72b76bcd373538d544abeba325e0251014fe9267bef4ad",
+      "verdict": "REFUSED"
+    },
+    {
+      "anchor": "Locator",
+      "failure_analysis": null,
+      "file": "lib/matplotlib/ticker.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 1,
+        "found": true,
+        "n_parsed": 582,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 400,
+        "reward": 1.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "attribute access `.Locator` in lib/matplotlib/collections.py line 986 is not a qualified reference to the defining module -- outside this operator's scope",
+      "tier": "MEDIUM",
+      "tree_digest": "d1d97750678b3876ea72b76bcd373538d544abeba325e0251014fe9267bef4ad",
+      "verdict": "REFUSED"
+    },
+    {
+      "anchor": "Axes3D",
+      "failure_analysis": null,
+      "file": "lib/mpl_toolkits/mplot3d/axes3d.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 1,
+        "found": true,
+        "n_parsed": 582,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 400,
+        "reward": 1.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "attribute access `.Axes3D` in examples/animation/random_walk.py line 46 is not a qualified reference to the defining module -- outside this operator's scope",
+      "tier": "MEDIUM",
+      "tree_digest": "d1d97750678b3876ea72b76bcd373538d544abeba325e0251014fe9267bef4ad",
+      "verdict": "REFUSED"
+    },
+    {
+      "anchor": null,
+      "failure_analysis": null,
+      "file": null,
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 1,
+        "found": true,
+        "n_parsed": 582,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 400,
+        "reward": 1.0
+      },
+      "loud_failure": false,
+      "observable": "order of elements in a returned collection",
+      "operator": "collection_reverse",
+      "reason": "no anchor inside the gold-touched region",
+      "tier": "MEDIUM",
+      "tree_digest": "d1d97750678b3876ea72b76bcd373538d544abeba325e0251014fe9267bef4ad",
+      "verdict": "NOT_APPLICABLE"
+    },
+    {
+      "anchor": null,
+      "failure_analysis": null,
+      "file": null,
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 1,
+        "found": true,
+        "n_parsed": 582,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 400,
+        "reward": 1.0
+      },
+      "loud_failure": false,
+      "observable": "human-readable text of an exception message",
+      "operator": "message_reword",
+      "reason": "no anchor inside the gold-touched region; 63 anchor(s) elsewhere in the 3 target(s): lib/matplotlib/axes/_base.py, lib/matplotlib/ticker.py, lib/mpl_toolkits/mplot3d/axes3d.py",
+      "tier": "HIGH",
+      "tree_digest": "d1d97750678b3876ea72b76bcd373538d544abeba325e0251014fe9267bef4ad",
+      "verdict": "NOT_APPLICABLE"
+    }
+  ],
+  "targets": [
+    "lib/matplotlib/axes/_base.py",
+    "lib/matplotlib/ticker.py",
+    "lib/mpl_toolkits/mplot3d/axes3d.py"
+  ],
+  "version": "3.1",
+  "witnesses": []
+}

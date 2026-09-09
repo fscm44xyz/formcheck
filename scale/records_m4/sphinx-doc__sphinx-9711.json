@@ -1,0 +1,232 @@
+{
+  "completed": true,
+  "control": {
+    "graded": null,
+    "log": null,
+    "passed": true,
+    "reason": "untransformed reference scores 1.0"
+  },
+  "digest_trace": [
+    {
+      "digest": "2131daa4755a0d6f871393e9da8ae341a5aa8199162fa6bbee164c73491c1d23",
+      "memo_hit": false
+    },
+    {
+      "digest": "13decfd88446a69165f4bb4948784e285053387fab695fbcf5e6836fbad64463",
+      "memo_hit": false
+    }
+  ],
+  "disk_orphan_reclaimed_bytes": 0,
+  "disk_residual_bytes": 0,
+  "elapsed_seconds": 133.64,
+  "error": null,
+  "image": "swebench/sweb.eval.x86_64.sphinx-doc_1776_sphinx-9711:latest",
+  "instance_id": "sphinx-doc__sphinx-9711",
+  "leaked_containers": [],
+  "leaked_image": false,
+  "log": [
+    [
+      "<control>",
+      "OK",
+      "untransformed reference scores 1.0"
+    ],
+    [
+      "kwonly_specialize:<no anchor>",
+      "NOT_APPLICABLE",
+      "no anchor inside the gold-touched region"
+    ],
+    [
+      "symbol_rename:verify_needs_extensions",
+      "UNVALIDATED",
+      "1 failing test(s) have no recognisable failure block -- unknown log shape, not evidence of breakage; first: tests/test_extension.py::test_needs_extensions"
+    ],
+    [
+      "collection_reverse:<no anchor>",
+      "NOT_APPLICABLE",
+      "no anchor inside the gold-touched region"
+    ],
+    [
+      "message_reword:<no anchor>",
+      "NOT_APPLICABLE",
+      "no anchor inside the gold-touched region"
+    ]
+  ],
+  "mountable": true,
+  "multi_target": false,
+  "n_targets": 1,
+  "on_prime_hub": null,
+  "on_prime_hub_reason": "not resolvable offline; no hub environment index is reachable from this repo, verifiers or swebench",
+  "operators_not_applicable": [
+    "collection_reverse",
+    "kwonly_specialize",
+    "message_reword"
+  ],
+  "operators_with_anchors": [
+    "symbol_rename"
+  ],
+  "repo": "sphinx-doc/sphinx",
+  "row": {
+    "elapsed": 39.94,
+    "error": null,
+    "error_type": null,
+    "index": 0,
+    "mode": "formcheck",
+    "name": "sphinx-doc__sphinx-9711",
+    "reason": "unchecked",
+    "valid": null
+  },
+  "rows": [
+    {
+      "anchor": null,
+      "failure_analysis": null,
+      "file": null,
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 1,
+        "found": true,
+        "n_parsed": 1,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 0,
+        "reward": 1.0
+      },
+      "loud_failure": false,
+      "observable": "callable signature (arity / parameter names)",
+      "operator": "kwonly_specialize",
+      "reason": "no anchor inside the gold-touched region",
+      "tier": "HIGH",
+      "tree_digest": "2131daa4755a0d6f871393e9da8ae341a5aa8199162fa6bbee164c73491c1d23",
+      "verdict": "NOT_APPLICABLE"
+    },
+    {
+      "anchor": "verify_needs_extensions",
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "broke": [],
+        "coupled": [],
+        "failing": [
+          "tests/test_extension.py::test_needs_extensions"
+        ],
+        "symbol": "verify_needs_extensions",
+        "unexplained": [
+          "tests/test_extension.py::test_needs_extensions (no failure section found)"
+        ],
+        "unparsed": [
+          "tests/test_extension.py::test_needs_extensions"
+        ],
+        "unparsed_log_shape": true
+      },
+      "file": "sphinx/extension.py",
+      "graded_log": "+ tox --current-env -epy39 -v -- tests/test_extension.py\npy39: commands[0]> python -X dev -m pytest -rA --durations 25 tests/test_extension.py\n\u001b[1m============================= test session starts ==============================\u001b[0m\nplatform linux -- Python 3.9.20, pytest-8.3.3, pluggy-1.5.0\ncachedir: .tox/py39/.pytest_cache\nlibraries: Sphinx-4.3.0+/ddfca61ba, docutils-0.17.1\nbase tempdir: /tmp/pytest-of-root/pytest-1\nrootdir: /testbed\nconfigfile: setup.cfg\nplugins: cov-5.0.0\ncollected 0 items / 1 error\n\n==================================== ERRORS ====================================\n\u001b[31m\u001b[1m___________________ ERROR collecting tests/test_extension.py ___________________\u001b[0m\n\u001b[31mImportError while importing test module '/testbed/tests/test_extension.py'.\nHint: make sure your test modules/packages have valid Python names.\nTraceback:\n/opt/miniconda3/envs/testbed/lib/python3.9/importlib/__init__.py:127: in import_module\n    return _bootstrap._gcd_import(name[level:], package, level)\ntests/test_extension.py:14: in <module>\n    from sphinx.extension import Extension, verify_needs_extensions\nE   ImportError: cannot import name 'verify_needs_extensions' from 'sphinx.extension' (/testbed/sphinx/extension.py)\u001b[0m\n\u001b[33m=============================== warnings summary ===============================\u001b[0m\nsphinx/util/docutils.py:44\n  /testbed/sphinx/util/docutils.py:44: DeprecationWarning: distutils Version classes are deprecated. Use packaging.version instead.\n    __version_info__ = tuple(LooseVersion(docutils.__version__).version)\n\nsphinx/highlighting.py:67\n  /testbed/sphinx/highlighting.py:67: DeprecationWarning: distutils Version classes are deprecated. Use packaging.version instead.\n    if tuple(LooseVersion(pygmentsversion).version) <= (2, 7, 4):\n\nsphinx/registry.py:24\n  /testbed/sphinx/registry.py:24: DeprecationWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html\n    from pkg_resources import iter_entry_points\n\n../opt/miniconda3/envs/testbed/lib/python3.9/site-packages/pkg_resources/__init__.py:3154\n../opt/miniconda3/envs/testbed/lib/python3.9/site-packages/pkg_resources/__init__.py:3154\n../opt/miniconda3/envs/testbed/lib/python3.9/site-packages/pkg_resources/__init__.py:3154\n../opt/miniconda3/envs/testbed/lib/python3.9/site-packages/pkg_resources/__init__.py:3154\n  /opt/miniconda3/envs/testbed/lib/python3.9/site-packages/pkg_resources/__init__.py:3154: DeprecationWarning: Deprecated call to `pkg_resources.declare_namespace('sphinxcontrib')`.\n  Implementing implicit namespace packages (as specified in PEP 420) is preferred to `pkg_resources.declare_namespace`. See https://setuptools.pypa.io/en/latest/references/keywords.html#keyword-namespace-packages\n    declare_namespace(pkg)\n\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n\u001b[36m\u001b[1m=========================== short test summary info ============================\u001b[0m\n\u001b[31mERROR\u001b[0m tests/test_extension.py\n!!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!!\n\u001b[31m========================= \u001b[33m7 warnings\u001b[0m, \u001b[31m\u001b[1m1 error\u001b[0m\u001b[31m in 0.14s\u001b[0m\u001b[31m =========================\u001b[0m\npy39: exit 2 (0.79 seconds) /testbed> python -X dev -m pytest -rA --durations 25 tests/test_extension.py pid=223\n  py39: FAIL code 2 (0.80=setup[0.01]+cmd[0.79] seconds)\n  evaluation failed :( (0.90 seconds)\n\n",
+      "graded_report": {
+        "f2p_fail": 1,
+        "f2p_failing": [
+          "tests/test_extension.py::test_needs_extensions"
+        ],
+        "f2p_pass": 0,
+        "found": true,
+        "n_parsed": 1,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 0,
+        "reward": 0.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "1 failing test(s) have no recognisable failure block -- unknown log shape, not evidence of breakage; first: tests/test_extension.py::test_needs_extensions",
+      "tier": "MEDIUM",
+      "tree_digest": "13decfd88446a69165f4bb4948784e285053387fab695fbcf5e6836fbad64463",
+      "verdict": "UNVALIDATED"
+    },
+    {
+      "anchor": null,
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "broke": [],
+        "coupled": [],
+        "failing": [
+          "tests/test_extension.py::test_needs_extensions"
+        ],
+        "symbol": "verify_needs_extensions",
+        "unexplained": [
+          "tests/test_extension.py::test_needs_extensions (no failure section found)"
+        ],
+        "unparsed": [
+          "tests/test_extension.py::test_needs_extensions"
+        ],
+        "unparsed_log_shape": true
+      },
+      "file": null,
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 1,
+        "f2p_failing": [
+          "tests/test_extension.py::test_needs_extensions"
+        ],
+        "f2p_pass": 0,
+        "found": true,
+        "n_parsed": 1,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 0,
+        "reward": 0.0
+      },
+      "loud_failure": false,
+      "observable": "order of elements in a returned collection",
+      "operator": "collection_reverse",
+      "reason": "no anchor inside the gold-touched region",
+      "tier": "MEDIUM",
+      "tree_digest": "13decfd88446a69165f4bb4948784e285053387fab695fbcf5e6836fbad64463",
+      "verdict": "NOT_APPLICABLE"
+    },
+    {
+      "anchor": null,
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "broke": [],
+        "coupled": [],
+        "failing": [
+          "tests/test_extension.py::test_needs_extensions"
+        ],
+        "symbol": "verify_needs_extensions",
+        "unexplained": [
+          "tests/test_extension.py::test_needs_extensions (no failure section found)"
+        ],
+        "unparsed": [
+          "tests/test_extension.py::test_needs_extensions"
+        ],
+        "unparsed_log_shape": true
+      },
+      "file": null,
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 1,
+        "f2p_failing": [
+          "tests/test_extension.py::test_needs_extensions"
+        ],
+        "f2p_pass": 0,
+        "found": true,
+        "n_parsed": 1,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 0,
+        "reward": 0.0
+      },
+      "loud_failure": false,
+      "observable": "human-readable text of an exception message",
+      "operator": "message_reword",
+      "reason": "no anchor inside the gold-touched region",
+      "tier": "HIGH",
+      "tree_digest": "13decfd88446a69165f4bb4948784e285053387fab695fbcf5e6836fbad64463",
+      "verdict": "NOT_APPLICABLE"
+    }
+  ],
+  "targets": [
+    "sphinx/extension.py"
+  ],
+  "version": "4.3",
+  "witnesses": []
+}

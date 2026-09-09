@@ -1,0 +1,307 @@
+{
+  "completed": true,
+  "control": {
+    "graded": null,
+    "log": null,
+    "passed": true,
+    "reason": "untransformed reference scores 1.0"
+  },
+  "digest_trace": [
+    {
+      "digest": "6cd9e719e322feb0b95ef97ae4eda8cd5265ec2633e85994bc485f62753ccb6f",
+      "memo_hit": false
+    },
+    {
+      "digest": "e7bfa5ad645097bd866cfc08e2f82189436a71cb8d6b4eafa168077bef6a51c4",
+      "memo_hit": false
+    }
+  ],
+  "disk_orphan_reclaimed_bytes": 0,
+  "disk_residual_bytes": 0,
+  "elapsed_seconds": 1617.67,
+  "error": null,
+  "image": "swebench/sweb.eval.x86_64.sphinx-doc_1776_sphinx-9281:latest",
+  "instance_id": "sphinx-doc__sphinx-9281",
+  "leaked_containers": [],
+  "leaked_image": false,
+  "log": [
+    [
+      "<control>",
+      "OK",
+      "untransformed reference scores 1.0"
+    ],
+    [
+      "kwonly_specialize:<no anchor>",
+      "NOT_APPLICABLE",
+      "no anchor inside the gold-touched region; 1 anchor(s) elsewhere in the target"
+    ],
+    [
+      "symbol_rename:object_description",
+      "UNVALIDATED",
+      "7 failing test(s) have no recognisable failure block -- unknown log shape, not evidence of breakage; first: tests/test_util_inspect.py::test_dictionary_sorting"
+    ],
+    [
+      "collection_reverse:<no anchor>",
+      "NOT_APPLICABLE",
+      "no anchor inside the gold-touched region"
+    ],
+    [
+      "message_reword:<no anchor>",
+      "NOT_APPLICABLE",
+      "no anchor inside the gold-touched region"
+    ]
+  ],
+  "mountable": true,
+  "multi_target": false,
+  "n_targets": 1,
+  "on_prime_hub": null,
+  "on_prime_hub_reason": "not resolvable offline; no hub environment index is reachable from this repo, verifiers or swebench",
+  "operators_not_applicable": [
+    "collection_reverse",
+    "kwonly_specialize",
+    "message_reword"
+  ],
+  "operators_with_anchors": [
+    "symbol_rename"
+  ],
+  "repo": "sphinx-doc/sphinx",
+  "row": {
+    "elapsed": 57.46,
+    "error": null,
+    "error_type": null,
+    "index": 0,
+    "mode": "formcheck",
+    "name": "sphinx-doc__sphinx-9281",
+    "reason": "unchecked",
+    "valid": null
+  },
+  "rows": [
+    {
+      "anchor": null,
+      "failure_analysis": null,
+      "file": null,
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 1,
+        "found": true,
+        "n_parsed": 39,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 38,
+        "reward": 1.0
+      },
+      "loud_failure": false,
+      "observable": "callable signature (arity / parameter names)",
+      "operator": "kwonly_specialize",
+      "reason": "no anchor inside the gold-touched region; 1 anchor(s) elsewhere in the target",
+      "tier": "HIGH",
+      "tree_digest": "6cd9e719e322feb0b95ef97ae4eda8cd5265ec2633e85994bc485f62753ccb6f",
+      "verdict": "NOT_APPLICABLE"
+    },
+    {
+      "anchor": "object_description",
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "broke": [],
+        "coupled": [],
+        "failing": [
+          "tests/test_util_inspect.py::test_dictionary_sorting",
+          "tests/test_util_inspect.py::test_set_sorting",
+          "tests/test_util_inspect.py::test_set_sorting_fallback",
+          "tests/test_util_inspect.py::test_frozenset_sorting",
+          "tests/test_util_inspect.py::test_frozenset_sorting_fallback",
+          "tests/test_util_inspect.py::test_dict_customtype",
+          "tests/test_util_inspect.py::test_object_description_enum"
+        ],
+        "symbol": "object_description",
+        "unexplained": [
+          "tests/test_util_inspect.py::test_dictionary_sorting (no failure section found)",
+          "tests/test_util_inspect.py::test_set_sorting (no failure section found)",
+          "tests/test_util_inspect.py::test_set_sorting_fallback (no failure section found)",
+          "tests/test_util_inspect.py::test_frozenset_sorting (no failure section found)",
+          "tests/test_util_inspect.py::test_frozenset_sorting_fallback (no failure section found)",
+          "tests/test_util_inspect.py::test_dict_customtype (no failure section found)",
+          "tests/test_util_inspect.py::test_object_description_enum (no failure section found)"
+        ],
+        "unparsed": [
+          "tests/test_util_inspect.py::test_dictionary_sorting",
+          "tests/test_util_inspect.py::test_set_sorting",
+          "tests/test_util_inspect.py::test_set_sorting_fallback",
+          "tests/test_util_inspect.py::test_frozenset_sorting",
+          "tests/test_util_inspect.py::test_frozenset_sorting_fallback",
+          "tests/test_util_inspect.py::test_dict_customtype",
+          "tests/test_util_inspect.py::test_object_description_enum"
+        ],
+        "unparsed_log_shape": true
+      },
+      "file": "sphinx/util/inspect.py",
+      "graded_log": "+ tox --current-env -epy39 -v -- tests/test_util_inspect.py\npy39: commands[0]> python -X dev -m pytest -rA --durations 25 tests/test_util_inspect.py\n\u001b[1m============================= test session starts ==============================\u001b[0m\nplatform linux -- Python 3.9.20, pytest-8.3.3, pluggy-1.5.0\ncachedir: .tox/py39/.pytest_cache\nlibraries: Sphinx-4.1.0, docutils-0.17.1\nbase tempdir: /tmp/pytest-of-root/pytest-1\nrootdir: /testbed\nconfigfile: setup.cfg\nplugins: cov-5.0.0\ncollected 39 items\n\ntests/test_util_inspect.py \u001b[32m.\u001b[0m\u001b[32m.\u001b[0m\u001b[32m.\u001b[0m\u001b[32m.\u001b[0m\u001b[32m.\u001b[0m\u001b[32m.\u001b[0m\u001b[32m.\u001b[0m\u001b[32m.\u001b[0m\u001b[32m.\u001b[0m\u001b[32m.\u001b[0m\u001b[32m.\u001b[0m\u001b[32m.\u001b[0m\u001b[32m.\u001b[0m\u001b[32m.\u001b[0m\u001b[32m.\u001b[0m\u001b[32m.\u001b[0m\u001b[32m.\u001b[0m\u001b[32m.\u001b[0m\u001b[32m.\u001b[0m\u001b[31mF\u001b[0m\u001b[31mF\u001b[0m\u001b[31mF\u001b[0m\u001b[31mF\u001b[0m\u001b[31mF\u001b[0m\u001b[31mF\u001b[0m\u001b[31mF\u001b[0m\u001b[32m.\u001b[0m\u001b[32m.\u001b[0m\u001b[32m.\u001b[0m\u001b[32m.\u001b[0m\u001b[32m.\u001b[0m\u001b[32m.\u001b[0m\u001b[32m.\u001b[0m\u001b[32m.\u001b[0m\u001b[32m.\u001b[0m\u001b[32m.\u001b[0m\u001b[32m.\u001b[0m\u001b[32m.\u001b[0m\u001b[32m.\u001b[0m\u001b[31m       [100%]\u001b[0m\n\n=================================== FAILURES ===================================\n\u001b[31m\u001b[1m___________________________ test_dictionary_sorting ____________________________\u001b[0m\n\n    \u001b[0m\u001b[94mdef\u001b[39;49;00m \u001b[92mtest_dictionary_sorting\u001b[39;49;00m():\u001b[90m\u001b[39;49;00m\n        dictionary = {\u001b[33m\"\u001b[39;49;00m\u001b[33mc\u001b[39;49;00m\u001b[33m\"\u001b[39;49;00m: \u001b[94m3\u001b[39;49;00m, \u001b[33m\"\u001b[39;49;00m\u001b[33ma\u001b[39;49;00m\u001b[33m\"\u001b[39;49;00m: \u001b[94m1\u001b[39;49;00m, \u001b[33m\"\u001b[39;49;00m\u001b[33md\u001b[39;49;00m\u001b[33m\"\u001b[39;49;00m: \u001b[94m2\u001b[39;49;00m, \u001b[33m\"\u001b[39;49;00m\u001b[33mb\u001b[39;49;00m\u001b[33m\"\u001b[39;49;00m: \u001b[94m4\u001b[39;49;00m}\u001b[90m\u001b[39;49;00m\n>       description = inspect.object_description(dictionary)\u001b[90m\u001b[39;49;00m\n\u001b[1m\u001b[31mE       AttributeError: module 'sphinx.util.inspect' has no attribute 'object_description'\u001b[0m\n\n\u001b[1m\u001b[31mtests/test_util_inspect.py\u001b[0m:478: AttributeError\n\u001b[31m\u001b[1m_______________________________ test_set_sorting _______________________________\u001b[0m\n\n    \u001b[0m\u001b[94mdef\u001b[39;49;00m \u001b[92mtest_set_sorting\u001b[39;49;00m():\u001b[90m\u001b[39;49;00m\n        set_ = \u001b[96mset\u001b[39;49;00m(\u001b[33m\"\u001b[39;49;00m\u001b[33mgfedcba\u001b[39;49;00m\u001b[33m\"\u001b[39;49;00m)\u001b[90m\u001b[39;49;00m\n>       description = inspect.object_description(set_)\u001b[90m\u001b[39;49;00m\n\u001b[1m\u001b[31mE       AttributeError: module 'sphinx.util.inspect' has no attribute 'object_description'\u001b[0m\n\n\u001b[1m\u001b[31mtests/test_util_inspect.py\u001b[0m:484: AttributeError\n\u001b[31m\u001b[1m__________________________ test_set_sorting_fallback ___________________________\u001b[0m\n\n    \u001b[0m\u001b[94mdef\u001b[39;49;00m \u001b[92mtest_set_sorting_fallback\u001b[39;49;00m():\u001b[90m\u001b[39;49;00m\n        set_ = {\u001b[94mNone\u001b[39;49;00m, \u001b[94m1\u001b[39;49;00m}\u001b[90m\u001b[39;49;00m\n>       description = inspect.object_description(set_)\u001b[90m\u001b[39;49;00m\n\u001b[1m\u001b[31mE       AttributeError: module 'sphinx.util.inspect' has no attribute 'object_description'\u001b[0m\n\n\u001b[1m\u001b[31mtests/test_util_inspect.py\u001b[0m:490: AttributeError\n\u001b[31m\u001b[1m____________________________ test_frozenset_sorting ____________________________\u001b[0m\n\n    \u001b[0m\u001b[94mdef\u001b[39;49;00m \u001b[92mtest_frozenset_sorting\u001b[39;49;00m():\u001b[90m\u001b[39;49;00m\n        frozenset_ = \u001b[96mfrozenset\u001b[39;49;00m(\u001b[33m\"\u001b[39;49;00m\u001b[33mgfedcba\u001b[39;49;00m\u001b[33m\"\u001b[39;49;00m)\u001b[90m\u001b[39;49;00m\n>       description = inspect.object_description(frozenset_)\u001b[90m\u001b[39;49;00m\n\u001b[1m\u001b[31mE       AttributeError: module 'sphinx.util.inspect' has no attribute 'object_description'\u001b[0m\n\n\u001b[1m\u001b[31mtests/test_util_inspect.py\u001b[0m:496: AttributeError\n\u001b[31m\u001b[1m_______________________ test_frozenset_sorting_fallback ________________________\u001b[0m\n\n    \u001b[0m\u001b[94mdef\u001b[39;49;00m \u001b[92mtest_frozenset_sorting_fallback\u001b[39;49;00m():\u001b[90m\u001b[39;49;00m\n        frozenset_ = \u001b[96mfrozenset\u001b[39;49;00m((\u001b[94mNone\u001b[39;49;00m, \u001b[94m1\u001b[39;49;00m))\u001b[90m\u001b[39;49;00m\n>       description = inspect.object_description(frozenset_)\u001b[90m\u001b[39;49;00m\n\u001b[1m\u001b[31mE       AttributeError: module 'sphinx.util.inspect' has no attribute 'object_description'\u001b[0m\n\n\u001b[1m\u001b[31mtests/test_util_inspect.py\u001b[0m:502: AttributeError\n\u001b[31m\u001b[1m_____________________________ test_dict_customtype _____________________________\u001b[0m\n\n    \u001b[0m\u001b[94mdef\u001b[39;49;00m \u001b[92mtest_dict_customtype\u001b[39;49;00m():\u001b[90m\u001b[39;49;00m\n        \u001b[94mclass\u001b[39;49;00m \u001b[04m\u001b[92mCustomType\u001b[39;49;00m:\u001b[90m\u001b[39;49;00m\n            \u001b[94mdef\u001b[39;49;00m \u001b[92m__init__\u001b[39;49;00m(\u001b[96mself\u001b[39;49;00m, value):\u001b[90m\u001b[39;49;00m\n                \u001b[96mself\u001b[39;49;00m._value = value\u001b[90m\u001b[39;49;00m\n    \u001b[90m\u001b[39;49;00m\n            \u001b[94mdef\u001b[39;49;00m \u001b[92m__repr__\u001b[39;49;00m(\u001b[96mself\u001b[39;49;00m):\u001b[90m\u001b[39;49;00m\n                \u001b[94mreturn\u001b[39;49;00m \u001b[33m\"\u001b[39;49;00m\u001b[33m<CustomType(\u001b[39;49;00m\u001b[33m%r\u001b[39;49;00m\u001b[33m)>\u001b[39;49;00m\u001b[33m\"\u001b[39;49;00m % \u001b[96mself\u001b[39;49;00m._value\u001b[90m\u001b[39;49;00m\n    \u001b[90m\u001b[39;49;00m\n        dictionary = {CustomType(\u001b[94m2\u001b[39;49;00m): \u001b[94m2\u001b[39;49;00m, CustomType(\u001b[94m1\u001b[39;49;00m): \u001b[94m1\u001b[39;49;00m}\u001b[90m\u001b[39;49;00m\n>       description = inspect.object_description(dictionary)\u001b[90m\u001b[39;49;00m\n\u001b[1m\u001b[31mE       AttributeError: module 'sphinx.util.inspect' has no attribute 'object_description'\u001b[0m\n\n\u001b[1m\u001b[31mtests/test_util_inspect.py\u001b[0m:515: AttributeError\n\u001b[31m\u001b[1m_________________________ test_object_description_enum _________________________\u001b[0m\n\n    \u001b[0m\u001b[94mdef\u001b[39;49;00m \u001b[92mtest_object_description_enum\u001b[39;49;00m():\u001b[90m\u001b[39;49;00m\n        \u001b[94mclass\u001b[39;49;00m \u001b[04m\u001b[92mMyEnum\u001b[39;49;00m(enum.Enum):\u001b[90m\u001b[39;49;00m\n            FOO = \u001b[94m1\u001b[39;49;00m\u001b[90m\u001b[39;49;00m\n            BAR = \u001b[94m2\u001b[39;49;00m\u001b[90m\u001b[39;49;00m\n    \u001b[90m\u001b[39;49;00m\n>       \u001b[94massert\u001b[39;49;00m inspect.object_description(MyEnum.FOO) == \u001b[33m\"\u001b[39;49;00m\u001b[33mMyEnum.FOO\u001b[39;49;00m\u001b[33m\"\u001b[39;49;00m\u001b[90m\u001b[39;49;00m\n\u001b[1m\u001b[31mE       AttributeError: module 'sphinx.util.inspect' has no attribute 'object_description'\u001b[0m\n\n\u001b[1m\u001b[31mtests/test_util_inspect.py\u001b[0m:525: AttributeError\n\u001b[33m=============================== warnings summary ===============================\u001b[0m\nsphinx/util/docutils.py:44\n  /testbed/sphinx/util/docutils.py:44: DeprecationWarning: distutils Version classes are deprecated. Use packaging.version instead.\n    __version_info__ = tuple(LooseVersion(docutils.__version__).version)\n\nsphinx/highlighting.py:67\n  /testbed/sphinx/highlighting.py:67: DeprecationWarning: distutils Version classes are deprecated. Use packaging.version instead.\n    if tuple(LooseVersion(pygmentsversion).version) <= (2, 7, 4):\n\nsphinx/registry.py:24\n  /testbed/sphinx/registry.py:24: DeprecationWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html\n    from pkg_resources import iter_entry_points\n\n../opt/miniconda3/envs/testbed/lib/python3.9/site-packages/pkg_resources/__init__.py:3154\n../opt/miniconda3/envs/testbed/lib/python3.9/site-packages/pkg_resources/__init__.py:3154\n../opt/miniconda3/envs/testbed/lib/python3.9/site-packages/pkg_resources/__init__.py:3154\n../opt/miniconda3/envs/testbed/lib/python3.9/site-packages/pkg_resources/__init__.py:3154\n  /opt/miniconda3/envs/testbed/lib/python3.9/site-packages/pkg_resources/__init__.py:3154: DeprecationWarning: Deprecated call to `pkg_resources.declare_namespace('sphinxcontrib')`.\n  Implementing implicit namespace packages (as specified in PEP 420) is preferred to `pkg_resources.declare_namespace`. See https://setuptools.pypa.io/en/latest/references/keywords.html#keyword-namespace-packages\n    declare_namespace(pkg)\n\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n==================================== PASSES ====================================\n--------------------------- Captured stdout teardown ---------------------------\n# testroot: root\n# builder: html\n# srcdir: /tmp/pytest-of-root/pytest-1/ext-autodoc\n# outdir: /tmp/pytest-of-root/pytest-1/ext-autodoc/_build/html\n# status: \n\u001b[01mRunning Sphinx v4.1.0\u001b[39;49;00m\n\n# warning: \n\n--------------------------- Captured stdout teardown ---------------------------\n# testroot: root\n# builder: html\n# srcdir: /tmp/pytest-of-root/pytest-1/ext-autodoc\n# outdir: /tmp/pytest-of-root/pytest-1/ext-autodoc/_build/html\n# status: \n\u001b[01mRunning Sphinx v4.1.0\u001b[39;49;00m\n\n# warning: \n\n--------------------------- Captured stdout teardown ---------------------------\n# testroot: root\n# builder: html\n# srcdir: /tmp/pytest-of-root/pytest-1/ext-autodoc\n# outdir: /tmp/pytest-of-root/pytest-1/ext-autodoc/_build/html\n# status: \n\u001b[01mRunning Sphinx v4.1.0\u001b[39;49;00m\n\n# warning: \n\n--------------------------- Captured stdout teardown ---------------------------\n# testroot: root\n# builder: html\n# srcdir: /tmp/pytest-of-root/pytest-1/ext-autodoc\n# outdir: /tmp/pytest-of-root/pytest-1/ext-autodoc/_build/html\n# status: \n\u001b[01mRunning Sphinx v4.1.0\u001b[39;49;00m\n\n# warning: \n\n--------------------------- Captured stdout teardown ---------------------------\n# testroot: root\n# builder: html\n# srcdir: /tmp/pytest-of-root/pytest-1/ext-autodoc\n# outdir: /tmp/pytest-of-root/pytest-1/ext-autodoc/_build/html\n# status: \n\u001b[01mRunning Sphinx v4.1.0\u001b[39;49;00m\n\n# warning: \n\n--------------------------- Captured stdout teardown ---------------------------\n# testroot: root\n# builder: html\n# srcdir: /tmp/pytest-of-root/pytest-1/ext-autodoc\n# outdir: /tmp/pytest-of-root/pytest-1/ext-autodoc/_build/html\n# status: \n\u001b[01mRunning Sphinx v4.1.0\u001b[39;49;00m\n\n# warning: \n\n--------------------------- Captured stdout teardown ---------------------------\n# testroot: root\n# builder: html\n# srcdir: /tmp/pytest-of-root/pytest-1/ext-autodoc\n# outdir: /tmp/pytest-of-root/pytest-1/ext-autodoc/_build/html\n# status: \n\u001b[01mRunning Sphinx v4.1.0\u001b[39;49;00m\n\n# warning: \n\n--------------------------- Captured stdout teardown ---------------------------\n# testroot: root\n# builder: html\n# srcdir: /tmp/pytest-of-root/pytest-1/ext-autodoc\n# outdir: /tmp/pytest-of-root/pytest-1/ext-autodoc/_build/html\n# status: \n\u001b[01mRunning Sphinx v4.1.0\u001b[39;49;00m\n\n# warning: \n\n--------------------------- Captured stdout teardown ---------------------------\n# testroot: root\n# builder: html\n# srcdir: /tmp/pytest-of-root/pytest-1/root\n# outdir: /tmp/pytest-of-root/pytest-1/root/_build/html\n# status: \n\u001b[01mRunning Sphinx v4.1.0\u001b[39;49;00m\n\n# warning: \n\n--------------------------- Captured stdout teardown ---------------------------\n# testroot: root\n# builder: html\n# srcdir: /tmp/pytest-of-root/pytest-1/ext-autodoc\n# outdir: /tmp/pytest-of-root/pytest-1/ext-autodoc/_build/html\n# status: \n\u001b[01mRunning Sphinx v4.1.0\u001b[39;49;00m\n\n# warning: \n\n============================= slowest 25 durations =============================\n0.54s setup    tests/test_util_inspect.py::test_signature_annotations_py38\n0.04s setup    tests/test_util_inspect.py::test_isproperty\n0.02s setup    tests/test_util_inspect.py::test_isattributedescriptor\n0.02s setup    tests/test_util_inspect.py::test_isdescriptor\n0.02s setup    tests/test_util_inspect.py::test_isgenericalias\n0.02s setup    tests/test_util_inspect.py::test_isbuiltin\n0.02s call     tests/test_util_inspect.py::test_signature\n0.02s setup    tests/test_util_inspect.py::test_iscoroutinefunction\n0.02s setup    tests/test_util_inspect.py::test_isstaticmethod\n0.02s setup    tests/test_util_inspect.py::test_isclassmethod\n0.02s setup    tests/test_util_inspect.py::test_isfunction\n\n(14 durations < 0.005s hidden.  Use -vv to show these durations.)\n\u001b[36m\u001b[1m=========================== short test summary info ============================\u001b[0m\n\u001b[32mPASSED\u001b[0m tests/test_util_inspect.py::\u001b[1mtest_TypeAliasNamespace\u001b[0m\n\u001b[32mPASSED\u001b[0m tests/test_util_inspect.py::\u001b[1mtest_signature\u001b[0m\n\u001b[32mPASSED\u001b[0m tests/test_util_inspect.py::\u001b[1mtest_signature_partial\u001b[0m\n\u001b[32mPASSED\u001b[0m tests/test_util_inspect.py::\u001b[1mtest_signature_methods\u001b[0m\n\u001b[32mPASSED\u001b[0m tests/test_util_inspect.py::\u001b[1mtest_signature_partialmethod\u001b[0m\n\u001b[32mPASSED\u001b[0m tests/test_util_inspect.py::\u001b[1mtest_signature_annotations\u001b[0m\n\u001b[32mPASSED\u001b[0m tests/test_util_inspect.py::\u001b[1mtest_signature_annotations_py38\u001b[0m\n\u001b[32mPASSED\u001b[0m tests/test_util_inspect.py::\u001b[1mtest_signature_from_str_basic\u001b[0m\n\u001b[32mPASSED\u001b[0m tests/test_util_inspect.py::\u001b[1mtest_signature_from_str_default_values\u001b[0m\n\u001b[32mPASSED\u001b[0m tests/test_util_inspect.py::\u001b[1mtest_signature_from_str_annotations\u001b[0m\n\u001b[32mPASSED\u001b[0m tests/test_util_inspect.py::\u001b[1mtest_signature_from_str_complex_annotations\u001b[0m\n\u001b[32mPASSED\u001b[0m tests/test_util_inspect.py::\u001b[1mtest_signature_from_str_kwonly_args\u001b[0m\n\u001b[32mPASSED\u001b[0m tests/test_util_inspect.py::\u001b[1mtest_signature_from_str_positionaly_only_args\u001b[0m\n\u001b[32mPASSED\u001b[0m tests/test_util_inspect.py::\u001b[1mtest_signature_from_str_invalid\u001b[0m\n\u001b[32mPASSED\u001b[0m tests/test_util_inspect.py::\u001b[1mtest_signature_from_ast\u001b[0m\n\u001b[32mPASSED\u001b[0m tests/test_util_inspect.py::\u001b[1mtest_safe_getattr_with_default\u001b[0m\n\u001b[32mPASSED\u001b[0m tests/test_util_inspect.py::\u001b[1mtest_safe_getattr_with_exception\u001b[0m\n\u001b[32mPASSED\u001b[0m tests/test_util_inspect.py::\u001b[1mtest_safe_getattr_with_property_exception\u001b[0m\n\u001b[32mPASSED\u001b[0m tests/test_util_inspect.py::\u001b[1mtest_safe_getattr_with___dict___override\u001b[0m\n\u001b[32mPASSED\u001b[0m tests/test_util_inspect.py::\u001b[1mtest_getslots\u001b[0m\n\u001b[32mPASSED\u001b[0m tests/test_util_inspect.py::\u001b[1mtest_isclassmethod\u001b[0m\n\u001b[32mPASSED\u001b[0m tests/test_util_inspect.py::\u001b[1mtest_isstaticmethod\u001b[0m\n\u001b[32mPASSED\u001b[0m tests/test_util_inspect.py::\u001b[1mtest_iscoroutinefunction\u001b[0m\n\u001b[32mPASSED\u001b[0m tests/test_util_inspect.py::\u001b[1mtest_isfunction\u001b[0m\n\u001b[32mPASSED\u001b[0m tests/test_util_inspect.py::\u001b[1mtest_isbuiltin\u001b[0m\n\u001b[32mPASSED\u001b[0m tests/test_util_inspect.py::\u001b[1mtest_isdescriptor\u001b[0m\n\u001b[32mPASSED\u001b[0m tests/test_util_inspect.py::\u001b[1mtest_isattributedescriptor\u001b[0m\n\u001b[32mPASSED\u001b[0m tests/test_util_inspect.py::\u001b[1mtest_isproperty\u001b[0m\n\u001b[32mPASSED\u001b[0m tests/test_util_inspect.py::\u001b[1mtest_isgenericalias\u001b[0m\n\u001b[32mPASSED\u001b[0m tests/test_util_inspect.py::\u001b[1mtest_unpartial\u001b[0m\n\u001b[32mPASSED\u001b[0m tests/test_util_inspect.py::\u001b[1mtest_getdoc_inherited_decorated_method\u001b[0m\n\u001b[32mPASSED\u001b[0m tests/test_util_inspect.py::\u001b[1mtest_is_builtin_class_method\u001b[0m\n\u001b[31mFAILED\u001b[0m tests/test_util_inspect.py::\u001b[1mtest_dictionary_sorting\u001b[0m - AttributeError: module 'sphinx.util.inspect' has no attribute 'object_descr...\n\u001b[31mFAILED\u001b[0m tests/test_util_inspect.py::\u001b[1mtest_set_sorting\u001b[0m - AttributeError: module 'sphinx.util.inspect' has no attribute 'object_descr...\n\u001b[31mFAILED\u001b[0m tests/test_util_inspect.py::\u001b[1mtest_set_sorting_fallback\u001b[0m - AttributeError: module 'sphinx.util.inspect' has no attribute 'object_descr...\n\u001b[31mFAILED\u001b[0m tests/test_util_inspect.py::\u001b[1mtest_frozenset_sorting\u001b[0m - AttributeError: module 'sphinx.util.inspect' has no attribute 'object_descr...\n\u001b[31mFAILED\u001b[0m tests/test_util_inspect.py::\u001b[1mtest_frozenset_sorting_fallback\u001b[0m - AttributeError: module 'sphinx.util.inspect' has no attribute 'object_descr...\n\u001b[31mFAILED\u001b[0m tests/test_util_inspect.py::\u001b[1mtest_dict_customtype\u001b[0m - AttributeError: module 'sphinx.util.inspect' has no attribute 'object_descr...\n\u001b[31mFAILED\u001b[0m tests/test_util_inspect.py::\u001b[1mtest_object_description_enum\u001b[0m - AttributeError: module 'sphinx.util.inspect' has no attribute 'object_descr...\n\u001b[31m=================== \u001b[31m\u001b[1m7 failed\u001b[0m, \u001b[32m32 passed\u001b[0m, \u001b[33m7 warnings\u001b[0m\u001b[31m in 1.19s\u001b[0m\u001b[31m ===================\u001b[0m\npy39: exit 1 (1.82 seconds) /testbed> python -X dev -m pytest -rA --durations 25 tests/test_util_inspect.py pid=276\n  py39: FAIL code 1 (1.83=setup[0.01]+cmd[1.82] seconds)\n  evaluation failed :( (1.93 seconds)\n\n",
+      "graded_report": {
+        "f2p_fail": 1,
+        "f2p_failing": [
+          "tests/test_util_inspect.py::test_object_description_enum"
+        ],
+        "f2p_pass": 0,
+        "found": true,
+        "n_parsed": 39,
+        "p2p_fail": 6,
+        "p2p_failing": [
+          "tests/test_util_inspect.py::test_dictionary_sorting",
+          "tests/test_util_inspect.py::test_set_sorting",
+          "tests/test_util_inspect.py::test_set_sorting_fallback",
+          "tests/test_util_inspect.py::test_frozenset_sorting",
+          "tests/test_util_inspect.py::test_frozenset_sorting_fallback",
+          "tests/test_util_inspect.py::test_dict_customtype"
+        ],
+        "p2p_pass": 32,
+        "reward": 0.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "7 failing test(s) have no recognisable failure block -- unknown log shape, not evidence of breakage; first: tests/test_util_inspect.py::test_dictionary_sorting",
+      "tier": "MEDIUM",
+      "tree_digest": "e7bfa5ad645097bd866cfc08e2f82189436a71cb8d6b4eafa168077bef6a51c4",
+      "verdict": "UNVALIDATED"
+    },
+    {
+      "anchor": null,
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "broke": [],
+        "coupled": [],
+        "failing": [
+          "tests/test_util_inspect.py::test_dictionary_sorting",
+          "tests/test_util_inspect.py::test_set_sorting",
+          "tests/test_util_inspect.py::test_set_sorting_fallback",
+          "tests/test_util_inspect.py::test_frozenset_sorting",
+          "tests/test_util_inspect.py::test_frozenset_sorting_fallback",
+          "tests/test_util_inspect.py::test_dict_customtype",
+          "tests/test_util_inspect.py::test_object_description_enum"
+        ],
+        "symbol": "object_description",
+        "unexplained": [
+          "tests/test_util_inspect.py::test_dictionary_sorting (no failure section found)",
+          "tests/test_util_inspect.py::test_set_sorting (no failure section found)",
+          "tests/test_util_inspect.py::test_set_sorting_fallback (no failure section found)",
+          "tests/test_util_inspect.py::test_frozenset_sorting (no failure section found)",
+          "tests/test_util_inspect.py::test_frozenset_sorting_fallback (no failure section found)",
+          "tests/test_util_inspect.py::test_dict_customtype (no failure section found)",
+          "tests/test_util_inspect.py::test_object_description_enum (no failure section found)"
+        ],
+        "unparsed": [
+          "tests/test_util_inspect.py::test_dictionary_sorting",
+          "tests/test_util_inspect.py::test_set_sorting",
+          "tests/test_util_inspect.py::test_set_sorting_fallback",
+          "tests/test_util_inspect.py::test_frozenset_sorting",
+          "tests/test_util_inspect.py::test_frozenset_sorting_fallback",
+          "tests/test_util_inspect.py::test_dict_customtype",
+          "tests/test_util_inspect.py::test_object_description_enum"
+        ],
+        "unparsed_log_shape": true
+      },
+      "file": null,
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 1,
+        "f2p_failing": [
+          "tests/test_util_inspect.py::test_object_description_enum"
+        ],
+        "f2p_pass": 0,
+        "found": true,
+        "n_parsed": 39,
+        "p2p_fail": 6,
+        "p2p_failing": [
+          "tests/test_util_inspect.py::test_dictionary_sorting",
+          "tests/test_util_inspect.py::test_set_sorting",
+          "tests/test_util_inspect.py::test_set_sorting_fallback",
+          "tests/test_util_inspect.py::test_frozenset_sorting",
+          "tests/test_util_inspect.py::test_frozenset_sorting_fallback",
+          "tests/test_util_inspect.py::test_dict_customtype"
+        ],
+        "p2p_pass": 32,
+        "reward": 0.0
+      },
+      "loud_failure": false,
+      "observable": "order of elements in a returned collection",
+      "operator": "collection_reverse",
+      "reason": "no anchor inside the gold-touched region",
+      "tier": "MEDIUM",
+      "tree_digest": "e7bfa5ad645097bd866cfc08e2f82189436a71cb8d6b4eafa168077bef6a51c4",
+      "verdict": "NOT_APPLICABLE"
+    },
+    {
+      "anchor": null,
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "broke": [],
+        "coupled": [],
+        "failing": [
+          "tests/test_util_inspect.py::test_dictionary_sorting",
+          "tests/test_util_inspect.py::test_set_sorting",
+          "tests/test_util_inspect.py::test_set_sorting_fallback",
+          "tests/test_util_inspect.py::test_frozenset_sorting",
+          "tests/test_util_inspect.py::test_frozenset_sorting_fallback",
+          "tests/test_util_inspect.py::test_dict_customtype",
+          "tests/test_util_inspect.py::test_object_description_enum"
+        ],
+        "symbol": "object_description",
+        "unexplained": [
+          "tests/test_util_inspect.py::test_dictionary_sorting (no failure section found)",
+          "tests/test_util_inspect.py::test_set_sorting (no failure section found)",
+          "tests/test_util_inspect.py::test_set_sorting_fallback (no failure section found)",
+          "tests/test_util_inspect.py::test_frozenset_sorting (no failure section found)",
+          "tests/test_util_inspect.py::test_frozenset_sorting_fallback (no failure section found)",
+          "tests/test_util_inspect.py::test_dict_customtype (no failure section found)",
+          "tests/test_util_inspect.py::test_object_description_enum (no failure section found)"
+        ],
+        "unparsed": [
+          "tests/test_util_inspect.py::test_dictionary_sorting",
+          "tests/test_util_inspect.py::test_set_sorting",
+          "tests/test_util_inspect.py::test_set_sorting_fallback",
+          "tests/test_util_inspect.py::test_frozenset_sorting",
+          "tests/test_util_inspect.py::test_frozenset_sorting_fallback",
+          "tests/test_util_inspect.py::test_dict_customtype",
+          "tests/test_util_inspect.py::test_object_description_enum"
+        ],
+        "unparsed_log_shape": true
+      },
+      "file": null,
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 1,
+        "f2p_failing": [
+          "tests/test_util_inspect.py::test_object_description_enum"
+        ],
+        "f2p_pass": 0,
+        "found": true,
+        "n_parsed": 39,
+        "p2p_fail": 6,
+        "p2p_failing": [
+          "tests/test_util_inspect.py::test_dictionary_sorting",
+          "tests/test_util_inspect.py::test_set_sorting",
+          "tests/test_util_inspect.py::test_set_sorting_fallback",
+          "tests/test_util_inspect.py::test_frozenset_sorting",
+          "tests/test_util_inspect.py::test_frozenset_sorting_fallback",
+          "tests/test_util_inspect.py::test_dict_customtype"
+        ],
+        "p2p_pass": 32,
+        "reward": 0.0
+      },
+      "loud_failure": false,
+      "observable": "human-readable text of an exception message",
+      "operator": "message_reword",
+      "reason": "no anchor inside the gold-touched region",
+      "tier": "HIGH",
+      "tree_digest": "e7bfa5ad645097bd866cfc08e2f82189436a71cb8d6b4eafa168077bef6a51c4",
+      "verdict": "NOT_APPLICABLE"
+    }
+  ],
+  "targets": [
+    "sphinx/util/inspect.py"
+  ],
+  "version": "4.1",
+  "witnesses": []
+}

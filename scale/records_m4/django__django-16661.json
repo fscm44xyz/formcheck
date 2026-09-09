@@ -1,0 +1,212 @@
+{
+  "completed": true,
+  "control": {
+    "graded": null,
+    "log": null,
+    "passed": true,
+    "reason": "untransformed reference scores 1.0"
+  },
+  "digest_trace": [
+    {
+      "digest": "420affc3d26d4ae4fdb3b5cb7ae67593ff19318c9d6f95c9eefb3a0575325cc2",
+      "memo_hit": false
+    },
+    {
+      "digest": "15d15eccf7c3ec6cc6e4074c217349c3e5c251a08199e976e42d38358fc6d36a",
+      "memo_hit": false
+    },
+    {
+      "digest": "15d15eccf7c3ec6cc6e4074c217349c3e5c251a08199e976e42d38358fc6d36a",
+      "memo_hit": true
+    }
+  ],
+  "disk_orphan_reclaimed_bytes": 0,
+  "disk_residual_bytes": 0,
+  "elapsed_seconds": 220.72,
+  "error": null,
+  "image": "swebench/sweb.eval.x86_64.django_1776_django-16661:latest",
+  "instance_id": "django__django-16661",
+  "leaked_containers": [],
+  "leaked_image": false,
+  "log": [
+    [
+      "<control>",
+      "OK",
+      "untransformed reference scores 1.0"
+    ],
+    [
+      "kwonly_specialize:<no anchor>",
+      "NOT_APPLICABLE",
+      "no anchor inside the gold-touched region"
+    ],
+    [
+      "symbol_rename:BaseModelAdmin",
+      "CLEAN",
+      "reward 1.0"
+    ],
+    [
+      "collection_reverse:<no anchor>",
+      "NOT_APPLICABLE",
+      "no anchor inside the gold-touched region"
+    ],
+    [
+      "message_reword:<no anchor>",
+      "NOT_APPLICABLE",
+      "no anchor inside the gold-touched region"
+    ]
+  ],
+  "mountable": true,
+  "multi_target": false,
+  "n_targets": 1,
+  "on_prime_hub": null,
+  "on_prime_hub_reason": "not resolvable offline; no hub environment index is reachable from this repo, verifiers or swebench",
+  "operators_not_applicable": [
+    "collection_reverse",
+    "kwonly_specialize",
+    "message_reword"
+  ],
+  "operators_with_anchors": [
+    "symbol_rename"
+  ],
+  "repo": "django/django",
+  "row": {
+    "elapsed": 71.79,
+    "error": null,
+    "error_type": null,
+    "index": 0,
+    "mode": "formcheck",
+    "name": "django__django-16661",
+    "reason": "valid",
+    "valid": true
+  },
+  "rows": [
+    {
+      "anchor": null,
+      "failure_analysis": null,
+      "file": null,
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 1,
+        "found": true,
+        "n_parsed": 37,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 36,
+        "reward": 1.0
+      },
+      "loud_failure": false,
+      "observable": "callable signature (arity / parameter names)",
+      "operator": "kwonly_specialize",
+      "reason": "no anchor inside the gold-touched region",
+      "tier": "HIGH",
+      "tree_digest": "420affc3d26d4ae4fdb3b5cb7ae67593ff19318c9d6f95c9eefb3a0575325cc2",
+      "verdict": "NOT_APPLICABLE"
+    },
+    {
+      "anchor": "BaseModelAdmin",
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "broke": [],
+        "coupled": [],
+        "failing": [],
+        "symbol": "BaseModelAdmin",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": "django/contrib/admin/options.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 1,
+        "found": true,
+        "n_parsed": 37,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 36,
+        "reward": 1.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "reward 1.0",
+      "tier": "MEDIUM",
+      "tree_digest": "15d15eccf7c3ec6cc6e4074c217349c3e5c251a08199e976e42d38358fc6d36a",
+      "verdict": "CLEAN"
+    },
+    {
+      "anchor": null,
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "broke": [],
+        "coupled": [],
+        "failing": [],
+        "symbol": "BaseModelAdmin",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": null,
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 1,
+        "found": true,
+        "n_parsed": 37,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 36,
+        "reward": 1.0
+      },
+      "loud_failure": false,
+      "observable": "order of elements in a returned collection",
+      "operator": "collection_reverse",
+      "reason": "no anchor inside the gold-touched region",
+      "tier": "MEDIUM",
+      "tree_digest": "15d15eccf7c3ec6cc6e4074c217349c3e5c251a08199e976e42d38358fc6d36a",
+      "verdict": "NOT_APPLICABLE"
+    },
+    {
+      "anchor": null,
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "broke": [],
+        "coupled": [],
+        "failing": [],
+        "symbol": "BaseModelAdmin",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": null,
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 1,
+        "found": true,
+        "n_parsed": 37,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 36,
+        "reward": 1.0
+      },
+      "loud_failure": false,
+      "observable": "human-readable text of an exception message",
+      "operator": "message_reword",
+      "reason": "no anchor inside the gold-touched region",
+      "tier": "HIGH",
+      "tree_digest": "15d15eccf7c3ec6cc6e4074c217349c3e5c251a08199e976e42d38358fc6d36a",
+      "verdict": "NOT_APPLICABLE"
+    }
+  ],
+  "targets": [
+    "django/contrib/admin/options.py"
+  ],
+  "version": "5.0",
+  "witnesses": []
+}

@@ -1,0 +1,325 @@
+{
+  "completed": true,
+  "control": {
+    "graded": null,
+    "log": null,
+    "passed": true,
+    "reason": "untransformed reference scores 1.0"
+  },
+  "digest_trace": [
+    {
+      "digest": "7da5c350786d267a219a5ee6f6a9826d24aac30de7e71747901078eaa57c7f89",
+      "memo_hit": false
+    }
+  ],
+  "disk_orphan_reclaimed_bytes": 0,
+  "disk_residual_bytes": 0,
+  "elapsed_seconds": 240.45,
+  "error": null,
+  "image": "swebench/sweb.eval.x86_64.django_1776_django-16263:latest",
+  "instance_id": "django__django-16263",
+  "leaked_containers": [],
+  "leaked_image": false,
+  "log": [
+    [
+      "<control>",
+      "OK",
+      "untransformed reference scores 1.0"
+    ],
+    [
+      "kwonly_specialize:<no anchor>",
+      "NOT_APPLICABLE",
+      "no anchor inside the gold-touched region; 5 anchor(s) elsewhere in the 4 target(s): django/db/models/expressions.py, django/db/models/query_utils.py, django/db/models/sql/query.py, django/db/models/sql/where.py"
+    ],
+    [
+      "symbol_rename:django/db/models/expressions.py:BaseExpression",
+      "REFUSED",
+      "multi-line import of 'BaseExpression' in django/db/models/sql/query.py"
+    ],
+    [
+      "symbol_rename:django/db/models/expressions.py:Ref",
+      "REFUSED",
+      "multi-line import of 'Ref' in django/db/models/sql/query.py"
+    ],
+    [
+      "symbol_rename:django/db/models/query_utils.py:Q",
+      "REFUSED",
+      "attribute access `.Q` in django/contrib/contenttypes/fields.py line 637 is not a qualified reference to the defining module -- outside this operator's scope"
+    ],
+    [
+      "symbol_rename:django/db/models/query_utils.py:refs_expression",
+      "REFUSED",
+      "multi-line import of 'refs_expression' in django/db/models/sql/query.py"
+    ],
+    [
+      "symbol_rename:django/db/models/sql/query.py:Query",
+      "REFUSED",
+      "BORDER: the issue names 'Query' -- candidate CONTRACT, route to the rubric"
+    ],
+    [
+      "symbol_rename:django/db/models/sql/where.py:WhereNode",
+      "REFUSED",
+      "multi-line import of 'WhereNode' in django/db/models/fields/related_lookups.py"
+    ],
+    [
+      "collection_reverse:<no anchor>",
+      "NOT_APPLICABLE",
+      "no anchor inside the gold-touched region"
+    ],
+    [
+      "message_reword:<no anchor>",
+      "NOT_APPLICABLE",
+      "no anchor inside the gold-touched region; 37 anchor(s) elsewhere in the 4 target(s): django/db/models/expressions.py, django/db/models/query_utils.py, django/db/models/sql/query.py, django/db/models/sql/where.py"
+    ]
+  ],
+  "mountable": true,
+  "multi_target": true,
+  "n_targets": 4,
+  "on_prime_hub": null,
+  "on_prime_hub_reason": "not resolvable offline; no hub environment index is reachable from this repo, verifiers or swebench",
+  "operators_not_applicable": [
+    "collection_reverse",
+    "kwonly_specialize",
+    "message_reword"
+  ],
+  "operators_with_anchors": [
+    "symbol_rename"
+  ],
+  "repo": "django/django",
+  "row": {
+    "elapsed": 79.25,
+    "error": null,
+    "error_type": null,
+    "index": 0,
+    "mode": "formcheck",
+    "name": "django__django-16263",
+    "reason": "unchecked",
+    "valid": null
+  },
+  "rows": [
+    {
+      "anchor": null,
+      "failure_analysis": null,
+      "file": null,
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 3,
+        "found": true,
+        "n_parsed": 103,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 100,
+        "reward": 1.0
+      },
+      "loud_failure": false,
+      "observable": "callable signature (arity / parameter names)",
+      "operator": "kwonly_specialize",
+      "reason": "no anchor inside the gold-touched region; 5 anchor(s) elsewhere in the 4 target(s): django/db/models/expressions.py, django/db/models/query_utils.py, django/db/models/sql/query.py, django/db/models/sql/where.py",
+      "tier": "HIGH",
+      "tree_digest": "7da5c350786d267a219a5ee6f6a9826d24aac30de7e71747901078eaa57c7f89",
+      "verdict": "NOT_APPLICABLE"
+    },
+    {
+      "anchor": "BaseExpression",
+      "failure_analysis": null,
+      "file": "django/db/models/expressions.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 3,
+        "found": true,
+        "n_parsed": 103,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 100,
+        "reward": 1.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "multi-line import of 'BaseExpression' in django/db/models/sql/query.py",
+      "tier": "MEDIUM",
+      "tree_digest": "7da5c350786d267a219a5ee6f6a9826d24aac30de7e71747901078eaa57c7f89",
+      "verdict": "REFUSED"
+    },
+    {
+      "anchor": "Ref",
+      "failure_analysis": null,
+      "file": "django/db/models/expressions.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 3,
+        "found": true,
+        "n_parsed": 103,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 100,
+        "reward": 1.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "multi-line import of 'Ref' in django/db/models/sql/query.py",
+      "tier": "MEDIUM",
+      "tree_digest": "7da5c350786d267a219a5ee6f6a9826d24aac30de7e71747901078eaa57c7f89",
+      "verdict": "REFUSED"
+    },
+    {
+      "anchor": "Q",
+      "failure_analysis": null,
+      "file": "django/db/models/query_utils.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 3,
+        "found": true,
+        "n_parsed": 103,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 100,
+        "reward": 1.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "attribute access `.Q` in django/contrib/contenttypes/fields.py line 637 is not a qualified reference to the defining module -- outside this operator's scope",
+      "tier": "MEDIUM",
+      "tree_digest": "7da5c350786d267a219a5ee6f6a9826d24aac30de7e71747901078eaa57c7f89",
+      "verdict": "REFUSED"
+    },
+    {
+      "anchor": "refs_expression",
+      "failure_analysis": null,
+      "file": "django/db/models/query_utils.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 3,
+        "found": true,
+        "n_parsed": 103,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 100,
+        "reward": 1.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "multi-line import of 'refs_expression' in django/db/models/sql/query.py",
+      "tier": "MEDIUM",
+      "tree_digest": "7da5c350786d267a219a5ee6f6a9826d24aac30de7e71747901078eaa57c7f89",
+      "verdict": "REFUSED"
+    },
+    {
+      "anchor": "Query",
+      "failure_analysis": null,
+      "file": "django/db/models/sql/query.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 3,
+        "found": true,
+        "n_parsed": 103,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 100,
+        "reward": 1.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "BORDER: the issue names 'Query' -- candidate CONTRACT, route to the rubric",
+      "tier": "MEDIUM",
+      "tree_digest": "7da5c350786d267a219a5ee6f6a9826d24aac30de7e71747901078eaa57c7f89",
+      "verdict": "REFUSED"
+    },
+    {
+      "anchor": "WhereNode",
+      "failure_analysis": null,
+      "file": "django/db/models/sql/where.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 3,
+        "found": true,
+        "n_parsed": 103,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 100,
+        "reward": 1.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "multi-line import of 'WhereNode' in django/db/models/fields/related_lookups.py",
+      "tier": "MEDIUM",
+      "tree_digest": "7da5c350786d267a219a5ee6f6a9826d24aac30de7e71747901078eaa57c7f89",
+      "verdict": "REFUSED"
+    },
+    {
+      "anchor": null,
+      "failure_analysis": null,
+      "file": null,
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 3,
+        "found": true,
+        "n_parsed": 103,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 100,
+        "reward": 1.0
+      },
+      "loud_failure": false,
+      "observable": "order of elements in a returned collection",
+      "operator": "collection_reverse",
+      "reason": "no anchor inside the gold-touched region",
+      "tier": "MEDIUM",
+      "tree_digest": "7da5c350786d267a219a5ee6f6a9826d24aac30de7e71747901078eaa57c7f89",
+      "verdict": "NOT_APPLICABLE"
+    },
+    {
+      "anchor": null,
+      "failure_analysis": null,
+      "file": null,
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 3,
+        "found": true,
+        "n_parsed": 103,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 100,
+        "reward": 1.0
+      },
+      "loud_failure": false,
+      "observable": "human-readable text of an exception message",
+      "operator": "message_reword",
+      "reason": "no anchor inside the gold-touched region; 37 anchor(s) elsewhere in the 4 target(s): django/db/models/expressions.py, django/db/models/query_utils.py, django/db/models/sql/query.py, django/db/models/sql/where.py",
+      "tier": "HIGH",
+      "tree_digest": "7da5c350786d267a219a5ee6f6a9826d24aac30de7e71747901078eaa57c7f89",
+      "verdict": "NOT_APPLICABLE"
+    }
+  ],
+  "targets": [
+    "django/db/models/expressions.py",
+    "django/db/models/query_utils.py",
+    "django/db/models/sql/query.py",
+    "django/db/models/sql/where.py"
+  ],
+  "version": "4.2",
+  "witnesses": []
+}

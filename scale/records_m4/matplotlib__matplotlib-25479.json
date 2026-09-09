@@ -1,0 +1,87 @@
+{
+  "completed": true,
+  "control": {
+    "graded": null,
+    "log": null,
+    "passed": true,
+    "reason": "untransformed reference scores 1.0"
+  },
+  "digest_trace": [
+    {
+      "digest": "6734ae00e35ec499b2c1990e17f002c096098edd3ed260563ba455ea9d92bb1d",
+      "memo_hit": false
+    }
+  ],
+  "disk_orphan_reclaimed_bytes": 0,
+  "disk_residual_bytes": 0,
+  "elapsed_seconds": 244.39,
+  "error": null,
+  "image": "swebench/sweb.eval.x86_64.matplotlib_1776_matplotlib-25479:latest",
+  "instance_id": "matplotlib__matplotlib-25479",
+  "leaked_containers": [],
+  "leaked_image": false,
+  "log": [
+    [
+      "<control>",
+      "OK",
+      "untransformed reference scores 1.0"
+    ],
+    [
+      "kwonly_specialize:lib/matplotlib/cm.py:register(*, name=...)",
+      "REFUSED",
+      "P2: the issue names ['name'] -- candidate CONTRACT, route to the rubric rather than transforming"
+    ]
+  ],
+  "mountable": false,
+  "multi_target": true,
+  "n_targets": 2,
+  "on_prime_hub": null,
+  "on_prime_hub_reason": "not resolvable offline; no hub environment index is reachable from this repo, verifiers or swebench",
+  "operators_not_applicable": [],
+  "operators_with_anchors": [
+    "kwonly_specialize"
+  ],
+  "repo": "matplotlib/matplotlib",
+  "row": {
+    "elapsed": 47.09,
+    "error": "Missing parentheses in call to 'print'. Did you mean print(...)? (<unknown>, line 5242)",
+    "error_type": "SyntaxError",
+    "index": 0,
+    "mode": "formcheck",
+    "name": "matplotlib__matplotlib-25479",
+    "reason": "error",
+    "valid": false
+  },
+  "rows": [
+    {
+      "anchor": "register(*, name=...)",
+      "failure_analysis": null,
+      "file": "lib/matplotlib/cm.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 2,
+        "found": true,
+        "n_parsed": 267,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 263,
+        "reward": 1.0
+      },
+      "loud_failure": false,
+      "observable": "callable signature (arity / parameter names)",
+      "operator": "kwonly_specialize",
+      "reason": "P2: the issue names ['name'] -- candidate CONTRACT, route to the rubric rather than transforming",
+      "tier": "HIGH",
+      "tree_digest": "6734ae00e35ec499b2c1990e17f002c096098edd3ed260563ba455ea9d92bb1d",
+      "verdict": "REFUSED"
+    }
+  ],
+  "targets": [
+    "lib/matplotlib/cm.py",
+    "lib/matplotlib/colors.py"
+  ],
+  "version": "3.7",
+  "witnesses": []
+}

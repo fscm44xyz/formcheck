@@ -1,0 +1,419 @@
+{
+  "completed": true,
+  "control": {
+    "graded": null,
+    "log": null,
+    "passed": true,
+    "reason": "untransformed reference scores 1.0"
+  },
+  "digest_trace": [
+    {
+      "digest": "5fd73acff269cc739c43e973a92f590aa852aa8ab162226f7db12168d4a15a77",
+      "memo_hit": false
+    },
+    {
+      "digest": "f5389fd17c228146fd856f70a5e178e2633d84fb1e3427254098c49c9632e901",
+      "memo_hit": false
+    }
+  ],
+  "disk_orphan_reclaimed_bytes": 0,
+  "disk_residual_bytes": 0,
+  "elapsed_seconds": 76.8,
+  "error": null,
+  "image": "swebench/sweb.eval.x86_64.sphinx-doc_1776_sphinx-7462:latest",
+  "instance_id": "sphinx-doc__sphinx-7462",
+  "leaked_containers": [],
+  "leaked_image": false,
+  "log": [
+    [
+      "<control>",
+      "OK",
+      "untransformed reference scores 1.0"
+    ],
+    [
+      "kwonly_specialize:<no anchor>",
+      "NOT_APPLICABLE",
+      "no anchor inside the gold-touched region"
+    ],
+    [
+      "symbol_rename:sphinx/domains/python.py:_parse_annotation",
+      "UNVALIDATED",
+      "1 failing test(s) have no recognisable failure block -- unknown log shape, not evidence of breakage; first: tests/test_pycode_ast.py::test_unparse[()-()]"
+    ],
+    [
+      "symbol_rename:sphinx/pycode/ast.py:unparse",
+      "REFUSED",
+      "BORDER: the issue names 'unparse' -- candidate CONTRACT, route to the rubric"
+    ],
+    [
+      "collection_reverse:<no anchor>",
+      "NOT_APPLICABLE",
+      "no anchor inside the gold-touched region"
+    ],
+    [
+      "message_reword:<no anchor>",
+      "NOT_APPLICABLE",
+      "no anchor inside the gold-touched region; 1 anchor(s) elsewhere in the 2 target(s): sphinx/domains/python.py, sphinx/pycode/ast.py"
+    ]
+  ],
+  "mountable": true,
+  "multi_target": true,
+  "n_targets": 2,
+  "on_prime_hub": null,
+  "on_prime_hub_reason": "not resolvable offline; no hub environment index is reachable from this repo, verifiers or swebench",
+  "operators_not_applicable": [
+    "collection_reverse",
+    "kwonly_specialize",
+    "message_reword"
+  ],
+  "operators_with_anchors": [
+    "symbol_rename"
+  ],
+  "repo": "sphinx-doc/sphinx",
+  "row": {
+    "elapsed": 48.71,
+    "error": null,
+    "error_type": null,
+    "index": 0,
+    "mode": "formcheck",
+    "name": "sphinx-doc__sphinx-7462",
+    "reason": "unchecked",
+    "valid": null
+  },
+  "rows": [
+    {
+      "anchor": null,
+      "failure_analysis": null,
+      "file": null,
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 2,
+        "found": true,
+        "n_parsed": 51,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 49,
+        "reward": 1.0
+      },
+      "loud_failure": false,
+      "observable": "callable signature (arity / parameter names)",
+      "operator": "kwonly_specialize",
+      "reason": "no anchor inside the gold-touched region",
+      "tier": "HIGH",
+      "tree_digest": "5fd73acff269cc739c43e973a92f590aa852aa8ab162226f7db12168d4a15a77",
+      "verdict": "NOT_APPLICABLE"
+    },
+    {
+      "anchor": "_parse_annotation",
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "broke": [],
+        "coupled": [
+          "tests/test_domain_py.py::test_function_signatures",
+          "tests/test_domain_py.py::test_domain_py_xrefs",
+          "tests/test_domain_py.py::test_domain_py_objects",
+          "tests/test_domain_py.py::test_resolve_xref_for_properties",
+          "tests/test_domain_py.py::test_domain_py_find_obj",
+          "tests/test_domain_py.py::test_get_full_qualified_name",
+          "tests/test_domain_py.py::test_pyfunction_signature",
+          "tests/test_domain_py.py::test_pyfunction_signature_full",
+          "tests/test_domain_py.py::test_pyfunction_signature_full_py38",
+          "tests/test_domain_py.py::test_optional_pyfunction_signature",
+          "tests/test_domain_py.py::test_parse_annotation"
+        ],
+        "failing": [
+          "tests/test_domain_py.py::test_function_signatures",
+          "tests/test_domain_py.py::test_domain_py_xrefs",
+          "tests/test_domain_py.py::test_domain_py_objects",
+          "tests/test_domain_py.py::test_resolve_xref_for_properties",
+          "tests/test_domain_py.py::test_domain_py_find_obj",
+          "tests/test_domain_py.py::test_get_full_qualified_name",
+          "tests/test_domain_py.py::test_pyfunction_signature",
+          "tests/test_domain_py.py::test_pyfunction_signature_full",
+          "tests/test_domain_py.py::test_pyfunction_signature_full_py38",
+          "tests/test_domain_py.py::test_optional_pyfunction_signature",
+          "tests/test_domain_py.py::test_parse_annotation",
+          "tests/test_pycode_ast.py::test_unparse[()-()]"
+        ],
+        "symbol": "_parse_annotation",
+        "unexplained": [
+          "tests/test_pycode_ast.py::test_unparse[()-()] (no failure section found)"
+        ],
+        "unparsed": [
+          "tests/test_pycode_ast.py::test_unparse[()-()]"
+        ],
+        "unparsed_log_shape": true
+      },
+      "file": "sphinx/domains/python.py",
+      "graded_log": "+ tox --current-env -epy39 -v -- tests/test_domain_py.py tests/test_pycode_ast.py\npy39: commands[0]> pytest -rA --durations 25 tests/test_domain_py.py tests/test_pycode_ast.py\n============================= test session starts ==============================\nplatform linux -- Python 3.9.20, pytest-8.3.3, pluggy-1.5.0\ncachedir: .tox/py39/.pytest_cache\nlibraries: Sphinx-3.1.0+/7f41bdb31, docutils-0.21.2\nbase tempdir: /tmp/pytest-of-root/pytest-1\nrootdir: /testbed\nconfigfile: setup.cfg\nplugins: cov-5.0.0\ncollected 39 items / 1 error\n\n==================================== ERRORS ====================================\n___________________ ERROR collecting tests/test_domain_py.py ___________________\nImportError while importing test module '/testbed/tests/test_domain_py.py'.\nHint: make sure your test modules/packages have valid Python names.\nTraceback:\n/opt/miniconda3/envs/testbed/lib/python3.9/importlib/__init__.py:127: in import_module\n    return _bootstrap._gcd_import(name[level:], package, level)\ntests/test_domain_py.py:24: in <module>\n    from sphinx.domains.python import (\nE   ImportError: cannot import name '_parse_annotation' from 'sphinx.domains.python' (/testbed/sphinx/domains/python.py)\n=============================== warnings summary ===============================\nsphinx/util/docutils.py:45\n  /testbed/sphinx/util/docutils.py:45: DeprecationWarning: distutils Version classes are deprecated. Use packaging.version instead.\n    __version_info__ = tuple(LooseVersion(docutils.__version__).version)\n\nsphinx/registry.py:22\n  /testbed/sphinx/registry.py:22: DeprecationWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html\n    from pkg_resources import iter_entry_points\n\n../opt/miniconda3/envs/testbed/lib/python3.9/site-packages/pkg_resources/__init__.py:3154\n../opt/miniconda3/envs/testbed/lib/python3.9/site-packages/pkg_resources/__init__.py:3154\n../opt/miniconda3/envs/testbed/lib/python3.9/site-packages/pkg_resources/__init__.py:3154\n../opt/miniconda3/envs/testbed/lib/python3.9/site-packages/pkg_resources/__init__.py:3154\n  /opt/miniconda3/envs/testbed/lib/python3.9/site-packages/pkg_resources/__init__.py:3154: DeprecationWarning: Deprecated call to `pkg_resources.declare_namespace('sphinxcontrib')`.\n  Implementing implicit namespace packages (as specified in PEP 420) is preferred to `pkg_resources.declare_namespace`. See https://setuptools.pypa.io/en/latest/references/keywords.html#keyword-namespace-packages\n    declare_namespace(pkg)\n\nsphinx/directives/patches.py:15\n  /testbed/sphinx/directives/patches.py:15: DeprecationWarning: The `docutils.parsers.rst.directive.html` module will be removed in Docutils 2.0. Since Docutils 0.18, the \"Meta\" node is defined in `docutils.parsers.rst.directives.misc`.\n    from docutils.parsers.rst.directives import images, html, tables\n\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n=========================== short test summary info ============================\nERROR tests/test_domain_py.py\n!!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!!\n========================= 7 warnings, 1 error in 0.21s =========================\npy39: exit 2 (0.89 seconds) /testbed> pytest -rA --durations 25 tests/test_domain_py.py tests/test_pycode_ast.py pid=333\n  py39: FAIL code 2 (0.90=setup[0.01]+cmd[0.89] seconds)\n  evaluation failed :( (0.99 seconds)\n\n",
+      "graded_report": {
+        "f2p_fail": 2,
+        "f2p_failing": [
+          "tests/test_domain_py.py::test_parse_annotation",
+          "tests/test_pycode_ast.py::test_unparse[()-()]"
+        ],
+        "f2p_pass": 0,
+        "found": true,
+        "n_parsed": 1,
+        "p2p_fail": 49,
+        "p2p_failing": [
+          "tests/test_domain_py.py::test_function_signatures",
+          "tests/test_domain_py.py::test_domain_py_xrefs",
+          "tests/test_domain_py.py::test_domain_py_objects",
+          "tests/test_domain_py.py::test_resolve_xref_for_properties",
+          "tests/test_domain_py.py::test_domain_py_find_obj",
+          "tests/test_domain_py.py::test_get_full_qualified_name",
+          "tests/test_domain_py.py::test_pyfunction_signature",
+          "tests/test_domain_py.py::test_pyfunction_signature_full",
+          "tests/test_domain_py.py::test_pyfunction_signature_full_py38",
+          "tests/test_domain_py.py::test_optional_pyfunction_signature"
+        ],
+        "p2p_pass": 0,
+        "reward": 0.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "1 failing test(s) have no recognisable failure block -- unknown log shape, not evidence of breakage; first: tests/test_pycode_ast.py::test_unparse[()-()]",
+      "tier": "HIGH",
+      "tree_digest": "f5389fd17c228146fd856f70a5e178e2633d84fb1e3427254098c49c9632e901",
+      "verdict": "UNVALIDATED"
+    },
+    {
+      "anchor": "unparse",
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "broke": [],
+        "coupled": [
+          "tests/test_domain_py.py::test_function_signatures",
+          "tests/test_domain_py.py::test_domain_py_xrefs",
+          "tests/test_domain_py.py::test_domain_py_objects",
+          "tests/test_domain_py.py::test_resolve_xref_for_properties",
+          "tests/test_domain_py.py::test_domain_py_find_obj",
+          "tests/test_domain_py.py::test_get_full_qualified_name",
+          "tests/test_domain_py.py::test_pyfunction_signature",
+          "tests/test_domain_py.py::test_pyfunction_signature_full",
+          "tests/test_domain_py.py::test_pyfunction_signature_full_py38",
+          "tests/test_domain_py.py::test_optional_pyfunction_signature",
+          "tests/test_domain_py.py::test_parse_annotation"
+        ],
+        "failing": [
+          "tests/test_domain_py.py::test_function_signatures",
+          "tests/test_domain_py.py::test_domain_py_xrefs",
+          "tests/test_domain_py.py::test_domain_py_objects",
+          "tests/test_domain_py.py::test_resolve_xref_for_properties",
+          "tests/test_domain_py.py::test_domain_py_find_obj",
+          "tests/test_domain_py.py::test_get_full_qualified_name",
+          "tests/test_domain_py.py::test_pyfunction_signature",
+          "tests/test_domain_py.py::test_pyfunction_signature_full",
+          "tests/test_domain_py.py::test_pyfunction_signature_full_py38",
+          "tests/test_domain_py.py::test_optional_pyfunction_signature",
+          "tests/test_domain_py.py::test_parse_annotation",
+          "tests/test_pycode_ast.py::test_unparse[()-()]"
+        ],
+        "symbol": "_parse_annotation",
+        "unexplained": [
+          "tests/test_pycode_ast.py::test_unparse[()-()] (no failure section found)"
+        ],
+        "unparsed": [
+          "tests/test_pycode_ast.py::test_unparse[()-()]"
+        ],
+        "unparsed_log_shape": true
+      },
+      "file": "sphinx/pycode/ast.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 2,
+        "f2p_failing": [
+          "tests/test_domain_py.py::test_parse_annotation",
+          "tests/test_pycode_ast.py::test_unparse[()-()]"
+        ],
+        "f2p_pass": 0,
+        "found": true,
+        "n_parsed": 1,
+        "p2p_fail": 49,
+        "p2p_failing": [
+          "tests/test_domain_py.py::test_function_signatures",
+          "tests/test_domain_py.py::test_domain_py_xrefs",
+          "tests/test_domain_py.py::test_domain_py_objects",
+          "tests/test_domain_py.py::test_resolve_xref_for_properties",
+          "tests/test_domain_py.py::test_domain_py_find_obj",
+          "tests/test_domain_py.py::test_get_full_qualified_name",
+          "tests/test_domain_py.py::test_pyfunction_signature",
+          "tests/test_domain_py.py::test_pyfunction_signature_full",
+          "tests/test_domain_py.py::test_pyfunction_signature_full_py38",
+          "tests/test_domain_py.py::test_optional_pyfunction_signature"
+        ],
+        "p2p_pass": 0,
+        "reward": 0.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "BORDER: the issue names 'unparse' -- candidate CONTRACT, route to the rubric",
+      "tier": "MEDIUM",
+      "tree_digest": "f5389fd17c228146fd856f70a5e178e2633d84fb1e3427254098c49c9632e901",
+      "verdict": "REFUSED"
+    },
+    {
+      "anchor": null,
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "broke": [],
+        "coupled": [
+          "tests/test_domain_py.py::test_function_signatures",
+          "tests/test_domain_py.py::test_domain_py_xrefs",
+          "tests/test_domain_py.py::test_domain_py_objects",
+          "tests/test_domain_py.py::test_resolve_xref_for_properties",
+          "tests/test_domain_py.py::test_domain_py_find_obj",
+          "tests/test_domain_py.py::test_get_full_qualified_name",
+          "tests/test_domain_py.py::test_pyfunction_signature",
+          "tests/test_domain_py.py::test_pyfunction_signature_full",
+          "tests/test_domain_py.py::test_pyfunction_signature_full_py38",
+          "tests/test_domain_py.py::test_optional_pyfunction_signature",
+          "tests/test_domain_py.py::test_parse_annotation"
+        ],
+        "failing": [
+          "tests/test_domain_py.py::test_function_signatures",
+          "tests/test_domain_py.py::test_domain_py_xrefs",
+          "tests/test_domain_py.py::test_domain_py_objects",
+          "tests/test_domain_py.py::test_resolve_xref_for_properties",
+          "tests/test_domain_py.py::test_domain_py_find_obj",
+          "tests/test_domain_py.py::test_get_full_qualified_name",
+          "tests/test_domain_py.py::test_pyfunction_signature",
+          "tests/test_domain_py.py::test_pyfunction_signature_full",
+          "tests/test_domain_py.py::test_pyfunction_signature_full_py38",
+          "tests/test_domain_py.py::test_optional_pyfunction_signature",
+          "tests/test_domain_py.py::test_parse_annotation",
+          "tests/test_pycode_ast.py::test_unparse[()-()]"
+        ],
+        "symbol": "_parse_annotation",
+        "unexplained": [
+          "tests/test_pycode_ast.py::test_unparse[()-()] (no failure section found)"
+        ],
+        "unparsed": [
+          "tests/test_pycode_ast.py::test_unparse[()-()]"
+        ],
+        "unparsed_log_shape": true
+      },
+      "file": null,
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 2,
+        "f2p_failing": [
+          "tests/test_domain_py.py::test_parse_annotation",
+          "tests/test_pycode_ast.py::test_unparse[()-()]"
+        ],
+        "f2p_pass": 0,
+        "found": true,
+        "n_parsed": 1,
+        "p2p_fail": 49,
+        "p2p_failing": [
+          "tests/test_domain_py.py::test_function_signatures",
+          "tests/test_domain_py.py::test_domain_py_xrefs",
+          "tests/test_domain_py.py::test_domain_py_objects",
+          "tests/test_domain_py.py::test_resolve_xref_for_properties",
+          "tests/test_domain_py.py::test_domain_py_find_obj",
+          "tests/test_domain_py.py::test_get_full_qualified_name",
+          "tests/test_domain_py.py::test_pyfunction_signature",
+          "tests/test_domain_py.py::test_pyfunction_signature_full",
+          "tests/test_domain_py.py::test_pyfunction_signature_full_py38",
+          "tests/test_domain_py.py::test_optional_pyfunction_signature"
+        ],
+        "p2p_pass": 0,
+        "reward": 0.0
+      },
+      "loud_failure": false,
+      "observable": "order of elements in a returned collection",
+      "operator": "collection_reverse",
+      "reason": "no anchor inside the gold-touched region",
+      "tier": "MEDIUM",
+      "tree_digest": "f5389fd17c228146fd856f70a5e178e2633d84fb1e3427254098c49c9632e901",
+      "verdict": "NOT_APPLICABLE"
+    },
+    {
+      "anchor": null,
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "broke": [],
+        "coupled": [
+          "tests/test_domain_py.py::test_function_signatures",
+          "tests/test_domain_py.py::test_domain_py_xrefs",
+          "tests/test_domain_py.py::test_domain_py_objects",
+          "tests/test_domain_py.py::test_resolve_xref_for_properties",
+          "tests/test_domain_py.py::test_domain_py_find_obj",
+          "tests/test_domain_py.py::test_get_full_qualified_name",
+          "tests/test_domain_py.py::test_pyfunction_signature",
+          "tests/test_domain_py.py::test_pyfunction_signature_full",
+          "tests/test_domain_py.py::test_pyfunction_signature_full_py38",
+          "tests/test_domain_py.py::test_optional_pyfunction_signature",
+          "tests/test_domain_py.py::test_parse_annotation"
+        ],
+        "failing": [
+          "tests/test_domain_py.py::test_function_signatures",
+          "tests/test_domain_py.py::test_domain_py_xrefs",
+          "tests/test_domain_py.py::test_domain_py_objects",
+          "tests/test_domain_py.py::test_resolve_xref_for_properties",
+          "tests/test_domain_py.py::test_domain_py_find_obj",
+          "tests/test_domain_py.py::test_get_full_qualified_name",
+          "tests/test_domain_py.py::test_pyfunction_signature",
+          "tests/test_domain_py.py::test_pyfunction_signature_full",
+          "tests/test_domain_py.py::test_pyfunction_signature_full_py38",
+          "tests/test_domain_py.py::test_optional_pyfunction_signature",
+          "tests/test_domain_py.py::test_parse_annotation",
+          "tests/test_pycode_ast.py::test_unparse[()-()]"
+        ],
+        "symbol": "_parse_annotation",
+        "unexplained": [
+          "tests/test_pycode_ast.py::test_unparse[()-()] (no failure section found)"
+        ],
+        "unparsed": [
+          "tests/test_pycode_ast.py::test_unparse[()-()]"
+        ],
+        "unparsed_log_shape": true
+      },
+      "file": null,
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 2,
+        "f2p_failing": [
+          "tests/test_domain_py.py::test_parse_annotation",
+          "tests/test_pycode_ast.py::test_unparse[()-()]"
+        ],
+        "f2p_pass": 0,
+        "found": true,
+        "n_parsed": 1,
+        "p2p_fail": 49,
+        "p2p_failing": [
+          "tests/test_domain_py.py::test_function_signatures",
+          "tests/test_domain_py.py::test_domain_py_xrefs",
+          "tests/test_domain_py.py::test_domain_py_objects",
+          "tests/test_domain_py.py::test_resolve_xref_for_properties",
+          "tests/test_domain_py.py::test_domain_py_find_obj",
+          "tests/test_domain_py.py::test_get_full_qualified_name",
+          "tests/test_domain_py.py::test_pyfunction_signature",
+          "tests/test_domain_py.py::test_pyfunction_signature_full",
+          "tests/test_domain_py.py::test_pyfunction_signature_full_py38",
+          "tests/test_domain_py.py::test_optional_pyfunction_signature"
+        ],
+        "p2p_pass": 0,
+        "reward": 0.0
+      },
+      "loud_failure": false,
+      "observable": "human-readable text of an exception message",
+      "operator": "message_reword",
+      "reason": "no anchor inside the gold-touched region; 1 anchor(s) elsewhere in the 2 target(s): sphinx/domains/python.py, sphinx/pycode/ast.py",
+      "tier": "HIGH",
+      "tree_digest": "f5389fd17c228146fd856f70a5e178e2633d84fb1e3427254098c49c9632e901",
+      "verdict": "NOT_APPLICABLE"
+    }
+  ],
+  "targets": [
+    "sphinx/domains/python.py",
+    "sphinx/pycode/ast.py"
+  ],
+  "version": "3.1",
+  "witnesses": []
+}

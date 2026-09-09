@@ -1,0 +1,207 @@
+{
+  "completed": true,
+  "control": {
+    "graded": null,
+    "log": null,
+    "passed": true,
+    "reason": "untransformed reference scores 1.0"
+  },
+  "digest_trace": [
+    {
+      "digest": "d9828439abd5bcb3721a285a7056fc54d3f0476e6d9c0fe243bf5def1cd2983d",
+      "memo_hit": false
+    }
+  ],
+  "disk_orphan_reclaimed_bytes": 0,
+  "disk_residual_bytes": 0,
+  "elapsed_seconds": 42.14,
+  "error": null,
+  "image": "swebench/sweb.eval.x86_64.django_1776_django-13512:latest",
+  "instance_id": "django__django-13512",
+  "leaked_containers": [],
+  "leaked_image": false,
+  "log": [
+    [
+      "<control>",
+      "OK",
+      "untransformed reference scores 1.0"
+    ],
+    [
+      "kwonly_specialize:<no anchor>",
+      "NOT_APPLICABLE",
+      "no anchor inside the gold-touched region; 34 anchor(s) elsewhere in the 2 target(s): django/contrib/admin/utils.py, django/forms/fields.py"
+    ],
+    [
+      "symbol_rename:django/contrib/admin/utils.py:display_for_field",
+      "REFUSED",
+      "multi-line import of 'display_for_field' in django/contrib/admin/helpers.py"
+    ],
+    [
+      "symbol_rename:django/forms/fields.py:JSONField",
+      "REFUSED",
+      "BORDER: the issue names 'JSONField' -- candidate CONTRACT, route to the rubric"
+    ],
+    [
+      "collection_reverse:<no anchor>",
+      "NOT_APPLICABLE",
+      "no anchor inside the gold-touched region; 2 anchor(s) elsewhere in the 2 target(s): django/contrib/admin/utils.py, django/forms/fields.py"
+    ],
+    [
+      "message_reword:<no anchor>",
+      "NOT_APPLICABLE",
+      "no anchor inside the gold-touched region; 2 anchor(s) elsewhere in the 2 target(s): django/contrib/admin/utils.py, django/forms/fields.py"
+    ]
+  ],
+  "mountable": true,
+  "multi_target": true,
+  "n_targets": 2,
+  "on_prime_hub": null,
+  "on_prime_hub_reason": "not resolvable offline; no hub environment index is reachable from this repo, verifiers or swebench",
+  "operators_not_applicable": [
+    "collection_reverse",
+    "kwonly_specialize",
+    "message_reword"
+  ],
+  "operators_with_anchors": [
+    "symbol_rename"
+  ],
+  "repo": "django/django",
+  "row": {
+    "elapsed": 23.97,
+    "error": null,
+    "error_type": null,
+    "index": 0,
+    "mode": "formcheck",
+    "name": "django__django-13512",
+    "reason": "unchecked",
+    "valid": null
+  },
+  "rows": [
+    {
+      "anchor": null,
+      "failure_analysis": null,
+      "file": null,
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 3,
+        "found": true,
+        "n_parsed": 35,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 32,
+        "reward": 1.0
+      },
+      "loud_failure": false,
+      "observable": "callable signature (arity / parameter names)",
+      "operator": "kwonly_specialize",
+      "reason": "no anchor inside the gold-touched region; 34 anchor(s) elsewhere in the 2 target(s): django/contrib/admin/utils.py, django/forms/fields.py",
+      "tier": "HIGH",
+      "tree_digest": "d9828439abd5bcb3721a285a7056fc54d3f0476e6d9c0fe243bf5def1cd2983d",
+      "verdict": "NOT_APPLICABLE"
+    },
+    {
+      "anchor": "display_for_field",
+      "failure_analysis": null,
+      "file": "django/contrib/admin/utils.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 3,
+        "found": true,
+        "n_parsed": 35,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 32,
+        "reward": 1.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "multi-line import of 'display_for_field' in django/contrib/admin/helpers.py",
+      "tier": "MEDIUM",
+      "tree_digest": "d9828439abd5bcb3721a285a7056fc54d3f0476e6d9c0fe243bf5def1cd2983d",
+      "verdict": "REFUSED"
+    },
+    {
+      "anchor": "JSONField",
+      "failure_analysis": null,
+      "file": "django/forms/fields.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 3,
+        "found": true,
+        "n_parsed": 35,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 32,
+        "reward": 1.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "BORDER: the issue names 'JSONField' -- candidate CONTRACT, route to the rubric",
+      "tier": "MEDIUM",
+      "tree_digest": "d9828439abd5bcb3721a285a7056fc54d3f0476e6d9c0fe243bf5def1cd2983d",
+      "verdict": "REFUSED"
+    },
+    {
+      "anchor": null,
+      "failure_analysis": null,
+      "file": null,
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 3,
+        "found": true,
+        "n_parsed": 35,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 32,
+        "reward": 1.0
+      },
+      "loud_failure": false,
+      "observable": "order of elements in a returned collection",
+      "operator": "collection_reverse",
+      "reason": "no anchor inside the gold-touched region; 2 anchor(s) elsewhere in the 2 target(s): django/contrib/admin/utils.py, django/forms/fields.py",
+      "tier": "MEDIUM",
+      "tree_digest": "d9828439abd5bcb3721a285a7056fc54d3f0476e6d9c0fe243bf5def1cd2983d",
+      "verdict": "NOT_APPLICABLE"
+    },
+    {
+      "anchor": null,
+      "failure_analysis": null,
+      "file": null,
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 3,
+        "found": true,
+        "n_parsed": 35,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 32,
+        "reward": 1.0
+      },
+      "loud_failure": false,
+      "observable": "human-readable text of an exception message",
+      "operator": "message_reword",
+      "reason": "no anchor inside the gold-touched region; 2 anchor(s) elsewhere in the 2 target(s): django/contrib/admin/utils.py, django/forms/fields.py",
+      "tier": "HIGH",
+      "tree_digest": "d9828439abd5bcb3721a285a7056fc54d3f0476e6d9c0fe243bf5def1cd2983d",
+      "verdict": "NOT_APPLICABLE"
+    }
+  ],
+  "targets": [
+    "django/contrib/admin/utils.py",
+    "django/forms/fields.py"
+  ],
+  "version": "3.2",
+  "witnesses": []
+}

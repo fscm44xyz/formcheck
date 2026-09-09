@@ -1,0 +1,289 @@
+{
+  "completed": true,
+  "control": {
+    "graded": null,
+    "log": null,
+    "passed": true,
+    "reason": "untransformed reference scores 1.0"
+  },
+  "digest_trace": [
+    {
+      "digest": "8e7b373253d78a6991ffe9c76fa0f98792606a416f25e32526497047f3253902",
+      "memo_hit": false
+    },
+    {
+      "digest": "d1af0a58f5239be290e09ce3c1ad10392a270b7ece746a7545295fefc962ad3c",
+      "memo_hit": false
+    },
+    {
+      "digest": "d1af0a58f5239be290e09ce3c1ad10392a270b7ece746a7545295fefc962ad3c",
+      "memo_hit": true
+    }
+  ],
+  "disk_orphan_reclaimed_bytes": 0,
+  "disk_residual_bytes": 0,
+  "elapsed_seconds": 265.37,
+  "error": null,
+  "image": "swebench/sweb.eval.x86_64.django_1776_django-16256:latest",
+  "instance_id": "django__django-16256",
+  "leaked_containers": [],
+  "leaked_image": false,
+  "log": [
+    [
+      "<control>",
+      "OK",
+      "untransformed reference scores 1.0"
+    ],
+    [
+      "kwonly_specialize:<no anchor>",
+      "NOT_APPLICABLE",
+      "no anchor inside the gold-touched region; 17 anchor(s) elsewhere in the 2 target(s): django/contrib/contenttypes/fields.py, django/db/models/fields/related_descriptors.py"
+    ],
+    [
+      "symbol_rename:django/contrib/contenttypes/fields.py:create_generic_related_manager",
+      "CLEAN",
+      "reward 1.0"
+    ],
+    [
+      "symbol_rename:django/db/models/fields/related_descriptors.py:create_reverse_many_to_one_manager",
+      "REFUSED",
+      "BORDER: the issue names 'create_reverse_many_to_one_manager' -- candidate CONTRACT, route to the rubric"
+    ],
+    [
+      "symbol_rename:django/db/models/fields/related_descriptors.py:create_forward_many_to_many_manager",
+      "REFUSED",
+      "BORDER: the issue names 'create_forward_many_to_many_manager' -- candidate CONTRACT, route to the rubric"
+    ],
+    [
+      "collection_reverse:<no anchor>",
+      "NOT_APPLICABLE",
+      "no anchor inside the gold-touched region"
+    ],
+    [
+      "message_reword:<no anchor>",
+      "NOT_APPLICABLE",
+      "no anchor inside the gold-touched region; 3 anchor(s) elsewhere in the 2 target(s): django/contrib/contenttypes/fields.py, django/db/models/fields/related_descriptors.py"
+    ]
+  ],
+  "mountable": true,
+  "multi_target": true,
+  "n_targets": 2,
+  "on_prime_hub": null,
+  "on_prime_hub_reason": "not resolvable offline; no hub environment index is reachable from this repo, verifiers or swebench",
+  "operators_not_applicable": [
+    "collection_reverse",
+    "kwonly_specialize",
+    "message_reword"
+  ],
+  "operators_with_anchors": [
+    "symbol_rename"
+  ],
+  "repo": "django/django",
+  "row": {
+    "elapsed": 86.33,
+    "error": null,
+    "error_type": null,
+    "index": 0,
+    "mode": "formcheck",
+    "name": "django__django-16256",
+    "reason": "valid",
+    "valid": true
+  },
+  "rows": [
+    {
+      "anchor": null,
+      "failure_analysis": null,
+      "file": null,
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 9,
+        "found": true,
+        "n_parsed": 62,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 53,
+        "reward": 1.0
+      },
+      "loud_failure": false,
+      "observable": "callable signature (arity / parameter names)",
+      "operator": "kwonly_specialize",
+      "reason": "no anchor inside the gold-touched region; 17 anchor(s) elsewhere in the 2 target(s): django/contrib/contenttypes/fields.py, django/db/models/fields/related_descriptors.py",
+      "tier": "HIGH",
+      "tree_digest": "8e7b373253d78a6991ffe9c76fa0f98792606a416f25e32526497047f3253902",
+      "verdict": "NOT_APPLICABLE"
+    },
+    {
+      "anchor": "create_generic_related_manager",
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "broke": [],
+        "coupled": [],
+        "failing": [],
+        "symbol": "create_generic_related_manager",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": "django/contrib/contenttypes/fields.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 9,
+        "found": true,
+        "n_parsed": 62,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 53,
+        "reward": 1.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "reward 1.0",
+      "tier": "MEDIUM",
+      "tree_digest": "d1af0a58f5239be290e09ce3c1ad10392a270b7ece746a7545295fefc962ad3c",
+      "verdict": "CLEAN"
+    },
+    {
+      "anchor": "create_reverse_many_to_one_manager",
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "broke": [],
+        "coupled": [],
+        "failing": [],
+        "symbol": "create_generic_related_manager",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": "django/db/models/fields/related_descriptors.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 9,
+        "found": true,
+        "n_parsed": 62,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 53,
+        "reward": 1.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "BORDER: the issue names 'create_reverse_many_to_one_manager' -- candidate CONTRACT, route to the rubric",
+      "tier": "MEDIUM",
+      "tree_digest": "d1af0a58f5239be290e09ce3c1ad10392a270b7ece746a7545295fefc962ad3c",
+      "verdict": "REFUSED"
+    },
+    {
+      "anchor": "create_forward_many_to_many_manager",
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "broke": [],
+        "coupled": [],
+        "failing": [],
+        "symbol": "create_generic_related_manager",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": "django/db/models/fields/related_descriptors.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 9,
+        "found": true,
+        "n_parsed": 62,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 53,
+        "reward": 1.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "BORDER: the issue names 'create_forward_many_to_many_manager' -- candidate CONTRACT, route to the rubric",
+      "tier": "MEDIUM",
+      "tree_digest": "d1af0a58f5239be290e09ce3c1ad10392a270b7ece746a7545295fefc962ad3c",
+      "verdict": "REFUSED"
+    },
+    {
+      "anchor": null,
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "broke": [],
+        "coupled": [],
+        "failing": [],
+        "symbol": "create_generic_related_manager",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": null,
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 9,
+        "found": true,
+        "n_parsed": 62,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 53,
+        "reward": 1.0
+      },
+      "loud_failure": false,
+      "observable": "order of elements in a returned collection",
+      "operator": "collection_reverse",
+      "reason": "no anchor inside the gold-touched region",
+      "tier": "MEDIUM",
+      "tree_digest": "d1af0a58f5239be290e09ce3c1ad10392a270b7ece746a7545295fefc962ad3c",
+      "verdict": "NOT_APPLICABLE"
+    },
+    {
+      "anchor": null,
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "broke": [],
+        "coupled": [],
+        "failing": [],
+        "symbol": "create_generic_related_manager",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": null,
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 9,
+        "found": true,
+        "n_parsed": 62,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 53,
+        "reward": 1.0
+      },
+      "loud_failure": false,
+      "observable": "human-readable text of an exception message",
+      "operator": "message_reword",
+      "reason": "no anchor inside the gold-touched region; 3 anchor(s) elsewhere in the 2 target(s): django/contrib/contenttypes/fields.py, django/db/models/fields/related_descriptors.py",
+      "tier": "HIGH",
+      "tree_digest": "d1af0a58f5239be290e09ce3c1ad10392a270b7ece746a7545295fefc962ad3c",
+      "verdict": "NOT_APPLICABLE"
+    }
+  ],
+  "targets": [
+    "django/contrib/contenttypes/fields.py",
+    "django/db/models/fields/related_descriptors.py"
+  ],
+  "version": "4.2",
+  "witnesses": []
+}

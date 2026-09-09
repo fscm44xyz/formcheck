@@ -1,0 +1,729 @@
+{
+  "completed": true,
+  "control": {
+    "graded": null,
+    "log": null,
+    "passed": true,
+    "reason": "untransformed reference scores 1.0"
+  },
+  "digest_trace": [
+    {
+      "digest": "0782046f437aead767f8a42c3ba56f7c948f74cb93406bd4006779ddcbf04bd3",
+      "memo_hit": false
+    }
+  ],
+  "disk_orphan_reclaimed_bytes": 0,
+  "disk_residual_bytes": 0,
+  "elapsed_seconds": 260.28,
+  "error": null,
+  "image": "swebench/sweb.eval.x86_64.django_1776_django-16560:latest",
+  "instance_id": "django__django-16560",
+  "leaked_containers": [],
+  "leaked_image": false,
+  "log": [
+    [
+      "<control>",
+      "OK",
+      "untransformed reference scores 1.0"
+    ],
+    [
+      "kwonly_specialize:django/contrib/postgres/constraints.py:__init__(*, index_type=...)",
+      "REFUSED",
+      "P4: 'index_type' is read outside a param-only `if` (line(s) [38, 60, 38])"
+    ],
+    [
+      "kwonly_specialize:django/contrib/postgres/constraints.py:__init__(*, condition=...)",
+      "REFUSED",
+      "P4: 'condition' is read outside a param-only `if` (line(s) [61, 51])"
+    ],
+    [
+      "kwonly_specialize:django/contrib/postgres/constraints.py:__init__(*, deferrable=...)",
+      "REFUSED",
+      "P4: 'deferrable' is read outside a param-only `if` (line(s) [62, 53])"
+    ],
+    [
+      "kwonly_specialize:django/contrib/postgres/constraints.py:__init__(*, include=...)",
+      "REFUSED",
+      "P4: 'include' is read outside a param-only `if` (line(s) [63, 57, 63])"
+    ],
+    [
+      "kwonly_specialize:django/contrib/postgres/constraints.py:__init__(*, violation_error_code=...)",
+      "REFUSED",
+      "P4: 'violation_error_code' is read outside a param-only `if` (line(s) [66])"
+    ],
+    [
+      "kwonly_specialize:django/contrib/postgres/constraints.py:__init__(*, violation_error_message=...)",
+      "REFUSED",
+      "P2: the issue names ['violation_error_message'] -- candidate CONTRACT, route to the rubric rather than transforming"
+    ],
+    [
+      "kwonly_specialize:django/db/models/constraints.py:__init__(*, name=...)",
+      "REFUSED",
+      "P4: 'name' is read outside a param-only `if` (line(s) [37, 32])"
+    ],
+    [
+      "kwonly_specialize:django/db/models/constraints.py:__init__(*, violation_error_code=...)",
+      "REFUSED",
+      "P4: 'violation_error_code' is read outside a param-only `if` (line(s) [38, 39])"
+    ],
+    [
+      "kwonly_specialize:django/db/models/constraints.py:__init__(*, violation_error_message=...)",
+      "REFUSED",
+      "P2: the issue names ['violation_error_message'] -- candidate CONTRACT, route to the rubric rather than transforming"
+    ],
+    [
+      "kwonly_specialize:django/db/models/constraints.py:__init__(*, violation_error_code=...)",
+      "REFUSED",
+      "P4: 'violation_error_code' is read outside a param-only `if` (line(s) [38, 39])"
+    ],
+    [
+      "kwonly_specialize:django/db/models/constraints.py:__init__(*, violation_error_message=...)",
+      "REFUSED",
+      "P2: the issue names ['violation_error_message'] -- candidate CONTRACT, route to the rubric rather than transforming"
+    ],
+    [
+      "kwonly_specialize:django/db/models/constraints.py:__init__(*, name=...)",
+      "REFUSED",
+      "P4: 'name' is read outside a param-only `if` (line(s) [37, 32])"
+    ],
+    [
+      "kwonly_specialize:django/db/models/constraints.py:__init__(*, condition=...)",
+      "REFUSED",
+      "P1: 'condition' is not a keyword-only parameter of __init__"
+    ],
+    [
+      "kwonly_specialize:django/db/models/constraints.py:__init__(*, deferrable=...)",
+      "REFUSED",
+      "P1: 'deferrable' is not a keyword-only parameter of __init__"
+    ],
+    [
+      "kwonly_specialize:django/db/models/constraints.py:__init__(*, include=...)",
+      "REFUSED",
+      "P1: 'include' is not a keyword-only parameter of __init__"
+    ],
+    [
+      "kwonly_specialize:django/db/models/constraints.py:__init__(*, violation_error_code=...)",
+      "REFUSED",
+      "P4: 'violation_error_code' is read outside a param-only `if` (line(s) [38, 39])"
+    ],
+    [
+      "kwonly_specialize:django/db/models/constraints.py:__init__(*, violation_error_message=...)",
+      "REFUSED",
+      "P2: the issue names ['violation_error_message'] -- candidate CONTRACT, route to the rubric rather than transforming"
+    ],
+    [
+      "symbol_rename:django/contrib/postgres/constraints.py:ExclusionConstraint",
+      "REFUSED",
+      "dynamic reach: 'ExclusionConstraint' appears in a non-annotation string literal in django/contrib/postgres/constraints.py line 13 ('ExclusionConstraint') -- an `__all__` entry; 3 further hit(s) -- an alpha-rename cannot be argued safe"
+    ],
+    [
+      "symbol_rename:django/db/models/constraints.py:BaseConstraint",
+      "REFUSED",
+      "BORDER: the issue names 'BaseConstraint' -- candidate CONTRACT, route to the rubric"
+    ],
+    [
+      "symbol_rename:django/db/models/constraints.py:CheckConstraint",
+      "REFUSED",
+      "dynamic reach: 'CheckConstraint' appears in a non-annotation string literal in django/db/models/constraints.py line 16 ('CheckConstraint') -- an `__all__` entry; 1 further hit(s) -- an alpha-rename cannot be argued safe"
+    ],
+    [
+      "symbol_rename:django/db/models/constraints.py:UniqueConstraint",
+      "REFUSED",
+      "dynamic reach: 'UniqueConstraint' appears in a non-annotation string literal in django/db/models/constraints.py line 16 ('UniqueConstraint') -- an `__all__` entry; 13 further hit(s) -- an alpha-rename cannot be argued safe"
+    ],
+    [
+      "collection_reverse:<no anchor>",
+      "NOT_APPLICABLE",
+      "no anchor inside the gold-touched region"
+    ],
+    [
+      "message_reword:<no anchor>",
+      "NOT_APPLICABLE",
+      "no anchor inside the gold-touched region; 25 anchor(s) elsewhere in the 2 target(s): django/contrib/postgres/constraints.py, django/db/models/constraints.py"
+    ]
+  ],
+  "mountable": true,
+  "multi_target": true,
+  "n_targets": 2,
+  "on_prime_hub": null,
+  "on_prime_hub_reason": "not resolvable offline; no hub environment index is reachable from this repo, verifiers or swebench",
+  "operators_not_applicable": [
+    "collection_reverse",
+    "message_reword"
+  ],
+  "operators_with_anchors": [
+    "kwonly_specialize",
+    "symbol_rename"
+  ],
+  "repo": "django/django",
+  "row": {
+    "elapsed": 106.86,
+    "error": null,
+    "error_type": null,
+    "index": 0,
+    "mode": "formcheck",
+    "name": "django__django-16560",
+    "reason": "unchecked",
+    "valid": null
+  },
+  "rows": [
+    {
+      "anchor": "__init__(*, index_type=...)",
+      "failure_analysis": null,
+      "file": "django/contrib/postgres/constraints.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 8,
+        "found": true,
+        "n_parsed": 128,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 66,
+        "reward": 1.0
+      },
+      "loud_failure": false,
+      "observable": "callable signature (arity / parameter names)",
+      "operator": "kwonly_specialize",
+      "reason": "P4: 'index_type' is read outside a param-only `if` (line(s) [38, 60, 38])",
+      "tier": "HIGH",
+      "tree_digest": "0782046f437aead767f8a42c3ba56f7c948f74cb93406bd4006779ddcbf04bd3",
+      "verdict": "REFUSED"
+    },
+    {
+      "anchor": "__init__(*, condition=...)",
+      "failure_analysis": null,
+      "file": "django/contrib/postgres/constraints.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 8,
+        "found": true,
+        "n_parsed": 128,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 66,
+        "reward": 1.0
+      },
+      "loud_failure": false,
+      "observable": "callable signature (arity / parameter names)",
+      "operator": "kwonly_specialize",
+      "reason": "P4: 'condition' is read outside a param-only `if` (line(s) [61, 51])",
+      "tier": "HIGH",
+      "tree_digest": "0782046f437aead767f8a42c3ba56f7c948f74cb93406bd4006779ddcbf04bd3",
+      "verdict": "REFUSED"
+    },
+    {
+      "anchor": "__init__(*, deferrable=...)",
+      "failure_analysis": null,
+      "file": "django/contrib/postgres/constraints.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 8,
+        "found": true,
+        "n_parsed": 128,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 66,
+        "reward": 1.0
+      },
+      "loud_failure": false,
+      "observable": "callable signature (arity / parameter names)",
+      "operator": "kwonly_specialize",
+      "reason": "P4: 'deferrable' is read outside a param-only `if` (line(s) [62, 53])",
+      "tier": "HIGH",
+      "tree_digest": "0782046f437aead767f8a42c3ba56f7c948f74cb93406bd4006779ddcbf04bd3",
+      "verdict": "REFUSED"
+    },
+    {
+      "anchor": "__init__(*, include=...)",
+      "failure_analysis": null,
+      "file": "django/contrib/postgres/constraints.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 8,
+        "found": true,
+        "n_parsed": 128,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 66,
+        "reward": 1.0
+      },
+      "loud_failure": false,
+      "observable": "callable signature (arity / parameter names)",
+      "operator": "kwonly_specialize",
+      "reason": "P4: 'include' is read outside a param-only `if` (line(s) [63, 57, 63])",
+      "tier": "HIGH",
+      "tree_digest": "0782046f437aead767f8a42c3ba56f7c948f74cb93406bd4006779ddcbf04bd3",
+      "verdict": "REFUSED"
+    },
+    {
+      "anchor": "__init__(*, violation_error_code=...)",
+      "failure_analysis": null,
+      "file": "django/contrib/postgres/constraints.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 8,
+        "found": true,
+        "n_parsed": 128,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 66,
+        "reward": 1.0
+      },
+      "loud_failure": false,
+      "observable": "callable signature (arity / parameter names)",
+      "operator": "kwonly_specialize",
+      "reason": "P4: 'violation_error_code' is read outside a param-only `if` (line(s) [66])",
+      "tier": "HIGH",
+      "tree_digest": "0782046f437aead767f8a42c3ba56f7c948f74cb93406bd4006779ddcbf04bd3",
+      "verdict": "REFUSED"
+    },
+    {
+      "anchor": "__init__(*, violation_error_message=...)",
+      "failure_analysis": null,
+      "file": "django/contrib/postgres/constraints.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 8,
+        "found": true,
+        "n_parsed": 128,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 66,
+        "reward": 1.0
+      },
+      "loud_failure": false,
+      "observable": "callable signature (arity / parameter names)",
+      "operator": "kwonly_specialize",
+      "reason": "P2: the issue names ['violation_error_message'] -- candidate CONTRACT, route to the rubric rather than transforming",
+      "tier": "HIGH",
+      "tree_digest": "0782046f437aead767f8a42c3ba56f7c948f74cb93406bd4006779ddcbf04bd3",
+      "verdict": "REFUSED"
+    },
+    {
+      "anchor": "__init__(*, name=...)",
+      "failure_analysis": null,
+      "file": "django/db/models/constraints.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 8,
+        "found": true,
+        "n_parsed": 128,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 66,
+        "reward": 1.0
+      },
+      "loud_failure": false,
+      "observable": "callable signature (arity / parameter names)",
+      "operator": "kwonly_specialize",
+      "reason": "P4: 'name' is read outside a param-only `if` (line(s) [37, 32])",
+      "tier": "HIGH",
+      "tree_digest": "0782046f437aead767f8a42c3ba56f7c948f74cb93406bd4006779ddcbf04bd3",
+      "verdict": "REFUSED"
+    },
+    {
+      "anchor": "__init__(*, violation_error_code=...)",
+      "failure_analysis": null,
+      "file": "django/db/models/constraints.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 8,
+        "found": true,
+        "n_parsed": 128,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 66,
+        "reward": 1.0
+      },
+      "loud_failure": false,
+      "observable": "callable signature (arity / parameter names)",
+      "operator": "kwonly_specialize",
+      "reason": "P4: 'violation_error_code' is read outside a param-only `if` (line(s) [38, 39])",
+      "tier": "HIGH",
+      "tree_digest": "0782046f437aead767f8a42c3ba56f7c948f74cb93406bd4006779ddcbf04bd3",
+      "verdict": "REFUSED"
+    },
+    {
+      "anchor": "__init__(*, violation_error_message=...)",
+      "failure_analysis": null,
+      "file": "django/db/models/constraints.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 8,
+        "found": true,
+        "n_parsed": 128,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 66,
+        "reward": 1.0
+      },
+      "loud_failure": false,
+      "observable": "callable signature (arity / parameter names)",
+      "operator": "kwonly_specialize",
+      "reason": "P2: the issue names ['violation_error_message'] -- candidate CONTRACT, route to the rubric rather than transforming",
+      "tier": "HIGH",
+      "tree_digest": "0782046f437aead767f8a42c3ba56f7c948f74cb93406bd4006779ddcbf04bd3",
+      "verdict": "REFUSED"
+    },
+    {
+      "anchor": "__init__(*, violation_error_code=...)",
+      "failure_analysis": null,
+      "file": "django/db/models/constraints.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 8,
+        "found": true,
+        "n_parsed": 128,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 66,
+        "reward": 1.0
+      },
+      "loud_failure": false,
+      "observable": "callable signature (arity / parameter names)",
+      "operator": "kwonly_specialize",
+      "reason": "P4: 'violation_error_code' is read outside a param-only `if` (line(s) [38, 39])",
+      "tier": "HIGH",
+      "tree_digest": "0782046f437aead767f8a42c3ba56f7c948f74cb93406bd4006779ddcbf04bd3",
+      "verdict": "REFUSED"
+    },
+    {
+      "anchor": "__init__(*, violation_error_message=...)",
+      "failure_analysis": null,
+      "file": "django/db/models/constraints.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 8,
+        "found": true,
+        "n_parsed": 128,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 66,
+        "reward": 1.0
+      },
+      "loud_failure": false,
+      "observable": "callable signature (arity / parameter names)",
+      "operator": "kwonly_specialize",
+      "reason": "P2: the issue names ['violation_error_message'] -- candidate CONTRACT, route to the rubric rather than transforming",
+      "tier": "HIGH",
+      "tree_digest": "0782046f437aead767f8a42c3ba56f7c948f74cb93406bd4006779ddcbf04bd3",
+      "verdict": "REFUSED"
+    },
+    {
+      "anchor": "__init__(*, name=...)",
+      "failure_analysis": null,
+      "file": "django/db/models/constraints.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 8,
+        "found": true,
+        "n_parsed": 128,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 66,
+        "reward": 1.0
+      },
+      "loud_failure": false,
+      "observable": "callable signature (arity / parameter names)",
+      "operator": "kwonly_specialize",
+      "reason": "P4: 'name' is read outside a param-only `if` (line(s) [37, 32])",
+      "tier": "HIGH",
+      "tree_digest": "0782046f437aead767f8a42c3ba56f7c948f74cb93406bd4006779ddcbf04bd3",
+      "verdict": "REFUSED"
+    },
+    {
+      "anchor": "__init__(*, condition=...)",
+      "failure_analysis": null,
+      "file": "django/db/models/constraints.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 8,
+        "found": true,
+        "n_parsed": 128,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 66,
+        "reward": 1.0
+      },
+      "loud_failure": false,
+      "observable": "callable signature (arity / parameter names)",
+      "operator": "kwonly_specialize",
+      "reason": "P1: 'condition' is not a keyword-only parameter of __init__",
+      "tier": "HIGH",
+      "tree_digest": "0782046f437aead767f8a42c3ba56f7c948f74cb93406bd4006779ddcbf04bd3",
+      "verdict": "REFUSED"
+    },
+    {
+      "anchor": "__init__(*, deferrable=...)",
+      "failure_analysis": null,
+      "file": "django/db/models/constraints.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 8,
+        "found": true,
+        "n_parsed": 128,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 66,
+        "reward": 1.0
+      },
+      "loud_failure": false,
+      "observable": "callable signature (arity / parameter names)",
+      "operator": "kwonly_specialize",
+      "reason": "P1: 'deferrable' is not a keyword-only parameter of __init__",
+      "tier": "HIGH",
+      "tree_digest": "0782046f437aead767f8a42c3ba56f7c948f74cb93406bd4006779ddcbf04bd3",
+      "verdict": "REFUSED"
+    },
+    {
+      "anchor": "__init__(*, include=...)",
+      "failure_analysis": null,
+      "file": "django/db/models/constraints.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 8,
+        "found": true,
+        "n_parsed": 128,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 66,
+        "reward": 1.0
+      },
+      "loud_failure": false,
+      "observable": "callable signature (arity / parameter names)",
+      "operator": "kwonly_specialize",
+      "reason": "P1: 'include' is not a keyword-only parameter of __init__",
+      "tier": "HIGH",
+      "tree_digest": "0782046f437aead767f8a42c3ba56f7c948f74cb93406bd4006779ddcbf04bd3",
+      "verdict": "REFUSED"
+    },
+    {
+      "anchor": "__init__(*, violation_error_code=...)",
+      "failure_analysis": null,
+      "file": "django/db/models/constraints.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 8,
+        "found": true,
+        "n_parsed": 128,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 66,
+        "reward": 1.0
+      },
+      "loud_failure": false,
+      "observable": "callable signature (arity / parameter names)",
+      "operator": "kwonly_specialize",
+      "reason": "P4: 'violation_error_code' is read outside a param-only `if` (line(s) [38, 39])",
+      "tier": "HIGH",
+      "tree_digest": "0782046f437aead767f8a42c3ba56f7c948f74cb93406bd4006779ddcbf04bd3",
+      "verdict": "REFUSED"
+    },
+    {
+      "anchor": "__init__(*, violation_error_message=...)",
+      "failure_analysis": null,
+      "file": "django/db/models/constraints.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 8,
+        "found": true,
+        "n_parsed": 128,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 66,
+        "reward": 1.0
+      },
+      "loud_failure": false,
+      "observable": "callable signature (arity / parameter names)",
+      "operator": "kwonly_specialize",
+      "reason": "P2: the issue names ['violation_error_message'] -- candidate CONTRACT, route to the rubric rather than transforming",
+      "tier": "HIGH",
+      "tree_digest": "0782046f437aead767f8a42c3ba56f7c948f74cb93406bd4006779ddcbf04bd3",
+      "verdict": "REFUSED"
+    },
+    {
+      "anchor": "ExclusionConstraint",
+      "failure_analysis": null,
+      "file": "django/contrib/postgres/constraints.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 8,
+        "found": true,
+        "n_parsed": 128,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 66,
+        "reward": 1.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "dynamic reach: 'ExclusionConstraint' appears in a non-annotation string literal in django/contrib/postgres/constraints.py line 13 ('ExclusionConstraint') -- an `__all__` entry; 3 further hit(s) -- an alpha-rename cannot be argued safe",
+      "tier": "MEDIUM",
+      "tree_digest": "0782046f437aead767f8a42c3ba56f7c948f74cb93406bd4006779ddcbf04bd3",
+      "verdict": "REFUSED"
+    },
+    {
+      "anchor": "BaseConstraint",
+      "failure_analysis": null,
+      "file": "django/db/models/constraints.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 8,
+        "found": true,
+        "n_parsed": 128,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 66,
+        "reward": 1.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "BORDER: the issue names 'BaseConstraint' -- candidate CONTRACT, route to the rubric",
+      "tier": "MEDIUM",
+      "tree_digest": "0782046f437aead767f8a42c3ba56f7c948f74cb93406bd4006779ddcbf04bd3",
+      "verdict": "REFUSED"
+    },
+    {
+      "anchor": "CheckConstraint",
+      "failure_analysis": null,
+      "file": "django/db/models/constraints.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 8,
+        "found": true,
+        "n_parsed": 128,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 66,
+        "reward": 1.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "dynamic reach: 'CheckConstraint' appears in a non-annotation string literal in django/db/models/constraints.py line 16 ('CheckConstraint') -- an `__all__` entry; 1 further hit(s) -- an alpha-rename cannot be argued safe",
+      "tier": "MEDIUM",
+      "tree_digest": "0782046f437aead767f8a42c3ba56f7c948f74cb93406bd4006779ddcbf04bd3",
+      "verdict": "REFUSED"
+    },
+    {
+      "anchor": "UniqueConstraint",
+      "failure_analysis": null,
+      "file": "django/db/models/constraints.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 8,
+        "found": true,
+        "n_parsed": 128,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 66,
+        "reward": 1.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "dynamic reach: 'UniqueConstraint' appears in a non-annotation string literal in django/db/models/constraints.py line 16 ('UniqueConstraint') -- an `__all__` entry; 13 further hit(s) -- an alpha-rename cannot be argued safe",
+      "tier": "MEDIUM",
+      "tree_digest": "0782046f437aead767f8a42c3ba56f7c948f74cb93406bd4006779ddcbf04bd3",
+      "verdict": "REFUSED"
+    },
+    {
+      "anchor": null,
+      "failure_analysis": null,
+      "file": null,
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 8,
+        "found": true,
+        "n_parsed": 128,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 66,
+        "reward": 1.0
+      },
+      "loud_failure": false,
+      "observable": "order of elements in a returned collection",
+      "operator": "collection_reverse",
+      "reason": "no anchor inside the gold-touched region",
+      "tier": "MEDIUM",
+      "tree_digest": "0782046f437aead767f8a42c3ba56f7c948f74cb93406bd4006779ddcbf04bd3",
+      "verdict": "NOT_APPLICABLE"
+    },
+    {
+      "anchor": null,
+      "failure_analysis": null,
+      "file": null,
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 8,
+        "found": true,
+        "n_parsed": 128,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 66,
+        "reward": 1.0
+      },
+      "loud_failure": false,
+      "observable": "human-readable text of an exception message",
+      "operator": "message_reword",
+      "reason": "no anchor inside the gold-touched region; 25 anchor(s) elsewhere in the 2 target(s): django/contrib/postgres/constraints.py, django/db/models/constraints.py",
+      "tier": "HIGH",
+      "tree_digest": "0782046f437aead767f8a42c3ba56f7c948f74cb93406bd4006779ddcbf04bd3",
+      "verdict": "NOT_APPLICABLE"
+    }
+  ],
+  "targets": [
+    "django/contrib/postgres/constraints.py",
+    "django/db/models/constraints.py"
+  ],
+  "version": "5.0",
+  "witnesses": []
+}

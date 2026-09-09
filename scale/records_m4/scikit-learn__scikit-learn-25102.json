@@ -1,0 +1,207 @@
+{
+  "completed": true,
+  "control": {
+    "graded": null,
+    "log": null,
+    "passed": true,
+    "reason": "untransformed reference scores 1.0"
+  },
+  "digest_trace": [
+    {
+      "digest": "09f3759faed23c2c04322e9027c3926bdcabfda025f60db100dcaad2cd1f320a",
+      "memo_hit": false
+    }
+  ],
+  "disk_orphan_reclaimed_bytes": 0,
+  "disk_residual_bytes": 0,
+  "elapsed_seconds": 224.07,
+  "error": null,
+  "image": "swebench/sweb.eval.x86_64.scikit-learn_1776_scikit-learn-25102:latest",
+  "instance_id": "scikit-learn__scikit-learn-25102",
+  "leaked_containers": [],
+  "leaked_image": false,
+  "log": [
+    [
+      "<control>",
+      "OK",
+      "untransformed reference scores 1.0"
+    ],
+    [
+      "kwonly_specialize:<no anchor>",
+      "NOT_APPLICABLE",
+      "no anchor inside the gold-touched region; 2 anchor(s) elsewhere in the 2 target(s): sklearn/base.py, sklearn/feature_selection/_base.py"
+    ],
+    [
+      "symbol_rename:sklearn/base.py:BaseEstimator",
+      "REFUSED",
+      "multi-line import of 'BaseEstimator' in sklearn/calibration.py"
+    ],
+    [
+      "symbol_rename:sklearn/feature_selection/_base.py:SelectorMixin",
+      "REFUSED",
+      "dynamic reach: 'SelectorMixin' appears in a non-annotation string literal in sklearn/feature_selection/__init__.py line 52 ('SelectorMixin') -- an `__all__` entry -- an alpha-rename cannot be argued safe"
+    ],
+    [
+      "collection_reverse:<no anchor>",
+      "NOT_APPLICABLE",
+      "no anchor inside the gold-touched region"
+    ],
+    [
+      "message_reword:<no anchor>",
+      "NOT_APPLICABLE",
+      "no anchor inside the gold-touched region; 5 anchor(s) elsewhere in the 2 target(s): sklearn/base.py, sklearn/feature_selection/_base.py"
+    ]
+  ],
+  "mountable": true,
+  "multi_target": true,
+  "n_targets": 2,
+  "on_prime_hub": null,
+  "on_prime_hub_reason": "not resolvable offline; no hub environment index is reachable from this repo, verifiers or swebench",
+  "operators_not_applicable": [
+    "collection_reverse",
+    "kwonly_specialize",
+    "message_reword"
+  ],
+  "operators_with_anchors": [
+    "symbol_rename"
+  ],
+  "repo": "scikit-learn/scikit-learn",
+  "row": {
+    "elapsed": 46.03,
+    "error": null,
+    "error_type": null,
+    "index": 0,
+    "mode": "formcheck",
+    "name": "scikit-learn__scikit-learn-25102",
+    "reason": "unchecked",
+    "valid": null
+  },
+  "rows": [
+    {
+      "anchor": null,
+      "failure_analysis": null,
+      "file": null,
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 2,
+        "found": true,
+        "n_parsed": 61,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 59,
+        "reward": 1.0
+      },
+      "loud_failure": false,
+      "observable": "callable signature (arity / parameter names)",
+      "operator": "kwonly_specialize",
+      "reason": "no anchor inside the gold-touched region; 2 anchor(s) elsewhere in the 2 target(s): sklearn/base.py, sklearn/feature_selection/_base.py",
+      "tier": "HIGH",
+      "tree_digest": "09f3759faed23c2c04322e9027c3926bdcabfda025f60db100dcaad2cd1f320a",
+      "verdict": "NOT_APPLICABLE"
+    },
+    {
+      "anchor": "BaseEstimator",
+      "failure_analysis": null,
+      "file": "sklearn/base.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 2,
+        "found": true,
+        "n_parsed": 61,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 59,
+        "reward": 1.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "multi-line import of 'BaseEstimator' in sklearn/calibration.py",
+      "tier": "MEDIUM",
+      "tree_digest": "09f3759faed23c2c04322e9027c3926bdcabfda025f60db100dcaad2cd1f320a",
+      "verdict": "REFUSED"
+    },
+    {
+      "anchor": "SelectorMixin",
+      "failure_analysis": null,
+      "file": "sklearn/feature_selection/_base.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 2,
+        "found": true,
+        "n_parsed": 61,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 59,
+        "reward": 1.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "dynamic reach: 'SelectorMixin' appears in a non-annotation string literal in sklearn/feature_selection/__init__.py line 52 ('SelectorMixin') -- an `__all__` entry -- an alpha-rename cannot be argued safe",
+      "tier": "MEDIUM",
+      "tree_digest": "09f3759faed23c2c04322e9027c3926bdcabfda025f60db100dcaad2cd1f320a",
+      "verdict": "REFUSED"
+    },
+    {
+      "anchor": null,
+      "failure_analysis": null,
+      "file": null,
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 2,
+        "found": true,
+        "n_parsed": 61,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 59,
+        "reward": 1.0
+      },
+      "loud_failure": false,
+      "observable": "order of elements in a returned collection",
+      "operator": "collection_reverse",
+      "reason": "no anchor inside the gold-touched region",
+      "tier": "MEDIUM",
+      "tree_digest": "09f3759faed23c2c04322e9027c3926bdcabfda025f60db100dcaad2cd1f320a",
+      "verdict": "NOT_APPLICABLE"
+    },
+    {
+      "anchor": null,
+      "failure_analysis": null,
+      "file": null,
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 2,
+        "found": true,
+        "n_parsed": 61,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 59,
+        "reward": 1.0
+      },
+      "loud_failure": false,
+      "observable": "human-readable text of an exception message",
+      "operator": "message_reword",
+      "reason": "no anchor inside the gold-touched region; 5 anchor(s) elsewhere in the 2 target(s): sklearn/base.py, sklearn/feature_selection/_base.py",
+      "tier": "HIGH",
+      "tree_digest": "09f3759faed23c2c04322e9027c3926bdcabfda025f60db100dcaad2cd1f320a",
+      "verdict": "NOT_APPLICABLE"
+    }
+  ],
+  "targets": [
+    "sklearn/base.py",
+    "sklearn/feature_selection/_base.py"
+  ],
+  "version": "1.3",
+  "witnesses": []
+}

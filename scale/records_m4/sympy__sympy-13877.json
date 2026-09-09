@@ -1,0 +1,289 @@
+{
+  "completed": true,
+  "control": {
+    "graded": null,
+    "log": null,
+    "passed": true,
+    "reason": "untransformed reference scores 1.0"
+  },
+  "digest_trace": [
+    {
+      "digest": "5092307c3ff9ea9401dee286f5193d904b964e357cbf44193929f1ca2fc4c0a5",
+      "memo_hit": false
+    },
+    {
+      "digest": "c2c8cc2eba972ac1d4a399fa628bcd798fe5bf91b8598d7e96672a7890fc9b6e",
+      "memo_hit": false
+    },
+    {
+      "digest": "c2c8cc2eba972ac1d4a399fa628bcd798fe5bf91b8598d7e96672a7890fc9b6e",
+      "memo_hit": true
+    }
+  ],
+  "disk_orphan_reclaimed_bytes": 0,
+  "disk_residual_bytes": 0,
+  "elapsed_seconds": 266.26,
+  "error": null,
+  "image": "swebench/sweb.eval.x86_64.sympy_1776_sympy-13877:latest",
+  "instance_id": "sympy__sympy-13877",
+  "leaked_containers": [],
+  "leaked_image": false,
+  "log": [
+    [
+      "<control>",
+      "OK",
+      "untransformed reference scores 1.0"
+    ],
+    [
+      "kwonly_specialize:<no anchor>",
+      "NOT_APPLICABLE",
+      "no anchor inside the gold-touched region"
+    ],
+    [
+      "symbol_rename:sympy/matrices/matrices.py:_is_zero_after_expand_mul",
+      "CLEAN",
+      "reward 1.0"
+    ],
+    [
+      "symbol_rename:sympy/matrices/matrices.py:MatrixDeterminant",
+      "REFUSED",
+      "dynamic reach: 'MatrixDeterminant' appears in a non-annotation string literal in sympy/matrices/matrices.py line 273 ('Assumed to exist by matrix expressions; ') -- an alpha-rename cannot be argued safe"
+    ],
+    [
+      "symbol_rename:sympy/utilities/randtest.py:random_complex_number",
+      "REFUSED",
+      "dynamic reach: 'random_complex_number' appears in a non-annotation string literal in sympy/core/expr.py line 413 ('Return self evaluated, if possible, repl') -- an alpha-rename cannot be argued safe"
+    ],
+    [
+      "collection_reverse:<no anchor>",
+      "NOT_APPLICABLE",
+      "no anchor inside the gold-touched region"
+    ],
+    [
+      "message_reword:<no anchor>",
+      "NOT_APPLICABLE",
+      "no anchor inside the gold-touched region; 55 anchor(s) elsewhere in the 2 target(s): sympy/matrices/matrices.py, sympy/utilities/randtest.py"
+    ]
+  ],
+  "mountable": true,
+  "multi_target": true,
+  "n_targets": 2,
+  "on_prime_hub": null,
+  "on_prime_hub_reason": "not resolvable offline; no hub environment index is reachable from this repo, verifiers or swebench",
+  "operators_not_applicable": [
+    "collection_reverse",
+    "kwonly_specialize",
+    "message_reword"
+  ],
+  "operators_with_anchors": [
+    "symbol_rename"
+  ],
+  "repo": "sympy/sympy",
+  "row": {
+    "elapsed": 250.97,
+    "error": null,
+    "error_type": null,
+    "index": 0,
+    "mode": "formcheck",
+    "name": "sympy__sympy-13877",
+    "reason": "valid",
+    "valid": true
+  },
+  "rows": [
+    {
+      "anchor": null,
+      "failure_analysis": null,
+      "file": null,
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 1,
+        "found": true,
+        "n_parsed": 188,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 110,
+        "reward": 1.0
+      },
+      "loud_failure": false,
+      "observable": "callable signature (arity / parameter names)",
+      "operator": "kwonly_specialize",
+      "reason": "no anchor inside the gold-touched region",
+      "tier": "HIGH",
+      "tree_digest": "5092307c3ff9ea9401dee286f5193d904b964e357cbf44193929f1ca2fc4c0a5",
+      "verdict": "NOT_APPLICABLE"
+    },
+    {
+      "anchor": "_is_zero_after_expand_mul",
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "broke": [],
+        "coupled": [],
+        "failing": [],
+        "symbol": "_is_zero_after_expand_mul",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": "sympy/matrices/matrices.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 1,
+        "found": true,
+        "n_parsed": 188,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 110,
+        "reward": 1.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "reward 1.0",
+      "tier": "HIGH",
+      "tree_digest": "c2c8cc2eba972ac1d4a399fa628bcd798fe5bf91b8598d7e96672a7890fc9b6e",
+      "verdict": "CLEAN"
+    },
+    {
+      "anchor": "MatrixDeterminant",
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "broke": [],
+        "coupled": [],
+        "failing": [],
+        "symbol": "_is_zero_after_expand_mul",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": "sympy/matrices/matrices.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 1,
+        "found": true,
+        "n_parsed": 188,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 110,
+        "reward": 1.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "dynamic reach: 'MatrixDeterminant' appears in a non-annotation string literal in sympy/matrices/matrices.py line 273 ('Assumed to exist by matrix expressions; ') -- an alpha-rename cannot be argued safe",
+      "tier": "MEDIUM",
+      "tree_digest": "c2c8cc2eba972ac1d4a399fa628bcd798fe5bf91b8598d7e96672a7890fc9b6e",
+      "verdict": "REFUSED"
+    },
+    {
+      "anchor": "random_complex_number",
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "broke": [],
+        "coupled": [],
+        "failing": [],
+        "symbol": "_is_zero_after_expand_mul",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": "sympy/utilities/randtest.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 1,
+        "found": true,
+        "n_parsed": 188,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 110,
+        "reward": 1.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "dynamic reach: 'random_complex_number' appears in a non-annotation string literal in sympy/core/expr.py line 413 ('Return self evaluated, if possible, repl') -- an alpha-rename cannot be argued safe",
+      "tier": "MEDIUM",
+      "tree_digest": "c2c8cc2eba972ac1d4a399fa628bcd798fe5bf91b8598d7e96672a7890fc9b6e",
+      "verdict": "REFUSED"
+    },
+    {
+      "anchor": null,
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "broke": [],
+        "coupled": [],
+        "failing": [],
+        "symbol": "_is_zero_after_expand_mul",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": null,
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 1,
+        "found": true,
+        "n_parsed": 188,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 110,
+        "reward": 1.0
+      },
+      "loud_failure": false,
+      "observable": "order of elements in a returned collection",
+      "operator": "collection_reverse",
+      "reason": "no anchor inside the gold-touched region",
+      "tier": "MEDIUM",
+      "tree_digest": "c2c8cc2eba972ac1d4a399fa628bcd798fe5bf91b8598d7e96672a7890fc9b6e",
+      "verdict": "NOT_APPLICABLE"
+    },
+    {
+      "anchor": null,
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "broke": [],
+        "coupled": [],
+        "failing": [],
+        "symbol": "_is_zero_after_expand_mul",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": null,
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 1,
+        "found": true,
+        "n_parsed": 188,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 110,
+        "reward": 1.0
+      },
+      "loud_failure": false,
+      "observable": "human-readable text of an exception message",
+      "operator": "message_reword",
+      "reason": "no anchor inside the gold-touched region; 55 anchor(s) elsewhere in the 2 target(s): sympy/matrices/matrices.py, sympy/utilities/randtest.py",
+      "tier": "HIGH",
+      "tree_digest": "c2c8cc2eba972ac1d4a399fa628bcd798fe5bf91b8598d7e96672a7890fc9b6e",
+      "verdict": "NOT_APPLICABLE"
+    }
+  ],
+  "targets": [
+    "sympy/matrices/matrices.py",
+    "sympy/utilities/randtest.py"
+  ],
+  "version": "1.1",
+  "witnesses": []
+}

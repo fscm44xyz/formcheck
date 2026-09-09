@@ -1,0 +1,426 @@
+{
+  "completed": true,
+  "control": {
+    "graded": null,
+    "log": null,
+    "passed": true,
+    "reason": "untransformed reference scores 1.0"
+  },
+  "digest_trace": [
+    {
+      "digest": "55aa1b77b9b454560ce65e5d6b3cbff710ccf61dacefa7efac632daaf463fda7",
+      "memo_hit": false
+    },
+    {
+      "digest": "b50ddbb1a6cdc15ec1162f9441560a3b51f59fe68ae9dae3ff12104b74e8b0a4",
+      "memo_hit": false
+    },
+    {
+      "digest": "b50ddbb1a6cdc15ec1162f9441560a3b51f59fe68ae9dae3ff12104b74e8b0a4",
+      "memo_hit": true
+    }
+  ],
+  "disk_orphan_reclaimed_bytes": 0,
+  "disk_residual_bytes": 0,
+  "elapsed_seconds": 47.99,
+  "error": null,
+  "image": "swebench/sweb.eval.x86_64.django_1776_django-15380:latest",
+  "instance_id": "django__django-15380",
+  "leaked_containers": [],
+  "leaked_image": false,
+  "log": [
+    [
+      "<control>",
+      "OK",
+      "untransformed reference scores 1.0"
+    ],
+    [
+      "kwonly_specialize:<no anchor>",
+      "NOT_APPLICABLE",
+      "no anchor inside the gold-touched region"
+    ],
+    [
+      "symbol_rename:MigrationAutodetector",
+      "WITNESS",
+      "reward 0.0"
+    ],
+    [
+      "collection_reverse:<no anchor>",
+      "NOT_APPLICABLE",
+      "no anchor inside the gold-touched region"
+    ],
+    [
+      "message_reword:<no anchor>",
+      "NOT_APPLICABLE",
+      "no anchor inside the gold-touched region"
+    ]
+  ],
+  "mountable": true,
+  "multi_target": false,
+  "n_targets": 1,
+  "on_prime_hub": null,
+  "on_prime_hub_reason": "not resolvable offline; no hub environment index is reachable from this repo, verifiers or swebench",
+  "operators_not_applicable": [
+    "collection_reverse",
+    "kwonly_specialize",
+    "message_reword"
+  ],
+  "operators_with_anchors": [
+    "symbol_rename"
+  ],
+  "repo": "django/django",
+  "row": {
+    "elapsed": 22.91,
+    "error": null,
+    "error_type": null,
+    "index": 0,
+    "mode": "formcheck",
+    "name": "django__django-15380",
+    "reason": "invalid",
+    "valid": false
+  },
+  "rows": [
+    {
+      "anchor": null,
+      "failure_analysis": null,
+      "file": null,
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 1,
+        "found": true,
+        "n_parsed": 134,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 133,
+        "reward": 1.0
+      },
+      "loud_failure": false,
+      "observable": "callable signature (arity / parameter names)",
+      "operator": "kwonly_specialize",
+      "reason": "no anchor inside the gold-touched region",
+      "tier": "HIGH",
+      "tree_digest": "55aa1b77b9b454560ce65e5d6b3cbff710ccf61dacefa7efac632daaf463fda7",
+      "verdict": "NOT_APPLICABLE"
+    },
+    {
+      "all_failures_attributed": true,
+      "anchor": "MigrationAutodetector",
+      "f2p_fail": 1,
+      "failure_analysis": {
+        "all_reference_the_symbol": true,
+        "broke": [],
+        "coupled": [
+          "test_auto (migrations.test_autodetector.MigrationSuggestNameTests)",
+          "test_many_operations_suffix (migrations.test_autodetector.MigrationSuggestNameTests)",
+          "test_no_operations (migrations.test_autodetector.MigrationSuggestNameTests)",
+          "test_no_operations_initial (migrations.test_autodetector.MigrationSuggestNameTests)",
+          "test_none_name (migrations.test_autodetector.MigrationSuggestNameTests)",
+          "test_none_name_with_initial_true (migrations.test_autodetector.MigrationSuggestNameTests)",
+          "test_operation_with_no_suggested_name (migrations.test_autodetector.MigrationSuggestNameTests)",
+          "test_single_operation (migrations.test_autodetector.MigrationSuggestNameTests)",
+          "test_single_operation_long_name (migrations.test_autodetector.MigrationSuggestNameTests)",
+          "test_two_create_models (migrations.test_autodetector.MigrationSuggestNameTests)",
+          "test_rename_field_with_renamed_model (migrations.test_autodetector.AutodetectorTests)"
+        ],
+        "failing": [
+          "test_auto (migrations.test_autodetector.MigrationSuggestNameTests)",
+          "test_many_operations_suffix (migrations.test_autodetector.MigrationSuggestNameTests)",
+          "test_no_operations (migrations.test_autodetector.MigrationSuggestNameTests)",
+          "test_no_operations_initial (migrations.test_autodetector.MigrationSuggestNameTests)",
+          "test_none_name (migrations.test_autodetector.MigrationSuggestNameTests)",
+          "test_none_name_with_initial_true (migrations.test_autodetector.MigrationSuggestNameTests)",
+          "test_operation_with_no_suggested_name (migrations.test_autodetector.MigrationSuggestNameTests)",
+          "test_single_operation (migrations.test_autodetector.MigrationSuggestNameTests)",
+          "test_single_operation_long_name (migrations.test_autodetector.MigrationSuggestNameTests)",
+          "test_two_create_models (migrations.test_autodetector.MigrationSuggestNameTests)",
+          "test_rename_field_with_renamed_model (migrations.test_autodetector.AutodetectorTests)"
+        ],
+        "symbol": "MigrationAutodetector",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": "django/db/migrations/autodetector.py",
+      "graded_log": "+ ./tests/runtests.py --verbosity 2 --settings=test_sqlite --parallel 1 migrations.test_autodetector\nTesting against Django installed in '/testbed/django'\nImporting application migrations\nFound 1 test(s).\nSkipping setup of unused database(s): default, other.\nSystem check identified no issues (0 silenced).\n\ntest_autodetector (unittest.loader._FailedTest) ... ERROR\n\n======================================================================\nERROR: test_autodetector (unittest.loader._FailedTest)\n----------------------------------------------------------------------\nImportError: Failed to import test module: test_autodetector\nTraceback (most recent call last):\n  File \"/opt/miniconda3/envs/testbed/lib/python3.9/unittest/loader.py\", line 154, in loadTestsFromName\n    module = __import__(module_name)\n  File \"/testbed/tests/migrations/test_autodetector.py\", line 10, in <module>\n    from django.db.migrations.autodetector import MigrationAutodetector\nImportError: cannot import name 'MigrationAutodetector' from 'django.db.migrations.autodetector' (/testbed/django/db/migrations/autodetector.py)\n\n\n----------------------------------------------------------------------\nRan 1 test in 0.000s\n\nFAILED (errors=1)\n",
+      "graded_report": {
+        "f2p_fail": 1,
+        "f2p_failing": [
+          "test_rename_field_with_renamed_model (migrations.test_autodetector.AutodetectorTests)"
+        ],
+        "f2p_pass": 0,
+        "found": true,
+        "n_parsed": 2,
+        "p2p_fail": 133,
+        "p2p_failing": [
+          "test_auto (migrations.test_autodetector.MigrationSuggestNameTests)",
+          "test_many_operations_suffix (migrations.test_autodetector.MigrationSuggestNameTests)",
+          "test_no_operations (migrations.test_autodetector.MigrationSuggestNameTests)",
+          "test_no_operations_initial (migrations.test_autodetector.MigrationSuggestNameTests)",
+          "test_none_name (migrations.test_autodetector.MigrationSuggestNameTests)",
+          "test_none_name_with_initial_true (migrations.test_autodetector.MigrationSuggestNameTests)",
+          "test_operation_with_no_suggested_name (migrations.test_autodetector.MigrationSuggestNameTests)",
+          "test_single_operation (migrations.test_autodetector.MigrationSuggestNameTests)",
+          "test_single_operation_long_name (migrations.test_autodetector.MigrationSuggestNameTests)",
+          "test_two_create_models (migrations.test_autodetector.MigrationSuggestNameTests)"
+        ],
+        "p2p_pass": 0,
+        "reward": 0.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "p2p_coupled_tests": [
+        "test_auto (migrations.test_autodetector.MigrationSuggestNameTests)",
+        "test_many_operations_suffix (migrations.test_autodetector.MigrationSuggestNameTests)",
+        "test_no_operations (migrations.test_autodetector.MigrationSuggestNameTests)",
+        "test_no_operations_initial (migrations.test_autodetector.MigrationSuggestNameTests)",
+        "test_none_name (migrations.test_autodetector.MigrationSuggestNameTests)",
+        "test_none_name_with_initial_true (migrations.test_autodetector.MigrationSuggestNameTests)",
+        "test_operation_with_no_suggested_name (migrations.test_autodetector.MigrationSuggestNameTests)",
+        "test_single_operation (migrations.test_autodetector.MigrationSuggestNameTests)",
+        "test_single_operation_long_name (migrations.test_autodetector.MigrationSuggestNameTests)",
+        "test_two_create_models (migrations.test_autodetector.MigrationSuggestNameTests)"
+      ],
+      "p2p_fail": 133,
+      "reason": "reward 0.0",
+      "tier": "MEDIUM",
+      "tree_digest": "b50ddbb1a6cdc15ec1162f9441560a3b51f59fe68ae9dae3ff12104b74e8b0a4",
+      "verdict": "WITNESS",
+      "witness_side": "p2p_coupling"
+    },
+    {
+      "anchor": null,
+      "failure_analysis": {
+        "all_reference_the_symbol": true,
+        "broke": [],
+        "coupled": [
+          "test_auto (migrations.test_autodetector.MigrationSuggestNameTests)",
+          "test_many_operations_suffix (migrations.test_autodetector.MigrationSuggestNameTests)",
+          "test_no_operations (migrations.test_autodetector.MigrationSuggestNameTests)",
+          "test_no_operations_initial (migrations.test_autodetector.MigrationSuggestNameTests)",
+          "test_none_name (migrations.test_autodetector.MigrationSuggestNameTests)",
+          "test_none_name_with_initial_true (migrations.test_autodetector.MigrationSuggestNameTests)",
+          "test_operation_with_no_suggested_name (migrations.test_autodetector.MigrationSuggestNameTests)",
+          "test_single_operation (migrations.test_autodetector.MigrationSuggestNameTests)",
+          "test_single_operation_long_name (migrations.test_autodetector.MigrationSuggestNameTests)",
+          "test_two_create_models (migrations.test_autodetector.MigrationSuggestNameTests)",
+          "test_rename_field_with_renamed_model (migrations.test_autodetector.AutodetectorTests)"
+        ],
+        "failing": [
+          "test_auto (migrations.test_autodetector.MigrationSuggestNameTests)",
+          "test_many_operations_suffix (migrations.test_autodetector.MigrationSuggestNameTests)",
+          "test_no_operations (migrations.test_autodetector.MigrationSuggestNameTests)",
+          "test_no_operations_initial (migrations.test_autodetector.MigrationSuggestNameTests)",
+          "test_none_name (migrations.test_autodetector.MigrationSuggestNameTests)",
+          "test_none_name_with_initial_true (migrations.test_autodetector.MigrationSuggestNameTests)",
+          "test_operation_with_no_suggested_name (migrations.test_autodetector.MigrationSuggestNameTests)",
+          "test_single_operation (migrations.test_autodetector.MigrationSuggestNameTests)",
+          "test_single_operation_long_name (migrations.test_autodetector.MigrationSuggestNameTests)",
+          "test_two_create_models (migrations.test_autodetector.MigrationSuggestNameTests)",
+          "test_rename_field_with_renamed_model (migrations.test_autodetector.AutodetectorTests)"
+        ],
+        "symbol": "MigrationAutodetector",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": null,
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 1,
+        "f2p_failing": [
+          "test_rename_field_with_renamed_model (migrations.test_autodetector.AutodetectorTests)"
+        ],
+        "f2p_pass": 0,
+        "found": true,
+        "n_parsed": 2,
+        "p2p_fail": 133,
+        "p2p_failing": [
+          "test_auto (migrations.test_autodetector.MigrationSuggestNameTests)",
+          "test_many_operations_suffix (migrations.test_autodetector.MigrationSuggestNameTests)",
+          "test_no_operations (migrations.test_autodetector.MigrationSuggestNameTests)",
+          "test_no_operations_initial (migrations.test_autodetector.MigrationSuggestNameTests)",
+          "test_none_name (migrations.test_autodetector.MigrationSuggestNameTests)",
+          "test_none_name_with_initial_true (migrations.test_autodetector.MigrationSuggestNameTests)",
+          "test_operation_with_no_suggested_name (migrations.test_autodetector.MigrationSuggestNameTests)",
+          "test_single_operation (migrations.test_autodetector.MigrationSuggestNameTests)",
+          "test_single_operation_long_name (migrations.test_autodetector.MigrationSuggestNameTests)",
+          "test_two_create_models (migrations.test_autodetector.MigrationSuggestNameTests)"
+        ],
+        "p2p_pass": 0,
+        "reward": 0.0
+      },
+      "loud_failure": false,
+      "observable": "order of elements in a returned collection",
+      "operator": "collection_reverse",
+      "reason": "no anchor inside the gold-touched region",
+      "tier": "MEDIUM",
+      "tree_digest": "b50ddbb1a6cdc15ec1162f9441560a3b51f59fe68ae9dae3ff12104b74e8b0a4",
+      "verdict": "NOT_APPLICABLE"
+    },
+    {
+      "anchor": null,
+      "failure_analysis": {
+        "all_reference_the_symbol": true,
+        "broke": [],
+        "coupled": [
+          "test_auto (migrations.test_autodetector.MigrationSuggestNameTests)",
+          "test_many_operations_suffix (migrations.test_autodetector.MigrationSuggestNameTests)",
+          "test_no_operations (migrations.test_autodetector.MigrationSuggestNameTests)",
+          "test_no_operations_initial (migrations.test_autodetector.MigrationSuggestNameTests)",
+          "test_none_name (migrations.test_autodetector.MigrationSuggestNameTests)",
+          "test_none_name_with_initial_true (migrations.test_autodetector.MigrationSuggestNameTests)",
+          "test_operation_with_no_suggested_name (migrations.test_autodetector.MigrationSuggestNameTests)",
+          "test_single_operation (migrations.test_autodetector.MigrationSuggestNameTests)",
+          "test_single_operation_long_name (migrations.test_autodetector.MigrationSuggestNameTests)",
+          "test_two_create_models (migrations.test_autodetector.MigrationSuggestNameTests)",
+          "test_rename_field_with_renamed_model (migrations.test_autodetector.AutodetectorTests)"
+        ],
+        "failing": [
+          "test_auto (migrations.test_autodetector.MigrationSuggestNameTests)",
+          "test_many_operations_suffix (migrations.test_autodetector.MigrationSuggestNameTests)",
+          "test_no_operations (migrations.test_autodetector.MigrationSuggestNameTests)",
+          "test_no_operations_initial (migrations.test_autodetector.MigrationSuggestNameTests)",
+          "test_none_name (migrations.test_autodetector.MigrationSuggestNameTests)",
+          "test_none_name_with_initial_true (migrations.test_autodetector.MigrationSuggestNameTests)",
+          "test_operation_with_no_suggested_name (migrations.test_autodetector.MigrationSuggestNameTests)",
+          "test_single_operation (migrations.test_autodetector.MigrationSuggestNameTests)",
+          "test_single_operation_long_name (migrations.test_autodetector.MigrationSuggestNameTests)",
+          "test_two_create_models (migrations.test_autodetector.MigrationSuggestNameTests)",
+          "test_rename_field_with_renamed_model (migrations.test_autodetector.AutodetectorTests)"
+        ],
+        "symbol": "MigrationAutodetector",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": null,
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 1,
+        "f2p_failing": [
+          "test_rename_field_with_renamed_model (migrations.test_autodetector.AutodetectorTests)"
+        ],
+        "f2p_pass": 0,
+        "found": true,
+        "n_parsed": 2,
+        "p2p_fail": 133,
+        "p2p_failing": [
+          "test_auto (migrations.test_autodetector.MigrationSuggestNameTests)",
+          "test_many_operations_suffix (migrations.test_autodetector.MigrationSuggestNameTests)",
+          "test_no_operations (migrations.test_autodetector.MigrationSuggestNameTests)",
+          "test_no_operations_initial (migrations.test_autodetector.MigrationSuggestNameTests)",
+          "test_none_name (migrations.test_autodetector.MigrationSuggestNameTests)",
+          "test_none_name_with_initial_true (migrations.test_autodetector.MigrationSuggestNameTests)",
+          "test_operation_with_no_suggested_name (migrations.test_autodetector.MigrationSuggestNameTests)",
+          "test_single_operation (migrations.test_autodetector.MigrationSuggestNameTests)",
+          "test_single_operation_long_name (migrations.test_autodetector.MigrationSuggestNameTests)",
+          "test_two_create_models (migrations.test_autodetector.MigrationSuggestNameTests)"
+        ],
+        "p2p_pass": 0,
+        "reward": 0.0
+      },
+      "loud_failure": false,
+      "observable": "human-readable text of an exception message",
+      "operator": "message_reword",
+      "reason": "no anchor inside the gold-touched region",
+      "tier": "HIGH",
+      "tree_digest": "b50ddbb1a6cdc15ec1162f9441560a3b51f59fe68ae9dae3ff12104b74e8b0a4",
+      "verdict": "NOT_APPLICABLE"
+    }
+  ],
+  "targets": [
+    "django/db/migrations/autodetector.py"
+  ],
+  "version": "4.1",
+  "witnesses": [
+    {
+      "all_failures_attributed": true,
+      "anchor": "MigrationAutodetector",
+      "f2p_fail": 1,
+      "failure_analysis": {
+        "all_reference_the_symbol": true,
+        "broke": [],
+        "coupled": [
+          "test_auto (migrations.test_autodetector.MigrationSuggestNameTests)",
+          "test_many_operations_suffix (migrations.test_autodetector.MigrationSuggestNameTests)",
+          "test_no_operations (migrations.test_autodetector.MigrationSuggestNameTests)",
+          "test_no_operations_initial (migrations.test_autodetector.MigrationSuggestNameTests)",
+          "test_none_name (migrations.test_autodetector.MigrationSuggestNameTests)",
+          "test_none_name_with_initial_true (migrations.test_autodetector.MigrationSuggestNameTests)",
+          "test_operation_with_no_suggested_name (migrations.test_autodetector.MigrationSuggestNameTests)",
+          "test_single_operation (migrations.test_autodetector.MigrationSuggestNameTests)",
+          "test_single_operation_long_name (migrations.test_autodetector.MigrationSuggestNameTests)",
+          "test_two_create_models (migrations.test_autodetector.MigrationSuggestNameTests)",
+          "test_rename_field_with_renamed_model (migrations.test_autodetector.AutodetectorTests)"
+        ],
+        "failing": [
+          "test_auto (migrations.test_autodetector.MigrationSuggestNameTests)",
+          "test_many_operations_suffix (migrations.test_autodetector.MigrationSuggestNameTests)",
+          "test_no_operations (migrations.test_autodetector.MigrationSuggestNameTests)",
+          "test_no_operations_initial (migrations.test_autodetector.MigrationSuggestNameTests)",
+          "test_none_name (migrations.test_autodetector.MigrationSuggestNameTests)",
+          "test_none_name_with_initial_true (migrations.test_autodetector.MigrationSuggestNameTests)",
+          "test_operation_with_no_suggested_name (migrations.test_autodetector.MigrationSuggestNameTests)",
+          "test_single_operation (migrations.test_autodetector.MigrationSuggestNameTests)",
+          "test_single_operation_long_name (migrations.test_autodetector.MigrationSuggestNameTests)",
+          "test_two_create_models (migrations.test_autodetector.MigrationSuggestNameTests)",
+          "test_rename_field_with_renamed_model (migrations.test_autodetector.AutodetectorTests)"
+        ],
+        "symbol": "MigrationAutodetector",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": "django/db/migrations/autodetector.py",
+      "graded_log": "+ ./tests/runtests.py --verbosity 2 --settings=test_sqlite --parallel 1 migrations.test_autodetector\nTesting against Django installed in '/testbed/django'\nImporting application migrations\nFound 1 test(s).\nSkipping setup of unused database(s): default, other.\nSystem check identified no issues (0 silenced).\n\ntest_autodetector (unittest.loader._FailedTest) ... ERROR\n\n======================================================================\nERROR: test_autodetector (unittest.loader._FailedTest)\n----------------------------------------------------------------------\nImportError: Failed to import test module: test_autodetector\nTraceback (most recent call last):\n  File \"/opt/miniconda3/envs/testbed/lib/python3.9/unittest/loader.py\", line 154, in loadTestsFromName\n    module = __import__(module_name)\n  File \"/testbed/tests/migrations/test_autodetector.py\", line 10, in <module>\n    from django.db.migrations.autodetector import MigrationAutodetector\nImportError: cannot import name 'MigrationAutodetector' from 'django.db.migrations.autodetector' (/testbed/django/db/migrations/autodetector.py)\n\n\n----------------------------------------------------------------------\nRan 1 test in 0.000s\n\nFAILED (errors=1)\n",
+      "graded_report": {
+        "f2p_fail": 1,
+        "f2p_failing": [
+          "test_rename_field_with_renamed_model (migrations.test_autodetector.AutodetectorTests)"
+        ],
+        "f2p_pass": 0,
+        "found": true,
+        "n_parsed": 2,
+        "p2p_fail": 133,
+        "p2p_failing": [
+          "test_auto (migrations.test_autodetector.MigrationSuggestNameTests)",
+          "test_many_operations_suffix (migrations.test_autodetector.MigrationSuggestNameTests)",
+          "test_no_operations (migrations.test_autodetector.MigrationSuggestNameTests)",
+          "test_no_operations_initial (migrations.test_autodetector.MigrationSuggestNameTests)",
+          "test_none_name (migrations.test_autodetector.MigrationSuggestNameTests)",
+          "test_none_name_with_initial_true (migrations.test_autodetector.MigrationSuggestNameTests)",
+          "test_operation_with_no_suggested_name (migrations.test_autodetector.MigrationSuggestNameTests)",
+          "test_single_operation (migrations.test_autodetector.MigrationSuggestNameTests)",
+          "test_single_operation_long_name (migrations.test_autodetector.MigrationSuggestNameTests)",
+          "test_two_create_models (migrations.test_autodetector.MigrationSuggestNameTests)"
+        ],
+        "p2p_pass": 0,
+        "reward": 0.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "p2p_coupled_tests": [
+        "test_auto (migrations.test_autodetector.MigrationSuggestNameTests)",
+        "test_many_operations_suffix (migrations.test_autodetector.MigrationSuggestNameTests)",
+        "test_no_operations (migrations.test_autodetector.MigrationSuggestNameTests)",
+        "test_no_operations_initial (migrations.test_autodetector.MigrationSuggestNameTests)",
+        "test_none_name (migrations.test_autodetector.MigrationSuggestNameTests)",
+        "test_none_name_with_initial_true (migrations.test_autodetector.MigrationSuggestNameTests)",
+        "test_operation_with_no_suggested_name (migrations.test_autodetector.MigrationSuggestNameTests)",
+        "test_single_operation (migrations.test_autodetector.MigrationSuggestNameTests)",
+        "test_single_operation_long_name (migrations.test_autodetector.MigrationSuggestNameTests)",
+        "test_two_create_models (migrations.test_autodetector.MigrationSuggestNameTests)"
+      ],
+      "p2p_fail": 133,
+      "reason": "reward 0.0",
+      "tier": "MEDIUM",
+      "tree_digest": "b50ddbb1a6cdc15ec1162f9441560a3b51f59fe68ae9dae3ff12104b74e8b0a4",
+      "verdict": "WITNESS",
+      "witness_side": "p2p_coupling"
+    }
+  ]
+}

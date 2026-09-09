@@ -1,0 +1,355 @@
+{
+  "completed": true,
+  "control": {
+    "graded": null,
+    "log": null,
+    "passed": true,
+    "reason": "untransformed reference scores 1.0"
+  },
+  "digest_trace": [
+    {
+      "digest": "bafa23e257554d9d19ab9504ece73f3aa13bf18e6915b1ac651a46f49f1a2ba6",
+      "memo_hit": false
+    },
+    {
+      "digest": "6a225ef555b2d0cce9851ca8c5a899452b32c5a15ffc0d19ff2d9f9319ce716f",
+      "memo_hit": false
+    }
+  ],
+  "disk_orphan_reclaimed_bytes": 0,
+  "disk_residual_bytes": 0,
+  "elapsed_seconds": 158.98,
+  "error": null,
+  "image": "swebench/sweb.eval.x86_64.sphinx-doc_1776_sphinx-10323:latest",
+  "instance_id": "sphinx-doc__sphinx-10323",
+  "leaked_containers": [],
+  "leaked_image": false,
+  "log": [
+    [
+      "<control>",
+      "OK",
+      "untransformed reference scores 1.0"
+    ],
+    [
+      "kwonly_specialize:<no anchor>",
+      "NOT_APPLICABLE",
+      "no anchor inside the gold-touched region"
+    ],
+    [
+      "symbol_rename:LiteralIncludeReader",
+      "UNVALIDATED",
+      "11 failing test(s) have no recognisable failure block -- unknown log shape, not evidence of breakage; first: tests/test_directive_code.py::test_LiteralIncludeReader"
+    ],
+    [
+      "collection_reverse:<no anchor>",
+      "NOT_APPLICABLE",
+      "no anchor inside the gold-touched region; 1 anchor(s) elsewhere in the target"
+    ],
+    [
+      "message_reword:<no anchor>",
+      "NOT_APPLICABLE",
+      "no anchor inside the gold-touched region"
+    ]
+  ],
+  "mountable": true,
+  "multi_target": false,
+  "n_targets": 1,
+  "on_prime_hub": null,
+  "on_prime_hub_reason": "not resolvable offline; no hub environment index is reachable from this repo, verifiers or swebench",
+  "operators_not_applicable": [
+    "collection_reverse",
+    "kwonly_specialize",
+    "message_reword"
+  ],
+  "operators_with_anchors": [
+    "symbol_rename"
+  ],
+  "repo": "sphinx-doc/sphinx",
+  "row": {
+    "elapsed": 50.73,
+    "error": null,
+    "error_type": null,
+    "index": 0,
+    "mode": "formcheck",
+    "name": "sphinx-doc__sphinx-10323",
+    "reason": "unchecked",
+    "valid": null
+  },
+  "rows": [
+    {
+      "anchor": null,
+      "failure_analysis": null,
+      "file": null,
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 1,
+        "found": true,
+        "n_parsed": 41,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 40,
+        "reward": 1.0
+      },
+      "loud_failure": false,
+      "observable": "callable signature (arity / parameter names)",
+      "operator": "kwonly_specialize",
+      "reason": "no anchor inside the gold-touched region",
+      "tier": "HIGH",
+      "tree_digest": "bafa23e257554d9d19ab9504ece73f3aa13bf18e6915b1ac651a46f49f1a2ba6",
+      "verdict": "NOT_APPLICABLE"
+    },
+    {
+      "anchor": "LiteralIncludeReader",
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "broke": [],
+        "coupled": [],
+        "failing": [
+          "tests/test_directive_code.py::test_LiteralIncludeReader",
+          "tests/test_directive_code.py::test_LiteralIncludeReader_lineno_start",
+          "tests/test_directive_code.py::test_LiteralIncludeReader_pyobject1",
+          "tests/test_directive_code.py::test_LiteralIncludeReader_pyobject2",
+          "tests/test_directive_code.py::test_LiteralIncludeReader_pyobject3",
+          "tests/test_directive_code.py::test_LiteralIncludeReader_pyobject_and_lines",
+          "tests/test_directive_code.py::test_LiteralIncludeReader_lines1",
+          "tests/test_directive_code.py::test_LiteralIncludeReader_lines2",
+          "tests/test_directive_code.py::test_LiteralIncludeReader_lines_and_lineno_match1",
+          "tests/test_directive_code.py::test_LiteralIncludeReader_lines_and_lineno_match2",
+          "tests/test_directive_code.py::test_LiteralIncludeReader_dedent_and_append_and_prepend"
+        ],
+        "symbol": "LiteralIncludeReader",
+        "unexplained": [
+          "tests/test_directive_code.py::test_LiteralIncludeReader (no failure section found)",
+          "tests/test_directive_code.py::test_LiteralIncludeReader_lineno_start (no failure section found)",
+          "tests/test_directive_code.py::test_LiteralIncludeReader_pyobject1 (no failure section found)",
+          "tests/test_directive_code.py::test_LiteralIncludeReader_pyobject2 (no failure section found)",
+          "tests/test_directive_code.py::test_LiteralIncludeReader_pyobject3 (no failure section found)",
+          "tests/test_directive_code.py::test_LiteralIncludeReader_pyobject_and_lines (no failure section found)",
+          "tests/test_directive_code.py::test_LiteralIncludeReader_lines1 (no failure section found)",
+          "tests/test_directive_code.py::test_LiteralIncludeReader_lines2 (no failure section found)",
+          "tests/test_directive_code.py::test_LiteralIncludeReader_lines_and_lineno_match1 (no failure section found)",
+          "tests/test_directive_code.py::test_LiteralIncludeReader_lines_and_lineno_match2 (no failure section found)",
+          "tests/test_directive_code.py::test_LiteralIncludeReader_dedent_and_append_and_prepend (no failure section found)"
+        ],
+        "unparsed": [
+          "tests/test_directive_code.py::test_LiteralIncludeReader",
+          "tests/test_directive_code.py::test_LiteralIncludeReader_lineno_start",
+          "tests/test_directive_code.py::test_LiteralIncludeReader_pyobject1",
+          "tests/test_directive_code.py::test_LiteralIncludeReader_pyobject2",
+          "tests/test_directive_code.py::test_LiteralIncludeReader_pyobject3",
+          "tests/test_directive_code.py::test_LiteralIncludeReader_pyobject_and_lines",
+          "tests/test_directive_code.py::test_LiteralIncludeReader_lines1",
+          "tests/test_directive_code.py::test_LiteralIncludeReader_lines2",
+          "tests/test_directive_code.py::test_LiteralIncludeReader_lines_and_lineno_match1",
+          "tests/test_directive_code.py::test_LiteralIncludeReader_lines_and_lineno_match2",
+          "tests/test_directive_code.py::test_LiteralIncludeReader_dedent_and_append_and_prepend"
+        ],
+        "unparsed_log_shape": true
+      },
+      "file": "sphinx/directives/code.py",
+      "graded_log": "+ tox --current-env -epy39 -v -- tests/test_directive_code.py\npy39: commands[0]> python -X dev -m pytest -rA --durations 25 tests/test_directive_code.py\n\u001b[1m============================= test session starts ==============================\u001b[0m\nplatform linux -- Python 3.9.20, pytest-8.3.3, pluggy-1.5.0\ncachedir: .tox/py39/.pytest_cache\nlibraries: Sphinx-5.0.0+/6f89f5986, docutils-0.17.1\nbase tempdir: /tmp/pytest-of-root/pytest-1\nrootdir: /testbed\nconfigfile: setup.cfg\nplugins: cov-5.0.0\ncollected 0 items / 1 error\n\n==================================== ERRORS ====================================\n\u001b[31m\u001b[1m________________ ERROR collecting tests/test_directive_code.py _________________\u001b[0m\n\u001b[31mImportError while importing test module '/testbed/tests/test_directive_code.py'.\nHint: make sure your test modules/packages have valid Python names.\nTraceback:\n/opt/miniconda3/envs/testbed/lib/python3.9/importlib/__init__.py:127: in import_module\n    return _bootstrap._gcd_import(name[level:], package, level)\ntests/test_directive_code.py:9: in <module>\n    from sphinx.directives.code import LiteralIncludeReader\nE   ImportError: cannot import name 'LiteralIncludeReader' from 'sphinx.directives.code' (/testbed/sphinx/directives/code.py)\u001b[0m\n\u001b[36m\u001b[1m=========================== short test summary info ============================\u001b[0m\n\u001b[31mERROR\u001b[0m tests/test_directive_code.py\n!!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!!\n\u001b[31m=============================== \u001b[31m\u001b[1m1 error\u001b[0m\u001b[31m in 0.19s\u001b[0m\u001b[31m ===============================\u001b[0m\npy39: exit 2 (0.72 seconds) /testbed> python -X dev -m pytest -rA --durations 25 tests/test_directive_code.py pid=286\n  py39: FAIL code 2 (0.73=setup[0.01]+cmd[0.72] seconds)\n  evaluation failed :( (0.83 seconds)\n\n",
+      "graded_report": {
+        "f2p_fail": 1,
+        "f2p_failing": [
+          "tests/test_directive_code.py::test_LiteralIncludeReader_dedent_and_append_and_prepend"
+        ],
+        "f2p_pass": 0,
+        "found": true,
+        "n_parsed": 1,
+        "p2p_fail": 40,
+        "p2p_failing": [
+          "tests/test_directive_code.py::test_LiteralIncludeReader",
+          "tests/test_directive_code.py::test_LiteralIncludeReader_lineno_start",
+          "tests/test_directive_code.py::test_LiteralIncludeReader_pyobject1",
+          "tests/test_directive_code.py::test_LiteralIncludeReader_pyobject2",
+          "tests/test_directive_code.py::test_LiteralIncludeReader_pyobject3",
+          "tests/test_directive_code.py::test_LiteralIncludeReader_pyobject_and_lines",
+          "tests/test_directive_code.py::test_LiteralIncludeReader_lines1",
+          "tests/test_directive_code.py::test_LiteralIncludeReader_lines2",
+          "tests/test_directive_code.py::test_LiteralIncludeReader_lines_and_lineno_match1",
+          "tests/test_directive_code.py::test_LiteralIncludeReader_lines_and_lineno_match2"
+        ],
+        "p2p_pass": 0,
+        "reward": 0.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "11 failing test(s) have no recognisable failure block -- unknown log shape, not evidence of breakage; first: tests/test_directive_code.py::test_LiteralIncludeReader",
+      "tier": "MEDIUM",
+      "tree_digest": "6a225ef555b2d0cce9851ca8c5a899452b32c5a15ffc0d19ff2d9f9319ce716f",
+      "verdict": "UNVALIDATED"
+    },
+    {
+      "anchor": null,
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "broke": [],
+        "coupled": [],
+        "failing": [
+          "tests/test_directive_code.py::test_LiteralIncludeReader",
+          "tests/test_directive_code.py::test_LiteralIncludeReader_lineno_start",
+          "tests/test_directive_code.py::test_LiteralIncludeReader_pyobject1",
+          "tests/test_directive_code.py::test_LiteralIncludeReader_pyobject2",
+          "tests/test_directive_code.py::test_LiteralIncludeReader_pyobject3",
+          "tests/test_directive_code.py::test_LiteralIncludeReader_pyobject_and_lines",
+          "tests/test_directive_code.py::test_LiteralIncludeReader_lines1",
+          "tests/test_directive_code.py::test_LiteralIncludeReader_lines2",
+          "tests/test_directive_code.py::test_LiteralIncludeReader_lines_and_lineno_match1",
+          "tests/test_directive_code.py::test_LiteralIncludeReader_lines_and_lineno_match2",
+          "tests/test_directive_code.py::test_LiteralIncludeReader_dedent_and_append_and_prepend"
+        ],
+        "symbol": "LiteralIncludeReader",
+        "unexplained": [
+          "tests/test_directive_code.py::test_LiteralIncludeReader (no failure section found)",
+          "tests/test_directive_code.py::test_LiteralIncludeReader_lineno_start (no failure section found)",
+          "tests/test_directive_code.py::test_LiteralIncludeReader_pyobject1 (no failure section found)",
+          "tests/test_directive_code.py::test_LiteralIncludeReader_pyobject2 (no failure section found)",
+          "tests/test_directive_code.py::test_LiteralIncludeReader_pyobject3 (no failure section found)",
+          "tests/test_directive_code.py::test_LiteralIncludeReader_pyobject_and_lines (no failure section found)",
+          "tests/test_directive_code.py::test_LiteralIncludeReader_lines1 (no failure section found)",
+          "tests/test_directive_code.py::test_LiteralIncludeReader_lines2 (no failure section found)",
+          "tests/test_directive_code.py::test_LiteralIncludeReader_lines_and_lineno_match1 (no failure section found)",
+          "tests/test_directive_code.py::test_LiteralIncludeReader_lines_and_lineno_match2 (no failure section found)",
+          "tests/test_directive_code.py::test_LiteralIncludeReader_dedent_and_append_and_prepend (no failure section found)"
+        ],
+        "unparsed": [
+          "tests/test_directive_code.py::test_LiteralIncludeReader",
+          "tests/test_directive_code.py::test_LiteralIncludeReader_lineno_start",
+          "tests/test_directive_code.py::test_LiteralIncludeReader_pyobject1",
+          "tests/test_directive_code.py::test_LiteralIncludeReader_pyobject2",
+          "tests/test_directive_code.py::test_LiteralIncludeReader_pyobject3",
+          "tests/test_directive_code.py::test_LiteralIncludeReader_pyobject_and_lines",
+          "tests/test_directive_code.py::test_LiteralIncludeReader_lines1",
+          "tests/test_directive_code.py::test_LiteralIncludeReader_lines2",
+          "tests/test_directive_code.py::test_LiteralIncludeReader_lines_and_lineno_match1",
+          "tests/test_directive_code.py::test_LiteralIncludeReader_lines_and_lineno_match2",
+          "tests/test_directive_code.py::test_LiteralIncludeReader_dedent_and_append_and_prepend"
+        ],
+        "unparsed_log_shape": true
+      },
+      "file": null,
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 1,
+        "f2p_failing": [
+          "tests/test_directive_code.py::test_LiteralIncludeReader_dedent_and_append_and_prepend"
+        ],
+        "f2p_pass": 0,
+        "found": true,
+        "n_parsed": 1,
+        "p2p_fail": 40,
+        "p2p_failing": [
+          "tests/test_directive_code.py::test_LiteralIncludeReader",
+          "tests/test_directive_code.py::test_LiteralIncludeReader_lineno_start",
+          "tests/test_directive_code.py::test_LiteralIncludeReader_pyobject1",
+          "tests/test_directive_code.py::test_LiteralIncludeReader_pyobject2",
+          "tests/test_directive_code.py::test_LiteralIncludeReader_pyobject3",
+          "tests/test_directive_code.py::test_LiteralIncludeReader_pyobject_and_lines",
+          "tests/test_directive_code.py::test_LiteralIncludeReader_lines1",
+          "tests/test_directive_code.py::test_LiteralIncludeReader_lines2",
+          "tests/test_directive_code.py::test_LiteralIncludeReader_lines_and_lineno_match1",
+          "tests/test_directive_code.py::test_LiteralIncludeReader_lines_and_lineno_match2"
+        ],
+        "p2p_pass": 0,
+        "reward": 0.0
+      },
+      "loud_failure": false,
+      "observable": "order of elements in a returned collection",
+      "operator": "collection_reverse",
+      "reason": "no anchor inside the gold-touched region; 1 anchor(s) elsewhere in the target",
+      "tier": "MEDIUM",
+      "tree_digest": "6a225ef555b2d0cce9851ca8c5a899452b32c5a15ffc0d19ff2d9f9319ce716f",
+      "verdict": "NOT_APPLICABLE"
+    },
+    {
+      "anchor": null,
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "broke": [],
+        "coupled": [],
+        "failing": [
+          "tests/test_directive_code.py::test_LiteralIncludeReader",
+          "tests/test_directive_code.py::test_LiteralIncludeReader_lineno_start",
+          "tests/test_directive_code.py::test_LiteralIncludeReader_pyobject1",
+          "tests/test_directive_code.py::test_LiteralIncludeReader_pyobject2",
+          "tests/test_directive_code.py::test_LiteralIncludeReader_pyobject3",
+          "tests/test_directive_code.py::test_LiteralIncludeReader_pyobject_and_lines",
+          "tests/test_directive_code.py::test_LiteralIncludeReader_lines1",
+          "tests/test_directive_code.py::test_LiteralIncludeReader_lines2",
+          "tests/test_directive_code.py::test_LiteralIncludeReader_lines_and_lineno_match1",
+          "tests/test_directive_code.py::test_LiteralIncludeReader_lines_and_lineno_match2",
+          "tests/test_directive_code.py::test_LiteralIncludeReader_dedent_and_append_and_prepend"
+        ],
+        "symbol": "LiteralIncludeReader",
+        "unexplained": [
+          "tests/test_directive_code.py::test_LiteralIncludeReader (no failure section found)",
+          "tests/test_directive_code.py::test_LiteralIncludeReader_lineno_start (no failure section found)",
+          "tests/test_directive_code.py::test_LiteralIncludeReader_pyobject1 (no failure section found)",
+          "tests/test_directive_code.py::test_LiteralIncludeReader_pyobject2 (no failure section found)",
+          "tests/test_directive_code.py::test_LiteralIncludeReader_pyobject3 (no failure section found)",
+          "tests/test_directive_code.py::test_LiteralIncludeReader_pyobject_and_lines (no failure section found)",
+          "tests/test_directive_code.py::test_LiteralIncludeReader_lines1 (no failure section found)",
+          "tests/test_directive_code.py::test_LiteralIncludeReader_lines2 (no failure section found)",
+          "tests/test_directive_code.py::test_LiteralIncludeReader_lines_and_lineno_match1 (no failure section found)",
+          "tests/test_directive_code.py::test_LiteralIncludeReader_lines_and_lineno_match2 (no failure section found)",
+          "tests/test_directive_code.py::test_LiteralIncludeReader_dedent_and_append_and_prepend (no failure section found)"
+        ],
+        "unparsed": [
+          "tests/test_directive_code.py::test_LiteralIncludeReader",
+          "tests/test_directive_code.py::test_LiteralIncludeReader_lineno_start",
+          "tests/test_directive_code.py::test_LiteralIncludeReader_pyobject1",
+          "tests/test_directive_code.py::test_LiteralIncludeReader_pyobject2",
+          "tests/test_directive_code.py::test_LiteralIncludeReader_pyobject3",
+          "tests/test_directive_code.py::test_LiteralIncludeReader_pyobject_and_lines",
+          "tests/test_directive_code.py::test_LiteralIncludeReader_lines1",
+          "tests/test_directive_code.py::test_LiteralIncludeReader_lines2",
+          "tests/test_directive_code.py::test_LiteralIncludeReader_lines_and_lineno_match1",
+          "tests/test_directive_code.py::test_LiteralIncludeReader_lines_and_lineno_match2",
+          "tests/test_directive_code.py::test_LiteralIncludeReader_dedent_and_append_and_prepend"
+        ],
+        "unparsed_log_shape": true
+      },
+      "file": null,
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 1,
+        "f2p_failing": [
+          "tests/test_directive_code.py::test_LiteralIncludeReader_dedent_and_append_and_prepend"
+        ],
+        "f2p_pass": 0,
+        "found": true,
+        "n_parsed": 1,
+        "p2p_fail": 40,
+        "p2p_failing": [
+          "tests/test_directive_code.py::test_LiteralIncludeReader",
+          "tests/test_directive_code.py::test_LiteralIncludeReader_lineno_start",
+          "tests/test_directive_code.py::test_LiteralIncludeReader_pyobject1",
+          "tests/test_directive_code.py::test_LiteralIncludeReader_pyobject2",
+          "tests/test_directive_code.py::test_LiteralIncludeReader_pyobject3",
+          "tests/test_directive_code.py::test_LiteralIncludeReader_pyobject_and_lines",
+          "tests/test_directive_code.py::test_LiteralIncludeReader_lines1",
+          "tests/test_directive_code.py::test_LiteralIncludeReader_lines2",
+          "tests/test_directive_code.py::test_LiteralIncludeReader_lines_and_lineno_match1",
+          "tests/test_directive_code.py::test_LiteralIncludeReader_lines_and_lineno_match2"
+        ],
+        "p2p_pass": 0,
+        "reward": 0.0
+      },
+      "loud_failure": false,
+      "observable": "human-readable text of an exception message",
+      "operator": "message_reword",
+      "reason": "no anchor inside the gold-touched region",
+      "tier": "HIGH",
+      "tree_digest": "6a225ef555b2d0cce9851ca8c5a899452b32c5a15ffc0d19ff2d9f9319ce716f",
+      "verdict": "NOT_APPLICABLE"
+    }
+  ],
+  "targets": [
+    "sphinx/directives/code.py"
+  ],
+  "version": "5.0",
+  "witnesses": []
+}

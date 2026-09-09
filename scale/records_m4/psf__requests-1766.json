@@ -1,0 +1,486 @@
+{
+  "completed": true,
+  "control": {
+    "graded": null,
+    "log": null,
+    "passed": true,
+    "reason": "untransformed reference scores 1.0"
+  },
+  "digest_trace": [
+    {
+      "digest": "b28781aeb6df7d97f91148d761cb8cab932cc6b9e9c37286f2334d1f5d1a9f92",
+      "memo_hit": false
+    },
+    {
+      "digest": "a9601c91caf565122f927bcefdf8942ba9fe55daf6a7a8c7f593a5349dfe0631",
+      "memo_hit": false
+    },
+    {
+      "digest": "a9601c91caf565122f927bcefdf8942ba9fe55daf6a7a8c7f593a5349dfe0631",
+      "memo_hit": true
+    }
+  ],
+  "disk_orphan_reclaimed_bytes": 0,
+  "disk_residual_bytes": 0,
+  "elapsed_seconds": 134.8,
+  "error": null,
+  "image": "swebench/sweb.eval.x86_64.psf_1776_requests-1766:latest",
+  "instance_id": "psf__requests-1766",
+  "leaked_containers": [],
+  "leaked_image": false,
+  "log": [
+    [
+      "<control>",
+      "OK",
+      "untransformed reference scores 1.0"
+    ],
+    [
+      "kwonly_specialize:<no anchor>",
+      "NOT_APPLICABLE",
+      "no anchor inside the gold-touched region"
+    ],
+    [
+      "symbol_rename:HTTPDigestAuth",
+      "WITNESS",
+      "reward 0.0"
+    ],
+    [
+      "collection_reverse:<no anchor>",
+      "NOT_APPLICABLE",
+      "no anchor inside the gold-touched region"
+    ],
+    [
+      "message_reword:<no anchor>",
+      "NOT_APPLICABLE",
+      "no anchor inside the gold-touched region; 1 anchor(s) elsewhere in the target"
+    ]
+  ],
+  "mountable": true,
+  "multi_target": false,
+  "n_targets": 1,
+  "on_prime_hub": null,
+  "on_prime_hub_reason": "not resolvable offline; no hub environment index is reachable from this repo, verifiers or swebench",
+  "operators_not_applicable": [
+    "collection_reverse",
+    "kwonly_specialize",
+    "message_reword"
+  ],
+  "operators_with_anchors": [
+    "symbol_rename"
+  ],
+  "repo": "psf/requests",
+  "row": {
+    "elapsed": 78.93,
+    "error": null,
+    "error_type": null,
+    "index": 0,
+    "mode": "formcheck",
+    "name": "psf__requests-1766",
+    "reason": "invalid",
+    "valid": false
+  },
+  "rows": [
+    {
+      "anchor": null,
+      "failure_analysis": null,
+      "file": null,
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 6,
+        "found": true,
+        "n_parsed": 91,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 79,
+        "reward": 1.0
+      },
+      "loud_failure": false,
+      "observable": "callable signature (arity / parameter names)",
+      "operator": "kwonly_specialize",
+      "reason": "no anchor inside the gold-touched region",
+      "tier": "HIGH",
+      "tree_digest": "b28781aeb6df7d97f91148d761cb8cab932cc6b9e9c37286f2334d1f5d1a9f92",
+      "verdict": "NOT_APPLICABLE"
+    },
+    {
+      "all_failures_attributed": true,
+      "anchor": "HTTPDigestAuth",
+      "f2p_fail": 6,
+      "failure_analysis": {
+        "all_reference_the_symbol": true,
+        "broke": [],
+        "coupled": [
+          "test_requests.py::RequestsTestCase::test_BASICAUTH_TUPLE_HTTP_200_OK_GET",
+          "test_requests.py::RequestsTestCase::test_DIGESTAUTH_WRONG_HTTP_401_GET",
+          "test_requests.py::RequestsTestCase::test_DIGEST_AUTH_RETURNS_COOKIE",
+          "test_requests.py::RequestsTestCase::test_DIGEST_AUTH_SETS_SESSION_COOKIES",
+          "test_requests.py::RequestsTestCase::test_DIGEST_STREAM",
+          "test_requests.py::RequestsTestCase::test_HTTP_200_OK_GET_WITH_MIXED_PARAMS",
+          "test_requests.py::RequestsTestCase::test_HTTP_200_OK_GET_WITH_PARAMS",
+          "test_requests.py::RequestsTestCase::test_HTTP_200_OK_HEAD",
+          "test_requests.py::RequestsTestCase::test_HTTP_200_OK_PUT",
+          "test_requests.py::RequestsTestCase::test_HTTP_302_ALLOW_REDIRECT_GET",
+          "test_requests.py::RequestsTestCase::test_DIGESTAUTH_QUOTES_QOP_VALUE",
+          "test_requests.py::RequestsTestCase::test_HTTP_200_OK_GET_ALTERNATIVE",
+          "test_requests.py::RequestsTestCase::test_cookie_sent_on_redirect",
+          "test_requests.py::RequestsTestCase::test_custom_content_type",
+          "test_requests.py::RequestsTestCase::test_params_are_merged_case_sensitive",
+          "test_requests.py::RequestsTestCase::test_user_agent_transfers"
+        ],
+        "failing": [
+          "test_requests.py::RequestsTestCase::test_BASICAUTH_TUPLE_HTTP_200_OK_GET",
+          "test_requests.py::RequestsTestCase::test_DIGESTAUTH_WRONG_HTTP_401_GET",
+          "test_requests.py::RequestsTestCase::test_DIGEST_AUTH_RETURNS_COOKIE",
+          "test_requests.py::RequestsTestCase::test_DIGEST_AUTH_SETS_SESSION_COOKIES",
+          "test_requests.py::RequestsTestCase::test_DIGEST_STREAM",
+          "test_requests.py::RequestsTestCase::test_HTTP_200_OK_GET_WITH_MIXED_PARAMS",
+          "test_requests.py::RequestsTestCase::test_HTTP_200_OK_GET_WITH_PARAMS",
+          "test_requests.py::RequestsTestCase::test_HTTP_200_OK_HEAD",
+          "test_requests.py::RequestsTestCase::test_HTTP_200_OK_PUT",
+          "test_requests.py::RequestsTestCase::test_HTTP_302_ALLOW_REDIRECT_GET",
+          "test_requests.py::RequestsTestCase::test_DIGESTAUTH_QUOTES_QOP_VALUE",
+          "test_requests.py::RequestsTestCase::test_HTTP_200_OK_GET_ALTERNATIVE",
+          "test_requests.py::RequestsTestCase::test_cookie_sent_on_redirect",
+          "test_requests.py::RequestsTestCase::test_custom_content_type",
+          "test_requests.py::RequestsTestCase::test_params_are_merged_case_sensitive",
+          "test_requests.py::RequestsTestCase::test_user_agent_transfers"
+        ],
+        "symbol": "HTTPDigestAuth",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": "requests/auth.py",
+      "graded_log": "+ pytest -rA test_requests.py\n============================= test session starts ==============================\nplatform linux -- Python 3.9.20, pytest-7.4.4, pluggy-1.0.0\nrootdir: /testbed\ncollected 0 items / 1 error\n\n==================================== ERRORS ====================================\n______________________ ERROR collecting test_requests.py _______________________\nImportError while importing test module '/testbed/test_requests.py'.\nHint: make sure your test modules/packages have valid Python names.\nTraceback:\n/opt/miniconda3/envs/testbed/lib/python3.9/importlib/__init__.py:127: in import_module\n    return _bootstrap._gcd_import(name[level:], package, level)\ntest_requests.py:14: in <module>\n    from requests.auth import HTTPDigestAuth\nE   ImportError: cannot import name 'HTTPDigestAuth' from 'requests.auth' (/testbed/requests/auth.py)\n=============================== warnings summary ===============================\nrequests/packages/urllib3/connectionpool.py:383\n  /testbed/requests/packages/urllib3/connectionpool.py:383: DeprecationWarning: invalid escape sequence \\*\n    \"\"\"\n\nrequests/packages/urllib3/connectionpool.py:658\n  /testbed/requests/packages/urllib3/connectionpool.py:658: DeprecationWarning: invalid escape sequence \\*\n    \"\"\"\n\nrequests/packages/urllib3/poolmanager.py:36\n  /testbed/requests/packages/urllib3/poolmanager.py:36: DeprecationWarning: invalid escape sequence \\*\n    \"\"\"\n\nrequests/packages/urllib3/_collections.py:7\n  /testbed/requests/packages/urllib3/_collections.py:7: DeprecationWarning: Using or importing the ABCs from 'collections' instead of from 'collections.abc' is deprecated since Python 3.3, and in 3.10 it will stop working\n    from collections import MutableMapping\n\nrequests/models.py:717\n  /testbed/requests/models.py:717: DeprecationWarning: invalid escape sequence \\*\n    \"\"\"Returns the json-encoded content of a response, if any.\n\nrequests/api.py:48\n  /testbed/requests/api.py:48: DeprecationWarning: invalid escape sequence \\*\n    \"\"\"Sends a GET request. Returns :class:`Response` object.\n\nrequests/api.py:59\n  /testbed/requests/api.py:59: DeprecationWarning: invalid escape sequence \\*\n    \"\"\"Sends a OPTIONS request. Returns :class:`Response` object.\n\nrequests/api.py:70\n  /testbed/requests/api.py:70: DeprecationWarning: invalid escape sequence \\*\n    \"\"\"Sends a HEAD request. Returns :class:`Response` object.\n\nrequests/api.py:81\n  /testbed/requests/api.py:81: DeprecationWarning: invalid escape sequence \\*\n    \"\"\"Sends a POST request. Returns :class:`Response` object.\n\nrequests/api.py:92\n  /testbed/requests/api.py:92: DeprecationWarning: invalid escape sequence \\*\n    \"\"\"Sends a PUT request. Returns :class:`Response` object.\n\nrequests/api.py:103\n  /testbed/requests/api.py:103: DeprecationWarning: invalid escape sequence \\*\n    \"\"\"Sends a PATCH request. Returns :class:`Response` object.\n\nrequests/api.py:114\n  /testbed/requests/api.py:114: DeprecationWarning: invalid escape sequence \\*\n    \"\"\"Sends a DELETE request. Returns :class:`Response` object.\n\nrequests/sessions.py:372\n  /testbed/requests/sessions.py:372: DeprecationWarning: invalid escape sequence \\*\n    \"\"\"Sends a GET request. Returns :class:`Response` object.\n\nrequests/sessions.py:382\n  /testbed/requests/sessions.py:382: DeprecationWarning: invalid escape sequence \\*\n    \"\"\"Sends a OPTIONS request. Returns :class:`Response` object.\n\nrequests/sessions.py:392\n  /testbed/requests/sessions.py:392: DeprecationWarning: invalid escape sequence \\*\n    \"\"\"Sends a HEAD request. Returns :class:`Response` object.\n\nrequests/sessions.py:402\n  /testbed/requests/sessions.py:402: DeprecationWarning: invalid escape sequence \\*\n    \"\"\"Sends a POST request. Returns :class:`Response` object.\n\nrequests/sessions.py:412\n  /testbed/requests/sessions.py:412: DeprecationWarning: invalid escape sequence \\*\n    \"\"\"Sends a PUT request. Returns :class:`Response` object.\n\nrequests/sessions.py:422\n  /testbed/requests/sessions.py:422: DeprecationWarning: invalid escape sequence \\*\n    \"\"\"Sends a PATCH request. Returns :class:`Response` object.\n\nrequests/sessions.py:432\n  /testbed/requests/sessions.py:432: DeprecationWarning: invalid escape sequence \\*\n    \"\"\"Sends a DELETE request. Returns :class:`Response` object.\n\nrequests/sessions.py:12\n  /testbed/requests/sessions.py:12: DeprecationWarning: Using or importing the ABCs from 'collections' instead of from 'collections.abc' is deprecated since Python 3.3, and in 3.10 it will stop working\n    from collections import Mapping\n\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n=========================== short test summary info ============================\nERROR test_requests.py\n!!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!!\n======================== 20 warnings, 1 error in 0.54s =========================\n\n",
+      "graded_report": {
+        "f2p_fail": 6,
+        "f2p_failing": [
+          "test_requests.py::RequestsTestCase::test_DIGESTAUTH_QUOTES_QOP_VALUE",
+          "test_requests.py::RequestsTestCase::test_HTTP_200_OK_GET_ALTERNATIVE",
+          "test_requests.py::RequestsTestCase::test_cookie_sent_on_redirect",
+          "test_requests.py::RequestsTestCase::test_custom_content_type",
+          "test_requests.py::RequestsTestCase::test_params_are_merged_case_sensitive",
+          "test_requests.py::RequestsTestCase::test_user_agent_transfers"
+        ],
+        "f2p_pass": 0,
+        "found": true,
+        "n_parsed": 1,
+        "p2p_fail": 79,
+        "p2p_failing": [
+          "test_requests.py::RequestsTestCase::test_BASICAUTH_TUPLE_HTTP_200_OK_GET",
+          "test_requests.py::RequestsTestCase::test_DIGESTAUTH_WRONG_HTTP_401_GET",
+          "test_requests.py::RequestsTestCase::test_DIGEST_AUTH_RETURNS_COOKIE",
+          "test_requests.py::RequestsTestCase::test_DIGEST_AUTH_SETS_SESSION_COOKIES",
+          "test_requests.py::RequestsTestCase::test_DIGEST_STREAM",
+          "test_requests.py::RequestsTestCase::test_HTTP_200_OK_GET_WITH_MIXED_PARAMS",
+          "test_requests.py::RequestsTestCase::test_HTTP_200_OK_GET_WITH_PARAMS",
+          "test_requests.py::RequestsTestCase::test_HTTP_200_OK_HEAD",
+          "test_requests.py::RequestsTestCase::test_HTTP_200_OK_PUT",
+          "test_requests.py::RequestsTestCase::test_HTTP_302_ALLOW_REDIRECT_GET"
+        ],
+        "p2p_pass": 0,
+        "reward": 0.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "p2p_coupled_tests": [
+        "test_requests.py::RequestsTestCase::test_BASICAUTH_TUPLE_HTTP_200_OK_GET",
+        "test_requests.py::RequestsTestCase::test_DIGESTAUTH_WRONG_HTTP_401_GET",
+        "test_requests.py::RequestsTestCase::test_DIGEST_AUTH_RETURNS_COOKIE",
+        "test_requests.py::RequestsTestCase::test_DIGEST_AUTH_SETS_SESSION_COOKIES",
+        "test_requests.py::RequestsTestCase::test_DIGEST_STREAM",
+        "test_requests.py::RequestsTestCase::test_HTTP_200_OK_GET_WITH_MIXED_PARAMS",
+        "test_requests.py::RequestsTestCase::test_HTTP_200_OK_GET_WITH_PARAMS",
+        "test_requests.py::RequestsTestCase::test_HTTP_200_OK_HEAD",
+        "test_requests.py::RequestsTestCase::test_HTTP_200_OK_PUT",
+        "test_requests.py::RequestsTestCase::test_HTTP_302_ALLOW_REDIRECT_GET"
+      ],
+      "p2p_fail": 79,
+      "reason": "reward 0.0",
+      "tier": "MEDIUM",
+      "tree_digest": "a9601c91caf565122f927bcefdf8942ba9fe55daf6a7a8c7f593a5349dfe0631",
+      "verdict": "WITNESS",
+      "witness_side": "p2p_coupling"
+    },
+    {
+      "anchor": null,
+      "failure_analysis": {
+        "all_reference_the_symbol": true,
+        "broke": [],
+        "coupled": [
+          "test_requests.py::RequestsTestCase::test_BASICAUTH_TUPLE_HTTP_200_OK_GET",
+          "test_requests.py::RequestsTestCase::test_DIGESTAUTH_WRONG_HTTP_401_GET",
+          "test_requests.py::RequestsTestCase::test_DIGEST_AUTH_RETURNS_COOKIE",
+          "test_requests.py::RequestsTestCase::test_DIGEST_AUTH_SETS_SESSION_COOKIES",
+          "test_requests.py::RequestsTestCase::test_DIGEST_STREAM",
+          "test_requests.py::RequestsTestCase::test_HTTP_200_OK_GET_WITH_MIXED_PARAMS",
+          "test_requests.py::RequestsTestCase::test_HTTP_200_OK_GET_WITH_PARAMS",
+          "test_requests.py::RequestsTestCase::test_HTTP_200_OK_HEAD",
+          "test_requests.py::RequestsTestCase::test_HTTP_200_OK_PUT",
+          "test_requests.py::RequestsTestCase::test_HTTP_302_ALLOW_REDIRECT_GET",
+          "test_requests.py::RequestsTestCase::test_DIGESTAUTH_QUOTES_QOP_VALUE",
+          "test_requests.py::RequestsTestCase::test_HTTP_200_OK_GET_ALTERNATIVE",
+          "test_requests.py::RequestsTestCase::test_cookie_sent_on_redirect",
+          "test_requests.py::RequestsTestCase::test_custom_content_type",
+          "test_requests.py::RequestsTestCase::test_params_are_merged_case_sensitive",
+          "test_requests.py::RequestsTestCase::test_user_agent_transfers"
+        ],
+        "failing": [
+          "test_requests.py::RequestsTestCase::test_BASICAUTH_TUPLE_HTTP_200_OK_GET",
+          "test_requests.py::RequestsTestCase::test_DIGESTAUTH_WRONG_HTTP_401_GET",
+          "test_requests.py::RequestsTestCase::test_DIGEST_AUTH_RETURNS_COOKIE",
+          "test_requests.py::RequestsTestCase::test_DIGEST_AUTH_SETS_SESSION_COOKIES",
+          "test_requests.py::RequestsTestCase::test_DIGEST_STREAM",
+          "test_requests.py::RequestsTestCase::test_HTTP_200_OK_GET_WITH_MIXED_PARAMS",
+          "test_requests.py::RequestsTestCase::test_HTTP_200_OK_GET_WITH_PARAMS",
+          "test_requests.py::RequestsTestCase::test_HTTP_200_OK_HEAD",
+          "test_requests.py::RequestsTestCase::test_HTTP_200_OK_PUT",
+          "test_requests.py::RequestsTestCase::test_HTTP_302_ALLOW_REDIRECT_GET",
+          "test_requests.py::RequestsTestCase::test_DIGESTAUTH_QUOTES_QOP_VALUE",
+          "test_requests.py::RequestsTestCase::test_HTTP_200_OK_GET_ALTERNATIVE",
+          "test_requests.py::RequestsTestCase::test_cookie_sent_on_redirect",
+          "test_requests.py::RequestsTestCase::test_custom_content_type",
+          "test_requests.py::RequestsTestCase::test_params_are_merged_case_sensitive",
+          "test_requests.py::RequestsTestCase::test_user_agent_transfers"
+        ],
+        "symbol": "HTTPDigestAuth",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": null,
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 6,
+        "f2p_failing": [
+          "test_requests.py::RequestsTestCase::test_DIGESTAUTH_QUOTES_QOP_VALUE",
+          "test_requests.py::RequestsTestCase::test_HTTP_200_OK_GET_ALTERNATIVE",
+          "test_requests.py::RequestsTestCase::test_cookie_sent_on_redirect",
+          "test_requests.py::RequestsTestCase::test_custom_content_type",
+          "test_requests.py::RequestsTestCase::test_params_are_merged_case_sensitive",
+          "test_requests.py::RequestsTestCase::test_user_agent_transfers"
+        ],
+        "f2p_pass": 0,
+        "found": true,
+        "n_parsed": 1,
+        "p2p_fail": 79,
+        "p2p_failing": [
+          "test_requests.py::RequestsTestCase::test_BASICAUTH_TUPLE_HTTP_200_OK_GET",
+          "test_requests.py::RequestsTestCase::test_DIGESTAUTH_WRONG_HTTP_401_GET",
+          "test_requests.py::RequestsTestCase::test_DIGEST_AUTH_RETURNS_COOKIE",
+          "test_requests.py::RequestsTestCase::test_DIGEST_AUTH_SETS_SESSION_COOKIES",
+          "test_requests.py::RequestsTestCase::test_DIGEST_STREAM",
+          "test_requests.py::RequestsTestCase::test_HTTP_200_OK_GET_WITH_MIXED_PARAMS",
+          "test_requests.py::RequestsTestCase::test_HTTP_200_OK_GET_WITH_PARAMS",
+          "test_requests.py::RequestsTestCase::test_HTTP_200_OK_HEAD",
+          "test_requests.py::RequestsTestCase::test_HTTP_200_OK_PUT",
+          "test_requests.py::RequestsTestCase::test_HTTP_302_ALLOW_REDIRECT_GET"
+        ],
+        "p2p_pass": 0,
+        "reward": 0.0
+      },
+      "loud_failure": false,
+      "observable": "order of elements in a returned collection",
+      "operator": "collection_reverse",
+      "reason": "no anchor inside the gold-touched region",
+      "tier": "MEDIUM",
+      "tree_digest": "a9601c91caf565122f927bcefdf8942ba9fe55daf6a7a8c7f593a5349dfe0631",
+      "verdict": "NOT_APPLICABLE"
+    },
+    {
+      "anchor": null,
+      "failure_analysis": {
+        "all_reference_the_symbol": true,
+        "broke": [],
+        "coupled": [
+          "test_requests.py::RequestsTestCase::test_BASICAUTH_TUPLE_HTTP_200_OK_GET",
+          "test_requests.py::RequestsTestCase::test_DIGESTAUTH_WRONG_HTTP_401_GET",
+          "test_requests.py::RequestsTestCase::test_DIGEST_AUTH_RETURNS_COOKIE",
+          "test_requests.py::RequestsTestCase::test_DIGEST_AUTH_SETS_SESSION_COOKIES",
+          "test_requests.py::RequestsTestCase::test_DIGEST_STREAM",
+          "test_requests.py::RequestsTestCase::test_HTTP_200_OK_GET_WITH_MIXED_PARAMS",
+          "test_requests.py::RequestsTestCase::test_HTTP_200_OK_GET_WITH_PARAMS",
+          "test_requests.py::RequestsTestCase::test_HTTP_200_OK_HEAD",
+          "test_requests.py::RequestsTestCase::test_HTTP_200_OK_PUT",
+          "test_requests.py::RequestsTestCase::test_HTTP_302_ALLOW_REDIRECT_GET",
+          "test_requests.py::RequestsTestCase::test_DIGESTAUTH_QUOTES_QOP_VALUE",
+          "test_requests.py::RequestsTestCase::test_HTTP_200_OK_GET_ALTERNATIVE",
+          "test_requests.py::RequestsTestCase::test_cookie_sent_on_redirect",
+          "test_requests.py::RequestsTestCase::test_custom_content_type",
+          "test_requests.py::RequestsTestCase::test_params_are_merged_case_sensitive",
+          "test_requests.py::RequestsTestCase::test_user_agent_transfers"
+        ],
+        "failing": [
+          "test_requests.py::RequestsTestCase::test_BASICAUTH_TUPLE_HTTP_200_OK_GET",
+          "test_requests.py::RequestsTestCase::test_DIGESTAUTH_WRONG_HTTP_401_GET",
+          "test_requests.py::RequestsTestCase::test_DIGEST_AUTH_RETURNS_COOKIE",
+          "test_requests.py::RequestsTestCase::test_DIGEST_AUTH_SETS_SESSION_COOKIES",
+          "test_requests.py::RequestsTestCase::test_DIGEST_STREAM",
+          "test_requests.py::RequestsTestCase::test_HTTP_200_OK_GET_WITH_MIXED_PARAMS",
+          "test_requests.py::RequestsTestCase::test_HTTP_200_OK_GET_WITH_PARAMS",
+          "test_requests.py::RequestsTestCase::test_HTTP_200_OK_HEAD",
+          "test_requests.py::RequestsTestCase::test_HTTP_200_OK_PUT",
+          "test_requests.py::RequestsTestCase::test_HTTP_302_ALLOW_REDIRECT_GET",
+          "test_requests.py::RequestsTestCase::test_DIGESTAUTH_QUOTES_QOP_VALUE",
+          "test_requests.py::RequestsTestCase::test_HTTP_200_OK_GET_ALTERNATIVE",
+          "test_requests.py::RequestsTestCase::test_cookie_sent_on_redirect",
+          "test_requests.py::RequestsTestCase::test_custom_content_type",
+          "test_requests.py::RequestsTestCase::test_params_are_merged_case_sensitive",
+          "test_requests.py::RequestsTestCase::test_user_agent_transfers"
+        ],
+        "symbol": "HTTPDigestAuth",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": null,
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 6,
+        "f2p_failing": [
+          "test_requests.py::RequestsTestCase::test_DIGESTAUTH_QUOTES_QOP_VALUE",
+          "test_requests.py::RequestsTestCase::test_HTTP_200_OK_GET_ALTERNATIVE",
+          "test_requests.py::RequestsTestCase::test_cookie_sent_on_redirect",
+          "test_requests.py::RequestsTestCase::test_custom_content_type",
+          "test_requests.py::RequestsTestCase::test_params_are_merged_case_sensitive",
+          "test_requests.py::RequestsTestCase::test_user_agent_transfers"
+        ],
+        "f2p_pass": 0,
+        "found": true,
+        "n_parsed": 1,
+        "p2p_fail": 79,
+        "p2p_failing": [
+          "test_requests.py::RequestsTestCase::test_BASICAUTH_TUPLE_HTTP_200_OK_GET",
+          "test_requests.py::RequestsTestCase::test_DIGESTAUTH_WRONG_HTTP_401_GET",
+          "test_requests.py::RequestsTestCase::test_DIGEST_AUTH_RETURNS_COOKIE",
+          "test_requests.py::RequestsTestCase::test_DIGEST_AUTH_SETS_SESSION_COOKIES",
+          "test_requests.py::RequestsTestCase::test_DIGEST_STREAM",
+          "test_requests.py::RequestsTestCase::test_HTTP_200_OK_GET_WITH_MIXED_PARAMS",
+          "test_requests.py::RequestsTestCase::test_HTTP_200_OK_GET_WITH_PARAMS",
+          "test_requests.py::RequestsTestCase::test_HTTP_200_OK_HEAD",
+          "test_requests.py::RequestsTestCase::test_HTTP_200_OK_PUT",
+          "test_requests.py::RequestsTestCase::test_HTTP_302_ALLOW_REDIRECT_GET"
+        ],
+        "p2p_pass": 0,
+        "reward": 0.0
+      },
+      "loud_failure": false,
+      "observable": "human-readable text of an exception message",
+      "operator": "message_reword",
+      "reason": "no anchor inside the gold-touched region; 1 anchor(s) elsewhere in the target",
+      "tier": "HIGH",
+      "tree_digest": "a9601c91caf565122f927bcefdf8942ba9fe55daf6a7a8c7f593a5349dfe0631",
+      "verdict": "NOT_APPLICABLE"
+    }
+  ],
+  "targets": [
+    "requests/auth.py"
+  ],
+  "version": "2.0",
+  "witnesses": [
+    {
+      "all_failures_attributed": true,
+      "anchor": "HTTPDigestAuth",
+      "f2p_fail": 6,
+      "failure_analysis": {
+        "all_reference_the_symbol": true,
+        "broke": [],
+        "coupled": [
+          "test_requests.py::RequestsTestCase::test_BASICAUTH_TUPLE_HTTP_200_OK_GET",
+          "test_requests.py::RequestsTestCase::test_DIGESTAUTH_WRONG_HTTP_401_GET",
+          "test_requests.py::RequestsTestCase::test_DIGEST_AUTH_RETURNS_COOKIE",
+          "test_requests.py::RequestsTestCase::test_DIGEST_AUTH_SETS_SESSION_COOKIES",
+          "test_requests.py::RequestsTestCase::test_DIGEST_STREAM",
+          "test_requests.py::RequestsTestCase::test_HTTP_200_OK_GET_WITH_MIXED_PARAMS",
+          "test_requests.py::RequestsTestCase::test_HTTP_200_OK_GET_WITH_PARAMS",
+          "test_requests.py::RequestsTestCase::test_HTTP_200_OK_HEAD",
+          "test_requests.py::RequestsTestCase::test_HTTP_200_OK_PUT",
+          "test_requests.py::RequestsTestCase::test_HTTP_302_ALLOW_REDIRECT_GET",
+          "test_requests.py::RequestsTestCase::test_DIGESTAUTH_QUOTES_QOP_VALUE",
+          "test_requests.py::RequestsTestCase::test_HTTP_200_OK_GET_ALTERNATIVE",
+          "test_requests.py::RequestsTestCase::test_cookie_sent_on_redirect",
+          "test_requests.py::RequestsTestCase::test_custom_content_type",
+          "test_requests.py::RequestsTestCase::test_params_are_merged_case_sensitive",
+          "test_requests.py::RequestsTestCase::test_user_agent_transfers"
+        ],
+        "failing": [
+          "test_requests.py::RequestsTestCase::test_BASICAUTH_TUPLE_HTTP_200_OK_GET",
+          "test_requests.py::RequestsTestCase::test_DIGESTAUTH_WRONG_HTTP_401_GET",
+          "test_requests.py::RequestsTestCase::test_DIGEST_AUTH_RETURNS_COOKIE",
+          "test_requests.py::RequestsTestCase::test_DIGEST_AUTH_SETS_SESSION_COOKIES",
+          "test_requests.py::RequestsTestCase::test_DIGEST_STREAM",
+          "test_requests.py::RequestsTestCase::test_HTTP_200_OK_GET_WITH_MIXED_PARAMS",
+          "test_requests.py::RequestsTestCase::test_HTTP_200_OK_GET_WITH_PARAMS",
+          "test_requests.py::RequestsTestCase::test_HTTP_200_OK_HEAD",
+          "test_requests.py::RequestsTestCase::test_HTTP_200_OK_PUT",
+          "test_requests.py::RequestsTestCase::test_HTTP_302_ALLOW_REDIRECT_GET",
+          "test_requests.py::RequestsTestCase::test_DIGESTAUTH_QUOTES_QOP_VALUE",
+          "test_requests.py::RequestsTestCase::test_HTTP_200_OK_GET_ALTERNATIVE",
+          "test_requests.py::RequestsTestCase::test_cookie_sent_on_redirect",
+          "test_requests.py::RequestsTestCase::test_custom_content_type",
+          "test_requests.py::RequestsTestCase::test_params_are_merged_case_sensitive",
+          "test_requests.py::RequestsTestCase::test_user_agent_transfers"
+        ],
+        "symbol": "HTTPDigestAuth",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": "requests/auth.py",
+      "graded_log": "+ pytest -rA test_requests.py\n============================= test session starts ==============================\nplatform linux -- Python 3.9.20, pytest-7.4.4, pluggy-1.0.0\nrootdir: /testbed\ncollected 0 items / 1 error\n\n==================================== ERRORS ====================================\n______________________ ERROR collecting test_requests.py _______________________\nImportError while importing test module '/testbed/test_requests.py'.\nHint: make sure your test modules/packages have valid Python names.\nTraceback:\n/opt/miniconda3/envs/testbed/lib/python3.9/importlib/__init__.py:127: in import_module\n    return _bootstrap._gcd_import(name[level:], package, level)\ntest_requests.py:14: in <module>\n    from requests.auth import HTTPDigestAuth\nE   ImportError: cannot import name 'HTTPDigestAuth' from 'requests.auth' (/testbed/requests/auth.py)\n=============================== warnings summary ===============================\nrequests/packages/urllib3/connectionpool.py:383\n  /testbed/requests/packages/urllib3/connectionpool.py:383: DeprecationWarning: invalid escape sequence \\*\n    \"\"\"\n\nrequests/packages/urllib3/connectionpool.py:658\n  /testbed/requests/packages/urllib3/connectionpool.py:658: DeprecationWarning: invalid escape sequence \\*\n    \"\"\"\n\nrequests/packages/urllib3/poolmanager.py:36\n  /testbed/requests/packages/urllib3/poolmanager.py:36: DeprecationWarning: invalid escape sequence \\*\n    \"\"\"\n\nrequests/packages/urllib3/_collections.py:7\n  /testbed/requests/packages/urllib3/_collections.py:7: DeprecationWarning: Using or importing the ABCs from 'collections' instead of from 'collections.abc' is deprecated since Python 3.3, and in 3.10 it will stop working\n    from collections import MutableMapping\n\nrequests/models.py:717\n  /testbed/requests/models.py:717: DeprecationWarning: invalid escape sequence \\*\n    \"\"\"Returns the json-encoded content of a response, if any.\n\nrequests/api.py:48\n  /testbed/requests/api.py:48: DeprecationWarning: invalid escape sequence \\*\n    \"\"\"Sends a GET request. Returns :class:`Response` object.\n\nrequests/api.py:59\n  /testbed/requests/api.py:59: DeprecationWarning: invalid escape sequence \\*\n    \"\"\"Sends a OPTIONS request. Returns :class:`Response` object.\n\nrequests/api.py:70\n  /testbed/requests/api.py:70: DeprecationWarning: invalid escape sequence \\*\n    \"\"\"Sends a HEAD request. Returns :class:`Response` object.\n\nrequests/api.py:81\n  /testbed/requests/api.py:81: DeprecationWarning: invalid escape sequence \\*\n    \"\"\"Sends a POST request. Returns :class:`Response` object.\n\nrequests/api.py:92\n  /testbed/requests/api.py:92: DeprecationWarning: invalid escape sequence \\*\n    \"\"\"Sends a PUT request. Returns :class:`Response` object.\n\nrequests/api.py:103\n  /testbed/requests/api.py:103: DeprecationWarning: invalid escape sequence \\*\n    \"\"\"Sends a PATCH request. Returns :class:`Response` object.\n\nrequests/api.py:114\n  /testbed/requests/api.py:114: DeprecationWarning: invalid escape sequence \\*\n    \"\"\"Sends a DELETE request. Returns :class:`Response` object.\n\nrequests/sessions.py:372\n  /testbed/requests/sessions.py:372: DeprecationWarning: invalid escape sequence \\*\n    \"\"\"Sends a GET request. Returns :class:`Response` object.\n\nrequests/sessions.py:382\n  /testbed/requests/sessions.py:382: DeprecationWarning: invalid escape sequence \\*\n    \"\"\"Sends a OPTIONS request. Returns :class:`Response` object.\n\nrequests/sessions.py:392\n  /testbed/requests/sessions.py:392: DeprecationWarning: invalid escape sequence \\*\n    \"\"\"Sends a HEAD request. Returns :class:`Response` object.\n\nrequests/sessions.py:402\n  /testbed/requests/sessions.py:402: DeprecationWarning: invalid escape sequence \\*\n    \"\"\"Sends a POST request. Returns :class:`Response` object.\n\nrequests/sessions.py:412\n  /testbed/requests/sessions.py:412: DeprecationWarning: invalid escape sequence \\*\n    \"\"\"Sends a PUT request. Returns :class:`Response` object.\n\nrequests/sessions.py:422\n  /testbed/requests/sessions.py:422: DeprecationWarning: invalid escape sequence \\*\n    \"\"\"Sends a PATCH request. Returns :class:`Response` object.\n\nrequests/sessions.py:432\n  /testbed/requests/sessions.py:432: DeprecationWarning: invalid escape sequence \\*\n    \"\"\"Sends a DELETE request. Returns :class:`Response` object.\n\nrequests/sessions.py:12\n  /testbed/requests/sessions.py:12: DeprecationWarning: Using or importing the ABCs from 'collections' instead of from 'collections.abc' is deprecated since Python 3.3, and in 3.10 it will stop working\n    from collections import Mapping\n\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n=========================== short test summary info ============================\nERROR test_requests.py\n!!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!!\n======================== 20 warnings, 1 error in 0.54s =========================\n\n",
+      "graded_report": {
+        "f2p_fail": 6,
+        "f2p_failing": [
+          "test_requests.py::RequestsTestCase::test_DIGESTAUTH_QUOTES_QOP_VALUE",
+          "test_requests.py::RequestsTestCase::test_HTTP_200_OK_GET_ALTERNATIVE",
+          "test_requests.py::RequestsTestCase::test_cookie_sent_on_redirect",
+          "test_requests.py::RequestsTestCase::test_custom_content_type",
+          "test_requests.py::RequestsTestCase::test_params_are_merged_case_sensitive",
+          "test_requests.py::RequestsTestCase::test_user_agent_transfers"
+        ],
+        "f2p_pass": 0,
+        "found": true,
+        "n_parsed": 1,
+        "p2p_fail": 79,
+        "p2p_failing": [
+          "test_requests.py::RequestsTestCase::test_BASICAUTH_TUPLE_HTTP_200_OK_GET",
+          "test_requests.py::RequestsTestCase::test_DIGESTAUTH_WRONG_HTTP_401_GET",
+          "test_requests.py::RequestsTestCase::test_DIGEST_AUTH_RETURNS_COOKIE",
+          "test_requests.py::RequestsTestCase::test_DIGEST_AUTH_SETS_SESSION_COOKIES",
+          "test_requests.py::RequestsTestCase::test_DIGEST_STREAM",
+          "test_requests.py::RequestsTestCase::test_HTTP_200_OK_GET_WITH_MIXED_PARAMS",
+          "test_requests.py::RequestsTestCase::test_HTTP_200_OK_GET_WITH_PARAMS",
+          "test_requests.py::RequestsTestCase::test_HTTP_200_OK_HEAD",
+          "test_requests.py::RequestsTestCase::test_HTTP_200_OK_PUT",
+          "test_requests.py::RequestsTestCase::test_HTTP_302_ALLOW_REDIRECT_GET"
+        ],
+        "p2p_pass": 0,
+        "reward": 0.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "p2p_coupled_tests": [
+        "test_requests.py::RequestsTestCase::test_BASICAUTH_TUPLE_HTTP_200_OK_GET",
+        "test_requests.py::RequestsTestCase::test_DIGESTAUTH_WRONG_HTTP_401_GET",
+        "test_requests.py::RequestsTestCase::test_DIGEST_AUTH_RETURNS_COOKIE",
+        "test_requests.py::RequestsTestCase::test_DIGEST_AUTH_SETS_SESSION_COOKIES",
+        "test_requests.py::RequestsTestCase::test_DIGEST_STREAM",
+        "test_requests.py::RequestsTestCase::test_HTTP_200_OK_GET_WITH_MIXED_PARAMS",
+        "test_requests.py::RequestsTestCase::test_HTTP_200_OK_GET_WITH_PARAMS",
+        "test_requests.py::RequestsTestCase::test_HTTP_200_OK_HEAD",
+        "test_requests.py::RequestsTestCase::test_HTTP_200_OK_PUT",
+        "test_requests.py::RequestsTestCase::test_HTTP_302_ALLOW_REDIRECT_GET"
+      ],
+      "p2p_fail": 79,
+      "reason": "reward 0.0",
+      "tier": "MEDIUM",
+      "tree_digest": "a9601c91caf565122f927bcefdf8942ba9fe55daf6a7a8c7f593a5349dfe0631",
+      "verdict": "WITNESS",
+      "witness_side": "p2p_coupling"
+    }
+  ]
+}

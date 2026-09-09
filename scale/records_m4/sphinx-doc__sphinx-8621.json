@@ -1,0 +1,367 @@
+{
+  "completed": true,
+  "control": {
+    "graded": null,
+    "log": null,
+    "passed": true,
+    "reason": "untransformed reference scores 1.0"
+  },
+  "digest_trace": [
+    {
+      "digest": "a744747c2847fb71a760f6f6d8df884360ad3105a85ccefdec03ee6934c1d648",
+      "memo_hit": false
+    },
+    {
+      "digest": "cdda67584e856256a68277c93c4b23ef7ca0a858a7b0cef4f4789a07b51d261c",
+      "memo_hit": false
+    }
+  ],
+  "disk_orphan_reclaimed_bytes": 0,
+  "disk_residual_bytes": 0,
+  "elapsed_seconds": 210.32,
+  "error": null,
+  "image": "swebench/sweb.eval.x86_64.sphinx-doc_1776_sphinx-8621:latest",
+  "instance_id": "sphinx-doc__sphinx-8621",
+  "leaked_containers": [],
+  "leaked_image": false,
+  "log": [
+    [
+      "<control>",
+      "OK",
+      "untransformed reference scores 1.0"
+    ],
+    [
+      "kwonly_specialize:<no anchor>",
+      "NOT_APPLICABLE",
+      "no anchor inside the gold-touched region"
+    ],
+    [
+      "symbol_rename:KeyboardTransform",
+      "UNVALIDATED",
+      "12 failing test(s) have no recognisable failure block -- unknown log shape, not evidence of breakage; first: tests/test_markup.py::test_inline[verify-:rfc:`2324`-<p><span"
+    ],
+    [
+      "collection_reverse:<no anchor>",
+      "NOT_APPLICABLE",
+      "no anchor inside the gold-touched region"
+    ],
+    [
+      "message_reword:<no anchor>",
+      "NOT_APPLICABLE",
+      "no anchor inside the gold-touched region"
+    ]
+  ],
+  "mountable": true,
+  "multi_target": false,
+  "n_targets": 1,
+  "on_prime_hub": null,
+  "on_prime_hub_reason": "not resolvable offline; no hub environment index is reachable from this repo, verifiers or swebench",
+  "operators_not_applicable": [
+    "collection_reverse",
+    "kwonly_specialize",
+    "message_reword"
+  ],
+  "operators_with_anchors": [
+    "symbol_rename"
+  ],
+  "repo": "sphinx-doc/sphinx",
+  "row": {
+    "elapsed": 36.78,
+    "error": null,
+    "error_type": null,
+    "index": 0,
+    "mode": "formcheck",
+    "name": "sphinx-doc__sphinx-8621",
+    "reason": "unchecked",
+    "valid": null
+  },
+  "rows": [
+    {
+      "anchor": null,
+      "failure_analysis": null,
+      "file": null,
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 2,
+        "found": true,
+        "n_parsed": 35,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 31,
+        "reward": 1.0
+      },
+      "loud_failure": false,
+      "observable": "callable signature (arity / parameter names)",
+      "operator": "kwonly_specialize",
+      "reason": "no anchor inside the gold-touched region",
+      "tier": "HIGH",
+      "tree_digest": "a744747c2847fb71a760f6f6d8df884360ad3105a85ccefdec03ee6934c1d648",
+      "verdict": "NOT_APPLICABLE"
+    },
+    {
+      "anchor": "KeyboardTransform",
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "broke": [],
+        "coupled": [],
+        "failing": [
+          "tests/test_markup.py::test_inline[verify-:rfc:`2324`-<p><span",
+          "tests/test_markup.py::test_inline[verify-:rfc:`2324#id1`-<p><span",
+          "tests/test_markup.py::test_inline[verify_re-``code",
+          "tests/test_markup.py::test_inline[verify-:menuselection:`a",
+          "tests/test_markup.py::test_inline[verify-:menuselection:`&Foo",
+          "tests/test_markup.py::test_inline[verify-:guilabel:`&Foo",
+          "tests/test_markup.py::test_inline[verify-:guilabel:`Foo`-<p><span",
+          "tests/test_markup.py::test_inline[verify-:kbd:`space`-<p><kbd",
+          "tests/test_markup.py::test_inline[verify-:kbd:`Control+X`-<p><kbd",
+          "tests/test_markup.py::test_inline[verify-:kbd:`M-x",
+          "tests/test_markup.py::test_inline[verify-:kbd:`Alt+^`-<p><kbd",
+          "tests/test_markup.py::test_inline[verify-:kbd:`-`-<p><kbd"
+        ],
+        "symbol": "KeyboardTransform",
+        "unexplained": [
+          "tests/test_markup.py::test_inline[verify-:rfc:`2324`-<p><span (no failure section found)",
+          "tests/test_markup.py::test_inline[verify-:rfc:`2324#id1`-<p><span (no failure section found)",
+          "tests/test_markup.py::test_inline[verify_re-``code (no failure section found)",
+          "tests/test_markup.py::test_inline[verify-:menuselection:`a (no failure section found)",
+          "tests/test_markup.py::test_inline[verify-:menuselection:`&Foo (no failure section found)",
+          "tests/test_markup.py::test_inline[verify-:guilabel:`&Foo (no failure section found)",
+          "tests/test_markup.py::test_inline[verify-:guilabel:`Foo`-<p><span (no failure section found)",
+          "tests/test_markup.py::test_inline[verify-:kbd:`space`-<p><kbd (no failure section found)",
+          "tests/test_markup.py::test_inline[verify-:kbd:`Control+X`-<p><kbd (no failure section found)",
+          "tests/test_markup.py::test_inline[verify-:kbd:`M-x (no failure section found)",
+          "tests/test_markup.py::test_inline[verify-:kbd:`Alt+^`-<p><kbd (no failure section found)",
+          "tests/test_markup.py::test_inline[verify-:kbd:`-`-<p><kbd (no failure section found)"
+        ],
+        "unparsed": [
+          "tests/test_markup.py::test_inline[verify-:rfc:`2324`-<p><span",
+          "tests/test_markup.py::test_inline[verify-:rfc:`2324#id1`-<p><span",
+          "tests/test_markup.py::test_inline[verify_re-``code",
+          "tests/test_markup.py::test_inline[verify-:menuselection:`a",
+          "tests/test_markup.py::test_inline[verify-:menuselection:`&Foo",
+          "tests/test_markup.py::test_inline[verify-:guilabel:`&Foo",
+          "tests/test_markup.py::test_inline[verify-:guilabel:`Foo`-<p><span",
+          "tests/test_markup.py::test_inline[verify-:kbd:`space`-<p><kbd",
+          "tests/test_markup.py::test_inline[verify-:kbd:`Control+X`-<p><kbd",
+          "tests/test_markup.py::test_inline[verify-:kbd:`M-x",
+          "tests/test_markup.py::test_inline[verify-:kbd:`Alt+^`-<p><kbd",
+          "tests/test_markup.py::test_inline[verify-:kbd:`-`-<p><kbd"
+        ],
+        "unparsed_log_shape": true
+      },
+      "file": "sphinx/builders/html/transforms.py",
+      "graded_log": "+ tox --current-env -epy39 -v -- tests/test_markup.py\npy39: commands[0]> python -X dev -m pytest -rA --durations 25 tests/test_markup.py\n\u001b[1m============================= test session starts ==============================\u001b[0m\nplatform linux -- Python 3.9.21, pytest-8.3.4, pluggy-1.5.0\ncachedir: .tox/py39/.pytest_cache\nlibraries: Sphinx-3.5.0+/f8aefaaf5, docutils-0.21.2\nbase tempdir: /tmp/pytest-of-root/pytest-1\nrootdir: /testbed\nconfigfile: setup.cfg\nplugins: cov-6.0.0\ncollected 0 items / 1 error\n\n==================================== ERRORS ====================================\n\u001b[31m\u001b[1m____________________ ERROR collecting tests/test_markup.py _____________________\u001b[0m\n\u001b[31mImportError while importing test module '/testbed/tests/test_markup.py'.\nHint: make sure your test modules/packages have valid Python names.\nTraceback:\n/opt/miniconda3/envs/testbed/lib/python3.9/importlib/__init__.py:127: in import_module\n    return _bootstrap._gcd_import(name[level:], package, level)\ntests/test_markup.py:18: in <module>\n    from sphinx.builders.html.transforms import KeyboardTransform\nE   ImportError: cannot import name 'KeyboardTransform' from 'sphinx.builders.html.transforms' (/testbed/sphinx/builders/html/transforms.py)\u001b[0m\n\u001b[33m=============================== warnings summary ===============================\u001b[0m\nsphinx/util/docutils.py:45\n  /testbed/sphinx/util/docutils.py:45: DeprecationWarning: distutils Version classes are deprecated. Use packaging.version instead.\n    __version_info__ = tuple(LooseVersion(docutils.__version__).version)\n\nsphinx/registry.py:22\n  /testbed/sphinx/registry.py:22: DeprecationWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html\n    from pkg_resources import iter_entry_points\n\n../opt/miniconda3/envs/testbed/lib/python3.9/site-packages/pkg_resources/__init__.py:3154\n../opt/miniconda3/envs/testbed/lib/python3.9/site-packages/pkg_resources/__init__.py:3154\n../opt/miniconda3/envs/testbed/lib/python3.9/site-packages/pkg_resources/__init__.py:3154\n../opt/miniconda3/envs/testbed/lib/python3.9/site-packages/pkg_resources/__init__.py:3154\n  /opt/miniconda3/envs/testbed/lib/python3.9/site-packages/pkg_resources/__init__.py:3154: DeprecationWarning: Deprecated call to `pkg_resources.declare_namespace('sphinxcontrib')`.\n  Implementing implicit namespace packages (as specified in PEP 420) is preferred to `pkg_resources.declare_namespace`. See https://setuptools.pypa.io/en/latest/references/keywords.html#keyword-namespace-packages\n    declare_namespace(pkg)\n\nsphinx/directives/patches.py:14\n  /testbed/sphinx/directives/patches.py:14: DeprecationWarning: The `docutils.parsers.rst.directive.html` module will be removed in Docutils 2.0. Since Docutils 0.18, the \"Meta\" node is defined in `docutils.parsers.rst.directives.misc`.\n    from docutils.parsers.rst.directives import html, images, tables\n\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n\u001b[36m\u001b[1m=========================== short test summary info ============================\u001b[0m\n\u001b[31mERROR\u001b[0m tests/test_markup.py\n!!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!!\n\u001b[31m========================= \u001b[33m7 warnings\u001b[0m, \u001b[31m\u001b[1m1 error\u001b[0m\u001b[31m in 0.23s\u001b[0m\u001b[31m =========================\u001b[0m\npy39: exit 2 (1.35 seconds) /testbed> python -X dev -m pytest -rA --durations 25 tests/test_markup.py pid=356\n  py39: FAIL code 2 (1.36=setup[0.01]+cmd[1.35] seconds)\n  evaluation failed :( (1.53 seconds)\n\n",
+      "graded_report": {
+        "f2p_fail": 2,
+        "f2p_failing": [
+          "tests/test_markup.py::test_inline[verify-:kbd:`Alt+^`-<p><kbd",
+          "tests/test_markup.py::test_inline[verify-:kbd:`-`-<p><kbd"
+        ],
+        "f2p_pass": 0,
+        "found": true,
+        "n_parsed": 1,
+        "p2p_fail": 31,
+        "p2p_failing": [
+          "tests/test_markup.py::test_inline[verify-:rfc:`2324`-<p><span",
+          "tests/test_markup.py::test_inline[verify-:rfc:`2324#id1`-<p><span",
+          "tests/test_markup.py::test_inline[verify_re-``code",
+          "tests/test_markup.py::test_inline[verify-:menuselection:`a",
+          "tests/test_markup.py::test_inline[verify-:menuselection:`&Foo",
+          "tests/test_markup.py::test_inline[verify-:guilabel:`&Foo",
+          "tests/test_markup.py::test_inline[verify-:guilabel:`Foo`-<p><span",
+          "tests/test_markup.py::test_inline[verify-:kbd:`space`-<p><kbd",
+          "tests/test_markup.py::test_inline[verify-:kbd:`Control+X`-<p><kbd",
+          "tests/test_markup.py::test_inline[verify-:kbd:`M-x"
+        ],
+        "p2p_pass": 0,
+        "reward": 0.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "12 failing test(s) have no recognisable failure block -- unknown log shape, not evidence of breakage; first: tests/test_markup.py::test_inline[verify-:rfc:`2324`-<p><span",
+      "tier": "MEDIUM",
+      "tree_digest": "cdda67584e856256a68277c93c4b23ef7ca0a858a7b0cef4f4789a07b51d261c",
+      "verdict": "UNVALIDATED"
+    },
+    {
+      "anchor": null,
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "broke": [],
+        "coupled": [],
+        "failing": [
+          "tests/test_markup.py::test_inline[verify-:rfc:`2324`-<p><span",
+          "tests/test_markup.py::test_inline[verify-:rfc:`2324#id1`-<p><span",
+          "tests/test_markup.py::test_inline[verify_re-``code",
+          "tests/test_markup.py::test_inline[verify-:menuselection:`a",
+          "tests/test_markup.py::test_inline[verify-:menuselection:`&Foo",
+          "tests/test_markup.py::test_inline[verify-:guilabel:`&Foo",
+          "tests/test_markup.py::test_inline[verify-:guilabel:`Foo`-<p><span",
+          "tests/test_markup.py::test_inline[verify-:kbd:`space`-<p><kbd",
+          "tests/test_markup.py::test_inline[verify-:kbd:`Control+X`-<p><kbd",
+          "tests/test_markup.py::test_inline[verify-:kbd:`M-x",
+          "tests/test_markup.py::test_inline[verify-:kbd:`Alt+^`-<p><kbd",
+          "tests/test_markup.py::test_inline[verify-:kbd:`-`-<p><kbd"
+        ],
+        "symbol": "KeyboardTransform",
+        "unexplained": [
+          "tests/test_markup.py::test_inline[verify-:rfc:`2324`-<p><span (no failure section found)",
+          "tests/test_markup.py::test_inline[verify-:rfc:`2324#id1`-<p><span (no failure section found)",
+          "tests/test_markup.py::test_inline[verify_re-``code (no failure section found)",
+          "tests/test_markup.py::test_inline[verify-:menuselection:`a (no failure section found)",
+          "tests/test_markup.py::test_inline[verify-:menuselection:`&Foo (no failure section found)",
+          "tests/test_markup.py::test_inline[verify-:guilabel:`&Foo (no failure section found)",
+          "tests/test_markup.py::test_inline[verify-:guilabel:`Foo`-<p><span (no failure section found)",
+          "tests/test_markup.py::test_inline[verify-:kbd:`space`-<p><kbd (no failure section found)",
+          "tests/test_markup.py::test_inline[verify-:kbd:`Control+X`-<p><kbd (no failure section found)",
+          "tests/test_markup.py::test_inline[verify-:kbd:`M-x (no failure section found)",
+          "tests/test_markup.py::test_inline[verify-:kbd:`Alt+^`-<p><kbd (no failure section found)",
+          "tests/test_markup.py::test_inline[verify-:kbd:`-`-<p><kbd (no failure section found)"
+        ],
+        "unparsed": [
+          "tests/test_markup.py::test_inline[verify-:rfc:`2324`-<p><span",
+          "tests/test_markup.py::test_inline[verify-:rfc:`2324#id1`-<p><span",
+          "tests/test_markup.py::test_inline[verify_re-``code",
+          "tests/test_markup.py::test_inline[verify-:menuselection:`a",
+          "tests/test_markup.py::test_inline[verify-:menuselection:`&Foo",
+          "tests/test_markup.py::test_inline[verify-:guilabel:`&Foo",
+          "tests/test_markup.py::test_inline[verify-:guilabel:`Foo`-<p><span",
+          "tests/test_markup.py::test_inline[verify-:kbd:`space`-<p><kbd",
+          "tests/test_markup.py::test_inline[verify-:kbd:`Control+X`-<p><kbd",
+          "tests/test_markup.py::test_inline[verify-:kbd:`M-x",
+          "tests/test_markup.py::test_inline[verify-:kbd:`Alt+^`-<p><kbd",
+          "tests/test_markup.py::test_inline[verify-:kbd:`-`-<p><kbd"
+        ],
+        "unparsed_log_shape": true
+      },
+      "file": null,
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 2,
+        "f2p_failing": [
+          "tests/test_markup.py::test_inline[verify-:kbd:`Alt+^`-<p><kbd",
+          "tests/test_markup.py::test_inline[verify-:kbd:`-`-<p><kbd"
+        ],
+        "f2p_pass": 0,
+        "found": true,
+        "n_parsed": 1,
+        "p2p_fail": 31,
+        "p2p_failing": [
+          "tests/test_markup.py::test_inline[verify-:rfc:`2324`-<p><span",
+          "tests/test_markup.py::test_inline[verify-:rfc:`2324#id1`-<p><span",
+          "tests/test_markup.py::test_inline[verify_re-``code",
+          "tests/test_markup.py::test_inline[verify-:menuselection:`a",
+          "tests/test_markup.py::test_inline[verify-:menuselection:`&Foo",
+          "tests/test_markup.py::test_inline[verify-:guilabel:`&Foo",
+          "tests/test_markup.py::test_inline[verify-:guilabel:`Foo`-<p><span",
+          "tests/test_markup.py::test_inline[verify-:kbd:`space`-<p><kbd",
+          "tests/test_markup.py::test_inline[verify-:kbd:`Control+X`-<p><kbd",
+          "tests/test_markup.py::test_inline[verify-:kbd:`M-x"
+        ],
+        "p2p_pass": 0,
+        "reward": 0.0
+      },
+      "loud_failure": false,
+      "observable": "order of elements in a returned collection",
+      "operator": "collection_reverse",
+      "reason": "no anchor inside the gold-touched region",
+      "tier": "MEDIUM",
+      "tree_digest": "cdda67584e856256a68277c93c4b23ef7ca0a858a7b0cef4f4789a07b51d261c",
+      "verdict": "NOT_APPLICABLE"
+    },
+    {
+      "anchor": null,
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "broke": [],
+        "coupled": [],
+        "failing": [
+          "tests/test_markup.py::test_inline[verify-:rfc:`2324`-<p><span",
+          "tests/test_markup.py::test_inline[verify-:rfc:`2324#id1`-<p><span",
+          "tests/test_markup.py::test_inline[verify_re-``code",
+          "tests/test_markup.py::test_inline[verify-:menuselection:`a",
+          "tests/test_markup.py::test_inline[verify-:menuselection:`&Foo",
+          "tests/test_markup.py::test_inline[verify-:guilabel:`&Foo",
+          "tests/test_markup.py::test_inline[verify-:guilabel:`Foo`-<p><span",
+          "tests/test_markup.py::test_inline[verify-:kbd:`space`-<p><kbd",
+          "tests/test_markup.py::test_inline[verify-:kbd:`Control+X`-<p><kbd",
+          "tests/test_markup.py::test_inline[verify-:kbd:`M-x",
+          "tests/test_markup.py::test_inline[verify-:kbd:`Alt+^`-<p><kbd",
+          "tests/test_markup.py::test_inline[verify-:kbd:`-`-<p><kbd"
+        ],
+        "symbol": "KeyboardTransform",
+        "unexplained": [
+          "tests/test_markup.py::test_inline[verify-:rfc:`2324`-<p><span (no failure section found)",
+          "tests/test_markup.py::test_inline[verify-:rfc:`2324#id1`-<p><span (no failure section found)",
+          "tests/test_markup.py::test_inline[verify_re-``code (no failure section found)",
+          "tests/test_markup.py::test_inline[verify-:menuselection:`a (no failure section found)",
+          "tests/test_markup.py::test_inline[verify-:menuselection:`&Foo (no failure section found)",
+          "tests/test_markup.py::test_inline[verify-:guilabel:`&Foo (no failure section found)",
+          "tests/test_markup.py::test_inline[verify-:guilabel:`Foo`-<p><span (no failure section found)",
+          "tests/test_markup.py::test_inline[verify-:kbd:`space`-<p><kbd (no failure section found)",
+          "tests/test_markup.py::test_inline[verify-:kbd:`Control+X`-<p><kbd (no failure section found)",
+          "tests/test_markup.py::test_inline[verify-:kbd:`M-x (no failure section found)",
+          "tests/test_markup.py::test_inline[verify-:kbd:`Alt+^`-<p><kbd (no failure section found)",
+          "tests/test_markup.py::test_inline[verify-:kbd:`-`-<p><kbd (no failure section found)"
+        ],
+        "unparsed": [
+          "tests/test_markup.py::test_inline[verify-:rfc:`2324`-<p><span",
+          "tests/test_markup.py::test_inline[verify-:rfc:`2324#id1`-<p><span",
+          "tests/test_markup.py::test_inline[verify_re-``code",
+          "tests/test_markup.py::test_inline[verify-:menuselection:`a",
+          "tests/test_markup.py::test_inline[verify-:menuselection:`&Foo",
+          "tests/test_markup.py::test_inline[verify-:guilabel:`&Foo",
+          "tests/test_markup.py::test_inline[verify-:guilabel:`Foo`-<p><span",
+          "tests/test_markup.py::test_inline[verify-:kbd:`space`-<p><kbd",
+          "tests/test_markup.py::test_inline[verify-:kbd:`Control+X`-<p><kbd",
+          "tests/test_markup.py::test_inline[verify-:kbd:`M-x",
+          "tests/test_markup.py::test_inline[verify-:kbd:`Alt+^`-<p><kbd",
+          "tests/test_markup.py::test_inline[verify-:kbd:`-`-<p><kbd"
+        ],
+        "unparsed_log_shape": true
+      },
+      "file": null,
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 2,
+        "f2p_failing": [
+          "tests/test_markup.py::test_inline[verify-:kbd:`Alt+^`-<p><kbd",
+          "tests/test_markup.py::test_inline[verify-:kbd:`-`-<p><kbd"
+        ],
+        "f2p_pass": 0,
+        "found": true,
+        "n_parsed": 1,
+        "p2p_fail": 31,
+        "p2p_failing": [
+          "tests/test_markup.py::test_inline[verify-:rfc:`2324`-<p><span",
+          "tests/test_markup.py::test_inline[verify-:rfc:`2324#id1`-<p><span",
+          "tests/test_markup.py::test_inline[verify_re-``code",
+          "tests/test_markup.py::test_inline[verify-:menuselection:`a",
+          "tests/test_markup.py::test_inline[verify-:menuselection:`&Foo",
+          "tests/test_markup.py::test_inline[verify-:guilabel:`&Foo",
+          "tests/test_markup.py::test_inline[verify-:guilabel:`Foo`-<p><span",
+          "tests/test_markup.py::test_inline[verify-:kbd:`space`-<p><kbd",
+          "tests/test_markup.py::test_inline[verify-:kbd:`Control+X`-<p><kbd",
+          "tests/test_markup.py::test_inline[verify-:kbd:`M-x"
+        ],
+        "p2p_pass": 0,
+        "reward": 0.0
+      },
+      "loud_failure": false,
+      "observable": "human-readable text of an exception message",
+      "operator": "message_reword",
+      "reason": "no anchor inside the gold-touched region",
+      "tier": "HIGH",
+      "tree_digest": "cdda67584e856256a68277c93c4b23ef7ca0a858a7b0cef4f4789a07b51d261c",
+      "verdict": "NOT_APPLICABLE"
+    }
+  ],
+  "targets": [
+    "sphinx/builders/html/transforms.py"
+  ],
+  "version": "3.5",
+  "witnesses": []
+}

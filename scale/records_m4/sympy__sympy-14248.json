@@ -1,0 +1,281 @@
+{
+  "completed": true,
+  "control": {
+    "graded": null,
+    "log": null,
+    "passed": true,
+    "reason": "untransformed reference scores 1.0"
+  },
+  "digest_trace": [
+    {
+      "digest": "7f7cd39a87f169e0a4db551a8676ae7a1c4c78b95ec8472ec2fca94e9397b208",
+      "memo_hit": false
+    },
+    {
+      "digest": "82325fc45a13ac7013999a8e8b2c06503b7c33bc0c2c5e00f38ab5e48453dec4",
+      "memo_hit": false
+    },
+    {
+      "digest": "82325fc45a13ac7013999a8e8b2c06503b7c33bc0c2c5e00f38ab5e48453dec4",
+      "memo_hit": true
+    }
+  ],
+  "disk_orphan_reclaimed_bytes": 0,
+  "disk_residual_bytes": 0,
+  "elapsed_seconds": 302.99,
+  "error": null,
+  "image": "swebench/sweb.eval.x86_64.sympy_1776_sympy-14248:latest",
+  "instance_id": "sympy__sympy-14248",
+  "leaked_containers": [],
+  "leaked_image": false,
+  "log": [
+    [
+      "<control>",
+      "OK",
+      "untransformed reference scores 1.0"
+    ],
+    [
+      "kwonly_specialize:<no anchor>",
+      "NOT_APPLICABLE",
+      "no anchor inside the gold-touched region"
+    ],
+    [
+      "symbol_rename:sympy/printing/latex.py:LatexPrinter",
+      "REFUSED",
+      "dynamic reach: 'LatexPrinter' appears in a non-annotation string literal in sympy/printing/printer.py line 1 (\"Printing subsystem driver\\n\\nSymPy's print\") -- an alpha-rename cannot be argued safe"
+    ],
+    [
+      "symbol_rename:sympy/printing/pretty/pretty.py:PrettyPrinter",
+      "CLEAN",
+      "reward 1.0"
+    ],
+    [
+      "symbol_rename:sympy/printing/str.py:StrPrinter",
+      "REFUSED",
+      "dynamic reach: 'StrPrinter' appears in a non-annotation string literal in sympy/matrices/matrices.py line 3877 ('\\n        String form of Matrix as a tabl'); 2 further hit(s) -- an alpha-rename cannot be argued safe"
+    ],
+    [
+      "collection_reverse:<no anchor>",
+      "NOT_APPLICABLE",
+      "no anchor inside the gold-touched region"
+    ],
+    [
+      "message_reword:<no anchor>",
+      "NOT_APPLICABLE",
+      "no anchor inside the gold-touched region; 3 anchor(s) elsewhere in the 3 target(s): sympy/printing/latex.py, sympy/printing/pretty/pretty.py, sympy/printing/str.py"
+    ]
+  ],
+  "mountable": true,
+  "multi_target": true,
+  "n_targets": 3,
+  "on_prime_hub": null,
+  "on_prime_hub_reason": "not resolvable offline; no hub environment index is reachable from this repo, verifiers or swebench",
+  "operators_not_applicable": [
+    "collection_reverse",
+    "kwonly_specialize",
+    "message_reword"
+  ],
+  "operators_with_anchors": [
+    "symbol_rename"
+  ],
+  "repo": "sympy/sympy",
+  "row": {
+    "elapsed": 233.4,
+    "error": null,
+    "error_type": null,
+    "index": 0,
+    "mode": "formcheck",
+    "name": "sympy__sympy-14248",
+    "reason": "valid",
+    "valid": true
+  },
+  "rows": [
+    {
+      "anchor": null,
+      "failure_analysis": null,
+      "file": null,
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 2,
+        "found": true,
+        "n_parsed": 445,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 433,
+        "reward": 1.0
+      },
+      "loud_failure": false,
+      "observable": "callable signature (arity / parameter names)",
+      "operator": "kwonly_specialize",
+      "reason": "no anchor inside the gold-touched region",
+      "tier": "HIGH",
+      "tree_digest": "7f7cd39a87f169e0a4db551a8676ae7a1c4c78b95ec8472ec2fca94e9397b208",
+      "verdict": "NOT_APPLICABLE"
+    },
+    {
+      "anchor": "LatexPrinter",
+      "failure_analysis": null,
+      "file": "sympy/printing/latex.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 2,
+        "found": true,
+        "n_parsed": 445,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 433,
+        "reward": 1.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "dynamic reach: 'LatexPrinter' appears in a non-annotation string literal in sympy/printing/printer.py line 1 (\"Printing subsystem driver\\n\\nSymPy's print\") -- an alpha-rename cannot be argued safe",
+      "tier": "MEDIUM",
+      "tree_digest": "7f7cd39a87f169e0a4db551a8676ae7a1c4c78b95ec8472ec2fca94e9397b208",
+      "verdict": "REFUSED"
+    },
+    {
+      "anchor": "PrettyPrinter",
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "broke": [],
+        "coupled": [],
+        "failing": [],
+        "symbol": "PrettyPrinter",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": "sympy/printing/pretty/pretty.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 2,
+        "found": true,
+        "n_parsed": 445,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 433,
+        "reward": 1.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "reward 1.0",
+      "tier": "MEDIUM",
+      "tree_digest": "82325fc45a13ac7013999a8e8b2c06503b7c33bc0c2c5e00f38ab5e48453dec4",
+      "verdict": "CLEAN"
+    },
+    {
+      "anchor": "StrPrinter",
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "broke": [],
+        "coupled": [],
+        "failing": [],
+        "symbol": "PrettyPrinter",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": "sympy/printing/str.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 2,
+        "found": true,
+        "n_parsed": 445,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 433,
+        "reward": 1.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "dynamic reach: 'StrPrinter' appears in a non-annotation string literal in sympy/matrices/matrices.py line 3877 ('\\n        String form of Matrix as a tabl'); 2 further hit(s) -- an alpha-rename cannot be argued safe",
+      "tier": "MEDIUM",
+      "tree_digest": "82325fc45a13ac7013999a8e8b2c06503b7c33bc0c2c5e00f38ab5e48453dec4",
+      "verdict": "REFUSED"
+    },
+    {
+      "anchor": null,
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "broke": [],
+        "coupled": [],
+        "failing": [],
+        "symbol": "PrettyPrinter",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": null,
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 2,
+        "found": true,
+        "n_parsed": 445,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 433,
+        "reward": 1.0
+      },
+      "loud_failure": false,
+      "observable": "order of elements in a returned collection",
+      "operator": "collection_reverse",
+      "reason": "no anchor inside the gold-touched region",
+      "tier": "MEDIUM",
+      "tree_digest": "82325fc45a13ac7013999a8e8b2c06503b7c33bc0c2c5e00f38ab5e48453dec4",
+      "verdict": "NOT_APPLICABLE"
+    },
+    {
+      "anchor": null,
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "broke": [],
+        "coupled": [],
+        "failing": [],
+        "symbol": "PrettyPrinter",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": null,
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 2,
+        "found": true,
+        "n_parsed": 445,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 433,
+        "reward": 1.0
+      },
+      "loud_failure": false,
+      "observable": "human-readable text of an exception message",
+      "operator": "message_reword",
+      "reason": "no anchor inside the gold-touched region; 3 anchor(s) elsewhere in the 3 target(s): sympy/printing/latex.py, sympy/printing/pretty/pretty.py, sympy/printing/str.py",
+      "tier": "HIGH",
+      "tree_digest": "82325fc45a13ac7013999a8e8b2c06503b7c33bc0c2c5e00f38ab5e48453dec4",
+      "verdict": "NOT_APPLICABLE"
+    }
+  ],
+  "targets": [
+    "sympy/printing/latex.py",
+    "sympy/printing/pretty/pretty.py",
+    "sympy/printing/str.py"
+  ],
+  "version": "1.1",
+  "witnesses": []
+}

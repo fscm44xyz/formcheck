@@ -1,0 +1,314 @@
+{
+  "completed": true,
+  "control": {
+    "graded": null,
+    "log": null,
+    "passed": true,
+    "reason": "untransformed reference scores 1.0"
+  },
+  "digest_trace": [
+    {
+      "digest": "49958e91f030c717db6469d6d0c71f18150903c92b8a9f936ebdef51599cf503",
+      "memo_hit": false
+    },
+    {
+      "digest": "1d4d5543fa3b4c142034352b94c9397aae0c45826cc3b7637e2c7c01354846b0",
+      "memo_hit": false
+    },
+    {
+      "digest": "1d4d5543fa3b4c142034352b94c9397aae0c45826cc3b7637e2c7c01354846b0",
+      "memo_hit": true
+    }
+  ],
+  "disk_orphan_reclaimed_bytes": 0,
+  "disk_residual_bytes": 0,
+  "elapsed_seconds": 227.65,
+  "error": null,
+  "image": "swebench/sweb.eval.x86_64.scikit-learn_1776_scikit-learn-14141:latest",
+  "instance_id": "scikit-learn__scikit-learn-14141",
+  "leaked_containers": [],
+  "leaked_image": false,
+  "log": [
+    [
+      "<control>",
+      "OK",
+      "untransformed reference scores 1.0"
+    ],
+    [
+      "kwonly_specialize:<no anchor>",
+      "NOT_APPLICABLE",
+      "no anchor inside the gold-touched region"
+    ],
+    [
+      "symbol_rename:_get_deps_info",
+      "WITNESS",
+      "reward 0.0"
+    ],
+    [
+      "collection_reverse:<no anchor>",
+      "NOT_APPLICABLE",
+      "no anchor inside the gold-touched region"
+    ],
+    [
+      "message_reword:<no anchor>",
+      "NOT_APPLICABLE",
+      "no anchor inside the gold-touched region"
+    ]
+  ],
+  "mountable": true,
+  "multi_target": false,
+  "n_targets": 1,
+  "on_prime_hub": null,
+  "on_prime_hub_reason": "not resolvable offline; no hub environment index is reachable from this repo, verifiers or swebench",
+  "operators_not_applicable": [
+    "collection_reverse",
+    "kwonly_specialize",
+    "message_reword"
+  ],
+  "operators_with_anchors": [
+    "symbol_rename"
+  ],
+  "repo": "scikit-learn/scikit-learn",
+  "row": {
+    "elapsed": 48.61,
+    "error": null,
+    "error_type": null,
+    "index": 0,
+    "mode": "formcheck",
+    "name": "scikit-learn__scikit-learn-14141",
+    "reason": "invalid",
+    "valid": false
+  },
+  "rows": [
+    {
+      "anchor": null,
+      "failure_analysis": null,
+      "file": null,
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 1,
+        "found": true,
+        "n_parsed": 3,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 2,
+        "reward": 1.0
+      },
+      "loud_failure": false,
+      "observable": "callable signature (arity / parameter names)",
+      "operator": "kwonly_specialize",
+      "reason": "no anchor inside the gold-touched region",
+      "tier": "HIGH",
+      "tree_digest": "49958e91f030c717db6469d6d0c71f18150903c92b8a9f936ebdef51599cf503",
+      "verdict": "NOT_APPLICABLE"
+    },
+    {
+      "all_failures_attributed": true,
+      "anchor": "_get_deps_info",
+      "f2p_fail": 1,
+      "failure_analysis": {
+        "all_reference_the_symbol": true,
+        "broke": [],
+        "coupled": [
+          "sklearn/utils/tests/test_show_versions.py::test_get_sys_info",
+          "sklearn/utils/tests/test_show_versions.py::test_show_versions_with_blas",
+          "sklearn/utils/tests/test_show_versions.py::test_get_deps_info"
+        ],
+        "failing": [
+          "sklearn/utils/tests/test_show_versions.py::test_get_sys_info",
+          "sklearn/utils/tests/test_show_versions.py::test_show_versions_with_blas",
+          "sklearn/utils/tests/test_show_versions.py::test_get_deps_info"
+        ],
+        "symbol": "_get_deps_info",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": "sklearn/utils/_show_versions.py",
+      "graded_log": "+ pytest -rA sklearn/utils/tests/test_show_versions.py\n============================= test session starts ==============================\nplatform linux -- Python 3.6.13, pytest-6.2.4, py-1.11.0, pluggy-0.13.1\nrootdir: /testbed, configfile: setup.cfg\ncollected 0 items / 2 errors\n\n==================================== ERRORS ====================================\n__________ ERROR collecting sklearn/utils/tests/test_show_versions.py __________\nsklearn/utils/tests/test_show_versions.py:3: in <module>\n    from sklearn.utils._show_versions import _get_deps_info\nE   ImportError: cannot import name '_get_deps_info'\n__________ ERROR collecting sklearn/utils/tests/test_show_versions.py __________\nImportError while importing test module '/testbed/sklearn/utils/tests/test_show_versions.py'.\nHint: make sure your test modules/packages have valid Python names.\nTraceback:\n/opt/miniconda3/envs/testbed/lib/python3.6/importlib/__init__.py:126: in import_module\n    return _bootstrap._gcd_import(name[level:], package, level)\nsklearn/utils/tests/test_show_versions.py:3: in <module>\n    from sklearn.utils._show_versions import _get_deps_info\nE   ImportError: cannot import name '_get_deps_info'\n=========================== short test summary info ============================\nERROR sklearn/utils/tests/test_show_versions.py - ImportError: cannot import ...\nERROR sklearn/utils/tests/test_show_versions.py\n!!!!!!!!!!!!!!!!!!! Interrupted: 2 errors during collection !!!!!!!!!!!!!!!!!!!!\n============================== 2 errors in 0.08s ===============================\n\n",
+      "graded_report": {
+        "f2p_fail": 1,
+        "f2p_failing": [
+          "sklearn/utils/tests/test_show_versions.py::test_get_deps_info"
+        ],
+        "f2p_pass": 0,
+        "found": true,
+        "n_parsed": 1,
+        "p2p_fail": 2,
+        "p2p_failing": [
+          "sklearn/utils/tests/test_show_versions.py::test_get_sys_info",
+          "sklearn/utils/tests/test_show_versions.py::test_show_versions_with_blas"
+        ],
+        "p2p_pass": 0,
+        "reward": 0.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "p2p_coupled_tests": [
+        "sklearn/utils/tests/test_show_versions.py::test_get_sys_info",
+        "sklearn/utils/tests/test_show_versions.py::test_show_versions_with_blas"
+      ],
+      "p2p_fail": 2,
+      "reason": "reward 0.0",
+      "tier": "HIGH",
+      "tree_digest": "1d4d5543fa3b4c142034352b94c9397aae0c45826cc3b7637e2c7c01354846b0",
+      "verdict": "WITNESS",
+      "witness_side": "p2p_coupling"
+    },
+    {
+      "anchor": null,
+      "failure_analysis": {
+        "all_reference_the_symbol": true,
+        "broke": [],
+        "coupled": [
+          "sklearn/utils/tests/test_show_versions.py::test_get_sys_info",
+          "sklearn/utils/tests/test_show_versions.py::test_show_versions_with_blas",
+          "sklearn/utils/tests/test_show_versions.py::test_get_deps_info"
+        ],
+        "failing": [
+          "sklearn/utils/tests/test_show_versions.py::test_get_sys_info",
+          "sklearn/utils/tests/test_show_versions.py::test_show_versions_with_blas",
+          "sklearn/utils/tests/test_show_versions.py::test_get_deps_info"
+        ],
+        "symbol": "_get_deps_info",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": null,
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 1,
+        "f2p_failing": [
+          "sklearn/utils/tests/test_show_versions.py::test_get_deps_info"
+        ],
+        "f2p_pass": 0,
+        "found": true,
+        "n_parsed": 1,
+        "p2p_fail": 2,
+        "p2p_failing": [
+          "sklearn/utils/tests/test_show_versions.py::test_get_sys_info",
+          "sklearn/utils/tests/test_show_versions.py::test_show_versions_with_blas"
+        ],
+        "p2p_pass": 0,
+        "reward": 0.0
+      },
+      "loud_failure": false,
+      "observable": "order of elements in a returned collection",
+      "operator": "collection_reverse",
+      "reason": "no anchor inside the gold-touched region",
+      "tier": "MEDIUM",
+      "tree_digest": "1d4d5543fa3b4c142034352b94c9397aae0c45826cc3b7637e2c7c01354846b0",
+      "verdict": "NOT_APPLICABLE"
+    },
+    {
+      "anchor": null,
+      "failure_analysis": {
+        "all_reference_the_symbol": true,
+        "broke": [],
+        "coupled": [
+          "sklearn/utils/tests/test_show_versions.py::test_get_sys_info",
+          "sklearn/utils/tests/test_show_versions.py::test_show_versions_with_blas",
+          "sklearn/utils/tests/test_show_versions.py::test_get_deps_info"
+        ],
+        "failing": [
+          "sklearn/utils/tests/test_show_versions.py::test_get_sys_info",
+          "sklearn/utils/tests/test_show_versions.py::test_show_versions_with_blas",
+          "sklearn/utils/tests/test_show_versions.py::test_get_deps_info"
+        ],
+        "symbol": "_get_deps_info",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": null,
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 1,
+        "f2p_failing": [
+          "sklearn/utils/tests/test_show_versions.py::test_get_deps_info"
+        ],
+        "f2p_pass": 0,
+        "found": true,
+        "n_parsed": 1,
+        "p2p_fail": 2,
+        "p2p_failing": [
+          "sklearn/utils/tests/test_show_versions.py::test_get_sys_info",
+          "sklearn/utils/tests/test_show_versions.py::test_show_versions_with_blas"
+        ],
+        "p2p_pass": 0,
+        "reward": 0.0
+      },
+      "loud_failure": false,
+      "observable": "human-readable text of an exception message",
+      "operator": "message_reword",
+      "reason": "no anchor inside the gold-touched region",
+      "tier": "HIGH",
+      "tree_digest": "1d4d5543fa3b4c142034352b94c9397aae0c45826cc3b7637e2c7c01354846b0",
+      "verdict": "NOT_APPLICABLE"
+    }
+  ],
+  "targets": [
+    "sklearn/utils/_show_versions.py"
+  ],
+  "version": "0.22",
+  "witnesses": [
+    {
+      "all_failures_attributed": true,
+      "anchor": "_get_deps_info",
+      "f2p_fail": 1,
+      "failure_analysis": {
+        "all_reference_the_symbol": true,
+        "broke": [],
+        "coupled": [
+          "sklearn/utils/tests/test_show_versions.py::test_get_sys_info",
+          "sklearn/utils/tests/test_show_versions.py::test_show_versions_with_blas",
+          "sklearn/utils/tests/test_show_versions.py::test_get_deps_info"
+        ],
+        "failing": [
+          "sklearn/utils/tests/test_show_versions.py::test_get_sys_info",
+          "sklearn/utils/tests/test_show_versions.py::test_show_versions_with_blas",
+          "sklearn/utils/tests/test_show_versions.py::test_get_deps_info"
+        ],
+        "symbol": "_get_deps_info",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": "sklearn/utils/_show_versions.py",
+      "graded_log": "+ pytest -rA sklearn/utils/tests/test_show_versions.py\n============================= test session starts ==============================\nplatform linux -- Python 3.6.13, pytest-6.2.4, py-1.11.0, pluggy-0.13.1\nrootdir: /testbed, configfile: setup.cfg\ncollected 0 items / 2 errors\n\n==================================== ERRORS ====================================\n__________ ERROR collecting sklearn/utils/tests/test_show_versions.py __________\nsklearn/utils/tests/test_show_versions.py:3: in <module>\n    from sklearn.utils._show_versions import _get_deps_info\nE   ImportError: cannot import name '_get_deps_info'\n__________ ERROR collecting sklearn/utils/tests/test_show_versions.py __________\nImportError while importing test module '/testbed/sklearn/utils/tests/test_show_versions.py'.\nHint: make sure your test modules/packages have valid Python names.\nTraceback:\n/opt/miniconda3/envs/testbed/lib/python3.6/importlib/__init__.py:126: in import_module\n    return _bootstrap._gcd_import(name[level:], package, level)\nsklearn/utils/tests/test_show_versions.py:3: in <module>\n    from sklearn.utils._show_versions import _get_deps_info\nE   ImportError: cannot import name '_get_deps_info'\n=========================== short test summary info ============================\nERROR sklearn/utils/tests/test_show_versions.py - ImportError: cannot import ...\nERROR sklearn/utils/tests/test_show_versions.py\n!!!!!!!!!!!!!!!!!!! Interrupted: 2 errors during collection !!!!!!!!!!!!!!!!!!!!\n============================== 2 errors in 0.08s ===============================\n\n",
+      "graded_report": {
+        "f2p_fail": 1,
+        "f2p_failing": [
+          "sklearn/utils/tests/test_show_versions.py::test_get_deps_info"
+        ],
+        "f2p_pass": 0,
+        "found": true,
+        "n_parsed": 1,
+        "p2p_fail": 2,
+        "p2p_failing": [
+          "sklearn/utils/tests/test_show_versions.py::test_get_sys_info",
+          "sklearn/utils/tests/test_show_versions.py::test_show_versions_with_blas"
+        ],
+        "p2p_pass": 0,
+        "reward": 0.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "p2p_coupled_tests": [
+        "sklearn/utils/tests/test_show_versions.py::test_get_sys_info",
+        "sklearn/utils/tests/test_show_versions.py::test_show_versions_with_blas"
+      ],
+      "p2p_fail": 2,
+      "reason": "reward 0.0",
+      "tier": "HIGH",
+      "tree_digest": "1d4d5543fa3b4c142034352b94c9397aae0c45826cc3b7637e2c7c01354846b0",
+      "verdict": "WITNESS",
+      "witness_side": "p2p_coupling"
+    }
+  ]
+}

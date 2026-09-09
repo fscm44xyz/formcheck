@@ -1,0 +1,328 @@
+{
+  "completed": true,
+  "control": {
+    "graded": null,
+    "log": null,
+    "passed": true,
+    "reason": "untransformed reference scores 1.0"
+  },
+  "digest_trace": [
+    {
+      "digest": "7ba6d8976cdb1968305c7c82c4753c3f61e041d3c810b87f0d93bd2fdcba92d9",
+      "memo_hit": false
+    },
+    {
+      "digest": "0544a6dfb4ccfe49e5050941f9e532c0943f9114415a8150d9b323db2430cb50",
+      "memo_hit": false
+    },
+    {
+      "digest": "0544a6dfb4ccfe49e5050941f9e532c0943f9114415a8150d9b323db2430cb50",
+      "memo_hit": true
+    }
+  ],
+  "disk_orphan_reclaimed_bytes": 0,
+  "disk_residual_bytes": 0,
+  "elapsed_seconds": 116.81,
+  "error": null,
+  "image": "swebench/sweb.eval.x86_64.django_1776_django-15572:latest",
+  "instance_id": "django__django-15572",
+  "leaked_containers": [],
+  "leaked_image": false,
+  "log": [
+    [
+      "<control>",
+      "OK",
+      "untransformed reference scores 1.0"
+    ],
+    [
+      "kwonly_specialize:<no anchor>",
+      "NOT_APPLICABLE",
+      "no anchor inside the gold-touched region"
+    ],
+    [
+      "symbol_rename:get_template_directories",
+      "WITNESS",
+      "reward 0.0"
+    ],
+    [
+      "collection_reverse:<no anchor>",
+      "NOT_APPLICABLE",
+      "no anchor inside the gold-touched region"
+    ],
+    [
+      "message_reword:<no anchor>",
+      "NOT_APPLICABLE",
+      "no anchor inside the gold-touched region"
+    ]
+  ],
+  "mountable": true,
+  "multi_target": false,
+  "n_targets": 1,
+  "on_prime_hub": null,
+  "on_prime_hub_reason": "not resolvable offline; no hub environment index is reachable from this repo, verifiers or swebench",
+  "operators_not_applicable": [
+    "collection_reverse",
+    "kwonly_specialize",
+    "message_reword"
+  ],
+  "operators_with_anchors": [
+    "symbol_rename"
+  ],
+  "repo": "django/django",
+  "row": {
+    "elapsed": 82.44,
+    "error": null,
+    "error_type": null,
+    "index": 0,
+    "mode": "formcheck",
+    "name": "django__django-15572",
+    "reason": "invalid",
+    "valid": false
+  },
+  "rows": [
+    {
+      "anchor": null,
+      "failure_analysis": null,
+      "file": null,
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 1,
+        "found": true,
+        "n_parsed": 11,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 10,
+        "reward": 1.0
+      },
+      "loud_failure": false,
+      "observable": "callable signature (arity / parameter names)",
+      "operator": "kwonly_specialize",
+      "reason": "no anchor inside the gold-touched region",
+      "tier": "HIGH",
+      "tree_digest": "7ba6d8976cdb1968305c7c82c4753c3f61e041d3c810b87f0d93bd2fdcba92d9",
+      "verdict": "NOT_APPLICABLE"
+    },
+    {
+      "all_failures_attributed": true,
+      "anchor": "get_template_directories",
+      "f2p_fail": 1,
+      "failure_analysis": {
+        "all_reference_the_symbol": true,
+        "broke": [],
+        "coupled": [
+          "test_get_template_directories (template_tests.test_autoreloader.Jinja2TemplateReloadTests)",
+          "test_get_template_directories (template_tests.test_autoreloader.TemplateReloadTests)",
+          "test_template_dirs_normalized_to_paths (template_tests.test_autoreloader.TemplateReloadTests)",
+          "test_template_dirs_ignore_empty_path (template_tests.test_autoreloader.TemplateReloadTests)"
+        ],
+        "failing": [
+          "test_get_template_directories (template_tests.test_autoreloader.Jinja2TemplateReloadTests)",
+          "test_get_template_directories (template_tests.test_autoreloader.TemplateReloadTests)",
+          "test_template_dirs_normalized_to_paths (template_tests.test_autoreloader.TemplateReloadTests)",
+          "test_template_dirs_ignore_empty_path (template_tests.test_autoreloader.TemplateReloadTests)"
+        ],
+        "symbol": "get_template_directories",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": "django/template/autoreload.py",
+      "graded_log": "+ ./tests/runtests.py --verbosity 2 --settings=test_sqlite --parallel 1 template_tests.test_autoreloader\nTesting against Django installed in '/testbed/django'\nImporting application template_tests\nFound 11 test(s).\nSkipping setup of unused database(s): default, other.\nSystem check identified no issues (0 silenced).\n\ntest_get_template_directories (template_tests.test_autoreloader.Jinja2TemplateReloadTests) ... ERROR\ntest_reset_all_loaders (template_tests.test_autoreloader.Jinja2TemplateReloadTests) ... ok\ntest_watch_for_template_changes (template_tests.test_autoreloader.Jinja2TemplateReloadTests) ... ok\ntest_get_template_directories (template_tests.test_autoreloader.TemplateReloadTests) ... ERROR\ntest_non_template_changed (template_tests.test_autoreloader.TemplateReloadTests) ... ok\ntest_non_template_changed_in_template_directory (template_tests.test_autoreloader.TemplateReloadTests) ... ok\ntest_reset_all_loaders (template_tests.test_autoreloader.TemplateReloadTests) ... ok\ntest_template_changed (template_tests.test_autoreloader.TemplateReloadTests) ... ok\ntest_template_dirs_ignore_empty_path (template_tests.test_autoreloader.TemplateReloadTests) ... ERROR\ntest_template_dirs_normalized_to_paths (template_tests.test_autoreloader.TemplateReloadTests) ... ERROR\ntest_watch_for_template_changes (template_tests.test_autoreloader.TemplateReloadTests) ... ok\n\n======================================================================\nERROR: test_get_template_directories (template_tests.test_autoreloader.Jinja2TemplateReloadTests)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/testbed/tests/template_tests/test_autoreloader.py\", line 133, in test_get_template_directories\n    autoreload.get_template_directories(),\nAttributeError: module 'django.template.autoreload' has no attribute 'get_template_directories'\n\n======================================================================\nERROR: test_get_template_directories (template_tests.test_autoreloader.TemplateReloadTests)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/testbed/tests/template_tests/test_autoreloader.py\", line 72, in test_get_template_directories\n    autoreload.get_template_directories(),\nAttributeError: module 'django.template.autoreload' has no attribute 'get_template_directories'\n\n======================================================================\nERROR: test_template_dirs_ignore_empty_path (template_tests.test_autoreloader.TemplateReloadTests)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/testbed/django/test/utils.py\", line 460, in inner\n    return func(*args, **kwargs)\n  File \"/testbed/tests/template_tests/test_autoreloader.py\", line 93, in test_template_dirs_ignore_empty_path\n    self.assertEqual(autoreload.get_template_directories(), set())\nAttributeError: module 'django.template.autoreload' has no attribute 'get_template_directories'\n\n======================================================================\nERROR: test_template_dirs_normalized_to_paths (template_tests.test_autoreloader.TemplateReloadTests)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/testbed/django/test/utils.py\", line 460, in inner\n    return func(*args, **kwargs)\n  File \"/testbed/tests/template_tests/test_autoreloader.py\", line 109, in test_template_dirs_normalized_to_paths\n    autoreload.get_template_directories(),\nAttributeError: module 'django.template.autoreload' has no attribute 'get_template_directories'\n\n----------------------------------------------------------------------\nRan 11 tests in 0.012s\n\nFAILED (errors=4)\n",
+      "graded_report": {
+        "f2p_fail": 1,
+        "f2p_failing": [
+          "test_template_dirs_ignore_empty_path (template_tests.test_autoreloader.TemplateReloadTests)"
+        ],
+        "f2p_pass": 0,
+        "found": true,
+        "n_parsed": 14,
+        "p2p_fail": 3,
+        "p2p_failing": [
+          "test_get_template_directories (template_tests.test_autoreloader.Jinja2TemplateReloadTests)",
+          "test_get_template_directories (template_tests.test_autoreloader.TemplateReloadTests)",
+          "test_template_dirs_normalized_to_paths (template_tests.test_autoreloader.TemplateReloadTests)"
+        ],
+        "p2p_pass": 7,
+        "reward": 0.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "p2p_coupled_tests": [
+        "test_get_template_directories (template_tests.test_autoreloader.Jinja2TemplateReloadTests)",
+        "test_get_template_directories (template_tests.test_autoreloader.TemplateReloadTests)",
+        "test_template_dirs_normalized_to_paths (template_tests.test_autoreloader.TemplateReloadTests)"
+      ],
+      "p2p_fail": 3,
+      "reason": "reward 0.0",
+      "tier": "MEDIUM",
+      "tree_digest": "0544a6dfb4ccfe49e5050941f9e532c0943f9114415a8150d9b323db2430cb50",
+      "verdict": "WITNESS",
+      "witness_side": "p2p_coupling"
+    },
+    {
+      "anchor": null,
+      "failure_analysis": {
+        "all_reference_the_symbol": true,
+        "broke": [],
+        "coupled": [
+          "test_get_template_directories (template_tests.test_autoreloader.Jinja2TemplateReloadTests)",
+          "test_get_template_directories (template_tests.test_autoreloader.TemplateReloadTests)",
+          "test_template_dirs_normalized_to_paths (template_tests.test_autoreloader.TemplateReloadTests)",
+          "test_template_dirs_ignore_empty_path (template_tests.test_autoreloader.TemplateReloadTests)"
+        ],
+        "failing": [
+          "test_get_template_directories (template_tests.test_autoreloader.Jinja2TemplateReloadTests)",
+          "test_get_template_directories (template_tests.test_autoreloader.TemplateReloadTests)",
+          "test_template_dirs_normalized_to_paths (template_tests.test_autoreloader.TemplateReloadTests)",
+          "test_template_dirs_ignore_empty_path (template_tests.test_autoreloader.TemplateReloadTests)"
+        ],
+        "symbol": "get_template_directories",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": null,
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 1,
+        "f2p_failing": [
+          "test_template_dirs_ignore_empty_path (template_tests.test_autoreloader.TemplateReloadTests)"
+        ],
+        "f2p_pass": 0,
+        "found": true,
+        "n_parsed": 14,
+        "p2p_fail": 3,
+        "p2p_failing": [
+          "test_get_template_directories (template_tests.test_autoreloader.Jinja2TemplateReloadTests)",
+          "test_get_template_directories (template_tests.test_autoreloader.TemplateReloadTests)",
+          "test_template_dirs_normalized_to_paths (template_tests.test_autoreloader.TemplateReloadTests)"
+        ],
+        "p2p_pass": 7,
+        "reward": 0.0
+      },
+      "loud_failure": false,
+      "observable": "order of elements in a returned collection",
+      "operator": "collection_reverse",
+      "reason": "no anchor inside the gold-touched region",
+      "tier": "MEDIUM",
+      "tree_digest": "0544a6dfb4ccfe49e5050941f9e532c0943f9114415a8150d9b323db2430cb50",
+      "verdict": "NOT_APPLICABLE"
+    },
+    {
+      "anchor": null,
+      "failure_analysis": {
+        "all_reference_the_symbol": true,
+        "broke": [],
+        "coupled": [
+          "test_get_template_directories (template_tests.test_autoreloader.Jinja2TemplateReloadTests)",
+          "test_get_template_directories (template_tests.test_autoreloader.TemplateReloadTests)",
+          "test_template_dirs_normalized_to_paths (template_tests.test_autoreloader.TemplateReloadTests)",
+          "test_template_dirs_ignore_empty_path (template_tests.test_autoreloader.TemplateReloadTests)"
+        ],
+        "failing": [
+          "test_get_template_directories (template_tests.test_autoreloader.Jinja2TemplateReloadTests)",
+          "test_get_template_directories (template_tests.test_autoreloader.TemplateReloadTests)",
+          "test_template_dirs_normalized_to_paths (template_tests.test_autoreloader.TemplateReloadTests)",
+          "test_template_dirs_ignore_empty_path (template_tests.test_autoreloader.TemplateReloadTests)"
+        ],
+        "symbol": "get_template_directories",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": null,
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 1,
+        "f2p_failing": [
+          "test_template_dirs_ignore_empty_path (template_tests.test_autoreloader.TemplateReloadTests)"
+        ],
+        "f2p_pass": 0,
+        "found": true,
+        "n_parsed": 14,
+        "p2p_fail": 3,
+        "p2p_failing": [
+          "test_get_template_directories (template_tests.test_autoreloader.Jinja2TemplateReloadTests)",
+          "test_get_template_directories (template_tests.test_autoreloader.TemplateReloadTests)",
+          "test_template_dirs_normalized_to_paths (template_tests.test_autoreloader.TemplateReloadTests)"
+        ],
+        "p2p_pass": 7,
+        "reward": 0.0
+      },
+      "loud_failure": false,
+      "observable": "human-readable text of an exception message",
+      "operator": "message_reword",
+      "reason": "no anchor inside the gold-touched region",
+      "tier": "HIGH",
+      "tree_digest": "0544a6dfb4ccfe49e5050941f9e532c0943f9114415a8150d9b323db2430cb50",
+      "verdict": "NOT_APPLICABLE"
+    }
+  ],
+  "targets": [
+    "django/template/autoreload.py"
+  ],
+  "version": "4.1",
+  "witnesses": [
+    {
+      "all_failures_attributed": true,
+      "anchor": "get_template_directories",
+      "f2p_fail": 1,
+      "failure_analysis": {
+        "all_reference_the_symbol": true,
+        "broke": [],
+        "coupled": [
+          "test_get_template_directories (template_tests.test_autoreloader.Jinja2TemplateReloadTests)",
+          "test_get_template_directories (template_tests.test_autoreloader.TemplateReloadTests)",
+          "test_template_dirs_normalized_to_paths (template_tests.test_autoreloader.TemplateReloadTests)",
+          "test_template_dirs_ignore_empty_path (template_tests.test_autoreloader.TemplateReloadTests)"
+        ],
+        "failing": [
+          "test_get_template_directories (template_tests.test_autoreloader.Jinja2TemplateReloadTests)",
+          "test_get_template_directories (template_tests.test_autoreloader.TemplateReloadTests)",
+          "test_template_dirs_normalized_to_paths (template_tests.test_autoreloader.TemplateReloadTests)",
+          "test_template_dirs_ignore_empty_path (template_tests.test_autoreloader.TemplateReloadTests)"
+        ],
+        "symbol": "get_template_directories",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": "django/template/autoreload.py",
+      "graded_log": "+ ./tests/runtests.py --verbosity 2 --settings=test_sqlite --parallel 1 template_tests.test_autoreloader\nTesting against Django installed in '/testbed/django'\nImporting application template_tests\nFound 11 test(s).\nSkipping setup of unused database(s): default, other.\nSystem check identified no issues (0 silenced).\n\ntest_get_template_directories (template_tests.test_autoreloader.Jinja2TemplateReloadTests) ... ERROR\ntest_reset_all_loaders (template_tests.test_autoreloader.Jinja2TemplateReloadTests) ... ok\ntest_watch_for_template_changes (template_tests.test_autoreloader.Jinja2TemplateReloadTests) ... ok\ntest_get_template_directories (template_tests.test_autoreloader.TemplateReloadTests) ... ERROR\ntest_non_template_changed (template_tests.test_autoreloader.TemplateReloadTests) ... ok\ntest_non_template_changed_in_template_directory (template_tests.test_autoreloader.TemplateReloadTests) ... ok\ntest_reset_all_loaders (template_tests.test_autoreloader.TemplateReloadTests) ... ok\ntest_template_changed (template_tests.test_autoreloader.TemplateReloadTests) ... ok\ntest_template_dirs_ignore_empty_path (template_tests.test_autoreloader.TemplateReloadTests) ... ERROR\ntest_template_dirs_normalized_to_paths (template_tests.test_autoreloader.TemplateReloadTests) ... ERROR\ntest_watch_for_template_changes (template_tests.test_autoreloader.TemplateReloadTests) ... ok\n\n======================================================================\nERROR: test_get_template_directories (template_tests.test_autoreloader.Jinja2TemplateReloadTests)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/testbed/tests/template_tests/test_autoreloader.py\", line 133, in test_get_template_directories\n    autoreload.get_template_directories(),\nAttributeError: module 'django.template.autoreload' has no attribute 'get_template_directories'\n\n======================================================================\nERROR: test_get_template_directories (template_tests.test_autoreloader.TemplateReloadTests)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/testbed/tests/template_tests/test_autoreloader.py\", line 72, in test_get_template_directories\n    autoreload.get_template_directories(),\nAttributeError: module 'django.template.autoreload' has no attribute 'get_template_directories'\n\n======================================================================\nERROR: test_template_dirs_ignore_empty_path (template_tests.test_autoreloader.TemplateReloadTests)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/testbed/django/test/utils.py\", line 460, in inner\n    return func(*args, **kwargs)\n  File \"/testbed/tests/template_tests/test_autoreloader.py\", line 93, in test_template_dirs_ignore_empty_path\n    self.assertEqual(autoreload.get_template_directories(), set())\nAttributeError: module 'django.template.autoreload' has no attribute 'get_template_directories'\n\n======================================================================\nERROR: test_template_dirs_normalized_to_paths (template_tests.test_autoreloader.TemplateReloadTests)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/testbed/django/test/utils.py\", line 460, in inner\n    return func(*args, **kwargs)\n  File \"/testbed/tests/template_tests/test_autoreloader.py\", line 109, in test_template_dirs_normalized_to_paths\n    autoreload.get_template_directories(),\nAttributeError: module 'django.template.autoreload' has no attribute 'get_template_directories'\n\n----------------------------------------------------------------------\nRan 11 tests in 0.012s\n\nFAILED (errors=4)\n",
+      "graded_report": {
+        "f2p_fail": 1,
+        "f2p_failing": [
+          "test_template_dirs_ignore_empty_path (template_tests.test_autoreloader.TemplateReloadTests)"
+        ],
+        "f2p_pass": 0,
+        "found": true,
+        "n_parsed": 14,
+        "p2p_fail": 3,
+        "p2p_failing": [
+          "test_get_template_directories (template_tests.test_autoreloader.Jinja2TemplateReloadTests)",
+          "test_get_template_directories (template_tests.test_autoreloader.TemplateReloadTests)",
+          "test_template_dirs_normalized_to_paths (template_tests.test_autoreloader.TemplateReloadTests)"
+        ],
+        "p2p_pass": 7,
+        "reward": 0.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "p2p_coupled_tests": [
+        "test_get_template_directories (template_tests.test_autoreloader.Jinja2TemplateReloadTests)",
+        "test_get_template_directories (template_tests.test_autoreloader.TemplateReloadTests)",
+        "test_template_dirs_normalized_to_paths (template_tests.test_autoreloader.TemplateReloadTests)"
+      ],
+      "p2p_fail": 3,
+      "reason": "reward 0.0",
+      "tier": "MEDIUM",
+      "tree_digest": "0544a6dfb4ccfe49e5050941f9e532c0943f9114415a8150d9b323db2430cb50",
+      "verdict": "WITNESS",
+      "witness_side": "p2p_coupling"
+    }
+  ]
+}

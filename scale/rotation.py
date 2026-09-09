@@ -320,11 +320,54 @@ class DiskBudgetError(RuntimeError):
     """Raised when disk does not come back after a task and cannot be reclaimed."""
 
 
-# A task that has cleaned up correctly returns the filesystem to within noise of
-# where it started; both a bare pull/rmi cycle and a full task (pull, container,
-# formcheck, teardown, rmi) were measured at exactly 0 MiB residual. Anything
-# above this is unexplained, and an unexplained budget cannot be guarded.
-RESIDUAL_ABORT_MIB = 256
+# WHY THERE IS NO FREE-SPACE ABORT THRESHOLD ANY MORE. `CHANGES.md` 24: a
+# run-wide budget expressed as `baseline_free - free_bytes()` measures the whole
+# filesystem, so every co-tenant on it is charged to the run -- and so is the
+# run's own output, which means the quantity cannot reach zero by construction.
+# On M4 it aborted the final task over 325 MiB, 100 MiB of which was an
+# unrelated `npm` cache write. The run-wide question is now asked structurally,
+# the same way the per-task one already was: not "how much disk came back" but
+# "is anything of OURS still resident that no live lease owns".
+
+
+def unowned_footprint(leases) -> dict:
+    """What this harness still has on the host that no live lease accounts for.
+
+    Attributable by construction, and the three things that made the free-space
+    version wrong cannot affect it:
+
+      * a co-tenant writing to the same filesystem is not in `NAMESPACE` and not
+        in `CONTAINER_PREFIX`, so it is not counted;
+      * the run's own records are not images or containers, so they are not
+        counted;
+      * a worker still holding an image is holding a lease, so its image is
+        owned -- which makes this evaluable at any moment, not only once the
+        run has drained. That is the second defect of the old guard: gated on
+        `not leases.live_refs()`, it could only ever fire on the last task.
+
+    `docker images` / `docker ps`, never `docker system df` -- `CHANGES.md` 10
+    stands, docker's own space accounting is still not usable as a budget, and
+    orphaned layer data is still reclaimed and measured with `df` by
+    `reclaim_orphans`. What changed is only what may ABORT a run.
+    """
+    owned = leases.live_refs()
+    images = {ref: size for ref, size in resident_images().items()
+              if ref not in owned}
+    containers = [name for name in _validate_containers()
+                  if name[1] not in owned]
+    return {"images": images, "containers": [n for n, _ in containers],
+            "bytes": sum(images.values())}
+
+
+def _validate_containers() -> list:
+    """`[(name, image_ref)]` for every container this harness's runtime started."""
+    out = _docker("ps", "-a", "--format", "{{.Names}}\t{{.Image}}")
+    rows = []
+    for line in out.stdout.splitlines():
+        name, _, image = line.partition("\t")
+        if name.startswith(CONTAINER_PREFIX):
+            rows.append((name, image))
+    return rows
 
 
 # The name `verifiers` gives the containers it starts for a validate run:
@@ -347,11 +390,9 @@ def reconcile_containers(keep_images: set) -> list:
     A container is orphaned iff its image is not one a live lease is holding. A
     live worker's container is protected because its image is in `keep_images`.
     """
-    out = _docker("ps", "-a", "--format", "{{.Names}}\t{{.Image}}")
     removed = []
-    for line in out.stdout.splitlines():
-        name, _, image = line.partition("\t")
-        if not name.startswith(CONTAINER_PREFIX) or image in keep_images:
+    for name, image in _validate_containers():
+        if image in keep_images:
             continue
         if _docker("rm", "-f", name, timeout=120).returncode == 0:
             removed.append(name)

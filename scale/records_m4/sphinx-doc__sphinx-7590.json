@@ -1,0 +1,1010 @@
+{
+  "completed": true,
+  "control": {
+    "graded": null,
+    "log": null,
+    "passed": true,
+    "reason": "untransformed reference scores 1.0"
+  },
+  "digest_trace": [
+    {
+      "digest": "a3d3267d4426be3b32002600636e618a410f59358d93b1e37330b8ed3244e3eb",
+      "memo_hit": false
+    },
+    {
+      "digest": "193962785b6fde7f551639b267dc7b3d60bcc3c7b934c91deb62ff00a67456b7",
+      "memo_hit": false
+    },
+    {
+      "digest": "193962785b6fde7f551639b267dc7b3d60bcc3c7b934c91deb62ff00a67456b7",
+      "memo_hit": true
+    },
+    {
+      "digest": "0f9ce847afebb610c23ea7fcc329d1a493ac13bda1308fbeb4016a6e682bf56f",
+      "memo_hit": false
+    },
+    {
+      "digest": "0f9ce847afebb610c23ea7fcc329d1a493ac13bda1308fbeb4016a6e682bf56f",
+      "memo_hit": true
+    },
+    {
+      "digest": "b3228adee3ac66e64684d3ff028c021b741b1dee9792d4d53f796982e4bad4ea",
+      "memo_hit": false
+    },
+    {
+      "digest": "b3228adee3ac66e64684d3ff028c021b741b1dee9792d4d53f796982e4bad4ea",
+      "memo_hit": true
+    },
+    {
+      "digest": "e94ea5bb4a3b88f687be032c1fb73300a6f33cf2ede4d4ff7997a4e07632d985",
+      "memo_hit": false
+    },
+    {
+      "digest": "e94ea5bb4a3b88f687be032c1fb73300a6f33cf2ede4d4ff7997a4e07632d985",
+      "memo_hit": true
+    },
+    {
+      "digest": "193962785b6fde7f551639b267dc7b3d60bcc3c7b934c91deb62ff00a67456b7",
+      "memo_hit": false
+    },
+    {
+      "digest": "193962785b6fde7f551639b267dc7b3d60bcc3c7b934c91deb62ff00a67456b7",
+      "memo_hit": true
+    },
+    {
+      "digest": "0f9ce847afebb610c23ea7fcc329d1a493ac13bda1308fbeb4016a6e682bf56f",
+      "memo_hit": false
+    },
+    {
+      "digest": "0f9ce847afebb610c23ea7fcc329d1a493ac13bda1308fbeb4016a6e682bf56f",
+      "memo_hit": true
+    },
+    {
+      "digest": "b3228adee3ac66e64684d3ff028c021b741b1dee9792d4d53f796982e4bad4ea",
+      "memo_hit": false
+    },
+    {
+      "digest": "b3228adee3ac66e64684d3ff028c021b741b1dee9792d4d53f796982e4bad4ea",
+      "memo_hit": true
+    },
+    {
+      "digest": "f40c0b6297bf3d38ac1a2462e8288d4e2d1abceaf258abfe3a4f79d3b49deea5",
+      "memo_hit": false
+    },
+    {
+      "digest": "f40c0b6297bf3d38ac1a2462e8288d4e2d1abceaf258abfe3a4f79d3b49deea5",
+      "memo_hit": true
+    },
+    {
+      "digest": "e94ea5bb4a3b88f687be032c1fb73300a6f33cf2ede4d4ff7997a4e07632d985",
+      "memo_hit": false
+    },
+    {
+      "digest": "e94ea5bb4a3b88f687be032c1fb73300a6f33cf2ede4d4ff7997a4e07632d985",
+      "memo_hit": true
+    }
+  ],
+  "disk_orphan_reclaimed_bytes": 0,
+  "disk_residual_bytes": 0,
+  "elapsed_seconds": 200.54,
+  "error": null,
+  "image": "swebench/sweb.eval.x86_64.sphinx-doc_1776_sphinx-7590:latest",
+  "instance_id": "sphinx-doc__sphinx-7590",
+  "leaked_containers": [],
+  "leaked_image": false,
+  "log": [
+    [
+      "<control>",
+      "OK",
+      "untransformed reference scores 1.0"
+    ],
+    [
+      "kwonly_specialize:<no anchor>",
+      "NOT_APPLICABLE",
+      "no anchor inside the gold-touched region; 1 anchor(s) elsewhere in the 3 target(s): sphinx/domains/c.py, sphinx/domains/cpp.py, sphinx/util/cfamily.py"
+    ],
+    [
+      "symbol_rename:sphinx/domains/c.py:ASTIdentifier",
+      "CLEAN",
+      "reward 1.0"
+    ],
+    [
+      "symbol_rename:sphinx/domains/c.py:ASTNumberLiteral",
+      "CLEAN",
+      "reward 1.0"
+    ],
+    [
+      "symbol_rename:sphinx/domains/c.py:ASTCharLiteral",
+      "CLEAN",
+      "reward 1.0"
+    ],
+    [
+      "symbol_rename:sphinx/domains/c.py:DefinitionParser",
+      "WITNESS",
+      "reward 0.0"
+    ],
+    [
+      "symbol_rename:sphinx/domains/cpp.py:ASTIdentifier",
+      "CLEAN",
+      "reward 1.0"
+    ],
+    [
+      "symbol_rename:sphinx/domains/cpp.py:ASTNumberLiteral",
+      "CLEAN",
+      "reward 1.0"
+    ],
+    [
+      "symbol_rename:sphinx/domains/cpp.py:ASTCharLiteral",
+      "CLEAN",
+      "reward 1.0"
+    ],
+    [
+      "symbol_rename:sphinx/domains/cpp.py:ASTUserDefinedLiteral",
+      "CLEAN",
+      "reward 1.0"
+    ],
+    [
+      "symbol_rename:sphinx/domains/cpp.py:DefinitionParser",
+      "WITNESS",
+      "reward 0.0"
+    ],
+    [
+      "symbol_rename:sphinx/util/cfamily.py:verify_description_mode",
+      "REFUSED",
+      "multi-line import of 'verify_description_mode' in sphinx/domains/cpp.py"
+    ],
+    [
+      "collection_reverse:<no anchor>",
+      "NOT_APPLICABLE",
+      "no anchor inside the gold-touched region"
+    ],
+    [
+      "message_reword:<no anchor>",
+      "NOT_APPLICABLE",
+      "no anchor inside the gold-touched region; 4 anchor(s) elsewhere in the 3 target(s): sphinx/domains/c.py, sphinx/domains/cpp.py, sphinx/util/cfamily.py"
+    ]
+  ],
+  "mountable": true,
+  "multi_target": true,
+  "n_targets": 3,
+  "on_prime_hub": null,
+  "on_prime_hub_reason": "not resolvable offline; no hub environment index is reachable from this repo, verifiers or swebench",
+  "operators_not_applicable": [
+    "collection_reverse",
+    "kwonly_specialize",
+    "message_reword"
+  ],
+  "operators_with_anchors": [
+    "symbol_rename"
+  ],
+  "repo": "sphinx-doc/sphinx",
+  "row": {
+    "elapsed": 184.33,
+    "error": null,
+    "error_type": null,
+    "index": 0,
+    "mode": "formcheck",
+    "name": "sphinx-doc__sphinx-7590",
+    "reason": "invalid",
+    "valid": false
+  },
+  "rows": [
+    {
+      "anchor": null,
+      "failure_analysis": null,
+      "file": null,
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 1,
+        "found": true,
+        "n_parsed": 25,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 24,
+        "reward": 1.0
+      },
+      "loud_failure": false,
+      "observable": "callable signature (arity / parameter names)",
+      "operator": "kwonly_specialize",
+      "reason": "no anchor inside the gold-touched region; 1 anchor(s) elsewhere in the 3 target(s): sphinx/domains/c.py, sphinx/domains/cpp.py, sphinx/util/cfamily.py",
+      "tier": "HIGH",
+      "tree_digest": "a3d3267d4426be3b32002600636e618a410f59358d93b1e37330b8ed3244e3eb",
+      "verdict": "NOT_APPLICABLE"
+    },
+    {
+      "anchor": "ASTIdentifier",
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "broke": [],
+        "coupled": [],
+        "failing": [],
+        "symbol": "ASTIdentifier",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": "sphinx/domains/c.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 1,
+        "found": true,
+        "n_parsed": 25,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 24,
+        "reward": 1.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "reward 1.0",
+      "tier": "MEDIUM",
+      "tree_digest": "193962785b6fde7f551639b267dc7b3d60bcc3c7b934c91deb62ff00a67456b7",
+      "verdict": "CLEAN"
+    },
+    {
+      "anchor": "ASTNumberLiteral",
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "broke": [],
+        "coupled": [],
+        "failing": [],
+        "symbol": "ASTNumberLiteral",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": "sphinx/domains/c.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 1,
+        "found": true,
+        "n_parsed": 25,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 24,
+        "reward": 1.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "reward 1.0",
+      "tier": "MEDIUM",
+      "tree_digest": "0f9ce847afebb610c23ea7fcc329d1a493ac13bda1308fbeb4016a6e682bf56f",
+      "verdict": "CLEAN"
+    },
+    {
+      "anchor": "ASTCharLiteral",
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "broke": [],
+        "coupled": [],
+        "failing": [],
+        "symbol": "ASTCharLiteral",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": "sphinx/domains/c.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 1,
+        "found": true,
+        "n_parsed": 25,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 24,
+        "reward": 1.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "reward 1.0",
+      "tier": "MEDIUM",
+      "tree_digest": "b3228adee3ac66e64684d3ff028c021b741b1dee9792d4d53f796982e4bad4ea",
+      "verdict": "CLEAN"
+    },
+    {
+      "all_failures_attributed": true,
+      "anchor": "DefinitionParser",
+      "f2p_fail": 1,
+      "failure_analysis": {
+        "all_reference_the_symbol": true,
+        "broke": [],
+        "coupled": [
+          "tests/test_domain_cpp.py::test_fundamental_types",
+          "tests/test_domain_cpp.py::test_type_definitions",
+          "tests/test_domain_cpp.py::test_concept_definitions",
+          "tests/test_domain_cpp.py::test_member_definitions",
+          "tests/test_domain_cpp.py::test_function_definitions",
+          "tests/test_domain_cpp.py::test_operators",
+          "tests/test_domain_cpp.py::test_class_definitions",
+          "tests/test_domain_cpp.py::test_union_definitions",
+          "tests/test_domain_cpp.py::test_enum_definitions",
+          "tests/test_domain_cpp.py::test_anon_definitions",
+          "tests/test_domain_cpp.py::test_expressions"
+        ],
+        "failing": [
+          "tests/test_domain_cpp.py::test_fundamental_types",
+          "tests/test_domain_cpp.py::test_type_definitions",
+          "tests/test_domain_cpp.py::test_concept_definitions",
+          "tests/test_domain_cpp.py::test_member_definitions",
+          "tests/test_domain_cpp.py::test_function_definitions",
+          "tests/test_domain_cpp.py::test_operators",
+          "tests/test_domain_cpp.py::test_class_definitions",
+          "tests/test_domain_cpp.py::test_union_definitions",
+          "tests/test_domain_cpp.py::test_enum_definitions",
+          "tests/test_domain_cpp.py::test_anon_definitions",
+          "tests/test_domain_cpp.py::test_expressions"
+        ],
+        "symbol": "DefinitionParser",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": "sphinx/domains/c.py",
+      "graded_log": "+ tox --current-env -epy39 -v -- tests/test_domain_cpp.py\npy39: commands[0]> pytest -rA --durations 25 tests/test_domain_cpp.py\n============================= test session starts ==============================\nplatform linux -- Python 3.9.20, pytest-8.3.3, pluggy-1.5.0\ncachedir: .tox/py39/.pytest_cache\nlibraries: Sphinx-3.1.0+/3f69f8550, docutils-0.21.2\nbase tempdir: /tmp/pytest-of-root/pytest-4\nrootdir: /testbed\nconfigfile: setup.cfg\nplugins: cov-5.0.0\ncollected 0 items / 1 error\n\n==================================== ERRORS ====================================\n__________________ ERROR collecting tests/test_domain_cpp.py ___________________\nImportError while importing test module '/testbed/tests/test_domain_cpp.py'.\nHint: make sure your test modules/packages have valid Python names.\nTraceback:\n/opt/miniconda3/envs/testbed/lib/python3.9/importlib/__init__.py:127: in import_module\n    return _bootstrap._gcd_import(name[level:], package, level)\ntests/test_domain_cpp.py:17: in <module>\n    from sphinx.domains.cpp import DefinitionParser, DefinitionError, NoOldIdError\nE   ImportError: cannot import name 'DefinitionParser' from 'sphinx.domains.cpp' (/testbed/sphinx/domains/cpp.py)\n=============================== warnings summary ===============================\nsphinx/util/docutils.py:45\n  /testbed/sphinx/util/docutils.py:45: DeprecationWarning: distutils Version classes are deprecated. Use packaging.version instead.\n    __version_info__ = tuple(LooseVersion(docutils.__version__).version)\n\nsphinx/registry.py:22\n  /testbed/sphinx/registry.py:22: DeprecationWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html\n    from pkg_resources import iter_entry_points\n\n../opt/miniconda3/envs/testbed/lib/python3.9/site-packages/pkg_resources/__init__.py:3154\n../opt/miniconda3/envs/testbed/lib/python3.9/site-packages/pkg_resources/__init__.py:3154\n../opt/miniconda3/envs/testbed/lib/python3.9/site-packages/pkg_resources/__init__.py:3154\n../opt/miniconda3/envs/testbed/lib/python3.9/site-packages/pkg_resources/__init__.py:3154\n  /opt/miniconda3/envs/testbed/lib/python3.9/site-packages/pkg_resources/__init__.py:3154: DeprecationWarning: Deprecated call to `pkg_resources.declare_namespace('sphinxcontrib')`.\n  Implementing implicit namespace packages (as specified in PEP 420) is preferred to `pkg_resources.declare_namespace`. See https://setuptools.pypa.io/en/latest/references/keywords.html#keyword-namespace-packages\n    declare_namespace(pkg)\n\nsphinx/directives/patches.py:15\n  /testbed/sphinx/directives/patches.py:15: DeprecationWarning: The `docutils.parsers.rst.directive.html` module will be removed in Docutils 2.0. Since Docutils 0.18, the \"Meta\" node is defined in `docutils.parsers.rst.directives.misc`.\n    from docutils.parsers.rst.directives import images, html, tables\n\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n=========================== short test summary info ============================\nERROR tests/test_domain_cpp.py\n!!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!!\n========================= 7 warnings, 1 error in 0.20s =========================\npy39: exit 2 (0.76 seconds) /testbed> pytest -rA --durations 25 tests/test_domain_cpp.py pid=1589\n  py39: FAIL code 2 (0.77=setup[0.01]+cmd[0.76] seconds)\n  evaluation failed :( (0.87 seconds)\n\n",
+      "graded_report": {
+        "f2p_fail": 1,
+        "f2p_failing": [
+          "tests/test_domain_cpp.py::test_expressions"
+        ],
+        "f2p_pass": 0,
+        "found": true,
+        "n_parsed": 1,
+        "p2p_fail": 24,
+        "p2p_failing": [
+          "tests/test_domain_cpp.py::test_fundamental_types",
+          "tests/test_domain_cpp.py::test_type_definitions",
+          "tests/test_domain_cpp.py::test_concept_definitions",
+          "tests/test_domain_cpp.py::test_member_definitions",
+          "tests/test_domain_cpp.py::test_function_definitions",
+          "tests/test_domain_cpp.py::test_operators",
+          "tests/test_domain_cpp.py::test_class_definitions",
+          "tests/test_domain_cpp.py::test_union_definitions",
+          "tests/test_domain_cpp.py::test_enum_definitions",
+          "tests/test_domain_cpp.py::test_anon_definitions"
+        ],
+        "p2p_pass": 0,
+        "reward": 0.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "p2p_coupled_tests": [
+        "tests/test_domain_cpp.py::test_fundamental_types",
+        "tests/test_domain_cpp.py::test_type_definitions",
+        "tests/test_domain_cpp.py::test_concept_definitions",
+        "tests/test_domain_cpp.py::test_member_definitions",
+        "tests/test_domain_cpp.py::test_function_definitions",
+        "tests/test_domain_cpp.py::test_operators",
+        "tests/test_domain_cpp.py::test_class_definitions",
+        "tests/test_domain_cpp.py::test_union_definitions",
+        "tests/test_domain_cpp.py::test_enum_definitions",
+        "tests/test_domain_cpp.py::test_anon_definitions"
+      ],
+      "p2p_fail": 24,
+      "reason": "reward 0.0",
+      "tier": "MEDIUM",
+      "tree_digest": "e94ea5bb4a3b88f687be032c1fb73300a6f33cf2ede4d4ff7997a4e07632d985",
+      "verdict": "WITNESS",
+      "witness_side": "p2p_coupling"
+    },
+    {
+      "anchor": "ASTIdentifier",
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "broke": [],
+        "coupled": [],
+        "failing": [],
+        "symbol": "ASTIdentifier",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": "sphinx/domains/cpp.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 1,
+        "found": true,
+        "n_parsed": 25,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 24,
+        "reward": 1.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "reward 1.0",
+      "tier": "MEDIUM",
+      "tree_digest": "193962785b6fde7f551639b267dc7b3d60bcc3c7b934c91deb62ff00a67456b7",
+      "verdict": "CLEAN"
+    },
+    {
+      "anchor": "ASTNumberLiteral",
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "broke": [],
+        "coupled": [],
+        "failing": [],
+        "symbol": "ASTNumberLiteral",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": "sphinx/domains/cpp.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 1,
+        "found": true,
+        "n_parsed": 25,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 24,
+        "reward": 1.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "reward 1.0",
+      "tier": "MEDIUM",
+      "tree_digest": "0f9ce847afebb610c23ea7fcc329d1a493ac13bda1308fbeb4016a6e682bf56f",
+      "verdict": "CLEAN"
+    },
+    {
+      "anchor": "ASTCharLiteral",
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "broke": [],
+        "coupled": [],
+        "failing": [],
+        "symbol": "ASTCharLiteral",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": "sphinx/domains/cpp.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 1,
+        "found": true,
+        "n_parsed": 25,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 24,
+        "reward": 1.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "reward 1.0",
+      "tier": "MEDIUM",
+      "tree_digest": "b3228adee3ac66e64684d3ff028c021b741b1dee9792d4d53f796982e4bad4ea",
+      "verdict": "CLEAN"
+    },
+    {
+      "anchor": "ASTUserDefinedLiteral",
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "broke": [],
+        "coupled": [],
+        "failing": [],
+        "symbol": "ASTUserDefinedLiteral",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": "sphinx/domains/cpp.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 1,
+        "found": true,
+        "n_parsed": 25,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 24,
+        "reward": 1.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "reward 1.0",
+      "tier": "MEDIUM",
+      "tree_digest": "f40c0b6297bf3d38ac1a2462e8288d4e2d1abceaf258abfe3a4f79d3b49deea5",
+      "verdict": "CLEAN"
+    },
+    {
+      "all_failures_attributed": true,
+      "anchor": "DefinitionParser",
+      "f2p_fail": 1,
+      "failure_analysis": {
+        "all_reference_the_symbol": true,
+        "broke": [],
+        "coupled": [
+          "tests/test_domain_cpp.py::test_fundamental_types",
+          "tests/test_domain_cpp.py::test_type_definitions",
+          "tests/test_domain_cpp.py::test_concept_definitions",
+          "tests/test_domain_cpp.py::test_member_definitions",
+          "tests/test_domain_cpp.py::test_function_definitions",
+          "tests/test_domain_cpp.py::test_operators",
+          "tests/test_domain_cpp.py::test_class_definitions",
+          "tests/test_domain_cpp.py::test_union_definitions",
+          "tests/test_domain_cpp.py::test_enum_definitions",
+          "tests/test_domain_cpp.py::test_anon_definitions",
+          "tests/test_domain_cpp.py::test_expressions"
+        ],
+        "failing": [
+          "tests/test_domain_cpp.py::test_fundamental_types",
+          "tests/test_domain_cpp.py::test_type_definitions",
+          "tests/test_domain_cpp.py::test_concept_definitions",
+          "tests/test_domain_cpp.py::test_member_definitions",
+          "tests/test_domain_cpp.py::test_function_definitions",
+          "tests/test_domain_cpp.py::test_operators",
+          "tests/test_domain_cpp.py::test_class_definitions",
+          "tests/test_domain_cpp.py::test_union_definitions",
+          "tests/test_domain_cpp.py::test_enum_definitions",
+          "tests/test_domain_cpp.py::test_anon_definitions",
+          "tests/test_domain_cpp.py::test_expressions"
+        ],
+        "symbol": "DefinitionParser",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": "sphinx/domains/cpp.py",
+      "graded_log": "+ tox --current-env -epy39 -v -- tests/test_domain_cpp.py\npy39: commands[0]> pytest -rA --durations 25 tests/test_domain_cpp.py\n============================= test session starts ==============================\nplatform linux -- Python 3.9.20, pytest-8.3.3, pluggy-1.5.0\ncachedir: .tox/py39/.pytest_cache\nlibraries: Sphinx-3.1.0+/3f69f8550, docutils-0.21.2\nbase tempdir: /tmp/pytest-of-root/pytest-9\nrootdir: /testbed\nconfigfile: setup.cfg\nplugins: cov-5.0.0\ncollected 0 items / 1 error\n\n==================================== ERRORS ====================================\n__________________ ERROR collecting tests/test_domain_cpp.py ___________________\nImportError while importing test module '/testbed/tests/test_domain_cpp.py'.\nHint: make sure your test modules/packages have valid Python names.\nTraceback:\n/opt/miniconda3/envs/testbed/lib/python3.9/importlib/__init__.py:127: in import_module\n    return _bootstrap._gcd_import(name[level:], package, level)\ntests/test_domain_cpp.py:17: in <module>\n    from sphinx.domains.cpp import DefinitionParser, DefinitionError, NoOldIdError\nE   ImportError: cannot import name 'DefinitionParser' from 'sphinx.domains.cpp' (/testbed/sphinx/domains/cpp.py)\n=============================== warnings summary ===============================\nsphinx/util/docutils.py:45\n  /testbed/sphinx/util/docutils.py:45: DeprecationWarning: distutils Version classes are deprecated. Use packaging.version instead.\n    __version_info__ = tuple(LooseVersion(docutils.__version__).version)\n\nsphinx/registry.py:22\n  /testbed/sphinx/registry.py:22: DeprecationWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html\n    from pkg_resources import iter_entry_points\n\n../opt/miniconda3/envs/testbed/lib/python3.9/site-packages/pkg_resources/__init__.py:3154\n../opt/miniconda3/envs/testbed/lib/python3.9/site-packages/pkg_resources/__init__.py:3154\n../opt/miniconda3/envs/testbed/lib/python3.9/site-packages/pkg_resources/__init__.py:3154\n../opt/miniconda3/envs/testbed/lib/python3.9/site-packages/pkg_resources/__init__.py:3154\n  /opt/miniconda3/envs/testbed/lib/python3.9/site-packages/pkg_resources/__init__.py:3154: DeprecationWarning: Deprecated call to `pkg_resources.declare_namespace('sphinxcontrib')`.\n  Implementing implicit namespace packages (as specified in PEP 420) is preferred to `pkg_resources.declare_namespace`. See https://setuptools.pypa.io/en/latest/references/keywords.html#keyword-namespace-packages\n    declare_namespace(pkg)\n\nsphinx/directives/patches.py:15\n  /testbed/sphinx/directives/patches.py:15: DeprecationWarning: The `docutils.parsers.rst.directive.html` module will be removed in Docutils 2.0. Since Docutils 0.18, the \"Meta\" node is defined in `docutils.parsers.rst.directives.misc`.\n    from docutils.parsers.rst.directives import images, html, tables\n\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n=========================== short test summary info ============================\nERROR tests/test_domain_cpp.py\n!!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!!\n========================= 7 warnings, 1 error in 0.25s =========================\npy39: exit 2 (0.85 seconds) /testbed> pytest -rA --durations 25 tests/test_domain_cpp.py pid=3244\n  py39: FAIL code 2 (0.86=setup[0.01]+cmd[0.85] seconds)\n  evaluation failed :( (0.96 seconds)\n\n",
+      "graded_report": {
+        "f2p_fail": 1,
+        "f2p_failing": [
+          "tests/test_domain_cpp.py::test_expressions"
+        ],
+        "f2p_pass": 0,
+        "found": true,
+        "n_parsed": 1,
+        "p2p_fail": 24,
+        "p2p_failing": [
+          "tests/test_domain_cpp.py::test_fundamental_types",
+          "tests/test_domain_cpp.py::test_type_definitions",
+          "tests/test_domain_cpp.py::test_concept_definitions",
+          "tests/test_domain_cpp.py::test_member_definitions",
+          "tests/test_domain_cpp.py::test_function_definitions",
+          "tests/test_domain_cpp.py::test_operators",
+          "tests/test_domain_cpp.py::test_class_definitions",
+          "tests/test_domain_cpp.py::test_union_definitions",
+          "tests/test_domain_cpp.py::test_enum_definitions",
+          "tests/test_domain_cpp.py::test_anon_definitions"
+        ],
+        "p2p_pass": 0,
+        "reward": 0.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "p2p_coupled_tests": [
+        "tests/test_domain_cpp.py::test_fundamental_types",
+        "tests/test_domain_cpp.py::test_type_definitions",
+        "tests/test_domain_cpp.py::test_concept_definitions",
+        "tests/test_domain_cpp.py::test_member_definitions",
+        "tests/test_domain_cpp.py::test_function_definitions",
+        "tests/test_domain_cpp.py::test_operators",
+        "tests/test_domain_cpp.py::test_class_definitions",
+        "tests/test_domain_cpp.py::test_union_definitions",
+        "tests/test_domain_cpp.py::test_enum_definitions",
+        "tests/test_domain_cpp.py::test_anon_definitions"
+      ],
+      "p2p_fail": 24,
+      "reason": "reward 0.0",
+      "tier": "MEDIUM",
+      "tree_digest": "e94ea5bb4a3b88f687be032c1fb73300a6f33cf2ede4d4ff7997a4e07632d985",
+      "verdict": "WITNESS",
+      "witness_side": "p2p_coupling"
+    },
+    {
+      "anchor": "verify_description_mode",
+      "failure_analysis": {
+        "all_reference_the_symbol": true,
+        "broke": [],
+        "coupled": [
+          "tests/test_domain_cpp.py::test_fundamental_types",
+          "tests/test_domain_cpp.py::test_type_definitions",
+          "tests/test_domain_cpp.py::test_concept_definitions",
+          "tests/test_domain_cpp.py::test_member_definitions",
+          "tests/test_domain_cpp.py::test_function_definitions",
+          "tests/test_domain_cpp.py::test_operators",
+          "tests/test_domain_cpp.py::test_class_definitions",
+          "tests/test_domain_cpp.py::test_union_definitions",
+          "tests/test_domain_cpp.py::test_enum_definitions",
+          "tests/test_domain_cpp.py::test_anon_definitions",
+          "tests/test_domain_cpp.py::test_expressions"
+        ],
+        "failing": [
+          "tests/test_domain_cpp.py::test_fundamental_types",
+          "tests/test_domain_cpp.py::test_type_definitions",
+          "tests/test_domain_cpp.py::test_concept_definitions",
+          "tests/test_domain_cpp.py::test_member_definitions",
+          "tests/test_domain_cpp.py::test_function_definitions",
+          "tests/test_domain_cpp.py::test_operators",
+          "tests/test_domain_cpp.py::test_class_definitions",
+          "tests/test_domain_cpp.py::test_union_definitions",
+          "tests/test_domain_cpp.py::test_enum_definitions",
+          "tests/test_domain_cpp.py::test_anon_definitions",
+          "tests/test_domain_cpp.py::test_expressions"
+        ],
+        "symbol": "DefinitionParser",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": "sphinx/util/cfamily.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 1,
+        "f2p_failing": [
+          "tests/test_domain_cpp.py::test_expressions"
+        ],
+        "f2p_pass": 0,
+        "found": true,
+        "n_parsed": 1,
+        "p2p_fail": 24,
+        "p2p_failing": [
+          "tests/test_domain_cpp.py::test_fundamental_types",
+          "tests/test_domain_cpp.py::test_type_definitions",
+          "tests/test_domain_cpp.py::test_concept_definitions",
+          "tests/test_domain_cpp.py::test_member_definitions",
+          "tests/test_domain_cpp.py::test_function_definitions",
+          "tests/test_domain_cpp.py::test_operators",
+          "tests/test_domain_cpp.py::test_class_definitions",
+          "tests/test_domain_cpp.py::test_union_definitions",
+          "tests/test_domain_cpp.py::test_enum_definitions",
+          "tests/test_domain_cpp.py::test_anon_definitions"
+        ],
+        "p2p_pass": 0,
+        "reward": 0.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "multi-line import of 'verify_description_mode' in sphinx/domains/cpp.py",
+      "tier": "MEDIUM",
+      "tree_digest": "e94ea5bb4a3b88f687be032c1fb73300a6f33cf2ede4d4ff7997a4e07632d985",
+      "verdict": "REFUSED"
+    },
+    {
+      "anchor": null,
+      "failure_analysis": {
+        "all_reference_the_symbol": true,
+        "broke": [],
+        "coupled": [
+          "tests/test_domain_cpp.py::test_fundamental_types",
+          "tests/test_domain_cpp.py::test_type_definitions",
+          "tests/test_domain_cpp.py::test_concept_definitions",
+          "tests/test_domain_cpp.py::test_member_definitions",
+          "tests/test_domain_cpp.py::test_function_definitions",
+          "tests/test_domain_cpp.py::test_operators",
+          "tests/test_domain_cpp.py::test_class_definitions",
+          "tests/test_domain_cpp.py::test_union_definitions",
+          "tests/test_domain_cpp.py::test_enum_definitions",
+          "tests/test_domain_cpp.py::test_anon_definitions",
+          "tests/test_domain_cpp.py::test_expressions"
+        ],
+        "failing": [
+          "tests/test_domain_cpp.py::test_fundamental_types",
+          "tests/test_domain_cpp.py::test_type_definitions",
+          "tests/test_domain_cpp.py::test_concept_definitions",
+          "tests/test_domain_cpp.py::test_member_definitions",
+          "tests/test_domain_cpp.py::test_function_definitions",
+          "tests/test_domain_cpp.py::test_operators",
+          "tests/test_domain_cpp.py::test_class_definitions",
+          "tests/test_domain_cpp.py::test_union_definitions",
+          "tests/test_domain_cpp.py::test_enum_definitions",
+          "tests/test_domain_cpp.py::test_anon_definitions",
+          "tests/test_domain_cpp.py::test_expressions"
+        ],
+        "symbol": "DefinitionParser",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": null,
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 1,
+        "f2p_failing": [
+          "tests/test_domain_cpp.py::test_expressions"
+        ],
+        "f2p_pass": 0,
+        "found": true,
+        "n_parsed": 1,
+        "p2p_fail": 24,
+        "p2p_failing": [
+          "tests/test_domain_cpp.py::test_fundamental_types",
+          "tests/test_domain_cpp.py::test_type_definitions",
+          "tests/test_domain_cpp.py::test_concept_definitions",
+          "tests/test_domain_cpp.py::test_member_definitions",
+          "tests/test_domain_cpp.py::test_function_definitions",
+          "tests/test_domain_cpp.py::test_operators",
+          "tests/test_domain_cpp.py::test_class_definitions",
+          "tests/test_domain_cpp.py::test_union_definitions",
+          "tests/test_domain_cpp.py::test_enum_definitions",
+          "tests/test_domain_cpp.py::test_anon_definitions"
+        ],
+        "p2p_pass": 0,
+        "reward": 0.0
+      },
+      "loud_failure": false,
+      "observable": "order of elements in a returned collection",
+      "operator": "collection_reverse",
+      "reason": "no anchor inside the gold-touched region",
+      "tier": "MEDIUM",
+      "tree_digest": "e94ea5bb4a3b88f687be032c1fb73300a6f33cf2ede4d4ff7997a4e07632d985",
+      "verdict": "NOT_APPLICABLE"
+    },
+    {
+      "anchor": null,
+      "failure_analysis": {
+        "all_reference_the_symbol": true,
+        "broke": [],
+        "coupled": [
+          "tests/test_domain_cpp.py::test_fundamental_types",
+          "tests/test_domain_cpp.py::test_type_definitions",
+          "tests/test_domain_cpp.py::test_concept_definitions",
+          "tests/test_domain_cpp.py::test_member_definitions",
+          "tests/test_domain_cpp.py::test_function_definitions",
+          "tests/test_domain_cpp.py::test_operators",
+          "tests/test_domain_cpp.py::test_class_definitions",
+          "tests/test_domain_cpp.py::test_union_definitions",
+          "tests/test_domain_cpp.py::test_enum_definitions",
+          "tests/test_domain_cpp.py::test_anon_definitions",
+          "tests/test_domain_cpp.py::test_expressions"
+        ],
+        "failing": [
+          "tests/test_domain_cpp.py::test_fundamental_types",
+          "tests/test_domain_cpp.py::test_type_definitions",
+          "tests/test_domain_cpp.py::test_concept_definitions",
+          "tests/test_domain_cpp.py::test_member_definitions",
+          "tests/test_domain_cpp.py::test_function_definitions",
+          "tests/test_domain_cpp.py::test_operators",
+          "tests/test_domain_cpp.py::test_class_definitions",
+          "tests/test_domain_cpp.py::test_union_definitions",
+          "tests/test_domain_cpp.py::test_enum_definitions",
+          "tests/test_domain_cpp.py::test_anon_definitions",
+          "tests/test_domain_cpp.py::test_expressions"
+        ],
+        "symbol": "DefinitionParser",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": null,
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 1,
+        "f2p_failing": [
+          "tests/test_domain_cpp.py::test_expressions"
+        ],
+        "f2p_pass": 0,
+        "found": true,
+        "n_parsed": 1,
+        "p2p_fail": 24,
+        "p2p_failing": [
+          "tests/test_domain_cpp.py::test_fundamental_types",
+          "tests/test_domain_cpp.py::test_type_definitions",
+          "tests/test_domain_cpp.py::test_concept_definitions",
+          "tests/test_domain_cpp.py::test_member_definitions",
+          "tests/test_domain_cpp.py::test_function_definitions",
+          "tests/test_domain_cpp.py::test_operators",
+          "tests/test_domain_cpp.py::test_class_definitions",
+          "tests/test_domain_cpp.py::test_union_definitions",
+          "tests/test_domain_cpp.py::test_enum_definitions",
+          "tests/test_domain_cpp.py::test_anon_definitions"
+        ],
+        "p2p_pass": 0,
+        "reward": 0.0
+      },
+      "loud_failure": false,
+      "observable": "human-readable text of an exception message",
+      "operator": "message_reword",
+      "reason": "no anchor inside the gold-touched region; 4 anchor(s) elsewhere in the 3 target(s): sphinx/domains/c.py, sphinx/domains/cpp.py, sphinx/util/cfamily.py",
+      "tier": "HIGH",
+      "tree_digest": "e94ea5bb4a3b88f687be032c1fb73300a6f33cf2ede4d4ff7997a4e07632d985",
+      "verdict": "NOT_APPLICABLE"
+    }
+  ],
+  "targets": [
+    "sphinx/domains/c.py",
+    "sphinx/domains/cpp.py",
+    "sphinx/util/cfamily.py"
+  ],
+  "version": "3.1",
+  "witnesses": [
+    {
+      "all_failures_attributed": true,
+      "anchor": "DefinitionParser",
+      "f2p_fail": 1,
+      "failure_analysis": {
+        "all_reference_the_symbol": true,
+        "broke": [],
+        "coupled": [
+          "tests/test_domain_cpp.py::test_fundamental_types",
+          "tests/test_domain_cpp.py::test_type_definitions",
+          "tests/test_domain_cpp.py::test_concept_definitions",
+          "tests/test_domain_cpp.py::test_member_definitions",
+          "tests/test_domain_cpp.py::test_function_definitions",
+          "tests/test_domain_cpp.py::test_operators",
+          "tests/test_domain_cpp.py::test_class_definitions",
+          "tests/test_domain_cpp.py::test_union_definitions",
+          "tests/test_domain_cpp.py::test_enum_definitions",
+          "tests/test_domain_cpp.py::test_anon_definitions",
+          "tests/test_domain_cpp.py::test_expressions"
+        ],
+        "failing": [
+          "tests/test_domain_cpp.py::test_fundamental_types",
+          "tests/test_domain_cpp.py::test_type_definitions",
+          "tests/test_domain_cpp.py::test_concept_definitions",
+          "tests/test_domain_cpp.py::test_member_definitions",
+          "tests/test_domain_cpp.py::test_function_definitions",
+          "tests/test_domain_cpp.py::test_operators",
+          "tests/test_domain_cpp.py::test_class_definitions",
+          "tests/test_domain_cpp.py::test_union_definitions",
+          "tests/test_domain_cpp.py::test_enum_definitions",
+          "tests/test_domain_cpp.py::test_anon_definitions",
+          "tests/test_domain_cpp.py::test_expressions"
+        ],
+        "symbol": "DefinitionParser",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": "sphinx/domains/c.py",
+      "graded_log": "+ tox --current-env -epy39 -v -- tests/test_domain_cpp.py\npy39: commands[0]> pytest -rA --durations 25 tests/test_domain_cpp.py\n============================= test session starts ==============================\nplatform linux -- Python 3.9.20, pytest-8.3.3, pluggy-1.5.0\ncachedir: .tox/py39/.pytest_cache\nlibraries: Sphinx-3.1.0+/3f69f8550, docutils-0.21.2\nbase tempdir: /tmp/pytest-of-root/pytest-4\nrootdir: /testbed\nconfigfile: setup.cfg\nplugins: cov-5.0.0\ncollected 0 items / 1 error\n\n==================================== ERRORS ====================================\n__________________ ERROR collecting tests/test_domain_cpp.py ___________________\nImportError while importing test module '/testbed/tests/test_domain_cpp.py'.\nHint: make sure your test modules/packages have valid Python names.\nTraceback:\n/opt/miniconda3/envs/testbed/lib/python3.9/importlib/__init__.py:127: in import_module\n    return _bootstrap._gcd_import(name[level:], package, level)\ntests/test_domain_cpp.py:17: in <module>\n    from sphinx.domains.cpp import DefinitionParser, DefinitionError, NoOldIdError\nE   ImportError: cannot import name 'DefinitionParser' from 'sphinx.domains.cpp' (/testbed/sphinx/domains/cpp.py)\n=============================== warnings summary ===============================\nsphinx/util/docutils.py:45\n  /testbed/sphinx/util/docutils.py:45: DeprecationWarning: distutils Version classes are deprecated. Use packaging.version instead.\n    __version_info__ = tuple(LooseVersion(docutils.__version__).version)\n\nsphinx/registry.py:22\n  /testbed/sphinx/registry.py:22: DeprecationWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html\n    from pkg_resources import iter_entry_points\n\n../opt/miniconda3/envs/testbed/lib/python3.9/site-packages/pkg_resources/__init__.py:3154\n../opt/miniconda3/envs/testbed/lib/python3.9/site-packages/pkg_resources/__init__.py:3154\n../opt/miniconda3/envs/testbed/lib/python3.9/site-packages/pkg_resources/__init__.py:3154\n../opt/miniconda3/envs/testbed/lib/python3.9/site-packages/pkg_resources/__init__.py:3154\n  /opt/miniconda3/envs/testbed/lib/python3.9/site-packages/pkg_resources/__init__.py:3154: DeprecationWarning: Deprecated call to `pkg_resources.declare_namespace('sphinxcontrib')`.\n  Implementing implicit namespace packages (as specified in PEP 420) is preferred to `pkg_resources.declare_namespace`. See https://setuptools.pypa.io/en/latest/references/keywords.html#keyword-namespace-packages\n    declare_namespace(pkg)\n\nsphinx/directives/patches.py:15\n  /testbed/sphinx/directives/patches.py:15: DeprecationWarning: The `docutils.parsers.rst.directive.html` module will be removed in Docutils 2.0. Since Docutils 0.18, the \"Meta\" node is defined in `docutils.parsers.rst.directives.misc`.\n    from docutils.parsers.rst.directives import images, html, tables\n\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n=========================== short test summary info ============================\nERROR tests/test_domain_cpp.py\n!!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!!\n========================= 7 warnings, 1 error in 0.20s =========================\npy39: exit 2 (0.76 seconds) /testbed> pytest -rA --durations 25 tests/test_domain_cpp.py pid=1589\n  py39: FAIL code 2 (0.77=setup[0.01]+cmd[0.76] seconds)\n  evaluation failed :( (0.87 seconds)\n\n",
+      "graded_report": {
+        "f2p_fail": 1,
+        "f2p_failing": [
+          "tests/test_domain_cpp.py::test_expressions"
+        ],
+        "f2p_pass": 0,
+        "found": true,
+        "n_parsed": 1,
+        "p2p_fail": 24,
+        "p2p_failing": [
+          "tests/test_domain_cpp.py::test_fundamental_types",
+          "tests/test_domain_cpp.py::test_type_definitions",
+          "tests/test_domain_cpp.py::test_concept_definitions",
+          "tests/test_domain_cpp.py::test_member_definitions",
+          "tests/test_domain_cpp.py::test_function_definitions",
+          "tests/test_domain_cpp.py::test_operators",
+          "tests/test_domain_cpp.py::test_class_definitions",
+          "tests/test_domain_cpp.py::test_union_definitions",
+          "tests/test_domain_cpp.py::test_enum_definitions",
+          "tests/test_domain_cpp.py::test_anon_definitions"
+        ],
+        "p2p_pass": 0,
+        "reward": 0.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "p2p_coupled_tests": [
+        "tests/test_domain_cpp.py::test_fundamental_types",
+        "tests/test_domain_cpp.py::test_type_definitions",
+        "tests/test_domain_cpp.py::test_concept_definitions",
+        "tests/test_domain_cpp.py::test_member_definitions",
+        "tests/test_domain_cpp.py::test_function_definitions",
+        "tests/test_domain_cpp.py::test_operators",
+        "tests/test_domain_cpp.py::test_class_definitions",
+        "tests/test_domain_cpp.py::test_union_definitions",
+        "tests/test_domain_cpp.py::test_enum_definitions",
+        "tests/test_domain_cpp.py::test_anon_definitions"
+      ],
+      "p2p_fail": 24,
+      "reason": "reward 0.0",
+      "tier": "MEDIUM",
+      "tree_digest": "e94ea5bb4a3b88f687be032c1fb73300a6f33cf2ede4d4ff7997a4e07632d985",
+      "verdict": "WITNESS",
+      "witness_side": "p2p_coupling"
+    },
+    {
+      "all_failures_attributed": true,
+      "anchor": "DefinitionParser",
+      "f2p_fail": 1,
+      "failure_analysis": {
+        "all_reference_the_symbol": true,
+        "broke": [],
+        "coupled": [
+          "tests/test_domain_cpp.py::test_fundamental_types",
+          "tests/test_domain_cpp.py::test_type_definitions",
+          "tests/test_domain_cpp.py::test_concept_definitions",
+          "tests/test_domain_cpp.py::test_member_definitions",
+          "tests/test_domain_cpp.py::test_function_definitions",
+          "tests/test_domain_cpp.py::test_operators",
+          "tests/test_domain_cpp.py::test_class_definitions",
+          "tests/test_domain_cpp.py::test_union_definitions",
+          "tests/test_domain_cpp.py::test_enum_definitions",
+          "tests/test_domain_cpp.py::test_anon_definitions",
+          "tests/test_domain_cpp.py::test_expressions"
+        ],
+        "failing": [
+          "tests/test_domain_cpp.py::test_fundamental_types",
+          "tests/test_domain_cpp.py::test_type_definitions",
+          "tests/test_domain_cpp.py::test_concept_definitions",
+          "tests/test_domain_cpp.py::test_member_definitions",
+          "tests/test_domain_cpp.py::test_function_definitions",
+          "tests/test_domain_cpp.py::test_operators",
+          "tests/test_domain_cpp.py::test_class_definitions",
+          "tests/test_domain_cpp.py::test_union_definitions",
+          "tests/test_domain_cpp.py::test_enum_definitions",
+          "tests/test_domain_cpp.py::test_anon_definitions",
+          "tests/test_domain_cpp.py::test_expressions"
+        ],
+        "symbol": "DefinitionParser",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": "sphinx/domains/cpp.py",
+      "graded_log": "+ tox --current-env -epy39 -v -- tests/test_domain_cpp.py\npy39: commands[0]> pytest -rA --durations 25 tests/test_domain_cpp.py\n============================= test session starts ==============================\nplatform linux -- Python 3.9.20, pytest-8.3.3, pluggy-1.5.0\ncachedir: .tox/py39/.pytest_cache\nlibraries: Sphinx-3.1.0+/3f69f8550, docutils-0.21.2\nbase tempdir: /tmp/pytest-of-root/pytest-9\nrootdir: /testbed\nconfigfile: setup.cfg\nplugins: cov-5.0.0\ncollected 0 items / 1 error\n\n==================================== ERRORS ====================================\n__________________ ERROR collecting tests/test_domain_cpp.py ___________________\nImportError while importing test module '/testbed/tests/test_domain_cpp.py'.\nHint: make sure your test modules/packages have valid Python names.\nTraceback:\n/opt/miniconda3/envs/testbed/lib/python3.9/importlib/__init__.py:127: in import_module\n    return _bootstrap._gcd_import(name[level:], package, level)\ntests/test_domain_cpp.py:17: in <module>\n    from sphinx.domains.cpp import DefinitionParser, DefinitionError, NoOldIdError\nE   ImportError: cannot import name 'DefinitionParser' from 'sphinx.domains.cpp' (/testbed/sphinx/domains/cpp.py)\n=============================== warnings summary ===============================\nsphinx/util/docutils.py:45\n  /testbed/sphinx/util/docutils.py:45: DeprecationWarning: distutils Version classes are deprecated. Use packaging.version instead.\n    __version_info__ = tuple(LooseVersion(docutils.__version__).version)\n\nsphinx/registry.py:22\n  /testbed/sphinx/registry.py:22: DeprecationWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html\n    from pkg_resources import iter_entry_points\n\n../opt/miniconda3/envs/testbed/lib/python3.9/site-packages/pkg_resources/__init__.py:3154\n../opt/miniconda3/envs/testbed/lib/python3.9/site-packages/pkg_resources/__init__.py:3154\n../opt/miniconda3/envs/testbed/lib/python3.9/site-packages/pkg_resources/__init__.py:3154\n../opt/miniconda3/envs/testbed/lib/python3.9/site-packages/pkg_resources/__init__.py:3154\n  /opt/miniconda3/envs/testbed/lib/python3.9/site-packages/pkg_resources/__init__.py:3154: DeprecationWarning: Deprecated call to `pkg_resources.declare_namespace('sphinxcontrib')`.\n  Implementing implicit namespace packages (as specified in PEP 420) is preferred to `pkg_resources.declare_namespace`. See https://setuptools.pypa.io/en/latest/references/keywords.html#keyword-namespace-packages\n    declare_namespace(pkg)\n\nsphinx/directives/patches.py:15\n  /testbed/sphinx/directives/patches.py:15: DeprecationWarning: The `docutils.parsers.rst.directive.html` module will be removed in Docutils 2.0. Since Docutils 0.18, the \"Meta\" node is defined in `docutils.parsers.rst.directives.misc`.\n    from docutils.parsers.rst.directives import images, html, tables\n\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n=========================== short test summary info ============================\nERROR tests/test_domain_cpp.py\n!!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!!\n========================= 7 warnings, 1 error in 0.25s =========================\npy39: exit 2 (0.85 seconds) /testbed> pytest -rA --durations 25 tests/test_domain_cpp.py pid=3244\n  py39: FAIL code 2 (0.86=setup[0.01]+cmd[0.85] seconds)\n  evaluation failed :( (0.96 seconds)\n\n",
+      "graded_report": {
+        "f2p_fail": 1,
+        "f2p_failing": [
+          "tests/test_domain_cpp.py::test_expressions"
+        ],
+        "f2p_pass": 0,
+        "found": true,
+        "n_parsed": 1,
+        "p2p_fail": 24,
+        "p2p_failing": [
+          "tests/test_domain_cpp.py::test_fundamental_types",
+          "tests/test_domain_cpp.py::test_type_definitions",
+          "tests/test_domain_cpp.py::test_concept_definitions",
+          "tests/test_domain_cpp.py::test_member_definitions",
+          "tests/test_domain_cpp.py::test_function_definitions",
+          "tests/test_domain_cpp.py::test_operators",
+          "tests/test_domain_cpp.py::test_class_definitions",
+          "tests/test_domain_cpp.py::test_union_definitions",
+          "tests/test_domain_cpp.py::test_enum_definitions",
+          "tests/test_domain_cpp.py::test_anon_definitions"
+        ],
+        "p2p_pass": 0,
+        "reward": 0.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "p2p_coupled_tests": [
+        "tests/test_domain_cpp.py::test_fundamental_types",
+        "tests/test_domain_cpp.py::test_type_definitions",
+        "tests/test_domain_cpp.py::test_concept_definitions",
+        "tests/test_domain_cpp.py::test_member_definitions",
+        "tests/test_domain_cpp.py::test_function_definitions",
+        "tests/test_domain_cpp.py::test_operators",
+        "tests/test_domain_cpp.py::test_class_definitions",
+        "tests/test_domain_cpp.py::test_union_definitions",
+        "tests/test_domain_cpp.py::test_enum_definitions",
+        "tests/test_domain_cpp.py::test_anon_definitions"
+      ],
+      "p2p_fail": 24,
+      "reason": "reward 0.0",
+      "tier": "MEDIUM",
+      "tree_digest": "e94ea5bb4a3b88f687be032c1fb73300a6f33cf2ede4d4ff7997a4e07632d985",
+      "verdict": "WITNESS",
+      "witness_side": "p2p_coupling"
+    }
+  ]
+}

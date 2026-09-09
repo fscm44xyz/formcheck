@@ -1,0 +1,1310 @@
+{
+  "completed": true,
+  "control": {
+    "graded": null,
+    "log": null,
+    "passed": true,
+    "reason": "untransformed reference scores 1.0"
+  },
+  "digest_trace": [
+    {
+      "digest": "bdbcc522ecfc0173a9a7f2b21c28669756cd1a3ed16001e0ec2f53d4d047f319",
+      "memo_hit": false
+    },
+    {
+      "digest": "fc529ea6eb0d517b482427b0d580b68ecb030985ef478241a81da2d24e249ea1",
+      "memo_hit": false
+    },
+    {
+      "digest": "fc529ea6eb0d517b482427b0d580b68ecb030985ef478241a81da2d24e249ea1",
+      "memo_hit": true
+    },
+    {
+      "digest": "fc529ea6eb0d517b482427b0d580b68ecb030985ef478241a81da2d24e249ea1",
+      "memo_hit": true
+    },
+    {
+      "digest": "fc529ea6eb0d517b482427b0d580b68ecb030985ef478241a81da2d24e249ea1",
+      "memo_hit": true
+    },
+    {
+      "digest": "fc529ea6eb0d517b482427b0d580b68ecb030985ef478241a81da2d24e249ea1",
+      "memo_hit": true
+    },
+    {
+      "digest": "fc529ea6eb0d517b482427b0d580b68ecb030985ef478241a81da2d24e249ea1",
+      "memo_hit": true
+    },
+    {
+      "digest": "fc529ea6eb0d517b482427b0d580b68ecb030985ef478241a81da2d24e249ea1",
+      "memo_hit": true
+    },
+    {
+      "digest": "fc529ea6eb0d517b482427b0d580b68ecb030985ef478241a81da2d24e249ea1",
+      "memo_hit": true
+    },
+    {
+      "digest": "fc529ea6eb0d517b482427b0d580b68ecb030985ef478241a81da2d24e249ea1",
+      "memo_hit": true
+    },
+    {
+      "digest": "fc529ea6eb0d517b482427b0d580b68ecb030985ef478241a81da2d24e249ea1",
+      "memo_hit": true
+    },
+    {
+      "digest": "fc529ea6eb0d517b482427b0d580b68ecb030985ef478241a81da2d24e249ea1",
+      "memo_hit": true
+    },
+    {
+      "digest": "fc529ea6eb0d517b482427b0d580b68ecb030985ef478241a81da2d24e249ea1",
+      "memo_hit": true
+    },
+    {
+      "digest": "fc529ea6eb0d517b482427b0d580b68ecb030985ef478241a81da2d24e249ea1",
+      "memo_hit": true
+    },
+    {
+      "digest": "fc529ea6eb0d517b482427b0d580b68ecb030985ef478241a81da2d24e249ea1",
+      "memo_hit": true
+    },
+    {
+      "digest": "fc529ea6eb0d517b482427b0d580b68ecb030985ef478241a81da2d24e249ea1",
+      "memo_hit": true
+    },
+    {
+      "digest": "fc529ea6eb0d517b482427b0d580b68ecb030985ef478241a81da2d24e249ea1",
+      "memo_hit": true
+    },
+    {
+      "digest": "fc529ea6eb0d517b482427b0d580b68ecb030985ef478241a81da2d24e249ea1",
+      "memo_hit": true
+    },
+    {
+      "digest": "fc529ea6eb0d517b482427b0d580b68ecb030985ef478241a81da2d24e249ea1",
+      "memo_hit": true
+    },
+    {
+      "digest": "fc529ea6eb0d517b482427b0d580b68ecb030985ef478241a81da2d24e249ea1",
+      "memo_hit": true
+    },
+    {
+      "digest": "fc529ea6eb0d517b482427b0d580b68ecb030985ef478241a81da2d24e249ea1",
+      "memo_hit": true
+    },
+    {
+      "digest": "fc529ea6eb0d517b482427b0d580b68ecb030985ef478241a81da2d24e249ea1",
+      "memo_hit": true
+    },
+    {
+      "digest": "fc529ea6eb0d517b482427b0d580b68ecb030985ef478241a81da2d24e249ea1",
+      "memo_hit": true
+    },
+    {
+      "digest": "fc529ea6eb0d517b482427b0d580b68ecb030985ef478241a81da2d24e249ea1",
+      "memo_hit": true
+    },
+    {
+      "digest": "fc529ea6eb0d517b482427b0d580b68ecb030985ef478241a81da2d24e249ea1",
+      "memo_hit": true
+    },
+    {
+      "digest": "fc529ea6eb0d517b482427b0d580b68ecb030985ef478241a81da2d24e249ea1",
+      "memo_hit": true
+    },
+    {
+      "digest": "fc529ea6eb0d517b482427b0d580b68ecb030985ef478241a81da2d24e249ea1",
+      "memo_hit": true
+    },
+    {
+      "digest": "fc529ea6eb0d517b482427b0d580b68ecb030985ef478241a81da2d24e249ea1",
+      "memo_hit": true
+    },
+    {
+      "digest": "fc529ea6eb0d517b482427b0d580b68ecb030985ef478241a81da2d24e249ea1",
+      "memo_hit": true
+    },
+    {
+      "digest": "fc529ea6eb0d517b482427b0d580b68ecb030985ef478241a81da2d24e249ea1",
+      "memo_hit": true
+    },
+    {
+      "digest": "fc529ea6eb0d517b482427b0d580b68ecb030985ef478241a81da2d24e249ea1",
+      "memo_hit": true
+    },
+    {
+      "digest": "fc529ea6eb0d517b482427b0d580b68ecb030985ef478241a81da2d24e249ea1",
+      "memo_hit": true
+    },
+    {
+      "digest": "fc529ea6eb0d517b482427b0d580b68ecb030985ef478241a81da2d24e249ea1",
+      "memo_hit": true
+    }
+  ],
+  "disk_orphan_reclaimed_bytes": 0,
+  "disk_residual_bytes": 0,
+  "elapsed_seconds": 1534.79,
+  "error": null,
+  "image": "swebench/sweb.eval.x86_64.sympy_1776_sympy-20438:latest",
+  "instance_id": "sympy__sympy-20438",
+  "leaked_containers": [],
+  "leaked_image": false,
+  "log": [
+    [
+      "<control>",
+      "OK",
+      "untransformed reference scores 1.0"
+    ],
+    [
+      "kwonly_specialize:<no anchor>",
+      "NOT_APPLICABLE",
+      "no anchor inside the gold-touched region"
+    ],
+    [
+      "symbol_rename:sympy/core/relational.py:Relational",
+      "REFUSED",
+      "BORDER: the issue names 'Relational' -- candidate CONTRACT, route to the rubric"
+    ],
+    [
+      "symbol_rename:sympy/core/relational.py:Equality",
+      "REFUSED",
+      "BORDER: the issue names 'Equality' -- candidate CONTRACT, route to the rubric"
+    ],
+    [
+      "symbol_rename:sympy/core/relational.py:_eval_is_eq",
+      "REFUSED",
+      "dynamic reach: '_eval_is_eq' appears in a non-annotation string literal in sympy/core/expr.py line 20 ('\\n    Base class for algebraic expression'); 1 further hit(s) -- an alpha-rename cannot be argued safe"
+    ],
+    [
+      "symbol_rename:sympy/core/relational.py:_eval_is_eq",
+      "REFUSED",
+      "dynamic reach: '_eval_is_eq' appears in a non-annotation string literal in sympy/core/expr.py line 20 ('\\n    Base class for algebraic expression'); 1 further hit(s) -- an alpha-rename cannot be argued safe"
+    ],
+    [
+      "symbol_rename:sympy/core/relational.py:_eval_is_eq",
+      "REFUSED",
+      "dynamic reach: '_eval_is_eq' appears in a non-annotation string literal in sympy/core/expr.py line 20 ('\\n    Base class for algebraic expression'); 1 further hit(s) -- an alpha-rename cannot be argued safe"
+    ],
+    [
+      "symbol_rename:sympy/core/relational.py:_eval_is_eq",
+      "REFUSED",
+      "dynamic reach: '_eval_is_eq' appears in a non-annotation string literal in sympy/core/expr.py line 20 ('\\n    Base class for algebraic expression'); 1 further hit(s) -- an alpha-rename cannot be argued safe"
+    ],
+    [
+      "symbol_rename:sympy/core/relational.py:_eval_is_eq",
+      "REFUSED",
+      "dynamic reach: '_eval_is_eq' appears in a non-annotation string literal in sympy/core/expr.py line 20 ('\\n    Base class for algebraic expression'); 1 further hit(s) -- an alpha-rename cannot be argued safe"
+    ],
+    [
+      "symbol_rename:sympy/sets/handlers/comparison.py:_eval_is_eq",
+      "REFUSED",
+      "dynamic reach: '_eval_is_eq' appears in a non-annotation string literal in sympy/core/expr.py line 20 ('\\n    Base class for algebraic expression'); 1 further hit(s) -- an alpha-rename cannot be argued safe"
+    ],
+    [
+      "symbol_rename:sympy/sets/handlers/comparison.py:_eval_is_eq",
+      "REFUSED",
+      "dynamic reach: '_eval_is_eq' appears in a non-annotation string literal in sympy/core/expr.py line 20 ('\\n    Base class for algebraic expression'); 1 further hit(s) -- an alpha-rename cannot be argued safe"
+    ],
+    [
+      "symbol_rename:sympy/sets/handlers/comparison.py:_eval_is_eq",
+      "REFUSED",
+      "dynamic reach: '_eval_is_eq' appears in a non-annotation string literal in sympy/core/expr.py line 20 ('\\n    Base class for algebraic expression'); 1 further hit(s) -- an alpha-rename cannot be argued safe"
+    ],
+    [
+      "symbol_rename:sympy/sets/handlers/comparison.py:_eval_is_eq",
+      "REFUSED",
+      "dynamic reach: '_eval_is_eq' appears in a non-annotation string literal in sympy/core/expr.py line 20 ('\\n    Base class for algebraic expression'); 1 further hit(s) -- an alpha-rename cannot be argued safe"
+    ],
+    [
+      "symbol_rename:sympy/sets/handlers/comparison.py:_eval_is_eq",
+      "REFUSED",
+      "dynamic reach: '_eval_is_eq' appears in a non-annotation string literal in sympy/core/expr.py line 20 ('\\n    Base class for algebraic expression'); 1 further hit(s) -- an alpha-rename cannot be argued safe"
+    ],
+    [
+      "symbol_rename:sympy/sets/handlers/comparison.py:_eval_is_eq",
+      "REFUSED",
+      "dynamic reach: '_eval_is_eq' appears in a non-annotation string literal in sympy/core/expr.py line 20 ('\\n    Base class for algebraic expression'); 1 further hit(s) -- an alpha-rename cannot be argued safe"
+    ],
+    [
+      "symbol_rename:sympy/sets/handlers/comparison.py:_eval_is_eq",
+      "REFUSED",
+      "dynamic reach: '_eval_is_eq' appears in a non-annotation string literal in sympy/core/expr.py line 20 ('\\n    Base class for algebraic expression'); 1 further hit(s) -- an alpha-rename cannot be argued safe"
+    ],
+    [
+      "symbol_rename:sympy/sets/handlers/issubset.py:is_subset_sets",
+      "CLEAN",
+      "reward 1.0"
+    ],
+    [
+      "symbol_rename:sympy/sets/handlers/issubset.py:is_subset_sets",
+      "CLEAN",
+      "reward 1.0"
+    ],
+    [
+      "symbol_rename:sympy/sets/handlers/issubset.py:is_subset_sets",
+      "CLEAN",
+      "reward 1.0"
+    ],
+    [
+      "symbol_rename:sympy/sets/handlers/issubset.py:is_subset_sets",
+      "CLEAN",
+      "reward 1.0"
+    ],
+    [
+      "symbol_rename:sympy/sets/handlers/issubset.py:is_subset_sets",
+      "CLEAN",
+      "reward 1.0"
+    ],
+    [
+      "symbol_rename:sympy/sets/handlers/issubset.py:is_subset_sets",
+      "CLEAN",
+      "reward 1.0"
+    ],
+    [
+      "symbol_rename:sympy/sets/handlers/issubset.py:is_subset_sets",
+      "CLEAN",
+      "reward 1.0"
+    ],
+    [
+      "symbol_rename:sympy/sets/handlers/issubset.py:is_subset_sets",
+      "CLEAN",
+      "reward 1.0"
+    ],
+    [
+      "symbol_rename:sympy/sets/handlers/issubset.py:is_subset_sets",
+      "CLEAN",
+      "reward 1.0"
+    ],
+    [
+      "symbol_rename:sympy/sets/handlers/issubset.py:is_subset_sets",
+      "CLEAN",
+      "reward 1.0"
+    ],
+    [
+      "symbol_rename:sympy/sets/handlers/issubset.py:is_subset_sets",
+      "CLEAN",
+      "reward 1.0"
+    ],
+    [
+      "symbol_rename:sympy/sets/handlers/issubset.py:is_subset_sets",
+      "CLEAN",
+      "reward 1.0"
+    ],
+    [
+      "symbol_rename:sympy/sets/handlers/issubset.py:is_subset_sets",
+      "CLEAN",
+      "reward 1.0"
+    ],
+    [
+      "symbol_rename:sympy/sets/handlers/issubset.py:is_subset_sets",
+      "CLEAN",
+      "reward 1.0"
+    ],
+    [
+      "symbol_rename:sympy/sets/handlers/issubset.py:is_subset_sets",
+      "CLEAN",
+      "reward 1.0"
+    ],
+    [
+      "symbol_rename:sympy/sets/handlers/issubset.py:is_subset_sets",
+      "CLEAN",
+      "reward 1.0"
+    ],
+    [
+      "collection_reverse:<no anchor>",
+      "NOT_APPLICABLE",
+      "no anchor inside the gold-touched region"
+    ],
+    [
+      "message_reword:<no anchor>",
+      "NOT_APPLICABLE",
+      "no anchor inside the gold-touched region; 3 anchor(s) elsewhere in the 3 target(s): sympy/core/relational.py, sympy/sets/handlers/comparison.py, sympy/sets/handlers/issubset.py"
+    ]
+  ],
+  "mountable": true,
+  "multi_target": true,
+  "n_targets": 3,
+  "on_prime_hub": null,
+  "on_prime_hub_reason": "not resolvable offline; no hub environment index is reachable from this repo, verifiers or swebench",
+  "operators_not_applicable": [
+    "collection_reverse",
+    "kwonly_specialize",
+    "message_reword"
+  ],
+  "operators_with_anchors": [
+    "symbol_rename"
+  ],
+  "repo": "sympy/sympy",
+  "row": {
+    "elapsed": 1085.1,
+    "error": null,
+    "error_type": null,
+    "index": 0,
+    "mode": "formcheck",
+    "name": "sympy__sympy-20438",
+    "reason": "valid",
+    "valid": true
+  },
+  "rows": [
+    {
+      "anchor": null,
+      "failure_analysis": null,
+      "file": null,
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 2,
+        "found": true,
+        "n_parsed": 95,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 93,
+        "reward": 1.0
+      },
+      "loud_failure": false,
+      "observable": "callable signature (arity / parameter names)",
+      "operator": "kwonly_specialize",
+      "reason": "no anchor inside the gold-touched region",
+      "tier": "HIGH",
+      "tree_digest": "bdbcc522ecfc0173a9a7f2b21c28669756cd1a3ed16001e0ec2f53d4d047f319",
+      "verdict": "NOT_APPLICABLE"
+    },
+    {
+      "anchor": "Relational",
+      "failure_analysis": null,
+      "file": "sympy/core/relational.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 2,
+        "found": true,
+        "n_parsed": 95,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 93,
+        "reward": 1.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "BORDER: the issue names 'Relational' -- candidate CONTRACT, route to the rubric",
+      "tier": "MEDIUM",
+      "tree_digest": "bdbcc522ecfc0173a9a7f2b21c28669756cd1a3ed16001e0ec2f53d4d047f319",
+      "verdict": "REFUSED"
+    },
+    {
+      "anchor": "Equality",
+      "failure_analysis": null,
+      "file": "sympy/core/relational.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 2,
+        "found": true,
+        "n_parsed": 95,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 93,
+        "reward": 1.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "BORDER: the issue names 'Equality' -- candidate CONTRACT, route to the rubric",
+      "tier": "MEDIUM",
+      "tree_digest": "bdbcc522ecfc0173a9a7f2b21c28669756cd1a3ed16001e0ec2f53d4d047f319",
+      "verdict": "REFUSED"
+    },
+    {
+      "anchor": "_eval_is_eq",
+      "failure_analysis": null,
+      "file": "sympy/core/relational.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 2,
+        "found": true,
+        "n_parsed": 95,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 93,
+        "reward": 1.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "dynamic reach: '_eval_is_eq' appears in a non-annotation string literal in sympy/core/expr.py line 20 ('\\n    Base class for algebraic expression'); 1 further hit(s) -- an alpha-rename cannot be argued safe",
+      "tier": "MEDIUM",
+      "tree_digest": "bdbcc522ecfc0173a9a7f2b21c28669756cd1a3ed16001e0ec2f53d4d047f319",
+      "verdict": "REFUSED"
+    },
+    {
+      "anchor": "_eval_is_eq",
+      "failure_analysis": null,
+      "file": "sympy/core/relational.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 2,
+        "found": true,
+        "n_parsed": 95,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 93,
+        "reward": 1.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "dynamic reach: '_eval_is_eq' appears in a non-annotation string literal in sympy/core/expr.py line 20 ('\\n    Base class for algebraic expression'); 1 further hit(s) -- an alpha-rename cannot be argued safe",
+      "tier": "MEDIUM",
+      "tree_digest": "bdbcc522ecfc0173a9a7f2b21c28669756cd1a3ed16001e0ec2f53d4d047f319",
+      "verdict": "REFUSED"
+    },
+    {
+      "anchor": "_eval_is_eq",
+      "failure_analysis": null,
+      "file": "sympy/core/relational.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 2,
+        "found": true,
+        "n_parsed": 95,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 93,
+        "reward": 1.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "dynamic reach: '_eval_is_eq' appears in a non-annotation string literal in sympy/core/expr.py line 20 ('\\n    Base class for algebraic expression'); 1 further hit(s) -- an alpha-rename cannot be argued safe",
+      "tier": "MEDIUM",
+      "tree_digest": "bdbcc522ecfc0173a9a7f2b21c28669756cd1a3ed16001e0ec2f53d4d047f319",
+      "verdict": "REFUSED"
+    },
+    {
+      "anchor": "_eval_is_eq",
+      "failure_analysis": null,
+      "file": "sympy/core/relational.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 2,
+        "found": true,
+        "n_parsed": 95,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 93,
+        "reward": 1.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "dynamic reach: '_eval_is_eq' appears in a non-annotation string literal in sympy/core/expr.py line 20 ('\\n    Base class for algebraic expression'); 1 further hit(s) -- an alpha-rename cannot be argued safe",
+      "tier": "MEDIUM",
+      "tree_digest": "bdbcc522ecfc0173a9a7f2b21c28669756cd1a3ed16001e0ec2f53d4d047f319",
+      "verdict": "REFUSED"
+    },
+    {
+      "anchor": "_eval_is_eq",
+      "failure_analysis": null,
+      "file": "sympy/core/relational.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 2,
+        "found": true,
+        "n_parsed": 95,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 93,
+        "reward": 1.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "dynamic reach: '_eval_is_eq' appears in a non-annotation string literal in sympy/core/expr.py line 20 ('\\n    Base class for algebraic expression'); 1 further hit(s) -- an alpha-rename cannot be argued safe",
+      "tier": "MEDIUM",
+      "tree_digest": "bdbcc522ecfc0173a9a7f2b21c28669756cd1a3ed16001e0ec2f53d4d047f319",
+      "verdict": "REFUSED"
+    },
+    {
+      "anchor": "_eval_is_eq",
+      "failure_analysis": null,
+      "file": "sympy/sets/handlers/comparison.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 2,
+        "found": true,
+        "n_parsed": 95,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 93,
+        "reward": 1.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "dynamic reach: '_eval_is_eq' appears in a non-annotation string literal in sympy/core/expr.py line 20 ('\\n    Base class for algebraic expression'); 1 further hit(s) -- an alpha-rename cannot be argued safe",
+      "tier": "MEDIUM",
+      "tree_digest": "bdbcc522ecfc0173a9a7f2b21c28669756cd1a3ed16001e0ec2f53d4d047f319",
+      "verdict": "REFUSED"
+    },
+    {
+      "anchor": "_eval_is_eq",
+      "failure_analysis": null,
+      "file": "sympy/sets/handlers/comparison.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 2,
+        "found": true,
+        "n_parsed": 95,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 93,
+        "reward": 1.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "dynamic reach: '_eval_is_eq' appears in a non-annotation string literal in sympy/core/expr.py line 20 ('\\n    Base class for algebraic expression'); 1 further hit(s) -- an alpha-rename cannot be argued safe",
+      "tier": "MEDIUM",
+      "tree_digest": "bdbcc522ecfc0173a9a7f2b21c28669756cd1a3ed16001e0ec2f53d4d047f319",
+      "verdict": "REFUSED"
+    },
+    {
+      "anchor": "_eval_is_eq",
+      "failure_analysis": null,
+      "file": "sympy/sets/handlers/comparison.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 2,
+        "found": true,
+        "n_parsed": 95,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 93,
+        "reward": 1.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "dynamic reach: '_eval_is_eq' appears in a non-annotation string literal in sympy/core/expr.py line 20 ('\\n    Base class for algebraic expression'); 1 further hit(s) -- an alpha-rename cannot be argued safe",
+      "tier": "MEDIUM",
+      "tree_digest": "bdbcc522ecfc0173a9a7f2b21c28669756cd1a3ed16001e0ec2f53d4d047f319",
+      "verdict": "REFUSED"
+    },
+    {
+      "anchor": "_eval_is_eq",
+      "failure_analysis": null,
+      "file": "sympy/sets/handlers/comparison.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 2,
+        "found": true,
+        "n_parsed": 95,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 93,
+        "reward": 1.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "dynamic reach: '_eval_is_eq' appears in a non-annotation string literal in sympy/core/expr.py line 20 ('\\n    Base class for algebraic expression'); 1 further hit(s) -- an alpha-rename cannot be argued safe",
+      "tier": "MEDIUM",
+      "tree_digest": "bdbcc522ecfc0173a9a7f2b21c28669756cd1a3ed16001e0ec2f53d4d047f319",
+      "verdict": "REFUSED"
+    },
+    {
+      "anchor": "_eval_is_eq",
+      "failure_analysis": null,
+      "file": "sympy/sets/handlers/comparison.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 2,
+        "found": true,
+        "n_parsed": 95,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 93,
+        "reward": 1.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "dynamic reach: '_eval_is_eq' appears in a non-annotation string literal in sympy/core/expr.py line 20 ('\\n    Base class for algebraic expression'); 1 further hit(s) -- an alpha-rename cannot be argued safe",
+      "tier": "MEDIUM",
+      "tree_digest": "bdbcc522ecfc0173a9a7f2b21c28669756cd1a3ed16001e0ec2f53d4d047f319",
+      "verdict": "REFUSED"
+    },
+    {
+      "anchor": "_eval_is_eq",
+      "failure_analysis": null,
+      "file": "sympy/sets/handlers/comparison.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 2,
+        "found": true,
+        "n_parsed": 95,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 93,
+        "reward": 1.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "dynamic reach: '_eval_is_eq' appears in a non-annotation string literal in sympy/core/expr.py line 20 ('\\n    Base class for algebraic expression'); 1 further hit(s) -- an alpha-rename cannot be argued safe",
+      "tier": "MEDIUM",
+      "tree_digest": "bdbcc522ecfc0173a9a7f2b21c28669756cd1a3ed16001e0ec2f53d4d047f319",
+      "verdict": "REFUSED"
+    },
+    {
+      "anchor": "_eval_is_eq",
+      "failure_analysis": null,
+      "file": "sympy/sets/handlers/comparison.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 2,
+        "found": true,
+        "n_parsed": 95,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 93,
+        "reward": 1.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "dynamic reach: '_eval_is_eq' appears in a non-annotation string literal in sympy/core/expr.py line 20 ('\\n    Base class for algebraic expression'); 1 further hit(s) -- an alpha-rename cannot be argued safe",
+      "tier": "MEDIUM",
+      "tree_digest": "bdbcc522ecfc0173a9a7f2b21c28669756cd1a3ed16001e0ec2f53d4d047f319",
+      "verdict": "REFUSED"
+    },
+    {
+      "anchor": "is_subset_sets",
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "broke": [],
+        "coupled": [],
+        "failing": [],
+        "symbol": "is_subset_sets",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": "sympy/sets/handlers/issubset.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 2,
+        "found": true,
+        "n_parsed": 95,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 93,
+        "reward": 1.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "reward 1.0",
+      "tier": "MEDIUM",
+      "tree_digest": "fc529ea6eb0d517b482427b0d580b68ecb030985ef478241a81da2d24e249ea1",
+      "verdict": "CLEAN"
+    },
+    {
+      "anchor": "is_subset_sets",
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "broke": [],
+        "coupled": [],
+        "failing": [],
+        "symbol": "is_subset_sets",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": "sympy/sets/handlers/issubset.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 2,
+        "found": true,
+        "n_parsed": 95,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 93,
+        "reward": 1.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "reward 1.0",
+      "tier": "MEDIUM",
+      "tree_digest": "fc529ea6eb0d517b482427b0d580b68ecb030985ef478241a81da2d24e249ea1",
+      "verdict": "CLEAN"
+    },
+    {
+      "anchor": "is_subset_sets",
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "broke": [],
+        "coupled": [],
+        "failing": [],
+        "symbol": "is_subset_sets",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": "sympy/sets/handlers/issubset.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 2,
+        "found": true,
+        "n_parsed": 95,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 93,
+        "reward": 1.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "reward 1.0",
+      "tier": "MEDIUM",
+      "tree_digest": "fc529ea6eb0d517b482427b0d580b68ecb030985ef478241a81da2d24e249ea1",
+      "verdict": "CLEAN"
+    },
+    {
+      "anchor": "is_subset_sets",
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "broke": [],
+        "coupled": [],
+        "failing": [],
+        "symbol": "is_subset_sets",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": "sympy/sets/handlers/issubset.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 2,
+        "found": true,
+        "n_parsed": 95,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 93,
+        "reward": 1.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "reward 1.0",
+      "tier": "MEDIUM",
+      "tree_digest": "fc529ea6eb0d517b482427b0d580b68ecb030985ef478241a81da2d24e249ea1",
+      "verdict": "CLEAN"
+    },
+    {
+      "anchor": "is_subset_sets",
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "broke": [],
+        "coupled": [],
+        "failing": [],
+        "symbol": "is_subset_sets",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": "sympy/sets/handlers/issubset.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 2,
+        "found": true,
+        "n_parsed": 95,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 93,
+        "reward": 1.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "reward 1.0",
+      "tier": "MEDIUM",
+      "tree_digest": "fc529ea6eb0d517b482427b0d580b68ecb030985ef478241a81da2d24e249ea1",
+      "verdict": "CLEAN"
+    },
+    {
+      "anchor": "is_subset_sets",
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "broke": [],
+        "coupled": [],
+        "failing": [],
+        "symbol": "is_subset_sets",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": "sympy/sets/handlers/issubset.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 2,
+        "found": true,
+        "n_parsed": 95,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 93,
+        "reward": 1.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "reward 1.0",
+      "tier": "MEDIUM",
+      "tree_digest": "fc529ea6eb0d517b482427b0d580b68ecb030985ef478241a81da2d24e249ea1",
+      "verdict": "CLEAN"
+    },
+    {
+      "anchor": "is_subset_sets",
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "broke": [],
+        "coupled": [],
+        "failing": [],
+        "symbol": "is_subset_sets",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": "sympy/sets/handlers/issubset.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 2,
+        "found": true,
+        "n_parsed": 95,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 93,
+        "reward": 1.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "reward 1.0",
+      "tier": "MEDIUM",
+      "tree_digest": "fc529ea6eb0d517b482427b0d580b68ecb030985ef478241a81da2d24e249ea1",
+      "verdict": "CLEAN"
+    },
+    {
+      "anchor": "is_subset_sets",
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "broke": [],
+        "coupled": [],
+        "failing": [],
+        "symbol": "is_subset_sets",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": "sympy/sets/handlers/issubset.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 2,
+        "found": true,
+        "n_parsed": 95,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 93,
+        "reward": 1.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "reward 1.0",
+      "tier": "MEDIUM",
+      "tree_digest": "fc529ea6eb0d517b482427b0d580b68ecb030985ef478241a81da2d24e249ea1",
+      "verdict": "CLEAN"
+    },
+    {
+      "anchor": "is_subset_sets",
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "broke": [],
+        "coupled": [],
+        "failing": [],
+        "symbol": "is_subset_sets",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": "sympy/sets/handlers/issubset.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 2,
+        "found": true,
+        "n_parsed": 95,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 93,
+        "reward": 1.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "reward 1.0",
+      "tier": "MEDIUM",
+      "tree_digest": "fc529ea6eb0d517b482427b0d580b68ecb030985ef478241a81da2d24e249ea1",
+      "verdict": "CLEAN"
+    },
+    {
+      "anchor": "is_subset_sets",
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "broke": [],
+        "coupled": [],
+        "failing": [],
+        "symbol": "is_subset_sets",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": "sympy/sets/handlers/issubset.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 2,
+        "found": true,
+        "n_parsed": 95,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 93,
+        "reward": 1.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "reward 1.0",
+      "tier": "MEDIUM",
+      "tree_digest": "fc529ea6eb0d517b482427b0d580b68ecb030985ef478241a81da2d24e249ea1",
+      "verdict": "CLEAN"
+    },
+    {
+      "anchor": "is_subset_sets",
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "broke": [],
+        "coupled": [],
+        "failing": [],
+        "symbol": "is_subset_sets",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": "sympy/sets/handlers/issubset.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 2,
+        "found": true,
+        "n_parsed": 95,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 93,
+        "reward": 1.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "reward 1.0",
+      "tier": "MEDIUM",
+      "tree_digest": "fc529ea6eb0d517b482427b0d580b68ecb030985ef478241a81da2d24e249ea1",
+      "verdict": "CLEAN"
+    },
+    {
+      "anchor": "is_subset_sets",
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "broke": [],
+        "coupled": [],
+        "failing": [],
+        "symbol": "is_subset_sets",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": "sympy/sets/handlers/issubset.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 2,
+        "found": true,
+        "n_parsed": 95,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 93,
+        "reward": 1.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "reward 1.0",
+      "tier": "MEDIUM",
+      "tree_digest": "fc529ea6eb0d517b482427b0d580b68ecb030985ef478241a81da2d24e249ea1",
+      "verdict": "CLEAN"
+    },
+    {
+      "anchor": "is_subset_sets",
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "broke": [],
+        "coupled": [],
+        "failing": [],
+        "symbol": "is_subset_sets",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": "sympy/sets/handlers/issubset.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 2,
+        "found": true,
+        "n_parsed": 95,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 93,
+        "reward": 1.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "reward 1.0",
+      "tier": "MEDIUM",
+      "tree_digest": "fc529ea6eb0d517b482427b0d580b68ecb030985ef478241a81da2d24e249ea1",
+      "verdict": "CLEAN"
+    },
+    {
+      "anchor": "is_subset_sets",
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "broke": [],
+        "coupled": [],
+        "failing": [],
+        "symbol": "is_subset_sets",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": "sympy/sets/handlers/issubset.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 2,
+        "found": true,
+        "n_parsed": 95,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 93,
+        "reward": 1.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "reward 1.0",
+      "tier": "MEDIUM",
+      "tree_digest": "fc529ea6eb0d517b482427b0d580b68ecb030985ef478241a81da2d24e249ea1",
+      "verdict": "CLEAN"
+    },
+    {
+      "anchor": "is_subset_sets",
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "broke": [],
+        "coupled": [],
+        "failing": [],
+        "symbol": "is_subset_sets",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": "sympy/sets/handlers/issubset.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 2,
+        "found": true,
+        "n_parsed": 95,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 93,
+        "reward": 1.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "reward 1.0",
+      "tier": "MEDIUM",
+      "tree_digest": "fc529ea6eb0d517b482427b0d580b68ecb030985ef478241a81da2d24e249ea1",
+      "verdict": "CLEAN"
+    },
+    {
+      "anchor": "is_subset_sets",
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "broke": [],
+        "coupled": [],
+        "failing": [],
+        "symbol": "is_subset_sets",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": "sympy/sets/handlers/issubset.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 2,
+        "found": true,
+        "n_parsed": 95,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 93,
+        "reward": 1.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "reward 1.0",
+      "tier": "MEDIUM",
+      "tree_digest": "fc529ea6eb0d517b482427b0d580b68ecb030985ef478241a81da2d24e249ea1",
+      "verdict": "CLEAN"
+    },
+    {
+      "anchor": null,
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "broke": [],
+        "coupled": [],
+        "failing": [],
+        "symbol": "is_subset_sets",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": null,
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 2,
+        "found": true,
+        "n_parsed": 95,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 93,
+        "reward": 1.0
+      },
+      "loud_failure": false,
+      "observable": "order of elements in a returned collection",
+      "operator": "collection_reverse",
+      "reason": "no anchor inside the gold-touched region",
+      "tier": "MEDIUM",
+      "tree_digest": "fc529ea6eb0d517b482427b0d580b68ecb030985ef478241a81da2d24e249ea1",
+      "verdict": "NOT_APPLICABLE"
+    },
+    {
+      "anchor": null,
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "broke": [],
+        "coupled": [],
+        "failing": [],
+        "symbol": "is_subset_sets",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": null,
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 2,
+        "found": true,
+        "n_parsed": 95,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 93,
+        "reward": 1.0
+      },
+      "loud_failure": false,
+      "observable": "human-readable text of an exception message",
+      "operator": "message_reword",
+      "reason": "no anchor inside the gold-touched region; 3 anchor(s) elsewhere in the 3 target(s): sympy/core/relational.py, sympy/sets/handlers/comparison.py, sympy/sets/handlers/issubset.py",
+      "tier": "HIGH",
+      "tree_digest": "fc529ea6eb0d517b482427b0d580b68ecb030985ef478241a81da2d24e249ea1",
+      "verdict": "NOT_APPLICABLE"
+    }
+  ],
+  "targets": [
+    "sympy/core/relational.py",
+    "sympy/sets/handlers/comparison.py",
+    "sympy/sets/handlers/issubset.py"
+  ],
+  "version": "1.8",
+  "witnesses": []
+}

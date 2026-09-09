@@ -1,0 +1,331 @@
+{
+  "completed": true,
+  "control": {
+    "graded": null,
+    "log": null,
+    "passed": true,
+    "reason": "untransformed reference scores 1.0"
+  },
+  "digest_trace": [
+    {
+      "digest": "916f15b00eb85e846714986d468bb595df98447e13b24a9afbee53502baa68fc",
+      "memo_hit": false
+    },
+    {
+      "digest": "e215e8a1b4bcd18095d0e67f319afd2fb484dd43b52d3a005c53c712841954b9",
+      "memo_hit": false
+    }
+  ],
+  "disk_orphan_reclaimed_bytes": 0,
+  "disk_residual_bytes": 0,
+  "elapsed_seconds": 56.06,
+  "error": null,
+  "image": "swebench/sweb.eval.x86_64.django_1776_django-13821:latest",
+  "instance_id": "django__django-13821",
+  "leaked_containers": [],
+  "leaked_image": false,
+  "log": [
+    [
+      "<control>",
+      "OK",
+      "untransformed reference scores 1.0"
+    ],
+    [
+      "kwonly_specialize:<no anchor>",
+      "NOT_APPLICABLE",
+      "no anchor inside the gold-touched region"
+    ],
+    [
+      "symbol_rename:check_sqlite_version",
+      "UNVALIDATED",
+      "2 failing test(s) have no recognisable failure block -- unknown log shape, not evidence of breakage; first: Raise NotSupportedError when aggregating on date/time fields."
+    ],
+    [
+      "collection_reverse:<no anchor>",
+      "NOT_APPLICABLE",
+      "no anchor inside the gold-touched region"
+    ],
+    [
+      "message_reword:<no anchor>",
+      "NOT_APPLICABLE",
+      "no anchor inside the gold-touched region; 1 anchor(s) elsewhere in the target"
+    ]
+  ],
+  "mountable": true,
+  "multi_target": false,
+  "n_targets": 1,
+  "on_prime_hub": null,
+  "on_prime_hub_reason": "not resolvable offline; no hub environment index is reachable from this repo, verifiers or swebench",
+  "operators_not_applicable": [
+    "collection_reverse",
+    "kwonly_specialize",
+    "message_reword"
+  ],
+  "operators_with_anchors": [
+    "symbol_rename"
+  ],
+  "repo": "django/django",
+  "row": {
+    "elapsed": 30.09,
+    "error": null,
+    "error_type": null,
+    "index": 0,
+    "mode": "formcheck",
+    "name": "django__django-13821",
+    "reason": "unchecked",
+    "valid": null
+  },
+  "rows": [
+    {
+      "anchor": null,
+      "failure_analysis": null,
+      "file": null,
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 1,
+        "found": true,
+        "n_parsed": 18,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 14,
+        "reward": 1.0
+      },
+      "loud_failure": false,
+      "observable": "callable signature (arity / parameter names)",
+      "operator": "kwonly_specialize",
+      "reason": "no anchor inside the gold-touched region",
+      "tier": "HIGH",
+      "tree_digest": "916f15b00eb85e846714986d468bb595df98447e13b24a9afbee53502baa68fc",
+      "verdict": "NOT_APPLICABLE"
+    },
+    {
+      "anchor": "check_sqlite_version",
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "broke": [],
+        "coupled": [
+          "test_parameter_escaping (backends.sqlite.tests.EscapingChecksDebug)",
+          "test_parameter_escaping (backends.sqlite.tests.EscapingChecks)",
+          "test_no_interpolation (backends.sqlite.tests.LastExecutedQueryTest)",
+          "test_parameter_quoting (backends.sqlite.tests.LastExecutedQueryTest)",
+          "test_distinct_aggregation (backends.sqlite.tests.Tests)",
+          "test_distinct_aggregation_multiple_args_no_distinct (backends.sqlite.tests.Tests)",
+          "test_pathlib_name (backends.sqlite.tests.Tests)",
+          "test_regexp_function (backends.sqlite.tests.Tests)",
+          "test_check_sqlite_version (backends.sqlite.tests.Tests)"
+        ],
+        "failing": [
+          "test_parameter_escaping (backends.sqlite.tests.EscapingChecksDebug)",
+          "test_parameter_escaping (backends.sqlite.tests.EscapingChecks)",
+          "test_no_interpolation (backends.sqlite.tests.LastExecutedQueryTest)",
+          "test_parameter_quoting (backends.sqlite.tests.LastExecutedQueryTest)",
+          "Raise NotSupportedError when aggregating on date/time fields.",
+          "test_distinct_aggregation (backends.sqlite.tests.Tests)",
+          "test_distinct_aggregation_multiple_args_no_distinct (backends.sqlite.tests.Tests)",
+          "A named in-memory db should be allowed where supported.",
+          "test_pathlib_name (backends.sqlite.tests.Tests)",
+          "test_regexp_function (backends.sqlite.tests.Tests)",
+          "test_check_sqlite_version (backends.sqlite.tests.Tests)"
+        ],
+        "symbol": "check_sqlite_version",
+        "unexplained": [
+          "Raise NotSupportedError when aggregating on date/time fields. (no failure section found)",
+          "A named in-memory db should be allowed where supported. (no failure section found)"
+        ],
+        "unparsed": [
+          "Raise NotSupportedError when aggregating on date/time fields.",
+          "A named in-memory db should be allowed where supported."
+        ],
+        "unparsed_log_shape": true
+      },
+      "file": "django/db/backends/sqlite3/base.py",
+      "graded_log": "+ ./tests/runtests.py --verbosity 2 --settings=test_sqlite --parallel 1 backends.sqlite.tests\nTesting against Django installed in '/testbed/django'\nImporting application backends\nSkipping setup of unused database(s): default, other.\nSystem check identified no issues (0 silenced).\n\ntests (unittest.loader._FailedTest) ... ERROR\n\n======================================================================\nERROR: tests (unittest.loader._FailedTest)\n----------------------------------------------------------------------\nImportError: Failed to import test module: tests\nTraceback (most recent call last):\n  File \"/opt/miniconda3/envs/testbed/lib/python3.6/unittest/loader.py\", line 153, in loadTestsFromName\n    module = __import__(module_name)\n  File \"/testbed/tests/backends/sqlite/tests.py\", line 22, in <module>\n    from django.db.backends.sqlite3.base import check_sqlite_version\nImportError: cannot import name 'check_sqlite_version'\n\n\n----------------------------------------------------------------------\nRan 1 test in 0.000s\n\nFAILED (errors=1)\n",
+      "graded_report": {
+        "f2p_fail": 1,
+        "f2p_failing": [
+          "test_check_sqlite_version (backends.sqlite.tests.Tests)"
+        ],
+        "f2p_pass": 0,
+        "found": true,
+        "n_parsed": 2,
+        "p2p_fail": 14,
+        "p2p_failing": [
+          "test_parameter_escaping (backends.sqlite.tests.EscapingChecksDebug)",
+          "test_parameter_escaping (backends.sqlite.tests.EscapingChecks)",
+          "test_no_interpolation (backends.sqlite.tests.LastExecutedQueryTest)",
+          "test_parameter_quoting (backends.sqlite.tests.LastExecutedQueryTest)",
+          "Raise NotSupportedError when aggregating on date/time fields.",
+          "test_distinct_aggregation (backends.sqlite.tests.Tests)",
+          "test_distinct_aggregation_multiple_args_no_distinct (backends.sqlite.tests.Tests)",
+          "A named in-memory db should be allowed where supported.",
+          "test_pathlib_name (backends.sqlite.tests.Tests)",
+          "test_regexp_function (backends.sqlite.tests.Tests)"
+        ],
+        "p2p_pass": 0,
+        "reward": 0.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "2 failing test(s) have no recognisable failure block -- unknown log shape, not evidence of breakage; first: Raise NotSupportedError when aggregating on date/time fields.",
+      "tier": "MEDIUM",
+      "tree_digest": "e215e8a1b4bcd18095d0e67f319afd2fb484dd43b52d3a005c53c712841954b9",
+      "verdict": "UNVALIDATED"
+    },
+    {
+      "anchor": null,
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "broke": [],
+        "coupled": [
+          "test_parameter_escaping (backends.sqlite.tests.EscapingChecksDebug)",
+          "test_parameter_escaping (backends.sqlite.tests.EscapingChecks)",
+          "test_no_interpolation (backends.sqlite.tests.LastExecutedQueryTest)",
+          "test_parameter_quoting (backends.sqlite.tests.LastExecutedQueryTest)",
+          "test_distinct_aggregation (backends.sqlite.tests.Tests)",
+          "test_distinct_aggregation_multiple_args_no_distinct (backends.sqlite.tests.Tests)",
+          "test_pathlib_name (backends.sqlite.tests.Tests)",
+          "test_regexp_function (backends.sqlite.tests.Tests)",
+          "test_check_sqlite_version (backends.sqlite.tests.Tests)"
+        ],
+        "failing": [
+          "test_parameter_escaping (backends.sqlite.tests.EscapingChecksDebug)",
+          "test_parameter_escaping (backends.sqlite.tests.EscapingChecks)",
+          "test_no_interpolation (backends.sqlite.tests.LastExecutedQueryTest)",
+          "test_parameter_quoting (backends.sqlite.tests.LastExecutedQueryTest)",
+          "Raise NotSupportedError when aggregating on date/time fields.",
+          "test_distinct_aggregation (backends.sqlite.tests.Tests)",
+          "test_distinct_aggregation_multiple_args_no_distinct (backends.sqlite.tests.Tests)",
+          "A named in-memory db should be allowed where supported.",
+          "test_pathlib_name (backends.sqlite.tests.Tests)",
+          "test_regexp_function (backends.sqlite.tests.Tests)",
+          "test_check_sqlite_version (backends.sqlite.tests.Tests)"
+        ],
+        "symbol": "check_sqlite_version",
+        "unexplained": [
+          "Raise NotSupportedError when aggregating on date/time fields. (no failure section found)",
+          "A named in-memory db should be allowed where supported. (no failure section found)"
+        ],
+        "unparsed": [
+          "Raise NotSupportedError when aggregating on date/time fields.",
+          "A named in-memory db should be allowed where supported."
+        ],
+        "unparsed_log_shape": true
+      },
+      "file": null,
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 1,
+        "f2p_failing": [
+          "test_check_sqlite_version (backends.sqlite.tests.Tests)"
+        ],
+        "f2p_pass": 0,
+        "found": true,
+        "n_parsed": 2,
+        "p2p_fail": 14,
+        "p2p_failing": [
+          "test_parameter_escaping (backends.sqlite.tests.EscapingChecksDebug)",
+          "test_parameter_escaping (backends.sqlite.tests.EscapingChecks)",
+          "test_no_interpolation (backends.sqlite.tests.LastExecutedQueryTest)",
+          "test_parameter_quoting (backends.sqlite.tests.LastExecutedQueryTest)",
+          "Raise NotSupportedError when aggregating on date/time fields.",
+          "test_distinct_aggregation (backends.sqlite.tests.Tests)",
+          "test_distinct_aggregation_multiple_args_no_distinct (backends.sqlite.tests.Tests)",
+          "A named in-memory db should be allowed where supported.",
+          "test_pathlib_name (backends.sqlite.tests.Tests)",
+          "test_regexp_function (backends.sqlite.tests.Tests)"
+        ],
+        "p2p_pass": 0,
+        "reward": 0.0
+      },
+      "loud_failure": false,
+      "observable": "order of elements in a returned collection",
+      "operator": "collection_reverse",
+      "reason": "no anchor inside the gold-touched region",
+      "tier": "MEDIUM",
+      "tree_digest": "e215e8a1b4bcd18095d0e67f319afd2fb484dd43b52d3a005c53c712841954b9",
+      "verdict": "NOT_APPLICABLE"
+    },
+    {
+      "anchor": null,
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "broke": [],
+        "coupled": [
+          "test_parameter_escaping (backends.sqlite.tests.EscapingChecksDebug)",
+          "test_parameter_escaping (backends.sqlite.tests.EscapingChecks)",
+          "test_no_interpolation (backends.sqlite.tests.LastExecutedQueryTest)",
+          "test_parameter_quoting (backends.sqlite.tests.LastExecutedQueryTest)",
+          "test_distinct_aggregation (backends.sqlite.tests.Tests)",
+          "test_distinct_aggregation_multiple_args_no_distinct (backends.sqlite.tests.Tests)",
+          "test_pathlib_name (backends.sqlite.tests.Tests)",
+          "test_regexp_function (backends.sqlite.tests.Tests)",
+          "test_check_sqlite_version (backends.sqlite.tests.Tests)"
+        ],
+        "failing": [
+          "test_parameter_escaping (backends.sqlite.tests.EscapingChecksDebug)",
+          "test_parameter_escaping (backends.sqlite.tests.EscapingChecks)",
+          "test_no_interpolation (backends.sqlite.tests.LastExecutedQueryTest)",
+          "test_parameter_quoting (backends.sqlite.tests.LastExecutedQueryTest)",
+          "Raise NotSupportedError when aggregating on date/time fields.",
+          "test_distinct_aggregation (backends.sqlite.tests.Tests)",
+          "test_distinct_aggregation_multiple_args_no_distinct (backends.sqlite.tests.Tests)",
+          "A named in-memory db should be allowed where supported.",
+          "test_pathlib_name (backends.sqlite.tests.Tests)",
+          "test_regexp_function (backends.sqlite.tests.Tests)",
+          "test_check_sqlite_version (backends.sqlite.tests.Tests)"
+        ],
+        "symbol": "check_sqlite_version",
+        "unexplained": [
+          "Raise NotSupportedError when aggregating on date/time fields. (no failure section found)",
+          "A named in-memory db should be allowed where supported. (no failure section found)"
+        ],
+        "unparsed": [
+          "Raise NotSupportedError when aggregating on date/time fields.",
+          "A named in-memory db should be allowed where supported."
+        ],
+        "unparsed_log_shape": true
+      },
+      "file": null,
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 1,
+        "f2p_failing": [
+          "test_check_sqlite_version (backends.sqlite.tests.Tests)"
+        ],
+        "f2p_pass": 0,
+        "found": true,
+        "n_parsed": 2,
+        "p2p_fail": 14,
+        "p2p_failing": [
+          "test_parameter_escaping (backends.sqlite.tests.EscapingChecksDebug)",
+          "test_parameter_escaping (backends.sqlite.tests.EscapingChecks)",
+          "test_no_interpolation (backends.sqlite.tests.LastExecutedQueryTest)",
+          "test_parameter_quoting (backends.sqlite.tests.LastExecutedQueryTest)",
+          "Raise NotSupportedError when aggregating on date/time fields.",
+          "test_distinct_aggregation (backends.sqlite.tests.Tests)",
+          "test_distinct_aggregation_multiple_args_no_distinct (backends.sqlite.tests.Tests)",
+          "A named in-memory db should be allowed where supported.",
+          "test_pathlib_name (backends.sqlite.tests.Tests)",
+          "test_regexp_function (backends.sqlite.tests.Tests)"
+        ],
+        "p2p_pass": 0,
+        "reward": 0.0
+      },
+      "loud_failure": false,
+      "observable": "human-readable text of an exception message",
+      "operator": "message_reword",
+      "reason": "no anchor inside the gold-touched region; 1 anchor(s) elsewhere in the target",
+      "tier": "HIGH",
+      "tree_digest": "e215e8a1b4bcd18095d0e67f319afd2fb484dd43b52d3a005c53c712841954b9",
+      "verdict": "NOT_APPLICABLE"
+    }
+  ],
+  "targets": [
+    "django/db/backends/sqlite3/base.py"
+  ],
+  "version": "3.2",
+  "witnesses": []
+}

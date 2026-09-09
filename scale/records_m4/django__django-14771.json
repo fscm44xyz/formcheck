@@ -1,0 +1,398 @@
+{
+  "completed": true,
+  "control": {
+    "graded": null,
+    "log": null,
+    "passed": true,
+    "reason": "untransformed reference scores 1.0"
+  },
+  "digest_trace": [
+    {
+      "digest": "39c64406d7189859b6120a1e41695c9e58d456618a49fd29546c114f1b798871",
+      "memo_hit": false
+    },
+    {
+      "digest": "4eb7b2439fde1391fb6518f7059447985c86ad23f653dac8a23200e6882299c6",
+      "memo_hit": false
+    },
+    {
+      "digest": "4eb7b2439fde1391fb6518f7059447985c86ad23f653dac8a23200e6882299c6",
+      "memo_hit": true
+    }
+  ],
+  "disk_orphan_reclaimed_bytes": 0,
+  "disk_residual_bytes": 0,
+  "elapsed_seconds": 1244.54,
+  "error": null,
+  "image": "swebench/sweb.eval.x86_64.django_1776_django-14771:latest",
+  "instance_id": "django__django-14771",
+  "leaked_containers": [],
+  "leaked_image": false,
+  "log": [
+    [
+      "<control>",
+      "OK",
+      "untransformed reference scores 1.0"
+    ],
+    [
+      "kwonly_specialize:<no anchor>",
+      "NOT_APPLICABLE",
+      "no anchor inside the gold-touched region"
+    ],
+    [
+      "symbol_rename:get_child_arguments",
+      "WITNESS",
+      "reward 0.0"
+    ],
+    [
+      "collection_reverse:<no anchor>",
+      "NOT_APPLICABLE",
+      "no anchor inside the gold-touched region"
+    ],
+    [
+      "message_reword:<no anchor>",
+      "NOT_APPLICABLE",
+      "no anchor inside the gold-touched region; 5 anchor(s) elsewhere in the target"
+    ]
+  ],
+  "mountable": true,
+  "multi_target": false,
+  "n_targets": 1,
+  "on_prime_hub": null,
+  "on_prime_hub_reason": "not resolvable offline; no hub environment index is reachable from this repo, verifiers or swebench",
+  "operators_not_applicable": [
+    "collection_reverse",
+    "kwonly_specialize",
+    "message_reword"
+  ],
+  "operators_with_anchors": [
+    "symbol_rename"
+  ],
+  "repo": "django/django",
+  "row": {
+    "elapsed": 26.17,
+    "error": null,
+    "error_type": null,
+    "index": 0,
+    "mode": "formcheck",
+    "name": "django__django-14771",
+    "reason": "invalid",
+    "valid": false
+  },
+  "rows": [
+    {
+      "anchor": null,
+      "failure_analysis": null,
+      "file": null,
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 1,
+        "found": true,
+        "n_parsed": 81,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 60,
+        "reward": 1.0
+      },
+      "loud_failure": false,
+      "observable": "callable signature (arity / parameter names)",
+      "operator": "kwonly_specialize",
+      "reason": "no anchor inside the gold-touched region",
+      "tier": "HIGH",
+      "tree_digest": "39c64406d7189859b6120a1e41695c9e58d456618a49fd29546c114f1b798871",
+      "verdict": "NOT_APPLICABLE"
+    },
+    {
+      "all_failures_attributed": true,
+      "anchor": "get_child_arguments",
+      "f2p_fail": 1,
+      "failure_analysis": {
+        "all_reference_the_symbol": true,
+        "broke": [],
+        "coupled": [
+          "test_entrypoint_fallback (utils_tests.test_autoreload.TestChildArguments)",
+          "test_exe_fallback (utils_tests.test_autoreload.TestChildArguments)",
+          "test_module_no_spec (utils_tests.test_autoreload.TestChildArguments)",
+          "test_raises_runtimeerror (utils_tests.test_autoreload.TestChildArguments)",
+          "test_run_as_module (utils_tests.test_autoreload.TestChildArguments)",
+          "test_run_as_non_django_module (utils_tests.test_autoreload.TestChildArguments)",
+          "test_run_as_non_django_module_non_package (utils_tests.test_autoreload.TestChildArguments)",
+          "test_warnoptions (utils_tests.test_autoreload.TestChildArguments)",
+          "test_xoptions (utils_tests.test_autoreload.TestChildArguments)"
+        ],
+        "failing": [
+          "test_entrypoint_fallback (utils_tests.test_autoreload.TestChildArguments)",
+          "test_exe_fallback (utils_tests.test_autoreload.TestChildArguments)",
+          "test_module_no_spec (utils_tests.test_autoreload.TestChildArguments)",
+          "test_raises_runtimeerror (utils_tests.test_autoreload.TestChildArguments)",
+          "test_run_as_module (utils_tests.test_autoreload.TestChildArguments)",
+          "test_run_as_non_django_module (utils_tests.test_autoreload.TestChildArguments)",
+          "test_run_as_non_django_module_non_package (utils_tests.test_autoreload.TestChildArguments)",
+          "test_warnoptions (utils_tests.test_autoreload.TestChildArguments)",
+          "test_xoptions (utils_tests.test_autoreload.TestChildArguments)"
+        ],
+        "symbol": "get_child_arguments",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": "django/utils/autoreload.py",
+      "graded_log": "+ ./tests/runtests.py --verbosity 2 --settings=test_sqlite --parallel 1 utils_tests.test_autoreload\nTesting against Django installed in '/testbed/django'\nImporting application utils_tests\nFound 81 test(s).\nSkipping setup of unused database(s): default, other.\nSystem check identified no issues (0 silenced).\n\ntest_run_loop_catches_stopiteration (utils_tests.test_autoreload.BaseReloaderTests) ... ok\ntest_run_loop_stop_and_return (utils_tests.test_autoreload.BaseReloaderTests) ... ok\ntest_wait_for_apps_ready_checks_for_exception (utils_tests.test_autoreload.BaseReloaderTests) ... ok\ntest_wait_for_apps_ready_without_exception (utils_tests.test_autoreload.BaseReloaderTests) ... ok\ntest_watch_dir_with_unresolvable_path (utils_tests.test_autoreload.BaseReloaderTests) ... ok\ntest_watch_files_with_recursive_glob (utils_tests.test_autoreload.BaseReloaderTests) ... ok\ntest_watch_with_glob (utils_tests.test_autoreload.BaseReloaderTests) ... ok\ntest_watchman_available (utils_tests.test_autoreload.GetReloaderTests) ... ok\ntest_watchman_unavailable (utils_tests.test_autoreload.GetReloaderTests) ... ok\ntest_manage_py (utils_tests.test_autoreload.RestartWithReloaderTests) ... ok\ntest_python_m_django (utils_tests.test_autoreload.RestartWithReloaderTests) ... ok\ntest_calls_start_django (utils_tests.test_autoreload.RunWithReloaderTests) ... ok\ntest_calls_sys_exit (utils_tests.test_autoreload.RunWithReloaderTests) ... ok\ntest_swallows_keyboard_interrupt (utils_tests.test_autoreload.RunWithReloaderTests) ... ok\ntest_check_errors_called (utils_tests.test_autoreload.StartDjangoTests) ... ok\ntest_echo_on_called (utils_tests.test_autoreload.StartDjangoTests) ... ok\ntest_starts_thread_with_args (utils_tests.test_autoreload.StartDjangoTests) ... ok\ntest_watchman_becomes_unavailable (utils_tests.test_autoreload.StartDjangoTests) ... ok\ntest_glob (utils_tests.test_autoreload.StatReloaderTests) ... ok\ntest_glob_recursive (utils_tests.test_autoreload.StatReloaderTests) ... ok\ntest_multiple_globs (utils_tests.test_autoreload.StatReloaderTests) ... ok\ntest_multiple_recursive_globs (utils_tests.test_autoreload.StatReloaderTests) ... ok\ntest_nested_glob_recursive (utils_tests.test_autoreload.StatReloaderTests) ... ok\ntest_overlapping_glob_recursive (utils_tests.test_autoreload.StatReloaderTests) ... ok\ntest_overlapping_globs (utils_tests.test_autoreload.StatReloaderTests) ... ok\ntest_snapshot_files_ignores_missing_files (utils_tests.test_autoreload.StatReloaderTests) ... ok\ntest_snapshot_files_updates (utils_tests.test_autoreload.StatReloaderTests) ... ok\ntest_snapshot_files_with_duplicates (utils_tests.test_autoreload.StatReloaderTests) ... ok\ntest_tick_does_not_trigger_twice (utils_tests.test_autoreload.StatReloaderTests) ... ok\ntest_mutates_error_files (utils_tests.test_autoreload.TestCheckErrors) ... ok\ntest_entrypoint_fallback (utils_tests.test_autoreload.TestChildArguments) ... ERROR\ntest_exe_fallback (utils_tests.test_autoreload.TestChildArguments) ... ERROR\ntest_module_no_spec (utils_tests.test_autoreload.TestChildArguments) ... ERROR\ntest_raises_runtimeerror (utils_tests.test_autoreload.TestChildArguments) ... ERROR\ntest_run_as_module (utils_tests.test_autoreload.TestChildArguments) ... ERROR\ntest_run_as_non_django_module (utils_tests.test_autoreload.TestChildArguments) ... ERROR\ntest_run_as_non_django_module_non_package (utils_tests.test_autoreload.TestChildArguments) ... ERROR\ntest_warnoptions (utils_tests.test_autoreload.TestChildArguments) ... ERROR\ntest_xoptions (utils_tests.test_autoreload.TestChildArguments) ... ERROR\ntest_common_roots (utils_tests.test_autoreload.TestCommonRoots) ... ok\ntest_bytecode_conversion_to_source (utils_tests.test_autoreload.TestIterModulesAndFiles)\n.pyc and .pyo files are included in the files list. ... ok\ntest_check_errors (utils_tests.test_autoreload.TestIterModulesAndFiles)\nWhen a file containing an error is imported in a function wrapped by ... ok\ntest_check_errors_catches_all_exceptions (utils_tests.test_autoreload.TestIterModulesAndFiles)\nSince Python may raise arbitrary exceptions when importing code, ... ok\ntest_file_added (utils_tests.test_autoreload.TestIterModulesAndFiles)\nWhen a file is added, it's returned by iter_all_python_module_files(). ... ok\ntest_main_module_is_resolved (utils_tests.test_autoreload.TestIterModulesAndFiles) ... ok\ntest_main_module_without_file_is_not_resolved (utils_tests.test_autoreload.TestIterModulesAndFiles) ... ok\ntest_module_without_spec (utils_tests.test_autoreload.TestIterModulesAndFiles) ... ok\ntest_path_with_embedded_null_bytes (utils_tests.test_autoreload.TestIterModulesAndFiles) ... ok\ntest_paths_are_pathlib_instances (utils_tests.test_autoreload.TestIterModulesAndFiles) ... ok\ntest_weakref_in_sys_module (utils_tests.test_autoreload.TestIterModulesAndFiles)\niter_all_python_module_file() ignores weakref modules. ... ok\ntest_zip_reload (utils_tests.test_autoreload.TestIterModulesAndFiles)\nModules imported from zipped files have their archive location included ... ok\ntest_no_exception (utils_tests.test_autoreload.TestRaiseLastException) ... ok\ntest_raises_custom_exception (utils_tests.test_autoreload.TestRaiseLastException) ... ok\ntest_raises_exception (utils_tests.test_autoreload.TestRaiseLastException) ... ok\ntest_raises_exception_with_context (utils_tests.test_autoreload.TestRaiseLastException) ... ok\ntest_sys_paths_absolute (utils_tests.test_autoreload.TestSysPathDirectories) ... ok\ntest_sys_paths_directories (utils_tests.test_autoreload.TestSysPathDirectories) ... ok\ntest_sys_paths_non_existing (utils_tests.test_autoreload.TestSysPathDirectories) ... ok\ntest_sys_paths_with_directories (utils_tests.test_autoreload.TestSysPathDirectories) ... ok\ntest_is_django_module (utils_tests.test_autoreload.TestUtilities) ... ok\ntest_is_django_path (utils_tests.test_autoreload.TestUtilities) ... ok\ntest_check_availability (utils_tests.test_autoreload.WatchmanReloaderTests) ... skipped 'Watchman unavailable: Cannot connect to the watchman service.'\ntest_check_availability_lower_version (utils_tests.test_autoreload.WatchmanReloaderTests) ... skipped 'Watchman unavailable: Cannot connect to the watchman service.'\ntest_check_server_status (utils_tests.test_autoreload.WatchmanReloaderTests) ... skipped 'Watchman unavailable: Cannot connect to the watchman service.'\ntest_check_server_status_raises_error (utils_tests.test_autoreload.WatchmanReloaderTests) ... skipped 'Watchman unavailable: Cannot connect to the watchman service.'\ntest_glob (utils_tests.test_autoreload.WatchmanReloaderTests) ... skipped 'Watchman unavailable: Cannot connect to the watchman service.'\ntest_glob_recursive (utils_tests.test_autoreload.WatchmanReloaderTests) ... skipped 'Watchman unavailable: Cannot connect to the watchman service.'\ntest_multiple_globs (utils_tests.test_autoreload.WatchmanReloaderTests) ... skipped 'Watchman unavailable: Cannot connect to the watchman service.'\ntest_multiple_recursive_globs (utils_tests.test_autoreload.WatchmanReloaderTests) ... skipped 'Watchman unavailable: Cannot connect to the watchman service.'\ntest_nested_glob_recursive (utils_tests.test_autoreload.WatchmanReloaderTests) ... skipped 'Watchman unavailable: Cannot connect to the watchman service.'\ntest_overlapping_glob_recursive (utils_tests.test_autoreload.WatchmanReloaderTests) ... skipped 'Watchman unavailable: Cannot connect to the watchman service.'\ntest_overlapping_globs (utils_tests.test_autoreload.WatchmanReloaderTests) ... skipped 'Watchman unavailable: Cannot connect to the watchman service.'\ntest_pywatchman_not_available (utils_tests.test_autoreload.WatchmanReloaderTests) ... skipped 'Watchman unavailable: Cannot connect to the watchman service.'\ntest_setting_timeout_from_environment_variable (utils_tests.test_autoreload.WatchmanReloaderTests) ... skipped 'Watchman unavailable: Cannot connect to the watchman service.'\ntest_update_watches_raises_exceptions (utils_tests.test_autoreload.WatchmanReloaderTests) ... skipped 'Watchman unavailable: Cannot connect to the watchman service.'\ntest_watch_glob_ignores_non_existing_directories_two_levels (utils_tests.test_autoreload.WatchmanReloaderTests) ... skipped 'Watchman unavailable: Cannot connect to the watchman service.'\ntest_watch_glob_multiple_patterns (utils_tests.test_autoreload.WatchmanReloaderTests) ... skipped 'Watchman unavailable: Cannot connect to the watchman service.'\ntest_watch_glob_uses_existing_parent_directories (utils_tests.test_autoreload.WatchmanReloaderTests) ... skipped 'Watchman unavailable: Cannot connect to the watchman service.'\ntest_watched_roots_contains_directory_globs (utils_tests.test_autoreload.WatchmanReloaderTests) ... skipped 'Watchman unavailable: Cannot connect to the watchman service.'\ntest_watched_roots_contains_files (utils_tests.test_autoreload.WatchmanReloaderTests) ... skipped 'Watchman unavailable: Cannot connect to the watchman service.'\ntest_watched_roots_contains_sys_path (utils_tests.test_autoreload.WatchmanReloaderTests) ... skipped 'Watchman unavailable: Cannot connect to the watchman service.'\n\n======================================================================\nERROR: test_entrypoint_fallback (utils_tests.test_autoreload.TestChildArguments)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/opt/miniconda3/envs/testbed/lib/python3.9/unittest/mock.py\", line 1336, in patched\n    return func(*newargs, **newkeywargs)\n  File \"/testbed/tests/utils_tests/test_autoreload.py\", line 240, in test_entrypoint_fallback\n    autoreload.get_child_arguments(),\nAttributeError: module 'django.utils.autoreload' has no attribute 'get_child_arguments'\n\n======================================================================\nERROR: test_exe_fallback (utils_tests.test_autoreload.TestChildArguments)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/opt/miniconda3/envs/testbed/lib/python3.9/unittest/mock.py\", line 1336, in patched\n    return func(*newargs, **newkeywargs)\n  File \"/testbed/tests/utils_tests/test_autoreload.py\", line 227, in test_exe_fallback\n    autoreload.get_child_arguments(),\nAttributeError: module 'django.utils.autoreload' has no attribute 'get_child_arguments'\n\n======================================================================\nERROR: test_module_no_spec (utils_tests.test_autoreload.TestChildArguments)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/opt/miniconda3/envs/testbed/lib/python3.9/unittest/mock.py\", line 1336, in patched\n    return func(*newargs, **newkeywargs)\n  File \"/testbed/tests/utils_tests/test_autoreload.py\", line 260, in test_module_no_spec\n    autoreload.get_child_arguments(),\nAttributeError: module 'django.utils.autoreload' has no attribute 'get_child_arguments'\n\n======================================================================\nERROR: test_raises_runtimeerror (utils_tests.test_autoreload.TestChildArguments)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/opt/miniconda3/envs/testbed/lib/python3.9/unittest/mock.py\", line 1336, in patched\n    return func(*newargs, **newkeywargs)\n  File \"/testbed/tests/utils_tests/test_autoreload.py\", line 250, in test_raises_runtimeerror\n    autoreload.get_child_arguments()\nAttributeError: module 'django.utils.autoreload' has no attribute 'get_child_arguments'\n\n======================================================================\nERROR: test_run_as_module (utils_tests.test_autoreload.TestChildArguments)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/opt/miniconda3/envs/testbed/lib/python3.9/unittest/mock.py\", line 1768, in _inner\n    return f(*args, **kw)\n  File \"/opt/miniconda3/envs/testbed/lib/python3.9/unittest/mock.py\", line 1336, in patched\n    return func(*newargs, **newkeywargs)\n  File \"/testbed/tests/utils_tests/test_autoreload.py\", line 176, in test_run_as_module\n    autoreload.get_child_arguments(),\nAttributeError: module 'django.utils.autoreload' has no attribute 'get_child_arguments'\n\n======================================================================\nERROR: test_run_as_non_django_module (utils_tests.test_autoreload.TestChildArguments)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/opt/miniconda3/envs/testbed/lib/python3.9/unittest/mock.py\", line 1768, in _inner\n    return f(*args, **kw)\n  File \"/opt/miniconda3/envs/testbed/lib/python3.9/unittest/mock.py\", line 1336, in patched\n    return func(*newargs, **newkeywargs)\n  File \"/testbed/tests/utils_tests/test_autoreload.py\", line 186, in test_run_as_non_django_module\n    autoreload.get_child_arguments(),\nAttributeError: module 'django.utils.autoreload' has no attribute 'get_child_arguments'\n\n======================================================================\nERROR: test_run_as_non_django_module_non_package (utils_tests.test_autoreload.TestChildArguments)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/opt/miniconda3/envs/testbed/lib/python3.9/unittest/mock.py\", line 1768, in _inner\n    return f(*args, **kw)\n  File \"/opt/miniconda3/envs/testbed/lib/python3.9/unittest/mock.py\", line 1336, in patched\n    return func(*newargs, **newkeywargs)\n  File \"/testbed/tests/utils_tests/test_autoreload.py\", line 196, in test_run_as_non_django_module_non_package\n    autoreload.get_child_arguments(),\nAttributeError: module 'django.utils.autoreload' has no attribute 'get_child_arguments'\n\n======================================================================\nERROR: test_warnoptions (utils_tests.test_autoreload.TestChildArguments)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/opt/miniconda3/envs/testbed/lib/python3.9/unittest/mock.py\", line 1336, in patched\n    return func(*newargs, **newkeywargs)\n  File \"/testbed/tests/utils_tests/test_autoreload.py\", line 206, in test_warnoptions\n    autoreload.get_child_arguments(),\nAttributeError: module 'django.utils.autoreload' has no attribute 'get_child_arguments'\n\n======================================================================\nERROR: test_xoptions (utils_tests.test_autoreload.TestChildArguments)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/opt/miniconda3/envs/testbed/lib/python3.9/unittest/mock.py\", line 1336, in patched\n    return func(*newargs, **newkeywargs)\n  File \"/testbed/tests/utils_tests/test_autoreload.py\", line 215, in test_xoptions\n    autoreload.get_child_arguments(),\nAttributeError: module 'django.utils.autoreload' has no attribute 'get_child_arguments'\n\n----------------------------------------------------------------------\nRan 81 tests in 0.406s\n\nFAILED (errors=9, skipped=20)\n",
+      "graded_report": {
+        "f2p_fail": 1,
+        "f2p_failing": [
+          "test_xoptions (utils_tests.test_autoreload.TestChildArguments)"
+        ],
+        "f2p_pass": 0,
+        "found": true,
+        "n_parsed": 90,
+        "p2p_fail": 8,
+        "p2p_failing": [
+          "test_entrypoint_fallback (utils_tests.test_autoreload.TestChildArguments)",
+          "test_exe_fallback (utils_tests.test_autoreload.TestChildArguments)",
+          "test_module_no_spec (utils_tests.test_autoreload.TestChildArguments)",
+          "test_raises_runtimeerror (utils_tests.test_autoreload.TestChildArguments)",
+          "test_run_as_module (utils_tests.test_autoreload.TestChildArguments)",
+          "test_run_as_non_django_module (utils_tests.test_autoreload.TestChildArguments)",
+          "test_run_as_non_django_module_non_package (utils_tests.test_autoreload.TestChildArguments)",
+          "test_warnoptions (utils_tests.test_autoreload.TestChildArguments)"
+        ],
+        "p2p_pass": 52,
+        "reward": 0.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "p2p_coupled_tests": [
+        "test_entrypoint_fallback (utils_tests.test_autoreload.TestChildArguments)",
+        "test_exe_fallback (utils_tests.test_autoreload.TestChildArguments)",
+        "test_module_no_spec (utils_tests.test_autoreload.TestChildArguments)",
+        "test_raises_runtimeerror (utils_tests.test_autoreload.TestChildArguments)",
+        "test_run_as_module (utils_tests.test_autoreload.TestChildArguments)",
+        "test_run_as_non_django_module (utils_tests.test_autoreload.TestChildArguments)",
+        "test_run_as_non_django_module_non_package (utils_tests.test_autoreload.TestChildArguments)",
+        "test_warnoptions (utils_tests.test_autoreload.TestChildArguments)"
+      ],
+      "p2p_fail": 8,
+      "reason": "reward 0.0",
+      "tier": "MEDIUM",
+      "tree_digest": "4eb7b2439fde1391fb6518f7059447985c86ad23f653dac8a23200e6882299c6",
+      "verdict": "WITNESS",
+      "witness_side": "p2p_coupling"
+    },
+    {
+      "anchor": null,
+      "failure_analysis": {
+        "all_reference_the_symbol": true,
+        "broke": [],
+        "coupled": [
+          "test_entrypoint_fallback (utils_tests.test_autoreload.TestChildArguments)",
+          "test_exe_fallback (utils_tests.test_autoreload.TestChildArguments)",
+          "test_module_no_spec (utils_tests.test_autoreload.TestChildArguments)",
+          "test_raises_runtimeerror (utils_tests.test_autoreload.TestChildArguments)",
+          "test_run_as_module (utils_tests.test_autoreload.TestChildArguments)",
+          "test_run_as_non_django_module (utils_tests.test_autoreload.TestChildArguments)",
+          "test_run_as_non_django_module_non_package (utils_tests.test_autoreload.TestChildArguments)",
+          "test_warnoptions (utils_tests.test_autoreload.TestChildArguments)",
+          "test_xoptions (utils_tests.test_autoreload.TestChildArguments)"
+        ],
+        "failing": [
+          "test_entrypoint_fallback (utils_tests.test_autoreload.TestChildArguments)",
+          "test_exe_fallback (utils_tests.test_autoreload.TestChildArguments)",
+          "test_module_no_spec (utils_tests.test_autoreload.TestChildArguments)",
+          "test_raises_runtimeerror (utils_tests.test_autoreload.TestChildArguments)",
+          "test_run_as_module (utils_tests.test_autoreload.TestChildArguments)",
+          "test_run_as_non_django_module (utils_tests.test_autoreload.TestChildArguments)",
+          "test_run_as_non_django_module_non_package (utils_tests.test_autoreload.TestChildArguments)",
+          "test_warnoptions (utils_tests.test_autoreload.TestChildArguments)",
+          "test_xoptions (utils_tests.test_autoreload.TestChildArguments)"
+        ],
+        "symbol": "get_child_arguments",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": null,
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 1,
+        "f2p_failing": [
+          "test_xoptions (utils_tests.test_autoreload.TestChildArguments)"
+        ],
+        "f2p_pass": 0,
+        "found": true,
+        "n_parsed": 90,
+        "p2p_fail": 8,
+        "p2p_failing": [
+          "test_entrypoint_fallback (utils_tests.test_autoreload.TestChildArguments)",
+          "test_exe_fallback (utils_tests.test_autoreload.TestChildArguments)",
+          "test_module_no_spec (utils_tests.test_autoreload.TestChildArguments)",
+          "test_raises_runtimeerror (utils_tests.test_autoreload.TestChildArguments)",
+          "test_run_as_module (utils_tests.test_autoreload.TestChildArguments)",
+          "test_run_as_non_django_module (utils_tests.test_autoreload.TestChildArguments)",
+          "test_run_as_non_django_module_non_package (utils_tests.test_autoreload.TestChildArguments)",
+          "test_warnoptions (utils_tests.test_autoreload.TestChildArguments)"
+        ],
+        "p2p_pass": 52,
+        "reward": 0.0
+      },
+      "loud_failure": false,
+      "observable": "order of elements in a returned collection",
+      "operator": "collection_reverse",
+      "reason": "no anchor inside the gold-touched region",
+      "tier": "MEDIUM",
+      "tree_digest": "4eb7b2439fde1391fb6518f7059447985c86ad23f653dac8a23200e6882299c6",
+      "verdict": "NOT_APPLICABLE"
+    },
+    {
+      "anchor": null,
+      "failure_analysis": {
+        "all_reference_the_symbol": true,
+        "broke": [],
+        "coupled": [
+          "test_entrypoint_fallback (utils_tests.test_autoreload.TestChildArguments)",
+          "test_exe_fallback (utils_tests.test_autoreload.TestChildArguments)",
+          "test_module_no_spec (utils_tests.test_autoreload.TestChildArguments)",
+          "test_raises_runtimeerror (utils_tests.test_autoreload.TestChildArguments)",
+          "test_run_as_module (utils_tests.test_autoreload.TestChildArguments)",
+          "test_run_as_non_django_module (utils_tests.test_autoreload.TestChildArguments)",
+          "test_run_as_non_django_module_non_package (utils_tests.test_autoreload.TestChildArguments)",
+          "test_warnoptions (utils_tests.test_autoreload.TestChildArguments)",
+          "test_xoptions (utils_tests.test_autoreload.TestChildArguments)"
+        ],
+        "failing": [
+          "test_entrypoint_fallback (utils_tests.test_autoreload.TestChildArguments)",
+          "test_exe_fallback (utils_tests.test_autoreload.TestChildArguments)",
+          "test_module_no_spec (utils_tests.test_autoreload.TestChildArguments)",
+          "test_raises_runtimeerror (utils_tests.test_autoreload.TestChildArguments)",
+          "test_run_as_module (utils_tests.test_autoreload.TestChildArguments)",
+          "test_run_as_non_django_module (utils_tests.test_autoreload.TestChildArguments)",
+          "test_run_as_non_django_module_non_package (utils_tests.test_autoreload.TestChildArguments)",
+          "test_warnoptions (utils_tests.test_autoreload.TestChildArguments)",
+          "test_xoptions (utils_tests.test_autoreload.TestChildArguments)"
+        ],
+        "symbol": "get_child_arguments",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": null,
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 1,
+        "f2p_failing": [
+          "test_xoptions (utils_tests.test_autoreload.TestChildArguments)"
+        ],
+        "f2p_pass": 0,
+        "found": true,
+        "n_parsed": 90,
+        "p2p_fail": 8,
+        "p2p_failing": [
+          "test_entrypoint_fallback (utils_tests.test_autoreload.TestChildArguments)",
+          "test_exe_fallback (utils_tests.test_autoreload.TestChildArguments)",
+          "test_module_no_spec (utils_tests.test_autoreload.TestChildArguments)",
+          "test_raises_runtimeerror (utils_tests.test_autoreload.TestChildArguments)",
+          "test_run_as_module (utils_tests.test_autoreload.TestChildArguments)",
+          "test_run_as_non_django_module (utils_tests.test_autoreload.TestChildArguments)",
+          "test_run_as_non_django_module_non_package (utils_tests.test_autoreload.TestChildArguments)",
+          "test_warnoptions (utils_tests.test_autoreload.TestChildArguments)"
+        ],
+        "p2p_pass": 52,
+        "reward": 0.0
+      },
+      "loud_failure": false,
+      "observable": "human-readable text of an exception message",
+      "operator": "message_reword",
+      "reason": "no anchor inside the gold-touched region; 5 anchor(s) elsewhere in the target",
+      "tier": "HIGH",
+      "tree_digest": "4eb7b2439fde1391fb6518f7059447985c86ad23f653dac8a23200e6882299c6",
+      "verdict": "NOT_APPLICABLE"
+    }
+  ],
+  "targets": [
+    "django/utils/autoreload.py"
+  ],
+  "version": "4.1",
+  "witnesses": [
+    {
+      "all_failures_attributed": true,
+      "anchor": "get_child_arguments",
+      "f2p_fail": 1,
+      "failure_analysis": {
+        "all_reference_the_symbol": true,
+        "broke": [],
+        "coupled": [
+          "test_entrypoint_fallback (utils_tests.test_autoreload.TestChildArguments)",
+          "test_exe_fallback (utils_tests.test_autoreload.TestChildArguments)",
+          "test_module_no_spec (utils_tests.test_autoreload.TestChildArguments)",
+          "test_raises_runtimeerror (utils_tests.test_autoreload.TestChildArguments)",
+          "test_run_as_module (utils_tests.test_autoreload.TestChildArguments)",
+          "test_run_as_non_django_module (utils_tests.test_autoreload.TestChildArguments)",
+          "test_run_as_non_django_module_non_package (utils_tests.test_autoreload.TestChildArguments)",
+          "test_warnoptions (utils_tests.test_autoreload.TestChildArguments)",
+          "test_xoptions (utils_tests.test_autoreload.TestChildArguments)"
+        ],
+        "failing": [
+          "test_entrypoint_fallback (utils_tests.test_autoreload.TestChildArguments)",
+          "test_exe_fallback (utils_tests.test_autoreload.TestChildArguments)",
+          "test_module_no_spec (utils_tests.test_autoreload.TestChildArguments)",
+          "test_raises_runtimeerror (utils_tests.test_autoreload.TestChildArguments)",
+          "test_run_as_module (utils_tests.test_autoreload.TestChildArguments)",
+          "test_run_as_non_django_module (utils_tests.test_autoreload.TestChildArguments)",
+          "test_run_as_non_django_module_non_package (utils_tests.test_autoreload.TestChildArguments)",
+          "test_warnoptions (utils_tests.test_autoreload.TestChildArguments)",
+          "test_xoptions (utils_tests.test_autoreload.TestChildArguments)"
+        ],
+        "symbol": "get_child_arguments",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": "django/utils/autoreload.py",
+      "graded_log": "+ ./tests/runtests.py --verbosity 2 --settings=test_sqlite --parallel 1 utils_tests.test_autoreload\nTesting against Django installed in '/testbed/django'\nImporting application utils_tests\nFound 81 test(s).\nSkipping setup of unused database(s): default, other.\nSystem check identified no issues (0 silenced).\n\ntest_run_loop_catches_stopiteration (utils_tests.test_autoreload.BaseReloaderTests) ... ok\ntest_run_loop_stop_and_return (utils_tests.test_autoreload.BaseReloaderTests) ... ok\ntest_wait_for_apps_ready_checks_for_exception (utils_tests.test_autoreload.BaseReloaderTests) ... ok\ntest_wait_for_apps_ready_without_exception (utils_tests.test_autoreload.BaseReloaderTests) ... ok\ntest_watch_dir_with_unresolvable_path (utils_tests.test_autoreload.BaseReloaderTests) ... ok\ntest_watch_files_with_recursive_glob (utils_tests.test_autoreload.BaseReloaderTests) ... ok\ntest_watch_with_glob (utils_tests.test_autoreload.BaseReloaderTests) ... ok\ntest_watchman_available (utils_tests.test_autoreload.GetReloaderTests) ... ok\ntest_watchman_unavailable (utils_tests.test_autoreload.GetReloaderTests) ... ok\ntest_manage_py (utils_tests.test_autoreload.RestartWithReloaderTests) ... ok\ntest_python_m_django (utils_tests.test_autoreload.RestartWithReloaderTests) ... ok\ntest_calls_start_django (utils_tests.test_autoreload.RunWithReloaderTests) ... ok\ntest_calls_sys_exit (utils_tests.test_autoreload.RunWithReloaderTests) ... ok\ntest_swallows_keyboard_interrupt (utils_tests.test_autoreload.RunWithReloaderTests) ... ok\ntest_check_errors_called (utils_tests.test_autoreload.StartDjangoTests) ... ok\ntest_echo_on_called (utils_tests.test_autoreload.StartDjangoTests) ... ok\ntest_starts_thread_with_args (utils_tests.test_autoreload.StartDjangoTests) ... ok\ntest_watchman_becomes_unavailable (utils_tests.test_autoreload.StartDjangoTests) ... ok\ntest_glob (utils_tests.test_autoreload.StatReloaderTests) ... ok\ntest_glob_recursive (utils_tests.test_autoreload.StatReloaderTests) ... ok\ntest_multiple_globs (utils_tests.test_autoreload.StatReloaderTests) ... ok\ntest_multiple_recursive_globs (utils_tests.test_autoreload.StatReloaderTests) ... ok\ntest_nested_glob_recursive (utils_tests.test_autoreload.StatReloaderTests) ... ok\ntest_overlapping_glob_recursive (utils_tests.test_autoreload.StatReloaderTests) ... ok\ntest_overlapping_globs (utils_tests.test_autoreload.StatReloaderTests) ... ok\ntest_snapshot_files_ignores_missing_files (utils_tests.test_autoreload.StatReloaderTests) ... ok\ntest_snapshot_files_updates (utils_tests.test_autoreload.StatReloaderTests) ... ok\ntest_snapshot_files_with_duplicates (utils_tests.test_autoreload.StatReloaderTests) ... ok\ntest_tick_does_not_trigger_twice (utils_tests.test_autoreload.StatReloaderTests) ... ok\ntest_mutates_error_files (utils_tests.test_autoreload.TestCheckErrors) ... ok\ntest_entrypoint_fallback (utils_tests.test_autoreload.TestChildArguments) ... ERROR\ntest_exe_fallback (utils_tests.test_autoreload.TestChildArguments) ... ERROR\ntest_module_no_spec (utils_tests.test_autoreload.TestChildArguments) ... ERROR\ntest_raises_runtimeerror (utils_tests.test_autoreload.TestChildArguments) ... ERROR\ntest_run_as_module (utils_tests.test_autoreload.TestChildArguments) ... ERROR\ntest_run_as_non_django_module (utils_tests.test_autoreload.TestChildArguments) ... ERROR\ntest_run_as_non_django_module_non_package (utils_tests.test_autoreload.TestChildArguments) ... ERROR\ntest_warnoptions (utils_tests.test_autoreload.TestChildArguments) ... ERROR\ntest_xoptions (utils_tests.test_autoreload.TestChildArguments) ... ERROR\ntest_common_roots (utils_tests.test_autoreload.TestCommonRoots) ... ok\ntest_bytecode_conversion_to_source (utils_tests.test_autoreload.TestIterModulesAndFiles)\n.pyc and .pyo files are included in the files list. ... ok\ntest_check_errors (utils_tests.test_autoreload.TestIterModulesAndFiles)\nWhen a file containing an error is imported in a function wrapped by ... ok\ntest_check_errors_catches_all_exceptions (utils_tests.test_autoreload.TestIterModulesAndFiles)\nSince Python may raise arbitrary exceptions when importing code, ... ok\ntest_file_added (utils_tests.test_autoreload.TestIterModulesAndFiles)\nWhen a file is added, it's returned by iter_all_python_module_files(). ... ok\ntest_main_module_is_resolved (utils_tests.test_autoreload.TestIterModulesAndFiles) ... ok\ntest_main_module_without_file_is_not_resolved (utils_tests.test_autoreload.TestIterModulesAndFiles) ... ok\ntest_module_without_spec (utils_tests.test_autoreload.TestIterModulesAndFiles) ... ok\ntest_path_with_embedded_null_bytes (utils_tests.test_autoreload.TestIterModulesAndFiles) ... ok\ntest_paths_are_pathlib_instances (utils_tests.test_autoreload.TestIterModulesAndFiles) ... ok\ntest_weakref_in_sys_module (utils_tests.test_autoreload.TestIterModulesAndFiles)\niter_all_python_module_file() ignores weakref modules. ... ok\ntest_zip_reload (utils_tests.test_autoreload.TestIterModulesAndFiles)\nModules imported from zipped files have their archive location included ... ok\ntest_no_exception (utils_tests.test_autoreload.TestRaiseLastException) ... ok\ntest_raises_custom_exception (utils_tests.test_autoreload.TestRaiseLastException) ... ok\ntest_raises_exception (utils_tests.test_autoreload.TestRaiseLastException) ... ok\ntest_raises_exception_with_context (utils_tests.test_autoreload.TestRaiseLastException) ... ok\ntest_sys_paths_absolute (utils_tests.test_autoreload.TestSysPathDirectories) ... ok\ntest_sys_paths_directories (utils_tests.test_autoreload.TestSysPathDirectories) ... ok\ntest_sys_paths_non_existing (utils_tests.test_autoreload.TestSysPathDirectories) ... ok\ntest_sys_paths_with_directories (utils_tests.test_autoreload.TestSysPathDirectories) ... ok\ntest_is_django_module (utils_tests.test_autoreload.TestUtilities) ... ok\ntest_is_django_path (utils_tests.test_autoreload.TestUtilities) ... ok\ntest_check_availability (utils_tests.test_autoreload.WatchmanReloaderTests) ... skipped 'Watchman unavailable: Cannot connect to the watchman service.'\ntest_check_availability_lower_version (utils_tests.test_autoreload.WatchmanReloaderTests) ... skipped 'Watchman unavailable: Cannot connect to the watchman service.'\ntest_check_server_status (utils_tests.test_autoreload.WatchmanReloaderTests) ... skipped 'Watchman unavailable: Cannot connect to the watchman service.'\ntest_check_server_status_raises_error (utils_tests.test_autoreload.WatchmanReloaderTests) ... skipped 'Watchman unavailable: Cannot connect to the watchman service.'\ntest_glob (utils_tests.test_autoreload.WatchmanReloaderTests) ... skipped 'Watchman unavailable: Cannot connect to the watchman service.'\ntest_glob_recursive (utils_tests.test_autoreload.WatchmanReloaderTests) ... skipped 'Watchman unavailable: Cannot connect to the watchman service.'\ntest_multiple_globs (utils_tests.test_autoreload.WatchmanReloaderTests) ... skipped 'Watchman unavailable: Cannot connect to the watchman service.'\ntest_multiple_recursive_globs (utils_tests.test_autoreload.WatchmanReloaderTests) ... skipped 'Watchman unavailable: Cannot connect to the watchman service.'\ntest_nested_glob_recursive (utils_tests.test_autoreload.WatchmanReloaderTests) ... skipped 'Watchman unavailable: Cannot connect to the watchman service.'\ntest_overlapping_glob_recursive (utils_tests.test_autoreload.WatchmanReloaderTests) ... skipped 'Watchman unavailable: Cannot connect to the watchman service.'\ntest_overlapping_globs (utils_tests.test_autoreload.WatchmanReloaderTests) ... skipped 'Watchman unavailable: Cannot connect to the watchman service.'\ntest_pywatchman_not_available (utils_tests.test_autoreload.WatchmanReloaderTests) ... skipped 'Watchman unavailable: Cannot connect to the watchman service.'\ntest_setting_timeout_from_environment_variable (utils_tests.test_autoreload.WatchmanReloaderTests) ... skipped 'Watchman unavailable: Cannot connect to the watchman service.'\ntest_update_watches_raises_exceptions (utils_tests.test_autoreload.WatchmanReloaderTests) ... skipped 'Watchman unavailable: Cannot connect to the watchman service.'\ntest_watch_glob_ignores_non_existing_directories_two_levels (utils_tests.test_autoreload.WatchmanReloaderTests) ... skipped 'Watchman unavailable: Cannot connect to the watchman service.'\ntest_watch_glob_multiple_patterns (utils_tests.test_autoreload.WatchmanReloaderTests) ... skipped 'Watchman unavailable: Cannot connect to the watchman service.'\ntest_watch_glob_uses_existing_parent_directories (utils_tests.test_autoreload.WatchmanReloaderTests) ... skipped 'Watchman unavailable: Cannot connect to the watchman service.'\ntest_watched_roots_contains_directory_globs (utils_tests.test_autoreload.WatchmanReloaderTests) ... skipped 'Watchman unavailable: Cannot connect to the watchman service.'\ntest_watched_roots_contains_files (utils_tests.test_autoreload.WatchmanReloaderTests) ... skipped 'Watchman unavailable: Cannot connect to the watchman service.'\ntest_watched_roots_contains_sys_path (utils_tests.test_autoreload.WatchmanReloaderTests) ... skipped 'Watchman unavailable: Cannot connect to the watchman service.'\n\n======================================================================\nERROR: test_entrypoint_fallback (utils_tests.test_autoreload.TestChildArguments)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/opt/miniconda3/envs/testbed/lib/python3.9/unittest/mock.py\", line 1336, in patched\n    return func(*newargs, **newkeywargs)\n  File \"/testbed/tests/utils_tests/test_autoreload.py\", line 240, in test_entrypoint_fallback\n    autoreload.get_child_arguments(),\nAttributeError: module 'django.utils.autoreload' has no attribute 'get_child_arguments'\n\n======================================================================\nERROR: test_exe_fallback (utils_tests.test_autoreload.TestChildArguments)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/opt/miniconda3/envs/testbed/lib/python3.9/unittest/mock.py\", line 1336, in patched\n    return func(*newargs, **newkeywargs)\n  File \"/testbed/tests/utils_tests/test_autoreload.py\", line 227, in test_exe_fallback\n    autoreload.get_child_arguments(),\nAttributeError: module 'django.utils.autoreload' has no attribute 'get_child_arguments'\n\n======================================================================\nERROR: test_module_no_spec (utils_tests.test_autoreload.TestChildArguments)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/opt/miniconda3/envs/testbed/lib/python3.9/unittest/mock.py\", line 1336, in patched\n    return func(*newargs, **newkeywargs)\n  File \"/testbed/tests/utils_tests/test_autoreload.py\", line 260, in test_module_no_spec\n    autoreload.get_child_arguments(),\nAttributeError: module 'django.utils.autoreload' has no attribute 'get_child_arguments'\n\n======================================================================\nERROR: test_raises_runtimeerror (utils_tests.test_autoreload.TestChildArguments)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/opt/miniconda3/envs/testbed/lib/python3.9/unittest/mock.py\", line 1336, in patched\n    return func(*newargs, **newkeywargs)\n  File \"/testbed/tests/utils_tests/test_autoreload.py\", line 250, in test_raises_runtimeerror\n    autoreload.get_child_arguments()\nAttributeError: module 'django.utils.autoreload' has no attribute 'get_child_arguments'\n\n======================================================================\nERROR: test_run_as_module (utils_tests.test_autoreload.TestChildArguments)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/opt/miniconda3/envs/testbed/lib/python3.9/unittest/mock.py\", line 1768, in _inner\n    return f(*args, **kw)\n  File \"/opt/miniconda3/envs/testbed/lib/python3.9/unittest/mock.py\", line 1336, in patched\n    return func(*newargs, **newkeywargs)\n  File \"/testbed/tests/utils_tests/test_autoreload.py\", line 176, in test_run_as_module\n    autoreload.get_child_arguments(),\nAttributeError: module 'django.utils.autoreload' has no attribute 'get_child_arguments'\n\n======================================================================\nERROR: test_run_as_non_django_module (utils_tests.test_autoreload.TestChildArguments)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/opt/miniconda3/envs/testbed/lib/python3.9/unittest/mock.py\", line 1768, in _inner\n    return f(*args, **kw)\n  File \"/opt/miniconda3/envs/testbed/lib/python3.9/unittest/mock.py\", line 1336, in patched\n    return func(*newargs, **newkeywargs)\n  File \"/testbed/tests/utils_tests/test_autoreload.py\", line 186, in test_run_as_non_django_module\n    autoreload.get_child_arguments(),\nAttributeError: module 'django.utils.autoreload' has no attribute 'get_child_arguments'\n\n======================================================================\nERROR: test_run_as_non_django_module_non_package (utils_tests.test_autoreload.TestChildArguments)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/opt/miniconda3/envs/testbed/lib/python3.9/unittest/mock.py\", line 1768, in _inner\n    return f(*args, **kw)\n  File \"/opt/miniconda3/envs/testbed/lib/python3.9/unittest/mock.py\", line 1336, in patched\n    return func(*newargs, **newkeywargs)\n  File \"/testbed/tests/utils_tests/test_autoreload.py\", line 196, in test_run_as_non_django_module_non_package\n    autoreload.get_child_arguments(),\nAttributeError: module 'django.utils.autoreload' has no attribute 'get_child_arguments'\n\n======================================================================\nERROR: test_warnoptions (utils_tests.test_autoreload.TestChildArguments)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/opt/miniconda3/envs/testbed/lib/python3.9/unittest/mock.py\", line 1336, in patched\n    return func(*newargs, **newkeywargs)\n  File \"/testbed/tests/utils_tests/test_autoreload.py\", line 206, in test_warnoptions\n    autoreload.get_child_arguments(),\nAttributeError: module 'django.utils.autoreload' has no attribute 'get_child_arguments'\n\n======================================================================\nERROR: test_xoptions (utils_tests.test_autoreload.TestChildArguments)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/opt/miniconda3/envs/testbed/lib/python3.9/unittest/mock.py\", line 1336, in patched\n    return func(*newargs, **newkeywargs)\n  File \"/testbed/tests/utils_tests/test_autoreload.py\", line 215, in test_xoptions\n    autoreload.get_child_arguments(),\nAttributeError: module 'django.utils.autoreload' has no attribute 'get_child_arguments'\n\n----------------------------------------------------------------------\nRan 81 tests in 0.406s\n\nFAILED (errors=9, skipped=20)\n",
+      "graded_report": {
+        "f2p_fail": 1,
+        "f2p_failing": [
+          "test_xoptions (utils_tests.test_autoreload.TestChildArguments)"
+        ],
+        "f2p_pass": 0,
+        "found": true,
+        "n_parsed": 90,
+        "p2p_fail": 8,
+        "p2p_failing": [
+          "test_entrypoint_fallback (utils_tests.test_autoreload.TestChildArguments)",
+          "test_exe_fallback (utils_tests.test_autoreload.TestChildArguments)",
+          "test_module_no_spec (utils_tests.test_autoreload.TestChildArguments)",
+          "test_raises_runtimeerror (utils_tests.test_autoreload.TestChildArguments)",
+          "test_run_as_module (utils_tests.test_autoreload.TestChildArguments)",
+          "test_run_as_non_django_module (utils_tests.test_autoreload.TestChildArguments)",
+          "test_run_as_non_django_module_non_package (utils_tests.test_autoreload.TestChildArguments)",
+          "test_warnoptions (utils_tests.test_autoreload.TestChildArguments)"
+        ],
+        "p2p_pass": 52,
+        "reward": 0.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "p2p_coupled_tests": [
+        "test_entrypoint_fallback (utils_tests.test_autoreload.TestChildArguments)",
+        "test_exe_fallback (utils_tests.test_autoreload.TestChildArguments)",
+        "test_module_no_spec (utils_tests.test_autoreload.TestChildArguments)",
+        "test_raises_runtimeerror (utils_tests.test_autoreload.TestChildArguments)",
+        "test_run_as_module (utils_tests.test_autoreload.TestChildArguments)",
+        "test_run_as_non_django_module (utils_tests.test_autoreload.TestChildArguments)",
+        "test_run_as_non_django_module_non_package (utils_tests.test_autoreload.TestChildArguments)",
+        "test_warnoptions (utils_tests.test_autoreload.TestChildArguments)"
+      ],
+      "p2p_fail": 8,
+      "reason": "reward 0.0",
+      "tier": "MEDIUM",
+      "tree_digest": "4eb7b2439fde1391fb6518f7059447985c86ad23f653dac8a23200e6882299c6",
+      "verdict": "WITNESS",
+      "witness_side": "p2p_coupling"
+    }
+  ]
+}

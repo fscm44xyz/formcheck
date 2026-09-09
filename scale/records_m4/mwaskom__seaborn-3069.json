@@ -1,0 +1,177 @@
+{
+  "completed": true,
+  "control": {
+    "graded": null,
+    "log": null,
+    "passed": true,
+    "reason": "untransformed reference scores 1.0"
+  },
+  "digest_trace": [
+    {
+      "digest": "6495bc324f9de8d75af2e6cd0a749bdcd0b0e2c13d1238b7d73a262e4fe714c8",
+      "memo_hit": false
+    }
+  ],
+  "disk_orphan_reclaimed_bytes": 0,
+  "disk_residual_bytes": 0,
+  "elapsed_seconds": 242.93,
+  "error": null,
+  "image": "swebench/sweb.eval.x86_64.mwaskom_1776_seaborn-3069:latest",
+  "instance_id": "mwaskom__seaborn-3069",
+  "leaked_containers": [],
+  "leaked_image": false,
+  "log": [
+    [
+      "<control>",
+      "OK",
+      "untransformed reference scores 1.0"
+    ],
+    [
+      "kwonly_specialize:<no anchor>",
+      "NOT_APPLICABLE",
+      "no anchor inside the gold-touched region; 5 anchor(s) elsewhere in the target"
+    ],
+    [
+      "symbol_rename:Plotter",
+      "REFUSED",
+      "BORDER: the issue names 'Plotter' -- candidate CONTRACT, route to the rubric"
+    ],
+    [
+      "collection_reverse:<no anchor>",
+      "NOT_APPLICABLE",
+      "no anchor inside the gold-touched region"
+    ],
+    [
+      "message_reword:<no anchor>",
+      "NOT_APPLICABLE",
+      "no anchor inside the gold-touched region; 2 anchor(s) elsewhere in the target"
+    ]
+  ],
+  "mountable": true,
+  "multi_target": false,
+  "n_targets": 1,
+  "on_prime_hub": null,
+  "on_prime_hub_reason": "not resolvable offline; no hub environment index is reachable from this repo, verifiers or swebench",
+  "operators_not_applicable": [
+    "collection_reverse",
+    "kwonly_specialize",
+    "message_reword"
+  ],
+  "operators_with_anchors": [
+    "symbol_rename"
+  ],
+  "repo": "mwaskom/seaborn",
+  "row": {
+    "elapsed": 81.68,
+    "error": null,
+    "error_type": null,
+    "index": 0,
+    "mode": "formcheck",
+    "name": "mwaskom__seaborn-3069",
+    "reason": "unchecked",
+    "valid": null
+  },
+  "rows": [
+    {
+      "anchor": null,
+      "failure_analysis": null,
+      "file": null,
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 2,
+        "found": true,
+        "n_parsed": 170,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 94,
+        "reward": 1.0
+      },
+      "loud_failure": false,
+      "observable": "callable signature (arity / parameter names)",
+      "operator": "kwonly_specialize",
+      "reason": "no anchor inside the gold-touched region; 5 anchor(s) elsewhere in the target",
+      "tier": "HIGH",
+      "tree_digest": "6495bc324f9de8d75af2e6cd0a749bdcd0b0e2c13d1238b7d73a262e4fe714c8",
+      "verdict": "NOT_APPLICABLE"
+    },
+    {
+      "anchor": "Plotter",
+      "failure_analysis": null,
+      "file": "seaborn/_core/plot.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 2,
+        "found": true,
+        "n_parsed": 170,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 94,
+        "reward": 1.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "BORDER: the issue names 'Plotter' -- candidate CONTRACT, route to the rubric",
+      "tier": "MEDIUM",
+      "tree_digest": "6495bc324f9de8d75af2e6cd0a749bdcd0b0e2c13d1238b7d73a262e4fe714c8",
+      "verdict": "REFUSED"
+    },
+    {
+      "anchor": null,
+      "failure_analysis": null,
+      "file": null,
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 2,
+        "found": true,
+        "n_parsed": 170,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 94,
+        "reward": 1.0
+      },
+      "loud_failure": false,
+      "observable": "order of elements in a returned collection",
+      "operator": "collection_reverse",
+      "reason": "no anchor inside the gold-touched region",
+      "tier": "MEDIUM",
+      "tree_digest": "6495bc324f9de8d75af2e6cd0a749bdcd0b0e2c13d1238b7d73a262e4fe714c8",
+      "verdict": "NOT_APPLICABLE"
+    },
+    {
+      "anchor": null,
+      "failure_analysis": null,
+      "file": null,
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 2,
+        "found": true,
+        "n_parsed": 170,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 94,
+        "reward": 1.0
+      },
+      "loud_failure": false,
+      "observable": "human-readable text of an exception message",
+      "operator": "message_reword",
+      "reason": "no anchor inside the gold-touched region; 2 anchor(s) elsewhere in the target",
+      "tier": "HIGH",
+      "tree_digest": "6495bc324f9de8d75af2e6cd0a749bdcd0b0e2c13d1238b7d73a262e4fe714c8",
+      "verdict": "NOT_APPLICABLE"
+    }
+  ],
+  "targets": [
+    "seaborn/_core/plot.py"
+  ],
+  "version": "0.12",
+  "witnesses": []
+}

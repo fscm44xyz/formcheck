@@ -1,0 +1,355 @@
+{
+  "completed": true,
+  "control": {
+    "graded": null,
+    "log": null,
+    "passed": true,
+    "reason": "untransformed reference scores 1.0"
+  },
+  "digest_trace": [
+    {
+      "digest": "16e7930ae18f29982b55a6d72867711e93cabde6d9753020c84f8d3c4b6fa0c3",
+      "memo_hit": false
+    },
+    {
+      "digest": "e83964dac1c9b85843cbc10d142fac98635bd301b19a9dcf30720ea7350efacd",
+      "memo_hit": false
+    },
+    {
+      "digest": "e83964dac1c9b85843cbc10d142fac98635bd301b19a9dcf30720ea7350efacd",
+      "memo_hit": true
+    }
+  ],
+  "disk_orphan_reclaimed_bytes": 0,
+  "disk_residual_bytes": 0,
+  "elapsed_seconds": 104.97,
+  "error": null,
+  "image": "swebench/sweb.eval.x86_64.sphinx-doc_1776_sphinx-8035:latest",
+  "instance_id": "sphinx-doc__sphinx-8035",
+  "leaked_containers": [],
+  "leaked_image": false,
+  "log": [
+    [
+      "<control>",
+      "OK",
+      "untransformed reference scores 1.0"
+    ],
+    [
+      "kwonly_specialize:<no anchor>",
+      "NOT_APPLICABLE",
+      "no anchor inside the gold-touched region"
+    ],
+    [
+      "symbol_rename:merge_special_members_option",
+      "REFUSED",
+      "dynamic reach: 'merge_special_members_option' appears in a non-annotation string literal in sphinx/ext/autodoc/__init__.py line 128 ('merge_special_members_option() is deprec') -- an alpha-rename cannot be argued safe"
+    ],
+    [
+      "symbol_rename:merge_members_option",
+      "CLEAN",
+      "reward 1.0"
+    ],
+    [
+      "symbol_rename:Documenter",
+      "REFUSED",
+      "dynamic reach: 'Documenter' appears in a non-annotation string literal in sphinx/application.py line 1014 ('Register a new documenter class for the '); 24 further hit(s) -- an alpha-rename cannot be argued safe"
+    ],
+    [
+      "symbol_rename:ModuleDocumenter",
+      "REFUSED",
+      "multi-line import of 'ModuleDocumenter' in sphinx/ext/autosummary/generate.py"
+    ],
+    [
+      "symbol_rename:ClassDocumenter",
+      "REFUSED",
+      "multi-line import of 'ClassDocumenter' in sphinx/ext/autosummary/generate.py"
+    ],
+    [
+      "collection_reverse:<no anchor>",
+      "NOT_APPLICABLE",
+      "no anchor inside the gold-touched region"
+    ],
+    [
+      "message_reword:<no anchor>",
+      "NOT_APPLICABLE",
+      "no anchor inside the gold-touched region; 2 anchor(s) elsewhere in the target"
+    ]
+  ],
+  "mountable": true,
+  "multi_target": false,
+  "n_targets": 1,
+  "on_prime_hub": null,
+  "on_prime_hub_reason": "not resolvable offline; no hub environment index is reachable from this repo, verifiers or swebench",
+  "operators_not_applicable": [
+    "collection_reverse",
+    "kwonly_specialize",
+    "message_reword"
+  ],
+  "operators_with_anchors": [
+    "symbol_rename"
+  ],
+  "repo": "sphinx-doc/sphinx",
+  "row": {
+    "elapsed": 56.54,
+    "error": null,
+    "error_type": null,
+    "index": 0,
+    "mode": "formcheck",
+    "name": "sphinx-doc__sphinx-8035",
+    "reason": "valid",
+    "valid": true
+  },
+  "rows": [
+    {
+      "anchor": null,
+      "failure_analysis": null,
+      "file": null,
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 1,
+        "found": true,
+        "n_parsed": 3,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 2,
+        "reward": 1.0
+      },
+      "loud_failure": false,
+      "observable": "callable signature (arity / parameter names)",
+      "operator": "kwonly_specialize",
+      "reason": "no anchor inside the gold-touched region",
+      "tier": "HIGH",
+      "tree_digest": "16e7930ae18f29982b55a6d72867711e93cabde6d9753020c84f8d3c4b6fa0c3",
+      "verdict": "NOT_APPLICABLE"
+    },
+    {
+      "anchor": "merge_special_members_option",
+      "failure_analysis": null,
+      "file": "sphinx/ext/autodoc/__init__.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 1,
+        "found": true,
+        "n_parsed": 3,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 2,
+        "reward": 1.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "dynamic reach: 'merge_special_members_option' appears in a non-annotation string literal in sphinx/ext/autodoc/__init__.py line 128 ('merge_special_members_option() is deprec') -- an alpha-rename cannot be argued safe",
+      "tier": "MEDIUM",
+      "tree_digest": "16e7930ae18f29982b55a6d72867711e93cabde6d9753020c84f8d3c4b6fa0c3",
+      "verdict": "REFUSED"
+    },
+    {
+      "anchor": "merge_members_option",
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "broke": [],
+        "coupled": [],
+        "failing": [],
+        "symbol": "merge_members_option",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": "sphinx/ext/autodoc/__init__.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 1,
+        "found": true,
+        "n_parsed": 3,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 2,
+        "reward": 1.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "reward 1.0",
+      "tier": "MEDIUM",
+      "tree_digest": "e83964dac1c9b85843cbc10d142fac98635bd301b19a9dcf30720ea7350efacd",
+      "verdict": "CLEAN"
+    },
+    {
+      "anchor": "Documenter",
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "broke": [],
+        "coupled": [],
+        "failing": [],
+        "symbol": "merge_members_option",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": "sphinx/ext/autodoc/__init__.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 1,
+        "found": true,
+        "n_parsed": 3,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 2,
+        "reward": 1.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "dynamic reach: 'Documenter' appears in a non-annotation string literal in sphinx/application.py line 1014 ('Register a new documenter class for the '); 24 further hit(s) -- an alpha-rename cannot be argued safe",
+      "tier": "MEDIUM",
+      "tree_digest": "e83964dac1c9b85843cbc10d142fac98635bd301b19a9dcf30720ea7350efacd",
+      "verdict": "REFUSED"
+    },
+    {
+      "anchor": "ModuleDocumenter",
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "broke": [],
+        "coupled": [],
+        "failing": [],
+        "symbol": "merge_members_option",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": "sphinx/ext/autodoc/__init__.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 1,
+        "found": true,
+        "n_parsed": 3,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 2,
+        "reward": 1.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "multi-line import of 'ModuleDocumenter' in sphinx/ext/autosummary/generate.py",
+      "tier": "MEDIUM",
+      "tree_digest": "e83964dac1c9b85843cbc10d142fac98635bd301b19a9dcf30720ea7350efacd",
+      "verdict": "REFUSED"
+    },
+    {
+      "anchor": "ClassDocumenter",
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "broke": [],
+        "coupled": [],
+        "failing": [],
+        "symbol": "merge_members_option",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": "sphinx/ext/autodoc/__init__.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 1,
+        "found": true,
+        "n_parsed": 3,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 2,
+        "reward": 1.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "multi-line import of 'ClassDocumenter' in sphinx/ext/autosummary/generate.py",
+      "tier": "MEDIUM",
+      "tree_digest": "e83964dac1c9b85843cbc10d142fac98635bd301b19a9dcf30720ea7350efacd",
+      "verdict": "REFUSED"
+    },
+    {
+      "anchor": null,
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "broke": [],
+        "coupled": [],
+        "failing": [],
+        "symbol": "merge_members_option",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": null,
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 1,
+        "found": true,
+        "n_parsed": 3,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 2,
+        "reward": 1.0
+      },
+      "loud_failure": false,
+      "observable": "order of elements in a returned collection",
+      "operator": "collection_reverse",
+      "reason": "no anchor inside the gold-touched region",
+      "tier": "MEDIUM",
+      "tree_digest": "e83964dac1c9b85843cbc10d142fac98635bd301b19a9dcf30720ea7350efacd",
+      "verdict": "NOT_APPLICABLE"
+    },
+    {
+      "anchor": null,
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "broke": [],
+        "coupled": [],
+        "failing": [],
+        "symbol": "merge_members_option",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": null,
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 1,
+        "found": true,
+        "n_parsed": 3,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 2,
+        "reward": 1.0
+      },
+      "loud_failure": false,
+      "observable": "human-readable text of an exception message",
+      "operator": "message_reword",
+      "reason": "no anchor inside the gold-touched region; 2 anchor(s) elsewhere in the target",
+      "tier": "HIGH",
+      "tree_digest": "e83964dac1c9b85843cbc10d142fac98635bd301b19a9dcf30720ea7350efacd",
+      "verdict": "NOT_APPLICABLE"
+    }
+  ],
+  "targets": [
+    "sphinx/ext/autodoc/__init__.py"
+  ],
+  "version": "3.2",
+  "witnesses": []
+}

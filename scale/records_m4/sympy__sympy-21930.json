@@ -1,0 +1,235 @@
+{
+  "completed": true,
+  "control": {
+    "graded": null,
+    "log": null,
+    "passed": true,
+    "reason": "untransformed reference scores 1.0"
+  },
+  "digest_trace": [
+    {
+      "digest": "6db2d762aa2326761c0dcf27008bc00d69d655e425c87938c459f0c1310d0a5f",
+      "memo_hit": false
+    }
+  ],
+  "disk_orphan_reclaimed_bytes": 0,
+  "disk_residual_bytes": 0,
+  "elapsed_seconds": 1161.74,
+  "error": null,
+  "image": "swebench/sweb.eval.x86_64.sympy_1776_sympy-21930:latest",
+  "instance_id": "sympy__sympy-21930",
+  "leaked_containers": [],
+  "leaked_image": false,
+  "log": [
+    [
+      "<control>",
+      "OK",
+      "untransformed reference scores 1.0"
+    ],
+    [
+      "kwonly_specialize:<no anchor>",
+      "NOT_APPLICABLE",
+      "no anchor inside the gold-touched region"
+    ],
+    [
+      "symbol_rename:AntiSymmetricTensor",
+      "REFUSED",
+      "dynamic reach: 'AntiSymmetricTensor' appears in a non-annotation string literal in sympy/physics/secondquant.py line 50 ('AntiSymmetricTensor') -- an `__all__` entry; 6 further hit(s) -- an alpha-rename cannot be argued safe"
+    ],
+    [
+      "symbol_rename:CreateBoson",
+      "REFUSED",
+      "dynamic reach: 'CreateBoson' appears in a non-annotation string literal in sympy/physics/secondquant.py line 21 ('CreateBoson') -- an `__all__` entry; 6 further hit(s) -- an alpha-rename cannot be argued safe"
+    ],
+    [
+      "symbol_rename:CreateFermion",
+      "REFUSED",
+      "dynamic reach: 'CreateFermion' appears in a non-annotation string literal in sympy/physics/secondquant.py line 23 ('CreateFermion') -- an `__all__` entry; 6 further hit(s) -- an alpha-rename cannot be argued safe"
+    ],
+    [
+      "collection_reverse:<no anchor>",
+      "NOT_APPLICABLE",
+      "no anchor inside the gold-touched region"
+    ],
+    [
+      "message_reword:<no anchor>",
+      "NOT_APPLICABLE",
+      "no anchor inside the gold-touched region; 3 anchor(s) elsewhere in the target"
+    ]
+  ],
+  "mountable": true,
+  "multi_target": false,
+  "n_targets": 1,
+  "on_prime_hub": null,
+  "on_prime_hub_reason": "not resolvable offline; no hub environment index is reachable from this repo, verifiers or swebench",
+  "operators_not_applicable": [
+    "collection_reverse",
+    "kwonly_specialize",
+    "message_reword"
+  ],
+  "operators_with_anchors": [
+    "symbol_rename"
+  ],
+  "repo": "sympy/sympy",
+  "row": {
+    "elapsed": 1124.02,
+    "error": null,
+    "error_type": null,
+    "index": 0,
+    "mode": "formcheck",
+    "name": "sympy__sympy-21930",
+    "reason": "unchecked",
+    "valid": null
+  },
+  "rows": [
+    {
+      "anchor": null,
+      "failure_analysis": null,
+      "file": null,
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 6,
+        "found": true,
+        "n_parsed": 51,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 45,
+        "reward": 1.0
+      },
+      "loud_failure": false,
+      "observable": "callable signature (arity / parameter names)",
+      "operator": "kwonly_specialize",
+      "reason": "no anchor inside the gold-touched region",
+      "tier": "HIGH",
+      "tree_digest": "6db2d762aa2326761c0dcf27008bc00d69d655e425c87938c459f0c1310d0a5f",
+      "verdict": "NOT_APPLICABLE"
+    },
+    {
+      "anchor": "AntiSymmetricTensor",
+      "failure_analysis": null,
+      "file": "sympy/physics/secondquant.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 6,
+        "found": true,
+        "n_parsed": 51,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 45,
+        "reward": 1.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "dynamic reach: 'AntiSymmetricTensor' appears in a non-annotation string literal in sympy/physics/secondquant.py line 50 ('AntiSymmetricTensor') -- an `__all__` entry; 6 further hit(s) -- an alpha-rename cannot be argued safe",
+      "tier": "MEDIUM",
+      "tree_digest": "6db2d762aa2326761c0dcf27008bc00d69d655e425c87938c459f0c1310d0a5f",
+      "verdict": "REFUSED"
+    },
+    {
+      "anchor": "CreateBoson",
+      "failure_analysis": null,
+      "file": "sympy/physics/secondquant.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 6,
+        "found": true,
+        "n_parsed": 51,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 45,
+        "reward": 1.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "dynamic reach: 'CreateBoson' appears in a non-annotation string literal in sympy/physics/secondquant.py line 21 ('CreateBoson') -- an `__all__` entry; 6 further hit(s) -- an alpha-rename cannot be argued safe",
+      "tier": "MEDIUM",
+      "tree_digest": "6db2d762aa2326761c0dcf27008bc00d69d655e425c87938c459f0c1310d0a5f",
+      "verdict": "REFUSED"
+    },
+    {
+      "anchor": "CreateFermion",
+      "failure_analysis": null,
+      "file": "sympy/physics/secondquant.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 6,
+        "found": true,
+        "n_parsed": 51,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 45,
+        "reward": 1.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "dynamic reach: 'CreateFermion' appears in a non-annotation string literal in sympy/physics/secondquant.py line 23 ('CreateFermion') -- an `__all__` entry; 6 further hit(s) -- an alpha-rename cannot be argued safe",
+      "tier": "MEDIUM",
+      "tree_digest": "6db2d762aa2326761c0dcf27008bc00d69d655e425c87938c459f0c1310d0a5f",
+      "verdict": "REFUSED"
+    },
+    {
+      "anchor": null,
+      "failure_analysis": null,
+      "file": null,
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 6,
+        "found": true,
+        "n_parsed": 51,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 45,
+        "reward": 1.0
+      },
+      "loud_failure": false,
+      "observable": "order of elements in a returned collection",
+      "operator": "collection_reverse",
+      "reason": "no anchor inside the gold-touched region",
+      "tier": "MEDIUM",
+      "tree_digest": "6db2d762aa2326761c0dcf27008bc00d69d655e425c87938c459f0c1310d0a5f",
+      "verdict": "NOT_APPLICABLE"
+    },
+    {
+      "anchor": null,
+      "failure_analysis": null,
+      "file": null,
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 6,
+        "found": true,
+        "n_parsed": 51,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 45,
+        "reward": 1.0
+      },
+      "loud_failure": false,
+      "observable": "human-readable text of an exception message",
+      "operator": "message_reword",
+      "reason": "no anchor inside the gold-touched region; 3 anchor(s) elsewhere in the target",
+      "tier": "HIGH",
+      "tree_digest": "6db2d762aa2326761c0dcf27008bc00d69d655e425c87938c459f0c1310d0a5f",
+      "verdict": "NOT_APPLICABLE"
+    }
+  ],
+  "targets": [
+    "sympy/physics/secondquant.py"
+  ],
+  "version": "1.9",
+  "witnesses": []
+}

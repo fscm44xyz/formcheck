@@ -1,0 +1,341 @@
+{
+  "completed": true,
+  "control": {
+    "graded": null,
+    "log": null,
+    "passed": true,
+    "reason": "untransformed reference scores 1.0"
+  },
+  "digest_trace": [
+    {
+      "digest": "d00f6b77078bdcb3522b92450ffacd1305d8ae319dc349c6d4258d3bb6f32cd1",
+      "memo_hit": false
+    },
+    {
+      "digest": "420ae6cc8642ab7a8d09579b1795faf53c6115dc4782268ebe2d9c96e9a64a10",
+      "memo_hit": false
+    },
+    {
+      "digest": "420ae6cc8642ab7a8d09579b1795faf53c6115dc4782268ebe2d9c96e9a64a10",
+      "memo_hit": true
+    },
+    {
+      "digest": "4e8edfc65696bebb8715290e9aa24e30f4054891cf7e19cd9900c8837d7d9b03",
+      "memo_hit": false
+    }
+  ],
+  "disk_orphan_reclaimed_bytes": 0,
+  "disk_residual_bytes": 0,
+  "elapsed_seconds": 1615.65,
+  "error": null,
+  "image": "swebench/sweb.eval.x86_64.sphinx-doc_1776_sphinx-9320:latest",
+  "instance_id": "sphinx-doc__sphinx-9320",
+  "leaked_containers": [],
+  "leaked_image": false,
+  "log": [
+    [
+      "<control>",
+      "OK",
+      "untransformed reference scores 1.0"
+    ],
+    [
+      "kwonly_specialize:<no anchor>",
+      "NOT_APPLICABLE",
+      "no anchor inside the gold-touched region"
+    ],
+    [
+      "symbol_rename:is_path_or_empty",
+      "CLEAN",
+      "reward 1.0"
+    ],
+    [
+      "symbol_rename:ask_user",
+      "UNVALIDATED",
+      "6 failing test(s) have no recognisable failure block -- unknown log shape, not evidence of breakage; first: tests/test_quickstart.py::test_quickstart_defaults"
+    ],
+    [
+      "collection_reverse:<no anchor>",
+      "NOT_APPLICABLE",
+      "no anchor inside the gold-touched region"
+    ],
+    [
+      "message_reword:<no anchor>",
+      "NOT_APPLICABLE",
+      "no anchor inside the gold-touched region"
+    ]
+  ],
+  "mountable": true,
+  "multi_target": false,
+  "n_targets": 1,
+  "on_prime_hub": null,
+  "on_prime_hub_reason": "not resolvable offline; no hub environment index is reachable from this repo, verifiers or swebench",
+  "operators_not_applicable": [
+    "collection_reverse",
+    "kwonly_specialize",
+    "message_reword"
+  ],
+  "operators_with_anchors": [
+    "symbol_rename"
+  ],
+  "repo": "sphinx-doc/sphinx",
+  "row": {
+    "elapsed": 59.37,
+    "error": null,
+    "error_type": null,
+    "index": 0,
+    "mode": "formcheck",
+    "name": "sphinx-doc__sphinx-9320",
+    "reason": "valid",
+    "valid": true
+  },
+  "rows": [
+    {
+      "anchor": null,
+      "failure_analysis": null,
+      "file": null,
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 1,
+        "found": true,
+        "n_parsed": 10,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 9,
+        "reward": 1.0
+      },
+      "loud_failure": false,
+      "observable": "callable signature (arity / parameter names)",
+      "operator": "kwonly_specialize",
+      "reason": "no anchor inside the gold-touched region",
+      "tier": "HIGH",
+      "tree_digest": "d00f6b77078bdcb3522b92450ffacd1305d8ae319dc349c6d4258d3bb6f32cd1",
+      "verdict": "NOT_APPLICABLE"
+    },
+    {
+      "anchor": "is_path_or_empty",
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "broke": [],
+        "coupled": [],
+        "failing": [],
+        "symbol": "is_path_or_empty",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": "sphinx/cmd/quickstart.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 1,
+        "found": true,
+        "n_parsed": 10,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 9,
+        "reward": 1.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "reward 1.0",
+      "tier": "MEDIUM",
+      "tree_digest": "420ae6cc8642ab7a8d09579b1795faf53c6115dc4782268ebe2d9c96e9a64a10",
+      "verdict": "CLEAN"
+    },
+    {
+      "anchor": "ask_user",
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "broke": [],
+        "coupled": [],
+        "failing": [
+          "tests/test_quickstart.py::test_quickstart_defaults",
+          "tests/test_quickstart.py::test_quickstart_all_answers",
+          "tests/test_quickstart.py::test_generated_files_eol",
+          "tests/test_quickstart.py::test_quickstart_and_build",
+          "tests/test_quickstart.py::test_default_filename",
+          "tests/test_quickstart.py::test_exits_when_existing_confpy"
+        ],
+        "symbol": "ask_user",
+        "unexplained": [
+          "tests/test_quickstart.py::test_quickstart_defaults (no failure section found)",
+          "tests/test_quickstart.py::test_quickstart_all_answers (no failure section found)",
+          "tests/test_quickstart.py::test_generated_files_eol (no failure section found)",
+          "tests/test_quickstart.py::test_quickstart_and_build (no failure section found)",
+          "tests/test_quickstart.py::test_default_filename (no failure section found)",
+          "tests/test_quickstart.py::test_exits_when_existing_confpy (no failure section found)"
+        ],
+        "unparsed": [
+          "tests/test_quickstart.py::test_quickstart_defaults",
+          "tests/test_quickstart.py::test_quickstart_all_answers",
+          "tests/test_quickstart.py::test_generated_files_eol",
+          "tests/test_quickstart.py::test_quickstart_and_build",
+          "tests/test_quickstart.py::test_default_filename",
+          "tests/test_quickstart.py::test_exits_when_existing_confpy"
+        ],
+        "unparsed_log_shape": true
+      },
+      "file": "sphinx/cmd/quickstart.py",
+      "graded_log": "+ tox --current-env -epy39 -v -- tests/test_quickstart.py\npy39: commands[0]> python -X dev -m pytest -rA --durations 25 tests/test_quickstart.py\n\u001b[1m============================= test session starts ==============================\u001b[0m\nplatform linux -- Python 3.9.20, pytest-8.3.3, pluggy-1.5.0\ncachedir: .tox/py39/.pytest_cache\nlibraries: Sphinx-4.1.0, docutils-0.17.1\nbase tempdir: /tmp/pytest-of-root/pytest-2\nrootdir: /testbed\nconfigfile: setup.cfg\nplugins: cov-5.0.0\ncollected 10 items\n\ntests/test_quickstart.py \u001b[32m.\u001b[0m\u001b[32m.\u001b[0m\u001b[32m.\u001b[0m\u001b[31mF\u001b[0m\u001b[31mF\u001b[0m\u001b[31mF\u001b[0m\u001b[31mF\u001b[0m\u001b[31mF\u001b[0m\u001b[32m.\u001b[0m\u001b[31mF\u001b[0m\u001b[31m                                      [100%]\u001b[0m\n\n=================================== FAILURES ===================================\n\u001b[31m\u001b[1m___________________________ test_quickstart_defaults ___________________________\u001b[0m\n\ntempdir = path('/tmp/pytest-of-root/pytest-2/test_quickstart_defaults0')\n\n    \u001b[0m\u001b[94mdef\u001b[39;49;00m \u001b[92mtest_quickstart_defaults\u001b[39;49;00m(tempdir):\u001b[90m\u001b[39;49;00m\n        answers = {\u001b[90m\u001b[39;49;00m\n            \u001b[33m'\u001b[39;49;00m\u001b[33mRoot path\u001b[39;49;00m\u001b[33m'\u001b[39;49;00m: tempdir,\u001b[90m\u001b[39;49;00m\n            \u001b[33m'\u001b[39;49;00m\u001b[33mProject name\u001b[39;49;00m\u001b[33m'\u001b[39;49;00m: \u001b[33m'\u001b[39;49;00m\u001b[33mSphinx Test\u001b[39;49;00m\u001b[33m'\u001b[39;49;00m,\u001b[90m\u001b[39;49;00m\n            \u001b[33m'\u001b[39;49;00m\u001b[33mAuthor name\u001b[39;49;00m\u001b[33m'\u001b[39;49;00m: \u001b[33m'\u001b[39;49;00m\u001b[33mGeorg Brandl\u001b[39;49;00m\u001b[33m'\u001b[39;49;00m,\u001b[90m\u001b[39;49;00m\n            \u001b[33m'\u001b[39;49;00m\u001b[33mProject version\u001b[39;49;00m\u001b[33m'\u001b[39;49;00m: \u001b[33m'\u001b[39;49;00m\u001b[33m0.1\u001b[39;49;00m\u001b[33m'\u001b[39;49;00m,\u001b[90m\u001b[39;49;00m\n        }\u001b[90m\u001b[39;49;00m\n        qs.term_input = mock_input(answers)\u001b[90m\u001b[39;49;00m\n        d = {}\u001b[90m\u001b[39;49;00m\n>       qs.ask_user(d)\u001b[90m\u001b[39;49;00m\n\u001b[1m\u001b[31mE       AttributeError: module 'sphinx.cmd.quickstart' has no attribute 'ask_user'\u001b[0m\n\n\u001b[1m\u001b[31mtests/test_quickstart.py\u001b[0m:105: AttributeError\n\u001b[31m\u001b[1m_________________________ test_quickstart_all_answers __________________________\u001b[0m\n\ntempdir = path('/tmp/pytest-of-root/pytest-2/test_quickstart_all_answers0')\n\n    \u001b[0m\u001b[94mdef\u001b[39;49;00m \u001b[92mtest_quickstart_all_answers\u001b[39;49;00m(tempdir):\u001b[90m\u001b[39;49;00m\n        answers = {\u001b[90m\u001b[39;49;00m\n            \u001b[33m'\u001b[39;49;00m\u001b[33mRoot path\u001b[39;49;00m\u001b[33m'\u001b[39;49;00m: tempdir,\u001b[90m\u001b[39;49;00m\n            \u001b[33m'\u001b[39;49;00m\u001b[33mSeparate source and build\u001b[39;49;00m\u001b[33m'\u001b[39;49;00m: \u001b[33m'\u001b[39;49;00m\u001b[33my\u001b[39;49;00m\u001b[33m'\u001b[39;49;00m,\u001b[90m\u001b[39;49;00m\n            \u001b[33m'\u001b[39;49;00m\u001b[33mName prefix for templates\u001b[39;49;00m\u001b[33m'\u001b[39;49;00m: \u001b[33m'\u001b[39;49;00m\u001b[33m.\u001b[39;49;00m\u001b[33m'\u001b[39;49;00m,\u001b[90m\u001b[39;49;00m\n            \u001b[33m'\u001b[39;49;00m\u001b[33mProject name\u001b[39;49;00m\u001b[33m'\u001b[39;49;00m: \u001b[33m'\u001b[39;49;00m\u001b[33mSTASI\u2122\u001b[39;49;00m\u001b[33m'\u001b[39;49;00m,\u001b[90m\u001b[39;49;00m\n            \u001b[33m'\u001b[39;49;00m\u001b[33mAuthor name\u001b[39;49;00m\u001b[33m'\u001b[39;49;00m: \u001b[33m'\u001b[39;49;00m\u001b[33mWolfgang Sch\u00e4uble & G\u001b[39;49;00m\u001b[33m\\'\u001b[39;49;00m\u001b[33mBeckstein\u001b[39;49;00m\u001b[33m'\u001b[39;49;00m,\u001b[90m\u001b[39;49;00m\n            \u001b[33m'\u001b[39;49;00m\u001b[33mProject version\u001b[39;49;00m\u001b[33m'\u001b[39;49;00m: \u001b[33m'\u001b[39;49;00m\u001b[33m2.0\u001b[39;49;00m\u001b[33m'\u001b[39;49;00m,\u001b[90m\u001b[39;49;00m\n            \u001b[33m'\u001b[39;49;00m\u001b[33mProject release\u001b[39;49;00m\u001b[33m'\u001b[39;49;00m: \u001b[33m'\u001b[39;49;00m\u001b[33m2.0.1\u001b[39;49;00m\u001b[33m'\u001b[39;49;00m,\u001b[90m\u001b[39;49;00m\n            \u001b[33m'\u001b[39;49;00m\u001b[33mProject language\u001b[39;49;00m\u001b[33m'\u001b[39;49;00m: \u001b[33m'\u001b[39;49;00m\u001b[33mde\u001b[39;49;00m\u001b[33m'\u001b[39;49;00m,\u001b[90m\u001b[39;49;00m\n            \u001b[33m'\u001b[39;49;00m\u001b[33mSource file suffix\u001b[39;49;00m\u001b[33m'\u001b[39;49;00m: \u001b[33m'\u001b[39;49;00m\u001b[33m.txt\u001b[39;49;00m\u001b[33m'\u001b[39;49;00m,\u001b[90m\u001b[39;49;00m\n            \u001b[33m'\u001b[39;49;00m\u001b[33mName of your master document\u001b[39;49;00m\u001b[33m'\u001b[39;49;00m: \u001b[33m'\u001b[39;49;00m\u001b[33mcontents\u001b[39;49;00m\u001b[33m'\u001b[39;49;00m,\u001b[90m\u001b[39;49;00m\n            \u001b[33m'\u001b[39;49;00m\u001b[33mautodoc\u001b[39;49;00m\u001b[33m'\u001b[39;49;00m: \u001b[33m'\u001b[39;49;00m\u001b[33my\u001b[39;49;00m\u001b[33m'\u001b[39;49;00m,\u001b[90m\u001b[39;49;00m\n            \u001b[33m'\u001b[39;49;00m\u001b[33mdoctest\u001b[39;49;00m\u001b[33m'\u001b[39;49;00m: \u001b[33m'\u001b[39;49;00m\u001b[33myes\u001b[39;49;00m\u001b[33m'\u001b[39;49;00m,\u001b[90m\u001b[39;49;00m\n            \u001b[33m'\u001b[39;49;00m\u001b[33mintersphinx\u001b[39;49;00m\u001b[33m'\u001b[39;49;00m: \u001b[33m'\u001b[39;49;00m\u001b[33mno\u001b[39;49;00m\u001b[33m'\u001b[39;49;00m,\u001b[90m\u001b[39;49;00m\n            \u001b[33m'\u001b[39;49;00m\u001b[33mtodo\u001b[39;49;00m\u001b[33m'\u001b[39;49;00m: \u001b[33m'\u001b[39;49;00m\u001b[33my\u001b[39;49;00m\u001b[33m'\u001b[39;49;00m,\u001b[90m\u001b[39;49;00m\n            \u001b[33m'\u001b[39;49;00m\u001b[33mcoverage\u001b[39;49;00m\u001b[33m'\u001b[39;49;00m: \u001b[33m'\u001b[39;49;00m\u001b[33mno\u001b[39;49;00m\u001b[33m'\u001b[39;49;00m,\u001b[90m\u001b[39;49;00m\n            \u001b[33m'\u001b[39;49;00m\u001b[33mimgmath\u001b[39;49;00m\u001b[33m'\u001b[39;49;00m: \u001b[33m'\u001b[39;49;00m\u001b[33mN\u001b[39;49;00m\u001b[33m'\u001b[39;49;00m,\u001b[90m\u001b[39;49;00m\n            \u001b[33m'\u001b[39;49;00m\u001b[33mmathjax\u001b[39;49;00m\u001b[33m'\u001b[39;49;00m: \u001b[33m'\u001b[39;49;00m\u001b[33mno\u001b[39;49;00m\u001b[33m'\u001b[39;49;00m,\u001b[90m\u001b[39;49;00m\n            \u001b[33m'\u001b[39;49;00m\u001b[33mifconfig\u001b[39;49;00m\u001b[33m'\u001b[39;49;00m: \u001b[33m'\u001b[39;49;00m\u001b[33mno\u001b[39;49;00m\u001b[33m'\u001b[39;49;00m,\u001b[90m\u001b[39;49;00m\n            \u001b[33m'\u001b[39;49;00m\u001b[33mviewcode\u001b[39;49;00m\u001b[33m'\u001b[39;49;00m: \u001b[33m'\u001b[39;49;00m\u001b[33mno\u001b[39;49;00m\u001b[33m'\u001b[39;49;00m,\u001b[90m\u001b[39;49;00m\n            \u001b[33m'\u001b[39;49;00m\u001b[33mgithubpages\u001b[39;49;00m\u001b[33m'\u001b[39;49;00m: \u001b[33m'\u001b[39;49;00m\u001b[33mno\u001b[39;49;00m\u001b[33m'\u001b[39;49;00m,\u001b[90m\u001b[39;49;00m\n            \u001b[33m'\u001b[39;49;00m\u001b[33mCreate Makefile\u001b[39;49;00m\u001b[33m'\u001b[39;49;00m: \u001b[33m'\u001b[39;49;00m\u001b[33mno\u001b[39;49;00m\u001b[33m'\u001b[39;49;00m,\u001b[90m\u001b[39;49;00m\n            \u001b[33m'\u001b[39;49;00m\u001b[33mCreate Windows command file\u001b[39;49;00m\u001b[33m'\u001b[39;49;00m: \u001b[33m'\u001b[39;49;00m\u001b[33mno\u001b[39;49;00m\u001b[33m'\u001b[39;49;00m,\u001b[90m\u001b[39;49;00m\n            \u001b[33m'\u001b[39;49;00m\u001b[33mDo you want to use the epub builder\u001b[39;49;00m\u001b[33m'\u001b[39;49;00m: \u001b[33m'\u001b[39;49;00m\u001b[33myes\u001b[39;49;00m\u001b[33m'\u001b[39;49;00m,\u001b[90m\u001b[39;49;00m\n        }\u001b[90m\u001b[39;49;00m\n        qs.term_input = mock_input(answers, needanswer=\u001b[94mTrue\u001b[39;49;00m)\u001b[90m\u001b[39;49;00m\n        d = {}\u001b[90m\u001b[39;49;00m\n>       qs.ask_user(d)\u001b[90m\u001b[39;49;00m\n\u001b[1m\u001b[31mE       AttributeError: module 'sphinx.cmd.quickstart' has no attribute 'ask_user'\u001b[0m\n\n\u001b[1m\u001b[31mtests/test_quickstart.py\u001b[0m:155: AttributeError\n\u001b[31m\u001b[1m___________________________ test_generated_files_eol ___________________________\u001b[0m\n\ntempdir = path('/tmp/pytest-of-root/pytest-2/test_generated_files_eol0')\n\n    \u001b[0m\u001b[94mdef\u001b[39;49;00m \u001b[92mtest_generated_files_eol\u001b[39;49;00m(tempdir):\u001b[90m\u001b[39;49;00m\n        answers = {\u001b[90m\u001b[39;49;00m\n            \u001b[33m'\u001b[39;49;00m\u001b[33mRoot path\u001b[39;49;00m\u001b[33m'\u001b[39;49;00m: tempdir,\u001b[90m\u001b[39;49;00m\n            \u001b[33m'\u001b[39;49;00m\u001b[33mProject name\u001b[39;49;00m\u001b[33m'\u001b[39;49;00m: \u001b[33m'\u001b[39;49;00m\u001b[33mSphinx Test\u001b[39;49;00m\u001b[33m'\u001b[39;49;00m,\u001b[90m\u001b[39;49;00m\n            \u001b[33m'\u001b[39;49;00m\u001b[33mAuthor name\u001b[39;49;00m\u001b[33m'\u001b[39;49;00m: \u001b[33m'\u001b[39;49;00m\u001b[33mGeorg Brandl\u001b[39;49;00m\u001b[33m'\u001b[39;49;00m,\u001b[90m\u001b[39;49;00m\n            \u001b[33m'\u001b[39;49;00m\u001b[33mProject version\u001b[39;49;00m\u001b[33m'\u001b[39;49;00m: \u001b[33m'\u001b[39;49;00m\u001b[33m0.1\u001b[39;49;00m\u001b[33m'\u001b[39;49;00m,\u001b[90m\u001b[39;49;00m\n        }\u001b[90m\u001b[39;49;00m\n        qs.term_input = mock_input(answers)\u001b[90m\u001b[39;49;00m\n        d = {}\u001b[90m\u001b[39;49;00m\n>       qs.ask_user(d)\u001b[90m\u001b[39;49;00m\n\u001b[1m\u001b[31mE       AttributeError: module 'sphinx.cmd.quickstart' has no attribute 'ask_user'\u001b[0m\n\n\u001b[1m\u001b[31mtests/test_quickstart.py\u001b[0m:191: AttributeError\n\u001b[31m\u001b[1m__________________________ test_quickstart_and_build ___________________________\u001b[0m\n\ntempdir = path('/tmp/pytest-of-root/pytest-2/test_quickstart_and_build0')\n\n    \u001b[0m\u001b[94mdef\u001b[39;49;00m \u001b[92mtest_quickstart_and_build\u001b[39;49;00m(tempdir):\u001b[90m\u001b[39;49;00m\n        answers = {\u001b[90m\u001b[39;49;00m\n            \u001b[33m'\u001b[39;49;00m\u001b[33mRoot path\u001b[39;49;00m\u001b[33m'\u001b[39;49;00m: tempdir,\u001b[90m\u001b[39;49;00m\n            \u001b[33m'\u001b[39;49;00m\u001b[33mProject name\u001b[39;49;00m\u001b[33m'\u001b[39;49;00m: \u001b[33m'\u001b[39;49;00m\u001b[33mFullwidth characters: \u001b[39;49;00m\u001b[33m\\u30c9\u001b[39;49;00m\u001b[33m\\u30a4\u001b[39;49;00m\u001b[33m\\u30c4\u001b[39;49;00m\u001b[33m'\u001b[39;49;00m,\u001b[90m\u001b[39;49;00m\n            \u001b[33m'\u001b[39;49;00m\u001b[33mAuthor name\u001b[39;49;00m\u001b[33m'\u001b[39;49;00m: \u001b[33m'\u001b[39;49;00m\u001b[33mGeorg Brandl\u001b[39;49;00m\u001b[33m'\u001b[39;49;00m,\u001b[90m\u001b[39;49;00m\n            \u001b[33m'\u001b[39;49;00m\u001b[33mProject version\u001b[39;49;00m\u001b[33m'\u001b[39;49;00m: \u001b[33m'\u001b[39;49;00m\u001b[33m0.1\u001b[39;49;00m\u001b[33m'\u001b[39;49;00m,\u001b[90m\u001b[39;49;00m\n        }\u001b[90m\u001b[39;49;00m\n        qs.term_input = mock_input(answers)\u001b[90m\u001b[39;49;00m\n        d = {}\u001b[90m\u001b[39;49;00m\n>       qs.ask_user(d)\u001b[90m\u001b[39;49;00m\n\u001b[1m\u001b[31mE       AttributeError: module 'sphinx.cmd.quickstart' has no attribute 'ask_user'\u001b[0m\n\n\u001b[1m\u001b[31mtests/test_quickstart.py\u001b[0m:211: AttributeError\n\u001b[31m\u001b[1m____________________________ test_default_filename _____________________________\u001b[0m\n\ntempdir = path('/tmp/pytest-of-root/pytest-2/test_default_filename0')\n\n    \u001b[0m\u001b[94mdef\u001b[39;49;00m \u001b[92mtest_default_filename\u001b[39;49;00m(tempdir):\u001b[90m\u001b[39;49;00m\n        answers = {\u001b[90m\u001b[39;49;00m\n            \u001b[33m'\u001b[39;49;00m\u001b[33mRoot path\u001b[39;49;00m\u001b[33m'\u001b[39;49;00m: tempdir,\u001b[90m\u001b[39;49;00m\n            \u001b[33m'\u001b[39;49;00m\u001b[33mProject name\u001b[39;49;00m\u001b[33m'\u001b[39;49;00m: \u001b[33m'\u001b[39;49;00m\u001b[33m\\u30c9\u001b[39;49;00m\u001b[33m\\u30a4\u001b[39;49;00m\u001b[33m\\u30c4\u001b[39;49;00m\u001b[33m'\u001b[39;49;00m,  \u001b[90m# Fullwidth characters only\u001b[39;49;00m\u001b[90m\u001b[39;49;00m\n            \u001b[33m'\u001b[39;49;00m\u001b[33mAuthor name\u001b[39;49;00m\u001b[33m'\u001b[39;49;00m: \u001b[33m'\u001b[39;49;00m\u001b[33mGeorg Brandl\u001b[39;49;00m\u001b[33m'\u001b[39;49;00m,\u001b[90m\u001b[39;49;00m\n            \u001b[33m'\u001b[39;49;00m\u001b[33mProject version\u001b[39;49;00m\u001b[33m'\u001b[39;49;00m: \u001b[33m'\u001b[39;49;00m\u001b[33m0.1\u001b[39;49;00m\u001b[33m'\u001b[39;49;00m,\u001b[90m\u001b[39;49;00m\n        }\u001b[90m\u001b[39;49;00m\n        qs.term_input = mock_input(answers)\u001b[90m\u001b[39;49;00m\n        d = {}\u001b[90m\u001b[39;49;00m\n>       qs.ask_user(d)\u001b[90m\u001b[39;49;00m\n\u001b[1m\u001b[31mE       AttributeError: module 'sphinx.cmd.quickstart' has no attribute 'ask_user'\u001b[0m\n\n\u001b[1m\u001b[31mtests/test_quickstart.py\u001b[0m:236: AttributeError\n\u001b[31m\u001b[1m_______________________ test_exits_when_existing_confpy ________________________\u001b[0m\n\nmonkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x73e288018fa0>\n\n    \u001b[0m\u001b[94mdef\u001b[39;49;00m \u001b[92mtest_exits_when_existing_confpy\u001b[39;49;00m(monkeypatch):\u001b[90m\u001b[39;49;00m\n        \u001b[90m# The code detects existing conf.py with path.isfile()\u001b[39;49;00m\u001b[90m\u001b[39;49;00m\n        \u001b[90m# so we mock it as True with pytest's monkeypatch\u001b[39;49;00m\u001b[90m\u001b[39;49;00m\n        \u001b[94mdef\u001b[39;49;00m \u001b[92mmock_isfile\u001b[39;49;00m(path):\u001b[90m\u001b[39;49;00m\n            \u001b[94mreturn\u001b[39;49;00m \u001b[94mTrue\u001b[39;49;00m\u001b[90m\u001b[39;49;00m\n        monkeypatch.setattr(path, \u001b[33m'\u001b[39;49;00m\u001b[33misfile\u001b[39;49;00m\u001b[33m'\u001b[39;49;00m, mock_isfile)\u001b[90m\u001b[39;49;00m\n    \u001b[90m\u001b[39;49;00m\n        qs.term_input = mock_input({\u001b[90m\u001b[39;49;00m\n            \u001b[33m'\u001b[39;49;00m\u001b[33mPlease enter a new root path (or just Enter to exit)\u001b[39;49;00m\u001b[33m'\u001b[39;49;00m: \u001b[33m'\u001b[39;49;00m\u001b[33m'\u001b[39;49;00m\u001b[90m\u001b[39;49;00m\n        })\u001b[90m\u001b[39;49;00m\n        d = {}\u001b[90m\u001b[39;49;00m\n        \u001b[94mwith\u001b[39;49;00m pytest.raises(\u001b[96mSystemExit\u001b[39;49;00m):\u001b[90m\u001b[39;49;00m\n>           qs.ask_user(d)\u001b[90m\u001b[39;49;00m\n\u001b[1m\u001b[31mE           AttributeError: module 'sphinx.cmd.quickstart' has no attribute 'ask_user'\u001b[0m\n\n\u001b[1m\u001b[31mtests/test_quickstart.py\u001b[0m:268: AttributeError\n\u001b[33m=============================== warnings summary ===============================\u001b[0m\nsphinx/util/docutils.py:44\n  /testbed/sphinx/util/docutils.py:44: DeprecationWarning: distutils Version classes are deprecated. Use packaging.version instead.\n    __version_info__ = tuple(LooseVersion(docutils.__version__).version)\n\nsphinx/highlighting.py:67\n  /testbed/sphinx/highlighting.py:67: DeprecationWarning: distutils Version classes are deprecated. Use packaging.version instead.\n    if tuple(LooseVersion(pygmentsversion).version) <= (2, 7, 4):\n\nsphinx/registry.py:24\n  /testbed/sphinx/registry.py:24: DeprecationWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html\n    from pkg_resources import iter_entry_points\n\n../opt/miniconda3/envs/testbed/lib/python3.9/site-packages/pkg_resources/__init__.py:3154\n../opt/miniconda3/envs/testbed/lib/python3.9/site-packages/pkg_resources/__init__.py:3154\n../opt/miniconda3/envs/testbed/lib/python3.9/site-packages/pkg_resources/__init__.py:3154\n../opt/miniconda3/envs/testbed/lib/python3.9/site-packages/pkg_resources/__init__.py:3154\n  /opt/miniconda3/envs/testbed/lib/python3.9/site-packages/pkg_resources/__init__.py:3154: DeprecationWarning: Deprecated call to `pkg_resources.declare_namespace('sphinxcontrib')`.\n  Implementing implicit namespace packages (as specified in PEP 420) is preferred to `pkg_resources.declare_namespace`. See https://setuptools.pypa.io/en/latest/references/keywords.html#keyword-namespace-packages\n    declare_namespace(pkg)\n\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n==================================== PASSES ====================================\n\u001b[32m\u001b[1m________________________________ test_do_prompt ________________________________\u001b[0m\n----------------------------- Captured stdout call -----------------------------\n* Please enter either 'y' or 'n'.\n\u001b[32m\u001b[1m_______________________________ test_extensions ________________________________\u001b[0m\n----------------------------- Captured stdout call -----------------------------\n\nFinished: An initial directory structure has been created.\n\nYou should now populate your master file /tmp/pytest-of-root/pytest-2/test_extensions0/index.rst and create other documentation\nsource files. Use the Makefile to build the docs, like so:\n   make builder\nwhere \"builder\" is one of the supported builders, e.g. html, latex or linkcheck.\n\n============================= slowest 25 durations =============================\n0.01s call     tests/test_quickstart.py::test_extensions\n\n(24 durations < 0.005s hidden.  Use -vv to show these durations.)\n\u001b[36m\u001b[1m=========================== short test summary info ============================\u001b[0m\n\u001b[32mPASSED\u001b[0m tests/test_quickstart.py::\u001b[1mtest_do_prompt\u001b[0m\n\u001b[32mPASSED\u001b[0m tests/test_quickstart.py::\u001b[1mtest_do_prompt_inputstrip\u001b[0m\n\u001b[32mPASSED\u001b[0m tests/test_quickstart.py::\u001b[1mtest_do_prompt_with_nonascii\u001b[0m\n\u001b[32mPASSED\u001b[0m tests/test_quickstart.py::\u001b[1mtest_extensions\u001b[0m\n\u001b[31mFAILED\u001b[0m tests/test_quickstart.py::\u001b[1mtest_quickstart_defaults\u001b[0m - AttributeError: module 'sphinx.cmd.quickstart' has no attribute 'ask_user'\n\u001b[31mFAILED\u001b[0m tests/test_quickstart.py::\u001b[1mtest_quickstart_all_answers\u001b[0m - AttributeError: module 'sphinx.cmd.quickstart' has no attribute 'ask_user'\n\u001b[31mFAILED\u001b[0m tests/test_quickstart.py::\u001b[1mtest_generated_files_eol\u001b[0m - AttributeError: module 'sphinx.cmd.quickstart' has no attribute 'ask_user'\n\u001b[31mFAILED\u001b[0m tests/test_quickstart.py::\u001b[1mtest_quickstart_and_build\u001b[0m - AttributeError: module 'sphinx.cmd.quickstart' has no attribute 'ask_user'\n\u001b[31mFAILED\u001b[0m tests/test_quickstart.py::\u001b[1mtest_default_filename\u001b[0m - AttributeError: module 'sphinx.cmd.quickstart' has no attribute 'ask_user'\n\u001b[31mFAILED\u001b[0m tests/test_quickstart.py::\u001b[1mtest_exits_when_existing_confpy\u001b[0m - AttributeError: module 'sphinx.cmd.quickstart' has no attribute 'ask_user'\n\u001b[31m=================== \u001b[31m\u001b[1m6 failed\u001b[0m, \u001b[32m4 passed\u001b[0m, \u001b[33m7 warnings\u001b[0m\u001b[31m in 0.19s\u001b[0m\u001b[31m ====================\u001b[0m\npy39: exit 1 (0.78 seconds) /testbed> python -X dev -m pytest -rA --durations 25 tests/test_quickstart.py pid=421\n  py39: FAIL code 1 (0.79=setup[0.01]+cmd[0.78] seconds)\n  evaluation failed :( (0.88 seconds)\n\n",
+      "graded_report": {
+        "f2p_fail": 1,
+        "f2p_failing": [
+          "tests/test_quickstart.py::test_exits_when_existing_confpy"
+        ],
+        "f2p_pass": 0,
+        "found": true,
+        "n_parsed": 10,
+        "p2p_fail": 5,
+        "p2p_failing": [
+          "tests/test_quickstart.py::test_quickstart_defaults",
+          "tests/test_quickstart.py::test_quickstart_all_answers",
+          "tests/test_quickstart.py::test_generated_files_eol",
+          "tests/test_quickstart.py::test_quickstart_and_build",
+          "tests/test_quickstart.py::test_default_filename"
+        ],
+        "p2p_pass": 4,
+        "reward": 0.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "6 failing test(s) have no recognisable failure block -- unknown log shape, not evidence of breakage; first: tests/test_quickstart.py::test_quickstart_defaults",
+      "tier": "MEDIUM",
+      "tree_digest": "4e8edfc65696bebb8715290e9aa24e30f4054891cf7e19cd9900c8837d7d9b03",
+      "verdict": "UNVALIDATED"
+    },
+    {
+      "anchor": null,
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "broke": [],
+        "coupled": [],
+        "failing": [
+          "tests/test_quickstart.py::test_quickstart_defaults",
+          "tests/test_quickstart.py::test_quickstart_all_answers",
+          "tests/test_quickstart.py::test_generated_files_eol",
+          "tests/test_quickstart.py::test_quickstart_and_build",
+          "tests/test_quickstart.py::test_default_filename",
+          "tests/test_quickstart.py::test_exits_when_existing_confpy"
+        ],
+        "symbol": "ask_user",
+        "unexplained": [
+          "tests/test_quickstart.py::test_quickstart_defaults (no failure section found)",
+          "tests/test_quickstart.py::test_quickstart_all_answers (no failure section found)",
+          "tests/test_quickstart.py::test_generated_files_eol (no failure section found)",
+          "tests/test_quickstart.py::test_quickstart_and_build (no failure section found)",
+          "tests/test_quickstart.py::test_default_filename (no failure section found)",
+          "tests/test_quickstart.py::test_exits_when_existing_confpy (no failure section found)"
+        ],
+        "unparsed": [
+          "tests/test_quickstart.py::test_quickstart_defaults",
+          "tests/test_quickstart.py::test_quickstart_all_answers",
+          "tests/test_quickstart.py::test_generated_files_eol",
+          "tests/test_quickstart.py::test_quickstart_and_build",
+          "tests/test_quickstart.py::test_default_filename",
+          "tests/test_quickstart.py::test_exits_when_existing_confpy"
+        ],
+        "unparsed_log_shape": true
+      },
+      "file": null,
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 1,
+        "f2p_failing": [
+          "tests/test_quickstart.py::test_exits_when_existing_confpy"
+        ],
+        "f2p_pass": 0,
+        "found": true,
+        "n_parsed": 10,
+        "p2p_fail": 5,
+        "p2p_failing": [
+          "tests/test_quickstart.py::test_quickstart_defaults",
+          "tests/test_quickstart.py::test_quickstart_all_answers",
+          "tests/test_quickstart.py::test_generated_files_eol",
+          "tests/test_quickstart.py::test_quickstart_and_build",
+          "tests/test_quickstart.py::test_default_filename"
+        ],
+        "p2p_pass": 4,
+        "reward": 0.0
+      },
+      "loud_failure": false,
+      "observable": "order of elements in a returned collection",
+      "operator": "collection_reverse",
+      "reason": "no anchor inside the gold-touched region",
+      "tier": "MEDIUM",
+      "tree_digest": "4e8edfc65696bebb8715290e9aa24e30f4054891cf7e19cd9900c8837d7d9b03",
+      "verdict": "NOT_APPLICABLE"
+    },
+    {
+      "anchor": null,
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "broke": [],
+        "coupled": [],
+        "failing": [
+          "tests/test_quickstart.py::test_quickstart_defaults",
+          "tests/test_quickstart.py::test_quickstart_all_answers",
+          "tests/test_quickstart.py::test_generated_files_eol",
+          "tests/test_quickstart.py::test_quickstart_and_build",
+          "tests/test_quickstart.py::test_default_filename",
+          "tests/test_quickstart.py::test_exits_when_existing_confpy"
+        ],
+        "symbol": "ask_user",
+        "unexplained": [
+          "tests/test_quickstart.py::test_quickstart_defaults (no failure section found)",
+          "tests/test_quickstart.py::test_quickstart_all_answers (no failure section found)",
+          "tests/test_quickstart.py::test_generated_files_eol (no failure section found)",
+          "tests/test_quickstart.py::test_quickstart_and_build (no failure section found)",
+          "tests/test_quickstart.py::test_default_filename (no failure section found)",
+          "tests/test_quickstart.py::test_exits_when_existing_confpy (no failure section found)"
+        ],
+        "unparsed": [
+          "tests/test_quickstart.py::test_quickstart_defaults",
+          "tests/test_quickstart.py::test_quickstart_all_answers",
+          "tests/test_quickstart.py::test_generated_files_eol",
+          "tests/test_quickstart.py::test_quickstart_and_build",
+          "tests/test_quickstart.py::test_default_filename",
+          "tests/test_quickstart.py::test_exits_when_existing_confpy"
+        ],
+        "unparsed_log_shape": true
+      },
+      "file": null,
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 1,
+        "f2p_failing": [
+          "tests/test_quickstart.py::test_exits_when_existing_confpy"
+        ],
+        "f2p_pass": 0,
+        "found": true,
+        "n_parsed": 10,
+        "p2p_fail": 5,
+        "p2p_failing": [
+          "tests/test_quickstart.py::test_quickstart_defaults",
+          "tests/test_quickstart.py::test_quickstart_all_answers",
+          "tests/test_quickstart.py::test_generated_files_eol",
+          "tests/test_quickstart.py::test_quickstart_and_build",
+          "tests/test_quickstart.py::test_default_filename"
+        ],
+        "p2p_pass": 4,
+        "reward": 0.0
+      },
+      "loud_failure": false,
+      "observable": "human-readable text of an exception message",
+      "operator": "message_reword",
+      "reason": "no anchor inside the gold-touched region",
+      "tier": "HIGH",
+      "tree_digest": "4e8edfc65696bebb8715290e9aa24e30f4054891cf7e19cd9900c8837d7d9b03",
+      "verdict": "NOT_APPLICABLE"
+    }
+  ],
+  "targets": [
+    "sphinx/cmd/quickstart.py"
+  ],
+  "version": "4.1",
+  "witnesses": []
+}

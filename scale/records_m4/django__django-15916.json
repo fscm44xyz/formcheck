@@ -1,0 +1,807 @@
+{
+  "completed": true,
+  "control": {
+    "graded": null,
+    "log": null,
+    "passed": true,
+    "reason": "untransformed reference scores 1.0"
+  },
+  "digest_trace": [
+    {
+      "digest": "6a4bce14cdeb165e3a2a527488a5be50ee4a3a76ea47e73d59da06fa41420da7",
+      "memo_hit": false
+    },
+    {
+      "digest": "78bfceaaacfd71b5e1848f35ecc21125e64fe05c0bd1f8f9ac395431e7972901",
+      "memo_hit": false
+    },
+    {
+      "digest": "78bfceaaacfd71b5e1848f35ecc21125e64fe05c0bd1f8f9ac395431e7972901",
+      "memo_hit": true
+    },
+    {
+      "digest": "8862c2cbbbdc598315f8cf9d24975b7d463768e29fbd1f4425769f59d31e9f12",
+      "memo_hit": false
+    }
+  ],
+  "disk_orphan_reclaimed_bytes": 0,
+  "disk_residual_bytes": 0,
+  "elapsed_seconds": 245.22,
+  "error": null,
+  "image": "swebench/sweb.eval.x86_64.django_1776_django-15916:latest",
+  "instance_id": "django__django-15916",
+  "leaked_containers": [],
+  "leaked_image": false,
+  "log": [
+    [
+      "<control>",
+      "OK",
+      "untransformed reference scores 1.0"
+    ],
+    [
+      "kwonly_specialize:__init__(*, initial=...)",
+      "REFUSED",
+      "P1: 'initial' is not a keyword-only parameter of __init__"
+    ],
+    [
+      "kwonly_specialize:__init__(*, pk_field=...)",
+      "REFUSED",
+      "P1: 'pk_field' is not a keyword-only parameter of __init__"
+    ],
+    [
+      "kwonly_specialize:__init__(*, to_field=...)",
+      "REFUSED",
+      "P1: 'to_field' is not a keyword-only parameter of __init__"
+    ],
+    [
+      "kwonly_specialize:__init__(*, empty_label=...)",
+      "REFUSED",
+      "P1: 'empty_label' is not a keyword-only parameter of __init__"
+    ],
+    [
+      "kwonly_specialize:__init__(*, required=...)",
+      "REFUSED",
+      "P1: 'required' is not a keyword-only parameter of __init__"
+    ],
+    [
+      "kwonly_specialize:__init__(*, widget=...)",
+      "REFUSED",
+      "P1: 'widget' is not a keyword-only parameter of __init__"
+    ],
+    [
+      "kwonly_specialize:__init__(*, label=...)",
+      "REFUSED",
+      "P1: 'label' is not a keyword-only parameter of __init__"
+    ],
+    [
+      "kwonly_specialize:__init__(*, initial=...)",
+      "REFUSED",
+      "P1: 'initial' is not a keyword-only parameter of __init__"
+    ],
+    [
+      "kwonly_specialize:__init__(*, help_text=...)",
+      "REFUSED",
+      "P1: 'help_text' is not a keyword-only parameter of __init__"
+    ],
+    [
+      "kwonly_specialize:__init__(*, to_field_name=...)",
+      "REFUSED",
+      "P1: 'to_field_name' is not a keyword-only parameter of __init__"
+    ],
+    [
+      "kwonly_specialize:__init__(*, limit_choices_to=...)",
+      "REFUSED",
+      "P1: 'limit_choices_to' is not a keyword-only parameter of __init__"
+    ],
+    [
+      "kwonly_specialize:__init__(*, blank=...)",
+      "REFUSED",
+      "P1: 'blank' is not a keyword-only parameter of __init__"
+    ],
+    [
+      "symbol_rename:ModelFormOptions",
+      "CLEAN",
+      "reward 1.0"
+    ],
+    [
+      "symbol_rename:ModelFormMetaclass",
+      "UNVALIDATED",
+      "7 failing test(s) have no recognisable failure block -- unknown log shape, not evidence of breakage; first: Regression test for #12960. Make sure the cleaned_data returned from"
+    ],
+    [
+      "symbol_rename:modelform_factory",
+      "REFUSED",
+      "BORDER: the issue names 'modelform_factory' -- candidate CONTRACT, route to the rubric"
+    ],
+    [
+      "collection_reverse:<no anchor>",
+      "NOT_APPLICABLE",
+      "no anchor inside the gold-touched region; 1 anchor(s) elsewhere in the target"
+    ],
+    [
+      "message_reword:<no anchor>",
+      "NOT_APPLICABLE",
+      "no anchor inside the gold-touched region; 4 anchor(s) elsewhere in the target"
+    ]
+  ],
+  "mountable": true,
+  "multi_target": false,
+  "n_targets": 1,
+  "on_prime_hub": null,
+  "on_prime_hub_reason": "not resolvable offline; no hub environment index is reachable from this repo, verifiers or swebench",
+  "operators_not_applicable": [
+    "collection_reverse",
+    "message_reword"
+  ],
+  "operators_with_anchors": [
+    "kwonly_specialize",
+    "symbol_rename"
+  ],
+  "repo": "django/django",
+  "row": {
+    "elapsed": 108.6,
+    "error": null,
+    "error_type": null,
+    "index": 0,
+    "mode": "formcheck",
+    "name": "django__django-15916",
+    "reason": "valid",
+    "valid": true
+  },
+  "rows": [
+    {
+      "anchor": "__init__(*, initial=...)",
+      "failure_analysis": null,
+      "file": "django/forms/models.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 2,
+        "found": true,
+        "n_parsed": 151,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 149,
+        "reward": 1.0
+      },
+      "loud_failure": false,
+      "observable": "callable signature (arity / parameter names)",
+      "operator": "kwonly_specialize",
+      "reason": "P1: 'initial' is not a keyword-only parameter of __init__",
+      "tier": "HIGH",
+      "tree_digest": "6a4bce14cdeb165e3a2a527488a5be50ee4a3a76ea47e73d59da06fa41420da7",
+      "verdict": "REFUSED"
+    },
+    {
+      "anchor": "__init__(*, pk_field=...)",
+      "failure_analysis": null,
+      "file": "django/forms/models.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 2,
+        "found": true,
+        "n_parsed": 151,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 149,
+        "reward": 1.0
+      },
+      "loud_failure": false,
+      "observable": "callable signature (arity / parameter names)",
+      "operator": "kwonly_specialize",
+      "reason": "P1: 'pk_field' is not a keyword-only parameter of __init__",
+      "tier": "HIGH",
+      "tree_digest": "6a4bce14cdeb165e3a2a527488a5be50ee4a3a76ea47e73d59da06fa41420da7",
+      "verdict": "REFUSED"
+    },
+    {
+      "anchor": "__init__(*, to_field=...)",
+      "failure_analysis": null,
+      "file": "django/forms/models.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 2,
+        "found": true,
+        "n_parsed": 151,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 149,
+        "reward": 1.0
+      },
+      "loud_failure": false,
+      "observable": "callable signature (arity / parameter names)",
+      "operator": "kwonly_specialize",
+      "reason": "P1: 'to_field' is not a keyword-only parameter of __init__",
+      "tier": "HIGH",
+      "tree_digest": "6a4bce14cdeb165e3a2a527488a5be50ee4a3a76ea47e73d59da06fa41420da7",
+      "verdict": "REFUSED"
+    },
+    {
+      "anchor": "__init__(*, empty_label=...)",
+      "failure_analysis": null,
+      "file": "django/forms/models.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 2,
+        "found": true,
+        "n_parsed": 151,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 149,
+        "reward": 1.0
+      },
+      "loud_failure": false,
+      "observable": "callable signature (arity / parameter names)",
+      "operator": "kwonly_specialize",
+      "reason": "P1: 'empty_label' is not a keyword-only parameter of __init__",
+      "tier": "HIGH",
+      "tree_digest": "6a4bce14cdeb165e3a2a527488a5be50ee4a3a76ea47e73d59da06fa41420da7",
+      "verdict": "REFUSED"
+    },
+    {
+      "anchor": "__init__(*, required=...)",
+      "failure_analysis": null,
+      "file": "django/forms/models.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 2,
+        "found": true,
+        "n_parsed": 151,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 149,
+        "reward": 1.0
+      },
+      "loud_failure": false,
+      "observable": "callable signature (arity / parameter names)",
+      "operator": "kwonly_specialize",
+      "reason": "P1: 'required' is not a keyword-only parameter of __init__",
+      "tier": "HIGH",
+      "tree_digest": "6a4bce14cdeb165e3a2a527488a5be50ee4a3a76ea47e73d59da06fa41420da7",
+      "verdict": "REFUSED"
+    },
+    {
+      "anchor": "__init__(*, widget=...)",
+      "failure_analysis": null,
+      "file": "django/forms/models.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 2,
+        "found": true,
+        "n_parsed": 151,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 149,
+        "reward": 1.0
+      },
+      "loud_failure": false,
+      "observable": "callable signature (arity / parameter names)",
+      "operator": "kwonly_specialize",
+      "reason": "P1: 'widget' is not a keyword-only parameter of __init__",
+      "tier": "HIGH",
+      "tree_digest": "6a4bce14cdeb165e3a2a527488a5be50ee4a3a76ea47e73d59da06fa41420da7",
+      "verdict": "REFUSED"
+    },
+    {
+      "anchor": "__init__(*, label=...)",
+      "failure_analysis": null,
+      "file": "django/forms/models.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 2,
+        "found": true,
+        "n_parsed": 151,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 149,
+        "reward": 1.0
+      },
+      "loud_failure": false,
+      "observable": "callable signature (arity / parameter names)",
+      "operator": "kwonly_specialize",
+      "reason": "P1: 'label' is not a keyword-only parameter of __init__",
+      "tier": "HIGH",
+      "tree_digest": "6a4bce14cdeb165e3a2a527488a5be50ee4a3a76ea47e73d59da06fa41420da7",
+      "verdict": "REFUSED"
+    },
+    {
+      "anchor": "__init__(*, initial=...)",
+      "failure_analysis": null,
+      "file": "django/forms/models.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 2,
+        "found": true,
+        "n_parsed": 151,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 149,
+        "reward": 1.0
+      },
+      "loud_failure": false,
+      "observable": "callable signature (arity / parameter names)",
+      "operator": "kwonly_specialize",
+      "reason": "P1: 'initial' is not a keyword-only parameter of __init__",
+      "tier": "HIGH",
+      "tree_digest": "6a4bce14cdeb165e3a2a527488a5be50ee4a3a76ea47e73d59da06fa41420da7",
+      "verdict": "REFUSED"
+    },
+    {
+      "anchor": "__init__(*, help_text=...)",
+      "failure_analysis": null,
+      "file": "django/forms/models.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 2,
+        "found": true,
+        "n_parsed": 151,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 149,
+        "reward": 1.0
+      },
+      "loud_failure": false,
+      "observable": "callable signature (arity / parameter names)",
+      "operator": "kwonly_specialize",
+      "reason": "P1: 'help_text' is not a keyword-only parameter of __init__",
+      "tier": "HIGH",
+      "tree_digest": "6a4bce14cdeb165e3a2a527488a5be50ee4a3a76ea47e73d59da06fa41420da7",
+      "verdict": "REFUSED"
+    },
+    {
+      "anchor": "__init__(*, to_field_name=...)",
+      "failure_analysis": null,
+      "file": "django/forms/models.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 2,
+        "found": true,
+        "n_parsed": 151,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 149,
+        "reward": 1.0
+      },
+      "loud_failure": false,
+      "observable": "callable signature (arity / parameter names)",
+      "operator": "kwonly_specialize",
+      "reason": "P1: 'to_field_name' is not a keyword-only parameter of __init__",
+      "tier": "HIGH",
+      "tree_digest": "6a4bce14cdeb165e3a2a527488a5be50ee4a3a76ea47e73d59da06fa41420da7",
+      "verdict": "REFUSED"
+    },
+    {
+      "anchor": "__init__(*, limit_choices_to=...)",
+      "failure_analysis": null,
+      "file": "django/forms/models.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 2,
+        "found": true,
+        "n_parsed": 151,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 149,
+        "reward": 1.0
+      },
+      "loud_failure": false,
+      "observable": "callable signature (arity / parameter names)",
+      "operator": "kwonly_specialize",
+      "reason": "P1: 'limit_choices_to' is not a keyword-only parameter of __init__",
+      "tier": "HIGH",
+      "tree_digest": "6a4bce14cdeb165e3a2a527488a5be50ee4a3a76ea47e73d59da06fa41420da7",
+      "verdict": "REFUSED"
+    },
+    {
+      "anchor": "__init__(*, blank=...)",
+      "failure_analysis": null,
+      "file": "django/forms/models.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 2,
+        "found": true,
+        "n_parsed": 151,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 149,
+        "reward": 1.0
+      },
+      "loud_failure": false,
+      "observable": "callable signature (arity / parameter names)",
+      "operator": "kwonly_specialize",
+      "reason": "P1: 'blank' is not a keyword-only parameter of __init__",
+      "tier": "HIGH",
+      "tree_digest": "6a4bce14cdeb165e3a2a527488a5be50ee4a3a76ea47e73d59da06fa41420da7",
+      "verdict": "REFUSED"
+    },
+    {
+      "anchor": "ModelFormOptions",
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "broke": [],
+        "coupled": [],
+        "failing": [],
+        "symbol": "ModelFormOptions",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": "django/forms/models.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 2,
+        "found": true,
+        "n_parsed": 151,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 149,
+        "reward": 1.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "reward 1.0",
+      "tier": "MEDIUM",
+      "tree_digest": "78bfceaaacfd71b5e1848f35ecc21125e64fe05c0bd1f8f9ac395431e7972901",
+      "verdict": "CLEAN"
+    },
+    {
+      "anchor": "ModelFormMetaclass",
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "broke": [],
+        "coupled": [
+          "test_modelform_factory_metaclass (model_forms.tests.CustomMetaclassTestCase)",
+          "test_bad_callback (model_forms.tests.FormFieldCallbackTests)",
+          "test_inherit_after_custom_callback (model_forms.tests.FormFieldCallbackTests)",
+          "test_custom_callback_from_base_form_meta (model_forms.tests.FormFieldCallbackTests)",
+          "test_custom_callback_in_meta (model_forms.tests.FormFieldCallbackTests)"
+        ],
+        "failing": [
+          "test_modelform_factory_metaclass (model_forms.tests.CustomMetaclassTestCase)",
+          "Regression test for #12960. Make sure the cleaned_data returned from",
+          "Regression for #12596: Calling super from ModelForm.clean() should be",
+          "test_bad_callback (model_forms.tests.FormFieldCallbackTests)",
+          "Using base forms with widgets defined in Meta should not raise errors.",
+          "A custom formfield_callback is used if provided",
+          "Regression for #15315: modelform_factory should accept widgets",
+          "test_inherit_after_custom_callback (model_forms.tests.FormFieldCallbackTests)",
+          "Regression for #19733",
+          "A model ValidationError using the dict form should put the error",
+          "test_custom_callback_from_base_form_meta (model_forms.tests.FormFieldCallbackTests)",
+          "test_custom_callback_in_meta (model_forms.tests.FormFieldCallbackTests)"
+        ],
+        "symbol": "ModelFormMetaclass",
+        "unexplained": [
+          "Regression test for #12960. Make sure the cleaned_data returned from (no failure section found)",
+          "Regression for #12596: Calling super from ModelForm.clean() should be (no failure section found)",
+          "Using base forms with widgets defined in Meta should not raise errors. (no failure section found)",
+          "A custom formfield_callback is used if provided (no failure section found)",
+          "Regression for #15315: modelform_factory should accept widgets (no failure section found)",
+          "Regression for #19733 (no failure section found)",
+          "A model ValidationError using the dict form should put the error (no failure section found)"
+        ],
+        "unparsed": [
+          "Regression test for #12960. Make sure the cleaned_data returned from",
+          "Regression for #12596: Calling super from ModelForm.clean() should be",
+          "Using base forms with widgets defined in Meta should not raise errors.",
+          "A custom formfield_callback is used if provided",
+          "Regression for #15315: modelform_factory should accept widgets",
+          "Regression for #19733",
+          "A model ValidationError using the dict form should put the error"
+        ],
+        "unparsed_log_shape": true
+      },
+      "file": "django/forms/models.py",
+      "graded_log": "+ ./tests/runtests.py --verbosity 2 --settings=test_sqlite --parallel 1 model_forms.tests\nTesting against Django installed in '/testbed/django'\nImporting application model_forms\nFound 1 test(s).\nSkipping setup of unused database(s): default, other.\nSystem check identified no issues (0 silenced).\n\ntests (unittest.loader._FailedTest) ... ERROR\n\n======================================================================\nERROR: tests (unittest.loader._FailedTest)\n----------------------------------------------------------------------\nImportError: Failed to import test module: tests\nTraceback (most recent call last):\n  File \"/opt/miniconda3/envs/testbed/lib/python3.9/unittest/loader.py\", line 154, in loadTestsFromName\n    module = __import__(module_name)\n  File \"/testbed/tests/model_forms/tests.py\", line 16, in <module>\n    from django.forms.models import (\nImportError: cannot import name 'ModelFormMetaclass' from 'django.forms.models' (/testbed/django/forms/models.py)\n\n\n----------------------------------------------------------------------\nRan 1 test in 0.000s\n\nFAILED (errors=1)\n",
+      "graded_report": {
+        "f2p_fail": 2,
+        "f2p_failing": [
+          "test_custom_callback_from_base_form_meta (model_forms.tests.FormFieldCallbackTests)",
+          "test_custom_callback_in_meta (model_forms.tests.FormFieldCallbackTests)"
+        ],
+        "f2p_pass": 0,
+        "found": true,
+        "n_parsed": 2,
+        "p2p_fail": 149,
+        "p2p_failing": [
+          "test_modelform_factory_metaclass (model_forms.tests.CustomMetaclassTestCase)",
+          "Regression test for #12960. Make sure the cleaned_data returned from",
+          "Regression for #12596: Calling super from ModelForm.clean() should be",
+          "test_bad_callback (model_forms.tests.FormFieldCallbackTests)",
+          "Using base forms with widgets defined in Meta should not raise errors.",
+          "A custom formfield_callback is used if provided",
+          "Regression for #15315: modelform_factory should accept widgets",
+          "test_inherit_after_custom_callback (model_forms.tests.FormFieldCallbackTests)",
+          "Regression for #19733",
+          "A model ValidationError using the dict form should put the error"
+        ],
+        "p2p_pass": 0,
+        "reward": 0.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "7 failing test(s) have no recognisable failure block -- unknown log shape, not evidence of breakage; first: Regression test for #12960. Make sure the cleaned_data returned from",
+      "tier": "MEDIUM",
+      "tree_digest": "8862c2cbbbdc598315f8cf9d24975b7d463768e29fbd1f4425769f59d31e9f12",
+      "verdict": "UNVALIDATED"
+    },
+    {
+      "anchor": "modelform_factory",
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "broke": [],
+        "coupled": [
+          "test_modelform_factory_metaclass (model_forms.tests.CustomMetaclassTestCase)",
+          "test_bad_callback (model_forms.tests.FormFieldCallbackTests)",
+          "test_inherit_after_custom_callback (model_forms.tests.FormFieldCallbackTests)",
+          "test_custom_callback_from_base_form_meta (model_forms.tests.FormFieldCallbackTests)",
+          "test_custom_callback_in_meta (model_forms.tests.FormFieldCallbackTests)"
+        ],
+        "failing": [
+          "test_modelform_factory_metaclass (model_forms.tests.CustomMetaclassTestCase)",
+          "Regression test for #12960. Make sure the cleaned_data returned from",
+          "Regression for #12596: Calling super from ModelForm.clean() should be",
+          "test_bad_callback (model_forms.tests.FormFieldCallbackTests)",
+          "Using base forms with widgets defined in Meta should not raise errors.",
+          "A custom formfield_callback is used if provided",
+          "Regression for #15315: modelform_factory should accept widgets",
+          "test_inherit_after_custom_callback (model_forms.tests.FormFieldCallbackTests)",
+          "Regression for #19733",
+          "A model ValidationError using the dict form should put the error",
+          "test_custom_callback_from_base_form_meta (model_forms.tests.FormFieldCallbackTests)",
+          "test_custom_callback_in_meta (model_forms.tests.FormFieldCallbackTests)"
+        ],
+        "symbol": "ModelFormMetaclass",
+        "unexplained": [
+          "Regression test for #12960. Make sure the cleaned_data returned from (no failure section found)",
+          "Regression for #12596: Calling super from ModelForm.clean() should be (no failure section found)",
+          "Using base forms with widgets defined in Meta should not raise errors. (no failure section found)",
+          "A custom formfield_callback is used if provided (no failure section found)",
+          "Regression for #15315: modelform_factory should accept widgets (no failure section found)",
+          "Regression for #19733 (no failure section found)",
+          "A model ValidationError using the dict form should put the error (no failure section found)"
+        ],
+        "unparsed": [
+          "Regression test for #12960. Make sure the cleaned_data returned from",
+          "Regression for #12596: Calling super from ModelForm.clean() should be",
+          "Using base forms with widgets defined in Meta should not raise errors.",
+          "A custom formfield_callback is used if provided",
+          "Regression for #15315: modelform_factory should accept widgets",
+          "Regression for #19733",
+          "A model ValidationError using the dict form should put the error"
+        ],
+        "unparsed_log_shape": true
+      },
+      "file": "django/forms/models.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 2,
+        "f2p_failing": [
+          "test_custom_callback_from_base_form_meta (model_forms.tests.FormFieldCallbackTests)",
+          "test_custom_callback_in_meta (model_forms.tests.FormFieldCallbackTests)"
+        ],
+        "f2p_pass": 0,
+        "found": true,
+        "n_parsed": 2,
+        "p2p_fail": 149,
+        "p2p_failing": [
+          "test_modelform_factory_metaclass (model_forms.tests.CustomMetaclassTestCase)",
+          "Regression test for #12960. Make sure the cleaned_data returned from",
+          "Regression for #12596: Calling super from ModelForm.clean() should be",
+          "test_bad_callback (model_forms.tests.FormFieldCallbackTests)",
+          "Using base forms with widgets defined in Meta should not raise errors.",
+          "A custom formfield_callback is used if provided",
+          "Regression for #15315: modelform_factory should accept widgets",
+          "test_inherit_after_custom_callback (model_forms.tests.FormFieldCallbackTests)",
+          "Regression for #19733",
+          "A model ValidationError using the dict form should put the error"
+        ],
+        "p2p_pass": 0,
+        "reward": 0.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "BORDER: the issue names 'modelform_factory' -- candidate CONTRACT, route to the rubric",
+      "tier": "MEDIUM",
+      "tree_digest": "8862c2cbbbdc598315f8cf9d24975b7d463768e29fbd1f4425769f59d31e9f12",
+      "verdict": "REFUSED"
+    },
+    {
+      "anchor": null,
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "broke": [],
+        "coupled": [
+          "test_modelform_factory_metaclass (model_forms.tests.CustomMetaclassTestCase)",
+          "test_bad_callback (model_forms.tests.FormFieldCallbackTests)",
+          "test_inherit_after_custom_callback (model_forms.tests.FormFieldCallbackTests)",
+          "test_custom_callback_from_base_form_meta (model_forms.tests.FormFieldCallbackTests)",
+          "test_custom_callback_in_meta (model_forms.tests.FormFieldCallbackTests)"
+        ],
+        "failing": [
+          "test_modelform_factory_metaclass (model_forms.tests.CustomMetaclassTestCase)",
+          "Regression test for #12960. Make sure the cleaned_data returned from",
+          "Regression for #12596: Calling super from ModelForm.clean() should be",
+          "test_bad_callback (model_forms.tests.FormFieldCallbackTests)",
+          "Using base forms with widgets defined in Meta should not raise errors.",
+          "A custom formfield_callback is used if provided",
+          "Regression for #15315: modelform_factory should accept widgets",
+          "test_inherit_after_custom_callback (model_forms.tests.FormFieldCallbackTests)",
+          "Regression for #19733",
+          "A model ValidationError using the dict form should put the error",
+          "test_custom_callback_from_base_form_meta (model_forms.tests.FormFieldCallbackTests)",
+          "test_custom_callback_in_meta (model_forms.tests.FormFieldCallbackTests)"
+        ],
+        "symbol": "ModelFormMetaclass",
+        "unexplained": [
+          "Regression test for #12960. Make sure the cleaned_data returned from (no failure section found)",
+          "Regression for #12596: Calling super from ModelForm.clean() should be (no failure section found)",
+          "Using base forms with widgets defined in Meta should not raise errors. (no failure section found)",
+          "A custom formfield_callback is used if provided (no failure section found)",
+          "Regression for #15315: modelform_factory should accept widgets (no failure section found)",
+          "Regression for #19733 (no failure section found)",
+          "A model ValidationError using the dict form should put the error (no failure section found)"
+        ],
+        "unparsed": [
+          "Regression test for #12960. Make sure the cleaned_data returned from",
+          "Regression for #12596: Calling super from ModelForm.clean() should be",
+          "Using base forms with widgets defined in Meta should not raise errors.",
+          "A custom formfield_callback is used if provided",
+          "Regression for #15315: modelform_factory should accept widgets",
+          "Regression for #19733",
+          "A model ValidationError using the dict form should put the error"
+        ],
+        "unparsed_log_shape": true
+      },
+      "file": null,
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 2,
+        "f2p_failing": [
+          "test_custom_callback_from_base_form_meta (model_forms.tests.FormFieldCallbackTests)",
+          "test_custom_callback_in_meta (model_forms.tests.FormFieldCallbackTests)"
+        ],
+        "f2p_pass": 0,
+        "found": true,
+        "n_parsed": 2,
+        "p2p_fail": 149,
+        "p2p_failing": [
+          "test_modelform_factory_metaclass (model_forms.tests.CustomMetaclassTestCase)",
+          "Regression test for #12960. Make sure the cleaned_data returned from",
+          "Regression for #12596: Calling super from ModelForm.clean() should be",
+          "test_bad_callback (model_forms.tests.FormFieldCallbackTests)",
+          "Using base forms with widgets defined in Meta should not raise errors.",
+          "A custom formfield_callback is used if provided",
+          "Regression for #15315: modelform_factory should accept widgets",
+          "test_inherit_after_custom_callback (model_forms.tests.FormFieldCallbackTests)",
+          "Regression for #19733",
+          "A model ValidationError using the dict form should put the error"
+        ],
+        "p2p_pass": 0,
+        "reward": 0.0
+      },
+      "loud_failure": false,
+      "observable": "order of elements in a returned collection",
+      "operator": "collection_reverse",
+      "reason": "no anchor inside the gold-touched region; 1 anchor(s) elsewhere in the target",
+      "tier": "MEDIUM",
+      "tree_digest": "8862c2cbbbdc598315f8cf9d24975b7d463768e29fbd1f4425769f59d31e9f12",
+      "verdict": "NOT_APPLICABLE"
+    },
+    {
+      "anchor": null,
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "broke": [],
+        "coupled": [
+          "test_modelform_factory_metaclass (model_forms.tests.CustomMetaclassTestCase)",
+          "test_bad_callback (model_forms.tests.FormFieldCallbackTests)",
+          "test_inherit_after_custom_callback (model_forms.tests.FormFieldCallbackTests)",
+          "test_custom_callback_from_base_form_meta (model_forms.tests.FormFieldCallbackTests)",
+          "test_custom_callback_in_meta (model_forms.tests.FormFieldCallbackTests)"
+        ],
+        "failing": [
+          "test_modelform_factory_metaclass (model_forms.tests.CustomMetaclassTestCase)",
+          "Regression test for #12960. Make sure the cleaned_data returned from",
+          "Regression for #12596: Calling super from ModelForm.clean() should be",
+          "test_bad_callback (model_forms.tests.FormFieldCallbackTests)",
+          "Using base forms with widgets defined in Meta should not raise errors.",
+          "A custom formfield_callback is used if provided",
+          "Regression for #15315: modelform_factory should accept widgets",
+          "test_inherit_after_custom_callback (model_forms.tests.FormFieldCallbackTests)",
+          "Regression for #19733",
+          "A model ValidationError using the dict form should put the error",
+          "test_custom_callback_from_base_form_meta (model_forms.tests.FormFieldCallbackTests)",
+          "test_custom_callback_in_meta (model_forms.tests.FormFieldCallbackTests)"
+        ],
+        "symbol": "ModelFormMetaclass",
+        "unexplained": [
+          "Regression test for #12960. Make sure the cleaned_data returned from (no failure section found)",
+          "Regression for #12596: Calling super from ModelForm.clean() should be (no failure section found)",
+          "Using base forms with widgets defined in Meta should not raise errors. (no failure section found)",
+          "A custom formfield_callback is used if provided (no failure section found)",
+          "Regression for #15315: modelform_factory should accept widgets (no failure section found)",
+          "Regression for #19733 (no failure section found)",
+          "A model ValidationError using the dict form should put the error (no failure section found)"
+        ],
+        "unparsed": [
+          "Regression test for #12960. Make sure the cleaned_data returned from",
+          "Regression for #12596: Calling super from ModelForm.clean() should be",
+          "Using base forms with widgets defined in Meta should not raise errors.",
+          "A custom formfield_callback is used if provided",
+          "Regression for #15315: modelform_factory should accept widgets",
+          "Regression for #19733",
+          "A model ValidationError using the dict form should put the error"
+        ],
+        "unparsed_log_shape": true
+      },
+      "file": null,
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 2,
+        "f2p_failing": [
+          "test_custom_callback_from_base_form_meta (model_forms.tests.FormFieldCallbackTests)",
+          "test_custom_callback_in_meta (model_forms.tests.FormFieldCallbackTests)"
+        ],
+        "f2p_pass": 0,
+        "found": true,
+        "n_parsed": 2,
+        "p2p_fail": 149,
+        "p2p_failing": [
+          "test_modelform_factory_metaclass (model_forms.tests.CustomMetaclassTestCase)",
+          "Regression test for #12960. Make sure the cleaned_data returned from",
+          "Regression for #12596: Calling super from ModelForm.clean() should be",
+          "test_bad_callback (model_forms.tests.FormFieldCallbackTests)",
+          "Using base forms with widgets defined in Meta should not raise errors.",
+          "A custom formfield_callback is used if provided",
+          "Regression for #15315: modelform_factory should accept widgets",
+          "test_inherit_after_custom_callback (model_forms.tests.FormFieldCallbackTests)",
+          "Regression for #19733",
+          "A model ValidationError using the dict form should put the error"
+        ],
+        "p2p_pass": 0,
+        "reward": 0.0
+      },
+      "loud_failure": false,
+      "observable": "human-readable text of an exception message",
+      "operator": "message_reword",
+      "reason": "no anchor inside the gold-touched region; 4 anchor(s) elsewhere in the target",
+      "tier": "HIGH",
+      "tree_digest": "8862c2cbbbdc598315f8cf9d24975b7d463768e29fbd1f4425769f59d31e9f12",
+      "verdict": "NOT_APPLICABLE"
+    }
+  ],
+  "targets": [
+    "django/forms/models.py"
+  ],
+  "version": "4.2",
+  "witnesses": []
+}

@@ -1,0 +1,178 @@
+{
+  "completed": true,
+  "control": {
+    "graded": null,
+    "log": null,
+    "passed": true,
+    "reason": "untransformed reference scores 1.0"
+  },
+  "digest_trace": [
+    {
+      "digest": "186e7846326856abf5a1b306135f421065c332a46a44484b85ee3287ef4e9370",
+      "memo_hit": false
+    }
+  ],
+  "disk_orphan_reclaimed_bytes": 0,
+  "disk_residual_bytes": 0,
+  "elapsed_seconds": 44.8,
+  "error": null,
+  "image": "swebench/sweb.eval.x86_64.pytest-dev_1776_pytest-5840:latest",
+  "instance_id": "pytest-dev__pytest-5840",
+  "leaked_containers": [],
+  "leaked_image": false,
+  "log": [
+    [
+      "<control>",
+      "OK",
+      "untransformed reference scores 1.0"
+    ],
+    [
+      "kwonly_specialize:<no anchor>",
+      "NOT_APPLICABLE",
+      "no anchor inside the gold-touched region; 1 anchor(s) elsewhere in the 2 target(s): src/_pytest/config/__init__.py, src/_pytest/pathlib.py"
+    ],
+    [
+      "symbol_rename:src/_pytest/config/__init__.py:PytestPluginManager",
+      "REFUSED",
+      "dynamic reach: 'PytestPluginManager' appears in a non-annotation string literal in src/_pytest/config/__init__.py line 173 ('\\n    Obtain a new instance of the\\n    :p'); 4 further hit(s) -- an alpha-rename cannot be argued safe"
+    ],
+    [
+      "collection_reverse:<no anchor>",
+      "NOT_APPLICABLE",
+      "no anchor inside the gold-touched region; 1 anchor(s) elsewhere in the 2 target(s): src/_pytest/config/__init__.py, src/_pytest/pathlib.py"
+    ],
+    [
+      "message_reword:<no anchor>",
+      "NOT_APPLICABLE",
+      "no anchor inside the gold-touched region; 2 anchor(s) elsewhere in the 2 target(s): src/_pytest/config/__init__.py, src/_pytest/pathlib.py"
+    ]
+  ],
+  "mountable": true,
+  "multi_target": true,
+  "n_targets": 2,
+  "on_prime_hub": null,
+  "on_prime_hub_reason": "not resolvable offline; no hub environment index is reachable from this repo, verifiers or swebench",
+  "operators_not_applicable": [
+    "collection_reverse",
+    "kwonly_specialize",
+    "message_reword"
+  ],
+  "operators_with_anchors": [
+    "symbol_rename"
+  ],
+  "repo": "pytest-dev/pytest",
+  "row": {
+    "elapsed": 23.46,
+    "error": null,
+    "error_type": null,
+    "index": 0,
+    "mode": "formcheck",
+    "name": "pytest-dev__pytest-5840",
+    "reason": "unchecked",
+    "valid": null
+  },
+  "rows": [
+    {
+      "anchor": null,
+      "failure_analysis": null,
+      "file": null,
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 2,
+        "found": true,
+        "n_parsed": 54,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 51,
+        "reward": 1.0
+      },
+      "loud_failure": false,
+      "observable": "callable signature (arity / parameter names)",
+      "operator": "kwonly_specialize",
+      "reason": "no anchor inside the gold-touched region; 1 anchor(s) elsewhere in the 2 target(s): src/_pytest/config/__init__.py, src/_pytest/pathlib.py",
+      "tier": "HIGH",
+      "tree_digest": "186e7846326856abf5a1b306135f421065c332a46a44484b85ee3287ef4e9370",
+      "verdict": "NOT_APPLICABLE"
+    },
+    {
+      "anchor": "PytestPluginManager",
+      "failure_analysis": null,
+      "file": "src/_pytest/config/__init__.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 2,
+        "found": true,
+        "n_parsed": 54,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 51,
+        "reward": 1.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "dynamic reach: 'PytestPluginManager' appears in a non-annotation string literal in src/_pytest/config/__init__.py line 173 ('\\n    Obtain a new instance of the\\n    :p'); 4 further hit(s) -- an alpha-rename cannot be argued safe",
+      "tier": "MEDIUM",
+      "tree_digest": "186e7846326856abf5a1b306135f421065c332a46a44484b85ee3287ef4e9370",
+      "verdict": "REFUSED"
+    },
+    {
+      "anchor": null,
+      "failure_analysis": null,
+      "file": null,
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 2,
+        "found": true,
+        "n_parsed": 54,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 51,
+        "reward": 1.0
+      },
+      "loud_failure": false,
+      "observable": "order of elements in a returned collection",
+      "operator": "collection_reverse",
+      "reason": "no anchor inside the gold-touched region; 1 anchor(s) elsewhere in the 2 target(s): src/_pytest/config/__init__.py, src/_pytest/pathlib.py",
+      "tier": "MEDIUM",
+      "tree_digest": "186e7846326856abf5a1b306135f421065c332a46a44484b85ee3287ef4e9370",
+      "verdict": "NOT_APPLICABLE"
+    },
+    {
+      "anchor": null,
+      "failure_analysis": null,
+      "file": null,
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 2,
+        "found": true,
+        "n_parsed": 54,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 51,
+        "reward": 1.0
+      },
+      "loud_failure": false,
+      "observable": "human-readable text of an exception message",
+      "operator": "message_reword",
+      "reason": "no anchor inside the gold-touched region; 2 anchor(s) elsewhere in the 2 target(s): src/_pytest/config/__init__.py, src/_pytest/pathlib.py",
+      "tier": "HIGH",
+      "tree_digest": "186e7846326856abf5a1b306135f421065c332a46a44484b85ee3287ef4e9370",
+      "verdict": "NOT_APPLICABLE"
+    }
+  ],
+  "targets": [
+    "src/_pytest/config/__init__.py",
+    "src/_pytest/pathlib.py"
+  ],
+  "version": "5.1",
+  "witnesses": []
+}

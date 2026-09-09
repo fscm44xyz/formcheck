@@ -1,0 +1,212 @@
+{
+  "completed": true,
+  "control": {
+    "graded": null,
+    "log": null,
+    "passed": true,
+    "reason": "untransformed reference scores 1.0"
+  },
+  "digest_trace": [
+    {
+      "digest": "62f4ac8719caacada77102993de9c01f76d0efcaac780e220f0a46ba43062d91",
+      "memo_hit": false
+    },
+    {
+      "digest": "2c8a28cdca881603c754d7969e3431b79d3016904a0757c1977a0f1f626ec3b7",
+      "memo_hit": false
+    },
+    {
+      "digest": "2c8a28cdca881603c754d7969e3431b79d3016904a0757c1977a0f1f626ec3b7",
+      "memo_hit": true
+    }
+  ],
+  "disk_orphan_reclaimed_bytes": 0,
+  "disk_residual_bytes": 0,
+  "elapsed_seconds": 294.92,
+  "error": null,
+  "image": "swebench/sweb.eval.x86_64.scikit-learn_1776_scikit-learn-13142:latest",
+  "instance_id": "scikit-learn__scikit-learn-13142",
+  "leaked_containers": [],
+  "leaked_image": false,
+  "log": [
+    [
+      "<control>",
+      "OK",
+      "untransformed reference scores 1.0"
+    ],
+    [
+      "kwonly_specialize:<no anchor>",
+      "NOT_APPLICABLE",
+      "no anchor inside the gold-touched region"
+    ],
+    [
+      "symbol_rename:BaseMixture",
+      "CLEAN",
+      "reward 1.0"
+    ],
+    [
+      "collection_reverse:<no anchor>",
+      "NOT_APPLICABLE",
+      "no anchor inside the gold-touched region"
+    ],
+    [
+      "message_reword:<no anchor>",
+      "NOT_APPLICABLE",
+      "no anchor inside the gold-touched region"
+    ]
+  ],
+  "mountable": true,
+  "multi_target": false,
+  "n_targets": 1,
+  "on_prime_hub": null,
+  "on_prime_hub_reason": "not resolvable offline; no hub environment index is reachable from this repo, verifiers or swebench",
+  "operators_not_applicable": [
+    "collection_reverse",
+    "kwonly_specialize",
+    "message_reword"
+  ],
+  "operators_with_anchors": [
+    "symbol_rename"
+  ],
+  "repo": "scikit-learn/scikit-learn",
+  "row": {
+    "elapsed": 80.47,
+    "error": null,
+    "error_type": null,
+    "index": 0,
+    "mode": "formcheck",
+    "name": "scikit-learn__scikit-learn-13142",
+    "reason": "valid",
+    "valid": true
+  },
+  "rows": [
+    {
+      "anchor": null,
+      "failure_analysis": null,
+      "file": null,
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 2,
+        "found": true,
+        "n_parsed": 56,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 54,
+        "reward": 1.0
+      },
+      "loud_failure": false,
+      "observable": "callable signature (arity / parameter names)",
+      "operator": "kwonly_specialize",
+      "reason": "no anchor inside the gold-touched region",
+      "tier": "HIGH",
+      "tree_digest": "62f4ac8719caacada77102993de9c01f76d0efcaac780e220f0a46ba43062d91",
+      "verdict": "NOT_APPLICABLE"
+    },
+    {
+      "anchor": "BaseMixture",
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "broke": [],
+        "coupled": [],
+        "failing": [],
+        "symbol": "BaseMixture",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": "sklearn/mixture/base.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 2,
+        "found": true,
+        "n_parsed": 56,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 54,
+        "reward": 1.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "reward 1.0",
+      "tier": "MEDIUM",
+      "tree_digest": "2c8a28cdca881603c754d7969e3431b79d3016904a0757c1977a0f1f626ec3b7",
+      "verdict": "CLEAN"
+    },
+    {
+      "anchor": null,
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "broke": [],
+        "coupled": [],
+        "failing": [],
+        "symbol": "BaseMixture",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": null,
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 2,
+        "found": true,
+        "n_parsed": 56,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 54,
+        "reward": 1.0
+      },
+      "loud_failure": false,
+      "observable": "order of elements in a returned collection",
+      "operator": "collection_reverse",
+      "reason": "no anchor inside the gold-touched region",
+      "tier": "MEDIUM",
+      "tree_digest": "2c8a28cdca881603c754d7969e3431b79d3016904a0757c1977a0f1f626ec3b7",
+      "verdict": "NOT_APPLICABLE"
+    },
+    {
+      "anchor": null,
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "broke": [],
+        "coupled": [],
+        "failing": [],
+        "symbol": "BaseMixture",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": null,
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 2,
+        "found": true,
+        "n_parsed": 56,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 54,
+        "reward": 1.0
+      },
+      "loud_failure": false,
+      "observable": "human-readable text of an exception message",
+      "operator": "message_reword",
+      "reason": "no anchor inside the gold-touched region",
+      "tier": "HIGH",
+      "tree_digest": "2c8a28cdca881603c754d7969e3431b79d3016904a0757c1977a0f1f626ec3b7",
+      "verdict": "NOT_APPLICABLE"
+    }
+  ],
+  "targets": [
+    "sklearn/mixture/base.py"
+  ],
+  "version": "0.21",
+  "witnesses": []
+}

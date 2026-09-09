@@ -1,0 +1,355 @@
+{
+  "completed": true,
+  "control": {
+    "graded": null,
+    "log": null,
+    "passed": true,
+    "reason": "untransformed reference scores 1.0"
+  },
+  "digest_trace": [
+    {
+      "digest": "938202a4c1191f8c559ec6024ff79a8041552c3e1f631e4c76322439126093ba",
+      "memo_hit": false
+    },
+    {
+      "digest": "3569ed4ae0206ce06568bd474d5be269e40cd4b8a455790fc4908746f94e751e",
+      "memo_hit": false
+    }
+  ],
+  "disk_orphan_reclaimed_bytes": 0,
+  "disk_residual_bytes": 0,
+  "elapsed_seconds": 151.69,
+  "error": null,
+  "image": "swebench/sweb.eval.x86_64.sphinx-doc_1776_sphinx-10435:latest",
+  "instance_id": "sphinx-doc__sphinx-10435",
+  "leaked_containers": [],
+  "leaked_image": false,
+  "log": [
+    [
+      "<control>",
+      "OK",
+      "untransformed reference scores 1.0"
+    ],
+    [
+      "kwonly_specialize:<no anchor>",
+      "NOT_APPLICABLE",
+      "no anchor inside the gold-touched region"
+    ],
+    [
+      "symbol_rename:LaTeXTranslator",
+      "UNVALIDATED",
+      "11 failing test(s) have no recognisable failure block -- unknown log shape, not evidence of breakage; first: tests/test_build_latex.py::test_writer"
+    ],
+    [
+      "collection_reverse:<no anchor>",
+      "NOT_APPLICABLE",
+      "no anchor inside the gold-touched region"
+    ],
+    [
+      "message_reword:<no anchor>",
+      "NOT_APPLICABLE",
+      "no anchor inside the gold-touched region"
+    ]
+  ],
+  "mountable": true,
+  "multi_target": false,
+  "n_targets": 1,
+  "on_prime_hub": null,
+  "on_prime_hub_reason": "not resolvable offline; no hub environment index is reachable from this repo, verifiers or swebench",
+  "operators_not_applicable": [
+    "collection_reverse",
+    "kwonly_specialize",
+    "message_reword"
+  ],
+  "operators_with_anchors": [
+    "symbol_rename"
+  ],
+  "repo": "sphinx-doc/sphinx",
+  "row": {
+    "elapsed": 63.47,
+    "error": null,
+    "error_type": null,
+    "index": 0,
+    "mode": "formcheck",
+    "name": "sphinx-doc__sphinx-10435",
+    "reason": "unchecked",
+    "valid": null
+  },
+  "rows": [
+    {
+      "anchor": null,
+      "failure_analysis": null,
+      "file": null,
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 1,
+        "found": true,
+        "n_parsed": 77,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 74,
+        "reward": 1.0
+      },
+      "loud_failure": false,
+      "observable": "callable signature (arity / parameter names)",
+      "operator": "kwonly_specialize",
+      "reason": "no anchor inside the gold-touched region",
+      "tier": "HIGH",
+      "tree_digest": "938202a4c1191f8c559ec6024ff79a8041552c3e1f631e4c76322439126093ba",
+      "verdict": "NOT_APPLICABLE"
+    },
+    {
+      "anchor": "LaTeXTranslator",
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "broke": [],
+        "coupled": [],
+        "failing": [
+          "tests/test_build_latex.py::test_writer",
+          "tests/test_build_latex.py::test_latex_warnings",
+          "tests/test_build_latex.py::test_latex_basic",
+          "tests/test_build_latex.py::test_latex_basic_manual",
+          "tests/test_build_latex.py::test_latex_basic_howto",
+          "tests/test_build_latex.py::test_latex_basic_manual_ja",
+          "tests/test_build_latex.py::test_latex_basic_howto_ja",
+          "tests/test_build_latex.py::test_latex_theme",
+          "tests/test_build_latex.py::test_latex_theme_papersize",
+          "tests/test_build_latex.py::test_latex_theme_options",
+          "tests/test_build_latex.py::test_latex_code_role"
+        ],
+        "symbol": "LaTeXTranslator",
+        "unexplained": [
+          "tests/test_build_latex.py::test_writer (no failure section found)",
+          "tests/test_build_latex.py::test_latex_warnings (no failure section found)",
+          "tests/test_build_latex.py::test_latex_basic (no failure section found)",
+          "tests/test_build_latex.py::test_latex_basic_manual (no failure section found)",
+          "tests/test_build_latex.py::test_latex_basic_howto (no failure section found)",
+          "tests/test_build_latex.py::test_latex_basic_manual_ja (no failure section found)",
+          "tests/test_build_latex.py::test_latex_basic_howto_ja (no failure section found)",
+          "tests/test_build_latex.py::test_latex_theme (no failure section found)",
+          "tests/test_build_latex.py::test_latex_theme_papersize (no failure section found)",
+          "tests/test_build_latex.py::test_latex_theme_options (no failure section found)",
+          "tests/test_build_latex.py::test_latex_code_role (no failure section found)"
+        ],
+        "unparsed": [
+          "tests/test_build_latex.py::test_writer",
+          "tests/test_build_latex.py::test_latex_warnings",
+          "tests/test_build_latex.py::test_latex_basic",
+          "tests/test_build_latex.py::test_latex_basic_manual",
+          "tests/test_build_latex.py::test_latex_basic_howto",
+          "tests/test_build_latex.py::test_latex_basic_manual_ja",
+          "tests/test_build_latex.py::test_latex_basic_howto_ja",
+          "tests/test_build_latex.py::test_latex_theme",
+          "tests/test_build_latex.py::test_latex_theme_papersize",
+          "tests/test_build_latex.py::test_latex_theme_options",
+          "tests/test_build_latex.py::test_latex_code_role"
+        ],
+        "unparsed_log_shape": true
+      },
+      "file": "sphinx/writers/latex.py",
+      "graded_log": "+ tox --current-env -epy39 -v -- tests/test_build_latex.py\npy39: commands[0]> python -X dev -X warn_default_encoding -m pytest -rA --durations 25 tests/test_build_latex.py\n\u001b[1m============================= test session starts ==============================\u001b[0m\nplatform linux -- Python 3.9.20, pytest-8.3.3, pluggy-1.5.0\ncachedir: .tox/py39/.pytest_cache\nlibraries: Sphinx-5.0.0+/a62142c7f, docutils-0.18.1\nbase tempdir: /tmp/pytest-of-root/pytest-1\nrootdir: /testbed\nconfigfile: setup.cfg\ncollected 0 items / 1 error\n\n==================================== ERRORS ====================================\n\u001b[31m\u001b[1m__________________ ERROR collecting tests/test_build_latex.py __________________\u001b[0m\n\u001b[31mImportError while importing test module '/testbed/tests/test_build_latex.py'.\nHint: make sure your test modules/packages have valid Python names.\nTraceback:\n/opt/miniconda3/envs/testbed/lib/python3.9/importlib/__init__.py:127: in import_module\n    return _bootstrap._gcd_import(name[level:], package, level)\ntests/test_build_latex.py:17: in <module>\n    from sphinx.writers.latex import LaTeXTranslator\nE   ImportError: cannot import name 'LaTeXTranslator' from 'sphinx.writers.latex' (/testbed/sphinx/writers/latex.py)\u001b[0m\n\u001b[36m\u001b[1m=========================== short test summary info ============================\u001b[0m\n\u001b[31mERROR\u001b[0m tests/test_build_latex.py\n!!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!!\n\u001b[31m=============================== \u001b[31m\u001b[1m1 error\u001b[0m\u001b[31m in 0.51s\u001b[0m\u001b[31m ===============================\u001b[0m\npy39: exit 2 (1.78 seconds) /testbed> python -X dev -X warn_default_encoding -m pytest -rA --durations 25 tests/test_build_latex.py pid=809\n  py39: FAIL code 2 (1.81=setup[0.03]+cmd[1.78] seconds)\n  evaluation failed :( (2.09 seconds)\n\n",
+      "graded_report": {
+        "f2p_fail": 1,
+        "f2p_failing": [
+          "tests/test_build_latex.py::test_latex_code_role"
+        ],
+        "f2p_pass": 0,
+        "found": true,
+        "n_parsed": 1,
+        "p2p_fail": 74,
+        "p2p_failing": [
+          "tests/test_build_latex.py::test_writer",
+          "tests/test_build_latex.py::test_latex_warnings",
+          "tests/test_build_latex.py::test_latex_basic",
+          "tests/test_build_latex.py::test_latex_basic_manual",
+          "tests/test_build_latex.py::test_latex_basic_howto",
+          "tests/test_build_latex.py::test_latex_basic_manual_ja",
+          "tests/test_build_latex.py::test_latex_basic_howto_ja",
+          "tests/test_build_latex.py::test_latex_theme",
+          "tests/test_build_latex.py::test_latex_theme_papersize",
+          "tests/test_build_latex.py::test_latex_theme_options"
+        ],
+        "p2p_pass": 0,
+        "reward": 0.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "11 failing test(s) have no recognisable failure block -- unknown log shape, not evidence of breakage; first: tests/test_build_latex.py::test_writer",
+      "tier": "MEDIUM",
+      "tree_digest": "3569ed4ae0206ce06568bd474d5be269e40cd4b8a455790fc4908746f94e751e",
+      "verdict": "UNVALIDATED"
+    },
+    {
+      "anchor": null,
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "broke": [],
+        "coupled": [],
+        "failing": [
+          "tests/test_build_latex.py::test_writer",
+          "tests/test_build_latex.py::test_latex_warnings",
+          "tests/test_build_latex.py::test_latex_basic",
+          "tests/test_build_latex.py::test_latex_basic_manual",
+          "tests/test_build_latex.py::test_latex_basic_howto",
+          "tests/test_build_latex.py::test_latex_basic_manual_ja",
+          "tests/test_build_latex.py::test_latex_basic_howto_ja",
+          "tests/test_build_latex.py::test_latex_theme",
+          "tests/test_build_latex.py::test_latex_theme_papersize",
+          "tests/test_build_latex.py::test_latex_theme_options",
+          "tests/test_build_latex.py::test_latex_code_role"
+        ],
+        "symbol": "LaTeXTranslator",
+        "unexplained": [
+          "tests/test_build_latex.py::test_writer (no failure section found)",
+          "tests/test_build_latex.py::test_latex_warnings (no failure section found)",
+          "tests/test_build_latex.py::test_latex_basic (no failure section found)",
+          "tests/test_build_latex.py::test_latex_basic_manual (no failure section found)",
+          "tests/test_build_latex.py::test_latex_basic_howto (no failure section found)",
+          "tests/test_build_latex.py::test_latex_basic_manual_ja (no failure section found)",
+          "tests/test_build_latex.py::test_latex_basic_howto_ja (no failure section found)",
+          "tests/test_build_latex.py::test_latex_theme (no failure section found)",
+          "tests/test_build_latex.py::test_latex_theme_papersize (no failure section found)",
+          "tests/test_build_latex.py::test_latex_theme_options (no failure section found)",
+          "tests/test_build_latex.py::test_latex_code_role (no failure section found)"
+        ],
+        "unparsed": [
+          "tests/test_build_latex.py::test_writer",
+          "tests/test_build_latex.py::test_latex_warnings",
+          "tests/test_build_latex.py::test_latex_basic",
+          "tests/test_build_latex.py::test_latex_basic_manual",
+          "tests/test_build_latex.py::test_latex_basic_howto",
+          "tests/test_build_latex.py::test_latex_basic_manual_ja",
+          "tests/test_build_latex.py::test_latex_basic_howto_ja",
+          "tests/test_build_latex.py::test_latex_theme",
+          "tests/test_build_latex.py::test_latex_theme_papersize",
+          "tests/test_build_latex.py::test_latex_theme_options",
+          "tests/test_build_latex.py::test_latex_code_role"
+        ],
+        "unparsed_log_shape": true
+      },
+      "file": null,
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 1,
+        "f2p_failing": [
+          "tests/test_build_latex.py::test_latex_code_role"
+        ],
+        "f2p_pass": 0,
+        "found": true,
+        "n_parsed": 1,
+        "p2p_fail": 74,
+        "p2p_failing": [
+          "tests/test_build_latex.py::test_writer",
+          "tests/test_build_latex.py::test_latex_warnings",
+          "tests/test_build_latex.py::test_latex_basic",
+          "tests/test_build_latex.py::test_latex_basic_manual",
+          "tests/test_build_latex.py::test_latex_basic_howto",
+          "tests/test_build_latex.py::test_latex_basic_manual_ja",
+          "tests/test_build_latex.py::test_latex_basic_howto_ja",
+          "tests/test_build_latex.py::test_latex_theme",
+          "tests/test_build_latex.py::test_latex_theme_papersize",
+          "tests/test_build_latex.py::test_latex_theme_options"
+        ],
+        "p2p_pass": 0,
+        "reward": 0.0
+      },
+      "loud_failure": false,
+      "observable": "order of elements in a returned collection",
+      "operator": "collection_reverse",
+      "reason": "no anchor inside the gold-touched region",
+      "tier": "MEDIUM",
+      "tree_digest": "3569ed4ae0206ce06568bd474d5be269e40cd4b8a455790fc4908746f94e751e",
+      "verdict": "NOT_APPLICABLE"
+    },
+    {
+      "anchor": null,
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "broke": [],
+        "coupled": [],
+        "failing": [
+          "tests/test_build_latex.py::test_writer",
+          "tests/test_build_latex.py::test_latex_warnings",
+          "tests/test_build_latex.py::test_latex_basic",
+          "tests/test_build_latex.py::test_latex_basic_manual",
+          "tests/test_build_latex.py::test_latex_basic_howto",
+          "tests/test_build_latex.py::test_latex_basic_manual_ja",
+          "tests/test_build_latex.py::test_latex_basic_howto_ja",
+          "tests/test_build_latex.py::test_latex_theme",
+          "tests/test_build_latex.py::test_latex_theme_papersize",
+          "tests/test_build_latex.py::test_latex_theme_options",
+          "tests/test_build_latex.py::test_latex_code_role"
+        ],
+        "symbol": "LaTeXTranslator",
+        "unexplained": [
+          "tests/test_build_latex.py::test_writer (no failure section found)",
+          "tests/test_build_latex.py::test_latex_warnings (no failure section found)",
+          "tests/test_build_latex.py::test_latex_basic (no failure section found)",
+          "tests/test_build_latex.py::test_latex_basic_manual (no failure section found)",
+          "tests/test_build_latex.py::test_latex_basic_howto (no failure section found)",
+          "tests/test_build_latex.py::test_latex_basic_manual_ja (no failure section found)",
+          "tests/test_build_latex.py::test_latex_basic_howto_ja (no failure section found)",
+          "tests/test_build_latex.py::test_latex_theme (no failure section found)",
+          "tests/test_build_latex.py::test_latex_theme_papersize (no failure section found)",
+          "tests/test_build_latex.py::test_latex_theme_options (no failure section found)",
+          "tests/test_build_latex.py::test_latex_code_role (no failure section found)"
+        ],
+        "unparsed": [
+          "tests/test_build_latex.py::test_writer",
+          "tests/test_build_latex.py::test_latex_warnings",
+          "tests/test_build_latex.py::test_latex_basic",
+          "tests/test_build_latex.py::test_latex_basic_manual",
+          "tests/test_build_latex.py::test_latex_basic_howto",
+          "tests/test_build_latex.py::test_latex_basic_manual_ja",
+          "tests/test_build_latex.py::test_latex_basic_howto_ja",
+          "tests/test_build_latex.py::test_latex_theme",
+          "tests/test_build_latex.py::test_latex_theme_papersize",
+          "tests/test_build_latex.py::test_latex_theme_options",
+          "tests/test_build_latex.py::test_latex_code_role"
+        ],
+        "unparsed_log_shape": true
+      },
+      "file": null,
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 1,
+        "f2p_failing": [
+          "tests/test_build_latex.py::test_latex_code_role"
+        ],
+        "f2p_pass": 0,
+        "found": true,
+        "n_parsed": 1,
+        "p2p_fail": 74,
+        "p2p_failing": [
+          "tests/test_build_latex.py::test_writer",
+          "tests/test_build_latex.py::test_latex_warnings",
+          "tests/test_build_latex.py::test_latex_basic",
+          "tests/test_build_latex.py::test_latex_basic_manual",
+          "tests/test_build_latex.py::test_latex_basic_howto",
+          "tests/test_build_latex.py::test_latex_basic_manual_ja",
+          "tests/test_build_latex.py::test_latex_basic_howto_ja",
+          "tests/test_build_latex.py::test_latex_theme",
+          "tests/test_build_latex.py::test_latex_theme_papersize",
+          "tests/test_build_latex.py::test_latex_theme_options"
+        ],
+        "p2p_pass": 0,
+        "reward": 0.0
+      },
+      "loud_failure": false,
+      "observable": "human-readable text of an exception message",
+      "operator": "message_reword",
+      "reason": "no anchor inside the gold-touched region",
+      "tier": "HIGH",
+      "tree_digest": "3569ed4ae0206ce06568bd474d5be269e40cd4b8a455790fc4908746f94e751e",
+      "verdict": "NOT_APPLICABLE"
+    }
+  ],
+  "targets": [
+    "sphinx/writers/latex.py"
+  ],
+  "version": "5.0",
+  "witnesses": []
+}

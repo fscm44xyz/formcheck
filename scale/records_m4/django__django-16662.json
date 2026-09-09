@@ -1,0 +1,328 @@
+{
+  "completed": true,
+  "control": {
+    "graded": null,
+    "log": null,
+    "passed": true,
+    "reason": "untransformed reference scores 1.0"
+  },
+  "digest_trace": [
+    {
+      "digest": "1471a4c20a1ad85841e4d570852aa0ec1e9bf959e3b9032e268411eac2ce2814",
+      "memo_hit": false
+    },
+    {
+      "digest": "537735d8166bb5af8dd83bf99b877e7b5677015f85b9840a1cc07ba762323184",
+      "memo_hit": false
+    }
+  ],
+  "disk_orphan_reclaimed_bytes": 0,
+  "disk_residual_bytes": 0,
+  "elapsed_seconds": 216.21,
+  "error": null,
+  "image": "swebench/sweb.eval.x86_64.django_1776_django-16662:latest",
+  "instance_id": "django__django-16662",
+  "leaked_containers": [],
+  "leaked_image": false,
+  "log": [
+    [
+      "<control>",
+      "OK",
+      "untransformed reference scores 1.0"
+    ],
+    [
+      "kwonly_specialize:<no anchor>",
+      "NOT_APPLICABLE",
+      "no anchor inside the gold-touched region"
+    ],
+    [
+      "symbol_rename:MigrationWriter",
+      "UNVALIDATED",
+      "1 failing test(s) have no recognisable failure block -- unknown log shape, not evidence of breakage; first: #24155 - Tests ordering of imports."
+    ],
+    [
+      "collection_reverse:<no anchor>",
+      "NOT_APPLICABLE",
+      "no anchor inside the gold-touched region"
+    ],
+    [
+      "message_reword:<no anchor>",
+      "NOT_APPLICABLE",
+      "no anchor inside the gold-touched region"
+    ]
+  ],
+  "mountable": true,
+  "multi_target": false,
+  "n_targets": 1,
+  "on_prime_hub": null,
+  "on_prime_hub_reason": "not resolvable offline; no hub environment index is reachable from this repo, verifiers or swebench",
+  "operators_not_applicable": [
+    "collection_reverse",
+    "kwonly_specialize",
+    "message_reword"
+  ],
+  "operators_with_anchors": [
+    "symbol_rename"
+  ],
+  "repo": "django/django",
+  "row": {
+    "elapsed": 70.77,
+    "error": null,
+    "error_type": null,
+    "index": 0,
+    "mode": "formcheck",
+    "name": "django__django-16662",
+    "reason": "unchecked",
+    "valid": null
+  },
+  "rows": [
+    {
+      "anchor": null,
+      "failure_analysis": null,
+      "file": null,
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 1,
+        "found": true,
+        "n_parsed": 52,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 51,
+        "reward": 1.0
+      },
+      "loud_failure": false,
+      "observable": "callable signature (arity / parameter names)",
+      "operator": "kwonly_specialize",
+      "reason": "no anchor inside the gold-touched region",
+      "tier": "HIGH",
+      "tree_digest": "1471a4c20a1ad85841e4d570852aa0ec1e9bf959e3b9032e268411eac2ce2814",
+      "verdict": "NOT_APPLICABLE"
+    },
+    {
+      "anchor": "MigrationWriter",
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "broke": [],
+        "coupled": [
+          "test_args_kwargs_signature (migrations.test_writer.OperationWriterTests.test_args_kwargs_signature)",
+          "test_args_signature (migrations.test_writer.OperationWriterTests.test_args_signature)",
+          "test_empty_signature (migrations.test_writer.OperationWriterTests.test_empty_signature)",
+          "test_expand_args_signature (migrations.test_writer.OperationWriterTests.test_expand_args_signature)",
+          "test_kwargs_signature (migrations.test_writer.OperationWriterTests.test_kwargs_signature)",
+          "test_multiline_args_signature (migrations.test_writer.OperationWriterTests.test_multiline_args_signature)",
+          "test_nested_args_signature (migrations.test_writer.OperationWriterTests.test_nested_args_signature)",
+          "test_nested_operation_expand_args_signature (migrations.test_writer.OperationWriterTests.test_nested_operation_expand_args_signature)",
+          "test_custom_operation (migrations.test_writer.WriterTests.test_custom_operation)",
+          "test_deconstruct_class_arguments (migrations.test_writer.WriterTests.test_deconstruct_class_arguments)"
+        ],
+        "failing": [
+          "test_args_kwargs_signature (migrations.test_writer.OperationWriterTests.test_args_kwargs_signature)",
+          "test_args_signature (migrations.test_writer.OperationWriterTests.test_args_signature)",
+          "test_empty_signature (migrations.test_writer.OperationWriterTests.test_empty_signature)",
+          "test_expand_args_signature (migrations.test_writer.OperationWriterTests.test_expand_args_signature)",
+          "test_kwargs_signature (migrations.test_writer.OperationWriterTests.test_kwargs_signature)",
+          "test_multiline_args_signature (migrations.test_writer.OperationWriterTests.test_multiline_args_signature)",
+          "test_nested_args_signature (migrations.test_writer.OperationWriterTests.test_nested_args_signature)",
+          "test_nested_operation_expand_args_signature (migrations.test_writer.OperationWriterTests.test_nested_operation_expand_args_signature)",
+          "test_custom_operation (migrations.test_writer.WriterTests.test_custom_operation)",
+          "test_deconstruct_class_arguments (migrations.test_writer.WriterTests.test_deconstruct_class_arguments)",
+          "#24155 - Tests ordering of imports."
+        ],
+        "symbol": "MigrationWriter",
+        "unexplained": [
+          "#24155 - Tests ordering of imports. (no failure section found)"
+        ],
+        "unparsed": [
+          "#24155 - Tests ordering of imports."
+        ],
+        "unparsed_log_shape": true
+      },
+      "file": "django/db/migrations/writer.py",
+      "graded_log": "+ ./tests/runtests.py --verbosity 2 --settings=test_sqlite --parallel 1 migrations.test_writer\nTesting against Django installed in '/testbed/django'\nImporting application migrations\nFound 1 test(s).\nSkipping setup of unused database(s): default, other.\nSystem check identified no issues (0 silenced).\n\ntest_writer (unittest.loader._FailedTest.test_writer) ... ERROR\n\n======================================================================\nERROR: test_writer (unittest.loader._FailedTest.test_writer)\n----------------------------------------------------------------------\nImportError: Failed to import test module: test_writer\nTraceback (most recent call last):\n  File \"/opt/miniconda3/envs/testbed/lib/python3.11/unittest/loader.py\", line 162, in loadTestsFromName\n    module = __import__(module_name)\n             ^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/testbed/tests/migrations/test_writer.py\", line 24, in <module>\n    from django.db.migrations.writer import MigrationWriter, OperationWriter\nImportError: cannot import name 'MigrationWriter' from 'django.db.migrations.writer' (/testbed/django/db/migrations/writer.py)\n\n\n----------------------------------------------------------------------\nRan 1 test in 0.000s\n\nFAILED (errors=1)\n",
+      "graded_report": {
+        "f2p_fail": 1,
+        "f2p_failing": [
+          "#24155 - Tests ordering of imports."
+        ],
+        "f2p_pass": 0,
+        "found": true,
+        "n_parsed": 2,
+        "p2p_fail": 51,
+        "p2p_failing": [
+          "test_args_kwargs_signature (migrations.test_writer.OperationWriterTests.test_args_kwargs_signature)",
+          "test_args_signature (migrations.test_writer.OperationWriterTests.test_args_signature)",
+          "test_empty_signature (migrations.test_writer.OperationWriterTests.test_empty_signature)",
+          "test_expand_args_signature (migrations.test_writer.OperationWriterTests.test_expand_args_signature)",
+          "test_kwargs_signature (migrations.test_writer.OperationWriterTests.test_kwargs_signature)",
+          "test_multiline_args_signature (migrations.test_writer.OperationWriterTests.test_multiline_args_signature)",
+          "test_nested_args_signature (migrations.test_writer.OperationWriterTests.test_nested_args_signature)",
+          "test_nested_operation_expand_args_signature (migrations.test_writer.OperationWriterTests.test_nested_operation_expand_args_signature)",
+          "test_custom_operation (migrations.test_writer.WriterTests.test_custom_operation)",
+          "test_deconstruct_class_arguments (migrations.test_writer.WriterTests.test_deconstruct_class_arguments)"
+        ],
+        "p2p_pass": 0,
+        "reward": 0.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "1 failing test(s) have no recognisable failure block -- unknown log shape, not evidence of breakage; first: #24155 - Tests ordering of imports.",
+      "tier": "MEDIUM",
+      "tree_digest": "537735d8166bb5af8dd83bf99b877e7b5677015f85b9840a1cc07ba762323184",
+      "verdict": "UNVALIDATED"
+    },
+    {
+      "anchor": null,
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "broke": [],
+        "coupled": [
+          "test_args_kwargs_signature (migrations.test_writer.OperationWriterTests.test_args_kwargs_signature)",
+          "test_args_signature (migrations.test_writer.OperationWriterTests.test_args_signature)",
+          "test_empty_signature (migrations.test_writer.OperationWriterTests.test_empty_signature)",
+          "test_expand_args_signature (migrations.test_writer.OperationWriterTests.test_expand_args_signature)",
+          "test_kwargs_signature (migrations.test_writer.OperationWriterTests.test_kwargs_signature)",
+          "test_multiline_args_signature (migrations.test_writer.OperationWriterTests.test_multiline_args_signature)",
+          "test_nested_args_signature (migrations.test_writer.OperationWriterTests.test_nested_args_signature)",
+          "test_nested_operation_expand_args_signature (migrations.test_writer.OperationWriterTests.test_nested_operation_expand_args_signature)",
+          "test_custom_operation (migrations.test_writer.WriterTests.test_custom_operation)",
+          "test_deconstruct_class_arguments (migrations.test_writer.WriterTests.test_deconstruct_class_arguments)"
+        ],
+        "failing": [
+          "test_args_kwargs_signature (migrations.test_writer.OperationWriterTests.test_args_kwargs_signature)",
+          "test_args_signature (migrations.test_writer.OperationWriterTests.test_args_signature)",
+          "test_empty_signature (migrations.test_writer.OperationWriterTests.test_empty_signature)",
+          "test_expand_args_signature (migrations.test_writer.OperationWriterTests.test_expand_args_signature)",
+          "test_kwargs_signature (migrations.test_writer.OperationWriterTests.test_kwargs_signature)",
+          "test_multiline_args_signature (migrations.test_writer.OperationWriterTests.test_multiline_args_signature)",
+          "test_nested_args_signature (migrations.test_writer.OperationWriterTests.test_nested_args_signature)",
+          "test_nested_operation_expand_args_signature (migrations.test_writer.OperationWriterTests.test_nested_operation_expand_args_signature)",
+          "test_custom_operation (migrations.test_writer.WriterTests.test_custom_operation)",
+          "test_deconstruct_class_arguments (migrations.test_writer.WriterTests.test_deconstruct_class_arguments)",
+          "#24155 - Tests ordering of imports."
+        ],
+        "symbol": "MigrationWriter",
+        "unexplained": [
+          "#24155 - Tests ordering of imports. (no failure section found)"
+        ],
+        "unparsed": [
+          "#24155 - Tests ordering of imports."
+        ],
+        "unparsed_log_shape": true
+      },
+      "file": null,
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 1,
+        "f2p_failing": [
+          "#24155 - Tests ordering of imports."
+        ],
+        "f2p_pass": 0,
+        "found": true,
+        "n_parsed": 2,
+        "p2p_fail": 51,
+        "p2p_failing": [
+          "test_args_kwargs_signature (migrations.test_writer.OperationWriterTests.test_args_kwargs_signature)",
+          "test_args_signature (migrations.test_writer.OperationWriterTests.test_args_signature)",
+          "test_empty_signature (migrations.test_writer.OperationWriterTests.test_empty_signature)",
+          "test_expand_args_signature (migrations.test_writer.OperationWriterTests.test_expand_args_signature)",
+          "test_kwargs_signature (migrations.test_writer.OperationWriterTests.test_kwargs_signature)",
+          "test_multiline_args_signature (migrations.test_writer.OperationWriterTests.test_multiline_args_signature)",
+          "test_nested_args_signature (migrations.test_writer.OperationWriterTests.test_nested_args_signature)",
+          "test_nested_operation_expand_args_signature (migrations.test_writer.OperationWriterTests.test_nested_operation_expand_args_signature)",
+          "test_custom_operation (migrations.test_writer.WriterTests.test_custom_operation)",
+          "test_deconstruct_class_arguments (migrations.test_writer.WriterTests.test_deconstruct_class_arguments)"
+        ],
+        "p2p_pass": 0,
+        "reward": 0.0
+      },
+      "loud_failure": false,
+      "observable": "order of elements in a returned collection",
+      "operator": "collection_reverse",
+      "reason": "no anchor inside the gold-touched region",
+      "tier": "MEDIUM",
+      "tree_digest": "537735d8166bb5af8dd83bf99b877e7b5677015f85b9840a1cc07ba762323184",
+      "verdict": "NOT_APPLICABLE"
+    },
+    {
+      "anchor": null,
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "broke": [],
+        "coupled": [
+          "test_args_kwargs_signature (migrations.test_writer.OperationWriterTests.test_args_kwargs_signature)",
+          "test_args_signature (migrations.test_writer.OperationWriterTests.test_args_signature)",
+          "test_empty_signature (migrations.test_writer.OperationWriterTests.test_empty_signature)",
+          "test_expand_args_signature (migrations.test_writer.OperationWriterTests.test_expand_args_signature)",
+          "test_kwargs_signature (migrations.test_writer.OperationWriterTests.test_kwargs_signature)",
+          "test_multiline_args_signature (migrations.test_writer.OperationWriterTests.test_multiline_args_signature)",
+          "test_nested_args_signature (migrations.test_writer.OperationWriterTests.test_nested_args_signature)",
+          "test_nested_operation_expand_args_signature (migrations.test_writer.OperationWriterTests.test_nested_operation_expand_args_signature)",
+          "test_custom_operation (migrations.test_writer.WriterTests.test_custom_operation)",
+          "test_deconstruct_class_arguments (migrations.test_writer.WriterTests.test_deconstruct_class_arguments)"
+        ],
+        "failing": [
+          "test_args_kwargs_signature (migrations.test_writer.OperationWriterTests.test_args_kwargs_signature)",
+          "test_args_signature (migrations.test_writer.OperationWriterTests.test_args_signature)",
+          "test_empty_signature (migrations.test_writer.OperationWriterTests.test_empty_signature)",
+          "test_expand_args_signature (migrations.test_writer.OperationWriterTests.test_expand_args_signature)",
+          "test_kwargs_signature (migrations.test_writer.OperationWriterTests.test_kwargs_signature)",
+          "test_multiline_args_signature (migrations.test_writer.OperationWriterTests.test_multiline_args_signature)",
+          "test_nested_args_signature (migrations.test_writer.OperationWriterTests.test_nested_args_signature)",
+          "test_nested_operation_expand_args_signature (migrations.test_writer.OperationWriterTests.test_nested_operation_expand_args_signature)",
+          "test_custom_operation (migrations.test_writer.WriterTests.test_custom_operation)",
+          "test_deconstruct_class_arguments (migrations.test_writer.WriterTests.test_deconstruct_class_arguments)",
+          "#24155 - Tests ordering of imports."
+        ],
+        "symbol": "MigrationWriter",
+        "unexplained": [
+          "#24155 - Tests ordering of imports. (no failure section found)"
+        ],
+        "unparsed": [
+          "#24155 - Tests ordering of imports."
+        ],
+        "unparsed_log_shape": true
+      },
+      "file": null,
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 1,
+        "f2p_failing": [
+          "#24155 - Tests ordering of imports."
+        ],
+        "f2p_pass": 0,
+        "found": true,
+        "n_parsed": 2,
+        "p2p_fail": 51,
+        "p2p_failing": [
+          "test_args_kwargs_signature (migrations.test_writer.OperationWriterTests.test_args_kwargs_signature)",
+          "test_args_signature (migrations.test_writer.OperationWriterTests.test_args_signature)",
+          "test_empty_signature (migrations.test_writer.OperationWriterTests.test_empty_signature)",
+          "test_expand_args_signature (migrations.test_writer.OperationWriterTests.test_expand_args_signature)",
+          "test_kwargs_signature (migrations.test_writer.OperationWriterTests.test_kwargs_signature)",
+          "test_multiline_args_signature (migrations.test_writer.OperationWriterTests.test_multiline_args_signature)",
+          "test_nested_args_signature (migrations.test_writer.OperationWriterTests.test_nested_args_signature)",
+          "test_nested_operation_expand_args_signature (migrations.test_writer.OperationWriterTests.test_nested_operation_expand_args_signature)",
+          "test_custom_operation (migrations.test_writer.WriterTests.test_custom_operation)",
+          "test_deconstruct_class_arguments (migrations.test_writer.WriterTests.test_deconstruct_class_arguments)"
+        ],
+        "p2p_pass": 0,
+        "reward": 0.0
+      },
+      "loud_failure": false,
+      "observable": "human-readable text of an exception message",
+      "operator": "message_reword",
+      "reason": "no anchor inside the gold-touched region",
+      "tier": "HIGH",
+      "tree_digest": "537735d8166bb5af8dd83bf99b877e7b5677015f85b9840a1cc07ba762323184",
+      "verdict": "NOT_APPLICABLE"
+    }
+  ],
+  "targets": [
+    "django/db/migrations/writer.py"
+  ],
+  "version": "5.0",
+  "witnesses": []
+}

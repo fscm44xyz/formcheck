@@ -1,0 +1,328 @@
+{
+  "completed": true,
+  "control": {
+    "graded": null,
+    "log": null,
+    "passed": true,
+    "reason": "untransformed reference scores 1.0"
+  },
+  "digest_trace": [
+    {
+      "digest": "88330c80765595d18d3e5cfdf489ca54d74bf8e3da8b05e12772e08d2ce6aa2d",
+      "memo_hit": false
+    },
+    {
+      "digest": "bf34bacf2636832ad5a85b1e4e46853b456a42fd17abf7bd8c456be90f7fa43c",
+      "memo_hit": false
+    }
+  ],
+  "disk_orphan_reclaimed_bytes": 0,
+  "disk_residual_bytes": 0,
+  "elapsed_seconds": 223.48,
+  "error": null,
+  "image": "swebench/sweb.eval.x86_64.django_1776_django-13568:latest",
+  "instance_id": "django__django-13568",
+  "leaked_containers": [],
+  "leaked_image": false,
+  "log": [
+    [
+      "<control>",
+      "OK",
+      "untransformed reference scores 1.0"
+    ],
+    [
+      "kwonly_specialize:<no anchor>",
+      "NOT_APPLICABLE",
+      "no anchor inside the gold-touched region"
+    ],
+    [
+      "symbol_rename:check_user_model",
+      "UNVALIDATED",
+      "1 failing test(s) have no recognisable failure block -- unknown log shape, not evidence of breakage; first: REQUIRED_FIELDS should be a list."
+    ],
+    [
+      "collection_reverse:<no anchor>",
+      "NOT_APPLICABLE",
+      "no anchor inside the gold-touched region"
+    ],
+    [
+      "message_reword:<no anchor>",
+      "NOT_APPLICABLE",
+      "no anchor inside the gold-touched region"
+    ]
+  ],
+  "mountable": true,
+  "multi_target": false,
+  "n_targets": 1,
+  "on_prime_hub": null,
+  "on_prime_hub_reason": "not resolvable offline; no hub environment index is reachable from this repo, verifiers or swebench",
+  "operators_not_applicable": [
+    "collection_reverse",
+    "kwonly_specialize",
+    "message_reword"
+  ],
+  "operators_with_anchors": [
+    "symbol_rename"
+  ],
+  "repo": "django/django",
+  "row": {
+    "elapsed": 45.87,
+    "error": null,
+    "error_type": null,
+    "index": 0,
+    "mode": "formcheck",
+    "name": "django__django-13568",
+    "reason": "unchecked",
+    "valid": null
+  },
+  "rows": [
+    {
+      "anchor": null,
+      "failure_analysis": null,
+      "file": null,
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 1,
+        "found": true,
+        "n_parsed": 14,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 13,
+        "reward": 1.0
+      },
+      "loud_failure": false,
+      "observable": "callable signature (arity / parameter names)",
+      "operator": "kwonly_specialize",
+      "reason": "no anchor inside the gold-touched region",
+      "tier": "HIGH",
+      "tree_digest": "88330c80765595d18d3e5cfdf489ca54d74bf8e3da8b05e12772e08d2ce6aa2d",
+      "verdict": "NOT_APPLICABLE"
+    },
+    {
+      "anchor": "check_user_model",
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "broke": [],
+        "coupled": [
+          "test_clashing_custom_permissions (auth_tests.test_checks.ModelsPermissionsChecksTests)",
+          "test_clashing_default_permissions (auth_tests.test_checks.ModelsPermissionsChecksTests)",
+          "test_custom_permission_codename_max_length (auth_tests.test_checks.ModelsPermissionsChecksTests)",
+          "test_custom_permission_name_max_length (auth_tests.test_checks.ModelsPermissionsChecksTests)",
+          "test_empty_default_permissions (auth_tests.test_checks.ModelsPermissionsChecksTests)",
+          "test_model_name_max_length (auth_tests.test_checks.ModelsPermissionsChecksTests)",
+          "test_non_clashing_custom_permissions (auth_tests.test_checks.ModelsPermissionsChecksTests)",
+          "test_verbose_name_max_length (auth_tests.test_checks.ModelsPermissionsChecksTests)",
+          "test_is_anonymous_authenticated_methods (auth_tests.test_checks.UserModelChecksTests)",
+          "test_username_unique_with_model_constraint (auth_tests.test_checks.UserModelChecksTests)"
+        ],
+        "failing": [
+          "test_clashing_custom_permissions (auth_tests.test_checks.ModelsPermissionsChecksTests)",
+          "test_clashing_default_permissions (auth_tests.test_checks.ModelsPermissionsChecksTests)",
+          "test_custom_permission_codename_max_length (auth_tests.test_checks.ModelsPermissionsChecksTests)",
+          "test_custom_permission_name_max_length (auth_tests.test_checks.ModelsPermissionsChecksTests)",
+          "test_empty_default_permissions (auth_tests.test_checks.ModelsPermissionsChecksTests)",
+          "test_model_name_max_length (auth_tests.test_checks.ModelsPermissionsChecksTests)",
+          "test_non_clashing_custom_permissions (auth_tests.test_checks.ModelsPermissionsChecksTests)",
+          "test_verbose_name_max_length (auth_tests.test_checks.ModelsPermissionsChecksTests)",
+          "test_is_anonymous_authenticated_methods (auth_tests.test_checks.UserModelChecksTests)",
+          "REQUIRED_FIELDS should be a list.",
+          "test_username_unique_with_model_constraint (auth_tests.test_checks.UserModelChecksTests)"
+        ],
+        "symbol": "check_user_model",
+        "unexplained": [
+          "REQUIRED_FIELDS should be a list. (no failure section found)"
+        ],
+        "unparsed": [
+          "REQUIRED_FIELDS should be a list."
+        ],
+        "unparsed_log_shape": true
+      },
+      "file": "django/contrib/auth/checks.py",
+      "graded_log": "+ ./tests/runtests.py --verbosity 2 --settings=test_sqlite --parallel 1 auth_tests.test_checks\nTesting against Django installed in '/testbed/django'\nImporting application auth_tests\nSkipping setup of unused database(s): default, other.\nSystem check identified no issues (0 silenced).\n\ntest_checks (unittest.loader._FailedTest) ... ERROR\n\n======================================================================\nERROR: test_checks (unittest.loader._FailedTest)\n----------------------------------------------------------------------\nImportError: Failed to import test module: test_checks\nTraceback (most recent call last):\n  File \"/opt/miniconda3/envs/testbed/lib/python3.6/unittest/loader.py\", line 153, in loadTestsFromName\n    module = __import__(module_name)\n  File \"/testbed/tests/auth_tests/test_checks.py\", line 1, in <module>\n    from django.contrib.auth.checks import (\nImportError: cannot import name 'check_user_model'\n\n\n----------------------------------------------------------------------\nRan 1 test in 0.000s\n\nFAILED (errors=1)\n",
+      "graded_report": {
+        "f2p_fail": 1,
+        "f2p_failing": [
+          "test_username_unique_with_model_constraint (auth_tests.test_checks.UserModelChecksTests)"
+        ],
+        "f2p_pass": 0,
+        "found": true,
+        "n_parsed": 2,
+        "p2p_fail": 13,
+        "p2p_failing": [
+          "test_clashing_custom_permissions (auth_tests.test_checks.ModelsPermissionsChecksTests)",
+          "test_clashing_default_permissions (auth_tests.test_checks.ModelsPermissionsChecksTests)",
+          "test_custom_permission_codename_max_length (auth_tests.test_checks.ModelsPermissionsChecksTests)",
+          "test_custom_permission_name_max_length (auth_tests.test_checks.ModelsPermissionsChecksTests)",
+          "test_empty_default_permissions (auth_tests.test_checks.ModelsPermissionsChecksTests)",
+          "test_model_name_max_length (auth_tests.test_checks.ModelsPermissionsChecksTests)",
+          "test_non_clashing_custom_permissions (auth_tests.test_checks.ModelsPermissionsChecksTests)",
+          "test_verbose_name_max_length (auth_tests.test_checks.ModelsPermissionsChecksTests)",
+          "test_is_anonymous_authenticated_methods (auth_tests.test_checks.UserModelChecksTests)",
+          "REQUIRED_FIELDS should be a list."
+        ],
+        "p2p_pass": 0,
+        "reward": 0.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "1 failing test(s) have no recognisable failure block -- unknown log shape, not evidence of breakage; first: REQUIRED_FIELDS should be a list.",
+      "tier": "MEDIUM",
+      "tree_digest": "bf34bacf2636832ad5a85b1e4e46853b456a42fd17abf7bd8c456be90f7fa43c",
+      "verdict": "UNVALIDATED"
+    },
+    {
+      "anchor": null,
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "broke": [],
+        "coupled": [
+          "test_clashing_custom_permissions (auth_tests.test_checks.ModelsPermissionsChecksTests)",
+          "test_clashing_default_permissions (auth_tests.test_checks.ModelsPermissionsChecksTests)",
+          "test_custom_permission_codename_max_length (auth_tests.test_checks.ModelsPermissionsChecksTests)",
+          "test_custom_permission_name_max_length (auth_tests.test_checks.ModelsPermissionsChecksTests)",
+          "test_empty_default_permissions (auth_tests.test_checks.ModelsPermissionsChecksTests)",
+          "test_model_name_max_length (auth_tests.test_checks.ModelsPermissionsChecksTests)",
+          "test_non_clashing_custom_permissions (auth_tests.test_checks.ModelsPermissionsChecksTests)",
+          "test_verbose_name_max_length (auth_tests.test_checks.ModelsPermissionsChecksTests)",
+          "test_is_anonymous_authenticated_methods (auth_tests.test_checks.UserModelChecksTests)",
+          "test_username_unique_with_model_constraint (auth_tests.test_checks.UserModelChecksTests)"
+        ],
+        "failing": [
+          "test_clashing_custom_permissions (auth_tests.test_checks.ModelsPermissionsChecksTests)",
+          "test_clashing_default_permissions (auth_tests.test_checks.ModelsPermissionsChecksTests)",
+          "test_custom_permission_codename_max_length (auth_tests.test_checks.ModelsPermissionsChecksTests)",
+          "test_custom_permission_name_max_length (auth_tests.test_checks.ModelsPermissionsChecksTests)",
+          "test_empty_default_permissions (auth_tests.test_checks.ModelsPermissionsChecksTests)",
+          "test_model_name_max_length (auth_tests.test_checks.ModelsPermissionsChecksTests)",
+          "test_non_clashing_custom_permissions (auth_tests.test_checks.ModelsPermissionsChecksTests)",
+          "test_verbose_name_max_length (auth_tests.test_checks.ModelsPermissionsChecksTests)",
+          "test_is_anonymous_authenticated_methods (auth_tests.test_checks.UserModelChecksTests)",
+          "REQUIRED_FIELDS should be a list.",
+          "test_username_unique_with_model_constraint (auth_tests.test_checks.UserModelChecksTests)"
+        ],
+        "symbol": "check_user_model",
+        "unexplained": [
+          "REQUIRED_FIELDS should be a list. (no failure section found)"
+        ],
+        "unparsed": [
+          "REQUIRED_FIELDS should be a list."
+        ],
+        "unparsed_log_shape": true
+      },
+      "file": null,
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 1,
+        "f2p_failing": [
+          "test_username_unique_with_model_constraint (auth_tests.test_checks.UserModelChecksTests)"
+        ],
+        "f2p_pass": 0,
+        "found": true,
+        "n_parsed": 2,
+        "p2p_fail": 13,
+        "p2p_failing": [
+          "test_clashing_custom_permissions (auth_tests.test_checks.ModelsPermissionsChecksTests)",
+          "test_clashing_default_permissions (auth_tests.test_checks.ModelsPermissionsChecksTests)",
+          "test_custom_permission_codename_max_length (auth_tests.test_checks.ModelsPermissionsChecksTests)",
+          "test_custom_permission_name_max_length (auth_tests.test_checks.ModelsPermissionsChecksTests)",
+          "test_empty_default_permissions (auth_tests.test_checks.ModelsPermissionsChecksTests)",
+          "test_model_name_max_length (auth_tests.test_checks.ModelsPermissionsChecksTests)",
+          "test_non_clashing_custom_permissions (auth_tests.test_checks.ModelsPermissionsChecksTests)",
+          "test_verbose_name_max_length (auth_tests.test_checks.ModelsPermissionsChecksTests)",
+          "test_is_anonymous_authenticated_methods (auth_tests.test_checks.UserModelChecksTests)",
+          "REQUIRED_FIELDS should be a list."
+        ],
+        "p2p_pass": 0,
+        "reward": 0.0
+      },
+      "loud_failure": false,
+      "observable": "order of elements in a returned collection",
+      "operator": "collection_reverse",
+      "reason": "no anchor inside the gold-touched region",
+      "tier": "MEDIUM",
+      "tree_digest": "bf34bacf2636832ad5a85b1e4e46853b456a42fd17abf7bd8c456be90f7fa43c",
+      "verdict": "NOT_APPLICABLE"
+    },
+    {
+      "anchor": null,
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "broke": [],
+        "coupled": [
+          "test_clashing_custom_permissions (auth_tests.test_checks.ModelsPermissionsChecksTests)",
+          "test_clashing_default_permissions (auth_tests.test_checks.ModelsPermissionsChecksTests)",
+          "test_custom_permission_codename_max_length (auth_tests.test_checks.ModelsPermissionsChecksTests)",
+          "test_custom_permission_name_max_length (auth_tests.test_checks.ModelsPermissionsChecksTests)",
+          "test_empty_default_permissions (auth_tests.test_checks.ModelsPermissionsChecksTests)",
+          "test_model_name_max_length (auth_tests.test_checks.ModelsPermissionsChecksTests)",
+          "test_non_clashing_custom_permissions (auth_tests.test_checks.ModelsPermissionsChecksTests)",
+          "test_verbose_name_max_length (auth_tests.test_checks.ModelsPermissionsChecksTests)",
+          "test_is_anonymous_authenticated_methods (auth_tests.test_checks.UserModelChecksTests)",
+          "test_username_unique_with_model_constraint (auth_tests.test_checks.UserModelChecksTests)"
+        ],
+        "failing": [
+          "test_clashing_custom_permissions (auth_tests.test_checks.ModelsPermissionsChecksTests)",
+          "test_clashing_default_permissions (auth_tests.test_checks.ModelsPermissionsChecksTests)",
+          "test_custom_permission_codename_max_length (auth_tests.test_checks.ModelsPermissionsChecksTests)",
+          "test_custom_permission_name_max_length (auth_tests.test_checks.ModelsPermissionsChecksTests)",
+          "test_empty_default_permissions (auth_tests.test_checks.ModelsPermissionsChecksTests)",
+          "test_model_name_max_length (auth_tests.test_checks.ModelsPermissionsChecksTests)",
+          "test_non_clashing_custom_permissions (auth_tests.test_checks.ModelsPermissionsChecksTests)",
+          "test_verbose_name_max_length (auth_tests.test_checks.ModelsPermissionsChecksTests)",
+          "test_is_anonymous_authenticated_methods (auth_tests.test_checks.UserModelChecksTests)",
+          "REQUIRED_FIELDS should be a list.",
+          "test_username_unique_with_model_constraint (auth_tests.test_checks.UserModelChecksTests)"
+        ],
+        "symbol": "check_user_model",
+        "unexplained": [
+          "REQUIRED_FIELDS should be a list. (no failure section found)"
+        ],
+        "unparsed": [
+          "REQUIRED_FIELDS should be a list."
+        ],
+        "unparsed_log_shape": true
+      },
+      "file": null,
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 1,
+        "f2p_failing": [
+          "test_username_unique_with_model_constraint (auth_tests.test_checks.UserModelChecksTests)"
+        ],
+        "f2p_pass": 0,
+        "found": true,
+        "n_parsed": 2,
+        "p2p_fail": 13,
+        "p2p_failing": [
+          "test_clashing_custom_permissions (auth_tests.test_checks.ModelsPermissionsChecksTests)",
+          "test_clashing_default_permissions (auth_tests.test_checks.ModelsPermissionsChecksTests)",
+          "test_custom_permission_codename_max_length (auth_tests.test_checks.ModelsPermissionsChecksTests)",
+          "test_custom_permission_name_max_length (auth_tests.test_checks.ModelsPermissionsChecksTests)",
+          "test_empty_default_permissions (auth_tests.test_checks.ModelsPermissionsChecksTests)",
+          "test_model_name_max_length (auth_tests.test_checks.ModelsPermissionsChecksTests)",
+          "test_non_clashing_custom_permissions (auth_tests.test_checks.ModelsPermissionsChecksTests)",
+          "test_verbose_name_max_length (auth_tests.test_checks.ModelsPermissionsChecksTests)",
+          "test_is_anonymous_authenticated_methods (auth_tests.test_checks.UserModelChecksTests)",
+          "REQUIRED_FIELDS should be a list."
+        ],
+        "p2p_pass": 0,
+        "reward": 0.0
+      },
+      "loud_failure": false,
+      "observable": "human-readable text of an exception message",
+      "operator": "message_reword",
+      "reason": "no anchor inside the gold-touched region",
+      "tier": "HIGH",
+      "tree_digest": "bf34bacf2636832ad5a85b1e4e46853b456a42fd17abf7bd8c456be90f7fa43c",
+      "verdict": "NOT_APPLICABLE"
+    }
+  ],
+  "targets": [
+    "django/contrib/auth/checks.py"
+  ],
+  "version": "3.2",
+  "witnesses": []
+}

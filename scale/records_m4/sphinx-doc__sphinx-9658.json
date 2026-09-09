@@ -1,0 +1,241 @@
+{
+  "completed": true,
+  "control": {
+    "graded": null,
+    "log": null,
+    "passed": true,
+    "reason": "untransformed reference scores 1.0"
+  },
+  "digest_trace": [
+    {
+      "digest": "e60ef2af7a89abdc080db7de6c43b36ccca82f4ed1b1093cd07ae0fa36a8b224",
+      "memo_hit": false
+    },
+    {
+      "digest": "b648e080736d10cbcd1d321ac9d3ebbb1d91dd353cfd7d60b1ff9d798e17f05e",
+      "memo_hit": false
+    },
+    {
+      "digest": "b648e080736d10cbcd1d321ac9d3ebbb1d91dd353cfd7d60b1ff9d798e17f05e",
+      "memo_hit": true
+    }
+  ],
+  "disk_orphan_reclaimed_bytes": 0,
+  "disk_residual_bytes": 0,
+  "elapsed_seconds": 163.49,
+  "error": null,
+  "image": "swebench/sweb.eval.x86_64.sphinx-doc_1776_sphinx-9658:latest",
+  "instance_id": "sphinx-doc__sphinx-9658",
+  "leaked_containers": [],
+  "leaked_image": false,
+  "log": [
+    [
+      "<control>",
+      "OK",
+      "untransformed reference scores 1.0"
+    ],
+    [
+      "kwonly_specialize:<no anchor>",
+      "NOT_APPLICABLE",
+      "no anchor inside the gold-touched region"
+    ],
+    [
+      "symbol_rename:_MockObject",
+      "REFUSED",
+      "dynamic reach: '_MockObject' appears in a non-annotation string literal in sphinx/ext/autodoc/mock.py line 28 ('_MockObject') -- an alpha-rename cannot be argued safe"
+    ],
+    [
+      "symbol_rename:_make_subclass",
+      "CLEAN",
+      "reward 1.0"
+    ],
+    [
+      "collection_reverse:<no anchor>",
+      "NOT_APPLICABLE",
+      "no anchor inside the gold-touched region"
+    ],
+    [
+      "message_reword:<no anchor>",
+      "NOT_APPLICABLE",
+      "no anchor inside the gold-touched region"
+    ]
+  ],
+  "mountable": true,
+  "multi_target": false,
+  "n_targets": 1,
+  "on_prime_hub": null,
+  "on_prime_hub_reason": "not resolvable offline; no hub environment index is reachable from this repo, verifiers or swebench",
+  "operators_not_applicable": [
+    "collection_reverse",
+    "kwonly_specialize",
+    "message_reword"
+  ],
+  "operators_with_anchors": [
+    "symbol_rename"
+  ],
+  "repo": "sphinx-doc/sphinx",
+  "row": {
+    "elapsed": 62.86,
+    "error": null,
+    "error_type": null,
+    "index": 0,
+    "mode": "formcheck",
+    "name": "sphinx-doc__sphinx-9658",
+    "reason": "valid",
+    "valid": true
+  },
+  "rows": [
+    {
+      "anchor": null,
+      "failure_analysis": null,
+      "file": null,
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 1,
+        "found": true,
+        "n_parsed": 26,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 24,
+        "reward": 1.0
+      },
+      "loud_failure": false,
+      "observable": "callable signature (arity / parameter names)",
+      "operator": "kwonly_specialize",
+      "reason": "no anchor inside the gold-touched region",
+      "tier": "HIGH",
+      "tree_digest": "e60ef2af7a89abdc080db7de6c43b36ccca82f4ed1b1093cd07ae0fa36a8b224",
+      "verdict": "NOT_APPLICABLE"
+    },
+    {
+      "anchor": "_MockObject",
+      "failure_analysis": null,
+      "file": "sphinx/ext/autodoc/mock.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 1,
+        "found": true,
+        "n_parsed": 26,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 24,
+        "reward": 1.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "dynamic reach: '_MockObject' appears in a non-annotation string literal in sphinx/ext/autodoc/mock.py line 28 ('_MockObject') -- an alpha-rename cannot be argued safe",
+      "tier": "MEDIUM",
+      "tree_digest": "e60ef2af7a89abdc080db7de6c43b36ccca82f4ed1b1093cd07ae0fa36a8b224",
+      "verdict": "REFUSED"
+    },
+    {
+      "anchor": "_make_subclass",
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "broke": [],
+        "coupled": [],
+        "failing": [],
+        "symbol": "_make_subclass",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": "sphinx/ext/autodoc/mock.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 1,
+        "found": true,
+        "n_parsed": 26,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 24,
+        "reward": 1.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "reward 1.0",
+      "tier": "HIGH",
+      "tree_digest": "b648e080736d10cbcd1d321ac9d3ebbb1d91dd353cfd7d60b1ff9d798e17f05e",
+      "verdict": "CLEAN"
+    },
+    {
+      "anchor": null,
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "broke": [],
+        "coupled": [],
+        "failing": [],
+        "symbol": "_make_subclass",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": null,
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 1,
+        "found": true,
+        "n_parsed": 26,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 24,
+        "reward": 1.0
+      },
+      "loud_failure": false,
+      "observable": "order of elements in a returned collection",
+      "operator": "collection_reverse",
+      "reason": "no anchor inside the gold-touched region",
+      "tier": "MEDIUM",
+      "tree_digest": "b648e080736d10cbcd1d321ac9d3ebbb1d91dd353cfd7d60b1ff9d798e17f05e",
+      "verdict": "NOT_APPLICABLE"
+    },
+    {
+      "anchor": null,
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "broke": [],
+        "coupled": [],
+        "failing": [],
+        "symbol": "_make_subclass",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": null,
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 1,
+        "found": true,
+        "n_parsed": 26,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 24,
+        "reward": 1.0
+      },
+      "loud_failure": false,
+      "observable": "human-readable text of an exception message",
+      "operator": "message_reword",
+      "reason": "no anchor inside the gold-touched region",
+      "tier": "HIGH",
+      "tree_digest": "b648e080736d10cbcd1d321ac9d3ebbb1d91dd353cfd7d60b1ff9d798e17f05e",
+      "verdict": "NOT_APPLICABLE"
+    }
+  ],
+  "targets": [
+    "sphinx/ext/autodoc/mock.py"
+  ],
+  "version": "4.3",
+  "witnesses": []
+}

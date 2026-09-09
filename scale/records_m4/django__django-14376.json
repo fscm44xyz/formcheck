@@ -1,0 +1,424 @@
+{
+  "completed": true,
+  "control": {
+    "graded": null,
+    "log": null,
+    "passed": true,
+    "reason": "untransformed reference scores 1.0"
+  },
+  "digest_trace": [
+    {
+      "digest": "d7cdab28967979eb2a9f0d1ceb0c25800004a440af196ee0ee803cd319228ee8",
+      "memo_hit": false
+    },
+    {
+      "digest": "0de09c2298eefa2a42529402afbca8eacebf4b93b494298df7d316b31af4265f",
+      "memo_hit": false
+    },
+    {
+      "digest": "0de09c2298eefa2a42529402afbca8eacebf4b93b494298df7d316b31af4265f",
+      "memo_hit": true
+    }
+  ],
+  "disk_orphan_reclaimed_bytes": 0,
+  "disk_residual_bytes": 0,
+  "elapsed_seconds": 150.86,
+  "error": null,
+  "image": "swebench/sweb.eval.x86_64.django_1776_django-14376:latest",
+  "instance_id": "django__django-14376",
+  "leaked_containers": [],
+  "leaked_image": false,
+  "log": [
+    [
+      "<control>",
+      "OK",
+      "untransformed reference scores 1.0"
+    ],
+    [
+      "kwonly_specialize:<no anchor>",
+      "NOT_APPLICABLE",
+      "no anchor inside the gold-touched region"
+    ],
+    [
+      "symbol_rename:django/db/backends/mysql/base.py:DatabaseWrapper",
+      "REFUSED",
+      "attribute access `.DatabaseWrapper` in django/db/utils.py line 205 is not a qualified reference to the defining module -- outside this operator's scope"
+    ],
+    [
+      "symbol_rename:django/db/backends/mysql/client.py:DatabaseClient",
+      "WITNESS",
+      "reward 0.0"
+    ],
+    [
+      "collection_reverse:<no anchor>",
+      "NOT_APPLICABLE",
+      "no anchor inside the gold-touched region"
+    ],
+    [
+      "message_reword:<no anchor>",
+      "NOT_APPLICABLE",
+      "no anchor inside the gold-touched region; 1 anchor(s) elsewhere in the 2 target(s): django/db/backends/mysql/base.py, django/db/backends/mysql/client.py"
+    ]
+  ],
+  "mountable": true,
+  "multi_target": true,
+  "n_targets": 2,
+  "on_prime_hub": null,
+  "on_prime_hub_reason": "not resolvable offline; no hub environment index is reachable from this repo, verifiers or swebench",
+  "operators_not_applicable": [
+    "collection_reverse",
+    "kwonly_specialize",
+    "message_reword"
+  ],
+  "operators_with_anchors": [
+    "symbol_rename"
+  ],
+  "repo": "django/django",
+  "row": {
+    "elapsed": 47.45,
+    "error": null,
+    "error_type": null,
+    "index": 0,
+    "mode": "formcheck",
+    "name": "django__django-14376",
+    "reason": "invalid",
+    "valid": false
+  },
+  "rows": [
+    {
+      "anchor": null,
+      "failure_analysis": null,
+      "file": null,
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 3,
+        "found": true,
+        "n_parsed": 9,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 6,
+        "reward": 1.0
+      },
+      "loud_failure": false,
+      "observable": "callable signature (arity / parameter names)",
+      "operator": "kwonly_specialize",
+      "reason": "no anchor inside the gold-touched region",
+      "tier": "HIGH",
+      "tree_digest": "d7cdab28967979eb2a9f0d1ceb0c25800004a440af196ee0ee803cd319228ee8",
+      "verdict": "NOT_APPLICABLE"
+    },
+    {
+      "anchor": "DatabaseWrapper",
+      "failure_analysis": null,
+      "file": "django/db/backends/mysql/base.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 3,
+        "found": true,
+        "n_parsed": 9,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 6,
+        "reward": 1.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "attribute access `.DatabaseWrapper` in django/db/utils.py line 205 is not a qualified reference to the defining module -- outside this operator's scope",
+      "tier": "MEDIUM",
+      "tree_digest": "d7cdab28967979eb2a9f0d1ceb0c25800004a440af196ee0ee803cd319228ee8",
+      "verdict": "REFUSED"
+    },
+    {
+      "all_failures_attributed": true,
+      "anchor": "DatabaseClient",
+      "f2p_fail": 3,
+      "failure_analysis": {
+        "all_reference_the_symbol": true,
+        "broke": [],
+        "coupled": [
+          "test_basic_params_specified_in_settings (dbshell.test_mysql.MySqlDbshellCommandTestCase)",
+          "test_can_connect_using_sockets (dbshell.test_mysql.MySqlDbshellCommandTestCase)",
+          "test_crash_password_does_not_leak (dbshell.test_mysql.MySqlDbshellCommandTestCase)",
+          "test_fails_with_keyerror_on_incomplete_config (dbshell.test_mysql.MySqlDbshellCommandTestCase)",
+          "test_options_charset (dbshell.test_mysql.MySqlDbshellCommandTestCase)",
+          "test_ssl_certificate_is_added (dbshell.test_mysql.MySqlDbshellCommandTestCase)",
+          "test_options_non_deprecated_keys_preferred (dbshell.test_mysql.MySqlDbshellCommandTestCase)",
+          "test_options_override_settings_proper_values (dbshell.test_mysql.MySqlDbshellCommandTestCase)",
+          "test_parameters (dbshell.test_mysql.MySqlDbshellCommandTestCase)"
+        ],
+        "failing": [
+          "test_basic_params_specified_in_settings (dbshell.test_mysql.MySqlDbshellCommandTestCase)",
+          "test_can_connect_using_sockets (dbshell.test_mysql.MySqlDbshellCommandTestCase)",
+          "test_crash_password_does_not_leak (dbshell.test_mysql.MySqlDbshellCommandTestCase)",
+          "test_fails_with_keyerror_on_incomplete_config (dbshell.test_mysql.MySqlDbshellCommandTestCase)",
+          "test_options_charset (dbshell.test_mysql.MySqlDbshellCommandTestCase)",
+          "test_ssl_certificate_is_added (dbshell.test_mysql.MySqlDbshellCommandTestCase)",
+          "test_options_non_deprecated_keys_preferred (dbshell.test_mysql.MySqlDbshellCommandTestCase)",
+          "test_options_override_settings_proper_values (dbshell.test_mysql.MySqlDbshellCommandTestCase)",
+          "test_parameters (dbshell.test_mysql.MySqlDbshellCommandTestCase)"
+        ],
+        "symbol": "DatabaseClient",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": "django/db/backends/mysql/client.py",
+      "graded_log": "+ ./tests/runtests.py --verbosity 2 --settings=test_sqlite --parallel 1 dbshell.test_mysql\nTesting against Django installed in '/testbed/django'\nImporting application dbshell\nFound 1 tests.\nSkipping setup of unused database(s): default, other.\nSystem check identified no issues (0 silenced).\n\ntest_mysql (unittest.loader._FailedTest) ... ERROR\n\n======================================================================\nERROR: test_mysql (unittest.loader._FailedTest)\n----------------------------------------------------------------------\nImportError: Failed to import test module: test_mysql\nTraceback (most recent call last):\n  File \"/opt/miniconda3/envs/testbed/lib/python3.8/unittest/loader.py\", line 154, in loadTestsFromName\n    module = __import__(module_name)\n  File \"/testbed/tests/dbshell/test_mysql.py\", line 6, in <module>\n    from django.db.backends.mysql.client import DatabaseClient\nImportError: cannot import name 'DatabaseClient' from 'django.db.backends.mysql.client' (/testbed/django/db/backends/mysql/client.py)\n\n\n----------------------------------------------------------------------\nRan 1 test in 0.000s\n\nFAILED (errors=1)\n",
+      "graded_report": {
+        "f2p_fail": 3,
+        "f2p_failing": [
+          "test_options_non_deprecated_keys_preferred (dbshell.test_mysql.MySqlDbshellCommandTestCase)",
+          "test_options_override_settings_proper_values (dbshell.test_mysql.MySqlDbshellCommandTestCase)",
+          "test_parameters (dbshell.test_mysql.MySqlDbshellCommandTestCase)"
+        ],
+        "f2p_pass": 0,
+        "found": true,
+        "n_parsed": 2,
+        "p2p_fail": 6,
+        "p2p_failing": [
+          "test_basic_params_specified_in_settings (dbshell.test_mysql.MySqlDbshellCommandTestCase)",
+          "test_can_connect_using_sockets (dbshell.test_mysql.MySqlDbshellCommandTestCase)",
+          "test_crash_password_does_not_leak (dbshell.test_mysql.MySqlDbshellCommandTestCase)",
+          "test_fails_with_keyerror_on_incomplete_config (dbshell.test_mysql.MySqlDbshellCommandTestCase)",
+          "test_options_charset (dbshell.test_mysql.MySqlDbshellCommandTestCase)",
+          "test_ssl_certificate_is_added (dbshell.test_mysql.MySqlDbshellCommandTestCase)"
+        ],
+        "p2p_pass": 0,
+        "reward": 0.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "p2p_coupled_tests": [
+        "test_basic_params_specified_in_settings (dbshell.test_mysql.MySqlDbshellCommandTestCase)",
+        "test_can_connect_using_sockets (dbshell.test_mysql.MySqlDbshellCommandTestCase)",
+        "test_crash_password_does_not_leak (dbshell.test_mysql.MySqlDbshellCommandTestCase)",
+        "test_fails_with_keyerror_on_incomplete_config (dbshell.test_mysql.MySqlDbshellCommandTestCase)",
+        "test_options_charset (dbshell.test_mysql.MySqlDbshellCommandTestCase)",
+        "test_ssl_certificate_is_added (dbshell.test_mysql.MySqlDbshellCommandTestCase)"
+      ],
+      "p2p_fail": 6,
+      "reason": "reward 0.0",
+      "tier": "MEDIUM",
+      "tree_digest": "0de09c2298eefa2a42529402afbca8eacebf4b93b494298df7d316b31af4265f",
+      "verdict": "WITNESS",
+      "witness_side": "p2p_coupling"
+    },
+    {
+      "anchor": null,
+      "failure_analysis": {
+        "all_reference_the_symbol": true,
+        "broke": [],
+        "coupled": [
+          "test_basic_params_specified_in_settings (dbshell.test_mysql.MySqlDbshellCommandTestCase)",
+          "test_can_connect_using_sockets (dbshell.test_mysql.MySqlDbshellCommandTestCase)",
+          "test_crash_password_does_not_leak (dbshell.test_mysql.MySqlDbshellCommandTestCase)",
+          "test_fails_with_keyerror_on_incomplete_config (dbshell.test_mysql.MySqlDbshellCommandTestCase)",
+          "test_options_charset (dbshell.test_mysql.MySqlDbshellCommandTestCase)",
+          "test_ssl_certificate_is_added (dbshell.test_mysql.MySqlDbshellCommandTestCase)",
+          "test_options_non_deprecated_keys_preferred (dbshell.test_mysql.MySqlDbshellCommandTestCase)",
+          "test_options_override_settings_proper_values (dbshell.test_mysql.MySqlDbshellCommandTestCase)",
+          "test_parameters (dbshell.test_mysql.MySqlDbshellCommandTestCase)"
+        ],
+        "failing": [
+          "test_basic_params_specified_in_settings (dbshell.test_mysql.MySqlDbshellCommandTestCase)",
+          "test_can_connect_using_sockets (dbshell.test_mysql.MySqlDbshellCommandTestCase)",
+          "test_crash_password_does_not_leak (dbshell.test_mysql.MySqlDbshellCommandTestCase)",
+          "test_fails_with_keyerror_on_incomplete_config (dbshell.test_mysql.MySqlDbshellCommandTestCase)",
+          "test_options_charset (dbshell.test_mysql.MySqlDbshellCommandTestCase)",
+          "test_ssl_certificate_is_added (dbshell.test_mysql.MySqlDbshellCommandTestCase)",
+          "test_options_non_deprecated_keys_preferred (dbshell.test_mysql.MySqlDbshellCommandTestCase)",
+          "test_options_override_settings_proper_values (dbshell.test_mysql.MySqlDbshellCommandTestCase)",
+          "test_parameters (dbshell.test_mysql.MySqlDbshellCommandTestCase)"
+        ],
+        "symbol": "DatabaseClient",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": null,
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 3,
+        "f2p_failing": [
+          "test_options_non_deprecated_keys_preferred (dbshell.test_mysql.MySqlDbshellCommandTestCase)",
+          "test_options_override_settings_proper_values (dbshell.test_mysql.MySqlDbshellCommandTestCase)",
+          "test_parameters (dbshell.test_mysql.MySqlDbshellCommandTestCase)"
+        ],
+        "f2p_pass": 0,
+        "found": true,
+        "n_parsed": 2,
+        "p2p_fail": 6,
+        "p2p_failing": [
+          "test_basic_params_specified_in_settings (dbshell.test_mysql.MySqlDbshellCommandTestCase)",
+          "test_can_connect_using_sockets (dbshell.test_mysql.MySqlDbshellCommandTestCase)",
+          "test_crash_password_does_not_leak (dbshell.test_mysql.MySqlDbshellCommandTestCase)",
+          "test_fails_with_keyerror_on_incomplete_config (dbshell.test_mysql.MySqlDbshellCommandTestCase)",
+          "test_options_charset (dbshell.test_mysql.MySqlDbshellCommandTestCase)",
+          "test_ssl_certificate_is_added (dbshell.test_mysql.MySqlDbshellCommandTestCase)"
+        ],
+        "p2p_pass": 0,
+        "reward": 0.0
+      },
+      "loud_failure": false,
+      "observable": "order of elements in a returned collection",
+      "operator": "collection_reverse",
+      "reason": "no anchor inside the gold-touched region",
+      "tier": "MEDIUM",
+      "tree_digest": "0de09c2298eefa2a42529402afbca8eacebf4b93b494298df7d316b31af4265f",
+      "verdict": "NOT_APPLICABLE"
+    },
+    {
+      "anchor": null,
+      "failure_analysis": {
+        "all_reference_the_symbol": true,
+        "broke": [],
+        "coupled": [
+          "test_basic_params_specified_in_settings (dbshell.test_mysql.MySqlDbshellCommandTestCase)",
+          "test_can_connect_using_sockets (dbshell.test_mysql.MySqlDbshellCommandTestCase)",
+          "test_crash_password_does_not_leak (dbshell.test_mysql.MySqlDbshellCommandTestCase)",
+          "test_fails_with_keyerror_on_incomplete_config (dbshell.test_mysql.MySqlDbshellCommandTestCase)",
+          "test_options_charset (dbshell.test_mysql.MySqlDbshellCommandTestCase)",
+          "test_ssl_certificate_is_added (dbshell.test_mysql.MySqlDbshellCommandTestCase)",
+          "test_options_non_deprecated_keys_preferred (dbshell.test_mysql.MySqlDbshellCommandTestCase)",
+          "test_options_override_settings_proper_values (dbshell.test_mysql.MySqlDbshellCommandTestCase)",
+          "test_parameters (dbshell.test_mysql.MySqlDbshellCommandTestCase)"
+        ],
+        "failing": [
+          "test_basic_params_specified_in_settings (dbshell.test_mysql.MySqlDbshellCommandTestCase)",
+          "test_can_connect_using_sockets (dbshell.test_mysql.MySqlDbshellCommandTestCase)",
+          "test_crash_password_does_not_leak (dbshell.test_mysql.MySqlDbshellCommandTestCase)",
+          "test_fails_with_keyerror_on_incomplete_config (dbshell.test_mysql.MySqlDbshellCommandTestCase)",
+          "test_options_charset (dbshell.test_mysql.MySqlDbshellCommandTestCase)",
+          "test_ssl_certificate_is_added (dbshell.test_mysql.MySqlDbshellCommandTestCase)",
+          "test_options_non_deprecated_keys_preferred (dbshell.test_mysql.MySqlDbshellCommandTestCase)",
+          "test_options_override_settings_proper_values (dbshell.test_mysql.MySqlDbshellCommandTestCase)",
+          "test_parameters (dbshell.test_mysql.MySqlDbshellCommandTestCase)"
+        ],
+        "symbol": "DatabaseClient",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": null,
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 3,
+        "f2p_failing": [
+          "test_options_non_deprecated_keys_preferred (dbshell.test_mysql.MySqlDbshellCommandTestCase)",
+          "test_options_override_settings_proper_values (dbshell.test_mysql.MySqlDbshellCommandTestCase)",
+          "test_parameters (dbshell.test_mysql.MySqlDbshellCommandTestCase)"
+        ],
+        "f2p_pass": 0,
+        "found": true,
+        "n_parsed": 2,
+        "p2p_fail": 6,
+        "p2p_failing": [
+          "test_basic_params_specified_in_settings (dbshell.test_mysql.MySqlDbshellCommandTestCase)",
+          "test_can_connect_using_sockets (dbshell.test_mysql.MySqlDbshellCommandTestCase)",
+          "test_crash_password_does_not_leak (dbshell.test_mysql.MySqlDbshellCommandTestCase)",
+          "test_fails_with_keyerror_on_incomplete_config (dbshell.test_mysql.MySqlDbshellCommandTestCase)",
+          "test_options_charset (dbshell.test_mysql.MySqlDbshellCommandTestCase)",
+          "test_ssl_certificate_is_added (dbshell.test_mysql.MySqlDbshellCommandTestCase)"
+        ],
+        "p2p_pass": 0,
+        "reward": 0.0
+      },
+      "loud_failure": false,
+      "observable": "human-readable text of an exception message",
+      "operator": "message_reword",
+      "reason": "no anchor inside the gold-touched region; 1 anchor(s) elsewhere in the 2 target(s): django/db/backends/mysql/base.py, django/db/backends/mysql/client.py",
+      "tier": "HIGH",
+      "tree_digest": "0de09c2298eefa2a42529402afbca8eacebf4b93b494298df7d316b31af4265f",
+      "verdict": "NOT_APPLICABLE"
+    }
+  ],
+  "targets": [
+    "django/db/backends/mysql/base.py",
+    "django/db/backends/mysql/client.py"
+  ],
+  "version": "4.0",
+  "witnesses": [
+    {
+      "all_failures_attributed": true,
+      "anchor": "DatabaseClient",
+      "f2p_fail": 3,
+      "failure_analysis": {
+        "all_reference_the_symbol": true,
+        "broke": [],
+        "coupled": [
+          "test_basic_params_specified_in_settings (dbshell.test_mysql.MySqlDbshellCommandTestCase)",
+          "test_can_connect_using_sockets (dbshell.test_mysql.MySqlDbshellCommandTestCase)",
+          "test_crash_password_does_not_leak (dbshell.test_mysql.MySqlDbshellCommandTestCase)",
+          "test_fails_with_keyerror_on_incomplete_config (dbshell.test_mysql.MySqlDbshellCommandTestCase)",
+          "test_options_charset (dbshell.test_mysql.MySqlDbshellCommandTestCase)",
+          "test_ssl_certificate_is_added (dbshell.test_mysql.MySqlDbshellCommandTestCase)",
+          "test_options_non_deprecated_keys_preferred (dbshell.test_mysql.MySqlDbshellCommandTestCase)",
+          "test_options_override_settings_proper_values (dbshell.test_mysql.MySqlDbshellCommandTestCase)",
+          "test_parameters (dbshell.test_mysql.MySqlDbshellCommandTestCase)"
+        ],
+        "failing": [
+          "test_basic_params_specified_in_settings (dbshell.test_mysql.MySqlDbshellCommandTestCase)",
+          "test_can_connect_using_sockets (dbshell.test_mysql.MySqlDbshellCommandTestCase)",
+          "test_crash_password_does_not_leak (dbshell.test_mysql.MySqlDbshellCommandTestCase)",
+          "test_fails_with_keyerror_on_incomplete_config (dbshell.test_mysql.MySqlDbshellCommandTestCase)",
+          "test_options_charset (dbshell.test_mysql.MySqlDbshellCommandTestCase)",
+          "test_ssl_certificate_is_added (dbshell.test_mysql.MySqlDbshellCommandTestCase)",
+          "test_options_non_deprecated_keys_preferred (dbshell.test_mysql.MySqlDbshellCommandTestCase)",
+          "test_options_override_settings_proper_values (dbshell.test_mysql.MySqlDbshellCommandTestCase)",
+          "test_parameters (dbshell.test_mysql.MySqlDbshellCommandTestCase)"
+        ],
+        "symbol": "DatabaseClient",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": "django/db/backends/mysql/client.py",
+      "graded_log": "+ ./tests/runtests.py --verbosity 2 --settings=test_sqlite --parallel 1 dbshell.test_mysql\nTesting against Django installed in '/testbed/django'\nImporting application dbshell\nFound 1 tests.\nSkipping setup of unused database(s): default, other.\nSystem check identified no issues (0 silenced).\n\ntest_mysql (unittest.loader._FailedTest) ... ERROR\n\n======================================================================\nERROR: test_mysql (unittest.loader._FailedTest)\n----------------------------------------------------------------------\nImportError: Failed to import test module: test_mysql\nTraceback (most recent call last):\n  File \"/opt/miniconda3/envs/testbed/lib/python3.8/unittest/loader.py\", line 154, in loadTestsFromName\n    module = __import__(module_name)\n  File \"/testbed/tests/dbshell/test_mysql.py\", line 6, in <module>\n    from django.db.backends.mysql.client import DatabaseClient\nImportError: cannot import name 'DatabaseClient' from 'django.db.backends.mysql.client' (/testbed/django/db/backends/mysql/client.py)\n\n\n----------------------------------------------------------------------\nRan 1 test in 0.000s\n\nFAILED (errors=1)\n",
+      "graded_report": {
+        "f2p_fail": 3,
+        "f2p_failing": [
+          "test_options_non_deprecated_keys_preferred (dbshell.test_mysql.MySqlDbshellCommandTestCase)",
+          "test_options_override_settings_proper_values (dbshell.test_mysql.MySqlDbshellCommandTestCase)",
+          "test_parameters (dbshell.test_mysql.MySqlDbshellCommandTestCase)"
+        ],
+        "f2p_pass": 0,
+        "found": true,
+        "n_parsed": 2,
+        "p2p_fail": 6,
+        "p2p_failing": [
+          "test_basic_params_specified_in_settings (dbshell.test_mysql.MySqlDbshellCommandTestCase)",
+          "test_can_connect_using_sockets (dbshell.test_mysql.MySqlDbshellCommandTestCase)",
+          "test_crash_password_does_not_leak (dbshell.test_mysql.MySqlDbshellCommandTestCase)",
+          "test_fails_with_keyerror_on_incomplete_config (dbshell.test_mysql.MySqlDbshellCommandTestCase)",
+          "test_options_charset (dbshell.test_mysql.MySqlDbshellCommandTestCase)",
+          "test_ssl_certificate_is_added (dbshell.test_mysql.MySqlDbshellCommandTestCase)"
+        ],
+        "p2p_pass": 0,
+        "reward": 0.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "p2p_coupled_tests": [
+        "test_basic_params_specified_in_settings (dbshell.test_mysql.MySqlDbshellCommandTestCase)",
+        "test_can_connect_using_sockets (dbshell.test_mysql.MySqlDbshellCommandTestCase)",
+        "test_crash_password_does_not_leak (dbshell.test_mysql.MySqlDbshellCommandTestCase)",
+        "test_fails_with_keyerror_on_incomplete_config (dbshell.test_mysql.MySqlDbshellCommandTestCase)",
+        "test_options_charset (dbshell.test_mysql.MySqlDbshellCommandTestCase)",
+        "test_ssl_certificate_is_added (dbshell.test_mysql.MySqlDbshellCommandTestCase)"
+      ],
+      "p2p_fail": 6,
+      "reason": "reward 0.0",
+      "tier": "MEDIUM",
+      "tree_digest": "0de09c2298eefa2a42529402afbca8eacebf4b93b494298df7d316b31af4265f",
+      "verdict": "WITNESS",
+      "witness_side": "p2p_coupling"
+    }
+  ]
+}

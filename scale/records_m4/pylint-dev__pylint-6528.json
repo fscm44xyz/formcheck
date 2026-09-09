@@ -1,0 +1,537 @@
+{
+  "completed": true,
+  "control": {
+    "graded": null,
+    "log": null,
+    "passed": true,
+    "reason": "untransformed reference scores 1.0"
+  },
+  "digest_trace": [
+    {
+      "digest": "71907519ba24f4f8202c4c6e65ff67fec01194fffd13c7bede7d514e1646abb2",
+      "memo_hit": false
+    },
+    {
+      "digest": "bf71e01be9163bba76f3a12ca22d6f90721ffb7e6267e9e29eede1ff53a41c57",
+      "memo_hit": false
+    },
+    {
+      "digest": "bf71e01be9163bba76f3a12ca22d6f90721ffb7e6267e9e29eede1ff53a41c57",
+      "memo_hit": true
+    },
+    {
+      "digest": "6f3786c0dd7259b5687dc7e5ca61db31b8a6f0b4341370f4c02a68250b201197",
+      "memo_hit": false
+    }
+  ],
+  "disk_orphan_reclaimed_bytes": 0,
+  "disk_residual_bytes": 0,
+  "elapsed_seconds": 131.19,
+  "error": null,
+  "image": "swebench/sweb.eval.x86_64.pylint-dev_1776_pylint-6528:latest",
+  "instance_id": "pylint-dev__pylint-6528",
+  "leaked_containers": [],
+  "leaked_image": false,
+  "log": [
+    [
+      "<control>",
+      "OK",
+      "untransformed reference scores 1.0"
+    ],
+    [
+      "kwonly_specialize:<no anchor>",
+      "NOT_APPLICABLE",
+      "no anchor inside the gold-touched region"
+    ],
+    [
+      "symbol_rename:pylint/lint/expand_modules.py:_is_ignored_file",
+      "CLEAN",
+      "reward 1.0"
+    ],
+    [
+      "symbol_rename:pylint/lint/expand_modules.py:expand_modules",
+      "UNVALIDATED",
+      "14 failing test(s) have no recognisable failure block -- unknown log shape, not evidence of breakage; first: tests/lint/unittest_lint.py::test_no_args"
+    ],
+    [
+      "symbol_rename:pylint/lint/pylinter.py:PyLinter",
+      "REFUSED",
+      "attribute access `.PyLinter` in pylint/checkers/non_ascii_names.py line 182 is not a qualified reference to the defining module -- outside this operator's scope"
+    ],
+    [
+      "collection_reverse:<no anchor>",
+      "NOT_APPLICABLE",
+      "no anchor inside the gold-touched region"
+    ],
+    [
+      "message_reword:<no anchor>",
+      "NOT_APPLICABLE",
+      "no anchor inside the gold-touched region; 2 anchor(s) elsewhere in the 2 target(s): pylint/lint/expand_modules.py, pylint/lint/pylinter.py"
+    ]
+  ],
+  "mountable": true,
+  "multi_target": true,
+  "n_targets": 2,
+  "on_prime_hub": null,
+  "on_prime_hub_reason": "not resolvable offline; no hub environment index is reachable from this repo, verifiers or swebench",
+  "operators_not_applicable": [
+    "collection_reverse",
+    "kwonly_specialize",
+    "message_reword"
+  ],
+  "operators_with_anchors": [
+    "symbol_rename"
+  ],
+  "repo": "pylint-dev/pylint",
+  "row": {
+    "elapsed": 106.12,
+    "error": null,
+    "error_type": null,
+    "index": 0,
+    "mode": "formcheck",
+    "name": "pylint-dev__pylint-6528",
+    "reason": "valid",
+    "valid": true
+  },
+  "rows": [
+    {
+      "anchor": null,
+      "failure_analysis": null,
+      "file": null,
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 4,
+        "found": true,
+        "n_parsed": 178,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 171,
+        "reward": 1.0
+      },
+      "loud_failure": false,
+      "observable": "callable signature (arity / parameter names)",
+      "operator": "kwonly_specialize",
+      "reason": "no anchor inside the gold-touched region",
+      "tier": "HIGH",
+      "tree_digest": "71907519ba24f4f8202c4c6e65ff67fec01194fffd13c7bede7d514e1646abb2",
+      "verdict": "NOT_APPLICABLE"
+    },
+    {
+      "anchor": "_is_ignored_file",
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "broke": [],
+        "coupled": [],
+        "failing": [],
+        "symbol": "_is_ignored_file",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": "pylint/lint/expand_modules.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 4,
+        "found": true,
+        "n_parsed": 178,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 171,
+        "reward": 1.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "reward 1.0",
+      "tier": "HIGH",
+      "tree_digest": "bf71e01be9163bba76f3a12ca22d6f90721ffb7e6267e9e29eede1ff53a41c57",
+      "verdict": "CLEAN"
+    },
+    {
+      "anchor": "expand_modules",
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "broke": [],
+        "coupled": [],
+        "failing": [
+          "tests/lint/unittest_lint.py::test_no_args",
+          "tests/lint/unittest_lint.py::test_one_arg[case0]",
+          "tests/lint/unittest_lint.py::test_one_arg[case1]",
+          "tests/lint/unittest_lint.py::test_one_arg[case2]",
+          "tests/lint/unittest_lint.py::test_one_arg[case3]",
+          "tests/lint/unittest_lint.py::test_one_arg[case4]",
+          "tests/lint/unittest_lint.py::test_two_similar_args[case0]",
+          "tests/lint/unittest_lint.py::test_two_similar_args[case1]",
+          "tests/lint/unittest_lint.py::test_two_similar_args[case2]",
+          "tests/lint/unittest_lint.py::test_two_similar_args[case3]",
+          "tests/lint/unittest_lint.py::test_recursive_ignore[--ignore-ignored_subdirectory]",
+          "tests/lint/unittest_lint.py::test_recursive_ignore[--ignore-patterns-ignored_*]",
+          "tests/test_self.py::TestRunTC::test_ignore_recursive",
+          "tests/test_self.py::TestRunTC::test_ignore_pattern_recursive"
+        ],
+        "symbol": "expand_modules",
+        "unexplained": [
+          "tests/lint/unittest_lint.py::test_no_args (no failure section found)",
+          "tests/lint/unittest_lint.py::test_one_arg[case0] (no failure section found)",
+          "tests/lint/unittest_lint.py::test_one_arg[case1] (no failure section found)",
+          "tests/lint/unittest_lint.py::test_one_arg[case2] (no failure section found)",
+          "tests/lint/unittest_lint.py::test_one_arg[case3] (no failure section found)",
+          "tests/lint/unittest_lint.py::test_one_arg[case4] (no failure section found)",
+          "tests/lint/unittest_lint.py::test_two_similar_args[case0] (no failure section found)",
+          "tests/lint/unittest_lint.py::test_two_similar_args[case1] (no failure section found)",
+          "tests/lint/unittest_lint.py::test_two_similar_args[case2] (no failure section found)",
+          "tests/lint/unittest_lint.py::test_two_similar_args[case3] (no failure section found)",
+          "tests/lint/unittest_lint.py::test_recursive_ignore[--ignore-ignored_subdirectory] (no failure section found)",
+          "tests/lint/unittest_lint.py::test_recursive_ignore[--ignore-patterns-ignored_*] (no failure section found)",
+          "tests/test_self.py::TestRunTC::test_ignore_recursive (no failure section found)",
+          "tests/test_self.py::TestRunTC::test_ignore_pattern_recursive (no failure section found)"
+        ],
+        "unparsed": [
+          "tests/lint/unittest_lint.py::test_no_args",
+          "tests/lint/unittest_lint.py::test_one_arg[case0]",
+          "tests/lint/unittest_lint.py::test_one_arg[case1]",
+          "tests/lint/unittest_lint.py::test_one_arg[case2]",
+          "tests/lint/unittest_lint.py::test_one_arg[case3]",
+          "tests/lint/unittest_lint.py::test_one_arg[case4]",
+          "tests/lint/unittest_lint.py::test_two_similar_args[case0]",
+          "tests/lint/unittest_lint.py::test_two_similar_args[case1]",
+          "tests/lint/unittest_lint.py::test_two_similar_args[case2]",
+          "tests/lint/unittest_lint.py::test_two_similar_args[case3]",
+          "tests/lint/unittest_lint.py::test_recursive_ignore[--ignore-ignored_subdirectory]",
+          "tests/lint/unittest_lint.py::test_recursive_ignore[--ignore-patterns-ignored_*]",
+          "tests/test_self.py::TestRunTC::test_ignore_recursive",
+          "tests/test_self.py::TestRunTC::test_ignore_pattern_recursive"
+        ],
+        "unparsed_log_shape": true
+      },
+      "file": "pylint/lint/expand_modules.py",
+      "graded_log": "+ pytest -rA tests/lint/unittest_lint.py tests/regrtest_data/directory/ignored_subdirectory/failing.py tests/test_self.py\n\n/opt/miniconda3/envs/testbed/lib/python3.9/site-packages/_pytest/config/__init__.py:331: PluggyTeardownRaisedWarning: A plugin raised an exception during an old-style hookwrapper teardown.\nPlugin: helpconfig, Hook: pytest_cmdline_parse\nConftestImportFailure: ModuleNotFoundError: No module named 'pylint.lint.expand_modules__renamed' (from /testbed/tests/conftest.py)\nFor more information see https://pluggy.readthedocs.io/en/stable/api_reference.html#pluggy.PluggyTeardownRaisedWarning\n  config = pluginmanager.hook.pytest_cmdline_parse(\nImportError while loading conftest '/testbed/tests/conftest.py'.\ntests/conftest.py:15: in <module>\n    from pylint.lint import PyLinter\npylint/lint/__init__.py:22: in <module>\n    from pylint.lint.pylinter import PyLinter\npylint/lint/pylinter.py:34: in <module>\n    from pylint.lint.expand_modules__renamed import _is_ignored_file, expand_modules\nE   ModuleNotFoundError: No module named 'pylint.lint.expand_modules__renamed'\n",
+      "graded_report": {
+        "f2p_fail": 4,
+        "f2p_failing": [
+          "tests/lint/unittest_lint.py::test_recursive_ignore[--ignore-ignored_subdirectory]",
+          "tests/lint/unittest_lint.py::test_recursive_ignore[--ignore-patterns-ignored_*]",
+          "tests/test_self.py::TestRunTC::test_ignore_recursive",
+          "tests/test_self.py::TestRunTC::test_ignore_pattern_recursive"
+        ],
+        "f2p_pass": 0,
+        "found": true,
+        "n_parsed": 0,
+        "p2p_fail": 171,
+        "p2p_failing": [
+          "tests/lint/unittest_lint.py::test_no_args",
+          "tests/lint/unittest_lint.py::test_one_arg[case0]",
+          "tests/lint/unittest_lint.py::test_one_arg[case1]",
+          "tests/lint/unittest_lint.py::test_one_arg[case2]",
+          "tests/lint/unittest_lint.py::test_one_arg[case3]",
+          "tests/lint/unittest_lint.py::test_one_arg[case4]",
+          "tests/lint/unittest_lint.py::test_two_similar_args[case0]",
+          "tests/lint/unittest_lint.py::test_two_similar_args[case1]",
+          "tests/lint/unittest_lint.py::test_two_similar_args[case2]",
+          "tests/lint/unittest_lint.py::test_two_similar_args[case3]"
+        ],
+        "p2p_pass": 0,
+        "reward": 0.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "14 failing test(s) have no recognisable failure block -- unknown log shape, not evidence of breakage; first: tests/lint/unittest_lint.py::test_no_args",
+      "tier": "MEDIUM",
+      "tree_digest": "6f3786c0dd7259b5687dc7e5ca61db31b8a6f0b4341370f4c02a68250b201197",
+      "verdict": "UNVALIDATED"
+    },
+    {
+      "anchor": "PyLinter",
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "broke": [],
+        "coupled": [],
+        "failing": [
+          "tests/lint/unittest_lint.py::test_no_args",
+          "tests/lint/unittest_lint.py::test_one_arg[case0]",
+          "tests/lint/unittest_lint.py::test_one_arg[case1]",
+          "tests/lint/unittest_lint.py::test_one_arg[case2]",
+          "tests/lint/unittest_lint.py::test_one_arg[case3]",
+          "tests/lint/unittest_lint.py::test_one_arg[case4]",
+          "tests/lint/unittest_lint.py::test_two_similar_args[case0]",
+          "tests/lint/unittest_lint.py::test_two_similar_args[case1]",
+          "tests/lint/unittest_lint.py::test_two_similar_args[case2]",
+          "tests/lint/unittest_lint.py::test_two_similar_args[case3]",
+          "tests/lint/unittest_lint.py::test_recursive_ignore[--ignore-ignored_subdirectory]",
+          "tests/lint/unittest_lint.py::test_recursive_ignore[--ignore-patterns-ignored_*]",
+          "tests/test_self.py::TestRunTC::test_ignore_recursive",
+          "tests/test_self.py::TestRunTC::test_ignore_pattern_recursive"
+        ],
+        "symbol": "expand_modules",
+        "unexplained": [
+          "tests/lint/unittest_lint.py::test_no_args (no failure section found)",
+          "tests/lint/unittest_lint.py::test_one_arg[case0] (no failure section found)",
+          "tests/lint/unittest_lint.py::test_one_arg[case1] (no failure section found)",
+          "tests/lint/unittest_lint.py::test_one_arg[case2] (no failure section found)",
+          "tests/lint/unittest_lint.py::test_one_arg[case3] (no failure section found)",
+          "tests/lint/unittest_lint.py::test_one_arg[case4] (no failure section found)",
+          "tests/lint/unittest_lint.py::test_two_similar_args[case0] (no failure section found)",
+          "tests/lint/unittest_lint.py::test_two_similar_args[case1] (no failure section found)",
+          "tests/lint/unittest_lint.py::test_two_similar_args[case2] (no failure section found)",
+          "tests/lint/unittest_lint.py::test_two_similar_args[case3] (no failure section found)",
+          "tests/lint/unittest_lint.py::test_recursive_ignore[--ignore-ignored_subdirectory] (no failure section found)",
+          "tests/lint/unittest_lint.py::test_recursive_ignore[--ignore-patterns-ignored_*] (no failure section found)",
+          "tests/test_self.py::TestRunTC::test_ignore_recursive (no failure section found)",
+          "tests/test_self.py::TestRunTC::test_ignore_pattern_recursive (no failure section found)"
+        ],
+        "unparsed": [
+          "tests/lint/unittest_lint.py::test_no_args",
+          "tests/lint/unittest_lint.py::test_one_arg[case0]",
+          "tests/lint/unittest_lint.py::test_one_arg[case1]",
+          "tests/lint/unittest_lint.py::test_one_arg[case2]",
+          "tests/lint/unittest_lint.py::test_one_arg[case3]",
+          "tests/lint/unittest_lint.py::test_one_arg[case4]",
+          "tests/lint/unittest_lint.py::test_two_similar_args[case0]",
+          "tests/lint/unittest_lint.py::test_two_similar_args[case1]",
+          "tests/lint/unittest_lint.py::test_two_similar_args[case2]",
+          "tests/lint/unittest_lint.py::test_two_similar_args[case3]",
+          "tests/lint/unittest_lint.py::test_recursive_ignore[--ignore-ignored_subdirectory]",
+          "tests/lint/unittest_lint.py::test_recursive_ignore[--ignore-patterns-ignored_*]",
+          "tests/test_self.py::TestRunTC::test_ignore_recursive",
+          "tests/test_self.py::TestRunTC::test_ignore_pattern_recursive"
+        ],
+        "unparsed_log_shape": true
+      },
+      "file": "pylint/lint/pylinter.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 4,
+        "f2p_failing": [
+          "tests/lint/unittest_lint.py::test_recursive_ignore[--ignore-ignored_subdirectory]",
+          "tests/lint/unittest_lint.py::test_recursive_ignore[--ignore-patterns-ignored_*]",
+          "tests/test_self.py::TestRunTC::test_ignore_recursive",
+          "tests/test_self.py::TestRunTC::test_ignore_pattern_recursive"
+        ],
+        "f2p_pass": 0,
+        "found": true,
+        "n_parsed": 0,
+        "p2p_fail": 171,
+        "p2p_failing": [
+          "tests/lint/unittest_lint.py::test_no_args",
+          "tests/lint/unittest_lint.py::test_one_arg[case0]",
+          "tests/lint/unittest_lint.py::test_one_arg[case1]",
+          "tests/lint/unittest_lint.py::test_one_arg[case2]",
+          "tests/lint/unittest_lint.py::test_one_arg[case3]",
+          "tests/lint/unittest_lint.py::test_one_arg[case4]",
+          "tests/lint/unittest_lint.py::test_two_similar_args[case0]",
+          "tests/lint/unittest_lint.py::test_two_similar_args[case1]",
+          "tests/lint/unittest_lint.py::test_two_similar_args[case2]",
+          "tests/lint/unittest_lint.py::test_two_similar_args[case3]"
+        ],
+        "p2p_pass": 0,
+        "reward": 0.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "attribute access `.PyLinter` in pylint/checkers/non_ascii_names.py line 182 is not a qualified reference to the defining module -- outside this operator's scope",
+      "tier": "MEDIUM",
+      "tree_digest": "6f3786c0dd7259b5687dc7e5ca61db31b8a6f0b4341370f4c02a68250b201197",
+      "verdict": "REFUSED"
+    },
+    {
+      "anchor": null,
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "broke": [],
+        "coupled": [],
+        "failing": [
+          "tests/lint/unittest_lint.py::test_no_args",
+          "tests/lint/unittest_lint.py::test_one_arg[case0]",
+          "tests/lint/unittest_lint.py::test_one_arg[case1]",
+          "tests/lint/unittest_lint.py::test_one_arg[case2]",
+          "tests/lint/unittest_lint.py::test_one_arg[case3]",
+          "tests/lint/unittest_lint.py::test_one_arg[case4]",
+          "tests/lint/unittest_lint.py::test_two_similar_args[case0]",
+          "tests/lint/unittest_lint.py::test_two_similar_args[case1]",
+          "tests/lint/unittest_lint.py::test_two_similar_args[case2]",
+          "tests/lint/unittest_lint.py::test_two_similar_args[case3]",
+          "tests/lint/unittest_lint.py::test_recursive_ignore[--ignore-ignored_subdirectory]",
+          "tests/lint/unittest_lint.py::test_recursive_ignore[--ignore-patterns-ignored_*]",
+          "tests/test_self.py::TestRunTC::test_ignore_recursive",
+          "tests/test_self.py::TestRunTC::test_ignore_pattern_recursive"
+        ],
+        "symbol": "expand_modules",
+        "unexplained": [
+          "tests/lint/unittest_lint.py::test_no_args (no failure section found)",
+          "tests/lint/unittest_lint.py::test_one_arg[case0] (no failure section found)",
+          "tests/lint/unittest_lint.py::test_one_arg[case1] (no failure section found)",
+          "tests/lint/unittest_lint.py::test_one_arg[case2] (no failure section found)",
+          "tests/lint/unittest_lint.py::test_one_arg[case3] (no failure section found)",
+          "tests/lint/unittest_lint.py::test_one_arg[case4] (no failure section found)",
+          "tests/lint/unittest_lint.py::test_two_similar_args[case0] (no failure section found)",
+          "tests/lint/unittest_lint.py::test_two_similar_args[case1] (no failure section found)",
+          "tests/lint/unittest_lint.py::test_two_similar_args[case2] (no failure section found)",
+          "tests/lint/unittest_lint.py::test_two_similar_args[case3] (no failure section found)",
+          "tests/lint/unittest_lint.py::test_recursive_ignore[--ignore-ignored_subdirectory] (no failure section found)",
+          "tests/lint/unittest_lint.py::test_recursive_ignore[--ignore-patterns-ignored_*] (no failure section found)",
+          "tests/test_self.py::TestRunTC::test_ignore_recursive (no failure section found)",
+          "tests/test_self.py::TestRunTC::test_ignore_pattern_recursive (no failure section found)"
+        ],
+        "unparsed": [
+          "tests/lint/unittest_lint.py::test_no_args",
+          "tests/lint/unittest_lint.py::test_one_arg[case0]",
+          "tests/lint/unittest_lint.py::test_one_arg[case1]",
+          "tests/lint/unittest_lint.py::test_one_arg[case2]",
+          "tests/lint/unittest_lint.py::test_one_arg[case3]",
+          "tests/lint/unittest_lint.py::test_one_arg[case4]",
+          "tests/lint/unittest_lint.py::test_two_similar_args[case0]",
+          "tests/lint/unittest_lint.py::test_two_similar_args[case1]",
+          "tests/lint/unittest_lint.py::test_two_similar_args[case2]",
+          "tests/lint/unittest_lint.py::test_two_similar_args[case3]",
+          "tests/lint/unittest_lint.py::test_recursive_ignore[--ignore-ignored_subdirectory]",
+          "tests/lint/unittest_lint.py::test_recursive_ignore[--ignore-patterns-ignored_*]",
+          "tests/test_self.py::TestRunTC::test_ignore_recursive",
+          "tests/test_self.py::TestRunTC::test_ignore_pattern_recursive"
+        ],
+        "unparsed_log_shape": true
+      },
+      "file": null,
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 4,
+        "f2p_failing": [
+          "tests/lint/unittest_lint.py::test_recursive_ignore[--ignore-ignored_subdirectory]",
+          "tests/lint/unittest_lint.py::test_recursive_ignore[--ignore-patterns-ignored_*]",
+          "tests/test_self.py::TestRunTC::test_ignore_recursive",
+          "tests/test_self.py::TestRunTC::test_ignore_pattern_recursive"
+        ],
+        "f2p_pass": 0,
+        "found": true,
+        "n_parsed": 0,
+        "p2p_fail": 171,
+        "p2p_failing": [
+          "tests/lint/unittest_lint.py::test_no_args",
+          "tests/lint/unittest_lint.py::test_one_arg[case0]",
+          "tests/lint/unittest_lint.py::test_one_arg[case1]",
+          "tests/lint/unittest_lint.py::test_one_arg[case2]",
+          "tests/lint/unittest_lint.py::test_one_arg[case3]",
+          "tests/lint/unittest_lint.py::test_one_arg[case4]",
+          "tests/lint/unittest_lint.py::test_two_similar_args[case0]",
+          "tests/lint/unittest_lint.py::test_two_similar_args[case1]",
+          "tests/lint/unittest_lint.py::test_two_similar_args[case2]",
+          "tests/lint/unittest_lint.py::test_two_similar_args[case3]"
+        ],
+        "p2p_pass": 0,
+        "reward": 0.0
+      },
+      "loud_failure": false,
+      "observable": "order of elements in a returned collection",
+      "operator": "collection_reverse",
+      "reason": "no anchor inside the gold-touched region",
+      "tier": "MEDIUM",
+      "tree_digest": "6f3786c0dd7259b5687dc7e5ca61db31b8a6f0b4341370f4c02a68250b201197",
+      "verdict": "NOT_APPLICABLE"
+    },
+    {
+      "anchor": null,
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "broke": [],
+        "coupled": [],
+        "failing": [
+          "tests/lint/unittest_lint.py::test_no_args",
+          "tests/lint/unittest_lint.py::test_one_arg[case0]",
+          "tests/lint/unittest_lint.py::test_one_arg[case1]",
+          "tests/lint/unittest_lint.py::test_one_arg[case2]",
+          "tests/lint/unittest_lint.py::test_one_arg[case3]",
+          "tests/lint/unittest_lint.py::test_one_arg[case4]",
+          "tests/lint/unittest_lint.py::test_two_similar_args[case0]",
+          "tests/lint/unittest_lint.py::test_two_similar_args[case1]",
+          "tests/lint/unittest_lint.py::test_two_similar_args[case2]",
+          "tests/lint/unittest_lint.py::test_two_similar_args[case3]",
+          "tests/lint/unittest_lint.py::test_recursive_ignore[--ignore-ignored_subdirectory]",
+          "tests/lint/unittest_lint.py::test_recursive_ignore[--ignore-patterns-ignored_*]",
+          "tests/test_self.py::TestRunTC::test_ignore_recursive",
+          "tests/test_self.py::TestRunTC::test_ignore_pattern_recursive"
+        ],
+        "symbol": "expand_modules",
+        "unexplained": [
+          "tests/lint/unittest_lint.py::test_no_args (no failure section found)",
+          "tests/lint/unittest_lint.py::test_one_arg[case0] (no failure section found)",
+          "tests/lint/unittest_lint.py::test_one_arg[case1] (no failure section found)",
+          "tests/lint/unittest_lint.py::test_one_arg[case2] (no failure section found)",
+          "tests/lint/unittest_lint.py::test_one_arg[case3] (no failure section found)",
+          "tests/lint/unittest_lint.py::test_one_arg[case4] (no failure section found)",
+          "tests/lint/unittest_lint.py::test_two_similar_args[case0] (no failure section found)",
+          "tests/lint/unittest_lint.py::test_two_similar_args[case1] (no failure section found)",
+          "tests/lint/unittest_lint.py::test_two_similar_args[case2] (no failure section found)",
+          "tests/lint/unittest_lint.py::test_two_similar_args[case3] (no failure section found)",
+          "tests/lint/unittest_lint.py::test_recursive_ignore[--ignore-ignored_subdirectory] (no failure section found)",
+          "tests/lint/unittest_lint.py::test_recursive_ignore[--ignore-patterns-ignored_*] (no failure section found)",
+          "tests/test_self.py::TestRunTC::test_ignore_recursive (no failure section found)",
+          "tests/test_self.py::TestRunTC::test_ignore_pattern_recursive (no failure section found)"
+        ],
+        "unparsed": [
+          "tests/lint/unittest_lint.py::test_no_args",
+          "tests/lint/unittest_lint.py::test_one_arg[case0]",
+          "tests/lint/unittest_lint.py::test_one_arg[case1]",
+          "tests/lint/unittest_lint.py::test_one_arg[case2]",
+          "tests/lint/unittest_lint.py::test_one_arg[case3]",
+          "tests/lint/unittest_lint.py::test_one_arg[case4]",
+          "tests/lint/unittest_lint.py::test_two_similar_args[case0]",
+          "tests/lint/unittest_lint.py::test_two_similar_args[case1]",
+          "tests/lint/unittest_lint.py::test_two_similar_args[case2]",
+          "tests/lint/unittest_lint.py::test_two_similar_args[case3]",
+          "tests/lint/unittest_lint.py::test_recursive_ignore[--ignore-ignored_subdirectory]",
+          "tests/lint/unittest_lint.py::test_recursive_ignore[--ignore-patterns-ignored_*]",
+          "tests/test_self.py::TestRunTC::test_ignore_recursive",
+          "tests/test_self.py::TestRunTC::test_ignore_pattern_recursive"
+        ],
+        "unparsed_log_shape": true
+      },
+      "file": null,
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 4,
+        "f2p_failing": [
+          "tests/lint/unittest_lint.py::test_recursive_ignore[--ignore-ignored_subdirectory]",
+          "tests/lint/unittest_lint.py::test_recursive_ignore[--ignore-patterns-ignored_*]",
+          "tests/test_self.py::TestRunTC::test_ignore_recursive",
+          "tests/test_self.py::TestRunTC::test_ignore_pattern_recursive"
+        ],
+        "f2p_pass": 0,
+        "found": true,
+        "n_parsed": 0,
+        "p2p_fail": 171,
+        "p2p_failing": [
+          "tests/lint/unittest_lint.py::test_no_args",
+          "tests/lint/unittest_lint.py::test_one_arg[case0]",
+          "tests/lint/unittest_lint.py::test_one_arg[case1]",
+          "tests/lint/unittest_lint.py::test_one_arg[case2]",
+          "tests/lint/unittest_lint.py::test_one_arg[case3]",
+          "tests/lint/unittest_lint.py::test_one_arg[case4]",
+          "tests/lint/unittest_lint.py::test_two_similar_args[case0]",
+          "tests/lint/unittest_lint.py::test_two_similar_args[case1]",
+          "tests/lint/unittest_lint.py::test_two_similar_args[case2]",
+          "tests/lint/unittest_lint.py::test_two_similar_args[case3]"
+        ],
+        "p2p_pass": 0,
+        "reward": 0.0
+      },
+      "loud_failure": false,
+      "observable": "human-readable text of an exception message",
+      "operator": "message_reword",
+      "reason": "no anchor inside the gold-touched region; 2 anchor(s) elsewhere in the 2 target(s): pylint/lint/expand_modules.py, pylint/lint/pylinter.py",
+      "tier": "HIGH",
+      "tree_digest": "6f3786c0dd7259b5687dc7e5ca61db31b8a6f0b4341370f4c02a68250b201197",
+      "verdict": "NOT_APPLICABLE"
+    }
+  ],
+  "targets": [
+    "pylint/lint/expand_modules.py",
+    "pylint/lint/pylinter.py"
+  ],
+  "version": "2.14",
+  "witnesses": []
+}

@@ -1,0 +1,314 @@
+{
+  "completed": true,
+  "control": {
+    "graded": null,
+    "log": null,
+    "passed": true,
+    "reason": "untransformed reference scores 1.0"
+  },
+  "digest_trace": [
+    {
+      "digest": "63ec99c7d80fb5d9d3bfd36aa26998fd4df01824bdfe1943b0c88a75fc2606af",
+      "memo_hit": false
+    },
+    {
+      "digest": "abfbd07490f56a5c4069d77ab7975137be8845379f0e891b087356f5004a80da",
+      "memo_hit": false
+    },
+    {
+      "digest": "abfbd07490f56a5c4069d77ab7975137be8845379f0e891b087356f5004a80da",
+      "memo_hit": true
+    }
+  ],
+  "disk_orphan_reclaimed_bytes": 0,
+  "disk_residual_bytes": 0,
+  "elapsed_seconds": 72.04,
+  "error": null,
+  "image": "swebench/sweb.eval.x86_64.pytest-dev_1776_pytest-5809:latest",
+  "instance_id": "pytest-dev__pytest-5809",
+  "leaked_containers": [],
+  "leaked_image": false,
+  "log": [
+    [
+      "<control>",
+      "OK",
+      "untransformed reference scores 1.0"
+    ],
+    [
+      "kwonly_specialize:<no anchor>",
+      "NOT_APPLICABLE",
+      "no anchor inside the gold-touched region"
+    ],
+    [
+      "symbol_rename:create_new_paste",
+      "WITNESS",
+      "reward 0.0"
+    ],
+    [
+      "collection_reverse:<no anchor>",
+      "NOT_APPLICABLE",
+      "no anchor inside the gold-touched region"
+    ],
+    [
+      "message_reword:<no anchor>",
+      "NOT_APPLICABLE",
+      "no anchor inside the gold-touched region"
+    ]
+  ],
+  "mountable": true,
+  "multi_target": false,
+  "n_targets": 1,
+  "on_prime_hub": null,
+  "on_prime_hub_reason": "not resolvable offline; no hub environment index is reachable from this repo, verifiers or swebench",
+  "operators_not_applicable": [
+    "collection_reverse",
+    "kwonly_specialize",
+    "message_reword"
+  ],
+  "operators_with_anchors": [
+    "symbol_rename"
+  ],
+  "repo": "pytest-dev/pytest",
+  "row": {
+    "elapsed": 30.29,
+    "error": null,
+    "error_type": null,
+    "index": 0,
+    "mode": "formcheck",
+    "name": "pytest-dev__pytest-5809",
+    "reason": "invalid",
+    "valid": false
+  },
+  "rows": [
+    {
+      "anchor": null,
+      "failure_analysis": null,
+      "file": null,
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 1,
+        "found": true,
+        "n_parsed": 4,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 3,
+        "reward": 1.0
+      },
+      "loud_failure": false,
+      "observable": "callable signature (arity / parameter names)",
+      "operator": "kwonly_specialize",
+      "reason": "no anchor inside the gold-touched region",
+      "tier": "HIGH",
+      "tree_digest": "63ec99c7d80fb5d9d3bfd36aa26998fd4df01824bdfe1943b0c88a75fc2606af",
+      "verdict": "NOT_APPLICABLE"
+    },
+    {
+      "all_failures_attributed": true,
+      "anchor": "create_new_paste",
+      "f2p_fail": 1,
+      "failure_analysis": {
+        "all_reference_the_symbol": true,
+        "broke": [],
+        "coupled": [
+          "testing/test_pastebin.py::TestPasteCapture::test_failed",
+          "testing/test_pastebin.py::TestPasteCapture::test_all",
+          "testing/test_pastebin.py::TestPaste::test_create_new_paste"
+        ],
+        "failing": [
+          "testing/test_pastebin.py::TestPasteCapture::test_failed",
+          "testing/test_pastebin.py::TestPasteCapture::test_all",
+          "testing/test_pastebin.py::TestPaste::test_create_new_paste"
+        ],
+        "symbol": "create_new_paste",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": "src/_pytest/pastebin.py",
+      "graded_log": "+ pytest -rA testing/test_pastebin.py\n============================= test session starts ==============================\nplatform linux -- Python 3.9.20, pytest-4.6.6.dev9+g8aba863a6, py-1.11.0, pluggy-0.13.1\nrootdir: /testbed, inifile: tox.ini\ncollected 4 items\n\ntesting/test_pastebin.py FEE.                                            [100%]\n\n==================================== ERRORS ====================================\n________________ ERROR at setup of TestPasteCapture.test_failed ________________\n\nself = <test_pastebin.TestPasteCapture object at 0x70c375e31e20>\nmonkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x70c375e314f0>\nrequest = <SubRequest 'pastebinlist' for <Function test_failed>>\n\n    @pytest.fixture\n    def pastebinlist(self, monkeypatch, request):\n        pastebinlist = []\n        plugin = request.config.pluginmanager.getplugin(\"pastebin\")\n>       monkeypatch.setattr(plugin, \"create_new_paste\", pastebinlist.append)\nE       AttributeError: <module '_pytest.pastebin' from '/testbed/src/_pytest/pastebin.py'> has no attribute 'create_new_paste'\n\n/testbed/testing/test_pastebin.py:16: AttributeError\n_________________ ERROR at setup of TestPasteCapture.test_all __________________\n\nself = <test_pastebin.TestPasteCapture object at 0x70c375e46be0>\nmonkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x70c375e46490>\nrequest = <SubRequest 'pastebinlist' for <Function test_all>>\n\n    @pytest.fixture\n    def pastebinlist(self, monkeypatch, request):\n        pastebinlist = []\n        plugin = request.config.pluginmanager.getplugin(\"pastebin\")\n>       monkeypatch.setattr(plugin, \"create_new_paste\", pastebinlist.append)\nE       AttributeError: <module '_pytest.pastebin' from '/testbed/src/_pytest/pastebin.py'> has no attribute 'create_new_paste'\n\n/testbed/testing/test_pastebin.py:16: AttributeError\n=================================== FAILURES ===================================\n_______________________ TestPaste.test_create_new_paste ________________________\n\nself = <test_pastebin.TestPaste object at 0x70c3767e79d0>\npastebin = <module '_pytest.pastebin' from '/testbed/src/_pytest/pastebin.py'>\nmocked_urlopen = []\n\n    def test_create_new_paste(self, pastebin, mocked_urlopen):\n>       result = pastebin.create_new_paste(b\"full-paste-contents\")\nE       AttributeError: module '_pytest.pastebin' has no attribute 'create_new_paste'\n\ntesting/test_pastebin.py:124: AttributeError\n==================================== PASSES ====================================\n__________________ TestPasteCapture.test_non_ascii_paste_text __________________\n----------------------------- Captured stdout call -----------------------------\n============================= test session starts ==============================\nplatform linux -- Python 3.9.20, pytest-4.6.6.dev9+g8aba863a6, py-1.11.0, pluggy-0.13.1 -- /opt/miniconda3/envs/testbed/bin/python\nrootdir: /tmp/pytest-of-root/pytest-1/test_non_ascii_paste_text0\ncollected 1 item\n\ntest_unicode.py F                                                        [100%]\n\n=================================== FAILURES ===================================\n_____________________________________ test _____________________________________\n\n    def test():\n>       assert '\u263a' == 1\nE       AssertionError: assert '\u263a' == 1\n\ntest_unicode.py:3: AssertionError\n=========================== 1 failed in 0.02 seconds ===========================\n===================== Sending information to Paste Service =====================\n----------------------------- Captured stderr call -----------------------------\nTraceback (most recent call last):\n  File \"/testbed/src/_pytest/pytester.py\", line 881, in runpytest_inprocess\n    reprec = self.inline_run(*args, **kwargs)\n  File \"/testbed/src/_pytest/pytester.py\", line 847, in inline_run\n    ret = pytest.main(list(args), plugins=plugins)\n  File \"/testbed/src/_pytest/config/__init__.py\", line 82, in main\n    return config.hook.pytest_cmdline_main(config=config)\n  File \"/opt/miniconda3/envs/testbed/lib/python3.9/site-packages/pluggy/hooks.py\", line 286, in __call__\n    return self._hookexec(self, self.get_hookimpls(), kwargs)\n  File \"/opt/miniconda3/envs/testbed/lib/python3.9/site-packages/pluggy/manager.py\", line 93, in _hookexec\n    return self._inner_hookexec(hook, methods, kwargs)\n  File \"/opt/miniconda3/envs/testbed/lib/python3.9/site-packages/pluggy/manager.py\", line 84, in <lambda>\n    self._inner_hookexec = lambda hook, methods, kwargs: hook.multicall(\n  File \"/opt/miniconda3/envs/testbed/lib/python3.9/site-packages/pluggy/callers.py\", line 208, in _multicall\n    return outcome.get_result()\n  File \"/opt/miniconda3/envs/testbed/lib/python3.9/site-packages/pluggy/callers.py\", line 80, in get_result\n    raise ex[1].with_traceback(ex[2])\n  File \"/opt/miniconda3/envs/testbed/lib/python3.9/site-packages/pluggy/callers.py\", line 187, in _multicall\n    res = hook_impl.function(*args)\n  File \"/testbed/src/_pytest/main.py\", line 243, in pytest_cmdline_main\n    return wrap_session(config, _main)\n  File \"/testbed/src/_pytest/main.py\", line 238, in wrap_session\n    config._ensure_unconfigure()\n  File \"/testbed/src/_pytest/config/__init__.py\", line 676, in _ensure_unconfigure\n    self.hook.pytest_unconfigure(config=self)\n  File \"/opt/miniconda3/envs/testbed/lib/python3.9/site-packages/pluggy/hooks.py\", line 286, in __call__\n    return self._hookexec(self, self.get_hookimpls(), kwargs)\n  File \"/opt/miniconda3/envs/testbed/lib/python3.9/site-packages/pluggy/manager.py\", line 93, in _hookexec\n    return self._inner_hookexec(hook, methods, kwargs)\n  File \"/opt/miniconda3/envs/testbed/lib/python3.9/site-packages/pluggy/manager.py\", line 337, in traced_hookexec\n    return outcome.get_result()\n  File \"/opt/miniconda3/envs/testbed/lib/python3.9/site-packages/pluggy/callers.py\", line 80, in get_result\n    raise ex[1].with_traceback(ex[2])\n  File \"/opt/miniconda3/envs/testbed/lib/python3.9/site-packages/pluggy/callers.py\", line 52, in from_call\n    result = func()\n  File \"/opt/miniconda3/envs/testbed/lib/python3.9/site-packages/pluggy/manager.py\", line 335, in <lambda>\n    outcome = _Result.from_call(lambda: oldcall(hook, hook_impls, kwargs))\n  File \"/opt/miniconda3/envs/testbed/lib/python3.9/site-packages/pluggy/manager.py\", line 84, in <lambda>\n    self._inner_hookexec = lambda hook, methods, kwargs: hook.multicall(\n  File \"/opt/miniconda3/envs/testbed/lib/python3.9/site-packages/pluggy/callers.py\", line 208, in _multicall\n    return outcome.get_result()\n  File \"/opt/miniconda3/envs/testbed/lib/python3.9/site-packages/pluggy/callers.py\", line 80, in get_result\n    raise ex[1].with_traceback(ex[2])\n  File \"/opt/miniconda3/envs/testbed/lib/python3.9/site-packages/pluggy/callers.py\", line 187, in _multicall\n    res = hook_impl.function(*args)\n  File \"/testbed/src/_pytest/pastebin.py\", line 61, in pytest_unconfigure\n    pastebinurl = create_new_paste__renamed(sessionlog)\n  File \"/testbed/src/_pytest/pastebin.py\", line 87, in create_new_paste__renamed\n    return \"bad response: \" + response\nTypeError: can only concatenate str (not \"bytes\") to str\n=========================== short test summary info ============================\nPASSED testing/test_pastebin.py::TestPasteCapture::test_non_ascii_paste_text\nERROR testing/test_pastebin.py::TestPasteCapture::test_failed - AttributeErro...\nERROR testing/test_pastebin.py::TestPasteCapture::test_all - AttributeError: ...\nFAILED testing/test_pastebin.py::TestPaste::test_create_new_paste - Attribute...\n================= 1 failed, 1 passed, 2 error in 2.82 seconds ==================\n\n",
+      "graded_report": {
+        "f2p_fail": 1,
+        "f2p_failing": [
+          "testing/test_pastebin.py::TestPaste::test_create_new_paste"
+        ],
+        "f2p_pass": 0,
+        "found": true,
+        "n_parsed": 4,
+        "p2p_fail": 2,
+        "p2p_failing": [
+          "testing/test_pastebin.py::TestPasteCapture::test_failed",
+          "testing/test_pastebin.py::TestPasteCapture::test_all"
+        ],
+        "p2p_pass": 1,
+        "reward": 0.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "p2p_coupled_tests": [
+        "testing/test_pastebin.py::TestPasteCapture::test_failed",
+        "testing/test_pastebin.py::TestPasteCapture::test_all"
+      ],
+      "p2p_fail": 2,
+      "reason": "reward 0.0",
+      "tier": "MEDIUM",
+      "tree_digest": "abfbd07490f56a5c4069d77ab7975137be8845379f0e891b087356f5004a80da",
+      "verdict": "WITNESS",
+      "witness_side": "p2p_coupling"
+    },
+    {
+      "anchor": null,
+      "failure_analysis": {
+        "all_reference_the_symbol": true,
+        "broke": [],
+        "coupled": [
+          "testing/test_pastebin.py::TestPasteCapture::test_failed",
+          "testing/test_pastebin.py::TestPasteCapture::test_all",
+          "testing/test_pastebin.py::TestPaste::test_create_new_paste"
+        ],
+        "failing": [
+          "testing/test_pastebin.py::TestPasteCapture::test_failed",
+          "testing/test_pastebin.py::TestPasteCapture::test_all",
+          "testing/test_pastebin.py::TestPaste::test_create_new_paste"
+        ],
+        "symbol": "create_new_paste",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": null,
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 1,
+        "f2p_failing": [
+          "testing/test_pastebin.py::TestPaste::test_create_new_paste"
+        ],
+        "f2p_pass": 0,
+        "found": true,
+        "n_parsed": 4,
+        "p2p_fail": 2,
+        "p2p_failing": [
+          "testing/test_pastebin.py::TestPasteCapture::test_failed",
+          "testing/test_pastebin.py::TestPasteCapture::test_all"
+        ],
+        "p2p_pass": 1,
+        "reward": 0.0
+      },
+      "loud_failure": false,
+      "observable": "order of elements in a returned collection",
+      "operator": "collection_reverse",
+      "reason": "no anchor inside the gold-touched region",
+      "tier": "MEDIUM",
+      "tree_digest": "abfbd07490f56a5c4069d77ab7975137be8845379f0e891b087356f5004a80da",
+      "verdict": "NOT_APPLICABLE"
+    },
+    {
+      "anchor": null,
+      "failure_analysis": {
+        "all_reference_the_symbol": true,
+        "broke": [],
+        "coupled": [
+          "testing/test_pastebin.py::TestPasteCapture::test_failed",
+          "testing/test_pastebin.py::TestPasteCapture::test_all",
+          "testing/test_pastebin.py::TestPaste::test_create_new_paste"
+        ],
+        "failing": [
+          "testing/test_pastebin.py::TestPasteCapture::test_failed",
+          "testing/test_pastebin.py::TestPasteCapture::test_all",
+          "testing/test_pastebin.py::TestPaste::test_create_new_paste"
+        ],
+        "symbol": "create_new_paste",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": null,
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 1,
+        "f2p_failing": [
+          "testing/test_pastebin.py::TestPaste::test_create_new_paste"
+        ],
+        "f2p_pass": 0,
+        "found": true,
+        "n_parsed": 4,
+        "p2p_fail": 2,
+        "p2p_failing": [
+          "testing/test_pastebin.py::TestPasteCapture::test_failed",
+          "testing/test_pastebin.py::TestPasteCapture::test_all"
+        ],
+        "p2p_pass": 1,
+        "reward": 0.0
+      },
+      "loud_failure": false,
+      "observable": "human-readable text of an exception message",
+      "operator": "message_reword",
+      "reason": "no anchor inside the gold-touched region",
+      "tier": "HIGH",
+      "tree_digest": "abfbd07490f56a5c4069d77ab7975137be8845379f0e891b087356f5004a80da",
+      "verdict": "NOT_APPLICABLE"
+    }
+  ],
+  "targets": [
+    "src/_pytest/pastebin.py"
+  ],
+  "version": "4.6",
+  "witnesses": [
+    {
+      "all_failures_attributed": true,
+      "anchor": "create_new_paste",
+      "f2p_fail": 1,
+      "failure_analysis": {
+        "all_reference_the_symbol": true,
+        "broke": [],
+        "coupled": [
+          "testing/test_pastebin.py::TestPasteCapture::test_failed",
+          "testing/test_pastebin.py::TestPasteCapture::test_all",
+          "testing/test_pastebin.py::TestPaste::test_create_new_paste"
+        ],
+        "failing": [
+          "testing/test_pastebin.py::TestPasteCapture::test_failed",
+          "testing/test_pastebin.py::TestPasteCapture::test_all",
+          "testing/test_pastebin.py::TestPaste::test_create_new_paste"
+        ],
+        "symbol": "create_new_paste",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": "src/_pytest/pastebin.py",
+      "graded_log": "+ pytest -rA testing/test_pastebin.py\n============================= test session starts ==============================\nplatform linux -- Python 3.9.20, pytest-4.6.6.dev9+g8aba863a6, py-1.11.0, pluggy-0.13.1\nrootdir: /testbed, inifile: tox.ini\ncollected 4 items\n\ntesting/test_pastebin.py FEE.                                            [100%]\n\n==================================== ERRORS ====================================\n________________ ERROR at setup of TestPasteCapture.test_failed ________________\n\nself = <test_pastebin.TestPasteCapture object at 0x70c375e31e20>\nmonkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x70c375e314f0>\nrequest = <SubRequest 'pastebinlist' for <Function test_failed>>\n\n    @pytest.fixture\n    def pastebinlist(self, monkeypatch, request):\n        pastebinlist = []\n        plugin = request.config.pluginmanager.getplugin(\"pastebin\")\n>       monkeypatch.setattr(plugin, \"create_new_paste\", pastebinlist.append)\nE       AttributeError: <module '_pytest.pastebin' from '/testbed/src/_pytest/pastebin.py'> has no attribute 'create_new_paste'\n\n/testbed/testing/test_pastebin.py:16: AttributeError\n_________________ ERROR at setup of TestPasteCapture.test_all __________________\n\nself = <test_pastebin.TestPasteCapture object at 0x70c375e46be0>\nmonkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x70c375e46490>\nrequest = <SubRequest 'pastebinlist' for <Function test_all>>\n\n    @pytest.fixture\n    def pastebinlist(self, monkeypatch, request):\n        pastebinlist = []\n        plugin = request.config.pluginmanager.getplugin(\"pastebin\")\n>       monkeypatch.setattr(plugin, \"create_new_paste\", pastebinlist.append)\nE       AttributeError: <module '_pytest.pastebin' from '/testbed/src/_pytest/pastebin.py'> has no attribute 'create_new_paste'\n\n/testbed/testing/test_pastebin.py:16: AttributeError\n=================================== FAILURES ===================================\n_______________________ TestPaste.test_create_new_paste ________________________\n\nself = <test_pastebin.TestPaste object at 0x70c3767e79d0>\npastebin = <module '_pytest.pastebin' from '/testbed/src/_pytest/pastebin.py'>\nmocked_urlopen = []\n\n    def test_create_new_paste(self, pastebin, mocked_urlopen):\n>       result = pastebin.create_new_paste(b\"full-paste-contents\")\nE       AttributeError: module '_pytest.pastebin' has no attribute 'create_new_paste'\n\ntesting/test_pastebin.py:124: AttributeError\n==================================== PASSES ====================================\n__________________ TestPasteCapture.test_non_ascii_paste_text __________________\n----------------------------- Captured stdout call -----------------------------\n============================= test session starts ==============================\nplatform linux -- Python 3.9.20, pytest-4.6.6.dev9+g8aba863a6, py-1.11.0, pluggy-0.13.1 -- /opt/miniconda3/envs/testbed/bin/python\nrootdir: /tmp/pytest-of-root/pytest-1/test_non_ascii_paste_text0\ncollected 1 item\n\ntest_unicode.py F                                                        [100%]\n\n=================================== FAILURES ===================================\n_____________________________________ test _____________________________________\n\n    def test():\n>       assert '\u263a' == 1\nE       AssertionError: assert '\u263a' == 1\n\ntest_unicode.py:3: AssertionError\n=========================== 1 failed in 0.02 seconds ===========================\n===================== Sending information to Paste Service =====================\n----------------------------- Captured stderr call -----------------------------\nTraceback (most recent call last):\n  File \"/testbed/src/_pytest/pytester.py\", line 881, in runpytest_inprocess\n    reprec = self.inline_run(*args, **kwargs)\n  File \"/testbed/src/_pytest/pytester.py\", line 847, in inline_run\n    ret = pytest.main(list(args), plugins=plugins)\n  File \"/testbed/src/_pytest/config/__init__.py\", line 82, in main\n    return config.hook.pytest_cmdline_main(config=config)\n  File \"/opt/miniconda3/envs/testbed/lib/python3.9/site-packages/pluggy/hooks.py\", line 286, in __call__\n    return self._hookexec(self, self.get_hookimpls(), kwargs)\n  File \"/opt/miniconda3/envs/testbed/lib/python3.9/site-packages/pluggy/manager.py\", line 93, in _hookexec\n    return self._inner_hookexec(hook, methods, kwargs)\n  File \"/opt/miniconda3/envs/testbed/lib/python3.9/site-packages/pluggy/manager.py\", line 84, in <lambda>\n    self._inner_hookexec = lambda hook, methods, kwargs: hook.multicall(\n  File \"/opt/miniconda3/envs/testbed/lib/python3.9/site-packages/pluggy/callers.py\", line 208, in _multicall\n    return outcome.get_result()\n  File \"/opt/miniconda3/envs/testbed/lib/python3.9/site-packages/pluggy/callers.py\", line 80, in get_result\n    raise ex[1].with_traceback(ex[2])\n  File \"/opt/miniconda3/envs/testbed/lib/python3.9/site-packages/pluggy/callers.py\", line 187, in _multicall\n    res = hook_impl.function(*args)\n  File \"/testbed/src/_pytest/main.py\", line 243, in pytest_cmdline_main\n    return wrap_session(config, _main)\n  File \"/testbed/src/_pytest/main.py\", line 238, in wrap_session\n    config._ensure_unconfigure()\n  File \"/testbed/src/_pytest/config/__init__.py\", line 676, in _ensure_unconfigure\n    self.hook.pytest_unconfigure(config=self)\n  File \"/opt/miniconda3/envs/testbed/lib/python3.9/site-packages/pluggy/hooks.py\", line 286, in __call__\n    return self._hookexec(self, self.get_hookimpls(), kwargs)\n  File \"/opt/miniconda3/envs/testbed/lib/python3.9/site-packages/pluggy/manager.py\", line 93, in _hookexec\n    return self._inner_hookexec(hook, methods, kwargs)\n  File \"/opt/miniconda3/envs/testbed/lib/python3.9/site-packages/pluggy/manager.py\", line 337, in traced_hookexec\n    return outcome.get_result()\n  File \"/opt/miniconda3/envs/testbed/lib/python3.9/site-packages/pluggy/callers.py\", line 80, in get_result\n    raise ex[1].with_traceback(ex[2])\n  File \"/opt/miniconda3/envs/testbed/lib/python3.9/site-packages/pluggy/callers.py\", line 52, in from_call\n    result = func()\n  File \"/opt/miniconda3/envs/testbed/lib/python3.9/site-packages/pluggy/manager.py\", line 335, in <lambda>\n    outcome = _Result.from_call(lambda: oldcall(hook, hook_impls, kwargs))\n  File \"/opt/miniconda3/envs/testbed/lib/python3.9/site-packages/pluggy/manager.py\", line 84, in <lambda>\n    self._inner_hookexec = lambda hook, methods, kwargs: hook.multicall(\n  File \"/opt/miniconda3/envs/testbed/lib/python3.9/site-packages/pluggy/callers.py\", line 208, in _multicall\n    return outcome.get_result()\n  File \"/opt/miniconda3/envs/testbed/lib/python3.9/site-packages/pluggy/callers.py\", line 80, in get_result\n    raise ex[1].with_traceback(ex[2])\n  File \"/opt/miniconda3/envs/testbed/lib/python3.9/site-packages/pluggy/callers.py\", line 187, in _multicall\n    res = hook_impl.function(*args)\n  File \"/testbed/src/_pytest/pastebin.py\", line 61, in pytest_unconfigure\n    pastebinurl = create_new_paste__renamed(sessionlog)\n  File \"/testbed/src/_pytest/pastebin.py\", line 87, in create_new_paste__renamed\n    return \"bad response: \" + response\nTypeError: can only concatenate str (not \"bytes\") to str\n=========================== short test summary info ============================\nPASSED testing/test_pastebin.py::TestPasteCapture::test_non_ascii_paste_text\nERROR testing/test_pastebin.py::TestPasteCapture::test_failed - AttributeErro...\nERROR testing/test_pastebin.py::TestPasteCapture::test_all - AttributeError: ...\nFAILED testing/test_pastebin.py::TestPaste::test_create_new_paste - Attribute...\n================= 1 failed, 1 passed, 2 error in 2.82 seconds ==================\n\n",
+      "graded_report": {
+        "f2p_fail": 1,
+        "f2p_failing": [
+          "testing/test_pastebin.py::TestPaste::test_create_new_paste"
+        ],
+        "f2p_pass": 0,
+        "found": true,
+        "n_parsed": 4,
+        "p2p_fail": 2,
+        "p2p_failing": [
+          "testing/test_pastebin.py::TestPasteCapture::test_failed",
+          "testing/test_pastebin.py::TestPasteCapture::test_all"
+        ],
+        "p2p_pass": 1,
+        "reward": 0.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "p2p_coupled_tests": [
+        "testing/test_pastebin.py::TestPasteCapture::test_failed",
+        "testing/test_pastebin.py::TestPasteCapture::test_all"
+      ],
+      "p2p_fail": 2,
+      "reason": "reward 0.0",
+      "tier": "MEDIUM",
+      "tree_digest": "abfbd07490f56a5c4069d77ab7975137be8845379f0e891b087356f5004a80da",
+      "verdict": "WITNESS",
+      "witness_side": "p2p_coupling"
+    }
+  ]
+}

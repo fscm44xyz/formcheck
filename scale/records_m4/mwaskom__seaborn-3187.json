@@ -1,0 +1,251 @@
+{
+  "completed": true,
+  "control": {
+    "graded": null,
+    "log": null,
+    "passed": true,
+    "reason": "untransformed reference scores 1.0"
+  },
+  "digest_trace": [
+    {
+      "digest": "ca112e314783c70f688a6c37f8cef21685bca2929302c34a7ae7287a4a4129c9",
+      "memo_hit": false
+    },
+    {
+      "digest": "dcd9905f579107fc3dc3732fd74382b1deeaec318892c8facfa8b3a2d0e259ec",
+      "memo_hit": false
+    },
+    {
+      "digest": "dcd9905f579107fc3dc3732fd74382b1deeaec318892c8facfa8b3a2d0e259ec",
+      "memo_hit": true
+    }
+  ],
+  "disk_orphan_reclaimed_bytes": 0,
+  "disk_residual_bytes": 0,
+  "elapsed_seconds": 365.16,
+  "error": null,
+  "image": "swebench/sweb.eval.x86_64.mwaskom_1776_seaborn-3187:latest",
+  "instance_id": "mwaskom__seaborn-3187",
+  "leaked_containers": [],
+  "leaked_image": false,
+  "log": [
+    [
+      "<control>",
+      "OK",
+      "untransformed reference scores 1.0"
+    ],
+    [
+      "kwonly_specialize:<no anchor>",
+      "NOT_APPLICABLE",
+      "no anchor inside the gold-touched region; 10 anchor(s) elsewhere in the 2 target(s): seaborn/_core/scales.py, seaborn/utils.py"
+    ],
+    [
+      "symbol_rename:seaborn/_core/scales.py:ContinuousBase",
+      "CLEAN",
+      "reward 1.0"
+    ],
+    [
+      "symbol_rename:seaborn/utils.py:locator_to_legend_entries",
+      "REFUSED",
+      "multi-line import of 'locator_to_legend_entries' in seaborn/relational.py"
+    ],
+    [
+      "collection_reverse:<no anchor>",
+      "NOT_APPLICABLE",
+      "no anchor inside the gold-touched region"
+    ],
+    [
+      "message_reword:<no anchor>",
+      "NOT_APPLICABLE",
+      "no anchor inside the gold-touched region; 3 anchor(s) elsewhere in the 2 target(s): seaborn/_core/scales.py, seaborn/utils.py"
+    ]
+  ],
+  "mountable": true,
+  "multi_target": true,
+  "n_targets": 2,
+  "on_prime_hub": null,
+  "on_prime_hub_reason": "not resolvable offline; no hub environment index is reachable from this repo, verifiers or swebench",
+  "operators_not_applicable": [
+    "collection_reverse",
+    "kwonly_specialize",
+    "message_reword"
+  ],
+  "operators_with_anchors": [
+    "symbol_rename"
+  ],
+  "repo": "mwaskom/seaborn",
+  "row": {
+    "elapsed": 220.2,
+    "error": null,
+    "error_type": null,
+    "index": 0,
+    "mode": "formcheck",
+    "name": "mwaskom__seaborn-3187",
+    "reason": "valid",
+    "valid": true
+  },
+  "rows": [
+    {
+      "anchor": null,
+      "failure_analysis": null,
+      "file": null,
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 2,
+        "found": true,
+        "n_parsed": 251,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 248,
+        "reward": 1.0
+      },
+      "loud_failure": false,
+      "observable": "callable signature (arity / parameter names)",
+      "operator": "kwonly_specialize",
+      "reason": "no anchor inside the gold-touched region; 10 anchor(s) elsewhere in the 2 target(s): seaborn/_core/scales.py, seaborn/utils.py",
+      "tier": "HIGH",
+      "tree_digest": "ca112e314783c70f688a6c37f8cef21685bca2929302c34a7ae7287a4a4129c9",
+      "verdict": "NOT_APPLICABLE"
+    },
+    {
+      "anchor": "ContinuousBase",
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "broke": [],
+        "coupled": [],
+        "failing": [],
+        "symbol": "ContinuousBase",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": "seaborn/_core/scales.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 2,
+        "found": true,
+        "n_parsed": 251,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 248,
+        "reward": 1.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "reward 1.0",
+      "tier": "MEDIUM",
+      "tree_digest": "dcd9905f579107fc3dc3732fd74382b1deeaec318892c8facfa8b3a2d0e259ec",
+      "verdict": "CLEAN"
+    },
+    {
+      "anchor": "locator_to_legend_entries",
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "broke": [],
+        "coupled": [],
+        "failing": [],
+        "symbol": "ContinuousBase",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": "seaborn/utils.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 2,
+        "found": true,
+        "n_parsed": 251,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 248,
+        "reward": 1.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "multi-line import of 'locator_to_legend_entries' in seaborn/relational.py",
+      "tier": "MEDIUM",
+      "tree_digest": "dcd9905f579107fc3dc3732fd74382b1deeaec318892c8facfa8b3a2d0e259ec",
+      "verdict": "REFUSED"
+    },
+    {
+      "anchor": null,
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "broke": [],
+        "coupled": [],
+        "failing": [],
+        "symbol": "ContinuousBase",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": null,
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 2,
+        "found": true,
+        "n_parsed": 251,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 248,
+        "reward": 1.0
+      },
+      "loud_failure": false,
+      "observable": "order of elements in a returned collection",
+      "operator": "collection_reverse",
+      "reason": "no anchor inside the gold-touched region",
+      "tier": "MEDIUM",
+      "tree_digest": "dcd9905f579107fc3dc3732fd74382b1deeaec318892c8facfa8b3a2d0e259ec",
+      "verdict": "NOT_APPLICABLE"
+    },
+    {
+      "anchor": null,
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "broke": [],
+        "coupled": [],
+        "failing": [],
+        "symbol": "ContinuousBase",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": null,
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 2,
+        "found": true,
+        "n_parsed": 251,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 248,
+        "reward": 1.0
+      },
+      "loud_failure": false,
+      "observable": "human-readable text of an exception message",
+      "operator": "message_reword",
+      "reason": "no anchor inside the gold-touched region; 3 anchor(s) elsewhere in the 2 target(s): seaborn/_core/scales.py, seaborn/utils.py",
+      "tier": "HIGH",
+      "tree_digest": "dcd9905f579107fc3dc3732fd74382b1deeaec318892c8facfa8b3a2d0e259ec",
+      "verdict": "NOT_APPLICABLE"
+    }
+  ],
+  "targets": [
+    "seaborn/_core/scales.py",
+    "seaborn/utils.py"
+  ],
+  "version": "0.12",
+  "witnesses": []
+}

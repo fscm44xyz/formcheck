@@ -1,0 +1,272 @@
+{
+  "completed": true,
+  "control": {
+    "graded": null,
+    "log": null,
+    "passed": true,
+    "reason": "untransformed reference scores 1.0"
+  },
+  "digest_trace": [
+    {
+      "digest": "50e8c6edf109f5481c586989e214e55b33439c1eb0b5862c06360c16ff927cbc",
+      "memo_hit": false
+    },
+    {
+      "digest": "737b638f545967da65b194e6901cd6002a9b9ea42cb95a17847f4abc6f1c992a",
+      "memo_hit": false
+    },
+    {
+      "digest": "737b638f545967da65b194e6901cd6002a9b9ea42cb95a17847f4abc6f1c992a",
+      "memo_hit": true
+    }
+  ],
+  "disk_orphan_reclaimed_bytes": 0,
+  "disk_residual_bytes": 0,
+  "elapsed_seconds": 107.47,
+  "error": null,
+  "image": "swebench/sweb.eval.x86_64.sphinx-doc_1776_sphinx-10673:latest",
+  "instance_id": "sphinx-doc__sphinx-10673",
+  "leaked_containers": [],
+  "leaked_image": false,
+  "log": [
+    [
+      "<control>",
+      "OK",
+      "untransformed reference scores 1.0"
+    ],
+    [
+      "kwonly_specialize:<no anchor>",
+      "NOT_APPLICABLE",
+      "no anchor inside the gold-touched region"
+    ],
+    [
+      "symbol_rename:sphinx/directives/other.py:TocTree",
+      "REFUSED",
+      "BORDER: the issue names 'TocTree' -- candidate CONTRACT, route to the rubric"
+    ],
+    [
+      "symbol_rename:sphinx/environment/adapters/toctree.py:TocTree",
+      "REFUSED",
+      "BORDER: the issue names 'TocTree' -- candidate CONTRACT, route to the rubric"
+    ],
+    [
+      "symbol_rename:sphinx/environment/collectors/toctree.py:TocTreeCollector",
+      "CLEAN",
+      "reward 1.0"
+    ],
+    [
+      "collection_reverse:<no anchor>",
+      "NOT_APPLICABLE",
+      "no anchor inside the gold-touched region"
+    ],
+    [
+      "message_reword:<no anchor>",
+      "NOT_APPLICABLE",
+      "no anchor inside the gold-touched region"
+    ]
+  ],
+  "mountable": true,
+  "multi_target": true,
+  "n_targets": 3,
+  "on_prime_hub": null,
+  "on_prime_hub_reason": "not resolvable offline; no hub environment index is reachable from this repo, verifiers or swebench",
+  "operators_not_applicable": [
+    "collection_reverse",
+    "kwonly_specialize",
+    "message_reword"
+  ],
+  "operators_with_anchors": [
+    "symbol_rename"
+  ],
+  "repo": "sphinx-doc/sphinx",
+  "row": {
+    "elapsed": 37.58,
+    "error": null,
+    "error_type": null,
+    "index": 0,
+    "mode": "formcheck",
+    "name": "sphinx-doc__sphinx-10673",
+    "reason": "valid",
+    "valid": true
+  },
+  "rows": [
+    {
+      "anchor": null,
+      "failure_analysis": null,
+      "file": null,
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 1,
+        "found": true,
+        "n_parsed": 10,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 9,
+        "reward": 1.0
+      },
+      "loud_failure": false,
+      "observable": "callable signature (arity / parameter names)",
+      "operator": "kwonly_specialize",
+      "reason": "no anchor inside the gold-touched region",
+      "tier": "HIGH",
+      "tree_digest": "50e8c6edf109f5481c586989e214e55b33439c1eb0b5862c06360c16ff927cbc",
+      "verdict": "NOT_APPLICABLE"
+    },
+    {
+      "anchor": "TocTree",
+      "failure_analysis": null,
+      "file": "sphinx/directives/other.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 1,
+        "found": true,
+        "n_parsed": 10,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 9,
+        "reward": 1.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "BORDER: the issue names 'TocTree' -- candidate CONTRACT, route to the rubric",
+      "tier": "MEDIUM",
+      "tree_digest": "50e8c6edf109f5481c586989e214e55b33439c1eb0b5862c06360c16ff927cbc",
+      "verdict": "REFUSED"
+    },
+    {
+      "anchor": "TocTree",
+      "failure_analysis": null,
+      "file": "sphinx/environment/adapters/toctree.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 1,
+        "found": true,
+        "n_parsed": 10,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 9,
+        "reward": 1.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "BORDER: the issue names 'TocTree' -- candidate CONTRACT, route to the rubric",
+      "tier": "MEDIUM",
+      "tree_digest": "50e8c6edf109f5481c586989e214e55b33439c1eb0b5862c06360c16ff927cbc",
+      "verdict": "REFUSED"
+    },
+    {
+      "anchor": "TocTreeCollector",
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "broke": [],
+        "coupled": [],
+        "failing": [],
+        "symbol": "TocTreeCollector",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": "sphinx/environment/collectors/toctree.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 1,
+        "found": true,
+        "n_parsed": 10,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 9,
+        "reward": 1.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "reward 1.0",
+      "tier": "MEDIUM",
+      "tree_digest": "737b638f545967da65b194e6901cd6002a9b9ea42cb95a17847f4abc6f1c992a",
+      "verdict": "CLEAN"
+    },
+    {
+      "anchor": null,
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "broke": [],
+        "coupled": [],
+        "failing": [],
+        "symbol": "TocTreeCollector",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": null,
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 1,
+        "found": true,
+        "n_parsed": 10,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 9,
+        "reward": 1.0
+      },
+      "loud_failure": false,
+      "observable": "order of elements in a returned collection",
+      "operator": "collection_reverse",
+      "reason": "no anchor inside the gold-touched region",
+      "tier": "MEDIUM",
+      "tree_digest": "737b638f545967da65b194e6901cd6002a9b9ea42cb95a17847f4abc6f1c992a",
+      "verdict": "NOT_APPLICABLE"
+    },
+    {
+      "anchor": null,
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "broke": [],
+        "coupled": [],
+        "failing": [],
+        "symbol": "TocTreeCollector",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": null,
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 1,
+        "found": true,
+        "n_parsed": 10,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 9,
+        "reward": 1.0
+      },
+      "loud_failure": false,
+      "observable": "human-readable text of an exception message",
+      "operator": "message_reword",
+      "reason": "no anchor inside the gold-touched region",
+      "tier": "HIGH",
+      "tree_digest": "737b638f545967da65b194e6901cd6002a9b9ea42cb95a17847f4abc6f1c992a",
+      "verdict": "NOT_APPLICABLE"
+    }
+  ],
+  "targets": [
+    "sphinx/directives/other.py",
+    "sphinx/environment/adapters/toctree.py",
+    "sphinx/environment/collectors/toctree.py"
+  ],
+  "version": "5.2",
+  "witnesses": []
+}

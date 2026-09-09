@@ -1,0 +1,350 @@
+{
+  "completed": true,
+  "control": {
+    "graded": null,
+    "log": null,
+    "passed": true,
+    "reason": "untransformed reference scores 1.0"
+  },
+  "digest_trace": [
+    {
+      "digest": "cdbbd076c6aba773badd38899ec089b8c66c963ca3bbb97cd6166ddc2c2820ab",
+      "memo_hit": false
+    },
+    {
+      "digest": "5d8567659ce9913f107108ba82bbb12a233d2664ba9a23025c32d25fee815315",
+      "memo_hit": false
+    },
+    {
+      "digest": "5d8567659ce9913f107108ba82bbb12a233d2664ba9a23025c32d25fee815315",
+      "memo_hit": true
+    },
+    {
+      "digest": "bd24ec2ad26f9065376da36c9a3686767a3b5abda6c7c626ef138e3502aae62f",
+      "memo_hit": false
+    },
+    {
+      "digest": "bd24ec2ad26f9065376da36c9a3686767a3b5abda6c7c626ef138e3502aae62f",
+      "memo_hit": true
+    },
+    {
+      "digest": "b68a2a08576651807a3ebf77cdb91225de0b847cacebaf3d0c0672a32b83afe8",
+      "memo_hit": false
+    },
+    {
+      "digest": "b68a2a08576651807a3ebf77cdb91225de0b847cacebaf3d0c0672a32b83afe8",
+      "memo_hit": true
+    },
+    {
+      "digest": "7f16d91b8fd609c0e1aef9fc84437c9eab7cfc4a0256e5943a6f91a826d346df",
+      "memo_hit": false
+    },
+    {
+      "digest": "7f16d91b8fd609c0e1aef9fc84437c9eab7cfc4a0256e5943a6f91a826d346df",
+      "memo_hit": true
+    }
+  ],
+  "disk_orphan_reclaimed_bytes": 0,
+  "disk_residual_bytes": 0,
+  "elapsed_seconds": 105.88,
+  "error": null,
+  "image": "swebench/sweb.eval.x86_64.django_1776_django-15503:latest",
+  "instance_id": "django__django-15503",
+  "leaked_containers": [],
+  "leaked_image": false,
+  "log": [
+    [
+      "<control>",
+      "OK",
+      "untransformed reference scores 1.0"
+    ],
+    [
+      "kwonly_specialize:<no anchor>",
+      "NOT_APPLICABLE",
+      "no anchor inside the gold-touched region"
+    ],
+    [
+      "symbol_rename:HasKeyLookup",
+      "CLEAN",
+      "reward 1.0"
+    ],
+    [
+      "symbol_rename:HasKeyOrArrayIndex",
+      "CLEAN",
+      "reward 1.0"
+    ],
+    [
+      "symbol_rename:KeyTransformIsNull",
+      "CLEAN",
+      "reward 1.0"
+    ],
+    [
+      "symbol_rename:KeyTransformExact",
+      "CLEAN",
+      "reward 1.0"
+    ],
+    [
+      "collection_reverse:<no anchor>",
+      "NOT_APPLICABLE",
+      "no anchor inside the gold-touched region"
+    ],
+    [
+      "message_reword:<no anchor>",
+      "NOT_APPLICABLE",
+      "no anchor inside the gold-touched region; 5 anchor(s) elsewhere in the target"
+    ]
+  ],
+  "mountable": true,
+  "multi_target": false,
+  "n_targets": 1,
+  "on_prime_hub": null,
+  "on_prime_hub_reason": "not resolvable offline; no hub environment index is reachable from this repo, verifiers or swebench",
+  "operators_not_applicable": [
+    "collection_reverse",
+    "kwonly_specialize",
+    "message_reword"
+  ],
+  "operators_with_anchors": [
+    "symbol_rename"
+  ],
+  "repo": "django/django",
+  "row": {
+    "elapsed": 79.76,
+    "error": null,
+    "error_type": null,
+    "index": 0,
+    "mode": "formcheck",
+    "name": "django__django-15503",
+    "reason": "valid",
+    "valid": true
+  },
+  "rows": [
+    {
+      "anchor": null,
+      "failure_analysis": null,
+      "file": null,
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 2,
+        "found": true,
+        "n_parsed": 88,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 78,
+        "reward": 1.0
+      },
+      "loud_failure": false,
+      "observable": "callable signature (arity / parameter names)",
+      "operator": "kwonly_specialize",
+      "reason": "no anchor inside the gold-touched region",
+      "tier": "HIGH",
+      "tree_digest": "cdbbd076c6aba773badd38899ec089b8c66c963ca3bbb97cd6166ddc2c2820ab",
+      "verdict": "NOT_APPLICABLE"
+    },
+    {
+      "anchor": "HasKeyLookup",
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "broke": [],
+        "coupled": [],
+        "failing": [],
+        "symbol": "HasKeyLookup",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": "django/db/models/fields/json.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 2,
+        "found": true,
+        "n_parsed": 88,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 78,
+        "reward": 1.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "reward 1.0",
+      "tier": "MEDIUM",
+      "tree_digest": "5d8567659ce9913f107108ba82bbb12a233d2664ba9a23025c32d25fee815315",
+      "verdict": "CLEAN"
+    },
+    {
+      "anchor": "HasKeyOrArrayIndex",
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "broke": [],
+        "coupled": [],
+        "failing": [],
+        "symbol": "HasKeyOrArrayIndex",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": "django/db/models/fields/json.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 2,
+        "found": true,
+        "n_parsed": 88,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 78,
+        "reward": 1.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "reward 1.0",
+      "tier": "MEDIUM",
+      "tree_digest": "bd24ec2ad26f9065376da36c9a3686767a3b5abda6c7c626ef138e3502aae62f",
+      "verdict": "CLEAN"
+    },
+    {
+      "anchor": "KeyTransformIsNull",
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "broke": [],
+        "coupled": [],
+        "failing": [],
+        "symbol": "KeyTransformIsNull",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": "django/db/models/fields/json.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 2,
+        "found": true,
+        "n_parsed": 88,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 78,
+        "reward": 1.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "reward 1.0",
+      "tier": "MEDIUM",
+      "tree_digest": "b68a2a08576651807a3ebf77cdb91225de0b847cacebaf3d0c0672a32b83afe8",
+      "verdict": "CLEAN"
+    },
+    {
+      "anchor": "KeyTransformExact",
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "broke": [],
+        "coupled": [],
+        "failing": [],
+        "symbol": "KeyTransformExact",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": "django/db/models/fields/json.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 2,
+        "found": true,
+        "n_parsed": 88,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 78,
+        "reward": 1.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "reward 1.0",
+      "tier": "MEDIUM",
+      "tree_digest": "7f16d91b8fd609c0e1aef9fc84437c9eab7cfc4a0256e5943a6f91a826d346df",
+      "verdict": "CLEAN"
+    },
+    {
+      "anchor": null,
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "broke": [],
+        "coupled": [],
+        "failing": [],
+        "symbol": "KeyTransformExact",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": null,
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 2,
+        "found": true,
+        "n_parsed": 88,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 78,
+        "reward": 1.0
+      },
+      "loud_failure": false,
+      "observable": "order of elements in a returned collection",
+      "operator": "collection_reverse",
+      "reason": "no anchor inside the gold-touched region",
+      "tier": "MEDIUM",
+      "tree_digest": "7f16d91b8fd609c0e1aef9fc84437c9eab7cfc4a0256e5943a6f91a826d346df",
+      "verdict": "NOT_APPLICABLE"
+    },
+    {
+      "anchor": null,
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "broke": [],
+        "coupled": [],
+        "failing": [],
+        "symbol": "KeyTransformExact",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": null,
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 2,
+        "found": true,
+        "n_parsed": 88,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 78,
+        "reward": 1.0
+      },
+      "loud_failure": false,
+      "observable": "human-readable text of an exception message",
+      "operator": "message_reword",
+      "reason": "no anchor inside the gold-touched region; 5 anchor(s) elsewhere in the target",
+      "tier": "HIGH",
+      "tree_digest": "7f16d91b8fd609c0e1aef9fc84437c9eab7cfc4a0256e5943a6f91a826d346df",
+      "verdict": "NOT_APPLICABLE"
+    }
+  ],
+  "targets": [
+    "django/db/models/fields/json.py"
+  ],
+  "version": "4.1",
+  "witnesses": []
+}

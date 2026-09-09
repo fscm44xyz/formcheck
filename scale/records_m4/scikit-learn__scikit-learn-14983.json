@@ -1,0 +1,484 @@
+{
+  "completed": true,
+  "control": {
+    "graded": null,
+    "log": null,
+    "passed": true,
+    "reason": "untransformed reference scores 1.0"
+  },
+  "digest_trace": [
+    {
+      "digest": "28d3fed68d02e9d64506058256e183a371c2c37ab34a9315c0900daba0e8f766",
+      "memo_hit": false
+    },
+    {
+      "digest": "4784132a9c66499f41785167705ef30eaed01da98f9667129a156e0dbae346f1",
+      "memo_hit": false
+    },
+    {
+      "digest": "4784132a9c66499f41785167705ef30eaed01da98f9667129a156e0dbae346f1",
+      "memo_hit": true
+    },
+    {
+      "digest": "b9e99a953cb6550c45282568e3f438969bea60667e3c304a0486bfef939ce7a3",
+      "memo_hit": false
+    },
+    {
+      "digest": "b9e99a953cb6550c45282568e3f438969bea60667e3c304a0486bfef939ce7a3",
+      "memo_hit": true
+    }
+  ],
+  "disk_orphan_reclaimed_bytes": 0,
+  "disk_residual_bytes": 0,
+  "elapsed_seconds": 287.22,
+  "error": null,
+  "image": "swebench/sweb.eval.x86_64.scikit-learn_1776_scikit-learn-14983:latest",
+  "instance_id": "scikit-learn__scikit-learn-14983",
+  "leaked_containers": [],
+  "leaked_image": false,
+  "log": [
+    [
+      "<control>",
+      "OK",
+      "untransformed reference scores 1.0"
+    ],
+    [
+      "kwonly_specialize:<no anchor>",
+      "NOT_APPLICABLE",
+      "no anchor inside the gold-touched region"
+    ],
+    [
+      "symbol_rename:_RepeatedSplits",
+      "CLEAN",
+      "reward 1.0"
+    ],
+    [
+      "symbol_rename:_build_repr",
+      "WITNESS",
+      "reward 0.0"
+    ],
+    [
+      "collection_reverse:<no anchor>",
+      "NOT_APPLICABLE",
+      "no anchor inside the gold-touched region; 1 anchor(s) elsewhere in the target"
+    ],
+    [
+      "message_reword:<no anchor>",
+      "NOT_APPLICABLE",
+      "no anchor inside the gold-touched region; 14 anchor(s) elsewhere in the target"
+    ]
+  ],
+  "mountable": true,
+  "multi_target": false,
+  "n_targets": 1,
+  "on_prime_hub": null,
+  "on_prime_hub_reason": "not resolvable offline; no hub environment index is reachable from this repo, verifiers or swebench",
+  "operators_not_applicable": [
+    "collection_reverse",
+    "kwonly_specialize",
+    "message_reword"
+  ],
+  "operators_with_anchors": [
+    "symbol_rename"
+  ],
+  "repo": "scikit-learn/scikit-learn",
+  "row": {
+    "elapsed": 126.93,
+    "error": null,
+    "error_type": null,
+    "index": 0,
+    "mode": "formcheck",
+    "name": "scikit-learn__scikit-learn-14983",
+    "reason": "invalid",
+    "valid": false
+  },
+  "rows": [
+    {
+      "anchor": null,
+      "failure_analysis": null,
+      "file": null,
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 2,
+        "found": true,
+        "n_parsed": 107,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 105,
+        "reward": 1.0
+      },
+      "loud_failure": false,
+      "observable": "callable signature (arity / parameter names)",
+      "operator": "kwonly_specialize",
+      "reason": "no anchor inside the gold-touched region",
+      "tier": "HIGH",
+      "tree_digest": "28d3fed68d02e9d64506058256e183a371c2c37ab34a9315c0900daba0e8f766",
+      "verdict": "NOT_APPLICABLE"
+    },
+    {
+      "anchor": "_RepeatedSplits",
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "broke": [],
+        "coupled": [],
+        "failing": [],
+        "symbol": "_RepeatedSplits",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": "sklearn/model_selection/_split.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 2,
+        "found": true,
+        "n_parsed": 107,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 105,
+        "reward": 1.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "reward 1.0",
+      "tier": "HIGH",
+      "tree_digest": "4784132a9c66499f41785167705ef30eaed01da98f9667129a156e0dbae346f1",
+      "verdict": "CLEAN"
+    },
+    {
+      "all_failures_attributed": true,
+      "anchor": "_build_repr",
+      "f2p_fail": 2,
+      "failure_analysis": {
+        "all_reference_the_symbol": true,
+        "broke": [],
+        "coupled": [
+          "sklearn/model_selection/tests/test_split.py::test_cross_validator_with_default_params",
+          "sklearn/model_selection/tests/test_split.py::test_2d_y",
+          "sklearn/model_selection/tests/test_split.py::test_kfold_valueerrors",
+          "sklearn/model_selection/tests/test_split.py::test_kfold_indices",
+          "sklearn/model_selection/tests/test_split.py::test_kfold_no_shuffle",
+          "sklearn/model_selection/tests/test_split.py::test_stratified_kfold_no_shuffle",
+          "sklearn/model_selection/tests/test_split.py::test_stratified_kfold_ratios[4-False]",
+          "sklearn/model_selection/tests/test_split.py::test_stratified_kfold_ratios[4-True]",
+          "sklearn/model_selection/tests/test_split.py::test_stratified_kfold_ratios[5-False]",
+          "sklearn/model_selection/tests/test_split.py::test_stratified_kfold_ratios[5-True]",
+          "sklearn/model_selection/tests/test_split.py::test_repeated_cv_repr[RepeatedKFold]",
+          "sklearn/model_selection/tests/test_split.py::test_repeated_cv_repr[RepeatedStratifiedKFold]"
+        ],
+        "failing": [
+          "sklearn/model_selection/tests/test_split.py::test_cross_validator_with_default_params",
+          "sklearn/model_selection/tests/test_split.py::test_2d_y",
+          "sklearn/model_selection/tests/test_split.py::test_kfold_valueerrors",
+          "sklearn/model_selection/tests/test_split.py::test_kfold_indices",
+          "sklearn/model_selection/tests/test_split.py::test_kfold_no_shuffle",
+          "sklearn/model_selection/tests/test_split.py::test_stratified_kfold_no_shuffle",
+          "sklearn/model_selection/tests/test_split.py::test_stratified_kfold_ratios[4-False]",
+          "sklearn/model_selection/tests/test_split.py::test_stratified_kfold_ratios[4-True]",
+          "sklearn/model_selection/tests/test_split.py::test_stratified_kfold_ratios[5-False]",
+          "sklearn/model_selection/tests/test_split.py::test_stratified_kfold_ratios[5-True]",
+          "sklearn/model_selection/tests/test_split.py::test_repeated_cv_repr[RepeatedKFold]",
+          "sklearn/model_selection/tests/test_split.py::test_repeated_cv_repr[RepeatedStratifiedKFold]"
+        ],
+        "symbol": "_build_repr",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": "sklearn/model_selection/_split.py",
+      "graded_log": "+ pytest -rA sklearn/model_selection/tests/test_split.py\n============================= test session starts ==============================\nplatform linux -- Python 3.6.13, pytest-6.2.4, py-1.11.0, pluggy-0.13.1\nrootdir: /testbed, configfile: setup.cfg\ncollected 0 items / 2 errors\n\n==================================== ERRORS ====================================\n_________ ERROR collecting sklearn/model_selection/tests/test_split.py _________\nsklearn/model_selection/tests/test_split.py:44: in <module>\n    from sklearn.model_selection._split import _build_repr\nE   ImportError: cannot import name '_build_repr'\n_________ ERROR collecting sklearn/model_selection/tests/test_split.py _________\nImportError while importing test module '/testbed/sklearn/model_selection/tests/test_split.py'.\nHint: make sure your test modules/packages have valid Python names.\nTraceback:\n/opt/miniconda3/envs/testbed/lib/python3.6/importlib/__init__.py:126: in import_module\n    return _bootstrap._gcd_import(name[level:], package, level)\nsklearn/model_selection/tests/test_split.py:44: in <module>\n    from sklearn.model_selection._split import _build_repr\nE   ImportError: cannot import name '_build_repr'\n=========================== short test summary info ============================\nERROR sklearn/model_selection/tests/test_split.py - ImportError: cannot impor...\nERROR sklearn/model_selection/tests/test_split.py\n!!!!!!!!!!!!!!!!!!! Interrupted: 2 errors during collection !!!!!!!!!!!!!!!!!!!!\n========================= 1 warning, 2 errors in 0.81s =========================\n\n",
+      "graded_report": {
+        "f2p_fail": 2,
+        "f2p_failing": [
+          "sklearn/model_selection/tests/test_split.py::test_repeated_cv_repr[RepeatedKFold]",
+          "sklearn/model_selection/tests/test_split.py::test_repeated_cv_repr[RepeatedStratifiedKFold]"
+        ],
+        "f2p_pass": 0,
+        "found": true,
+        "n_parsed": 1,
+        "p2p_fail": 105,
+        "p2p_failing": [
+          "sklearn/model_selection/tests/test_split.py::test_cross_validator_with_default_params",
+          "sklearn/model_selection/tests/test_split.py::test_2d_y",
+          "sklearn/model_selection/tests/test_split.py::test_kfold_valueerrors",
+          "sklearn/model_selection/tests/test_split.py::test_kfold_indices",
+          "sklearn/model_selection/tests/test_split.py::test_kfold_no_shuffle",
+          "sklearn/model_selection/tests/test_split.py::test_stratified_kfold_no_shuffle",
+          "sklearn/model_selection/tests/test_split.py::test_stratified_kfold_ratios[4-False]",
+          "sklearn/model_selection/tests/test_split.py::test_stratified_kfold_ratios[4-True]",
+          "sklearn/model_selection/tests/test_split.py::test_stratified_kfold_ratios[5-False]",
+          "sklearn/model_selection/tests/test_split.py::test_stratified_kfold_ratios[5-True]"
+        ],
+        "p2p_pass": 0,
+        "reward": 0.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "p2p_coupled_tests": [
+        "sklearn/model_selection/tests/test_split.py::test_cross_validator_with_default_params",
+        "sklearn/model_selection/tests/test_split.py::test_2d_y",
+        "sklearn/model_selection/tests/test_split.py::test_kfold_valueerrors",
+        "sklearn/model_selection/tests/test_split.py::test_kfold_indices",
+        "sklearn/model_selection/tests/test_split.py::test_kfold_no_shuffle",
+        "sklearn/model_selection/tests/test_split.py::test_stratified_kfold_no_shuffle",
+        "sklearn/model_selection/tests/test_split.py::test_stratified_kfold_ratios[4-False]",
+        "sklearn/model_selection/tests/test_split.py::test_stratified_kfold_ratios[4-True]",
+        "sklearn/model_selection/tests/test_split.py::test_stratified_kfold_ratios[5-False]",
+        "sklearn/model_selection/tests/test_split.py::test_stratified_kfold_ratios[5-True]"
+      ],
+      "p2p_fail": 105,
+      "reason": "reward 0.0",
+      "tier": "HIGH",
+      "tree_digest": "b9e99a953cb6550c45282568e3f438969bea60667e3c304a0486bfef939ce7a3",
+      "verdict": "WITNESS",
+      "witness_side": "p2p_coupling"
+    },
+    {
+      "anchor": null,
+      "failure_analysis": {
+        "all_reference_the_symbol": true,
+        "broke": [],
+        "coupled": [
+          "sklearn/model_selection/tests/test_split.py::test_cross_validator_with_default_params",
+          "sklearn/model_selection/tests/test_split.py::test_2d_y",
+          "sklearn/model_selection/tests/test_split.py::test_kfold_valueerrors",
+          "sklearn/model_selection/tests/test_split.py::test_kfold_indices",
+          "sklearn/model_selection/tests/test_split.py::test_kfold_no_shuffle",
+          "sklearn/model_selection/tests/test_split.py::test_stratified_kfold_no_shuffle",
+          "sklearn/model_selection/tests/test_split.py::test_stratified_kfold_ratios[4-False]",
+          "sklearn/model_selection/tests/test_split.py::test_stratified_kfold_ratios[4-True]",
+          "sklearn/model_selection/tests/test_split.py::test_stratified_kfold_ratios[5-False]",
+          "sklearn/model_selection/tests/test_split.py::test_stratified_kfold_ratios[5-True]",
+          "sklearn/model_selection/tests/test_split.py::test_repeated_cv_repr[RepeatedKFold]",
+          "sklearn/model_selection/tests/test_split.py::test_repeated_cv_repr[RepeatedStratifiedKFold]"
+        ],
+        "failing": [
+          "sklearn/model_selection/tests/test_split.py::test_cross_validator_with_default_params",
+          "sklearn/model_selection/tests/test_split.py::test_2d_y",
+          "sklearn/model_selection/tests/test_split.py::test_kfold_valueerrors",
+          "sklearn/model_selection/tests/test_split.py::test_kfold_indices",
+          "sklearn/model_selection/tests/test_split.py::test_kfold_no_shuffle",
+          "sklearn/model_selection/tests/test_split.py::test_stratified_kfold_no_shuffle",
+          "sklearn/model_selection/tests/test_split.py::test_stratified_kfold_ratios[4-False]",
+          "sklearn/model_selection/tests/test_split.py::test_stratified_kfold_ratios[4-True]",
+          "sklearn/model_selection/tests/test_split.py::test_stratified_kfold_ratios[5-False]",
+          "sklearn/model_selection/tests/test_split.py::test_stratified_kfold_ratios[5-True]",
+          "sklearn/model_selection/tests/test_split.py::test_repeated_cv_repr[RepeatedKFold]",
+          "sklearn/model_selection/tests/test_split.py::test_repeated_cv_repr[RepeatedStratifiedKFold]"
+        ],
+        "symbol": "_build_repr",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": null,
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 2,
+        "f2p_failing": [
+          "sklearn/model_selection/tests/test_split.py::test_repeated_cv_repr[RepeatedKFold]",
+          "sklearn/model_selection/tests/test_split.py::test_repeated_cv_repr[RepeatedStratifiedKFold]"
+        ],
+        "f2p_pass": 0,
+        "found": true,
+        "n_parsed": 1,
+        "p2p_fail": 105,
+        "p2p_failing": [
+          "sklearn/model_selection/tests/test_split.py::test_cross_validator_with_default_params",
+          "sklearn/model_selection/tests/test_split.py::test_2d_y",
+          "sklearn/model_selection/tests/test_split.py::test_kfold_valueerrors",
+          "sklearn/model_selection/tests/test_split.py::test_kfold_indices",
+          "sklearn/model_selection/tests/test_split.py::test_kfold_no_shuffle",
+          "sklearn/model_selection/tests/test_split.py::test_stratified_kfold_no_shuffle",
+          "sklearn/model_selection/tests/test_split.py::test_stratified_kfold_ratios[4-False]",
+          "sklearn/model_selection/tests/test_split.py::test_stratified_kfold_ratios[4-True]",
+          "sklearn/model_selection/tests/test_split.py::test_stratified_kfold_ratios[5-False]",
+          "sklearn/model_selection/tests/test_split.py::test_stratified_kfold_ratios[5-True]"
+        ],
+        "p2p_pass": 0,
+        "reward": 0.0
+      },
+      "loud_failure": false,
+      "observable": "order of elements in a returned collection",
+      "operator": "collection_reverse",
+      "reason": "no anchor inside the gold-touched region; 1 anchor(s) elsewhere in the target",
+      "tier": "MEDIUM",
+      "tree_digest": "b9e99a953cb6550c45282568e3f438969bea60667e3c304a0486bfef939ce7a3",
+      "verdict": "NOT_APPLICABLE"
+    },
+    {
+      "anchor": null,
+      "failure_analysis": {
+        "all_reference_the_symbol": true,
+        "broke": [],
+        "coupled": [
+          "sklearn/model_selection/tests/test_split.py::test_cross_validator_with_default_params",
+          "sklearn/model_selection/tests/test_split.py::test_2d_y",
+          "sklearn/model_selection/tests/test_split.py::test_kfold_valueerrors",
+          "sklearn/model_selection/tests/test_split.py::test_kfold_indices",
+          "sklearn/model_selection/tests/test_split.py::test_kfold_no_shuffle",
+          "sklearn/model_selection/tests/test_split.py::test_stratified_kfold_no_shuffle",
+          "sklearn/model_selection/tests/test_split.py::test_stratified_kfold_ratios[4-False]",
+          "sklearn/model_selection/tests/test_split.py::test_stratified_kfold_ratios[4-True]",
+          "sklearn/model_selection/tests/test_split.py::test_stratified_kfold_ratios[5-False]",
+          "sklearn/model_selection/tests/test_split.py::test_stratified_kfold_ratios[5-True]",
+          "sklearn/model_selection/tests/test_split.py::test_repeated_cv_repr[RepeatedKFold]",
+          "sklearn/model_selection/tests/test_split.py::test_repeated_cv_repr[RepeatedStratifiedKFold]"
+        ],
+        "failing": [
+          "sklearn/model_selection/tests/test_split.py::test_cross_validator_with_default_params",
+          "sklearn/model_selection/tests/test_split.py::test_2d_y",
+          "sklearn/model_selection/tests/test_split.py::test_kfold_valueerrors",
+          "sklearn/model_selection/tests/test_split.py::test_kfold_indices",
+          "sklearn/model_selection/tests/test_split.py::test_kfold_no_shuffle",
+          "sklearn/model_selection/tests/test_split.py::test_stratified_kfold_no_shuffle",
+          "sklearn/model_selection/tests/test_split.py::test_stratified_kfold_ratios[4-False]",
+          "sklearn/model_selection/tests/test_split.py::test_stratified_kfold_ratios[4-True]",
+          "sklearn/model_selection/tests/test_split.py::test_stratified_kfold_ratios[5-False]",
+          "sklearn/model_selection/tests/test_split.py::test_stratified_kfold_ratios[5-True]",
+          "sklearn/model_selection/tests/test_split.py::test_repeated_cv_repr[RepeatedKFold]",
+          "sklearn/model_selection/tests/test_split.py::test_repeated_cv_repr[RepeatedStratifiedKFold]"
+        ],
+        "symbol": "_build_repr",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": null,
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 2,
+        "f2p_failing": [
+          "sklearn/model_selection/tests/test_split.py::test_repeated_cv_repr[RepeatedKFold]",
+          "sklearn/model_selection/tests/test_split.py::test_repeated_cv_repr[RepeatedStratifiedKFold]"
+        ],
+        "f2p_pass": 0,
+        "found": true,
+        "n_parsed": 1,
+        "p2p_fail": 105,
+        "p2p_failing": [
+          "sklearn/model_selection/tests/test_split.py::test_cross_validator_with_default_params",
+          "sklearn/model_selection/tests/test_split.py::test_2d_y",
+          "sklearn/model_selection/tests/test_split.py::test_kfold_valueerrors",
+          "sklearn/model_selection/tests/test_split.py::test_kfold_indices",
+          "sklearn/model_selection/tests/test_split.py::test_kfold_no_shuffle",
+          "sklearn/model_selection/tests/test_split.py::test_stratified_kfold_no_shuffle",
+          "sklearn/model_selection/tests/test_split.py::test_stratified_kfold_ratios[4-False]",
+          "sklearn/model_selection/tests/test_split.py::test_stratified_kfold_ratios[4-True]",
+          "sklearn/model_selection/tests/test_split.py::test_stratified_kfold_ratios[5-False]",
+          "sklearn/model_selection/tests/test_split.py::test_stratified_kfold_ratios[5-True]"
+        ],
+        "p2p_pass": 0,
+        "reward": 0.0
+      },
+      "loud_failure": false,
+      "observable": "human-readable text of an exception message",
+      "operator": "message_reword",
+      "reason": "no anchor inside the gold-touched region; 14 anchor(s) elsewhere in the target",
+      "tier": "HIGH",
+      "tree_digest": "b9e99a953cb6550c45282568e3f438969bea60667e3c304a0486bfef939ce7a3",
+      "verdict": "NOT_APPLICABLE"
+    }
+  ],
+  "targets": [
+    "sklearn/model_selection/_split.py"
+  ],
+  "version": "0.22",
+  "witnesses": [
+    {
+      "all_failures_attributed": true,
+      "anchor": "_build_repr",
+      "f2p_fail": 2,
+      "failure_analysis": {
+        "all_reference_the_symbol": true,
+        "broke": [],
+        "coupled": [
+          "sklearn/model_selection/tests/test_split.py::test_cross_validator_with_default_params",
+          "sklearn/model_selection/tests/test_split.py::test_2d_y",
+          "sklearn/model_selection/tests/test_split.py::test_kfold_valueerrors",
+          "sklearn/model_selection/tests/test_split.py::test_kfold_indices",
+          "sklearn/model_selection/tests/test_split.py::test_kfold_no_shuffle",
+          "sklearn/model_selection/tests/test_split.py::test_stratified_kfold_no_shuffle",
+          "sklearn/model_selection/tests/test_split.py::test_stratified_kfold_ratios[4-False]",
+          "sklearn/model_selection/tests/test_split.py::test_stratified_kfold_ratios[4-True]",
+          "sklearn/model_selection/tests/test_split.py::test_stratified_kfold_ratios[5-False]",
+          "sklearn/model_selection/tests/test_split.py::test_stratified_kfold_ratios[5-True]",
+          "sklearn/model_selection/tests/test_split.py::test_repeated_cv_repr[RepeatedKFold]",
+          "sklearn/model_selection/tests/test_split.py::test_repeated_cv_repr[RepeatedStratifiedKFold]"
+        ],
+        "failing": [
+          "sklearn/model_selection/tests/test_split.py::test_cross_validator_with_default_params",
+          "sklearn/model_selection/tests/test_split.py::test_2d_y",
+          "sklearn/model_selection/tests/test_split.py::test_kfold_valueerrors",
+          "sklearn/model_selection/tests/test_split.py::test_kfold_indices",
+          "sklearn/model_selection/tests/test_split.py::test_kfold_no_shuffle",
+          "sklearn/model_selection/tests/test_split.py::test_stratified_kfold_no_shuffle",
+          "sklearn/model_selection/tests/test_split.py::test_stratified_kfold_ratios[4-False]",
+          "sklearn/model_selection/tests/test_split.py::test_stratified_kfold_ratios[4-True]",
+          "sklearn/model_selection/tests/test_split.py::test_stratified_kfold_ratios[5-False]",
+          "sklearn/model_selection/tests/test_split.py::test_stratified_kfold_ratios[5-True]",
+          "sklearn/model_selection/tests/test_split.py::test_repeated_cv_repr[RepeatedKFold]",
+          "sklearn/model_selection/tests/test_split.py::test_repeated_cv_repr[RepeatedStratifiedKFold]"
+        ],
+        "symbol": "_build_repr",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": "sklearn/model_selection/_split.py",
+      "graded_log": "+ pytest -rA sklearn/model_selection/tests/test_split.py\n============================= test session starts ==============================\nplatform linux -- Python 3.6.13, pytest-6.2.4, py-1.11.0, pluggy-0.13.1\nrootdir: /testbed, configfile: setup.cfg\ncollected 0 items / 2 errors\n\n==================================== ERRORS ====================================\n_________ ERROR collecting sklearn/model_selection/tests/test_split.py _________\nsklearn/model_selection/tests/test_split.py:44: in <module>\n    from sklearn.model_selection._split import _build_repr\nE   ImportError: cannot import name '_build_repr'\n_________ ERROR collecting sklearn/model_selection/tests/test_split.py _________\nImportError while importing test module '/testbed/sklearn/model_selection/tests/test_split.py'.\nHint: make sure your test modules/packages have valid Python names.\nTraceback:\n/opt/miniconda3/envs/testbed/lib/python3.6/importlib/__init__.py:126: in import_module\n    return _bootstrap._gcd_import(name[level:], package, level)\nsklearn/model_selection/tests/test_split.py:44: in <module>\n    from sklearn.model_selection._split import _build_repr\nE   ImportError: cannot import name '_build_repr'\n=========================== short test summary info ============================\nERROR sklearn/model_selection/tests/test_split.py - ImportError: cannot impor...\nERROR sklearn/model_selection/tests/test_split.py\n!!!!!!!!!!!!!!!!!!! Interrupted: 2 errors during collection !!!!!!!!!!!!!!!!!!!!\n========================= 1 warning, 2 errors in 0.81s =========================\n\n",
+      "graded_report": {
+        "f2p_fail": 2,
+        "f2p_failing": [
+          "sklearn/model_selection/tests/test_split.py::test_repeated_cv_repr[RepeatedKFold]",
+          "sklearn/model_selection/tests/test_split.py::test_repeated_cv_repr[RepeatedStratifiedKFold]"
+        ],
+        "f2p_pass": 0,
+        "found": true,
+        "n_parsed": 1,
+        "p2p_fail": 105,
+        "p2p_failing": [
+          "sklearn/model_selection/tests/test_split.py::test_cross_validator_with_default_params",
+          "sklearn/model_selection/tests/test_split.py::test_2d_y",
+          "sklearn/model_selection/tests/test_split.py::test_kfold_valueerrors",
+          "sklearn/model_selection/tests/test_split.py::test_kfold_indices",
+          "sklearn/model_selection/tests/test_split.py::test_kfold_no_shuffle",
+          "sklearn/model_selection/tests/test_split.py::test_stratified_kfold_no_shuffle",
+          "sklearn/model_selection/tests/test_split.py::test_stratified_kfold_ratios[4-False]",
+          "sklearn/model_selection/tests/test_split.py::test_stratified_kfold_ratios[4-True]",
+          "sklearn/model_selection/tests/test_split.py::test_stratified_kfold_ratios[5-False]",
+          "sklearn/model_selection/tests/test_split.py::test_stratified_kfold_ratios[5-True]"
+        ],
+        "p2p_pass": 0,
+        "reward": 0.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "p2p_coupled_tests": [
+        "sklearn/model_selection/tests/test_split.py::test_cross_validator_with_default_params",
+        "sklearn/model_selection/tests/test_split.py::test_2d_y",
+        "sklearn/model_selection/tests/test_split.py::test_kfold_valueerrors",
+        "sklearn/model_selection/tests/test_split.py::test_kfold_indices",
+        "sklearn/model_selection/tests/test_split.py::test_kfold_no_shuffle",
+        "sklearn/model_selection/tests/test_split.py::test_stratified_kfold_no_shuffle",
+        "sklearn/model_selection/tests/test_split.py::test_stratified_kfold_ratios[4-False]",
+        "sklearn/model_selection/tests/test_split.py::test_stratified_kfold_ratios[4-True]",
+        "sklearn/model_selection/tests/test_split.py::test_stratified_kfold_ratios[5-False]",
+        "sklearn/model_selection/tests/test_split.py::test_stratified_kfold_ratios[5-True]"
+      ],
+      "p2p_fail": 105,
+      "reason": "reward 0.0",
+      "tier": "HIGH",
+      "tree_digest": "b9e99a953cb6550c45282568e3f438969bea60667e3c304a0486bfef939ce7a3",
+      "verdict": "WITNESS",
+      "witness_side": "p2p_coupling"
+    }
+  ]
+}

@@ -1,0 +1,241 @@
+{
+  "completed": true,
+  "control": {
+    "graded": null,
+    "log": null,
+    "passed": true,
+    "reason": "untransformed reference scores 1.0"
+  },
+  "digest_trace": [
+    {
+      "digest": "c6fb72374ba1e20fc60876d654dc0a887b22605b507834978ff10bf8f4e9dcd3",
+      "memo_hit": false
+    },
+    {
+      "digest": "5727fcd9ec4a31bd9ba6e4f08cf1ef93f05fdfc961dec0c90664b3a6b1d374c8",
+      "memo_hit": false
+    },
+    {
+      "digest": "5727fcd9ec4a31bd9ba6e4f08cf1ef93f05fdfc961dec0c90664b3a6b1d374c8",
+      "memo_hit": true
+    }
+  ],
+  "disk_orphan_reclaimed_bytes": 0,
+  "disk_residual_bytes": 0,
+  "elapsed_seconds": 92.06,
+  "error": null,
+  "image": "swebench/sweb.eval.x86_64.pytest-dev_1776_pytest-7324:latest",
+  "instance_id": "pytest-dev__pytest-7324",
+  "leaked_containers": [],
+  "leaked_image": false,
+  "log": [
+    [
+      "<control>",
+      "OK",
+      "untransformed reference scores 1.0"
+    ],
+    [
+      "kwonly_specialize:<no anchor>",
+      "NOT_APPLICABLE",
+      "no anchor inside the gold-touched region; 1 anchor(s) elsewhere in the target"
+    ],
+    [
+      "symbol_rename:not_expr",
+      "REFUSED",
+      "dynamic reach: 'not_expr' appears in a non-annotation string literal in src/_pytest/mark/expression.py line 1 ('\\nEvaluate match expressions, as used by ') -- an alpha-rename cannot be argued safe"
+    ],
+    [
+      "symbol_rename:MatcherAdapter",
+      "CLEAN",
+      "reward 1.0"
+    ],
+    [
+      "collection_reverse:<no anchor>",
+      "NOT_APPLICABLE",
+      "no anchor inside the gold-touched region"
+    ],
+    [
+      "message_reword:<no anchor>",
+      "NOT_APPLICABLE",
+      "no anchor inside the gold-touched region"
+    ]
+  ],
+  "mountable": true,
+  "multi_target": false,
+  "n_targets": 1,
+  "on_prime_hub": null,
+  "on_prime_hub_reason": "not resolvable offline; no hub environment index is reachable from this repo, verifiers or swebench",
+  "operators_not_applicable": [
+    "collection_reverse",
+    "kwonly_specialize",
+    "message_reword"
+  ],
+  "operators_with_anchors": [
+    "symbol_rename"
+  ],
+  "repo": "pytest-dev/pytest",
+  "row": {
+    "elapsed": 48.8,
+    "error": null,
+    "error_type": null,
+    "index": 0,
+    "mode": "formcheck",
+    "name": "pytest-dev__pytest-7324",
+    "reason": "valid",
+    "valid": true
+  },
+  "rows": [
+    {
+      "anchor": null,
+      "failure_analysis": null,
+      "file": null,
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 3,
+        "found": true,
+        "n_parsed": 61,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 58,
+        "reward": 1.0
+      },
+      "loud_failure": false,
+      "observable": "callable signature (arity / parameter names)",
+      "operator": "kwonly_specialize",
+      "reason": "no anchor inside the gold-touched region; 1 anchor(s) elsewhere in the target",
+      "tier": "HIGH",
+      "tree_digest": "c6fb72374ba1e20fc60876d654dc0a887b22605b507834978ff10bf8f4e9dcd3",
+      "verdict": "NOT_APPLICABLE"
+    },
+    {
+      "anchor": "not_expr",
+      "failure_analysis": null,
+      "file": "src/_pytest/mark/expression.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 3,
+        "found": true,
+        "n_parsed": 61,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 58,
+        "reward": 1.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "dynamic reach: 'not_expr' appears in a non-annotation string literal in src/_pytest/mark/expression.py line 1 ('\\nEvaluate match expressions, as used by ') -- an alpha-rename cannot be argued safe",
+      "tier": "MEDIUM",
+      "tree_digest": "c6fb72374ba1e20fc60876d654dc0a887b22605b507834978ff10bf8f4e9dcd3",
+      "verdict": "REFUSED"
+    },
+    {
+      "anchor": "MatcherAdapter",
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "broke": [],
+        "coupled": [],
+        "failing": [],
+        "symbol": "MatcherAdapter",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": "src/_pytest/mark/expression.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 3,
+        "found": true,
+        "n_parsed": 61,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 58,
+        "reward": 1.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "reward 1.0",
+      "tier": "MEDIUM",
+      "tree_digest": "5727fcd9ec4a31bd9ba6e4f08cf1ef93f05fdfc961dec0c90664b3a6b1d374c8",
+      "verdict": "CLEAN"
+    },
+    {
+      "anchor": null,
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "broke": [],
+        "coupled": [],
+        "failing": [],
+        "symbol": "MatcherAdapter",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": null,
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 3,
+        "found": true,
+        "n_parsed": 61,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 58,
+        "reward": 1.0
+      },
+      "loud_failure": false,
+      "observable": "order of elements in a returned collection",
+      "operator": "collection_reverse",
+      "reason": "no anchor inside the gold-touched region",
+      "tier": "MEDIUM",
+      "tree_digest": "5727fcd9ec4a31bd9ba6e4f08cf1ef93f05fdfc961dec0c90664b3a6b1d374c8",
+      "verdict": "NOT_APPLICABLE"
+    },
+    {
+      "anchor": null,
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "broke": [],
+        "coupled": [],
+        "failing": [],
+        "symbol": "MatcherAdapter",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": null,
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 3,
+        "found": true,
+        "n_parsed": 61,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 58,
+        "reward": 1.0
+      },
+      "loud_failure": false,
+      "observable": "human-readable text of an exception message",
+      "operator": "message_reword",
+      "reason": "no anchor inside the gold-touched region",
+      "tier": "HIGH",
+      "tree_digest": "5727fcd9ec4a31bd9ba6e4f08cf1ef93f05fdfc961dec0c90664b3a6b1d374c8",
+      "verdict": "NOT_APPLICABLE"
+    }
+  ],
+  "targets": [
+    "src/_pytest/mark/expression.py"
+  ],
+  "version": "5.4",
+  "witnesses": []
+}

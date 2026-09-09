@@ -1,0 +1,66 @@
+{
+  "completed": true,
+  "control": {
+    "graded": {
+      "f2p_fail": 1,
+      "f2p_failing": [
+        "tests/lint/unittest_lint.py::test_pylint_home"
+      ],
+      "f2p_pass": 0,
+      "found": true,
+      "n_parsed": 0,
+      "p2p_fail": 0,
+      "p2p_failing": [],
+      "p2p_pass": 0,
+      "reward": 0.0
+    },
+    "log": "+ pytest -rA tests/lint/unittest_lint.py\n\n/opt/miniconda3/envs/testbed/lib/python3.9/site-packages/_pytest/config/__init__.py:318: PluggyTeardownRaisedWarning: A plugin raised an exception during an old-style hookwrapper teardown.\nPlugin: helpconfig, Hook: pytest_cmdline_parse\nConftestImportFailure: ModuleNotFoundError: No module named 'appdirs' (from /testbed/tests/conftest.py)\nFor more information see https://pluggy.readthedocs.io/en/stable/api_reference.html#pluggy.PluggyTeardownRaisedWarning\n  config = pluginmanager.hook.pytest_cmdline_parse(\nImportError while loading conftest '/testbed/tests/conftest.py'.\ntests/conftest.py:8: in <module>\n    from pylint import checkers\npylint/checkers/__init__.py:49: in <module>\n    from pylint.checkers.base_checker import BaseChecker, BaseTokenChecker\npylint/checkers/base_checker.py:22: in <module>\n    from pylint.config import OptionsProviderMixIn\npylint/config/__init__.py:39: in <module>\n    import appdirs\nE   ModuleNotFoundError: No module named 'appdirs'\n",
+    "passed": false,
+    "reason": "the untransformed reference solution scored 0.0, not 1.0; F2P 0/1, P2P 0/0; first failing: tests/lint/unittest_lint.py::test_pylint_home"
+  },
+  "digest_trace": [
+    {
+      "digest": "1641f315e4890e53e8564d4ba31a5f4aa3c8039b21917b7cbd0d35335bd9c543",
+      "memo_hit": false
+    }
+  ],
+  "disk_orphan_reclaimed_bytes": 0,
+  "disk_residual_bytes": 0,
+  "elapsed_seconds": 108.32,
+  "error": null,
+  "image": "swebench/sweb.eval.x86_64.pylint-dev_1776_pylint-4661:latest",
+  "instance_id": "pylint-dev__pylint-4661",
+  "leaked_containers": [],
+  "leaked_image": false,
+  "log": [
+    [
+      "<control>",
+      "HARNESS_UNPROVEN",
+      "the untransformed reference solution scored 0.0, not 1.0; F2P 0/1, P2P 0/0; first failing: tests/lint/unittest_lint.py::test_pylint_home"
+    ]
+  ],
+  "mountable": true,
+  "multi_target": false,
+  "n_targets": 1,
+  "on_prime_hub": null,
+  "on_prime_hub_reason": "not resolvable offline; no hub environment index is reachable from this repo, verifiers or swebench",
+  "operators_not_applicable": [],
+  "operators_with_anchors": [],
+  "repo": "pylint-dev/pylint",
+  "row": {
+    "elapsed": 29.59,
+    "error": null,
+    "error_type": null,
+    "index": 0,
+    "mode": "formcheck",
+    "name": "pylint-dev__pylint-4661",
+    "reason": "unchecked",
+    "valid": null
+  },
+  "rows": [],
+  "targets": [
+    "pylint/config/__init__.py"
+  ],
+  "version": "2.10",
+  "witnesses": []
+}

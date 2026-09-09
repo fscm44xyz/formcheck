@@ -122,6 +122,32 @@ def check_task_cleanup(image, leaked_image, leaked_containers, progress=None,
         "silently and the next pull fails looking like a transport error.")
 
 
+def check_run_footprint(footprint, progress=None, instance_id=""):
+    """Raise if the harness still owns an image or container nothing accounts for.
+
+    The run-wide counterpart to `check_task_cleanup`, and the replacement for a
+    free-space budget that could not distinguish this run's bytes from anyone
+    else's (`CHANGES.md` 24). Extracted, like the others, so a test can drive it
+    to its raise -- an invariant inlined in a loop cannot be proven capable of
+    firing.
+    """
+    if not (footprint["images"] or footprint["containers"]):
+        return
+    if progress is not None:
+        progress(event="abort", instance_id=instance_id,
+                 reason="the run owns residue no live lease accounts for",
+                 images=sorted(footprint["images"]),
+                 containers=sorted(footprint["containers"]),
+                 bytes=footprint["bytes"])
+    raise rotation.DiskBudgetError(
+        f"{instance_id}: {len(footprint['images'])} image(s) and "
+        f"{len(footprint['containers'])} container(s) belonging to this "
+        f"harness are resident with no live lease holding them "
+        f"({footprint['bytes'] / 1024**2:.0f} MiB): "
+        f"{sorted(footprint['images']) + sorted(footprint['containers'])}. "
+        "Stopping rather than continuing to pull against residue that is ours.")
+
+
 class Progress:
     """Append-only, one JSON object per line, flushed on every write.
 
@@ -347,15 +373,22 @@ async def run_one(instance, leases, progress, timeout, baseline_free=0):
         leaked_containers = rotation.containers_for(image)
         leaked_image = rotation.image_present(image)
 
-    # The run-wide budget is still checked, but only when it is meaningful: with
-    # no other lease live, free space is attributable to the run as a whole and a
-    # shortfall against its baseline is real accumulation.
-    residual = 0
-    if not leases.live_refs():
-        residual = max(0, baseline_free - rotation.free_bytes())
-        if residual > rotation.RESIDUAL_ABORT_MIB * 1024**2:
-            orphan_reclaimed += rotation.reclaim_orphans()
-            residual = max(0, baseline_free - rotation.free_bytes())
+    # The run-wide check is STRUCTURAL too, for the same reason the per-task one
+    # is (`CHANGES.md` 24). What it asks is "is anything of ours still resident
+    # that no live lease owns", not "did free space come back" -- the latter
+    # charges the run for every other writer on the filesystem, including the
+    # run's own records, and on M4 it aborted the final task over an unrelated
+    # 97 MB `npm` cache write.
+    footprint = rotation.unowned_footprint(leases)
+    if footprint["images"] or footprint["containers"]:
+        rotation.reconcile_containers(leases.live_refs())
+        orphan_reclaimed += rotation.reclaim_orphans()
+        footprint = rotation.unowned_footprint(leases)
+
+    # Free space is still RECORDED, because the number is worth having and
+    # `reclaim_orphans` is still measured with `df`. It no longer decides
+    # anything: it is an observation, not a budget.
+    residual = max(0, baseline_free - rotation.free_bytes())
 
     record = build_record(instance_id, image, spec, row, task,
                           round(time.time() - t0, 2), error)
@@ -378,15 +411,7 @@ async def run_one(instance, leases, progress, timeout, baseline_free=0):
 
     check_task_cleanup(image, leaked_image, leaked_containers,
                        progress.write, instance_id)
-    if residual > rotation.RESIDUAL_ABORT_MIB * 1024**2:
-        progress.write(event="abort", instance_id=instance_id,
-                       reason="run-wide disk did not return to baseline",
-                       residual_mib=round(residual / 1024**2, 1))
-        raise rotation.DiskBudgetError(
-            f"{instance_id}: with no other task running, "
-            f"{residual / 1024**2:.0f} MiB has not come back since the run "
-            f"started (threshold {rotation.RESIDUAL_ABORT_MIB} MiB). Stopping "
-            "rather than continuing on a budget that cannot be accounted for.")
+    check_run_footprint(footprint, progress.write, instance_id)
     return record
 
 
