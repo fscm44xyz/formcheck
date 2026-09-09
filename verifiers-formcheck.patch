@@ -1,5 +1,5 @@
 diff --git a/verifiers/v1/cli/validate.py b/verifiers/v1/cli/validate.py
-index 88f5fa6..5c53c42 100644
+index 88f5fa6..ffc5d92 100644
 --- a/verifiers/v1/cli/validate.py
 +++ b/verifiers/v1/cli/validate.py
 @@ -49,10 +49,11 @@ REASONS = ("valid", "invalid", "unchecked", "error", "timeout")
@@ -25,6 +25,15 @@ index 88f5fa6..5c53c42 100644
      if config.only_setup:
          return "setup"
      return "all"
+@@ -171,7 +174,7 @@ def summarize(rows: Sequence[ResultRow], total: int, mode: str) -> dict[str, Any
+     }
+     if mode == "all":
+         checks: dict[str, dict[str, int]] = {}
+-        for check in ("gold", "setup"):
++        for check in ("gold", "formcheck", "setup"):
+             check_counts = Counter(
+                 row.get(check, {}).get("reason")
+                 for row in rows
 @@ -255,9 +258,13 @@ async def _run_check(task: Task, config: ValidateConfig, mode: str) -> ResultRow
              invoke(task.setup, {"trace": trace, "runtime": runtime}),
              setup_timeout,
@@ -52,6 +61,23 @@ index 88f5fa6..5c53c42 100644
      reason = _all_reason(rows)
      error, error_type = _all_error(rows)
      return {
+@@ -309,6 +317,7 @@ async def _run_all(task: Task, config: ValidateConfig) -> ResultRow:
+         "error": error,
+         "error_type": error_type,
+         "gold": gold,
++        "formcheck": formcheck,
+         "setup": setup,
+     }
+ 
+@@ -339,7 +348,7 @@ async def run_validate(config: ValidateConfig) -> list[dict]:
+             "taskset needs a container runtime to validate - pass --runtime.type docker (or prime)"
+         )
+     mode = validation_mode(config)
+-    checks = "gold+setup" if mode == "all" else mode
++    checks = "gold+formcheck+setup" if mode == "all" else mode
+     out = output_path(config)
+     selected_keys = [task.hash for task in tasks]
+     if not config.resume:
 diff --git a/verifiers/v1/configs/cli/validate.py b/verifiers/v1/configs/cli/validate.py
 index a562945..dcc4f49 100644
 --- a/verifiers/v1/configs/cli/validate.py

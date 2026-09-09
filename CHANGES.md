@@ -1209,3 +1209,42 @@ and re-run the two `merge-base` checks before publishing anything that cites it.
 
 `REPORT.md` §1, §2, Appendix A; `writeup.md` §5, §9, §9.3;
 `scale/records_m1_pilot/README.md`; `git tag -n99 -l 'evidence/*'`.
+
+---
+
+## 26. The patch ran `formcheck` under `--all` and threw the result away
+
+**Not an instance of the family — a plain incompleteness, recorded because the
+rule in this file's header applies to every fix.**
+
+The patch added a third mode. It extended the two places that *dispatch* on a
+mode and none of the three that *enumerate* them, so under `validate --all`:
+
+1. **`_run_all` computed the formcheck sub-result and dropped it.** Lines 304-306
+   ran gold, formcheck and setup; the returned row carried `"gold"` and
+   `"setup"` only. The aggregate verdict was still correct — `_all_reason` and
+   `_all_error` read all three rows — but the formcheck detail was executed at
+   full cost and then discarded before persistence.
+2. **`summarize` iterated `("gold", "setup")`**, so the per-check breakdown could
+   not have shown formcheck even if the row had carried it.
+3. **The run banner said `gold+setup`** when three checks were running.
+
+All three are now `("gold", "formcheck", "setup")` in the same order they
+execute. Verified rather than asserted: `summarize` was driven with a row shaped
+as `_run_all` now returns and its `checks` key contains a correctly counted
+`formcheck` entry; the regenerated patch applies cleanly to a fresh worktree at
+`04b0bf5` and reproduces the working checkout byte for byte in all three files.
+
+**Why it survived review.** `scale/run.py` calls `_run_check(task, cfg,
+"formcheck")` directly and never reaches `_run_all`, `summarize` or the banner,
+so the entire 500-task run exercised none of the three broken sites. The harness
+that produced every number in `REPORT.md` could not have caught this, and no
+number in it is affected. The lesson is narrow and worth stating anyway: *the
+code path your own harness takes is not the code path a user takes*, and a patch
+proposing a new mode is read by its recipient along the second one.
+
+Patch size moved with the fix: **+52 −9 across 3 files** (was +49 −7);
+`writeup.md` §5 and its appendix updated, since both quoted the old figure.
+
+`verifiers/v1/cli/validate.py` (`_run_all`, `summarize`, `run_validate`);
+`verifiers-formcheck.patch`.

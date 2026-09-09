@@ -351,7 +351,8 @@ classifier rather than remembered by a human.
 
 ## 5. Integration: it runs on the real path
 
-`verifiers-formcheck.patch` — **121 lines against `origin/main` `04b0bf5`**.
+`verifiers-formcheck.patch` — **3 files changed, +52 −9, against `origin/main`
+`04b0bf5`** (147 lines of unified diff).
 
 1. **`verifiers/v1/task.py`** — a `formcheck` hook beside `validate`, with the
    same tri-state contract that `651484c` established:
@@ -816,7 +817,8 @@ $PYG f2_overlay.py    # evidence in overlay form (arguments, tiers, precondition
 $PYV f3_run.py        # _run_check(task, cfg, "formcheck") -> the results.jsonl row
 ```
 
-Patch: `../verifiers-formcheck.patch` (121 lines, base `origin/main` `04b0bf5`).
+Patch: `../verifiers-formcheck.patch` (+52 −9 across 3 files, base
+`origin/main` `04b0bf5`).
 
 **Multi-task**
 
