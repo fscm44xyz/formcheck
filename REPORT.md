@@ -10,13 +10,24 @@ This report covers the scale work: running that check inside each task's own
 epoch-pinned image, on verifiers' own runtime, across all 500 tasks of SWE-bench
 Verified.
 
+**The result in one sentence.** 22.2% of controlled SWE-bench Verified tasks have
+a reward coupled to the form of the gold patch — and in the median coupled task
+**every graded test fails** under a rename that changes no behaviour, because
+renaming a module-level symbol stops the test module importing, so the suite does
+not partially fail: it does not run.
+
+The percentage says how many tasks are affected. The second half says what
+happens inside them, and it is the stronger claim: on those tasks the reward
+carries no information about whether the solution works.
+
 ---
 
 ## 1. The number
 
 > **22.2% of controlled SWE-bench Verified tasks — 28 of 126, Wilson 95%
 > [15.8%, 30.2%] — reject a behaviour-preserving rename of an internal symbol
-> the gold patch touches.**
+> the gold patch touches. In 15 of those 28, *every* graded test fails; the
+> median coupled task loses 100% of its suite (§3a).**
 
 The scope belongs in the sentence, so it is written there: `symbol_rename` only,
 over tasks whose reference solution reproduced its own score in its own image.
@@ -200,9 +211,28 @@ disputes:
 The strict rule is too strict — it excludes `MigrationAutodetector` and
 `get_child_arguments`, which are internal machinery by any reading — so 5.6% is
 not the better estimate. It is the floor that survives the most hostile reading
-of "internal", and even there the interval clears zero. Nothing was dropped from
-the count: all 28 meet the criterion the run applied, and the stricter subsets are
-reported beside them so a reader can pick.
+of "internal", and even there the interval clears zero.
+
+**Two decisions here, recorded as decisions rather than left as absences.**
+
+*Dropping cases was permitted and declined.* The brief for this table allowed any
+of the 28 that could not be defended from the records to be dropped from the
+count. None was — and not because all 28 are self-evidently internal, but because
+the evidence that would adjudicate the contested ones case by case is the
+projects' own documentation, which is not in the records and cannot be
+reconstructed offline. Dropping a subset would have meant substituting a judgment
+call for evidence and then reporting the survivors as though they had been
+checked. The sensitivity analysis is what that judgment looks like when it is
+made honestly: it hands the reader the range instead of picking a point inside it
+and calling the point a measurement.
+
+*The sensitivity axis predates the results.* HIGH/MEDIUM is not a partition
+invented for this table. `symbol_rename` has carried "HIGH if `_`-private, else
+MEDIUM" in `repro/f2_operators.py` since `a95db58` (2026-09-07 15:48) — before
+the first pilot records exist (`79694c9`, the following afternoon), and long
+before any witness was known. The M4 run reads its tier from that same module
+through the hook, so the column is the operator's own pre-committed confidence in
+its equivalence argument, not a post-hoc split chosen with the answers visible.
 
 ---
 
