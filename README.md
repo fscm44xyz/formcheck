@@ -12,53 +12,60 @@ Full report: **[REPORT.md](REPORT.md)**.
 
 ## What formcheck does
 
-It transforms the reference solution in ways that preserve behaviour — an
-alpha-rename of a symbol, say — and re-runs the task's own graded tests. Each
-transform is offered an **anchor**, the particular symbol it proposes to change,
-and only symbols the gold patch actually touches are offered; a transform that
-still satisfies the issue's contract and still scores 0.0 is a **witness** that
-the reward is coupled to the incidental form of the gold patch. Every rate is
-scoped to **controlled** tasks — those whose untransformed reference solution
-reproduces its own 1.0 inside its own image — because a task that cannot
-reproduce its own gold proves nothing in either direction.
+It transforms the reference solution in ways that preserve behaviour, such as an
+alpha-rename of a symbol, and re-runs the task's own graded tests. Each transform
+is offered an **anchor**, the particular symbol it proposes to change, and only
+symbols the gold patch actually touches are offered; a transform that still
+satisfies the issue's contract and still scores 0.0 is a **witness** that the
+reward is coupled to the incidental form of the gold patch. Every rate is scoped
+to **controlled** tasks, those whose untransformed reference solution reproduces
+its own 1.0 inside its own image, because a task that cannot reproduce its own
+gold proves nothing in either direction.
 
 ## How it was measured
 
-- **500 tasks**, the whole of SWE-bench Verified, 12 repositories, 4 test runners.
-- **Inside each task's own epoch-pinned image**, on verifiers' own `DockerRuntime`
-  through `validate._run_check` — the same call by which a Harbor task reaches its
-  container.
-- **494 of 500 controls passed.** The 6 that did not are excluded and named.
-- **Every witness is attributed by failure text** — a failure block that names the
-  renamed symbol. `p2p_unattributed = 0`: no witness rests on a failure the
-  attribution could not explain.
-- **No model produces a witness.** The number involves no inference at any point.
-- 9.15 h wall clock, 2.26 TiB of images pulled and discarded, zero leaked.
+All 500 tasks of SWE-bench Verified, across 12 repositories and 4 test runners,
+each inside its own epoch-pinned image. The check runs on verifiers' own
+`DockerRuntime` through `validate._run_check`, which is the same call by which a
+Harbor task reaches its container.
+
+494 of the 500 reference solutions reproduced their own score before any
+transform ran; the 6 that did not are excluded from every rate and named in the
+report. Every witness is attributed by failure text, meaning a failure block that
+names the renamed symbol: `p2p_unattributed = 0`, so no witness rests on a
+failure the attribution could not explain. No model produces a witness, and the
+number involves no inference at any point.
+
+The run took 9.15 hours and pulled 2.26 TiB of images, discarding all of them and
+leaking none.
 
 ## What it does not show
 
-- **One channel only.** The rate is coupling to a symbol's *identity*. Coupling to
-  structure, ordering or decomposition is unprobed — the operators that would
-  reach them found anchors on 0–3.5% of the corpus — and **the direction is
-  unknown**: an earlier claim that 22.2% is a floor was withdrawn, because tests
-  import by name and a restructuring that preserves entry points may break fewer
-  tests, not more.
-- **The encounter rate is unmeasured.** How often a real policy is actually
-  penalised depends on how often its correct solution differs in form from the
-  gold. Measuring it needs rollouts from a model; this project uses none.
-- **`on_prime_hub` is unresolved on 500 of 500** — unresolved, not negative.
+**One channel only.** The rate measures coupling to a symbol's *identity*.
+Coupling to structure, ordering or decomposition is unprobed, because the
+operators that would reach those found anchors on 0–3.5% of the corpus, and the
+direction is unknown. An earlier claim that 22.2% is a floor has been withdrawn:
+tests import by name, so a restructuring that preserves entry points may break
+fewer tests rather than more.
+
+**The encounter rate is unmeasured.** How often a real policy is actually
+penalised depends on how often its correct solution differs in form from the
+gold. Measuring that needs rollouts from a model, and this project uses none.
+
+**`on_prime_hub` is unresolved on 500 of 500.** Unresolved, not negative.
 
 ## The result that survives the number
 
 Nine defects found in this work share one shape: **a check that reports a verdict
-for a reason invisible in its own output** — the exact failure `formcheck` was
-built to detect in other people's graders, appearing repeatedly in `formcheck`.
+for a reason invisible in its own output**. That is the exact failure `formcheck`
+was built to detect in other people's graders, appearing repeatedly in
+`formcheck` itself.
 Every one was found by inspecting the machinery, never by a suspicious number,
 because none of them produced a suspicious number: one had a parser that
 understood a single test runner and silently converted four real witnesses into
 "invalid transform", which would have reported `W = 0` over 50 tasks with clean
 controls, zero errors and a 46-minute run. Two others are worth the read on their
-own — two individually correct guards that cancelled at their seam and disabled a
+own: two individually correct guards that cancelled at their seam and disabled a
 liveness check without emitting anything, and a disk guard whose first firing in
 production was a false positive.
 

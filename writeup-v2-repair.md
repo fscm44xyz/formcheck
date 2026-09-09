@@ -411,7 +411,9 @@ $PYT m4_mechanism.py      # iter_markers ['a','b','c','a','b'] ; name set {a,b,c
   There is therefore no in-repo grading path left to diff against. What we did
   instead: `repro/f1_grader_provenance.py` transcribes the v0.2.1 implementation
   literally (recovered with `git show v0.2.1:<path>`) and runs it beside ours on
-  every captured log — **agreement on all 12**. We describe our grader as an
+  every captured log — **agreement on all 17**. (This line read "all 12" until
+  2026-09-09; 12 was carried over from the July rig and was never true of this
+  repository. See `writeup.md` §9.) We describe our grader as an
   offline SWE-bench-format grader, not as "the verifiers grader".
 - Corpus figures (§2) are from a Scale-SWE prefix sample — non-random,
   Python-only, repo-clustered. The four-gate result (§3) is from **one** task.

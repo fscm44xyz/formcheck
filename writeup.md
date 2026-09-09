@@ -1,5 +1,11 @@
 # formcheck — detecting form-coupled graders with executable witnesses
 
+> **This is the method document, at n=3 tasks, written July–August 2026.** Its
+> scope claims are superseded by the 500-task run reported in
+> **[REPORT.md](REPORT.md)** — where the corresponding figure is 22.2% of
+> controlled tasks, not a mechanism demonstration. It is retained for §3–§5, which
+> are the method, and §9, which is the record of what this work got wrong.
+
 *An offline admission check for RL task rewards, built on Prime Intellect's
 `verifiers` stack. It answers a question `validate --only-gold` cannot ask: not
 "is the ground truth right?" but "would this reward also accept a correct
@@ -127,6 +133,13 @@ way out of it.
 |---|---|---|
 | SWE-bench Verified (curated) | ~2–4% | scan of all 500 test patches |
 | Scale-SWE (uncurated) | **35%** — 316 of 907 graded tasks with ≥1 signal | 972-row prefix sample, Python-only, repo-clustered |
+
+**These are not the 22.2% in `REPORT.md`, and the two must not be read as one
+number that grew.** The ~2–4% here is a *static scan* counting test patches that
+carry a coupling signal, over all 500 tasks; the 22.2% is an *executable witness*
+rate — a transform that provably preserved behaviour and still scored 0.0 — over
+the 126 tasks where that could be judged. Different evidence, different
+denominators, different questions.
 
 And among those 316 coupled tasks, the *kind* of coupling *(measured)*:
 
@@ -659,9 +672,24 @@ Coupling prevalence, 35% vs ~2–4%, and the signal-type distribution
 `pytest#10356` and `H_dup`'s survival. The outcome distribution (WITNESS 3 / CLEAN 2 / INVALID 0 / REFUSED 2 /
 UNVALIDATED 1 / NOT_APPLICABLE 7) over 15 rows — 12 operator-slots, 8 of them
 anchor-cases. Mount rate 4/5 and control rate 2/4. The grader
-provenance check: 12 logs, 12 agreements. The synthetic probe's baseline→witness
+provenance check: 17 logs, 17 agreements. The synthetic probe's baseline→witness
 flip. The one adjudication: CONTRACT, 419/240 tokens, $0.00037 — a single routed
 case, not a judge accuracy figure.
+
+**Correction to the line above (2026-09-09).** This section previously reported
+the grader provenance check as *"12 logs, 12 agreements"*, and
+`writeup-v2-repair.md` carried the same figure while §8 of this document said
+**17 of 17** — a number that contradicted itself inside the honesty section,
+which is the worst place in the repository for one. **17 is correct.** The
+artefact settles it without interpretation: `repro/f1_grader_provenance.py` globs
+`log_*.txt`, counts what it finds, and prints the total; there are 17 such logs
+and all 17 agree. They have been 17 since this repository's first commit
+(`a95db58`), so the 12 was already false when it was committed here — it was
+carried over unchecked from the pre-repository July rig, where it described a
+smaller log set. **The error ran in the conservative direction:** it understated
+the corroboration by five logs. No claim anywhere rested on the difference, and
+re-running the script prints the count, so this was checkable at any time and was
+not checked.
 
 **Qualitative — direction, never a percentage.**
 The type→repairability mapping. The auto-repairable fraction, which shrank
@@ -688,10 +716,17 @@ real corpus. Behaviour inside Harbor images. Any non-Python corpus.
    P2P suite — which cannot verify the issue's fix still works. We know that gap
    is real: on `pytest#10356` the `bug_none` mutant broke the fix and passed all
    79 P2P tests. **A stronger oracle finds more invalid transforms, never fewer.**
-3. **This is Windows and subprocess, not Harbor and containers.** `verifiers` v1
-   does not import on Windows without an `fcntl` shim, and importing `swebench`
-   installs an asyncio policy that breaks every subprocess the runtime starts.
-   Both are shimmed and documented; neither is a port.
+3. **This was Windows and subprocess; it is now Linux and containers.** This
+   constraint first read: *"This is Windows and subprocess, not Harbor and
+   containers"* — `verifiers` v1 does not import on Windows without an `fcntl`
+   shim, and importing `swebench` installs an asyncio policy that breaks every
+   subprocess the runtime starts. That was true of the July rig and is now true
+   of nothing, for the same reason recorded in §5: M0 (commit `65ba7e1`) moved
+   the check onto verifiers' own `DockerRuntime`, inside the task's own image,
+   and returned seven verdicts identical to the July rig's on operator, anchor,
+   verdict and refusal reason. Both shims belong to the host-side rig and are
+   unnecessary on Linux (`CHANGES.md` 3). What is still not demonstrated is a hub
+   SWE environment, which is the limit §5 states.
 
 **Errors we made, and what each one bought.** These are in the writeup because
 each is now a rule or a check, and because the method's credibility rests on the
