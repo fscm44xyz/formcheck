@@ -409,7 +409,8 @@ first half was true of the July rig and is now true of nothing. `formcheck` runs
 on verifiers' own `DockerRuntime`, with the image resolved through
 `resolve_runtime_config` from `task.data.image` — the same call, on the same
 path, by which a Harbor task reaches its container. §7 argued on paper that the
-check belonged inside the task's own image; M0 (commit `65ba7e1`) executed it,
+check belonged inside the task's own image; M0 (`evidence/m0-gate`, `a390c7e`)
+executed it,
 and the seven verdicts came back identical to the July rig's on operator, anchor,
 verdict and refusal reason.
 
@@ -684,7 +685,8 @@ which is the worst place in the repository for one. **17 is correct.** The
 artefact settles it without interpretation: `repro/f1_grader_provenance.py` globs
 `log_*.txt`, counts what it finds, and prints the total; there are 17 such logs
 and all 17 agree. They have been 17 since this repository's first commit
-(`a95db58`), so the 12 was already false when it was committed here — it was
+(`evidence/tier-axis`, `a95db58`), so the 12 was already false when it was
+committed here — it was
 carried over unchecked from the pre-repository July rig, where it described a
 smaller log set. **The error ran in the conservative direction:** it understated
 the corroboration by five logs. No claim anywhere rested on the difference, and
@@ -721,7 +723,8 @@ real corpus. Behaviour inside Harbor images. Any non-Python corpus.
    containers"* — `verifiers` v1 does not import on Windows without an `fcntl`
    shim, and importing `swebench` installs an asyncio policy that breaks every
    subprocess the runtime starts. That was true of the July rig and is now true
-   of nothing, for the same reason recorded in §5: M0 (commit `65ba7e1`) moved
+   of nothing, for the same reason recorded in §5: M0 (`evidence/m0-gate`,
+   `a390c7e`) moved
    the check onto verifiers' own `DockerRuntime`, inside the task's own image,
    and returned seven verdicts identical to the July rig's on operator, anchor,
    verdict and refusal reason. Both shims belong to the host-side rig and are

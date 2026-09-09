@@ -103,7 +103,7 @@ The task-level rate leads because `STOPPING_RULE.md` fixed that unit before any
 result existed, verbatim: *"W counts **tasks**, not rows: a task with three
 witness rows counts once. The extrapolation below is to tasks, so the numerator
 must be tasks too."* That is the only reason it leads, and it is checkable in a
-commit (`0d6e786`) that predates the data.
+commit that predates the data — tag `evidence/stopping-rule` (`165e778`).
 
 **Why the two differ, since "any-of" rates usually differ for a bad reason.** The
 obvious inflation — witness tasks winning by having more anchors to try — is not
@@ -180,10 +180,21 @@ rate-shaped object that does not name its operator. Emitting a family-wide
 percentage requires deleting a guard, which shows up in a diff.
 
 `scale/STOPPING_RULE.md` fixes the threshold at W ≥ 3 witness tasks in 50 for
-"M4 is worth the weekend, and the number leads"; it was committed in `0d6e786`
-at 14:39 on 2026-09-08, before M3's ids were frozen in `664a3ab` at 16:25 and
-before M3's results existed in `18d22b5` at 18:24. M3 returned W = 4, with the
-rule's validity precondition of at least 40 of 50 controlled met at 50/50.
+"M4 is worth the weekend, and the number leads"; it was committed at
+`evidence/stopping-rule` (`165e778`) at 14:39 on 2026-09-08, before M3's ids were
+frozen at `evidence/ids-frozen` (`98119c8`) at 16:25 and before M3's results
+existed at `evidence/m3-results` (`47ac9b7`) at 18:24. M3 returned W = 4, with
+the rule's validity precondition of at least 40 of 50 controlled met at 50/50.
+
+Those three tags are the durable handles, and the hashes beside them are only
+today's values: this repository's history has been rewritten once already, which
+killed every hash this paragraph originally cited. Verify the ordering with
+
+```bash
+git merge-base --is-ancestor evidence/stopping-rule evidence/ids-frozen \
+  && git merge-base --is-ancestor evidence/ids-frozen evidence/m3-results \
+  && echo "threshold -> sample -> result: ordering holds"
+```
 
 The 34 witness rows share one observable: `symbol identity (module-level name)`.
 By repo: django 18, sphinx 4, pylint 3, pytest 3, scikit-learn 2, astropy 1,
@@ -304,8 +315,9 @@ and calling the point a measurement.
 
 *The sensitivity axis predates the results.* HIGH/MEDIUM is not a partition
 invented for this table. `symbol_rename` has carried "HIGH if `_`-private, else
-MEDIUM" in `repro/f2_operators.py` since `a95db58` (2026-09-07 15:48) — before
-the first pilot records exist (`79694c9`, the following afternoon), and long
+MEDIUM" in `repro/f2_operators.py` since `evidence/tier-axis` (`a95db58`,
+2026-09-07 15:48) — before the first pilot records exist
+(`evidence/m1-pilot`, `0008aa2`, the following afternoon), and long
 before any witness was known. The M4 run reads its tier from that same module
 through the hook, so the column is the operator's own pre-committed confidence in
 its equivalence argument, not a post-hoc split chosen with the answers visible.
@@ -888,7 +900,7 @@ Copy-pasteable, from a clone of this repository.
 ```bash
 git clone https://github.com/fscm44xyz/formcheck.git
 cd formcheck
-git checkout m0-in-container   # 500 records + summary.json are pinned at a1bbbfa
+git checkout evidence/m4-run   # the 500 records + summary.json, tagged
 
 python3.12 -m venv ~/.venv-fc
 ~/.venv-fc/bin/pip install "swebench==4.0.3" "datasets==5.0.1" "docker==7.2.0"

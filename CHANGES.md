@@ -7,6 +7,34 @@ not happen.
 
 ---
 
+> ## ⚠ Before you rewrite this history
+>
+> **Seven commits in this repository are cited as evidence, and the citations are
+> load-bearing.** `REPORT.md` §1 and §2 argue that the stopping-rule threshold and
+> the sensitivity axis were fixed *before* the results they judge, and the proof of
+> that is commit ordering. They are tagged:
+>
+> ```
+> git tag -n99 -l 'evidence/*'
+> ```
+>
+> A rebase, amend, squash or `filter-branch` touching any of them breaks that
+> proof. **It has already happened once** — a rewrite killed six citations at
+> once and nothing reported it, because a dead hash reads exactly like a live one
+> (entry 25). If you must rewrite, move the tags afterwards and re-run:
+>
+> ```bash
+> git merge-base --is-ancestor evidence/stopping-rule evidence/ids-frozen \
+>   && git merge-base --is-ancestor evidence/ids-frozen evidence/m3-results \
+>   && git merge-base --is-ancestor evidence/tier-axis evidence/m1-pilot \
+>   && echo "ordering holds"
+> ```
+>
+> Publishing anything that cites them without that command passing is the defect
+> this file exists to record.
+
+---
+
 ## 1. The hook was silent on zero anchors
 
 **Bug.** `FormCheckMixin.formcheck` iterated `op.anchors(...)` and fell through
@@ -1097,3 +1125,77 @@ it would have killed a run that was working perfectly.
 `scale/rotation.py` (`unowned_footprint`, `_validate_containers`;
 `RESIDUAL_ABORT_MIB` removed); `scale/run.py` (`check_run_footprint`, `run_one`);
 `scale/test_guards_fire.py`.
+
+---
+
+## 25. Six citations that looked verifiable and were not
+
+**The tenth instance of the family, and the first where the unverifiable thing
+was the evidence for a claim rather than the claim itself.**
+
+`REPORT.md` §1 asks the reader to check that the stopping rule was fixed before
+the data:
+
+> *"it was committed in `0d6e786` at 14:39 on 2026-09-08, before M3's ids were
+> frozen in `664a3ab` at 16:25 and before M3's results existed in `18d22b5` at
+> 18:24."*
+
+That paragraph exists for exactly one purpose: to let a sceptic confirm the
+threshold was not chosen to fit the answer. **All three hashes were dead.** The
+repository's history had been rewritten, every commit from the M4 series onward
+got a new hash, and six citations across three files silently stopped resolving:
+
+| cited | where | now |
+|---|---|---|
+| `0d6e786` | REPORT.md §1 ×2 | `evidence/stopping-rule` (`165e778`) |
+| `664a3ab` | REPORT.md §1 | `evidence/ids-frozen` (`98119c8`) |
+| `18d22b5` | REPORT.md §1 | `evidence/m3-results` (`47ac9b7`) |
+| `79694c9` | REPORT.md §2, `records_m1_pilot/README.md` | `evidence/m1-pilot` (`0008aa2`) |
+| `a1bbbfa` | REPORT.md Appendix A | `evidence/m4-run` (`cc0ad6b`) |
+| `65ba7e1` | writeup.md §5, §9.3 | `evidence/m0-gate` (`a390c7e`) |
+
+**The shape is the family's.** A citation renders as a plausible hash whether or
+not it resolves; nothing about reading the document reveals that
+`git show 0d6e786` fails. The check that would have caught it — running the
+verification instruction the report itself prints — was never executed after the
+history changed. That is the same mechanism as **#18** (a parser that produced a
+plausible verdict for logs it could not read) and **D2/#16** (a memo that served
+a grading it had not performed): *evidence carried forward without re-executing
+the check that would have caught it.*
+
+**One of the six was introduced while fixing something else.** Writing §9.3's
+retraction (entry 24's sibling fix), `65ba7e1` was copied out of §5 into the new
+paragraph. It was **already dead at the moment it was written**, and it was
+copied rather than checked. A citation was propagated on the authority of another
+citation, which is precisely the failure this file keeps recording.
+
+**Why hashes were the wrong handle, and tags are the fix.** These commits are not
+referenced for their content; they are referenced for their *position in time* —
+the report's argument is that one thing was committed before another. A proof of
+ordering must not depend on nobody rewriting history, and a bare hash does.
+Seven annotated tags now carry that role, each stating what the commit **proves**
+rather than what it contains:
+
+```
+evidence/tier-axis       the HIGH/MEDIUM axis, fixed before any witness was known
+evidence/m0-gate         the container reproduces the July rig, field for field
+evidence/m1-pilot        the earliest task records in the repository
+evidence/stopping-rule   the W>=3 threshold, fixed before the sample was drawn
+evidence/ids-frozen      M3's 50 ids, frozen before any container started
+evidence/m3-results      the first commit at which W=4 exists
+evidence/m4-run          the 500 records and summary.json the report aggregates
+```
+
+Citations now read as tag plus today's hash, so a reader has both a durable
+handle and a value they can paste. `REPORT.md` §1 states that the tags are the
+durable handle and prints a `git merge-base --is-ancestor` chain that verifies
+the ordering directly; that command was executed before this entry was written,
+and it passes.
+
+**These seven commits are cited as evidence and must not be rewritten.** Any
+rebase, amend, squash or `filter-branch` that touches them invalidates the
+ordering proof in `REPORT.md` §1 and §2. If one must be rewritten, move its tag
+and re-run the two `merge-base` checks before publishing anything that cites it.
+
+`REPORT.md` §1, §2, Appendix A; `writeup.md` §5, §9, §9.3;
+`scale/records_m1_pilot/README.md`; `git tag -n99 -l 'evidence/*'`.

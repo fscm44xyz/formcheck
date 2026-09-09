@@ -2,7 +2,7 @@
 
 `scale/run.py` writes to `scale/records/`, and M2 overwrote M1's pilot there.
 These are the pilot's own records, restored so both evidence sets exist in the
-tree rather than only in history (`79694c9`).
+tree rather than only in history (`evidence/m1-pilot`, `0008aa2`).
 
 Sampled from `scale/eligible.jsonl` with seed 0: django-13810,
 scikit-learn-14894, sphinx-9591, sympy-13091, sympy-17139. 5/5 controls passed
