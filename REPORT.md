@@ -370,8 +370,11 @@ The mechanism is established; the magnitude is not, and no number is offered for
 it. The experiment that would measure it is specific: run a policy on these 28
 tasks, take the solutions that are correct by judgment, and count how many score
 0.0. That requires generating rollouts from a model — inference — which this
-project deliberately does not use anywhere, so it is named as future work rather
-than estimated.
+project deliberately keeps off the measurement path: no witness, no verdict and
+no number in this report comes from a model. The single exception is named rather
+than hidden, and it is not on that path — one judge call on one refused case,
+costed in §6 and contributing nothing to any rate. So the encounter rate is named
+as future work rather than estimated.
 
 ### (c) What 22.2% is, and what it is not
 
@@ -594,7 +597,8 @@ and reported as their own stratum, decided before the run.
 
 ## 6. Routing the border, and what a judge would cost
 
-Cases the mechanical family declines are routed to `judge_rubric.md`, which stays
+Cases the mechanical family declines are routed to
+[`judge_rubric.md`](judge_rubric.md), which stays
 a separate artefact: an auditable contract-vs-form judge with a text-anchored
 decision procedure and an explicit statement that no reliability metric is
 claimed for it. At 500 tasks the routing map is no longer three cases.
@@ -620,6 +624,25 @@ being `Query` (13), then `Field`, `Model`, `QuerySet`, `Dataset`,
 **Cost.** One adjudication was run end to end (`writeup.md` §8): 419 in / 240 out
 tokens on `gpt-5.6-luna`, **$0.00037**, verdict CONTRACT with a quoted span from
 the issue.
+
+**Both halves of that call are in the repository**, under
+`overlays/pallets__flask-5014@formcheck-1/`:
+[`adjudication_prompt.txt`](overlays/pallets__flask-5014@formcheck-1/adjudication_prompt.txt)
+is exactly what a border case gets asked, rendered from
+[`judge_rubric.md`](judge_rubric.md) §6 with the issue and the assertion filled
+in, and
+[`adjudication_result.json`](overlays/pallets__flask-5014@formcheck-1/adjudication_result.json)
+is what came back — reply, token counts and price. The prompt is the artefact to
+read if you want to know what the 301 would be asked; the rubric is the policy it
+implements.
+
+**What has and has not been run, stated precisely.** The judge has been run
+**once**, on that one case. The **301 border cases were never adjudicated** — the
+$0.11 above is an extrapolation from n=1, not a bill anyone paid. And no model
+call fed THE NUMBER, any witness, or any verdict anywhere in this report: the
+only figures inference produced are the three cost numbers in the table above,
+each labelled measured at n=1. The judge sits beside the measurement, never
+inside it.
 
 | assumption | value |
 |---|---|
