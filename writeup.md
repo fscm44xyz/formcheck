@@ -789,9 +789,24 @@ move this from a demonstration to something that could sweep a corpus.
 
 ## Appendix — run it yourself
 
-Every quantitative claim above has a script and an exact command. Let
-`PYT` = the pytest-editable venv, `PYG` = the grader venv (swebench),
-`PYV` = the venv with `verifiers` `main`. From `formcheck/repro/`.
+**This appendix reproduces the n=3 claims in this document.** For the 500-task
+numbers — the 22.2%, the per-task records, the aggregate — use
+[REPORT.md Appendix A](REPORT.md#appendix-a--reproduce-it) instead; it needs only
+a venv and the committed records, and no July rig at all. The two do not overlap.
+
+Setup is one-time and lives in [`repro/README.md`](repro/README.md): a pytest
+clone at the task's base commit, three venvs, and `verifiers` at `04b0bf5` with
+`verifiers-formcheck.patch` applied, laid out as siblings under one root. With
+that in place, from `formcheck/repro/`:
+
+```bash
+export PYT=../../.venv-pytest/bin/python   # runs the task's tests
+export PYG=../../.venv/bin/python          # runs the swebench grader
+export PYV=../../.venv-vf/bin/python       # verifiers + the formcheck patch
+# on Windows these are ../../.venv-*/Scripts/python.exe
+```
+
+Every quantitative claim above then has a script and an exact command.
 
 **The original false negative, and the mechanical witness that reproduces it**
 
