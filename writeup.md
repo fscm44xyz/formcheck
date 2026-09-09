@@ -757,10 +757,18 @@ The output of a `formcheck` failure is the counter-example itself.
 **A check that knows what it cannot judge.** `UNVALIDATED`, `REFUSED` and
 `unchecked` are first-class outcomes with distinct meanings: *I cannot see this*,
 *the issue may specify this*, *this harness has not earned the right to report*.
-Half our attempted corpus ended in the third, correctly. A validation tool that
-reports confidently on an environment it cannot reproduce is worse than one that
-abstains, and the July precedent for that judgement is Prime's own: absence of a
-check must not read as agreement.
+A validation tool that reports confidently on an environment it cannot reproduce
+is worse than one that abstains, and the July precedent for that judgement is
+Prime's own: absence of a check must not read as agreement.
+
+*Superseded, the way §5 and §9.3 are.* This paragraph first read: *"Half our
+attempted corpus ended in the third, correctly."* That was true of the July rig,
+where 2 of 4 mounted tasks reached a valid control and the rest correctly
+abstained. It is now true of nothing: inside the tasks' own images the rate is
+**494 of 500 controlled**, so the harness abstains on 1.2% rather than half
+(`REPORT.md` §8). The argument the sentence was making is unaffected and is the
+stronger for it — abstention remained available and fired six times, on tasks
+named in `REPORT.md` §8, rather than being designed out once it became rare.
 
 **A complement to Agentic Judging, in a different position in the pipeline.**
 `AgenticJudgeEnv` shipped 2026-08-07 (verifiers 0.3.0 / prime-rl 0.8.0). By
