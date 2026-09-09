@@ -13,7 +13,7 @@ solution written differently?" — and it answers it by constructing the
 counter-example rather than asserting one.*
 
 *Every number below is labelled **measured**, **qualitative**, or **open**. Where
-we got something wrong earlier in this work, the retraction is in the text, not
+something here was got wrong earlier, the retraction is in the text, not
 in a footnote: the errors are how the method acquired its two safety rules.*
 
 ---
@@ -41,7 +41,7 @@ attempted tasks that reproduced their own reference score. Three witnesses, foun
 in two of those three tasks. That is a mechanism demonstration at n=3 tasks. It is
 not a rate, and nothing below is presented as one.
 
-**What surprised us, and is the most transferable finding:** on
+**The most transferable finding, and the one not anticipated:** on
 `pydata/xarray#4966` the coupling lives in **PASS_TO_PASS**, not in the graded
 `FAIL_TO_PASS` test. Four P2P tests fail purely because they name an internal
 symbol; the seventeen that do not name it pass, and all four F2P tests pass. A
@@ -108,12 +108,12 @@ was checked. The hole is now visible and still open.
 
 **Independent corroboration of scale.** DeepSWE (arXiv 2607.07946) measures
 **19–28% verifier false negatives on SWE-Bench Pro**. *(measured — by them, on a
-different corpus, by a different method.)* We cite it as evidence the phenomenon
-is large, not as a substitute for our own numbers: it measures false negatives of
+different corpus, by a different method.)* It is cited as evidence the phenomenon
+is large, not as a substitute for the numbers here: it measures false negatives of
 a verifier end-to-end, while §2 measures implementation-coupling signals in graded
 tests. Related but not the same quantity.
 
-**What Prime has already closed, so we do not claim it.**
+**What Prime has already closed, and is therefore not claimed here.**
 `IsolatedVerifierEnv` (`verifiers/v1/envs/isolated_verifier/env.py`) reruns a
 task's metrics and rewards in a fresh runtime after the solver's box is
 destroyed, closing the "grade in a box the agent controlled" gap as a shipped
@@ -124,10 +124,9 @@ rejects it just as reliably in a pristine container.
 
 ## 2. The inversion: from repairing to detecting
 
-This project started as a repairer. In July we built one, and then measured our
-way out of it.
+This project started as a repairer, built in July. Measurement led out of it.
 
-**What we measured then** *(measured; sample caveats stated)*:
+**What was measured then** *(measured; sample caveats stated)*:
 
 | corpus | coupling in graded tests | how |
 |---|---|---|
@@ -155,7 +154,7 @@ least repairable.** When a test mocks an internal and asserts its call arguments
 the intended behaviour is observable *only through the mock* — there is no
 independent oracle to repair the assertion against. The repairable slice lived in
 the minority message-coupling type, and a large part of even that turned out to
-be contract the issue actually specifies. Under audit our own estimate of the
+be contract the issue actually specifies. Under audit the estimate of the
 safely-repairable fraction shrank threefold, to a single-digit percentage
 *(qualitative — a direction, from 26 non-random hand-classified cases; never a
 population rate)*.
@@ -169,7 +168,7 @@ one:
 > as the reference and watch the grader reject it. That rejection is the finding,
 > and it needs no judgement to produce.
 
-The inversion is literal. Our July mutant generator perturbed a solution to
+The inversion is literal. The July mutant generator perturbed a solution to
 *break* behaviour, checking the tests caught it (negative preservation). The new
 operators perturb the reference to *preserve* behaviour, checking whether the
 tests reject it anyway. Same machinery, opposite sign, and the output changes from
@@ -195,8 +194,8 @@ Four operators, each carrying four things — none optional.
 | `collection_reverse` | MEDIUM | element order | if the issue fixes no order and no caller depends on position, order is unspecified | any consumer is order-sensitive — including precedence rules like "nearest wins", which are ordering semantics even when the issue never writes the word "order" |
 | `message_reword` | HIGH | exception message text | the exception *type* is the contract, the wording is form; rewording changes no control flow | a consumer matches on the text, or the issue quotes the wording |
 
-Equivalence here is **argued and regression-checked, never proven**, and we do not
-use the word proof. Each operator states its own argument and names the condition
+Equivalence here is **argued and regression-checked, never proven**, and the word
+proof is not used. Each operator states its own argument and names the condition
 that would defeat it, so a reader can attack the argument rather than the verdict.
 
 ### 3.2 Preconditions are checked, and a failure refuses
@@ -216,12 +215,12 @@ task, `symbol_rename` refused `MarkDecorator` because the name appears in a
 non-annotation string literal at `src/pytest/__init__.py:117` — an `__all__`
 entry, i.e. a public re-export an alpha-rename cannot follow.
 
-That refusal is also a worked example of a false positive we removed. It
+That refusal is also a worked example of a false positive since removed. It
 originally fired on `) -> "MarkDecorator":` in `structures.py:48` — a
 **forward-reference type annotation**, which is a static type reference, not
 dynamic reach. Treating annotations as dynamic over-refuses, so they are now
 renamed along with the symbol. Relaxing that alone would have been unsafe,
-because the two-file scan we used at the time could not see the `__all__` entries
+because the two-file scan in use at the time could not see the `__all__` entries
 at all; the relaxation shipped together with widening the scan from 2 files to the
 whole production tree (67 files for pytest). Same verdict, sound reason.
 
@@ -257,7 +256,7 @@ sets out the two rules side by side, row by row.
 An operator is only offered symbols whose definition the reference patch actually
 overlaps. This is principled — the fix's own form is what a graded test can be
 coupled to — and it is also the thing that keeps the operator honest. Without it,
-`symbol_rename` would sweep every definition in a module and we could pick the
+`symbol_rename` would sweep every definition in a module and one could pick the
 ones that happened to produce a witness. That would be selecting for the outcome.
 The restriction is what makes "no witness" a real result.
 
@@ -294,7 +293,7 @@ over-claim, and §4 is the story of why they exist.
 
 ## 4. Two principles, and how each was earned
 
-Both of these were bought with our own mistakes. They are in the text because
+Both of these were bought with mistakes made here. They are in the text because
 they are the load-bearing part of the design, and because a method that only
 reports its successes should not be believed.
 
@@ -320,8 +319,8 @@ if control != 1.0:
 
 If the untransformed reference does not score 1.0, the hook reports `unchecked`
 and asserts nothing. A zero is not evidence of coupling unless a one was
-achievable in the same harness. §7 shows this rule firing on half the tasks we
-mounted — which is exactly the point: it converts an environment fault into an
+achievable in the same harness. §7 shows this rule firing on half the tasks
+mounted there — which is exactly the point: it converts an environment fault into an
 honest abstention instead of a finding.
 
 ### 4.2 "An oracle that cannot disconfirm a transform cannot confirm it"
@@ -332,9 +331,9 @@ honest abstention instead of a finding.
 satisfied. It looks exactly like a witness.
 
 It is not. In pytest, marker order determines precedence: `get_closest_marker`
-resolves by position. Reversing the list is a genuine behaviour change that our
+resolves by position. Reversing the list is a genuine behaviour change that this
 oracle is structurally blind to, because a set hides order. **Here the graded test
-is right and our transform is wrong.**
+is right and the transform is wrong.**
 
 So each operator declares the observable class it can perturb, and each task
 declares what its oracle actually watches. When the two do not intersect the
@@ -375,7 +374,7 @@ classifier rather than remembered by a human.
    `_classify` is **untouched**: the existing vocabulary already distinguishes
    valid / invalid / unchecked, and `mode` disambiguates what was checked.
 
-**Run for real, not simulated.** We installed `verifiers` `main` in a venv and
+**Run for real, not simulated.** `verifiers` `main` was installed in a venv and
 called the library's own `_run_check(task, cfg, "formcheck")`. It provisioned a
 runtime, ran `Task.setup`, dispatched to the hook, and classified with the
 untouched `_classify`. The row it produced is the row `validate` would persist:
@@ -399,7 +398,7 @@ reported three ways -- they are separate runs of one task whose cost is dominate
 by a pytest invocation, and only one of them left an artifact. The artifact is
 what is quoted.
 
-For comparison, `validate --only-gold` on this same task: our local stand-in
+For comparison, `validate --only-gold` on this same task: the local stand-in
 implements the gold check, so it reports `valid` — the gold patch passes its own
 tests. A real code taskset, which returns `None` from `validate` (§1), reports
 `unchecked`. In both cases `formcheck` reports `invalid`.
@@ -449,7 +448,7 @@ bounded — see §9)*.
 
 ### 6.2 Coupling does not only live in the graded test
 
-The `xarray` witness is the finding we did not anticipate. Renaming
+The `xarray` witness is the finding that was not anticipated. Renaming
 `UnsignedIntegerCoder`:
 
 - **4 PASS_TO_PASS tests fail**, every one with
@@ -463,7 +462,7 @@ the *name*. The reward goes to zero through PASS_TO_PASS — the part of the tas
 that is supposed to be the stable background, not the thing under test. Any
 detector that only inspects the F2P tests would miss this class entirely.
 
-It also forced a mid-flight correction we want on the record: the classifier
+It also forced a mid-flight correction that belongs on the record: the classifier
 originally called *any* P2P breakage `INVALID`. That would have reported this as
 "the transform broke behaviour". It now partitions P2P failures into those whose
 failure text names the renamed symbol (coupling) and those that fail any other way
@@ -485,11 +484,11 @@ July's overlay catalogued three coupled forms in `pytest#10356`, by hand:
 The third is precisely the item the human had also recorded as a documented
 boundary (`H_dup`). The mechanical family found what the human found and refused
 to claim the one the human had already marked as beyond the oracle. *(qualitative
-— one task, and the comparison is against our own earlier labels.)*
+— one task, and the comparison is against this project's own earlier labels.)*
 
 ### 6.4 Mock coupling: reachable, not observed — and a retraction
 
-**We previously claimed, in an interim report, that `symbol_rename` structurally
+**An interim report previously claimed that `symbol_rename` structurally
 cannot exhibit the dominant mock-based coupling, because `mock.patch` targets are
 string literals and the operator refuses on string occurrences of the name. That
 claim was wrong, and the reasoning behind it was wrong.**
@@ -499,7 +498,7 @@ source set, because the transform rewrites the solution and not the graded tests
 So a `mock.patch("mod.sym")` inside a test triggers no refusal at all: the rename
 proceeds, and the test breaks because it named the symbol. That is a witness.
 
-We settled it with a **synthetic probe** (`repro/f4_mock_probe.py`), labelled in
+It was settled with a **synthetic probe** (`repro/f4_mock_probe.py`), labelled in
 its own docstring as *not a measurement*. It takes `store_mark` on `pytest#10356`
 — CLEAN in the real task — and injects a `mock.patch` on it into a PASS_TO_PASS
 test:
@@ -513,7 +512,7 @@ with injected mock.patch:  testing/test_mark.py::test_pytest_param_id_requires_s
 ```
 
 So: **mock coupling is reachable by this mechanism** *(measured, on a synthetic
-case)*, and we did not observe it in the wild at n=3 because none of the three
+case)*, and it was not observed in the wild at n=3 because none of the three
 tasks contained an instance — absence of data, not a structural bar *(open: its
 real prevalence under this operator is unmeasured)*.
 
@@ -550,8 +549,8 @@ The two that mounted but could not reach a valid control:
 - `pytest-dev/pytest#7571` needs pytest 6.0, which cannot run on Python 3.11 —
   `TypeError: required field "lineno" missing from alias`. An interpreter
   incompatibility, not a pin.
-- `pylint-dev/pylint#6903` stalled at P2P 4/8 after three era-pins. We stopped
-  there rather than fight it, and recorded it as `unchecked`.
+- `pylint-dev/pylint#6903` stalled at P2P 4/8 after three era-pins. It was
+  abandoned rather than fought, and recorded as `unchecked`.
 
 The remedy, every time it worked, was the same: **pin dependencies to the task's
 era** — `pytest==7.4.4`, `werkzeug==2.3.7`, `numpy==1.26.4`, `astroid==2.11.7`,
@@ -561,7 +560,7 @@ everything and the repo's own test suite stops working: Werkzeug 3 removed
 `_pytest.monkeypatch.notset`.
 
 **That list is a description of what a Docker image is for.** The operational
-conclusion follows directly, and it is the main thing we would tell Prime about
+conclusion follows directly, and it is the main thing worth telling Prime about
 deployment:
 
 > `formcheck` should run **inside the Harbor task image**, where those pins are
@@ -589,7 +588,7 @@ them is a question a judge can settle:
 | `pytest#10356` — `MarkDecorator` in `__all__` | REFUSED, dynamic reach | No — settled mechanically |
 | `pytest#10356` — `collection_reverse` | UNVALIDATED, oracle blind to order | No — needs a better oracle, not a judge |
 
-### The one adjudication we ran *(measured, n=1)*
+### The one adjudication that was run *(measured, n=1)*
 
 `repro/f4_adjudicate.py` extracts the verbatim prompt from `judge_rubric.md` §6 —
 unchanged, not reworded — fills in the issue and the assertion, and sends it.
@@ -617,7 +616,7 @@ The judge's reply, in full:
 **The pipeline reaches a verdict end to end** — mechanical operator → G4 refusal →
 rubric → adjudicated CONTRACT, with a quoted issue span. The operator's refusal
 was right, and the routing did its job. That is what n=1 shows. It shows nothing
-about how often the judge is right, and we make no such claim.
+about how often the judge is right, and no such claim is made.
 
 **Read the rationale, not the label.** The verdict is correct, but the reasoning
 leads with the *naming* rule: "explicitly names … **Therefore** the public symbol
@@ -627,7 +626,7 @@ explicit that naming is a **strong proxy, not proof**, and that what settles
 contract is whether the payload is public surface consumers depend on. Here the
 judge reached the right answer by the weaker road.
 
-That is not a surprise, and it is the open point we flagged before running: §6's
+That is not a surprise, and it is the open point flagged before running: §6's
 runnable prompt encodes the simple form of the test ("if the issue names the
 payload → CONTRACT"), while the refinement lives in the rubric's prose and never
 reaches the model. On `flask` both roads arrive at CONTRACT, so this case cannot
@@ -644,17 +643,17 @@ it. Worth fixing in the prompt before this is run at any scale.
 
 **Why that model** *(a judgement call, not a measurement)*. The task is
 short-context reading against an explicit decision procedure, not code synthesis,
-so the cheapest current-generation model is the right tier. We did not take the
-cheapest available (`gpt-5-nano`, $0.05 / $0.40): a judge that returns the right
+so the cheapest current-generation model is the right tier. The cheapest
+available was not taken (`gpt-5-nano`, $0.05 / $0.40): a judge that returns the right
 label for the wrong reason defeats the purpose of routing to a rubric at all,
 which is the audit trail — and, as above, even this model partly did that. Price
 is not the binding constraint at this size: one case across the range from
 `gpt-5-nano` to `gpt-5.1` costs roughly $0.0001 to $0.003. `--model` re-runs the
 same prompt on a stronger judge for a fraction of a cent.
 
-*Correction, twice over.* We first estimated ~$0.04 per case, assuming the whole
-rubric document entered the prompt; it does not, since §6 is self-contained. We
-then estimated ~$0.001. The measured figure is **$0.00037** — the estimate was
+*Correction, twice over.* An early estimate put this at ~$0.04 per case, assuming
+the whole rubric document entered the prompt; it does not, since §6 is
+self-contained. A second put it at ~$0.001. The measured figure is **$0.00037** — the estimate was
 still nearly 3× high, because the reply was shorter than assumed. Small numbers,
 but the pattern is the point: every estimate in this work has run high until it
 was measured.
@@ -696,13 +695,13 @@ not checked.
 
 **Qualitative — direction, never a percentage.**
 The type→repairability mapping. The auto-repairable fraction, which shrank
-threefold under audit to single digits. The comparison in §6.3 against our own
+threefold under audit to single digits. The comparison in §6.3 against this project's own
 July labels.
 
 **Open.**
 The real prevalence of mock coupling under `symbol_rename` — reachable,
 unmeasured. The reliability of the semantic judge, still untested: the one case
-we ran could not discriminate the naming rule from the public-surface rule, and
+that was run could not discriminate the naming rule from the public-surface rule, and
 its reply broke the rubric's own `confidence` schema. Whether an oracle stronger
 than a name-set changes the invalid rate. The anchor availability rate across a
 real corpus. Behaviour inside Harbor images. Any non-Python corpus.
@@ -716,8 +715,8 @@ real corpus. Behaviour inside Harbor images. Any non-Python corpus.
    blind to order and duplication. The other tasks have no hand-written contract
    oracle at all: there, only operators whose sole realistic failure mode is loud
    (an incomplete rename raising on first use) are judged, using the task's own
-   P2P suite — which cannot verify the issue's fix still works. We know that gap
-   is real: on `pytest#10356` the `bug_none` mutant broke the fix and passed all
+   P2P suite — which cannot verify the issue's fix still works. That gap is known
+   to be real: on `pytest#10356` the `bug_none` mutant broke the fix and passed all
    79 P2P tests. **A stronger oracle finds more invalid transforms, never fewer.**
 3. **This was Windows and subprocess; it is now Linux and containers.** This
    constraint first read: *"This is Windows and subprocess, not Harbor and
@@ -732,9 +731,9 @@ real corpus. Behaviour inside Harbor images. Any non-Python corpus.
    unnecessary on Linux (`CHANGES.md` 3). What is still not demonstrated is a hub
    SWE environment, which is the limit §5 states.
 
-**Errors we made, and what each one bought.** These are in the writeup because
+**Errors made here, and what each one bought.** These are in the writeup because
 each is now a rule or a check, and because the method's credibility rests on the
-ones we caught, not on the ones we did not.
+ones caught, not on the ones missed.
 
 | what went wrong | how it surfaced | what it became |
 |---|---|---|
@@ -857,16 +856,16 @@ $PYG f4_adjudicate.py --model <a-stronger-model>                  # same prompt,
 **Grader provenance**
 
 ```bash
-$PYG f1_grader_provenance.py    # ours vs a literal transcription of verifiers v0.2.1
+$PYG f1_grader_provenance.py    # this grader vs a literal transcription of v0.2.1
 ```
 
 Resolution is decided by upstream `swebench` 4.0.3 (`get_eval_tests_report` /
-`get_resolution_status`); no grading logic was reimplemented. Our caller
+`get_resolution_status`); no grading logic was reimplemented. The caller here
 reproduces how `verifiers` called it at tag **v0.2.1** (2026-07-20). That path no
 longer exists — the v0 stack was removed on 2026-08-31 (`66a6064`) — so there is
 nothing in-repo left to diff against, and the script instead transcribes the
 v0.2.1 implementation literally and checks both agree on every captured log:
-**17 of 17**. We therefore describe it as an offline SWE-bench-format grader, not
+**17 of 17**. It is therefore described as an offline SWE-bench-format grader, not
 as "the verifiers grader".
 
 **Artefacts**
