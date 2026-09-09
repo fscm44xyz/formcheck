@@ -1,71 +1,92 @@
-# formcheck — detecting form-coupled graders with executable witnesses
+# formcheck — does a task's reward reject a correct solution written differently?
 
-`verifiers`' task validation (`validate`) has two checks, `gold` and `setup`
-(`verifiers/v1/cli/validate.py:66-71`). Neither asks whether the reward would
-also accept a correct solution written differently: the gold patch passes its
-own tests, so a test coupled to the incidental form of that patch is invisible
-to both. Commit `651484c` (2026-08-29) made the gap visible without filling it —
-`Task.validate` became tri-state, so a taskset with no check now reports
-`unchecked` instead of `valid`. `formcheck` fills it, mechanically: it applies
-behaviour-preserving transforms to the reference solution (specialise away an
-invented keyword-only parameter; alpha-rename a symbol), re-runs the graded
-tests, and reports a witness when the transformed solution still satisfies the
-issue's contract and still scores 0.0. No LLM is involved in producing a witness.
+**Across all 500 tasks of SWE-bench Verified, 22.2% of controlled tasks — 28 of
+126, Wilson 95% [15.8%, 30.2%] — reject a behaviour-preserving rename of an
+internal symbol the gold patch touches.** In 15 of those 28 *every* graded test
+fails, and the median coupled task loses 100% of its suite: renaming a
+module-level symbol stops the test module importing, so the suite does not
+partially fail — it does not run, and the reward carries no information about
+whether the solution works.
 
-## The witness on `pytest-dev/pytest#10356`
+Full report: **[REPORT.md](REPORT.md)**.
 
-Output of `repro/f0_gate.py`; grading by upstream `swebench` 4.0.3:
+## What formcheck does
 
-| solution | reward | F2P | P2P |
-|---|---|---|---|
-| gold patch (control) | 1.0 | 1/1 | 79/79 |
-| hand-written alt (control) | 0.0 | 0/1 | 79/79 |
-| gold + `kwonly_specialize` | 0.0 | 0/1 | 79/79 |
+It transforms the reference solution in ways that preserve behaviour — an
+alpha-rename of a symbol, say — and re-runs the task's own graded tests. Each
+transform is offered an **anchor**, the particular symbol it proposes to change,
+and only symbols the gold patch actually touches are offered; a transform that
+still satisfies the issue's contract and still scores 0.0 is a **witness** that
+the reward is coupled to the incidental form of the gold patch. Every rate is
+scoped to **controlled** tasks — those whose untransformed reference solution
+reproduces its own 1.0 inside its own image — because a task that cannot
+reproduce its own gold proves nothing in either direction.
 
-The mechanical transform reproduced what took a human to write. The transformed
-gold satisfies the issue's contract (independent oracle: both markers
-collected) and fails exactly the graded test, `test_mark_mro`, and nothing else.
+## How it was measured
 
-## Coupling is not only in the graded test
+- **500 tasks**, the whole of SWE-bench Verified, 12 repositories, 4 test runners.
+- **Inside each task's own epoch-pinned image**, on verifiers' own `DockerRuntime`
+  through `validate._run_check` — the same call by which a Harbor task reaches its
+  container.
+- **494 of 500 controls passed.** The 6 that did not are excluded and named.
+- **Every witness is attributed by failure text** — a failure block that names the
+  renamed symbol. `p2p_unattributed = 0`: no witness rests on a failure the
+  attribution could not explain.
+- **No model produces a witness.** The number involves no inference at any point.
+- 9.15 h wall clock, 2.26 TiB of images pulled and discarded, zero leaked.
 
-On `pydata/xarray#4966`, alpha-renaming `UnsignedIntegerCoder` fails 4
-PASS_TO_PASS tests (each an `AttributeError` on the name) while all 4
-FAIL_TO_PASS tests pass. The reward goes to zero through PASS_TO_PASS.
+## What it does not show
 
-## Run it yourself
+- **One channel only.** The rate is coupling to a symbol's *identity*. Coupling to
+  structure, ordering or decomposition is unprobed — the operators that would
+  reach them found anchors on 0–3.5% of the corpus — and **the direction is
+  unknown**: an earlier claim that 22.2% is a floor was withdrawn, because tests
+  import by name and a restructuring that preserves entry points may break fewer
+  tests, not more.
+- **The encounter rate is unmeasured.** How often a real policy is actually
+  penalised depends on how often its correct solution differs in form from the
+  gold. Measuring it needs rollouts from a model; this project uses none.
+- **`on_prime_hub` is unresolved on 500 of 500** — unresolved, not negative.
 
-Setup — a pytest checkout at the task's base commit, three venvs, and
-`verifiers` at `04b0bf5` with `verifiers-formcheck.patch` applied — is in
-[repro/README.md](repro/README.md). Then, from `repro/` (Windows paths; on POSIX
-use `bin/python` instead of `Scripts/python`):
+## The result that survives the number
 
+Nine defects found in this work share one shape: **a check that reports a verdict
+for a reason invisible in its own output** — the exact failure `formcheck` was
+built to detect in other people's graders, appearing repeatedly in `formcheck`.
+Every one was found by inspecting the machinery, never by a suspicious number,
+because none of them produced a suspicious number: one had a parser that
+understood a single test runner and silently converted four real witnesses into
+"invalid transform", which would have reported `W = 0` over 50 tasks with clean
+controls, zero errors and a 46-minute run. Two others are worth the read on their
+own — two individually correct guards that cancelled at their seam and disabled a
+liveness check without emitting anything, and a disk guard whose first firing in
+production was a false positive.
+
+→ **[REPORT.md §7, The defect family](REPORT.md#7-the-defect-family)**
+
+## Where to look
+
+| | |
+|---|---|
+| [REPORT.md §1](REPORT.md#1-the-number) | the number, both denominators, why one operator |
+| [REPORT.md §3](REPORT.md#3-what-changes-for-a-customer) | blast radius, encounter rate, what the number is |
+| [REPORT.md §7](REPORT.md#7-the-defect-family) | nine defects, one shape |
+| [writeup.md](writeup.md) | method, the transform family, retractions |
+| [judge_rubric.md](judge_rubric.md) | the contract-vs-form rubric for refused cases |
+
+## Reproduce
+
+```bash
+python3.12 -m venv ~/.venv-fc
+~/.venv-fc/bin/pip install "swebench==4.0.3" "datasets==5.0.1" "docker==7.2.0"
+
+# recompute every number, from records on disk -- no containers
+~/.venv-fc/bin/python scale/aggregate.py --results scale/records_m4 -o /tmp/agg.json
+~/.venv-fc/bin/python scale/test_guards_fire.py     # 17/17 -- every guard fires
+
+# one task, ~2 min, needs docker
+~/.venv-fc/bin/python scale/run.py --instance-id django__django-13195
 ```
-../../.venv-pytest/Scripts/python run_case.py gold ; ../../.venv/Scripts/python grade.py log_gold.txt          # REWARD = 1.0  (control)
-../../.venv-pytest/Scripts/python f0_witness.py    ; ../../.venv/Scripts/python grade.py log_f0_witness.txt    # REWARD = 0.0  (mechanical witness)
-../../.venv/Scripts/python f0_gate.py                                                                          # the table above
-../../.venv-vf/Scripts/python f3_run.py                                                                        # valid = False, reason 'invalid'
-```
 
-The last command runs `Task.formcheck` through `verifiers`' own
-`validate._run_check` and prints the `results.jsonl` row it would persist.
-
-## Scope
-
-n = 3 tasks (`pytest#10356`, `flask#5014`, `xarray#4966`); three witnesses in
-two of them. Mechanism demonstration, not a rate. The `verifiers` run uses the
-`subprocess` runtime on Windows with a local stand-in taskset; `formcheck`
-belongs inside Harbor task images, where the reference score is reproducible by
-construction.
-
-## Contents
-
-- [writeup.md](writeup.md) — method, measurements, retractions, and an appendix
-  with every command.
-- [judge_rubric.md](judge_rubric.md) — contract-vs-form rubric for the border
-  cases the operators refuse.
-- [verifiers-formcheck.patch](verifiers-formcheck.patch) — `--only-formcheck`
-  for `validate` (121 lines, base `04b0bf5`).
-- [overlays/](overlays/) — the pytest#10356 repair overlay and the one
-  flask#5014 adjudication.
-- [repro/](repro/) — scripts, captured logs, and per-transform evidence
-  (`repro/overlay_f2/`).
+Full setup, pinned versions and the 500-task command:
+[REPORT.md Appendix A](REPORT.md#appendix-a--reproduce-it).

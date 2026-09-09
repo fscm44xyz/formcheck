@@ -10,15 +10,37 @@ This report covers the scale work: running that check inside each task's own
 epoch-pinned image, on verifiers' own runtime, across all 500 tasks of SWE-bench
 Verified.
 
-**The result in one sentence.** 22.2% of controlled SWE-bench Verified tasks have
-a reward coupled to the form of the gold patch — and in the median coupled task
-**every graded test fails** under a rename that changes no behaviour, because
-renaming a module-level symbol stops the test module importing, so the suite does
-not partially fail: it does not run.
+**The result in one sentence.** 22.2% of *controlled* SWE-bench Verified tasks —
+those whose reference solution reproduces its own score inside its own image, 494
+of the 500 — have a reward coupled to the form of the gold patch, and in the
+median coupled task **every graded test fails** under a rename that changes no
+behaviour, because renaming a module-level symbol stops the test module
+importing, so the suite does not partially fail: it does not run.
 
 The percentage says how many tasks are affected. The second half says what
 happens inside them, and it is the stronger claim: on those tasks the reward
 carries no information about whether the solution works.
+
+*Fifteen minutes rather than forty: [README.md](README.md) is the one-page
+version.*
+
+---
+
+## Contents
+
+| | |
+|---|---|
+| [1. The number](#1-the-number) | the rate, both denominators, why one operator |
+| [2. The 28, case by case](#2-the-28-case-by-case) | are these reward bugs or interface changes |
+| [3. What changes for a customer](#3-what-changes-for-a-customer) | blast radius, encounter rate, what the number is |
+| [4. What the number rests on](#4-what-the-number-rests-on) | controls, attribution, the checks that found nothing |
+| [5. The ceiling](#5-the-ceiling) | anchor availability, unparsed logs, `on_prime_hub` |
+| [6. Routing the border](#6-routing-the-border-and-what-a-judge-would-cost) | the 631 refusals, and what a judge would cost |
+| [7. The defect family](#7-the-defect-family) | nine defects, one shape — the result that survives the number |
+| [8. Reproducibility](#8-reproducibility-executed-rather-than-argued) | 2 of 4 on the July rig became 494 of 500 |
+| [9. What this does not show](#9-what-this-does-not-show) | the limits, and what a hub-side run would close |
+| [Appendix A — reproduce it](#appendix-a--reproduce-it) | copy-pasteable, pinned versions |
+| [Appendix B — what the run cost](#appendix-b--what-the-run-cost) | 9.15 h, 2.26 TiB, zero leaks |
 
 ---
 
@@ -44,13 +66,21 @@ the operator itself, not asserted here:
 |---|---|---|---|---|
 | `symbol_rename` | HIGH if `_`-private, else MEDIUM | symbol identity | renaming a definition and every static reference to it is a pure alpha-rename; no expression's value changes | the name is reached by a path the rewrite cannot follow: an `__all__` entry, a `mock.patch` target, `getattr`, an entry point |
 
+**Tier** is the operator's own confidence in that equivalence argument for a given
+anchor — HIGH where the argument is strongest, MEDIUM where it rests on a scan
+rather than a convention. It is set in code, and the rule shown here has been
+fixed since before any result existed, which is what lets it serve as the
+sensitivity axis in §2.
+
 Equivalence is **argued and regression-checked, never proven**, and the word
 proof is not used. The defeating condition is not left to inspection: the
 dynamic-reach precondition scans **the entire production tree** — an `__all__`
 entry in a package `__init__` is exactly the case a narrower scan misses — and
-refuses the anchor when it finds one. It refused 130 anchors in this run, so it
-is not a vacuous check. The other three operators carry their own arguments and
-tiers in `writeup.md` §3.1.
+refuses the **anchor**, the particular symbol an operator offers to transform on
+a task, when it finds one. It refused 130 anchors in this run, so it is not a
+vacuous check. Anchors are the unit almost everything downstream counts: the
+denominator below, the coverage ceiling in §5 and the routing map in §6. The
+other three operators carry their own arguments and tiers in `writeup.md` §3.1.
 
 ### What the denominator is
 
