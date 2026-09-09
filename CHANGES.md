@@ -708,7 +708,7 @@ explains why.
 
 ---
 
-## 18. The failure attribution understood one test runner. SWE-bench has three.
+## 18. The failure attribution understood one test runner. SWE-bench has four.
 
 **The most consequential defect in this project. It inverted M3's headline, and
 it stops M3.**
@@ -755,10 +755,21 @@ downward, again, which is the direction nobody audits.
 
 **Rule.** *Attribution must understand every runner the corpus uses, and an
 unattributable failure is a defect to investigate, not a verdict to report.* The
-three shapes are handled in `f4_formcheck.failure_sections` / `section_for` --
+shapes are handled in `f4_formcheck.failure_sections` / `section_for` --
 extended in place, because `CHANGES.md` 13's lesson is that a second copy is how
 this rule gets lost. Per-test blocks are preferred over module-wide collection
 errors: a test with its own failure block failed on its own terms.
+
+**The count in this entry's title was three when it was written, and is four.**
+Three shapes were known at M3. The fourth -- sympy's `bin/test`, whose blocks are
+underscore-delimited and so parse, but which labels them
+`path/to/test_x.py:test_name` while swebench reports the bare name -- was found
+afterwards by the closure this entry installed rather than by a wrong number,
+which is the closure working as designed. Four is also the number of distinct
+runners in the corpus: django's `runtests.py` (231 tasks), pytest (150), sympy's
+`bin/test` (75) and sphinx's `tox` (44), counted from
+`MAP_REPO_VERSION_TO_SPECS` over all 500. `scale/test_partition.py` pins all
+four.
 
 Pinned by six tests over the four real M3 logs
 (`scale/fixtures/m3_misattributed_logs.json`), including that a per-test block

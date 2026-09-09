@@ -406,8 +406,8 @@ def classify_failures(log: str, graded: dict, name: str) -> dict:
             # NO FAILURE BLOCK FOUND. This is not evidence that the transform
             # broke behaviour -- it is evidence that this log has a shape the
             # parser does not know. `CHANGES.md` 18 is what happens when the two
-            # are conflated: three runner formats existed, one was understood,
-            # and every failure in the other two was silently reported as
+            # are conflated: four runner formats exist, one was understood,
+            # and every failure in the others was silently reported as
             # breakage. That suppressed four witnesses and inverted M3's
             # headline while every operational signal stayed green.
             #

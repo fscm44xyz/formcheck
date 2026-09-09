@@ -171,10 +171,12 @@ def failure_sections(log):
     the pytest-10356 baseline log has such a line with zero failures, which
     would have forced every verdict to INVALID.
 
-    THREE BLOCK SHAPES, because SWE-bench is not one test runner. Phase 4 ran
+    FOUR RUNNER DIALECTS, because SWE-bench is not one test runner. Phase 4 ran
     only pytest repos and this function only understood pytest's per-test form;
-    M3 ran ten repos and found the other two, misattributing every failure in
-    them (`CHANGES.md` 18):
+    M3 ran ten repos and found two more, misattributing every failure in them
+    (`CHANGES.md` 18). The fourth, sympy's, is listed here for completeness but
+    is resolved in `section_for`, not here: its blocks are underscore-delimited
+    and parse fine, and only its LABEL differs.
 
       pytest per-test    `______ test_name ______`
       pytest collection  `______ ERROR collecting path/to/test_x.py ______`
@@ -184,6 +186,9 @@ def failure_sections(log):
       unittest / django  `====...` then `ERROR: test_name (mod.Class)` then
                          `----...` then the traceback. No underscore rules at
                          all, so the old parser found nothing whatsoever.
+      sympy `bin/test`   underscore blocks labelled `path/to/test_x.py:name`
+                         while swebench reports the bare name -- parsed here,
+                         matched in `section_for`.
     """
     out, current, buf = {}, None, []
     for line in log.splitlines():
