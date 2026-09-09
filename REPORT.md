@@ -19,11 +19,65 @@ Verified.
 > the gold patch touches.**
 
 The scope belongs in the sentence, so it is written there: `symbol_rename` only,
-over tasks whose reference solution reproduced its own score in its own image,
-counting a task once however many of its rows are witnesses.
+over tasks whose reference solution reproduced its own score in its own image.
 
-Denominator: tasks with at least one judged `symbol_rename` case, among the 494
-tasks whose control passed. 126 of the 494 have one.
+### What the transform is, and why it preserves behaviour
+
+The perturbation is an **alpha-rename**: a module-level definition and every
+static reference to it are renamed together, including `from X import name`. No
+expression's value changes, no branch is added or removed, no call order moves.
+The equivalence argument and the condition that would defeat it are carried by
+the operator itself, not asserted here:
+
+| operator | tier | observable | equivalence argument | what breaks it |
+|---|---|---|---|---|
+| `symbol_rename` | HIGH if `_`-private, else MEDIUM | symbol identity | renaming a definition and every static reference to it is a pure alpha-rename; no expression's value changes | the name is reached by a path the rewrite cannot follow: an `__all__` entry, a `mock.patch` target, `getattr`, an entry point |
+
+Equivalence is **argued and regression-checked, never proven**, and the word
+proof is not used. The defeating condition is not left to inspection: the
+dynamic-reach precondition scans **the entire production tree** — an `__all__`
+entry in a package `__init__` is exactly the case a narrower scan misses — and
+refuses the anchor when it finds one. It refused 130 anchors in this run, so it
+is not a vacuous check. The other three operators carry their own arguments and
+tiers in `writeup.md` §3.1.
+
+### What the denominator is
+
+| | |
+|---|---|
+| witness **rows** | **34** |
+| witness **tasks** — a task counts once however many of its rows are witnesses | **28** |
+| **denominator: tasks with ≥ 1 *judged* `symbol_rename` case, among the 494 controlled** | **126** |
+
+The denominator is **not 500** and **not 494**. A task enters it only if
+`symbol_rename` found an in-scope anchor *and* the resulting run was judgeable —
+not refused by a precondition, not `UNVALIDATED` for an unreadable log. 126 of
+the 494 controlled tasks qualify. The 34 → 28 collapse is six extra rows on two
+tasks: five symbols in `django/core/validators.py` on `django-13212`, two in
+`pylint/pyreverse/utils.py` on `pylint-4551`, and one name defined in two
+different modules on `sphinx-7590`.
+
+### Why only this operator, stated before anyone else states it
+
+**This number measures something narrow, and the narrowness is measured, not
+hidden.** It covers one perturbation — renaming an internal symbol — out of four
+the family implements. The other three contribute nothing to it, and the reason
+is not that they were tried and failed: they found no anchor to transform on
+96–100% of the corpus (§5). `message_reword` found none on any of 491 tasks.
+
+Two independent constraints select this operator, and both are measured:
+
+1. **Anchor availability.** `symbol_rename` finds an in-scope anchor on 98.4% of
+   controlled tasks; the next-best operator manages 3.5%.
+2. **Judgeability.** `symbol_rename` is the only operator whose failure mode is
+   LOUD, so the task's own suite is a sufficient oracle. The other three fail
+   silently and their cases are `UNVALIDATED` without a hand-written contract
+   oracle nobody has for 500 tasks.
+
+So the honest reading is: *of the four form-perturbations this work can apply,
+one is both widely applicable and self-judging, and on that one the coupling rate
+is 22.2%.* It is not a claim about form-coupling in general, and §9 says so
+again.
 
 ### By sampling stratum
 
@@ -71,7 +125,159 @@ requests 1, xarray 1, sympy 1.
 
 ---
 
-## 2. What the number rests on
+## 2. The 28, case by case
+
+The objection this table exists to answer: *are these reward bugs, or legitimate
+interface incompatibilities?* An alpha-rename of a symbol that is genuinely part
+of a public interface would be an interface change, and a grader that catches it
+would be doing its job.
+
+**The criterion, applied mechanically to every anchor before it was transformed,
+and uniform across all 28:**
+
+1. **No `__all__` entry and no string-literal reach, anywhere in the production
+   tree.** The scan root is the whole repository, not the target file, precisely
+   so a re-export in a package `__init__` is visible. Any anchor that tripped it
+   was `REFUSED` and never renamed — that happened 130 times in this run.
+2. **Not named in the task's own issue text.** An anchor the issue names is
+   `REFUSED` as a candidate contract and routed to the rubric — 301 times in this
+   run. Re-checked independently for this report by searching each task's
+   `problem_statement` for its symbol: **0 of 33 witness symbols appear.**
+
+| task | symbol | file | tier | private by name/module | graded tests failing | side |
+|---|---|---|---|---|---|---|
+| `sphinx-doc/sphinx-7590` | `DefinitionParser` +1 | `sphinx/domains/c.py` | MEDIUM | — | **25/25** = 100% | p2p coupling |
+| `sphinx-doc/sphinx-7454` | `_parse_annotation` | `sphinx/domains/python.py` | HIGH | yes | **28/28** = 100% | p2p coupling |
+| `scikit-learn/scikit-learn-14983` | `_build_repr` | `sklearn/model_selection/_split.py` | HIGH | yes | **107/107** = 100% | p2p coupling |
+| `scikit-learn/scikit-learn-14141` | `_get_deps_info` | `sklearn/utils/_show_versions.py` | HIGH | yes | **3/3** = 100% | p2p coupling |
+| `pylint-dev/pylint-4604` | `VariablesChecker` | `pylint/checkers/variables.py` | MEDIUM | — | **21/21** = 100% | f2p only |
+| `pylint-dev/pylint-4551` | `get_annotation` +1 | `pylint/pyreverse/utils.py` | MEDIUM | — | **10/10** = 100% | f2p only |
+| `psf/requests-1766` | `HTTPDigestAuth` | `requests/auth.py` | MEDIUM | — | **85/85** = 100% | p2p coupling |
+| `django/django-15973` | `MigrationAutodetector` | `django/db/migrations/autodetector.py` | MEDIUM | — | **158/158** = 100% | p2p coupling |
+| `django/django-15851` | `DatabaseClient` | `django/db/backends/postgresql/client.py` | MEDIUM | — | **9/9** = 100% | p2p coupling |
+| `django/django-15380` | `MigrationAutodetector` | `django/db/migrations/autodetector.py` | MEDIUM | — | **134/134** = 100% | p2p coupling |
+| `django/django-14376` | `DatabaseClient` | `django/db/backends/mysql/client.py` | MEDIUM | — | **9/9** = 100% | p2p coupling |
+| `django/django-12155` | `parse_docstring` | `django/contrib/admindocs/utils.py` | MEDIUM | — | **7/7** = 100% | p2p coupling |
+| `django/django-11433` | `construct_instance` | `django/forms/models.py` | MEDIUM | — | **143/143** = 100% | p2p coupling |
+| `django/django-11179` | `Collector` | `django/db/models/deletion.py` | MEDIUM | — | **41/41** = 100% | p2p coupling |
+| `astropy/astropy-12907` | `_cstack` | `astropy/modeling/separable.py` | HIGH | yes | **15/15** = 100% | p2p coupling |
+| `django/django-13121` | `Combinable` | `django/db/models/expressions.py` | MEDIUM | — | **140/169** = 83% | p2p coupling |
+| `django/django-14315` | `DatabaseClient` | `django/db/backends/postgresql/client.py` | MEDIUM | — | **9/11** = 82% | f2p only |
+| `pytest-dev/pytest-5809` | `create_new_paste` | `src/_pytest/pastebin.py` | MEDIUM | yes | **3/4** = 75% | p2p coupling |
+| `django/django-15572` | `get_template_directories` | `django/template/autoreload.py` | MEDIUM | — | **4/11** = 36% | p2p coupling |
+| `pydata/xarray-4966` | `UnsignedIntegerCoder` | `xarray/coding/variables.py` | MEDIUM | — | **8/25** = 32% | p2p coupling |
+| `django/django-13212` | `RegexValidator` +4 | `django/core/validators.py` | MEDIUM | — | **2/7** = 29% | p2p coupling |
+| `sphinx-doc/sphinx-7757` | `signature_from_str` | `sphinx/util/inspect.py` | MEDIUM | — | **7/34** = 21% | p2p coupling |
+| `django/django-14771` | `get_child_arguments` | `django/utils/autoreload.py` | MEDIUM | — | **9/61** = 15% | p2p coupling |
+| `django/django-14311` | `get_child_arguments` | `django/utils/autoreload.py` | MEDIUM | — | **8/60** = 13% | p2p coupling |
+| `sympy/sympy-13031` | `MutableSparseMatrix` | `sympy/matrices/sparse.py` | MEDIUM | — | **1/10** = 10% | f2p only |
+| `django/django-13195` | `CookieStorage` | `django/contrib/messages/storage/cookie.py` | MEDIUM | — | **28/387** = 7% | p2p coupling |
+| `pytest-dev/pytest-7521` | `FDCaptureBinary` | `src/_pytest/capture.py` | MEDIUM | yes | **2/127** = 2% | p2p coupling |
+| `pytest-dev/pytest-10356` | `get_unpacked_marks` | `src/_pytest/mark/structures.py` | MEDIUM | yes | **1/80** = 1% | f2p only |
+
+`+n` marks a task with n further witness symbols; the row shows the widest blast
+radius. Sorted by blast radius, which is §3.
+
+**Where this evidence stops, stated rather than papered over.** The criterion is
+"not re-exported and not named in the issue". It does **not** consult the
+project's own documentation, and no offline artefact in this repo can: deciding
+whether `django.core.validators.RegexValidator` is documented public API needs
+the docs, not the records. A reader who holds that a symbol importable from a
+non-underscore module is public interface regardless of `__all__` will contest
+some of these 28.
+
+That objection is answered with a sensitivity analysis rather than an argument.
+The `private by name/module` column applies a deliberately over-strict rule — the
+symbol or a component of its path starts with `_` — which no reasonable person
+disputes:
+
+| set | tasks | over 126 | Wilson 95% |
+|---|---|---|---|
+| all witnesses | 28 | **22.2%** | [15.8%, 30.2%] |
+| symbol or module `_`-private | 7 | **5.6%** | [2.7%, 11.0%] |
+| HIGH tier (`_`-private name) | 4 | **3.2%** | [1.2%, 7.9%] |
+
+The strict rule is too strict — it excludes `MigrationAutodetector` and
+`get_child_arguments`, which are internal machinery by any reading — so 5.6% is
+not the better estimate. It is the floor that survives the most hostile reading
+of "internal", and even there the interval clears zero. Nothing was dropped from
+the count: all 28 meet the criterion the run applied, and the stricter subsets are
+reported beside them so a reader can pick.
+
+---
+
+## 3. What changes for a customer
+
+### (a) Blast radius, measured — how much of the graded suite a rename destroys
+
+For each of the 28, how many graded tests fail under the equivalent rename, out
+of how many graded tests the task has. Both numbers come from the witness row's
+own grading report, and the totals reconcile exactly with the dataset's
+`FAIL_TO_PASS` + `PASS_TO_PASS` lists on all 28.
+
+| share of the graded suite that fails | tasks |
+|---|---|
+| **100% — every graded test fails** | **15** |
+| 50–99% | 3 |
+| 20–49% | 4 |
+| 5–19% | 4 |
+| < 5% | 2 |
+
+**Median 100%. In 15 of 28 tasks, a rename that changes no behaviour fails the
+entire graded suite** — 158 of 158 tests on `django-15973`, 143 of 143 on
+`django-11433`, 107 of 107 on `scikit-learn-14983`, 85 of 85 on `requests-1766`.
+Across all 28, 1017 of 1781 graded tests fail.
+
+The distribution matters more than the aggregate, and it is bimodal, not smooth.
+The mechanism is visible in the logs: renaming a module-level symbol makes the
+*test module fail to import*, so the suite does not partially fail — it does not
+run. That is why the modal outcome is 100% and not "one test asserts the name".
+The tail is the other shape: 1 of 80 on `pytest-10356`, 2 of 127 on
+`pytest-7521`, where a single test references the name and the rest are
+unaffected.
+
+For a customer this is the difference between a grader that is slightly noisy and
+one that returns 0.0 on a fully correct solution because a helper has a different
+name. Fifteen of these twenty-eight are the second kind.
+
+### (b) Encounter rate, not measurable here
+
+What this does **not** give is how often a real policy is actually penalised.
+That is the product of two things: this coupling, which is measured, and the
+**encounter rate** — how often a policy's correct solution differs in form from
+the gold in a way that trips it — which is not. A grader can be maximally coupled
+to a name and cost nothing if every correct solution happens to choose that name.
+
+The mechanism is established; the magnitude is not, and no number is offered for
+it. The experiment that would measure it is specific: run a policy on these 28
+tasks, take the solutions that are correct by judgment, and count how many score
+0.0. That requires generating rollouts from a model — inference — which this
+project deliberately does not use anywhere, so it is named as future work rather
+than estimated.
+
+### (c) The claim that is defensible: 22.2% is a floor
+
+`symbol_rename` is the most conservative perturbation in the family. It changes
+**only** a name: not structure, not helper decomposition, not ordering, not
+algorithm, not which module code lives in. A real policy varies all of those
+freely, and every one of them is a larger departure from the gold patch than a
+rename is.
+
+So a grader that rejects a rename is a grader that would reject the larger
+variations too, and coupling found by the weakest available probe is a **lower
+bound** on the coupling a real policy would meet. The stronger probes are not
+hypothetical — they are the other three operators — and the reason they produce
+no number is anchor availability, not a clean result.
+
+**The one assumption this rests on:** that graders coupled to a symbol's name are
+not *systematically less* coupled to structure, ordering and decomposition. If
+that assumption is wrong — if name-coupling were somehow the only form-coupling
+these suites have — 22.2% would be an estimate rather than a floor. Nothing in
+these records tests it, and it is stated here so it can be attacked.
+
+---
+
+## 4. What the number rests on
 
 **Controls.** 494 of 500 reference solutions scored exactly 1.0 in their own
 image before any transform ran. A task whose control fails is excluded from the
@@ -109,6 +315,24 @@ PASS_TO_PASS — the part of a task meant to be stable background, which a
 detector inspecting only the graded test would miss entirely. That is
 `writeup.md` §6.2's class, now measured at scale rather than argued from three
 tasks.
+
+**Can a parser or runner change manufacture a witness?** No, and the strongest
+evidence is the worst defect in this project. #18 was exactly that failure — a
+parser that understood one test runner out of the corpus's four — and its bias
+ran in the **opposite** direction. Failures it could not read were resolved to
+`INVALID`, which *suppressed* four real witnesses and reported `W = 0`. Widening
+the parser turned `INVALID` into `WITNESS`, never the reverse: in the M3 re-run,
+**exactly four rows changed and all four moved `INVALID → WITNESS`**, with 211 of
+215 identical.
+
+The direction is now structural rather than incidental. A log the attribution
+cannot read is classified `unparsed`, renders `UNVALIDATED`, and **cannot enter a
+denominator** — so an unreadable runner costs coverage and can never produce a
+witness. And a witness requires a failure block that *names the renamed symbol*:
+`p2p_unattributed = 0` and `unknown = 0` mean **no witness in this run rests on a
+failure the attribution could not explain.** A future parser change can add
+witnesses by reading logs currently unread; it cannot invent one from a failure it
+already understands.
 
 **M3 reproduces inside M4 exactly.** All 50 M3 tasks are in the 500 and were
 re-run as part of it. Comparing every `(instance, operator, anchor)` triple:
@@ -148,7 +372,7 @@ file on disk byte for byte; all 500 match, so none is truncated. All carry
 
 ---
 
-## 3. The ceiling
+## 5. The ceiling
 
 Coverage is bounded by anchor availability, not by refusals and not by oracle
 strength. This is the sharpest form of `writeup.md` §6.5's finding, and at 500
@@ -215,7 +439,7 @@ and reported as their own stratum, decided before the run.
 
 ---
 
-## 4. Routing the border, and what a judge would cost
+## 6. Routing the border, and what a judge would cost
 
 Cases the mechanical family declines are routed to `judge_rubric.md`, which stays
 a separate artefact: an auditable contract-vs-form judge with a text-anchored
@@ -262,7 +486,7 @@ label partly by the weaker of the rubric's two roads.
 
 ---
 
-## 5. The defect family
+## 7. The defect family
 
 This is the result that survives the number. Nine defects in this work share one
 shape:
@@ -318,7 +542,7 @@ which is the worst property a wrong number can have.
 It is closed rather than patched: "cannot parse" is now a third classification
 alongside "coupled" and "broke", it renders `UNVALIDATED`, it cannot enter a
 denominator, and `aggregate` reports it as a loud number with the offending tasks
-named. §3 above is that mechanism reporting 75 rows on itself.
+named. §5 above is that mechanism reporting 75 rows on itself.
 
 ### #23, because correctness of parts did not compose
 
@@ -407,7 +631,7 @@ next false positive gets retuned rather than diagnosed.
 
 ---
 
-## 6. Reproducibility, executed rather than argued
+## 8. Reproducibility, executed rather than argued
 
 `writeup.md` §7 concluded from five tasks that `formcheck` must run inside the
 task's own image, because outside it half the corpus cannot reproduce its own
@@ -472,7 +696,7 @@ them after seeing which ones failed is the same error as widening the parser.
 
 ---
 
-## 7. What this does not show
+## 9. What this does not show
 
 - **Nothing about the other three operators.** Their combined judged-case count
   is zero. `message_reword` found no anchor on any of 491 tasks. The result is
@@ -485,9 +709,14 @@ them after seeing which ones failed is the same error as widening the parser.
   the rate would hold on a corpus that was not curated for cleanliness.
 - **Nothing about the 19 tasks excluded by unparsed log shapes**, which are named
   rather than counted, and whose inclusion could only widen the denominator.
-- **Nothing about severity.** A witness shows a reward rejects a
-  behaviour-preserving rewrite. It does not show how often a real model would
-  write that rewrite, and this work does not measure that.
+- **Nothing about the encounter rate**, which is the other half of any claim
+  about cost to a customer. A witness shows a reward rejects a
+  behaviour-preserving rewrite; it does not show how often a real policy would
+  write that rewrite. §3(b) names the experiment that would measure it and why
+  this project does not run it.
+- **Nothing that makes 22.2% an estimate rather than a floor** — the floor
+  argument in §3(c) rests on one stated assumption, and these records do not
+  test it.
 
 ### What a hub-side run would close
 
@@ -509,7 +738,57 @@ settle four things this run could not:
 
 ---
 
-## Appendix — what the run cost
+## Appendix A — reproduce it
+
+Copy-pasteable, from a clone of this repository.
+
+```bash
+git clone https://github.com/fscm44xyz/formcheck.git
+cd formcheck
+git checkout m0-in-container   # 500 records + summary.json are pinned at a1bbbfa
+
+python3.12 -m venv ~/.venv-fc
+~/.venv-fc/bin/pip install "swebench==4.0.3" "datasets==5.0.1" "docker==7.2.0"
+# verifiers 0.3.2.dev67 with the formcheck hook applied:
+#   git -C <verifiers-checkout> apply verifiers-formcheck.patch
+~/.venv-fc/bin/pip install -e <verifiers-checkout>
+
+# --- no containers: the aggregate, the guards, the #18 partition, eligibility ---
+~/.venv-fc/bin/python scale/aggregate.py --results scale/records_m4 -o /tmp/agg.json
+~/.venv-fc/bin/python scale/test_guards_fire.py     # 17/17 -- every guard fires
+~/.venv-fc/bin/python scale/test_partition.py       # 20/20 -- the #18 partition
+~/.venv-fc/bin/python scale/eligibility.py          # the 500/429/430 split
+
+# --- one task, ~2 min, needs docker + ~4.5 GiB of pull ---
+~/.venv-fc/bin/python scale/run.py --instance-id django__django-13195
+
+# --- all 500: ~9 h at 4 workers, ~2.3 TiB pulled and discarded ---
+~/.venv-fc/bin/python scale/run.py --workers 4 --timeout 2700
+```
+
+The first three need no network. `eligibility.py` reads SWE-bench Verified from
+the `datasets` cache, downloading it once if absent; nothing else does.
+
+Versions this run used: Python 3.12.3, `swebench` 4.0.3, `verifiers`
+0.3.2.dev67, `datasets` 5.0.1, `docker` (SDK) 7.2.0, Docker Engine 29.8.0.
+Resolution is decided by upstream `swebench`; no grading logic is reimplemented.
+
+`/tmp/agg.json` reproduces `scale/summary.json` on every key except the three
+blocks the reporting pass adds (`integrity`, `run`, `eligibility`), which are
+provenance rather than results:
+
+```bash
+~/.venv-fc/bin/python -c "import json; a=json.load(open('/tmp/agg.json')); b=json.load(open('scale/summary.json')); print(a == {k:v for k,v in b.items() if k not in ('integrity','run','eligibility')})"
+# True
+```
+
+Per-task evidence for any single result is the record itself —
+`scale/records_m4/<instance_id>.json` carries the transformed tree's digest, the
+full graded log, the failure analysis and the equivalence tier for every row.
+
+---
+
+## Appendix B — what the run cost
 
 | | |
 |---|---|
