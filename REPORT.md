@@ -59,6 +59,31 @@ tiers in `writeup.md` §3.1.
 | witness **rows** | **34** |
 | witness **tasks** — a task counts once however many of its rows are witnesses | **28** |
 | **denominator: tasks with ≥ 1 *judged* `symbol_rename` case, among the 494 controlled** | **126** |
+| judged **rows** (WITNESS + CLEAN + INVALID) | **234** |
+
+**Both rates, because both are defensible and a reader will compute the second
+one anyway:**
+
+| unit | rate | Wilson 95% |
+|---|---|---|
+| **tasks** — the headline | **28 / 126 = 22.2%** | [15.8%, 30.2%] |
+| rows | 34 / 234 = **14.5%** | [10.6%, 19.6%] |
+
+The task-level rate leads because `STOPPING_RULE.md` fixed that unit before any
+result existed, verbatim: *"W counts **tasks**, not rows: a task with three
+witness rows counts once. The extrapolation below is to tasks, so the numerator
+must be tasks too."* That is the only reason it leads, and it is checkable in a
+commit (`0d6e786`) that predates the data.
+
+**Why the two differ, since "any-of" rates usually differ for a bad reason.** The
+obvious inflation — witness tasks winning by having more anchors to try — is not
+present. Witness tasks carry a mean of **1.89** judged anchors against **1.85**
+for non-witness judged tasks, and **21 of the 28 have exactly one**, so there is
+no multiplicity to harvest. The gap comes from the other end of the distribution:
+a few clean tasks carry 16 and 24 judged anchors apiece, which inflates the *row*
+denominator without adding a task. Neither rate is wrong; they answer "how many
+tasks are affected" and "how often a given anchor is coupled", and the first is
+the question this work was scoped to.
 
 The denominator is **not 500** and **not 494**. A task enters it only if
 `symbol_rename` found an in-scope anchor *and* the resulting run was judgeable —
@@ -189,13 +214,32 @@ and uniform across all 28:**
 `+n` marks a task with n further witness symbols; the row shows the widest blast
 radius. Sorted by blast radius, which is §3.
 
-**Where this evidence stops, stated rather than papered over.** The criterion is
+**Where this evidence stops, and the limit of the criterion.** The criterion is
 "not re-exported and not named in the issue". It does **not** consult the
-project's own documentation, and no offline artefact in this repo can: deciding
-whether `django.core.validators.RegexValidator` is documented public API needs
-the docs, not the records. A reader who holds that a symbol importable from a
-non-underscore module is public interface regardless of `__all__` will contest
-some of these 28.
+project's own documentation, and no offline artefact in this repo can.
+
+The limit is sharper than that, and worth naming precisely: **absence from
+`__all__` is not evidence of privateness in a project that does not use `__all__`
+at all**, and nothing offline tells us which of these twelve projects those are.
+The precondition was built to *refuse re-exported symbols* — a soundness guard on
+the rename — and it does that job. It was never built to *certify a symbol as
+non-public*, which is a stronger claim, and it is being asked for one here.
+
+So a reader who holds that a symbol importable from a non-underscore module is
+public interface regardless of `__all__` will contest some of these 28, and the
+most likely names are not a mystery: **`HTTPDigestAuth`** in `requests/auth.py`
+(`psf/requests-1766`) and **`RegexValidator`** / **`URLValidator`** in
+`django/core/validators.py` (`django/django-13212`, which carries three further
+`validate_*` symbols from the same module). Those three symbols sit on **two**
+tasks, not three.
+
+Striking them costs almost nothing, which is the point:
+
+| | tasks | over 126 | Wilson 95% |
+|---|---|---|---|
+| as reported | 28 | **22.2%** | [15.8%, 30.2%] |
+| less `requests-1766` and `django-13212` | 26 | **20.6%** | [14.5%, 28.5%] |
+| less also `Combinable` and `MutableSparseMatrix`, the next most arguable | 24 | **19.0%** | [13.1%, 26.8%] |
 
 That objection is answered with a sensitivity analysis rather than an argument.
 The `private by name/module` column applies a deliberately over-strict rule — the
@@ -210,8 +254,10 @@ disputes:
 
 The strict rule is too strict — it excludes `MigrationAutodetector` and
 `get_child_arguments`, which are internal machinery by any reading — so 5.6% is
-not the better estimate. It is the floor that survives the most hostile reading
-of "internal", and even there the interval clears zero.
+not the better estimate. It is what survives the most hostile reading of
+"internal" — a floor on *this* rate, under a stricter definition of the same
+channel, and not to be confused with the cross-channel floor §3(c) withdraws.
+Even there the interval clears zero.
 
 **Two decisions here, recorded as decisions rather than left as absences.**
 
@@ -285,25 +331,47 @@ tasks, take the solutions that are correct by judgment, and count how many score
 project deliberately does not use anywhere, so it is named as future work rather
 than estimated.
 
-### (c) The claim that is defensible: 22.2% is a floor
+### (c) What 22.2% is, and what it is not
 
-`symbol_rename` is the most conservative perturbation in the family. It changes
-**only** a name: not structure, not helper decomposition, not ordering, not
-algorithm, not which module code lives in. A real policy varies all of those
-freely, and every one of them is a larger departure from the gold patch than a
-rename is.
+An earlier draft of this section argued that 22.2% is a **floor**: a rename is
+the smallest semantic change in the family, a real policy varies structure and
+ordering too, so coupling found by the weakest probe must lower-bound the
+coupling a policy would meet. **That argument does not hold and is withdrawn
+rather than softened.**
 
-So a grader that rejects a rename is a grader that would reject the larger
-variations too, and coupling found by the weakest available probe is a **lower
-bound** on the coupling a real policy would meet. The stronger probes are not
-hypothetical — they are the other three operators — and the reason they produce
-no number is anchor availability, not a clean result.
+Its hidden step is that *smallest semantic change* implies *least test-visible*.
+Those are different properties and the second does not follow. **Test suites
+reference code by name** — they import symbols. A solution that restructures
+helpers, reorders operations or decomposes differently while preserving the
+public names and entry points may break **fewer** tests than a rename does,
+because the tests still import exactly what they imported before. On that
+reading `symbol_rename` is the *most* test-visible operator in the family, not
+the least.
 
-**The one assumption this rests on:** that graders coupled to a symbol's name are
-not *systematically less* coupled to structure, ordering and decomposition. If
-that assumption is wrong — if name-coupling were somehow the only form-coupling
-these suites have — 22.2% would be an estimate rather than a floor. Nothing in
-these records tests it, and it is stated here so it can be attacked.
+**The one piece of evidence in these records bears on the question, and it cuts
+against the floor reading.** The mechanism behind §3(a)'s 100% median is
+*import failure*: renaming a module-level symbol stops the test module importing.
+That is a channel a rename hits squarely and a structural rewrite that preserves
+entry points does not hit at all. Fifteen of the twenty-eight coupled tasks fail
+by exactly that route. So the dominant mechanism found here is one that is
+specific to renaming, which is a reason to expect the name channel to be
+*unusually* visible to a test suite rather than representative of the others.
+
+Nothing in this run measures the other channels. The three operators that would
+probe them produced **zero judged cases** — not a null result, an absence: they
+found no anchor to transform on 96–100% of the corpus (§5). So there is no
+measurement here of whether structural coupling is more common, less common or
+equally common than name coupling, and **the direction is unknown.**
+
+What the number is, stated without extrapolation:
+
+> **22.2% is a measured rate on one channel** — coupling to the identity of an
+> internal symbol — over the tasks where that channel could be probed and judged.
+> Its relationship to coupling on structure, ordering or decomposition is
+> unmeasured, and this work does not establish whether that relationship runs up
+> or down.
+
+That is a smaller claim than a floor. It is the one the records support.
 
 ---
 
@@ -363,6 +431,19 @@ witness. And a witness requires a failure block that *names the renamed symbol*:
 failure the attribution could not explain.** A future parser change can add
 witnesses by reading logs currently unread; it cannot invent one from a failure it
 already understands.
+
+**Two checks that looked for a defect and did not find one.** Reported because a
+reader wants to know they were run, not only that nothing turned up.
+
+- *Does any witness rest on a failure the attribution could not explain?* **No.**
+  `p2p_unattributed = 0` and `unknown = 0` across all 34 witness rows. Every
+  witness is carried by a failure block that names the renamed symbol.
+- *Is the judged/refused split outcome-dependent — could a task be refused
+  because of how its transform turned out?* **No, and it is structurally
+  impossible.** Every precondition is evaluated on the anchor *before* the
+  transform is applied and before any test runs, so a refusal cannot see the
+  outcome it would have produced. What a refusal removes from the denominator is
+  decided by the issue text and the shape of the source, never by the reward.
 
 **M3 reproduces inside M4 exactly.** All 50 M3 tasks are in the 500 and were
 re-run as part of it. Comparing every `(instance, operator, anchor)` triple:
@@ -744,9 +825,11 @@ them after seeing which ones failed is the same error as widening the parser.
   behaviour-preserving rewrite; it does not show how often a real policy would
   write that rewrite. §3(b) names the experiment that would measure it and why
   this project does not run it.
-- **Nothing that makes 22.2% an estimate rather than a floor** — the floor
-  argument in §3(c) rests on one stated assumption, and these records do not
-  test it.
+- **Nothing about coupling on any channel but the name.** Structure, ordering
+  and decomposition are unprobed here — the operators that would reach them
+  found no anchors — so whether coupling on those channels is more or less
+  common than the 22.2% measured on names is **unknown in both directions**.
+  §3(c) withdraws the argument that made 22.2% a floor, and says why.
 
 ### What a hub-side run would close
 
