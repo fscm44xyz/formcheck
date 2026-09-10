@@ -1,77 +1,71 @@
-{
-  "status": "VOID -- defect in the run, not a result",
-  "reason": "`rename_everywhere` selected files with a WORD-BOUNDARY grep and then replaced with a plain `str.replace`, so a superstring of the symbol was rewritten too. On django-14376 that turned `BaseDatabaseClient` into `BaseDatabaseClient__renamed` inside django/db/backends/mysql/client.py while django/db/backends/base/client.py -- which the word-boundary grep correctly did not select -- still defines `BaseDatabaseClient`. The mysql client then failed to import, the test module never loaded, and the run reported k=N and recovery=0 with `reported_after: 0`.",
-  "detected_by": "the recovery==0 stop rule. The control (rename alone must report zero graded node ids) CANNOT catch this: a broken rename reports zero too.",
-  "scope": "both rows below were produced by this apparatus and are void, including django-12155, whose numbers may happen to be right.",
-  "rows": [
-    {
-      "task": "django__django-12155",
-      "symbol": "parse_docstring",
-      "image": "swebench/sweb.eval.x86_64.django_1776_django-12155:latest",
-      "test_files": [
-        "./tests/admin_docs/test_utils.py"
-      ],
-      "renamed_files": [
-        "./django/contrib/admindocs/utils.py",
-        "./django/contrib/admindocs/views.py"
-      ],
-      "control_reported": 0,
-      "n_graded": 7,
-      "control_reward": 0.0,
-      "outcome": "measured",
-      "k": 4,
-      "recovery": 3,
-      "reward": 0.0,
-      "failing_after": [
-        "test_description_output (admin_docs.test_utils.TestUtils)",
-        "test_parse_docstring (admin_docs.test_utils.TestUtils)",
-        "test_parse_rst_with_docstring_no_leading_line_feed (admin_docs.test_utils.TestUtils)",
-        "test_title_output (admin_docs.test_utils.TestUtils)"
-      ],
-      "reported_after": 7
-    },
-    {
-      "task": "django__django-14376",
-      "symbol": "DatabaseClient",
-      "image": "swebench/sweb.eval.x86_64.django_1776_django-14376:latest",
-      "test_files": [
-        "./tests/dbshell/test_mysql.py",
-        "./tests/dbshell/test_oracle.py",
-        "./tests/dbshell/test_postgresql.py",
-        "./tests/dbshell/test_sqlite.py"
-      ],
-      "renamed_files": [
-        "./django/contrib/gis/db/backends/spatialite/client.py",
-        "./django/db/backends/dummy/base.py",
-        "./django/db/backends/mysql/base.py",
-        "./django/db/backends/mysql/client.py",
-        "./django/db/backends/mysql/creation.py",
-        "./django/db/backends/oracle/base.py",
-        "./django/db/backends/oracle/client.py",
-        "./django/db/backends/postgresql/base.py",
-        "./django/db/backends/postgresql/client.py",
-        "./django/db/backends/sqlite3/base.py",
-        "./django/db/backends/sqlite3/client.py"
-      ],
-      "control_reported": 0,
-      "n_graded": 9,
-      "control_reward": 0.0,
-      "outcome": "measured",
-      "k": 9,
-      "recovery": 0,
-      "reward": 0.0,
-      "failing_after": [
-        "test_basic_params_specified_in_settings (dbshell.test_mysql.MySqlDbshellCommandTestCase)",
-        "test_can_connect_using_sockets (dbshell.test_mysql.MySqlDbshellCommandTestCase)",
-        "test_crash_password_does_not_leak (dbshell.test_mysql.MySqlDbshellCommandTestCase)",
-        "test_fails_with_keyerror_on_incomplete_config (dbshell.test_mysql.MySqlDbshellCommandTestCase)",
-        "test_options_charset (dbshell.test_mysql.MySqlDbshellCommandTestCase)",
-        "test_options_non_deprecated_keys_preferred (dbshell.test_mysql.MySqlDbshellCommandTestCase)",
-        "test_options_override_settings_proper_values (dbshell.test_mysql.MySqlDbshellCommandTestCase)",
-        "test_parameters (dbshell.test_mysql.MySqlDbshellCommandTestCase)",
-        "test_ssl_certificate_is_added (dbshell.test_mysql.MySqlDbshellCommandTestCase)"
-      ],
-      "reported_after": 0
-    }
-  ]
-}
+[
+  {
+    "task": "django__django-12155",
+    "symbol": "parse_docstring",
+    "image": "swebench/sweb.eval.x86_64.django_1776_django-12155:latest",
+    "test_files": [
+      "./tests/admin_docs/test_utils.py"
+    ],
+    "renamed_files": [
+      "./django/contrib/admindocs/utils.py",
+      "./django/contrib/admindocs/views.py"
+    ],
+    "control_reported": 0,
+    "n_graded": 7,
+    "control_reward": 0.0,
+    "outcome": "measured",
+    "k": 4,
+    "recovery": 3,
+    "reward": 0.0,
+    "failing_after": [
+      "test_description_output (admin_docs.test_utils.TestUtils)",
+      "test_parse_docstring (admin_docs.test_utils.TestUtils)",
+      "test_parse_rst_with_docstring_no_leading_line_feed (admin_docs.test_utils.TestUtils)",
+      "test_title_output (admin_docs.test_utils.TestUtils)"
+    ],
+    "reported_after": 7
+  },
+  {
+    "task": "django__django-14376",
+    "symbol": "DatabaseClient",
+    "image": "swebench/sweb.eval.x86_64.django_1776_django-14376:latest",
+    "test_files": [
+      "./tests/dbshell/test_mysql.py",
+      "./tests/dbshell/test_oracle.py",
+      "./tests/dbshell/test_postgresql.py",
+      "./tests/dbshell/test_sqlite.py"
+    ],
+    "renamed_files": [
+      "./django/contrib/gis/db/backends/spatialite/client.py",
+      "./django/db/backends/dummy/base.py",
+      "./django/db/backends/mysql/base.py",
+      "./django/db/backends/mysql/client.py",
+      "./django/db/backends/mysql/creation.py",
+      "./django/db/backends/oracle/base.py",
+      "./django/db/backends/oracle/client.py",
+      "./django/db/backends/postgresql/base.py",
+      "./django/db/backends/postgresql/client.py",
+      "./django/db/backends/sqlite3/base.py",
+      "./django/db/backends/sqlite3/client.py"
+    ],
+    "control_reported": 0,
+    "n_graded": 9,
+    "control_reward": 0.0,
+    "outcome": "measured",
+    "k": 9,
+    "recovery": 0,
+    "reward": 0.0,
+    "failing_after": [
+      "test_basic_params_specified_in_settings (dbshell.test_mysql.MySqlDbshellCommandTestCase)",
+      "test_can_connect_using_sockets (dbshell.test_mysql.MySqlDbshellCommandTestCase)",
+      "test_crash_password_does_not_leak (dbshell.test_mysql.MySqlDbshellCommandTestCase)",
+      "test_fails_with_keyerror_on_incomplete_config (dbshell.test_mysql.MySqlDbshellCommandTestCase)",
+      "test_options_charset (dbshell.test_mysql.MySqlDbshellCommandTestCase)",
+      "test_options_non_deprecated_keys_preferred (dbshell.test_mysql.MySqlDbshellCommandTestCase)",
+      "test_options_override_settings_proper_values (dbshell.test_mysql.MySqlDbshellCommandTestCase)",
+      "test_parameters (dbshell.test_mysql.MySqlDbshellCommandTestCase)",
+      "test_ssl_certificate_is_added (dbshell.test_mysql.MySqlDbshellCommandTestCase)"
+    ],
+    "reported_after": 7
+  }
+]
