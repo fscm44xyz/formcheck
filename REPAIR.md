@@ -128,11 +128,10 @@ Two consequences worth keeping separate:
   computes the same thing for these inputs, checked before the repair was
   written.
 
-If this holds elsewhere, the headline number's *blast radius* figure — "in 15 of
-28 tasks every graded test fails" (`README.md`) — is largely a statement about
-module-level imports rather than about how much of a suite is really coupled.
-That would be worth knowing and is not yet known: it needs the same
-`import_local` measurement on more of the 19 import-shape tasks.
+`REPORT.md` §3(a) and the README now carry an amendment stating this
+distinction — reward damage (measured, on all 28) versus extent of genuine
+coupling (not measured) — with the table above as its evidence and n = 1 marked
+as n = 1. No number in either document changed.
 
 **Not repaired, and reported instead:** `_coord_matrix`, `_cdot` and
 `_arith_oper` sit in the same import with the identical latent coupling.
@@ -234,3 +233,36 @@ And one on the repair itself: **node ids may not change.** `test_failed` counts 
 node id absent from the log as a failure, so renaming a test, its class, its
 module or its `parametrize` ids pins the reward at 0.0 regardless of what the
 test does (`repair/CONTEXT.md` §3.3).
+
+---
+
+## Open item 1 — the attributable-to-one-import fraction across the 15
+
+**The strongest second number available at €0 and with no inference. Not started.**
+
+`REPORT.md` §3(a) reports that 15 of the 28 coupled tasks lose their entire
+graded suite. `astropy-12907` shows the mechanism can be a single module-scope
+import line, with 14 of its 15 failures collateral — but that is n = 1, and the
+split is unmeasured on the other 14.
+
+**The measurement.** For each of the 15 all-fail tasks, build the `import_local`
+variant — move the renamed symbol's import out of module scope and into the test
+functions that actually use it, changing nothing else — and grade it under the
+rename. The fraction of failures that come back is the fraction attributable to
+the import line rather than to tests that genuinely reference the symbol.
+
+**Why it is worth doing.** It costs 15 container runs, uses the overlay surface
+and the gate that already exist, involves no model and no judgement call, and it
+answers the question the headline figure raises but cannot settle. It would turn
+"the median coupled task loses 100% of its suite" from one number into two: how
+much signal is destroyed, and how much of a suite is really coupled.
+
+**What it is not.** It is not a repair, and it must not be reported as one: the
+`import_local` variant still scores 0.0 on every task where any test genuinely
+names the symbol. It is a decomposition of an existing number, and the honest
+framing is that it makes the existing number *more* interpretable, not smaller.
+
+**One thing to fix first.** The 15 include 8 django tasks, and django's runner
+reports import failure as a synthetic `unittest.loader._FailedTest` with no real
+node ids in the status map. Whether the variant is even measurable there is the
+question `repair-M0d` exists to answer.

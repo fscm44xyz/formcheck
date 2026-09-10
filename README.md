@@ -8,6 +8,14 @@ module-level symbol stops the test module importing, so the suite does not
 partially fail — it does not run, and the reward carries no information about
 whether the solution works.
 
+That figure measures **reward damage** — how much graded signal a rename
+destroys. It is not a measurement of how many of a suite's tests actually
+reference the symbol, and it should not be read as one; at module scope a single
+import line can take down tests that never mention the name. Measured once, on
+`astropy-12907`: 14 of its 15 failures were attributable to one import line, and
+the reward is 0.0 either way. n = 1 for the mechanism, unmeasured on the other 14
+— see [REPORT.md §3a](REPORT.md#3-what-changes-for-a-customer).
+
 Full report: **[REPORT.md](REPORT.md)**.
 
 ## What formcheck does

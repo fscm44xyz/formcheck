@@ -358,6 +358,54 @@ For a customer this is the difference between a grader that is slightly noisy an
 one that returns 0.0 on a fully correct solution because a helper has a different
 name. Fifteen of these twenty-eight are the second kind.
 
+#### What this measures, and what it does not — an amendment
+
+**Every number above stands and none of them moves.** The tests do fail, the
+grader does return 0.0, and 15 of 28 tasks do lose their entire graded suite. The
+amendment is about what that quantity is evidence *for*.
+
+It measures **reward damage**: how much of a task's graded signal is destroyed by
+a behaviour-preserving rename. That is measured, on all 28, and it is the number
+a customer cares about.
+
+It does **not** measure **the extent of genuine coupling**: how many of a task's
+tests actually reference the renamed symbol. Those two are equal only if every
+failing test names the symbol itself, and at module scope they are not equal at
+all — one import line can carry an entire module's worth of tests down with it.
+The report never claimed the second quantity. It is being stated here because the
+first reads naturally as the second, and that reading is not supported.
+
+**The mechanism, measured once.** On `astropy/astropy-12907` — 15 of 15 in the
+table above — `astropy/modeling/tests/test_separable.py` reaches production code
+through a single module-level import naming four private symbols, and `_cstack`
+is used by exactly **one** of the module's six test functions. Both FAIL_TO_PASS
+tests already reach the code through the module's exported API and are collateral.
+A test variant that changes nothing except *where* `_cstack` is imported —
+dropped from the module import, imported inside the one test that uses it —
+separates the two quantities under the same rename:
+
+| variant, under the rename | F2P | P2P | reward |
+|---|---|---|---|
+| the shipped test module | 0/2 | 0/13 | 0.0 |
+| `_cstack` imported inside its one test | **2/2** | **12/13** | 0.0 |
+| the test entering through public API | 2/2 | 13/13 | 1.0 |
+
+Fourteen of the fifteen failures were attributable to the import line. One was
+not: `test_cstack` is a unit test whose *subject* is the renamed symbol, and no
+placement of an import saves a test that calls `_cstack` by name. Note the middle
+row still scores **0.0** — reward damage is total either way, which is precisely
+why the reward cannot distinguish these two situations and why the distinction
+had to be measured separately.
+
+**This is n = 1 for the mechanism.** The split has not been measured on the other
+14 all-fail tasks, and nothing here says how it distributes. It is entirely
+possible that some of those suites are coupled test-by-test rather than through
+one import. The measurement that would settle it is cheap, needs no inference and
+is logged as an open item in `REPAIR.md`.
+
+Evidence: `repair/M0C_RESULT.md`, `repair/m0c_gate_result.json`,
+`repair/test_repair_m0c.py::test_the_blast_radius_was_almost_entirely_the_import_line`.
+
 ### (b) Encounter rate, not measurable here
 
 What this does **not** give is how often a real policy is actually penalised.
