@@ -8,6 +8,12 @@
       "xarray/tests/test_coding.py::test_decode_signed_from_unsigned[8]"
     ],
     "f2p_pass": 0,
+    "failing_ids": [
+      "xarray/tests/test_coding.py::test_decode_signed_from_unsigned[1]",
+      "xarray/tests/test_coding.py::test_decode_signed_from_unsigned[2]",
+      "xarray/tests/test_coding.py::test_decode_signed_from_unsigned[4]",
+      "xarray/tests/test_coding.py::test_decode_signed_from_unsigned[8]"
+    ],
     "graded_ids_present": 25,
     "n_parsed": 25,
     "names_symbol_in_log": false,
@@ -25,6 +31,12 @@
       "xarray/tests/test_coding.py::test_decode_signed_from_unsigned[8]"
     ],
     "f2p_pass": 0,
+    "failing_ids": [
+      "xarray/tests/test_coding.py::test_decode_signed_from_unsigned[1]",
+      "xarray/tests/test_coding.py::test_decode_signed_from_unsigned[2]",
+      "xarray/tests/test_coding.py::test_decode_signed_from_unsigned[4]",
+      "xarray/tests/test_coding.py::test_decode_signed_from_unsigned[8]"
+    ],
     "graded_ids_present": 25,
     "n_parsed": 25,
     "names_symbol_in_log": false,
@@ -41,6 +53,11 @@
       "xarray/tests/test_coding.py::test_decode_signed_from_unsigned[8]"
     ],
     "f2p_pass": 1,
+    "failing_ids": [
+      "xarray/tests/test_coding.py::test_decode_signed_from_unsigned[2]",
+      "xarray/tests/test_coding.py::test_decode_signed_from_unsigned[4]",
+      "xarray/tests/test_coding.py::test_decode_signed_from_unsigned[8]"
+    ],
     "graded_ids_present": 25,
     "n_parsed": 25,
     "names_symbol_in_log": false,
@@ -53,6 +70,7 @@
     "f2p_fail": 0,
     "f2p_failing": [],
     "f2p_pass": 4,
+    "failing_ids": [],
     "graded_ids_present": 25,
     "n_parsed": 25,
     "names_symbol_in_log": false,
@@ -70,6 +88,16 @@
       "xarray/tests/test_coding.py::test_decode_signed_from_unsigned[8]"
     ],
     "f2p_pass": 0,
+    "failing_ids": [
+      "xarray/tests/test_coding.py::test_decode_signed_from_unsigned[1]",
+      "xarray/tests/test_coding.py::test_decode_signed_from_unsigned[2]",
+      "xarray/tests/test_coding.py::test_decode_signed_from_unsigned[4]",
+      "xarray/tests/test_coding.py::test_decode_signed_from_unsigned[8]",
+      "xarray/tests/test_coding.py::test_decode_unsigned_from_signed[1]",
+      "xarray/tests/test_coding.py::test_decode_unsigned_from_signed[2]",
+      "xarray/tests/test_coding.py::test_decode_unsigned_from_signed[4]",
+      "xarray/tests/test_coding.py::test_decode_unsigned_from_signed[8]"
+    ],
     "graded_ids_present": 25,
     "n_parsed": 25,
     "names_symbol_in_log": true,
@@ -92,6 +120,12 @@
       "xarray/tests/test_coding.py::test_decode_signed_from_unsigned[8]"
     ],
     "f2p_pass": 0,
+    "failing_ids": [
+      "xarray/tests/test_coding.py::test_decode_signed_from_unsigned[1]",
+      "xarray/tests/test_coding.py::test_decode_signed_from_unsigned[2]",
+      "xarray/tests/test_coding.py::test_decode_signed_from_unsigned[4]",
+      "xarray/tests/test_coding.py::test_decode_signed_from_unsigned[8]"
+    ],
     "graded_ids_present": 25,
     "n_parsed": 25,
     "names_symbol_in_log": false,
@@ -109,6 +143,12 @@
       "xarray/tests/test_coding.py::test_decode_signed_from_unsigned[8]"
     ],
     "f2p_pass": 0,
+    "failing_ids": [
+      "xarray/tests/test_coding.py::test_decode_signed_from_unsigned[1]",
+      "xarray/tests/test_coding.py::test_decode_signed_from_unsigned[2]",
+      "xarray/tests/test_coding.py::test_decode_signed_from_unsigned[4]",
+      "xarray/tests/test_coding.py::test_decode_signed_from_unsigned[8]"
+    ],
     "graded_ids_present": 25,
     "n_parsed": 25,
     "names_symbol_in_log": false,
@@ -125,6 +165,11 @@
       "xarray/tests/test_coding.py::test_decode_signed_from_unsigned[8]"
     ],
     "f2p_pass": 1,
+    "failing_ids": [
+      "xarray/tests/test_coding.py::test_decode_signed_from_unsigned[2]",
+      "xarray/tests/test_coding.py::test_decode_signed_from_unsigned[4]",
+      "xarray/tests/test_coding.py::test_decode_signed_from_unsigned[8]"
+    ],
     "graded_ids_present": 25,
     "n_parsed": 25,
     "names_symbol_in_log": false,
@@ -137,6 +182,7 @@
     "f2p_fail": 0,
     "f2p_failing": [],
     "f2p_pass": 4,
+    "failing_ids": [],
     "graded_ids_present": 25,
     "n_parsed": 25,
     "names_symbol_in_log": false,
@@ -149,6 +195,7 @@
     "f2p_fail": 0,
     "f2p_failing": [],
     "f2p_pass": 4,
+    "failing_ids": [],
     "graded_ids_present": 25,
     "n_parsed": 25,
     "names_symbol_in_log": false,

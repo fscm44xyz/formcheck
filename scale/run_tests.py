@@ -19,6 +19,9 @@ One file per defect class that has actually cost a run:
     ../repair/test_repair_m0d.py
                        django's runner, and a repair that passes both
                        conditions and is still weaker                (repair-M0d)
+    ../repair/test_repair_m0e.py
+                       the second django task: C3 fails, and why a
+                       count-based C3 could not have seen it        (repair-M0e)
 
 Deliberately NOT covered here, because they need a container: the M0 gate
 (`scale/m0_run.py`, a 3.8 GB pull) and anything exercising a real image. Those
@@ -41,7 +44,8 @@ SUITES = ["test_scope.py", "test_rotation.py", "test_partition.py",
           os.path.join("..", "repair", "test_repair_m0a.py"),
           os.path.join("..", "repair", "test_repair_m0b.py"),
           os.path.join("..", "repair", "test_repair_m0c.py"),
-          os.path.join("..", "repair", "test_repair_m0d.py")]
+          os.path.join("..", "repair", "test_repair_m0d.py"),
+          os.path.join("..", "repair", "test_repair_m0e.py")]
 
 
 def main():

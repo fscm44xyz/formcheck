@@ -1463,3 +1463,52 @@ reason it did not silently shift a count.
 
 `REPAIR.md` (candidate pattern 2); `repair/scan/test_patch_origin.py`;
 `repair/scan/RESULT.md`.
+
+---
+
+## 30. C3 reported "no drift" using a comparison that could not have seen drift
+
+**Bug.** C3 — added in entry 28, promoted to a first-class condition after it — was
+implemented as a comparison of **FAIL_TO_PASS pass/fail counts** between the
+original and the repaired test. That is sufficient only when the coupled test
+happens to be a F2P test.
+
+It was, on `django-11179`, which is why the implementation looked adequate: the
+condition was written against the one case that had produced drift, and that case
+could not distinguish "compares the right thing" from "compares a proxy that
+happened to move".
+
+On `django-11433` the coupled test is one of **142 PASS_TO_PASS** tests. Under the
+deciding mutant its outcome changes, the F2P breakdown does not move at all
+(`0/1` under both variants), and the P2P failure count moves from 17 to 16 —
+one, inside a number the mutant itself moves by seventeen. **The old C3 would have
+printed "no detection drift" on a repair that had just stopped rejecting the
+mutant it existed to reject**, and the gate would have returned PASS.
+
+`grade_log`'s `p2p_failing` is no use for this either: it is truncated to ten
+entries (entry 27's sibling concern), so the report cannot say *which* tests
+failed on any task with more than ten failures.
+
+**Rule.** C3 recomputes the status map from each run's own log and compares the
+exact **set** of graded node ids that did not pass. Sets, not counts; node ids,
+not aggregates; recomputed, not read from the truncated field. The gate now also
+**fails** on drift rather than printing it — entry 28 made it report-only on the
+ground that "the reward is what the reward is", which was right while drift was an
+observation and wrong once it became a condition.
+
+**What the fix cost, and what it confirmed.** All three earlier gates were re-run
+under the new comparison. `xarray-4966` and `astropy-12907` come back
+`C3 OK -- no detection drift` with **every pre-existing value unchanged**, so the
+two shipped repairs survive a check strictly stronger than the one they were
+accepted under. `django-11179` comes back `C3 FAIL`, naming
+`test_fast_delete_instance_set_pk_none` — the same finding entry 28 recorded in
+prose, now produced by the gate as a verdict rather than a printed remark.
+
+**Family.** A check reporting a verdict for a reason invisible in its own output —
+here the check *is* the reason. C3's whole purpose is to see what the reward
+cannot, and it was reading a coarser aggregate of the same run. Written against
+one case and generalised without a case that could falsify it, which is
+`CHANGES.md` 29 in a different place.
+
+`repair/gate.py` (`failing_ids`, `report`); `repair/m0e_gate.py`;
+`repair/M0E_RESULT.md`; `repair/test_repair_m0e.py::test_c3_set_comparison_is_what_catches_this`.

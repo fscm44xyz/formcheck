@@ -13,8 +13,9 @@ a rule until more than one case has produced it.
 ## Candidate pattern 1 — the coupling may live in how the test *reaches* the
 ## code, not in what it *asserts*
 
-**Status: held on 2 of 3. It failed on the third for a stated, checkable reason
-— the pattern now has a known boundary rather than only supporting cases.**
+**Status: held on 2 of 4. Two known boundaries, both stated and checkable — one
+where the pattern cannot apply, one where applying it silently weakens the
+test.**
 
 The plan for `pydata__xarray-4966` was to rewrite the coupled assertions. When
 the tests were actually read, the assertions turned out to be fine:
@@ -89,11 +90,15 @@ public entry point reaching the same behaviour with the same discriminating
 power. That is a property of the library, not of the coupling. The remaining
 caveats:
 
-* **django is half the corpus and one task of it has been tried.** The runner is
-  *not* the obstacle — `repair-M0d` established that the positive control works,
-  that the log distinguishes absence from failure, and that both conditions stay
-  evaluable. The one django task attempted did not repair cleanly, for a reason
-  that is not django-specific. The other 13 are untried.
+* **django is half the corpus; two tasks of it have been tried and neither
+  yielded a shippable repair.** The runner is *not* the obstacle — `repair-M0d`
+  established that the positive control works, that the log distinguishes absence
+  from failure, and that all three conditions stay evaluable, and `repair-M0e`
+  reproduced that. `django-11179` is PRECONDITION, `django-11433` is
+  HOLLOWING-OUT; both pass C1 and C2 and fail C3. Neither failure is
+  django-specific — both are graded suites that unit-test internal helpers, a
+  property of the tests rather than the runner. The other 12 are untried, and 4
+  of them are the module-attribute shape rather than this one.
 * **Both cases were `symbol_rename`.** It is the only operator producing
   witnesses, so this is not a limitation of the sample — but the pattern is a
   claim about renames, not about coupling in general.
@@ -113,7 +118,7 @@ Evidence: `repair/M0B_RESULT.md`, `repair/M0C_RESULT.md`, `repair/gate.py`,
 ## Candidate pattern 2 — at module scope, blast radius is unrelated to how many
 ## tests are actually coupled
 
-**Status: measured twice, in two repos and two test runners. n = 2.**
+**Status: measured three times, in three repos and two test runners. n = 3.**
 
 `test_separable.py` reaches production code through one module-level import:
 
@@ -160,8 +165,11 @@ patch, used by exactly one of the module's 42 test methods:
 | `import_local` | 0/1 | **40/40** | 0.0 |
 | `repaired` | 1/1 | 40/40 | 1.0 |
 
-**40 of 41 failures were the import line**, against astropy's 14 of 15. Two
-repos, two runners, same shape.
+**40 of 41 failures were the import line**, against astropy's 14 of 15. And on
+`django__django-11433`, **142 of 143** — one module-scope import naming
+`construct_instance`, used by one of the module's 144 test methods, with the
+task's only FAIL_TO_PASS test pure collateral. Three tasks, three repos, two
+runners, same shape.
 
 *Correction.* This section previously added that on both tasks the coupling was
 introduced by the benchmark's own test patch. That is true of `django-11179` and
@@ -269,7 +277,7 @@ replaced.** All three are required of every repair from here on.
 |---|---|---|
 | **C1** | the renamed gold scores **1.0** — the coupling is gone | the task reward |
 | **C2** | genuinely broken solutions still score **0.0** — the suite still rejects wrong programs | the task reward |
-| **C3** | **no detection drift** — every mutant's F2P breakdown is identical under the original and the repaired test | the per-test breakdown |
+| **C3** | **no detection drift** — for every mutant, the repaired test rejects exactly the set of graded tests the original rejected | the per-node-id outcome set |
 
 No two of them are sufficient. A test asserting nothing passes C1 and fails C2;
 the original coupled test passes C2 and fails C1; and a repair that guts one test
@@ -278,10 +286,21 @@ which is what C3 exists to catch. C1 and C2 are properties of the **suite**; C3
 is a property of the **test**, and that is exactly why the first two cannot
 substitute for it.
 
-C3 does not flip the gate's verdict on its own. The reward is what the reward is,
-and reporting drift as a failure would be its own inversion — the suite really did
-reject the mutant. It is reported separately, and a repair that drifts is not
-shipped without saying so.
+**C3 fails the gate.** It was report-only when it was first added, on the ground
+that the reward is what the reward is and the suite really did reject the mutant.
+That was the wrong call once C3 became a condition rather than an observation: a
+repair that silently loses detection is not a repair, and a gate that prints the
+loss and then returns PASS is exactly the shape this project keeps finding — a
+check that reports a verdict for a reason its verdict does not carry.
+
+**C3 compares outcome sets, not counts.** The first implementation compared
+FAIL_TO_PASS pass/fail counts, which is sufficient only when the coupled test
+happens to be a F2P test. That was true on `django-11179` and false on
+`django-11433`, where the coupled test is one of 142 PASS_TO_PASS tests and its
+outcome moves `p2p_fail` by one inside a number other mutants move by dozens.
+C3 now recomputes the status map from each run's log — `grade_log` truncates
+`p2p_failing` to ten entries and cannot be used for this — and compares the exact
+set of graded node ids that did not pass.
 
 **`xarray-4966` and `astropy-12907` were confirmed clean by C3 after the fact.**
 Both were accepted before the condition existed; re-running their gates under it
@@ -364,6 +383,56 @@ argued for.
 n = 1. Nothing about it was django-specific.
 
 Evidence: `repair/M0D_RESULT.md`, `repair/test_repair_m0d.py`.
+
+---
+
+## Outcome class — HOLLOWING-OUT
+
+**Status: one task, `django__django-11433`. Detected by C3, invisible to C1, C2
+and formcheck.**
+
+The coupled line *is* a route to the behaviour under test, and a public route
+exists — so candidate pattern 1 appears to apply. It does not, because the public
+route reaches the same **assertion** through different **code**.
+
+```python
+# coupled: cleaned_data holds 'name'; the fields=() filter suppresses it
+form = modelform_factory(Person, fields="__all__")({'name': 'John Doe'})
+instance = construct_instance(form, Person(), fields=())
+self.assertEqual(instance.name, '')
+
+# public route: the form has no fields, so cleaned_data is EMPTY and the
+# filter never runs -- the field is skipped one branch earlier
+form = modelform_factory(Person, fields=())({'name': 'John Doe'})
+instance = form.save(commit=False)
+self.assertEqual(instance.name, '')
+```
+
+Both give `name == ''`. Only the first exercises the `fields` filter. The mutant
+`bug_fieldfilter` inverts that filter: the original test rejects it, the repaired
+test does not, and the task reward is 0.0 under both because seventeen other
+graded tests reject it too.
+
+**The recognition test.** A repair is a hollowing-out when it passes C1 and C2 and
+there exists a behavioural mutant whose rejection set loses the coupled test.
+That is C3, and it is the only one of the four checks — C1, C2, C3, formcheck —
+that can see it.
+
+**Why it is distinct from PRECONDITION.** In PRECONDITION coupling no substitute
+exists and every candidate is provably vacuous, so the repair is *unavailable*. In
+hollowing-out a substitute exists, passes every reward-level check, and is
+*wrong*. The first is a wall; the second is a trap, and it is the more dangerous
+of the two because the gate that existed before M0d would have shipped it.
+
+**How to tell them apart before running anything.** Ask what the public route
+makes true. If it reaches the same assertion by the same code, pattern 1 applies.
+If it reaches the same assertion by different code, expect hollowing-out — and the
+way to check is to name the mutant that distinguishes the two paths and put it in
+the gate. On `django-11433` that prediction was made from a probe measuring
+`cleaned_data` under both routes, before the repair was written, and C3 confirmed
+it.
+
+Evidence: `repair/M0E_RESULT.md`, `repair/test_repair_m0e.py`.
 
 ---
 

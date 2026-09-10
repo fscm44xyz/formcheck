@@ -142,7 +142,31 @@ class Gate:
         r = self.sh(f"export PATH={os.path.dirname(self.python)}:$PATH "
                     f"&& cd {WORKDIR} && {full}")
         log = "+ " + full + "\n" + (r.stdout or "") + "\n" + (r.stderr or "")
-        return log, grade_log(log, meta), self.graded_ids_present(log, meta, cmd)
+        return (log, grade_log(log, meta),
+                self.graded_ids_present(log, meta, cmd),
+                self.failing_ids(log, meta, cmd))
+
+    @staticmethod
+    def failing_ids(log, meta, cmd):
+        """Exactly which graded node ids did not pass, as a sorted list.
+
+        C3 compares these SETS between the original and the repaired test. It
+        used to compare F2P pass/fail counts, which is only sufficient when the
+        coupled test happens to be a FAIL_TO_PASS test -- true on
+        `django-11179`, false on `django-11433`, where the coupled test is one of
+        142 PASS_TO_PASS tests and a change in its outcome moves `p2p_fail` by
+        one inside a number that other mutants move by dozens.
+
+        Counts also cannot say WHICH test changed. `grade_log` truncates
+        `p2p_failing` to ten entries, so the list on the report is not usable for
+        this either; the status map is not truncated and is recomputed here from
+        the log.
+        """
+        from swebench.harness.log_parsers import MAP_REPO_TO_PARSER
+        from swebench.harness.grading import test_passed
+        status_map = MAP_REPO_TO_PARSER[meta["repo"]](log.split(cmd)[-1], None)
+        graded = list(meta["FAIL_TO_PASS"]) + list(meta["PASS_TO_PASS"])
+        return sorted(t for t in graded if not test_passed(t, status_map))
 
     @staticmethod
     def graded_ids_present(log, meta, cmd):
@@ -200,7 +224,7 @@ class Gate:
             for test in self.test_variants:
                 for solution in self.solutions:
                     self.build(solution, test)
-                    log, g, present = self.graded(spec)
+                    log, g, present, failing = self.graded(spec)
                     old = self.rename[0]
                     results[f"{test}/{solution}"] = {
                         "reward": g["reward"], "f2p_pass": g["f2p_pass"],
@@ -209,6 +233,7 @@ class Gate:
                         "f2p_failing": g["f2p_failing"],
                         "p2p_failing": g["p2p_failing"],
                         "graded_ids_present": present,
+                        "failing_ids": failing,
                         "names_symbol_in_log": old in log and (
                             "has no attribute" in log
                             or "cannot import name" in log),
@@ -285,23 +310,24 @@ class Gate:
         # flip the gate on its own -- the reward is what the reward is.
         drift = []
         for name in self.mutants:
-            base = results[f"original/{name}"]
-            rep = results[f"repaired/{name}"]
-            if (base["f2p_pass"], base["f2p_fail"]) != (rep["f2p_pass"],
-                                                        rep["f2p_fail"]):
-                drift.append((name, base, rep))
+            base = set(results[f"original/{name}"]["failing_ids"])
+            rep = set(results[f"repaired/{name}"]["failing_ids"])
+            if base != rep:
+                drift.append((name, sorted(base - rep), sorted(rep - base)))
+        print()
         if drift:
-            print("\n  !! DETECTION DRIFT -- the repaired test catches less than "
-                  "the original:")
-            for name, base, rep in drift:
-                print(f"       {name:16s} F2P {base['f2p_pass']}/"
-                      f"{base['f2p_pass'] + base['f2p_fail']} -> "
-                      f"{rep['f2p_pass']}/{rep['f2p_pass'] + rep['f2p_fail']}"
-                      "   (the suite still scores 0.0; the repaired test does "
-                      "not do it)")
+            ok = False
+            print("  C3  FAIL -- DETECTION DRIFT: the repaired test does not "
+                  "reject what the original rejected")
+            for name, lost, gained in drift:
+                print(f"      {name}:")
+                for t in lost:
+                    print(f"        no longer fails: {t}")
+                for t in gained:
+                    print(f"        newly fails:     {t}")
         else:
-            print("\n  detection drift: none -- every mutant's F2P breakdown is "
-                  "identical under the original and repaired tests")
+            print("  C3  OK -- no detection drift: for every mutant the repaired "
+                  "test rejects exactly the set the original rejected")
 
         print(f"\n  -> {'PASS' if ok else 'FAIL'}    {self.out}")
         return 0 if ok else 1

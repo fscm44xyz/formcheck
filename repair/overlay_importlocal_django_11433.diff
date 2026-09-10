@@ -1,0 +1,20 @@
+diff --git a/tests/model_forms/tests.py b/tests/model_forms/tests.py
+--- a/tests/model_forms/tests.py
++++ b/tests/model_forms/tests.py
+@@ -12,7 +12,7 @@
+ from django.db import connection, models
+ from django.db.models.query import EmptyQuerySet
+ from django.forms.models import (
+-    ModelFormMetaclass, construct_instance, fields_for_model, model_to_dict,
++    ModelFormMetaclass, fields_for_model, model_to_dict,
+     modelform_factory,
+ )
+ from django.template import Context, Template
+@@ -204,6 +204,7 @@
+         """
+         No fields should be set on a model instance if construct_instance receives fields=().
+         """
++        from django.forms.models import construct_instance
+         form = modelform_factory(Person, fields="__all__")({'name': 'John Doe'})
+         self.assertTrue(form.is_valid())
+         instance = construct_instance(form, Person(), fields=())

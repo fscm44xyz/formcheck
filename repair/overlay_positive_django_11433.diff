@@ -1,0 +1,11 @@
+diff --git a/tests/model_forms/tests.py b/tests/model_forms/tests.py
+--- a/tests/model_forms/tests.py
++++ b/tests/model_forms/tests.py
+@@ -210,6 +210,7 @@
+         self.assertEqual(instance.name, '')
+ 
+     def test_blank_with_null_foreign_key_field(self):
++        assert False, "overlay landed"
+         """
+         #13776 -- ModelForm's with models having a FK set to null=False and
+         required=False should be valid.

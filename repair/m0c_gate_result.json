@@ -5,6 +5,11 @@
       "astropy/modeling/tests/test_separable.py::test_separable[compound_model9-result9]"
     ],
     "f2p_pass": 1,
+    "failing_ids": [
+      "astropy/modeling/tests/test_separable.py::test_separable[compound_model7-result7]",
+      "astropy/modeling/tests/test_separable.py::test_separable[compound_model8-result8]",
+      "astropy/modeling/tests/test_separable.py::test_separable[compound_model9-result9]"
+    ],
     "graded_ids_present": 15,
     "n_parsed": 15,
     "names_symbol_in_log": false,
@@ -23,6 +28,10 @@
       "astropy/modeling/tests/test_separable.py::test_separable[compound_model9-result9]"
     ],
     "f2p_pass": 0,
+    "failing_ids": [
+      "astropy/modeling/tests/test_separable.py::test_separable[compound_model6-result6]",
+      "astropy/modeling/tests/test_separable.py::test_separable[compound_model9-result9]"
+    ],
     "graded_ids_present": 15,
     "n_parsed": 15,
     "names_symbol_in_log": false,
@@ -38,6 +47,17 @@
       "astropy/modeling/tests/test_separable.py::test_separable[compound_model9-result9]"
     ],
     "f2p_pass": 0,
+    "failing_ids": [
+      "astropy/modeling/tests/test_separable.py::test_cstack",
+      "astropy/modeling/tests/test_separable.py::test_separable[compound_model0-result0]",
+      "astropy/modeling/tests/test_separable.py::test_separable[compound_model2-result2]",
+      "astropy/modeling/tests/test_separable.py::test_separable[compound_model3-result3]",
+      "astropy/modeling/tests/test_separable.py::test_separable[compound_model5-result5]",
+      "astropy/modeling/tests/test_separable.py::test_separable[compound_model6-result6]",
+      "astropy/modeling/tests/test_separable.py::test_separable[compound_model7-result7]",
+      "astropy/modeling/tests/test_separable.py::test_separable[compound_model8-result8]",
+      "astropy/modeling/tests/test_separable.py::test_separable[compound_model9-result9]"
+    ],
     "graded_ids_present": 15,
     "n_parsed": 15,
     "names_symbol_in_log": false,
@@ -58,6 +78,7 @@
     "f2p_fail": 0,
     "f2p_failing": [],
     "f2p_pass": 2,
+    "failing_ids": [],
     "graded_ids_present": 15,
     "n_parsed": 15,
     "names_symbol_in_log": false,
@@ -70,6 +91,9 @@
     "f2p_fail": 0,
     "f2p_failing": [],
     "f2p_pass": 2,
+    "failing_ids": [
+      "astropy/modeling/tests/test_separable.py::test_cstack"
+    ],
     "graded_ids_present": 15,
     "n_parsed": 15,
     "names_symbol_in_log": true,
@@ -86,6 +110,11 @@
       "astropy/modeling/tests/test_separable.py::test_separable[compound_model9-result9]"
     ],
     "f2p_pass": 1,
+    "failing_ids": [
+      "astropy/modeling/tests/test_separable.py::test_separable[compound_model7-result7]",
+      "astropy/modeling/tests/test_separable.py::test_separable[compound_model8-result8]",
+      "astropy/modeling/tests/test_separable.py::test_separable[compound_model9-result9]"
+    ],
     "graded_ids_present": 15,
     "n_parsed": 15,
     "names_symbol_in_log": false,
@@ -104,6 +133,10 @@
       "astropy/modeling/tests/test_separable.py::test_separable[compound_model9-result9]"
     ],
     "f2p_pass": 0,
+    "failing_ids": [
+      "astropy/modeling/tests/test_separable.py::test_separable[compound_model6-result6]",
+      "astropy/modeling/tests/test_separable.py::test_separable[compound_model9-result9]"
+    ],
     "graded_ids_present": 15,
     "n_parsed": 15,
     "names_symbol_in_log": false,
@@ -119,6 +152,17 @@
       "astropy/modeling/tests/test_separable.py::test_separable[compound_model9-result9]"
     ],
     "f2p_pass": 0,
+    "failing_ids": [
+      "astropy/modeling/tests/test_separable.py::test_cstack",
+      "astropy/modeling/tests/test_separable.py::test_separable[compound_model0-result0]",
+      "astropy/modeling/tests/test_separable.py::test_separable[compound_model2-result2]",
+      "astropy/modeling/tests/test_separable.py::test_separable[compound_model3-result3]",
+      "astropy/modeling/tests/test_separable.py::test_separable[compound_model5-result5]",
+      "astropy/modeling/tests/test_separable.py::test_separable[compound_model6-result6]",
+      "astropy/modeling/tests/test_separable.py::test_separable[compound_model7-result7]",
+      "astropy/modeling/tests/test_separable.py::test_separable[compound_model8-result8]",
+      "astropy/modeling/tests/test_separable.py::test_separable[compound_model9-result9]"
+    ],
     "graded_ids_present": 15,
     "n_parsed": 15,
     "names_symbol_in_log": false,
@@ -139,6 +183,7 @@
     "f2p_fail": 0,
     "f2p_failing": [],
     "f2p_pass": 2,
+    "failing_ids": [],
     "graded_ids_present": 15,
     "n_parsed": 15,
     "names_symbol_in_log": false,
@@ -154,6 +199,23 @@
       "astropy/modeling/tests/test_separable.py::test_separable[compound_model9-result9]"
     ],
     "f2p_pass": 0,
+    "failing_ids": [
+      "astropy/modeling/tests/test_separable.py::test_arith_oper",
+      "astropy/modeling/tests/test_separable.py::test_cdot",
+      "astropy/modeling/tests/test_separable.py::test_coord_matrix",
+      "astropy/modeling/tests/test_separable.py::test_cstack",
+      "astropy/modeling/tests/test_separable.py::test_custom_model_separable",
+      "astropy/modeling/tests/test_separable.py::test_separable[compound_model0-result0]",
+      "astropy/modeling/tests/test_separable.py::test_separable[compound_model1-result1]",
+      "astropy/modeling/tests/test_separable.py::test_separable[compound_model2-result2]",
+      "astropy/modeling/tests/test_separable.py::test_separable[compound_model3-result3]",
+      "astropy/modeling/tests/test_separable.py::test_separable[compound_model4-result4]",
+      "astropy/modeling/tests/test_separable.py::test_separable[compound_model5-result5]",
+      "astropy/modeling/tests/test_separable.py::test_separable[compound_model6-result6]",
+      "astropy/modeling/tests/test_separable.py::test_separable[compound_model7-result7]",
+      "astropy/modeling/tests/test_separable.py::test_separable[compound_model8-result8]",
+      "astropy/modeling/tests/test_separable.py::test_separable[compound_model9-result9]"
+    ],
     "graded_ids_present": 0,
     "n_parsed": 1,
     "names_symbol_in_log": true,
@@ -179,6 +241,11 @@
       "astropy/modeling/tests/test_separable.py::test_separable[compound_model9-result9]"
     ],
     "f2p_pass": 1,
+    "failing_ids": [
+      "astropy/modeling/tests/test_separable.py::test_separable[compound_model7-result7]",
+      "astropy/modeling/tests/test_separable.py::test_separable[compound_model8-result8]",
+      "astropy/modeling/tests/test_separable.py::test_separable[compound_model9-result9]"
+    ],
     "graded_ids_present": 15,
     "n_parsed": 15,
     "names_symbol_in_log": false,
@@ -197,6 +264,10 @@
       "astropy/modeling/tests/test_separable.py::test_separable[compound_model9-result9]"
     ],
     "f2p_pass": 0,
+    "failing_ids": [
+      "astropy/modeling/tests/test_separable.py::test_separable[compound_model6-result6]",
+      "astropy/modeling/tests/test_separable.py::test_separable[compound_model9-result9]"
+    ],
     "graded_ids_present": 15,
     "n_parsed": 15,
     "names_symbol_in_log": false,
@@ -212,6 +283,17 @@
       "astropy/modeling/tests/test_separable.py::test_separable[compound_model9-result9]"
     ],
     "f2p_pass": 0,
+    "failing_ids": [
+      "astropy/modeling/tests/test_separable.py::test_cstack",
+      "astropy/modeling/tests/test_separable.py::test_separable[compound_model0-result0]",
+      "astropy/modeling/tests/test_separable.py::test_separable[compound_model2-result2]",
+      "astropy/modeling/tests/test_separable.py::test_separable[compound_model3-result3]",
+      "astropy/modeling/tests/test_separable.py::test_separable[compound_model5-result5]",
+      "astropy/modeling/tests/test_separable.py::test_separable[compound_model6-result6]",
+      "astropy/modeling/tests/test_separable.py::test_separable[compound_model7-result7]",
+      "astropy/modeling/tests/test_separable.py::test_separable[compound_model8-result8]",
+      "astropy/modeling/tests/test_separable.py::test_separable[compound_model9-result9]"
+    ],
     "graded_ids_present": 15,
     "n_parsed": 15,
     "names_symbol_in_log": false,
@@ -232,6 +314,7 @@
     "f2p_fail": 0,
     "f2p_failing": [],
     "f2p_pass": 2,
+    "failing_ids": [],
     "graded_ids_present": 15,
     "n_parsed": 15,
     "names_symbol_in_log": false,
@@ -244,6 +327,7 @@
     "f2p_fail": 0,
     "f2p_failing": [],
     "f2p_pass": 2,
+    "failing_ids": [],
     "graded_ids_present": 15,
     "n_parsed": 15,
     "names_symbol_in_log": false,

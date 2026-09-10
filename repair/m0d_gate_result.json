@@ -5,6 +5,19 @@
       "test_fast_delete_instance_set_pk_none (delete.tests.FastDeleteTests)"
     ],
     "f2p_pass": 0,
+    "failing_ids": [
+      "test_fast_delete_empty_no_update_can_self_select (delete.tests.FastDeleteTests)",
+      "test_fast_delete_fk (delete.tests.FastDeleteTests)",
+      "test_fast_delete_inheritance (delete.tests.FastDeleteTests)",
+      "test_fast_delete_instance_set_pk_none (delete.tests.FastDeleteTests)",
+      "test_fast_delete_joined_qs (delete.tests.FastDeleteTests)",
+      "test_fast_delete_large_batch (delete.tests.FastDeleteTests)",
+      "test_fast_delete_m2m (delete.tests.FastDeleteTests)",
+      "test_fast_delete_qs (delete.tests.FastDeleteTests)",
+      "test_fast_delete_revm2m (delete.tests.FastDeleteTests)",
+      "test_model_delete_returns_num_rows (delete.tests.DeletionTests)",
+      "test_queryset_delete_returns_num_rows (delete.tests.DeletionTests)"
+    ],
     "graded_ids_present": 41,
     "n_parsed": 53,
     "names_symbol_in_log": false,
@@ -30,6 +43,9 @@
       "test_fast_delete_instance_set_pk_none (delete.tests.FastDeleteTests)"
     ],
     "f2p_pass": 0,
+    "failing_ids": [
+      "test_fast_delete_instance_set_pk_none (delete.tests.FastDeleteTests)"
+    ],
     "graded_ids_present": 41,
     "n_parsed": 43,
     "names_symbol_in_log": false,
@@ -44,6 +60,9 @@
       "test_fast_delete_instance_set_pk_none (delete.tests.FastDeleteTests)"
     ],
     "f2p_pass": 0,
+    "failing_ids": [
+      "test_fast_delete_instance_set_pk_none (delete.tests.FastDeleteTests)"
+    ],
     "graded_ids_present": 41,
     "n_parsed": 43,
     "names_symbol_in_log": false,
@@ -56,6 +75,7 @@
     "f2p_fail": 0,
     "f2p_failing": [],
     "f2p_pass": 1,
+    "failing_ids": [],
     "graded_ids_present": 41,
     "n_parsed": 42,
     "names_symbol_in_log": false,
@@ -70,6 +90,9 @@
       "test_fast_delete_instance_set_pk_none (delete.tests.FastDeleteTests)"
     ],
     "f2p_pass": 0,
+    "failing_ids": [
+      "test_fast_delete_instance_set_pk_none (delete.tests.FastDeleteTests)"
+    ],
     "graded_ids_present": 41,
     "n_parsed": 43,
     "names_symbol_in_log": true,
@@ -84,6 +107,19 @@
       "test_fast_delete_instance_set_pk_none (delete.tests.FastDeleteTests)"
     ],
     "f2p_pass": 0,
+    "failing_ids": [
+      "test_fast_delete_empty_no_update_can_self_select (delete.tests.FastDeleteTests)",
+      "test_fast_delete_fk (delete.tests.FastDeleteTests)",
+      "test_fast_delete_inheritance (delete.tests.FastDeleteTests)",
+      "test_fast_delete_instance_set_pk_none (delete.tests.FastDeleteTests)",
+      "test_fast_delete_joined_qs (delete.tests.FastDeleteTests)",
+      "test_fast_delete_large_batch (delete.tests.FastDeleteTests)",
+      "test_fast_delete_m2m (delete.tests.FastDeleteTests)",
+      "test_fast_delete_qs (delete.tests.FastDeleteTests)",
+      "test_fast_delete_revm2m (delete.tests.FastDeleteTests)",
+      "test_model_delete_returns_num_rows (delete.tests.DeletionTests)",
+      "test_queryset_delete_returns_num_rows (delete.tests.DeletionTests)"
+    ],
     "graded_ids_present": 41,
     "n_parsed": 53,
     "names_symbol_in_log": false,
@@ -109,6 +145,9 @@
       "test_fast_delete_instance_set_pk_none (delete.tests.FastDeleteTests)"
     ],
     "f2p_pass": 0,
+    "failing_ids": [
+      "test_fast_delete_instance_set_pk_none (delete.tests.FastDeleteTests)"
+    ],
     "graded_ids_present": 41,
     "n_parsed": 43,
     "names_symbol_in_log": false,
@@ -123,6 +162,9 @@
       "test_fast_delete_instance_set_pk_none (delete.tests.FastDeleteTests)"
     ],
     "f2p_pass": 0,
+    "failing_ids": [
+      "test_fast_delete_instance_set_pk_none (delete.tests.FastDeleteTests)"
+    ],
     "graded_ids_present": 41,
     "n_parsed": 43,
     "names_symbol_in_log": false,
@@ -135,6 +177,7 @@
     "f2p_fail": 0,
     "f2p_failing": [],
     "f2p_pass": 1,
+    "failing_ids": [],
     "graded_ids_present": 41,
     "n_parsed": 42,
     "names_symbol_in_log": false,
@@ -149,6 +192,49 @@
       "test_fast_delete_instance_set_pk_none (delete.tests.FastDeleteTests)"
     ],
     "f2p_pass": 0,
+    "failing_ids": [
+      "test_auto (delete.tests.OnDeleteTests)",
+      "test_auto_nullable (delete.tests.OnDeleteTests)",
+      "test_bulk (delete.tests.DeletionTests)",
+      "test_can_defer_constraint_checks (delete.tests.DeletionTests)",
+      "test_cascade (delete.tests.OnDeleteTests)",
+      "test_cascade_from_child (delete.tests.OnDeleteTests)",
+      "test_cascade_from_parent (delete.tests.OnDeleteTests)",
+      "test_cascade_nullable (delete.tests.OnDeleteTests)",
+      "test_delete_with_keeping_parents (delete.tests.DeletionTests)",
+      "test_delete_with_keeping_parents_relationships (delete.tests.DeletionTests)",
+      "test_deletion_order (delete.tests.DeletionTests)",
+      "test_do_nothing (delete.tests.OnDeleteTests)",
+      "test_do_nothing_qscount (delete.tests.OnDeleteTests)",
+      "test_fast_delete_empty_no_update_can_self_select (delete.tests.FastDeleteTests)",
+      "test_fast_delete_fk (delete.tests.FastDeleteTests)",
+      "test_fast_delete_inheritance (delete.tests.FastDeleteTests)",
+      "test_fast_delete_instance_set_pk_none (delete.tests.FastDeleteTests)",
+      "test_fast_delete_joined_qs (delete.tests.FastDeleteTests)",
+      "test_fast_delete_large_batch (delete.tests.FastDeleteTests)",
+      "test_fast_delete_m2m (delete.tests.FastDeleteTests)",
+      "test_fast_delete_qs (delete.tests.FastDeleteTests)",
+      "test_fast_delete_revm2m (delete.tests.FastDeleteTests)",
+      "test_hidden_related (delete.tests.DeletionTests)",
+      "test_inheritance_cascade_down (delete.tests.OnDeleteTests)",
+      "test_inheritance_cascade_up (delete.tests.OnDeleteTests)",
+      "test_instance_update (delete.tests.DeletionTests)",
+      "test_large_delete (delete.tests.DeletionTests)",
+      "test_large_delete_related (delete.tests.DeletionTests)",
+      "test_m2m (delete.tests.DeletionTests)",
+      "test_model_delete_returns_num_rows (delete.tests.DeletionTests)",
+      "test_o2o_setnull (delete.tests.OnDeleteTests)",
+      "test_protect (delete.tests.OnDeleteTests)",
+      "test_proxied_model_duplicate_queries (delete.tests.DeletionTests)",
+      "test_queryset_delete_returns_num_rows (delete.tests.DeletionTests)",
+      "test_relational_post_delete_signals_happen_before_parent_object (delete.tests.DeletionTests)",
+      "test_setdefault (delete.tests.OnDeleteTests)",
+      "test_setdefault_none (delete.tests.OnDeleteTests)",
+      "test_setnull (delete.tests.OnDeleteTests)",
+      "test_setnull_from_child (delete.tests.OnDeleteTests)",
+      "test_setnull_from_parent (delete.tests.OnDeleteTests)",
+      "test_setvalue (delete.tests.OnDeleteTests)"
+    ],
     "graded_ids_present": 0,
     "n_parsed": 2,
     "names_symbol_in_log": true,
@@ -172,6 +258,18 @@
     "f2p_fail": 0,
     "f2p_failing": [],
     "f2p_pass": 1,
+    "failing_ids": [
+      "test_fast_delete_empty_no_update_can_self_select (delete.tests.FastDeleteTests)",
+      "test_fast_delete_fk (delete.tests.FastDeleteTests)",
+      "test_fast_delete_inheritance (delete.tests.FastDeleteTests)",
+      "test_fast_delete_joined_qs (delete.tests.FastDeleteTests)",
+      "test_fast_delete_large_batch (delete.tests.FastDeleteTests)",
+      "test_fast_delete_m2m (delete.tests.FastDeleteTests)",
+      "test_fast_delete_qs (delete.tests.FastDeleteTests)",
+      "test_fast_delete_revm2m (delete.tests.FastDeleteTests)",
+      "test_model_delete_returns_num_rows (delete.tests.DeletionTests)",
+      "test_queryset_delete_returns_num_rows (delete.tests.DeletionTests)"
+    ],
     "graded_ids_present": 41,
     "n_parsed": 52,
     "names_symbol_in_log": false,
@@ -197,6 +295,9 @@
       "test_fast_delete_instance_set_pk_none (delete.tests.FastDeleteTests)"
     ],
     "f2p_pass": 0,
+    "failing_ids": [
+      "test_fast_delete_instance_set_pk_none (delete.tests.FastDeleteTests)"
+    ],
     "graded_ids_present": 41,
     "n_parsed": 43,
     "names_symbol_in_log": false,
@@ -211,6 +312,9 @@
       "test_fast_delete_instance_set_pk_none (delete.tests.FastDeleteTests)"
     ],
     "f2p_pass": 0,
+    "failing_ids": [
+      "test_fast_delete_instance_set_pk_none (delete.tests.FastDeleteTests)"
+    ],
     "graded_ids_present": 41,
     "n_parsed": 43,
     "names_symbol_in_log": false,
@@ -223,6 +327,7 @@
     "f2p_fail": 0,
     "f2p_failing": [],
     "f2p_pass": 1,
+    "failing_ids": [],
     "graded_ids_present": 41,
     "n_parsed": 42,
     "names_symbol_in_log": false,
@@ -235,6 +340,7 @@
     "f2p_fail": 0,
     "f2p_failing": [],
     "f2p_pass": 1,
+    "failing_ids": [],
     "graded_ids_present": 41,
     "n_parsed": 42,
     "names_symbol_in_log": false,
