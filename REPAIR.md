@@ -292,6 +292,23 @@ grandfathered.
 Two rewrites of the same condition on two cases is not a settled acceptance test.
 It is one that has been falsified once and has not yet met a third kind of drift.
 
+**All four gates were re-run under the boundary-aware substitution**
+(`CHANGES.md` 34), against the recorded result of each, and **every recorded
+value is unchanged** — zero differing leaves in all four result files, which the
+re-run reproduced byte for byte. No verdict moved: `m0b` and `m0c` `PASS` with
+`C3 OK`, `m0d` and `m0e` `FAIL` with `C3` naming the same drifting test as
+before. The result files hold the fifteen measured cells and the conditions are
+computed from them, so equality of the cells is equality of the verdicts.
+
+Three of the four could not have moved and that is a proof rather than a
+re-run: for `m0b`, `m0c` and `m0e`, the old substitution and the boundary-aware
+one produce byte-identical output on every production file the gate renames.
+Only `m0d` differed, in one file of five — `str.replace` had rewritten
+`NoFastDeleteCollector` along with `Collector`. It changed nothing measurable,
+because the identifier is defined and used only in that file and was rewritten
+consistently in both places. That is luck rather than design, and it is the
+reason the substitution is fixed rather than left alone.
+
 ---
 
 ## 7. The limit that recurs in every case
