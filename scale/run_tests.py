@@ -10,6 +10,9 @@ One file per defect class that has actually cost a run:
     ../repair/test_repair_m0a.py
                        the persisted transform + the overlay's
                        production-file assertion                (repair-M0a)
+    ../repair/test_repair_m0b.py
+                       the repair's two conditions: coupling gone,
+                       broken code still rejected                  (repair-M0b)
 
 Deliberately NOT covered here, because they need a container: the M0 gate
 (`scale/m0_run.py`, a 3.8 GB pull) and anything exercising a real image. Those
@@ -29,7 +32,8 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 SUITES = ["test_scope.py", "test_rotation.py", "test_partition.py",
           "test_digest.py", "test_aggregate.py", "test_burn.py",
           "test_guards_fire.py",
-          os.path.join("..", "repair", "test_repair_m0a.py")]
+          os.path.join("..", "repair", "test_repair_m0a.py"),
+          os.path.join("..", "repair", "test_repair_m0b.py")]
 
 
 def main():

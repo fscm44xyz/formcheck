@@ -2175,3 +2175,10 @@
 {"bytes":7568161426,"event":"removed","free_bytes_after":1020811788288,"instance_id":"pydata__xarray-4966","ref":"swebench/sweb.eval.x86_64.pydata_1776_xarray-4966:latest","t":1789058604.262}
 {"control":true,"disk_residual_mib":0.0,"error":null,"event":"done","free_gib":950.71,"instance_id":"pydata__xarray-4966","leaked_containers":[],"leaked_image":false,"orphan_reclaimed_mib":0.0,"reason":"invalid","seconds":160.61,"t":1789058605.314,"witnesses":1}
 {"event":"run_end","n_tasks":1,"t":1789058605.314}
+{"containers_removed":[],"event":"reclaimed_at_start","free_bytes_after":1020811272192,"orphan_bytes_reclaimed":0,"reclaimed_bytes":7568161426,"removed":["swebench/sweb.eval.x86_64.pydata_1776_xarray-4966:latest"],"t":1789059444.308}
+{"event":"run_start","ids":["pydata__xarray-4966"],"n_tasks":1,"seed":0,"t":1789059444.318,"timeout":2700,"workers":5}
+{"event":"start","image":"swebench/sweb.eval.x86_64.pydata_1776_xarray-4966:latest","instance_id":"pydata__xarray-4966","n_targets":1,"t":1789059444.319}
+{"bytes":7568165522,"event":"pulled","instance_id":"pydata__xarray-4966","quota_limit":100,"quota_remaining":95,"ref":"swebench/sweb.eval.x86_64.pydata_1776_xarray-4966:latest","seconds":115.6,"t":1789059560.594}
+{"bytes":7568165522,"event":"removed","free_bytes_after":1020811268096,"instance_id":"pydata__xarray-4966","ref":"swebench/sweb.eval.x86_64.pydata_1776_xarray-4966:latest","t":1789059586.325}
+{"control":true,"disk_residual_mib":0.0,"error":null,"event":"done","free_gib":950.7,"instance_id":"pydata__xarray-4966","leaked_containers":[],"leaked_image":false,"orphan_reclaimed_mib":0.0,"reason":"valid","seconds":142.8,"t":1789059587.131,"witnesses":0}
+{"event":"run_end","n_tasks":1,"t":1789059587.131}
