@@ -161,8 +161,14 @@ patch, used by exactly one of the module's 42 test methods:
 | `repaired` | 1/1 | 40/40 | 1.0 |
 
 **40 of 41 failures were the import line**, against astropy's 14 of 15. Two
-repos, two runners, same shape. Also worth recording: on both tasks the coupling
-was introduced by the benchmark's own test patch, not by the upstream project.
+repos, two runners, same shape.
+
+*Correction.* This section previously added that on both tasks the coupling was
+introduced by the benchmark's own test patch. That is true of `django-11179` and
+**false of `astropy-12907`**, whose test patch never mentions `_cstack` — the
+coupling import pre-exists in the repository. The claim was generalised from one
+case to two without checking the second. A static scan of all 28 now measures it
+properly: `repair/scan/RESULT.md`.
 
 `REPORT.md` §3(a) and the README carry an amendment stating this distinction —
 reward damage (measured, on all 28) versus extent of genuine coupling (not

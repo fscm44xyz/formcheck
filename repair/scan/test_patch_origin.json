@@ -1,0 +1,430 @@
+[
+  {
+    "task": "astropy__astropy-12907",
+    "repo": "astropy/astropy",
+    "symbol": "_cstack",
+    "origin": "pre_existing",
+    "kinds": [],
+    "n_added_lines": 0,
+    "n_context_lines": 0,
+    "added_lines": []
+  },
+  {
+    "task": "django__django-11179",
+    "repo": "django/django",
+    "symbol": "Collector",
+    "origin": "introduced",
+    "kinds": [
+      "in_test",
+      "module_import"
+    ],
+    "n_added_lines": 2,
+    "n_context_lines": 0,
+    "added_lines": [
+      "from django.db.models.deletion import Collector",
+      "        collector = Collector(using='default')"
+    ]
+  },
+  {
+    "task": "django__django-11433",
+    "repo": "django/django",
+    "symbol": "construct_instance",
+    "origin": "pre_existing",
+    "kinds": [],
+    "n_added_lines": 0,
+    "n_context_lines": 0,
+    "added_lines": []
+  },
+  {
+    "task": "django__django-12155",
+    "repo": "django/django",
+    "symbol": "parse_docstring",
+    "origin": "mixed",
+    "kinds": [
+      "in_test",
+      "module_import"
+    ],
+    "n_added_lines": 2,
+    "n_context_lines": 2,
+    "added_lines": [
+      "    docutils_is_available, parse_docstring, parse_rst,",
+      "        title, body, _ = parse_docstring('firstline\\n\\n    second line')"
+    ]
+  },
+  {
+    "task": "django__django-13121",
+    "repo": "django/django",
+    "symbol": "Combinable",
+    "origin": "pre_existing",
+    "kinds": [],
+    "n_added_lines": 0,
+    "n_context_lines": 0,
+    "added_lines": []
+  },
+  {
+    "task": "django__django-13195",
+    "repo": "django/django",
+    "symbol": "CookieStorage",
+    "origin": "pre_existing",
+    "kinds": [],
+    "n_added_lines": 0,
+    "n_context_lines": 0,
+    "added_lines": []
+  },
+  {
+    "task": "django__django-13212",
+    "repo": "django/django",
+    "symbol": "RegexValidator",
+    "origin": "introduced",
+    "kinds": [
+      "in_test"
+    ],
+    "n_added_lines": 1,
+    "n_context_lines": 0,
+    "added_lines": [
+      "            (validators.RegexValidator('[0-9]+'), 'xxxxxx', 'invalid'),"
+    ]
+  },
+  {
+    "task": "django__django-13212",
+    "repo": "django/django",
+    "symbol": "URLValidator",
+    "origin": "introduced",
+    "kinds": [
+      "in_test"
+    ],
+    "n_added_lines": 5,
+    "n_context_lines": 0,
+    "added_lines": [
+      "            (validators.URLValidator(), 'no_scheme', 'invalid'),",
+      "            (validators.URLValidator(), 'http://test[.com', 'invalid'),",
+      "            (validators.URLValidator(), 'http://[::1:2::3]/', 'invalid'),",
+      "                validators.URLValidator(),",
+      "            (validators.URLValidator(), '1', 'invalid'),"
+    ]
+  },
+  {
+    "task": "django__django-13212",
+    "repo": "django/django",
+    "symbol": "validate_ipv4_address",
+    "origin": "introduced",
+    "kinds": [
+      "in_test"
+    ],
+    "n_added_lines": 1,
+    "n_context_lines": 0,
+    "added_lines": [
+      "            (validators.validate_ipv4_address, '256.1.1.1', 'invalid'),"
+    ]
+  },
+  {
+    "task": "django__django-13212",
+    "repo": "django/django",
+    "symbol": "validate_ipv6_address",
+    "origin": "introduced",
+    "kinds": [
+      "in_test"
+    ],
+    "n_added_lines": 1,
+    "n_context_lines": 0,
+    "added_lines": [
+      "            (validators.validate_ipv6_address, '1:2', 'invalid'),"
+    ]
+  },
+  {
+    "task": "django__django-13212",
+    "repo": "django/django",
+    "symbol": "validate_ipv46_address",
+    "origin": "introduced",
+    "kinds": [
+      "in_test"
+    ],
+    "n_added_lines": 1,
+    "n_context_lines": 0,
+    "added_lines": [
+      "            (validators.validate_ipv46_address, '256.1.1.1', 'invalid'),"
+    ]
+  },
+  {
+    "task": "django__django-14311",
+    "repo": "django/django",
+    "symbol": "get_child_arguments",
+    "origin": "introduced",
+    "kinds": [
+      "in_test"
+    ],
+    "n_added_lines": 1,
+    "n_context_lines": 0,
+    "added_lines": [
+      "            autoreload.get_child_arguments(),"
+    ]
+  },
+  {
+    "task": "django__django-14315",
+    "repo": "django/django",
+    "symbol": "DatabaseClient",
+    "origin": "pre_existing",
+    "kinds": [],
+    "n_added_lines": 0,
+    "n_context_lines": 0,
+    "added_lines": []
+  },
+  {
+    "task": "django__django-14376",
+    "repo": "django/django",
+    "symbol": "DatabaseClient",
+    "origin": "pre_existing",
+    "kinds": [],
+    "n_added_lines": 0,
+    "n_context_lines": 0,
+    "added_lines": []
+  },
+  {
+    "task": "django__django-14771",
+    "repo": "django/django",
+    "symbol": "get_child_arguments",
+    "origin": "mixed",
+    "kinds": [
+      "in_test"
+    ],
+    "n_added_lines": 1,
+    "n_context_lines": 4,
+    "added_lines": [
+      "            autoreload.get_child_arguments(),"
+    ]
+  },
+  {
+    "task": "django__django-15380",
+    "repo": "django/django",
+    "symbol": "MigrationAutodetector",
+    "origin": "pre_existing",
+    "kinds": [],
+    "n_added_lines": 0,
+    "n_context_lines": 0,
+    "added_lines": []
+  },
+  {
+    "task": "django__django-15572",
+    "repo": "django/django",
+    "symbol": "get_template_directories",
+    "origin": "introduced",
+    "kinds": [
+      "in_test"
+    ],
+    "n_added_lines": 1,
+    "n_context_lines": 0,
+    "added_lines": [
+      "        self.assertEqual(autoreload.get_template_directories(), set())"
+    ]
+  },
+  {
+    "task": "django__django-15851",
+    "repo": "django/django",
+    "symbol": "DatabaseClient",
+    "origin": "pre_existing",
+    "kinds": [],
+    "n_added_lines": 0,
+    "n_context_lines": 0,
+    "added_lines": []
+  },
+  {
+    "task": "django__django-15973",
+    "repo": "django/django",
+    "symbol": "MigrationAutodetector",
+    "origin": "pre_existing",
+    "kinds": [],
+    "n_added_lines": 0,
+    "n_context_lines": 0,
+    "added_lines": []
+  },
+  {
+    "task": "psf__requests-1766",
+    "repo": "psf/requests",
+    "symbol": "HTTPDigestAuth",
+    "origin": "introduced",
+    "kinds": [
+      "in_test"
+    ],
+    "n_added_lines": 1,
+    "n_context_lines": 0,
+    "added_lines": [
+      "        auth = HTTPDigestAuth('user', 'pass')"
+    ]
+  },
+  {
+    "task": "pydata__xarray-4966",
+    "repo": "pydata/xarray",
+    "symbol": "UnsignedIntegerCoder",
+    "origin": "introduced",
+    "kinds": [
+      "in_test"
+    ],
+    "n_added_lines": 2,
+    "n_context_lines": 0,
+    "added_lines": [
+      "    coder = variables.UnsignedIntegerCoder()",
+      "    coder = variables.UnsignedIntegerCoder()"
+    ]
+  },
+  {
+    "task": "pylint-dev__pylint-4551",
+    "repo": "pylint-dev/pylint",
+    "symbol": "get_annotation",
+    "origin": "introduced",
+    "kinds": [
+      "in_test",
+      "module_import"
+    ],
+    "n_added_lines": 5,
+    "n_context_lines": 0,
+    "added_lines": [
+      "from pylint.pyreverse.utils import get_annotation, get_visibility, infer_node",
+      "    got = get_annotation(node.value).name",
+      "            got = get_annotation(assign_attr).name",
+      "@patch(\"pylint.pyreverse.utils.get_annotation\")",
+      "@patch(\"pylint.pyreverse.utils.get_annotation\")"
+    ]
+  },
+  {
+    "task": "pylint-dev__pylint-4551",
+    "repo": "pylint-dev/pylint",
+    "symbol": "infer_node",
+    "origin": "introduced",
+    "kinds": [
+      "in_test",
+      "module_import"
+    ],
+    "n_added_lines": 3,
+    "n_context_lines": 0,
+    "added_lines": [
+      "from pylint.pyreverse.utils import get_annotation, get_visibility, infer_node",
+      "    assert infer_node(node) == set()",
+      "    assert infer_node(node) == set(\"x\")"
+    ]
+  },
+  {
+    "task": "pylint-dev__pylint-4604",
+    "repo": "pylint-dev/pylint",
+    "symbol": "VariablesChecker",
+    "origin": "pre_existing",
+    "kinds": [],
+    "n_added_lines": 0,
+    "n_context_lines": 0,
+    "added_lines": []
+  },
+  {
+    "task": "pytest-dev__pytest-10356",
+    "repo": "pytest-dev/pytest",
+    "symbol": "get_unpacked_marks",
+    "origin": "introduced",
+    "kinds": [
+      "in_test",
+      "local_import"
+    ],
+    "n_added_lines": 3,
+    "n_context_lines": 0,
+    "added_lines": [
+      "    from _pytest.mark.structures import get_unpacked_marks",
+      "    all_marks = get_unpacked_marks(C)",
+      "    assert get_unpacked_marks(C, consider_mro=False) == [xfail(\"c\").mark]"
+    ]
+  },
+  {
+    "task": "pytest-dev__pytest-5809",
+    "repo": "pytest-dev/pytest",
+    "symbol": "create_new_paste",
+    "origin": "pre_existing",
+    "kinds": [],
+    "n_added_lines": 0,
+    "n_context_lines": 0,
+    "added_lines": []
+  },
+  {
+    "task": "pytest-dev__pytest-7521",
+    "repo": "pytest-dev/pytest",
+    "symbol": "FDCaptureBinary",
+    "origin": "pre_existing",
+    "kinds": [],
+    "n_added_lines": 0,
+    "n_context_lines": 0,
+    "added_lines": []
+  },
+  {
+    "task": "scikit-learn__scikit-learn-14141",
+    "repo": "scikit-learn/scikit-learn",
+    "symbol": "_get_deps_info",
+    "origin": "pre_existing",
+    "kinds": [],
+    "n_added_lines": 0,
+    "n_context_lines": 0,
+    "added_lines": []
+  },
+  {
+    "task": "scikit-learn__scikit-learn-14983",
+    "repo": "scikit-learn/scikit-learn",
+    "symbol": "_build_repr",
+    "origin": "pre_existing",
+    "kinds": [],
+    "n_added_lines": 0,
+    "n_context_lines": 0,
+    "added_lines": []
+  },
+  {
+    "task": "sphinx-doc__sphinx-7454",
+    "repo": "sphinx-doc/sphinx",
+    "symbol": "_parse_annotation",
+    "origin": "mixed",
+    "kinds": [
+      "in_test"
+    ],
+    "n_added_lines": 1,
+    "n_context_lines": 2,
+    "added_lines": [
+      "    doctree = _parse_annotation(\"None\")"
+    ]
+  },
+  {
+    "task": "sphinx-doc__sphinx-7590",
+    "repo": "sphinx-doc/sphinx",
+    "symbol": "DefinitionParser",
+    "origin": "pre_existing",
+    "kinds": [],
+    "n_added_lines": 0,
+    "n_context_lines": 0,
+    "added_lines": []
+  },
+  {
+    "task": "sphinx-doc__sphinx-7590",
+    "repo": "sphinx-doc/sphinx",
+    "symbol": "DefinitionParser",
+    "origin": "pre_existing",
+    "kinds": [],
+    "n_added_lines": 0,
+    "n_context_lines": 0,
+    "added_lines": []
+  },
+  {
+    "task": "sphinx-doc__sphinx-7757",
+    "repo": "sphinx-doc/sphinx",
+    "symbol": "signature_from_str",
+    "origin": "mixed",
+    "kinds": [
+      "in_test"
+    ],
+    "n_added_lines": 1,
+    "n_context_lines": 1,
+    "added_lines": [
+      "    sig = inspect.signature_from_str('(a, b=0, /, c=1)')"
+    ]
+  },
+  {
+    "task": "sympy__sympy-13031",
+    "repo": "sympy/sympy",
+    "symbol": "MutableSparseMatrix",
+    "origin": "pre_existing",
+    "kinds": [],
+    "n_added_lines": 0,
+    "n_context_lines": 0,
+    "added_lines": []
+  }
+]
