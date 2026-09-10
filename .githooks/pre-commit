@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+# Refuses a commit whose staged content contains a term from
+# .githooks/blocked-terms.txt.  See AGENTS.md.
+#
+# Install: git config core.hooksPath .githooks
+# Bypass:  git commit --no-verify   (say why in the commit body)
+
+set -uo pipefail
+
+scanner="$(git rev-parse --show-toplevel)/.githooks/scan-blocked-terms.sh"
+if [ ! -x "$scanner" ]; then
+  printf 'pre-commit: %s is missing or not executable; refusing to commit unchecked.\n' "$scanner" >&2
+  exit 1
+fi
+
+if ! "$scanner" --staged; then
+  printf '\nCommit refused. Fix the staged content, or `git commit --no-verify` if\n' >&2
+  printf 'this is a deliberate exception and the body of the commit says so.\n' >&2
+  exit 1
+fi

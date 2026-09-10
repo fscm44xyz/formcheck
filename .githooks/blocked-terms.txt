@@ -1,0 +1,61 @@
+# Term list for "What never enters this repository" (AGENTS.md).
+#
+# One POSIX extended regular expression per line.  Lines starting with '#' and
+# blank lines are ignored.  Matching is case-insensitive, so write patterns in
+# lower case; do not rely on capitalisation to carry meaning.
+#
+# The scanner skips this file and .githooks/allowed-lines.txt by path.  A term
+# list that trips its own guard is CHANGES.md 32 one layer up -- a filter that
+# swallows the row it is filtering for.
+
+# --- Rule 1: no third-party names; people by role if at all -----------------
+#
+# Upstream attribution is NOT blocked and must never be added here.  The names
+# of dependencies, benchmarks, providers, registries and the platform this is
+# built on are technical facts and are expected to appear: Prime Intellect,
+# verifiers, SWE-bench, SWE-Bench Pro, Harbor, OpenAI, Docker, Django, pytest.
+#
+# What this section blocks is individual people.  Named individuals cannot be
+# enumerated in advance, so this list is meant to grow: when a name is caught by
+# reading rather than by grep, it is added here, one per line, \b-anchored:
+#
+#   \bfirstname lastname\b
+#
+# The three patterns below catch the shapes a name arrives in, not the names.
+\b(mr|mrs|ms|dr)\. [a-z]
+\b(recruiter|hiring manager)\b
+\bmy contact at\b
+
+# --- Rule 2: no framing of purpose beyond what the work technically is ------
+\btake[ -]?home\b
+\binterview(s|ed|ing)?\b
+\bhiring\b
+\brecruit(er|ers|ing|ment)?\b
+\bapplicant\b
+\bjob application\b
+\bapplying (to|for) (a |an |the )?(job|role|position|team|opening)\b
+\bapplication (packet|materials)\b
+\bcandidacy\b
+\bcover letter\b
+\bcurriculum vitae\b
+# Accent required on purpose: the bare ASCII "resume" is the ordinary verb
+# and the name of scale/run.py's --resume flag, which appears throughout.
+(résum[eé]|resumé)s?\b
+\bwork sample\b
+\bportfolio piece\b
+\bcoding (challenge|exercise)\b
+\bscreening (task|exercise|round)\b
+\bemployer\b
+
+# --- Rule 3: no local absolute paths ---------------------------------------
+#
+# Container paths are part of captured logs, are reproducible, and are NOT
+# local: /testbed, /root, /tmp/pytest-of-root are deliberately absent below.
+# What is blocked is a path that names this machine and no other -- which is
+# also how unsanitised exception text arrives, since a traceback carries the
+# path of whatever ran it.
+/home/[a-z0-9_.-]+
+/users/[a-z0-9_.-]+
+\b[a-z]:[\\/]users[\\/]
+/mnt/[a-z]/users/
+\bfscm44\b
