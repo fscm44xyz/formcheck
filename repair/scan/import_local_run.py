@@ -19,8 +19,26 @@ TWO GRADINGS PER TASK, in one container:
               variant read 0.0.
   measured    import_local + the same rename.
 
-`recovery == 0` on a task whose control reproduced is treated as a DEFECT and
-stops the run: it cannot happen if the import is what couples the module.
+`recovery == 0` on a task whose control reproduced is either a fourth OUTCOME or
+a DEFECT that stops the run, and the two are separated in code rather than by
+reading:
+
+  HELPER_COUPLED   every graded test reaches the symbol through a shared helper
+                   rather than through the module-scope import, so recovery is
+                   genuinely 0 and no placement of that import can change it.
+                   Requires ALL FOUR of:
+                     1. the round trip held on every renamed file
+                     2. the residue grep is empty
+                     3. the module loaded -- graded node ids reported > 0
+                     4. every graded test's own failure block names the symbol
+  DEFECT           anything else. The run stops.
+
+The premise of the stop rule -- "this cannot happen if the import is what couples
+the module" -- is sound, and its antecedent is false on `django-14376`, where a
+helper method called by every graded test holds the reference. Check 3 is what
+separates this from the `str.replace` defect that voided the first run, where
+nothing imported and nothing ran; checks 1 and 2 are what separate it from a
+rename that was never well formed.
 
 NOT APPLICABLE is a separate outcome, not a recovery of zero. A task whose test
 module reaches the symbol some other way -- a class-body attribute access, say,
@@ -47,6 +65,8 @@ ROOT = os.path.dirname(os.path.dirname(HERE))
 for p in (os.path.join(ROOT, "scale"), os.path.join(ROOT, "repro")):
     if p not in sys.path:
         sys.path.insert(0, p)
+
+from f4_formcheck import failure_sections, section_for, names_symbol  # noqa: E402
 
 RECORDS = os.path.join(ROOT, "scale", "records_m4")
 OUT = os.path.join(HERE, "import_local_run.json")
@@ -181,13 +201,20 @@ def grade(spec):
 
 
 def rename_everywhere(symbol, new):
-    """Rename across production sources, then verify no residue -- the M0d guard."""
+    """Rename across production sources, then verify no residue -- the M0d guard.
+
+    Returns evidence rather than just the file list: checks 1 and 2 of the
+    HELPER_COUPLED classification are exactly "these two did not raise", and a
+    classification that cannot show its own evidence is worth as little as an
+    unfired guard.
+    """
     files = sh("grep -rl '\\b%s\\b' --include='*.py' . "
                "| grep -v '/tests\\?/' | grep -v '/testing/' | sort" % symbol).stdout.split()
     if not files:
         raise RuntimeError("no production file references %s" % symbol)
     pat = re.compile(r"\b%s\b" % re.escape(symbol))
     back = re.compile(r"\b%s\b" % re.escape(new))
+    verified = 0
     for path in files:
         src = sh("cat '%s'" % path, check=True).stdout
         # Word boundaries, matching the `\b` the file selection and the residue
@@ -201,12 +228,72 @@ def rename_everywhere(symbol, new):
                 "on a word boundary does not reproduce the input"
                 % (symbol, path, new))
         put("%s/%s" % (WORKDIR, path), renamed)
+        verified += 1
     residue = sh("grep -rl '\\b%s\\b' --include='*.py' . "
                  "| grep -v '/tests\\?/' | grep -v '/testing/' | sort" % symbol).stdout.split()
     if residue:
         raise RuntimeError("incomplete rename of %s: residue in %s"
                            % (symbol, residue))
-    return files
+    return {"files": files, "round_trip_verified": verified, "residue": []}
+
+
+def sections_for(sections, test_id):
+    """The failure block(s) for a test id, including subTest blocks.
+
+    `section_for` cannot match a subTest block, whose header carries a trailing
+    `(keys=(...))` beyond the test id -- and that is the very shape that produced
+    the unterminated status line (`CHANGES.md` 35). The fallback matches by
+    prefix and joins every block, because one test can error under several
+    subTest keys. Done here rather than in `f4_formcheck`, whose `section_for`
+    graded the published run and is not being changed under a scan.
+    """
+    body = section_for(sections, test_id)
+    if body is not None:
+        return body
+    parts = [b for h, b in sections.items() if h.startswith(test_id + " (")]
+    return "\n".join(parts) if parts else None
+
+
+def classify_zero(symbol, rename_ev, got, log, spec):
+    """`recovery == 0`: a HELPER_COUPLED verdict, or a DEFECT that stops the run.
+
+    Four checks, and all four must hold. Each rules out one way of arriving at a
+    zero that is not a property of the task.
+    """
+    meta = spec["meta"]
+    graded = list(meta["FAIL_TO_PASS"]) + list(meta["PASS_TO_PASS"])
+    checks, why = {}, []
+
+    files = rename_ev["files"]
+    checks["round_trip_on_every_renamed_file"] = bool(files) and \
+        rename_ev["round_trip_verified"] == len(files)
+    if not checks["round_trip_on_every_renamed_file"]:
+        why.append("round trip verified on %d of %d renamed file(s)"
+                   % (rename_ev["round_trip_verified"], len(files)))
+
+    checks["residue_empty"] = not rename_ev["residue"]
+    if not checks["residue_empty"]:
+        why.append("residue: %s" % rename_ev["residue"])
+
+    checks["module_loaded"] = len(got["reported"]) > 0
+    if not checks["module_loaded"]:
+        why.append("no graded node id was reported -- nothing ran, so this 0 is "
+                   "ABSENCE and not a measurement")
+
+    sections = failure_sections(log)
+    unattributed = []
+    for t in graded:
+        body = sections_for(sections, t)
+        if body is None or not names_symbol(body, symbol):
+            unattributed.append(t if body is not None
+                                else "%s (no failure block)" % t)
+    checks["every_graded_test_reaches_the_symbol"] = not unattributed
+    if unattributed:
+        why.append("%d graded test(s) do not name the symbol in their own "
+                   "failure block: %s" % (len(unattributed), unattributed[:3]))
+
+    ok = all(checks.values())
+    return ok, checks, why
 
 
 def reset(spec, local_files=None):
@@ -261,7 +348,8 @@ def run_task(instance_id, symbol, by_id):
 
         # CONTROL: rename only. Must reproduce the witness.
         reset(spec)
-        row["renamed_files"] = rename_everywhere(symbol, symbol + "__renamed")
+        ctl_ev = rename_everywhere(symbol, symbol + "__renamed")
+        row["renamed_files"] = ctl_ev["files"]
         ctl, _ = grade(spec)
         row["control_reported"] = len(ctl["reported"])
         row["n_graded"] = ctl["n_graded"]
@@ -275,17 +363,33 @@ def run_task(instance_id, symbol, by_id):
 
         # MEASURED: import_local + the same rename.
         reset(spec, local)
-        rename_everywhere(symbol, symbol + "__renamed")
-        got, _ = grade(spec)
+        rename_ev = rename_everywhere(symbol, symbol + "__renamed")
+        got, mlog = grade(spec)
         k = len(got["failing"])
+        recovery = got["n_graded"] - k
         row.update({
             "outcome": "measured",
             "k": k,
-            "recovery": got["n_graded"] - k,
+            "recovery": recovery,
             "reward": got["grade"]["reward"],
             "failing_after": got["failing"][:12],
             "reported_after": len(got["reported"]),
         })
+        if recovery == 0:
+            ok, checks, why = classify_zero(symbol, rename_ev, got, mlog, spec)
+            row["zero_checks"] = checks
+            if ok:
+                row["outcome"] = "helper_coupled"
+                row["reason"] = (
+                    "every graded test reaches %s through a shared helper rather "
+                    "than the module-scope import: the rename is a verified "
+                    "alpha-rename, the module loaded (%d graded id(s) reported), "
+                    "and every graded test's own failure block names the symbol. "
+                    "No placement of that import can change this."
+                    % (symbol, len(got["reported"])))
+            else:
+                row["outcome"] = "recovery_zero_defect"
+                row["reason"] = "; ".join(why)
         return row
     finally:
         subprocess.run(["docker", "rm", "-f", CONTAINER],
@@ -340,9 +444,13 @@ def main():
         print("      -> %s %s" % (row["outcome"],
                                   {k: row[k] for k in ("k", "recovery", "n_graded")
                                    if k in row}), flush=True)
-        if row["outcome"] == "measured" and row["recovery"] == 0:
-            print("      !! recovery 0 with a reproduced control -- impossible if "
-                  "the import is the coupling. Treating as a defect and stopping.")
+        if row["outcome"] == "helper_coupled":
+            print("      -- recovery 0, and all four checks hold: the coupling is a "
+                  "shared helper, not the module-scope import. Classified, not stopped.")
+        if row["outcome"] == "recovery_zero_defect":
+            print("      !! recovery 0 and the four checks do NOT hold: %s"
+                  % row.get("reason", "")[:160])
+            print("      !! treating as a defect and stopping.")
             return 1
         if row["outcome"] in ("control_did_not_reproduce", "error"):
             print("      !! %s -- stopping." % row["outcome"])
