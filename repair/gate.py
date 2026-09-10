@@ -28,6 +28,7 @@ Extracted from `m0b_gate.py` when the second task needed it; `m0b_gate.py` and
 
 import json
 import os
+import re
 import subprocess
 import sys
 
@@ -96,11 +97,29 @@ class Gate:
         self.sh("git apply --whitespace=nowarn /tmp/gold.diff", check=True)
         if solution == "gold_renamed":
             old, new, paths = self.rename
+            pat = re.compile(rf"\b{re.escape(old)}\b")
+            back = re.compile(rf"\b{re.escape(new)}\b")
             for path in paths:
                 src = self.sh(f"cat '{path}'", check=True).stdout
-                if old not in src:
+                if not pat.search(src):
                     raise RuntimeError(f"rename anchor {old!r} missing in {path}")
-                self.put(f"{WORKDIR}/{path}", src.replace(old, new))
+                # WORD BOUNDARIES, not `str.replace`. The file SELECTION below
+                # and the residue check already used `\b`; the substitution did
+                # not, so a longer identifier containing the symbol -- and a
+                # module path containing it -- was rewritten too. That is
+                # `CHANGES.md` 33 on the repair side.
+                renamed = pat.sub(new, src)
+                # And the round trip, for the same reason the operator has one:
+                # the residue check cannot see this class. `BaseCollector`
+                # rewritten to `BaseCollector__renamed` no longer contains
+                # `\bCollector\b`, so the residue grep comes back clean on
+                # exactly the corruption it is there to catch.
+                if back.sub(old, renamed) != src:
+                    raise RuntimeError(
+                        f"rename of {old!r} in {path} is not an alpha-rename: "
+                        f"substituting {new!r} back on a word boundary does not "
+                        f"reproduce the input")
+                self.put(f"{WORKDIR}/{path}", renamed)
             # THE RENAME MUST BE COMPLETE ACROSS PRODUCTION SOURCES.
             #
             # `symbol_rename` rewrites every reference in every scanned

@@ -38,6 +38,7 @@ import argparse
 import ast
 import json
 import os
+import re
 import subprocess
 import sys
 
@@ -185,9 +186,21 @@ def rename_everywhere(symbol, new):
                "| grep -v '/tests\\?/' | grep -v '/testing/' | sort" % symbol).stdout.split()
     if not files:
         raise RuntimeError("no production file references %s" % symbol)
+    pat = re.compile(r"\b%s\b" % re.escape(symbol))
+    back = re.compile(r"\b%s\b" % re.escape(new))
     for path in files:
         src = sh("cat '%s'" % path, check=True).stdout
-        put("%s/%s" % (WORKDIR, path), src.replace(symbol, new))
+        # Word boundaries, matching the `\b` the file selection and the residue
+        # check above and below already use. `str.replace` rewrote any longer
+        # identifier containing the symbol, and the residue grep could not see
+        # it: `\bsymbol\b` no longer matches inside the corrupted token.
+        renamed = pat.sub(new, src)
+        if back.sub(symbol, renamed) != src:
+            raise RuntimeError(
+                "rename of %s in %s is not an alpha-rename: substituting %s back "
+                "on a word boundary does not reproduce the input"
+                % (symbol, path, new))
+        put("%s/%s" % (WORKDIR, path), renamed)
     residue = sh("grep -rl '\\b%s\\b' --include='*.py' . "
                  "| grep -v '/tests\\?/' | grep -v '/testing/' | sort" % symbol).stdout.split()
     if residue:
