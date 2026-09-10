@@ -2163,3 +2163,15 @@
 {"bytes":7568177810,"event":"removed","free_bytes_after":1020812218368,"instance_id":"pydata__xarray-4966","ref":"swebench/sweb.eval.x86_64.pydata_1776_xarray-4966:latest","t":1789055293.103}
 {"control":true,"disk_residual_mib":0.0,"error":null,"event":"done","free_gib":950.71,"instance_id":"pydata__xarray-4966","leaked_containers":[],"leaked_image":false,"orphan_reclaimed_mib":0.0,"reason":"invalid","seconds":140.71,"t":1789055294.045,"witnesses":1}
 {"event":"run_end","n_tasks":1,"t":1789055294.046}
+{"event":"run_start","ids":["pydata__xarray-4966"],"n_tasks":1,"seed":0,"t":1789058264.24,"timeout":2700,"workers":5}
+{"event":"start","image":"swebench/sweb.eval.x86_64.pydata_1776_xarray-4966:latest","instance_id":"pydata__xarray-4966","n_targets":1,"t":1789058264.241}
+{"bytes":7568165522,"event":"pulled","instance_id":"pydata__xarray-4966","quota_limit":100,"quota_remaining":100,"ref":"swebench/sweb.eval.x86_64.pydata_1776_xarray-4966:latest","seconds":114.2,"t":1789058378.725}
+{"bytes":7568165522,"event":"removed","free_bytes_after":1020811857920,"instance_id":"pydata__xarray-4966","ref":"swebench/sweb.eval.x86_64.pydata_1776_xarray-4966:latest","t":1789058392.424}
+{"control":false,"disk_residual_mib":0.0,"error":null,"event":"done","free_gib":950.71,"instance_id":"pydata__xarray-4966","leaked_containers":[],"leaked_image":false,"orphan_reclaimed_mib":0.0,"reason":"unchecked","seconds":128.92,"t":1789058393.16,"witnesses":0}
+{"event":"run_end","n_tasks":1,"t":1789058393.161}
+{"event":"run_start","ids":["pydata__xarray-4966"],"n_tasks":1,"seed":0,"t":1789058444.699,"timeout":2700,"workers":5}
+{"event":"start","image":"swebench/sweb.eval.x86_64.pydata_1776_xarray-4966:latest","instance_id":"pydata__xarray-4966","n_targets":1,"t":1789058444.7}
+{"bytes":7568161426,"event":"pulled","instance_id":"pydata__xarray-4966","quota_limit":100,"quota_remaining":98,"ref":"swebench/sweb.eval.x86_64.pydata_1776_xarray-4966:latest","seconds":134.1,"t":1789058579.003}
+{"bytes":7568161426,"event":"removed","free_bytes_after":1020811788288,"instance_id":"pydata__xarray-4966","ref":"swebench/sweb.eval.x86_64.pydata_1776_xarray-4966:latest","t":1789058604.262}
+{"control":true,"disk_residual_mib":0.0,"error":null,"event":"done","free_gib":950.71,"instance_id":"pydata__xarray-4966","leaked_containers":[],"leaked_image":false,"orphan_reclaimed_mib":0.0,"reason":"invalid","seconds":160.61,"t":1789058605.314,"witnesses":1}
+{"event":"run_end","n_tasks":1,"t":1789058605.314}

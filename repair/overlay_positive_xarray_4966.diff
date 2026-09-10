@@ -1,0 +1,11 @@
+diff --git a/xarray/tests/test_coding.py b/xarray/tests/test_coding.py
+--- a/xarray/tests/test_coding.py
++++ b/xarray/tests/test_coding.py
+@@ -121,6 +121,7 @@ def test_scaling_offset_as_list(scale_factor, add_offset):
+ 
+ @pytest.mark.parametrize("bits", [1, 2, 4, 8])
+ def test_decode_unsigned_from_signed(bits):
++    assert False, "overlay landed"
+     unsigned_dtype = np.dtype(f"u{bits}")
+     signed_dtype = np.dtype(f"i{bits}")
+     original_values = np.array([np.iinfo(unsigned_dtype).max], dtype=unsigned_dtype)

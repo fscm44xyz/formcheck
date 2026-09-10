@@ -19,7 +19,9 @@ restatement of it.
 """
 
 import asyncio
+import json
 import os
+import re
 import sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -290,6 +292,161 @@ def test_setup_refuses_a_bad_overlay_before_writing_it():
     else:
         raise AssertionError("setup accepted a production overlay")
     assert not any("tests_overlay" in w for w in written), written
+
+
+# ---------------------------------------------------------------------------
+# addendum -- the overlay's POSITIVE and NEGATIVE control, kept as a pair
+# ---------------------------------------------------------------------------
+#
+# A no-op overlay cannot distinguish "the overlay reached the graded run" from
+# "the overlay was silently dropped": both leave the reward at 1.0. The digest
+# narrows it -- `_tree_digest` shells out to `sha256sum` INSIDE the container, so
+# a moved digest means the bytes in /testbed really changed -- but it still does
+# not establish that the graded run EXECUTED those bytes. A stale `.pyc`, a
+# directive pointing at another file, or a collection that never reached the
+# module would all move the digest and change nothing that pytest ran.
+#
+# Only a falsifiable positive control closes that: an overlay that must break a
+# named set of tests, and does, in the graded log, by its own message.
+#
+# THE TWO ARE KEPT TOGETHER ON PURPOSE. The positive control alone proves the
+# overlay can reach the graded run but says nothing about whether an inert one
+# perturbs it; the no-op alone proves nothing at all. `test_the_control_pair_is_
+# intact` fails if either record goes missing, so the pair cannot be quietly
+# halved.
+#
+# The records are committed artifacts of container runs, so these tests are
+# offline and fast. Regenerate with:
+#
+#   ~/.venv-fc/bin/python scale/run.py --instance-id pydata__xarray-4966 \
+#       --records-dir repair/records_m0a/plain
+#   ~/.venv-fc/bin/python scale/run.py --instance-id pydata__xarray-4966 \
+#       --tests-overlay repair/overlay_positive_xarray_4966.diff \
+#       --records-dir repair/records_m0a/positive
+#   ~/.venv-fc/bin/python scale/run.py --instance-id pydata__xarray-4966 \
+#       --tests-overlay repair/overlay_noop_xarray_4966.diff \
+#       --records-dir repair/records_m0a/noop_rerun
+
+RECORDS = os.path.join(HERE, "records_m0a")
+INSTANCE = "pydata__xarray-4966.json"
+
+# The four the positive overlay targets. Written out rather than derived, so a
+# change to which tests are hit shows up here as a diff.
+TARGETED = {f"xarray/tests/test_coding.py::test_decode_unsigned_from_signed[{b}]"
+            for b in (1, 2, 4, 8)}
+# The four that must be untouched: same file, same module, adjacent function.
+UNTOUCHED = {f"xarray/tests/test_coding.py::test_decode_signed_from_unsigned[{b}]"
+             for b in (1, 2, 4, 8)}
+OVERLAY_MESSAGE = "AssertionError: overlay landed"
+
+
+def _record(name):
+    path = os.path.join(RECORDS, name, INSTANCE)
+    assert os.path.exists(path), (
+        f"missing control record {path} -- regenerate it with the command in "
+        "this file's header. A missing record must FAIL, not skip: a control "
+        "that silently stops running is the defect this pair exists to catch.")
+    with open(path, encoding="utf-8") as f:
+        return json.load(f)
+
+
+def _states(log):
+    """Per-node-id outcome, from pytest's own `-rA` summary lines."""
+    out = {}
+    for line in log.splitlines():
+        m = re.match(r"^(PASSED|FAILED|ERROR)\s+(\S+)", line.strip())
+        if m:
+            out[m.group(2)] = m.group(1)
+    return out
+
+
+def test_the_control_pair_is_intact():
+    """Neither half may be dropped. The negative alone proves nothing."""
+    for name in ("plain", "positive", "noop_rerun"):
+        rec = _record(name)
+        assert rec["instance_id"] == "pydata__xarray-4966", rec["instance_id"]
+        assert rec["error"] is None, rec["error"]
+        assert rec["completed"] is True
+
+
+def test_baseline_scores_one_with_no_overlay():
+    """The reference point both controls are read against."""
+    rec = _record("plain")
+    assert rec["control"]["passed"] is True, rec["control"]
+    assert "scores 1.0" in rec["control"]["reason"], rec["control"]["reason"]
+
+
+def test_positive_control_drops_the_reward():
+    """POSITIVE: an overlay that must break the graded run, and does.
+
+    Read against the ORIGINAL gold: `control` is the untransformed reference
+    solution, so this is the reward of the real solution against the overlaid
+    suite, with no transform anywhere in it.
+    """
+    rec = _record("positive")
+    control = rec["control"]
+    assert control["passed"] is False, "the breaking overlay left the reward at 1.0"
+    assert control["graded"]["reward"] == 0.0, control["graded"]["reward"]
+
+
+def test_positive_control_fails_exactly_the_targeted_node_ids():
+    """SCOPE: the four targeted fail, the four adjacent pass, nothing else moves.
+
+    The baseline state of every graded test is PASSED -- not assumed, derived:
+    the un-overlaid control scored 1.0, and `get_resolution_status` returns FULL
+    only when every FAIL_TO_PASS and every PASS_TO_PASS succeeded.
+    """
+    assert _record("plain")["control"]["passed"] is True
+    control = _record("positive")["control"]
+    graded, states = control["graded"], _states(control["log"] or "")
+
+    assert len(states) == 25, f"expected 25 graded node ids, got {len(states)}"
+    assert graded["p2p_fail"] == 4 and graded["p2p_pass"] == 17, graded
+    assert graded["f2p_fail"] == 0 and graded["f2p_pass"] == 4, graded
+
+    failed = {t for t, st in states.items() if st != "PASSED"}
+    assert failed == TARGETED, (
+        "the overlay is not scoped the way the contract claims -- changed "
+        f"state: {sorted(failed)}, expected exactly {sorted(TARGETED)}")
+    for node in UNTOUCHED:
+        assert states.get(node) == "PASSED", (node, states.get(node))
+
+
+def test_positive_control_message_is_verbatim_in_the_graded_log():
+    """The overlay's own text, in the log, four times -- one per parametrization.
+
+    Matching the message rather than merely counting failures is what ties the
+    failure to THIS overlay: any breakage would drop the reward, only this one
+    says `overlay landed`.
+    """
+    log = _record("positive")["control"]["log"] or ""
+    assert OVERLAY_MESSAGE in log, "the overlay's message is not in the graded log"
+    assert log.count(OVERLAY_MESSAGE) == len(TARGETED), log.count(OVERLAY_MESSAGE)
+
+
+def test_noop_control_keeps_the_reward_at_one():
+    """NEGATIVE: the same surface, an inert overlay, reward unchanged.
+
+    Same file, same application point, same everything except the content -- so
+    the drop in the positive control is attributable to what the overlay says,
+    not to the fact that an overlay was applied at all.
+    """
+    rec = _record("noop_rerun")
+    assert rec["control"]["passed"] is True, rec["control"]
+    assert "scores 1.0" in rec["control"]["reason"], rec["control"]["reason"]
+    verdicts = [(lbl, v) for lbl, v, _ in rec["log"]]
+    assert ("symbol_rename:UnsignedIntegerCoder", "WITNESS") in verdicts, verdicts
+
+
+def test_the_three_trees_have_three_distinct_digests():
+    """No overlay, inert overlay, breaking overlay: three different trees.
+
+    Computed container-side (`docker exec sha256sum`), so this is a statement
+    about the bytes in /testbed rather than about the spec the host built.
+    """
+    seen = {name: _record(name)["digest_trace"][0]["digest"]
+            for name in ("plain", "noop_rerun", "positive")}
+    assert len(set(seen.values())) == 3, seen
 
 
 def collect():

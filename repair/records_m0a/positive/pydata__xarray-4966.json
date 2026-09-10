@@ -1,0 +1,69 @@
+{
+  "completed": true,
+  "control": {
+    "graded": {
+      "f2p_fail": 0,
+      "f2p_failing": [],
+      "f2p_pass": 4,
+      "found": true,
+      "n_parsed": 25,
+      "p2p_fail": 4,
+      "p2p_failing": [
+        "xarray/tests/test_coding.py::test_decode_unsigned_from_signed[1]",
+        "xarray/tests/test_coding.py::test_decode_unsigned_from_signed[2]",
+        "xarray/tests/test_coding.py::test_decode_unsigned_from_signed[4]",
+        "xarray/tests/test_coding.py::test_decode_unsigned_from_signed[8]"
+      ],
+      "p2p_pass": 17,
+      "reward": 0.0
+    },
+    "log": "+ pytest -rA xarray/tests/test_coding.py\n============================= test session starts ==============================\nplatform linux -- Python 3.10.15, pytest-7.4.0, pluggy-1.5.0\nrootdir: /testbed\nconfigfile: setup.cfg\nplugins: hypothesis-6.114.0, xdist-3.6.1, cov-5.0.0, env-1.1.5\ncollected 25 items\n\nxarray/tests/test_coding.py .................FFFF....                    [100%]\n\n=================================== FAILURES ===================================\n_____________________ test_decode_unsigned_from_signed[1] ______________________\n\nbits = 1\n\n    @pytest.mark.parametrize(\"bits\", [1, 2, 4, 8])\n    def test_decode_unsigned_from_signed(bits):\n>       assert False, \"overlay landed\"\nE       AssertionError: overlay landed\nE       assert False\n\n/testbed/xarray/tests/test_coding.py:124: AssertionError\n_____________________ test_decode_unsigned_from_signed[2] ______________________\n\nbits = 2\n\n    @pytest.mark.parametrize(\"bits\", [1, 2, 4, 8])\n    def test_decode_unsigned_from_signed(bits):\n>       assert False, \"overlay landed\"\nE       AssertionError: overlay landed\nE       assert False\n\n/testbed/xarray/tests/test_coding.py:124: AssertionError\n_____________________ test_decode_unsigned_from_signed[4] ______________________\n\nbits = 4\n\n    @pytest.mark.parametrize(\"bits\", [1, 2, 4, 8])\n    def test_decode_unsigned_from_signed(bits):\n>       assert False, \"overlay landed\"\nE       AssertionError: overlay landed\nE       assert False\n\n/testbed/xarray/tests/test_coding.py:124: AssertionError\n_____________________ test_decode_unsigned_from_signed[8] ______________________\n\nbits = 8\n\n    @pytest.mark.parametrize(\"bits\", [1, 2, 4, 8])\n    def test_decode_unsigned_from_signed(bits):\n>       assert False, \"overlay landed\"\nE       AssertionError: overlay landed\nE       assert False\n\n/testbed/xarray/tests/test_coding.py:124: AssertionError\n=============================== warnings summary ===============================\nxarray/__init__.py:1\n  /testbed/xarray/__init__.py:1: DeprecationWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html\n    import pkg_resources\n\nxarray/core/dask_array_compat.py:61\nxarray/core/dask_array_compat.py:61\n  /testbed/xarray/core/dask_array_compat.py:61: DeprecationWarning: distutils Version classes are deprecated. Use packaging.version instead.\n    if LooseVersion(dask_version) > LooseVersion(\"2.9.0\"):\n\nxarray/core/pdcompat.py:45\n  /testbed/xarray/core/pdcompat.py:45: DeprecationWarning: distutils Version classes are deprecated. Use packaging.version instead.\n    if LooseVersion(pd.__version__) < \"0.25.0\":\n\n../opt/miniconda3/envs/testbed/lib/python3.10/site-packages/setuptools/_distutils/version.py:345\nxarray/tests/test_coding.py::test_CFMaskCoder_encode_missing_fill_values_conflict[times-with-dtype]\n  /opt/miniconda3/envs/testbed/lib/python3.10/site-packages/setuptools/_distutils/version.py:345: DeprecationWarning: distutils Version classes are deprecated. Use packaging.version instead.\n    other = LooseVersion(other)\n\nxarray/tests/__init__.py:59\nxarray/tests/__init__.py:59\nxarray/tests/__init__.py:59\nxarray/tests/__init__.py:59\nxarray/tests/__init__.py:59\nxarray/tests/__init__.py:59\n  /testbed/xarray/tests/__init__.py:59: DeprecationWarning: distutils Version classes are deprecated. Use packaging.version instead.\n    return version.LooseVersion(vstring)\n\nxarray/tests/test_coding.py::test_CFMaskCoder_encode_missing_fill_values_conflict[times-with-dtype]\n  /testbed/xarray/coding/times.py:265: DeprecationWarning: distutils Version classes are deprecated. Use packaging.version instead.\n    if LooseVersion(pd.__version__) < \"0.25.0\":\n\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n==================================== PASSES ====================================\n=========================== short test summary info ============================\nPASSED xarray/tests/test_coding.py::test_CFMaskCoder_decode\nPASSED xarray/tests/test_coding.py::test_CFMaskCoder_encode_missing_fill_values_conflict[numeric-with-dtype]\nPASSED xarray/tests/test_coding.py::test_CFMaskCoder_encode_missing_fill_values_conflict[numeric-without-dtype]\nPASSED xarray/tests/test_coding.py::test_CFMaskCoder_encode_missing_fill_values_conflict[times-with-dtype]\nPASSED xarray/tests/test_coding.py::test_CFMaskCoder_missing_value\nPASSED xarray/tests/test_coding.py::test_CFMaskCoder_decode_dask\nPASSED xarray/tests/test_coding.py::test_coder_roundtrip\nPASSED xarray/tests/test_coding.py::test_scaling_converts_to_float32[u1]\nPASSED xarray/tests/test_coding.py::test_scaling_converts_to_float32[u2]\nPASSED xarray/tests/test_coding.py::test_scaling_converts_to_float32[i1]\nPASSED xarray/tests/test_coding.py::test_scaling_converts_to_float32[i2]\nPASSED xarray/tests/test_coding.py::test_scaling_converts_to_float32[f2]\nPASSED xarray/tests/test_coding.py::test_scaling_converts_to_float32[f4]\nPASSED xarray/tests/test_coding.py::test_scaling_offset_as_list[0.1-10]\nPASSED xarray/tests/test_coding.py::test_scaling_offset_as_list[0.1-scale_factor1]\nPASSED xarray/tests/test_coding.py::test_scaling_offset_as_list[add_offset1-10]\nPASSED xarray/tests/test_coding.py::test_scaling_offset_as_list[add_offset1-scale_factor1]\nPASSED xarray/tests/test_coding.py::test_decode_signed_from_unsigned[1]\nPASSED xarray/tests/test_coding.py::test_decode_signed_from_unsigned[2]\nPASSED xarray/tests/test_coding.py::test_decode_signed_from_unsigned[4]\nPASSED xarray/tests/test_coding.py::test_decode_signed_from_unsigned[8]\nFAILED xarray/tests/test_coding.py::test_decode_unsigned_from_signed[1] - Ass...\nFAILED xarray/tests/test_coding.py::test_decode_unsigned_from_signed[2] - Ass...\nFAILED xarray/tests/test_coding.py::test_decode_unsigned_from_signed[4] - Ass...\nFAILED xarray/tests/test_coding.py::test_decode_unsigned_from_signed[8] - Ass...\n================== 4 failed, 21 passed, 13 warnings in 2.66s ===================\n\n",
+    "passed": false,
+    "reason": "the untransformed reference solution scored 0.0, not 1.0; F2P 4/4, P2P 17/21; first failing: xarray/tests/test_coding.py::test_decode_unsigned_from_signed[1]"
+  },
+  "digest_trace": [
+    {
+      "digest": "1ab790c5e58c12b1a5862a6788ac099e19f31b6603b1679f2ff98bb44e262bd3",
+      "memo_hit": false
+    }
+  ],
+  "disk_orphan_reclaimed_bytes": 0,
+  "disk_residual_bytes": 4096,
+  "elapsed_seconds": 128.92,
+  "error": null,
+  "image": "swebench/sweb.eval.x86_64.pydata_1776_xarray-4966:latest",
+  "instance_id": "pydata__xarray-4966",
+  "leaked_containers": [],
+  "leaked_image": false,
+  "log": [
+    [
+      "<control>",
+      "HARNESS_UNPROVEN",
+      "the untransformed reference solution scored 0.0, not 1.0; F2P 4/4, P2P 17/21; first failing: xarray/tests/test_coding.py::test_decode_unsigned_from_signed[1]"
+    ]
+  ],
+  "mountable": true,
+  "multi_target": false,
+  "n_targets": 1,
+  "on_prime_hub": null,
+  "on_prime_hub_reason": "not resolvable offline; no hub environment index is reachable from this repo, verifiers or swebench",
+  "operators_not_applicable": [],
+  "operators_with_anchors": [],
+  "repo": "pydata/xarray",
+  "row": {
+    "elapsed": 7.47,
+    "error": null,
+    "error_type": null,
+    "index": 0,
+    "mode": "formcheck",
+    "name": "pydata__xarray-4966",
+    "reason": "unchecked",
+    "valid": null
+  },
+  "rows": [],
+  "targets": [
+    "xarray/coding/variables.py"
+  ],
+  "version": "0.12",
+  "witnesses": []
+}
