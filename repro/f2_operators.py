@@ -307,12 +307,28 @@ class SymbolRename(Operator):
                 elif isinstance(node, ast.ImportFrom):
                     for alias in node.names:
                         if alias.name == name and alias.asname is None:
-                            line = src.splitlines()[node.lineno - 1]
-                            if name not in line:
+                            # The alias carries its own span, so take it rather
+                            # than searching the line for the text. `str.index`
+                            # is a substring search and lands inside a longer
+                            # identifier: `BaseFoo` on `from pkg.mod import
+                            # BaseFoo, Foo`, and the module path on `from
+                            # pkg.Foolib import Foo`. The span check below
+                            # cannot catch either, because the slice it tests is
+                            # exactly `name` -- the tail of the superstring the
+                            # search landed in.
+                            #
+                            # The multi-line refusal is kept as it was. An alias
+                            # on a continuation line of a parenthesised import
+                            # is now locatable, but making it succeed would
+                            # change which anchors this operator processes,
+                            # which is a different claim with a different blast
+                            # radius from the boundary fix.
+                            if alias.lineno != node.lineno \
+                                    or alias.lineno != alias.end_lineno:
                                 raise Refused(
                                     f"multi-line import of {name!r} in {path}")
-                            col = line.index(name)
-                            edits.append((node.lineno, col, col + len(name)))
+                            edits.append((alias.lineno, alias.col_offset,
+                                          alias.end_col_offset))
                 elif isinstance(node, ast.Attribute) and node.attr == name:
                     # A QUALIFIED reference to the same symbol -- `variables.X()`
                     # where `variables` is the module that defines X -- is still
@@ -328,12 +344,17 @@ class SymbolRename(Operator):
                     modname = target.replace("\\", "/").split("/")[-1][:-3]
                     if isinstance(node.value, ast.Name) and node.value.id == modname \
                             and self._imports_module(tree, modname):
-                        line = src.splitlines()[node.lineno - 1]
-                        col = line.find(name, node.value.end_col_offset)
-                        if col < 0:
+                        # An Attribute node ends exactly at the end of the
+                        # attribute identifier, so the span is arithmetic on the
+                        # node's own end offset. `str.find` from the end of the
+                        # module Name has the same substring defect as the
+                        # import branch above.
+                        if node.lineno != node.end_lineno:
                             raise Refused(
                                 f"qualified reference to {name!r} spans lines in {path}")
-                        edits.append((node.lineno, col, col + len(name)))
+                        edits.append((node.end_lineno,
+                                      node.end_col_offset - len(name),
+                                      node.end_col_offset))
                     else:
                         raise Refused(
                             f"attribute access `.{name}` in {path} line "

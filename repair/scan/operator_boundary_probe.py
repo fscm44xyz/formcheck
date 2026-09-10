@@ -22,15 +22,20 @@ The span check at :347 cannot catch it:
 
 because the slice IS exactly `name` -- it is the tail of `BaseFoo`.
 
-WHAT CHANGED. The round-trip invariant this probe used to apply from the outside
-now lives INSIDE the operator, as a `Refused`. So the two corrupting cases below
-no longer come back as a silently broken rename; they come back refused. This
-probe therefore checks three outcomes, not two, and a REFUSED is a pass for the
-guard and a fail for the branch -- which is the state until the branches are
-made boundary-aware.
+WHAT CHANGED. Both branches now take the span from the AST -- the alias node for
+the import, the node's own end offset for the attribute -- so all four cases
+rename correctly and the probe expects OK on all four. The round-trip invariant
+this probe used to apply from the outside also lives INSIDE the operator now, as
+a `Refused`, and it is what stood between the substring searches and a silently
+broken rename while the fix was being written.
+
+Run `--expect-unfixed` after reverting either branch to a substring search: the
+two corrupting cases must come back REFUSED rather than BROKEN. That is the
+guard being exercised rather than assumed, and it is the reason this file keeps
+its own independent copy of the invariant.
 
     ~/.venv-fc/bin/python repair/scan/operator_boundary_probe.py
-    ~/.venv-fc/bin/python repair/scan/operator_boundary_probe.py --expect-fixed
+    ~/.venv-fc/bin/python repair/scan/operator_boundary_probe.py --expect-unfixed
 """
 
 import os
@@ -63,10 +68,11 @@ CASES = [
 ]
 """(label, sources, target, anchor name, corrupted_by_the_substring_branches)
 
-The last field marks the cases the two substring branches land wrong on. A
-CORRECT operator renames all four cleanly; until the branches are fixed, these
-are the two the round-trip invariant must refuse. Nothing may come back BROKEN
-at any stage -- that is the outcome the invariant exists to remove.
+The last field marks the two cases the substring branches landed wrong on. The
+operator now renames all four cleanly, so all four are expected OK; under
+`--expect-unfixed` these two are the ones the round-trip invariant must refuse.
+Nothing may come back BROKEN at any stage -- that is the outcome the invariant
+exists to remove.
 """
 
 OK, REFUSED, BROKEN = "OK", "REFUSED", "BROKEN"
@@ -106,10 +112,10 @@ def run():
     return outcomes
 
 
-def main(expect_fixed):
+def main(expect_unfixed):
     outcomes = run()
     corrupted = {label for label, _s, _t, _n, c in CASES if c}
-    expected = {label: (OK if expect_fixed or label not in corrupted else REFUSED)
+    expected = {label: (REFUSED if expect_unfixed and label in corrupted else OK)
                 for label, _s, _t, _n, _c in CASES}
 
     print("=" * 72)
@@ -128,13 +134,11 @@ def main(expect_fixed):
     for l in refused:
         print("   %s" % l)
 
-    if not expect_fixed:
-        print("\nThe invariant is in the operator; the two substring branches are")
-        print("NOT yet fixed. A refusal above is the guard working and the branch")
-        print("still broken. f2_operators.py:313 `col = line.index(name)` and :337")
-        print("`col = line.find(name, ...)` are substring searches; the span check")
-        print("cannot catch them, because `ln[c0:c1]` is exactly `name`, being the")
-        print("tail of the superstring it landed in.")
+    if expect_unfixed:
+        print("\nRun in --expect-unfixed mode: a substring search is expected back in")
+        print("one of the two branches, and a refusal above is the round-trip")
+        print("invariant catching what the span check cannot -- `ln[c0:c1]` is")
+        print("exactly `name`, being the tail of the superstring it landed in.")
 
     print("\nBlast radius on the published 500-task run is UNDETERMINED from the")
     print("records: a witness produced this way and a genuine one both fail with")
@@ -152,4 +156,4 @@ def main(expect_fixed):
 
 
 if __name__ == "__main__":
-    sys.exit(main("--expect-fixed" in sys.argv[1:]))
+    sys.exit(main("--expect-unfixed" in sys.argv[1:]))
