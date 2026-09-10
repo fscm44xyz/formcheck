@@ -1269,3 +1269,77 @@ Patch size moved with the fix: **+52 −9 across 3 files** (was +49 −7);
 
 `verifiers/v1/cli/validate.py` (`_run_all`, `summarize`, `run_validate`);
 `verifiers-formcheck.patch`.
+
+---
+
+## 27. The graded memo could not see a test-side change — the tenth of the family
+
+**Bug.** `SweBenchFormcheckTask._tree_digest` hashed `FORMCHECK_TARGETS` and
+nothing else. `graded_report` memoizes the whole grading on that digest, so the
+key described the production files a transform rewrites and said nothing about
+the files the suite is actually made of.
+
+That was sound for every run this repository has taken. In the detection family a
+transform rewrites the solution and never the graded tests — `_READ_TREE` excludes
+the test tree, `formcheck_write` can only write paths `formcheck_read` returned,
+and `f2_operators` states the same rule from the operator's side. The test files
+were constant, so hashing them would have been dead weight, and the docstring said
+so in as many words: *"Only the targets are ever modified."*
+
+It stops being true the moment a test-side overlay exists. An overlay changes a
+graded test file and, by construction, **no target**. The digest is therefore
+identical across the overlaid and un-overlaid trees, `graded_report` reports
+`memo_hit` and returns the un-overlaid grading, and the row records a reward for a
+suite that never ran in the form being claimed. On an overlay meant to *fix* a
+coupled test that reads as reward 0.0 — the overlay looking like it did nothing —
+and on an overlay applied after a control run it reads as reward 1.0. Both are the
+memo answering a question it was never asked.
+
+**This is the same shape as the previous nine, and as D2 specifically: a check
+that reports a verdict for a reason invisible in its own output.** The only
+evidence of it in a record would be `digest_trace` — two entries with the same
+digest and `memo_hit: true` — which is exactly the tell D2 forced into the record
+and the reason it is there. The verdict and the reward cannot discriminate. It is
+also the same *cause* as D2 twice over: a key that fails to distinguish two trees
+it must distinguish, arrived at not by a coding error but by a statement about the
+system that was true when written and stopped being true when the system grew.
+
+**Rule.** The digest covers every file whose content can change what the graded
+run reports, and it is keyed on **the same list the run actually executes**:
+`_digest_paths()` returns `FORMCHECK_TARGETS + spec["test_files"]`, and
+`spec["test_files"]` is the list `formcheck_graded` runs and `test_invocation`
+turns into the runner's directives. Deriving it from a second, parallel notion of
+"the test files" is the cross-path inference `writeup.md` 4.1 warns about; there
+is one list.
+
+Every guard D2 installed is preserved and now applies to the wider set: one
+`sha256sum`-or-`MISSING` line per path, a raise if the line count disagrees, a
+raise on an all-`MISSING` result. The degenerate-case message now reads *"every
+digested path is missing"*, since "target" no longer names the whole set.
+
+**Found by inspection, before the overlay was built, not by a wrong number** —
+`repair/CONTEXT.md` §4.3, written during reconnaissance for repair-M0a. No number
+in `REPORT.md` is affected. The widened digest is a different *value* — it hashes
+more lines — but the same *equivalence relation* over the trees the 500-task run
+actually produced: that run varied no test file, so every pair of trees that
+hashed equal before hashes equal now, and every pair that differed still differs.
+Memo hits, verdicts and rewards are unchanged on all 500. What the entry
+records is a fix landing *before* the first measurement that could have been
+corrupted by it, which is the only time this family has ever been caught early.
+
+**Regression, and it fails against the old code.**
+`scale/test_digest.py::test_digest_varies_with_the_graded_test_files` builds two
+trees with identical targets and one differing graded test file and asserts the
+digests differ. Its stub `sh` reads the paths **out of the digest script** rather
+than being handed them, so a path the implementation never asks about never
+reaches the hash — without that it would restate the fix instead of testing it.
+`test_memo_re_runs_when_only_the_test_file_changed` drives the real
+`graded_report` three times and counts `runtime.run` calls: re-run after the
+overlay, and still a memo hit on the unchanged tree, because widening a key into
+"never memoize" would double the container time of all 500 tasks. Counting the
+calls rather than reading the reward is deliberate — both gradings return the same
+reward, so the reward cannot tell a re-run from a memo hit, which is precisely why
+D2 was invisible. Before the fix: 6/8. After: 8/8; full fast suite 92/92.
+
+`scale/container_task.py` (`_digest_paths`, `_tree_digest`);
+`scale/test_digest.py`; `repair/CONTEXT.md` §4.3.

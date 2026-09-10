@@ -514,11 +514,35 @@ class SweBenchFormcheckTask(ContainerFormcheckTask):
         self.digest_trace = []
         self.last_digest = None
 
-    def _tree_digest(self):
-        """Content hash of the files a transform can rewrite.
+    def _digest_paths(self):
+        """Every file whose CONTENT can change what the graded run reports.
 
-        Only the targets are ever modified, so hashing them decides whether a
-        cached graded result still describes the tree.
+        Two groups, and the second was absent until repair-M0a:
+
+          * `FORMCHECK_TARGETS` -- the production files a transform rewrites.
+          * `spec["test_files"]` -- the graded test files, the same list
+            `formcheck_graded` runs and that `test_invocation` turns into the
+            runner's directives.
+
+        The old docstring's reason for hashing only the first group -- "only the
+        targets are ever modified" -- was a true statement about the detection
+        family, where every transform rewrites the solution and the graded tests
+        are excluded from `formcheck_read` by construction. It is false the
+        moment a test-side overlay exists, because an overlay changes a test
+        file and NO target. The digest would then be equal across the overlaid
+        and un-overlaid trees, `graded_report` would serve the un-overlaid
+        grading, and the reward would read 1.0 for a suite that never ran in the
+        form being claimed.
+
+        That is the defect shape of `REPORT.md` 7 and of D2 itself: a check
+        reporting a verdict for a reason invisible in its own output. The
+        widening is deliberately keyed on the same list the run actually
+        executes, so the two cannot drift apart silently.
+        """
+        return tuple(self.FORMCHECK_TARGETS) + tuple(self.spec["test_files"])
+
+    def _tree_digest(self):
+        """Content hash of every file that can change the graded outcome.
 
         THIS MUST NEVER FAIL QUIETLY. The first version ran
         `sha256sum <paths> 2>/dev/null || true`, so any failure -- a missing
@@ -528,31 +552,31 @@ class SweBenchFormcheckTask(ContainerFormcheckTask):
         CLEAN, a silent false negative in the one direction that matters. A
         witness that never appears cannot be noticed by looking at the results.
 
-        So each target is hashed individually and a missing file is recorded as
-        a distinct `MISSING` line rather than as nothing, and the output is
-        checked to have one line per target.
+        So each path is hashed individually and a missing file is recorded as a
+        distinct `MISSING` line rather than as nothing, and the output is
+        checked to have one line per path.
         """
-        targets = self.FORMCHECK_TARGETS
+        paths = self._digest_paths()
         script = "; ".join(
             f"if [ -f '{t}' ]; then sha256sum '{t}'; else echo 'MISSING {t}'; fi"
-            for t in targets)
+            for t in paths)
         out = self.sh(script)
         lines = [ln for ln in out.stdout.splitlines() if ln.strip()]
-        if len(lines) != len(targets):
+        if len(lines) != len(paths):
             raise RuntimeError(
-                f"tree digest: expected {len(targets)} line(s), got "
+                f"tree digest: expected {len(paths)} line(s), got "
                 f"{len(lines)} -- refusing to return a digest that could "
                 f"collide with another tree's. stderr: "
                 f"{out.stderr.strip()[:200]}")
         if all(ln.startswith("MISSING ") for ln in lines):
-            # Well-formed but degenerate: every target absent means the tree is
+            # Well-formed but degenerate: every path absent means the tree is
             # not in a state where grading it says anything, AND the digest
             # would be identical for any other such tree. Raise rather than
             # return a value that is technically distinct but semantically
             # empty.
             raise RuntimeError(
-                f"tree digest: every target is missing ({', '.join(targets)}) "
-                "-- refusing a degenerate digest")
+                f"tree digest: every digested path is missing "
+                f"({', '.join(paths)}) -- refusing a degenerate digest")
         return hashlib.sha256("\n".join(lines).encode()).hexdigest()
 
     def test_invocation(self):
