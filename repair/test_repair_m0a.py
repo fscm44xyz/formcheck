@@ -143,6 +143,155 @@ def test_detail_is_none_when_no_transform_was_applied():
         assert row.get("detail") is None, row.get("detail")
 
 
+# ---------------------------------------------------------------------------
+# item 3 -- the overlay surface, and the boundary it is not allowed to cross
+# ---------------------------------------------------------------------------
+
+TEST_FILES = ["xarray/tests/test_coding.py"]
+
+
+def _diff(*paths):
+    """A minimal unified diff touching `paths`, enough for `touched_files`."""
+    out = []
+    for path in paths:
+        out += [f"diff --git a/{path} b/{path}",
+                f"--- a/{path}", f"+++ b/{path}",
+                "@@ -1,1 +1,2 @@", " x = 1", "+# overlay"]
+    return "\n".join(out) + "\n"
+
+
+def test_overlay_accepts_a_file_the_test_patch_touches():
+    from container_task import check_tests_overlay
+    got = check_tests_overlay(_diff(*TEST_FILES), TEST_FILES, "t")
+    assert got == TEST_FILES, got
+
+
+def test_overlay_refuses_production_python():
+    """The one that matters: an overlay reaching a source file could put the
+    solution into the tree under the guise of repairing a test, and the 1.0 it
+    produced would be indistinguishable from an honest one."""
+    from container_task import check_tests_overlay, OverlayScopeError
+    prod = "xarray/coding/variables.py"
+    try:
+        check_tests_overlay(_diff(prod), TEST_FILES + [prod], "t")
+    except OverlayScopeError as exc:
+        assert "production Python" in str(exc), exc
+    else:
+        raise AssertionError(
+            "an overlay modifying production Python was accepted")
+
+
+def test_overlay_refuses_a_file_outside_the_test_patch():
+    from container_task import check_tests_overlay, OverlayScopeError
+    try:
+        check_tests_overlay(_diff("xarray/tests/test_other.py"), TEST_FILES, "t")
+    except OverlayScopeError as exc:
+        assert "does not touch" in str(exc), exc
+    else:
+        raise AssertionError("an overlay adding a graded file was accepted")
+
+
+def test_overlay_refuses_a_diff_with_no_readable_scope():
+    """Not 'accept it, it changes nothing' -- a diff whose scope cannot be read
+    from its own headers is refused, because the check has nothing to check."""
+    from container_task import check_tests_overlay, OverlayScopeError
+    try:
+        check_tests_overlay("no headers here\n", TEST_FILES, "t")
+    except OverlayScopeError as exc:
+        assert "touches no file" in str(exc), exc
+    else:
+        raise AssertionError("a headerless overlay was accepted")
+
+
+def test_build_task_spec_refuses_a_bad_overlay_offline():
+    """Before the 4 GiB pull, not after it."""
+    from container_task import build_task_spec, OverlayScopeError
+    instance = {
+        "instance_id": "pydata__xarray-4966", "repo": "pydata/xarray",
+        "version": "0.12", "base_commit": "0" * 40,
+        "patch": _diff("xarray/coding/variables.py"),
+        "test_patch": _diff(*TEST_FILES),
+        "problem_statement": "an issue", "FAIL_TO_PASS": "[]",
+        "PASS_TO_PASS": "[]",
+    }
+    spec = build_task_spec(instance, _diff(*TEST_FILES))
+    assert spec["tests_overlay"], "a valid overlay did not reach the spec"
+    assert build_task_spec(instance)["tests_overlay"] is None
+
+    try:
+        build_task_spec(instance, _diff("xarray/coding/variables.py"))
+    except OverlayScopeError:
+        pass
+    else:
+        raise AssertionError("build_task_spec accepted a production overlay")
+
+
+def _reset_task(overlay):
+    """A `ContainerFormcheckTask` with `sh` recording instead of executing."""
+    from container_task import ContainerFormcheckTask
+
+    class Rec:
+        stdout = stderr = ""
+        returncode = 0
+
+    task = ContainerFormcheckTask.__new__(ContainerFormcheckTask)
+    task.spec = {"tests_overlay": overlay, "test_files": TEST_FILES,
+                 "instance_id": "t"}
+    task.calls = []
+    task.sh = lambda script, check=False: (task.calls.append(script), Rec())[1]
+    return task
+
+
+def test_reset_applies_base_tests_overlay_gold_in_that_order():
+    task = _reset_task(_diff(*TEST_FILES))
+    task.formcheck_reset()
+    applied = [c.split("/")[-1] for c in task.calls if c.startswith("git apply")]
+    assert applied == ["tests.diff", "tests_overlay.diff", "gold.diff"], applied
+
+
+def test_reset_without_an_overlay_is_byte_for_byte_the_old_sequence():
+    """The 500-task run must be reproducible: no overlay, no third patch."""
+    task = _reset_task(None)
+    task.formcheck_reset()
+    applied = [c.split("/")[-1] for c in task.calls if c.startswith("git apply")]
+    assert applied == ["tests.diff", "gold.diff"], applied
+
+
+def test_setup_refuses_a_bad_overlay_before_writing_it():
+    """A hand-built spec never sees `build_task_spec`, so `setup` re-checks --
+    and refuses before the overlay's bytes reach the container."""
+    from container_task import ContainerFormcheckTask, OverlayScopeError
+
+    class Rec:
+        stdout = "yes"
+        stderr = ""
+        returncode = 0
+
+    class Info:
+        id = "container123"
+
+    class Runtime:
+        info = Info()
+
+    prod = "xarray/coding/variables.py"
+    task = ContainerFormcheckTask.__new__(ContainerFormcheckTask)
+    task.spec = {"gold_diff": "g", "tests_diff": "t",
+                 "tests_overlay": _diff(prod),
+                 "test_files": TEST_FILES + [prod], "instance_id": "t"}
+    task.python = "/usr/bin/python"
+    written = []
+    task.sh = lambda script, check=False: Rec()
+    task.put = lambda path, text: written.append(path)
+
+    try:
+        asyncio.run(task.setup(Runtime()))
+    except OverlayScopeError:
+        pass
+    else:
+        raise AssertionError("setup accepted a production overlay")
+    assert not any("tests_overlay" in w for w in written), written
+
+
 def collect():
     """Collected at CALL time -- see `scale/test_digest.py` (CHANGES.md 19)."""
     return [v for k, v in sorted(globals().items()) if k.startswith("test_")]

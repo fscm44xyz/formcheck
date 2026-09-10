@@ -184,6 +184,15 @@ class ContainerFormcheckTask(FormCheckMixin, vf.Task):
         self.sh(f"mkdir -p {PATCH_DIR}", check=True)
         self.put(f"{PATCH_DIR}/gold.diff", self.spec["gold_diff"])
         self.put(f"{PATCH_DIR}/tests.diff", self.spec["tests_diff"])
+        # Re-validated here, not only in `build_task_spec`. Every route into a
+        # container passes through `setup`, including a hand-built spec that
+        # never went near the builder, and the overlay is refused BEFORE its
+        # bytes are written anywhere the container can reach.
+        overlay = self.spec.get("tests_overlay")
+        if overlay:
+            check_tests_overlay(overlay, self.spec["test_files"],
+                                self.spec.get("instance_id", ""))
+            self.put(f"{PATCH_DIR}/tests_overlay.diff", overlay)
 
     # ---- the six hooks the mixin calls --------------------------------
     def formcheck_issue(self):
@@ -197,11 +206,31 @@ class ContainerFormcheckTask(FormCheckMixin, vf.Task):
         module importable and the failure would surface in the NEXT case rather
         than the one that caused it (`writeup.md` §9). Bytecode is purged
         explicitly, every time.
+
+        WITH A TEST-SIDE OVERLAY the contract is:
+
+            base + tests.diff + tests_overlay.diff + gold.diff
+
+        The overlay goes after `tests.diff` because it patches the post-test-patch
+        file -- there is nothing for it to apply against before that -- and before
+        `gold.diff` only so that a failure to apply is reported against the test
+        tree rather than after the solution has landed. It touches a disjoint set
+        of files from the gold patch (`check_tests_overlay` enforces exactly
+        that), so the two cannot interact whichever way round they go.
+
+        Applied here rather than once at `setup`, for the same reason everything
+        else is: this method runs before the control, before every `apply`, and
+        again after every verdict, and an overlay applied once would silently
+        vanish at the first reset.
         """
         self.sh("git checkout -- . && git clean -fdq", check=True)
         self.sh("find . -name __pycache__ -type d -prune -exec rm -rf {} + "
                 "; find . -name '*.pyc' -delete")
-        for name in ("tests.diff", "gold.diff"):
+        patches = ["tests.diff"]
+        if self.spec.get("tests_overlay"):
+            patches.append("tests_overlay.diff")
+        patches.append("gold.diff")
+        for name in patches:
             r = self.sh(f"git apply --whitespace=nowarn {PATCH_DIR}/{name}")
             if r.returncode != 0:
                 raise RuntimeError(f"apply {name}: {r.stderr.strip()[:300]}")
@@ -279,6 +308,61 @@ def touched_files(patch: str) -> list:
     return out
 
 
+class OverlayScopeError(RuntimeError):
+    """A test-side overlay tried to modify a file it is not allowed to."""
+
+
+def check_tests_overlay(overlay: str, test_files, instance_id=""):
+    """Every file a test-side overlay touches, or raise.
+
+    THE RULE: an overlay may only modify files the task's own test patch already
+    names. It returns the paths it validated, so a caller cannot accept the
+    check and then apply something else.
+
+    WHY THIS IS AN ASSERTION AND NOT A COMMENT. The overlay is applied to the
+    same working tree as the gold patch, by the same `git apply`, and the graded
+    suite runs afterwards. An overlay able to reach a production file could put
+    the solution into the tree under the guise of repairing a test, and the 1.0
+    that came back would be indistinguishable from an honest one -- the reward
+    would be right for a reason invisible in its own output, which is the defect
+    shape this project keeps finding in itself (`CHANGES.md` 16, 27). There is
+    no number that would look wrong afterwards, so the check has to be here.
+
+    Two conditions, both enforced, because neither implies the other:
+
+      * the path is in `test_files`, the list `touched_files(test_patch)`
+        produced and the same list `formcheck_graded` runs and `_digest_paths`
+        hashes. A path outside it is a file the overlay would be introducing to
+        the graded run, not repairing in it.
+      * the path is not production Python. `is_production_python` is the same
+        predicate `build_task_spec` uses to pick targets, so "production" means
+        here exactly what it means there. A test patch that happens to touch a
+        production file -- some repos ship fixtures next to sources -- does not
+        thereby license an overlay to rewrite it.
+    """
+    from eligibility import is_production_python
+
+    allowed = set(test_files or ())
+    touched = touched_files(overlay)
+    where = f"{instance_id}: " if instance_id else ""
+    if not touched:
+        raise OverlayScopeError(
+            f"{where}the test-side overlay touches no file -- refusing to apply "
+            "a diff whose scope cannot be read from its own headers")
+    outside = [f for f in touched if f not in allowed]
+    if outside:
+        raise OverlayScopeError(
+            f"{where}the test-side overlay modifies {outside!r}, which the "
+            f"task's test patch does not touch. Allowed: {sorted(allowed)!r}")
+    production = [f for f in touched if is_production_python(f)]
+    if production:
+        raise OverlayScopeError(
+            f"{where}the test-side overlay modifies production Python "
+            f"{production!r}. An overlay repairs a graded test; it may not put "
+            "the solution into the tree.")
+    return touched
+
+
 def changed_lines(patch: str) -> dict:
     """`{path: {line numbers on the POST-patch side the diff modifies}}`.
 
@@ -350,7 +434,7 @@ def symbols_covering(source: str, lines: set) -> set:
     return names
 
 
-def build_task_spec(instance: dict) -> dict:
+def build_task_spec(instance: dict, tests_overlay: str = None) -> dict:
     """A `ContainerFormcheckTask` spec from one raw dataset row.
 
     `scan_root` is the whole repository, not a guessed source directory. The
@@ -365,6 +449,11 @@ def build_task_spec(instance: dict) -> dict:
 
     gold = instance["patch"]
     targets = [f for f in touched_files(gold) if is_production_python(f)]
+    test_files = touched_files(instance["test_patch"])
+    # Validated HERE as well as in `setup`, so a bad overlay costs nothing: this
+    # runs offline, before a 4 GiB pull and a container start.
+    if tests_overlay:
+        check_tests_overlay(tests_overlay, test_files, instance["instance_id"])
     return {
         "instance_id": instance["instance_id"],
         "meta": {
@@ -381,7 +470,11 @@ def build_task_spec(instance: dict) -> dict:
         "target": targets[0] if targets else "",
         "targets": targets,
         "scan_root": "",
-        "test_files": touched_files(instance["test_patch"]),
+        "test_files": test_files,
+        # None when no overlay is in play, which is every task of the 500-task
+        # run. The contract when one IS in play is stated once, in
+        # `formcheck_reset`: base + tests.diff + overlay + gold.
+        "tests_overlay": tests_overlay,
         # Line numbers, not names: names cannot be resolved correctly without the
         # file's structure, which only exists once the container holds the tree.
         "changed_lines": {k: sorted(v) for k, v in changed_lines(gold).items()},
