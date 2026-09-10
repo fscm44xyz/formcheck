@@ -1512,3 +1512,71 @@ one case and generalised without a case that could falsify it, which is
 
 `repair/gate.py` (`failing_ids`, `report`); `repair/m0e_gate.py`;
 `repair/M0E_RESULT.md`; `repair/test_repair_m0e.py::test_c3_set_comparison_is_what_catches_this`.
+
+---
+
+## 31. "No containers" was applied to a measurement that needs fifteen of them
+
+**Bug.** The instruction for the next measurement read *"the static measurement,
+no containers … this is the second number and it costs nothing"*, applied to
+`REPAIR.md` open item 1 — running the `import_local` variant across the 15
+all-fail tasks.
+
+That item costs 15 container runs, and `REPAIR.md` §9 says so in its own text:
+*"15 container runs, no model, no judgement call"*. The generalisation went from
+**no inference** — which is true of it, and is the property that made it
+attractive — to **no Docker**, which is not. The two had travelled together on the
+preceding measurement (`repair/scan/test_patch_origin.py`, a pure diff scan), and
+the second property was carried across with the first.
+
+**How it was caught.** By reading the section the instruction cited before acting
+on it. The tell was mechanical rather than clever: the item's own cost line
+contradicted the premise in the sentence pointing at it.
+
+**Rule.** When an instruction names a prior artifact, the artifact is read before
+the work starts, and a contradiction between the two is raised rather than
+resolved silently in either direction. Resolving it silently is the failure mode
+in both directions: running 15 containers under "costs nothing" spends the budget
+the constraint was protecting, and substituting a cheaper measurement under the
+same name reports a different number against the original question.
+
+What was delivered instead was the part the recorded logs already settle — zero
+of 795 graded tests executed on any of the 15, so the mechanism is a module-import
+failure in every case — reported explicitly as *not* the `import_local` fraction,
+with the container cost of the real thing restated.
+
+---
+
+## 32. A `grep -v` filter swallowed the row it was filtering for
+
+**Bug.** Terminal readings of two scans were filtered through
+`grep -v "Warning\|cached\|httpx\|HTTP"` to strip HTTP request logging from the
+`datasets` library. One witness symbol is **`HTTPDigestAuth`**, so
+`psf__requests-1766` was removed from both displayed tables by the filter that
+was supposed to be removing noise.
+
+The underlying data was never affected — both scans wrote JSON, and the counts
+printed alongside the tables were computed from the full row set, which is why the
+tables and their own totals disagreed.
+
+**The part worth keeping.** It was noticed the first time, and dismissed: the row
+was recorded as *"a display artefact"* and not chased, on the reasoning that the
+count was right so the data was right. That reasoning is correct and beside the
+point. A table that disagrees with its own total is a signal that something
+between the data and the reader is wrong, and the cost of finding out was one
+command. It took a second occurrence, on a different scan, before it was chased —
+and the cause was a filter written by the same hand that then read the output
+through it.
+
+**Rule.** The JSON is written unconditionally and the file is the artifact; the
+terminal is a view of it. A filter applied to output is part of the measurement
+apparatus and can corrupt a reading exactly as a parser can — `CHANGES.md` 18 is
+the same shape one layer down, where a log parser that understood one runner
+silently converted four real witnesses into "invalid transform".
+
+**Family.** A check reporting a verdict for a reason invisible in its own output.
+Here the invisible reason was in the pipe, not the program, and the output it
+corrupted was the one being used to decide what to do next.
+
+`repair/scan/test_patch_origin.py`; `repair/scan/allfail_mechanism.py`;
+`repair/scan/RESULT.md`.
