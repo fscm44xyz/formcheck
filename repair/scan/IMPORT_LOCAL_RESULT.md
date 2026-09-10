@@ -1,103 +1,110 @@
-# `import_local` across the 12 — INCOMPLETE, stopped on task 2 of 12
+# `import_local` across the 12 — complete
 
-The measurement `REPAIR.md` §9 open item 1 asks for: on each all-fail task, move
-the coupled symbol's module-scope import into the test functions that use it,
-re-grade under the same rename, and report how much of the suite loss was
-attributable to that one line.
+`REPAIR.md` §9 open item 1: on each all-fail task, move the coupled symbol's
+module-scope import into the test functions that use it, re-grade under the same
+rename, and report how much of the suite loss is attributable to that one line.
 
-**Status: 2 of 12 tasks measured. The run stopped on `django-14376` under the
-`recovery == 0` rule and has not been resumed.** The remaining 10 are unmeasured.
-No aggregate is reported, because neither measured task qualifies for one.
+**All 12 tasks measured. 13 unique (task, symbol) measurements.**
 
-## The two rows
+    N          graded tests
+    k          still failing after the import is moved -- the tests that reach the symbol
+    recovery   N - k, attributable to the single module-scope import line
 
-```
-task                   symbol            N   k   recovery   reported/N
-django__django-12155   parse_docstring   7   4   3          7/7
-django__django-14376   DatabaseClient    9   9   0          7/9   <- stopped here
-```
-
-`N` graded tests, `k` still failing after the move, `recovery = N - k`.
-
-**`django-12155` is called out separately, not averaged in: `k = 4`.** The
-mechanism established at n=3 in `REPAIR.md` §4 has `k = 1` — one module-scope
-import takes the module down, and the single residual is the test whose *subject*
-is the symbol. Here four of seven graded tests still fail after the import is
-moved, so four reference the symbol directly. That is a different shape and
-belongs in no average with the k=1 cases.
-
-**The aggregate attributable to a single module-scope import is therefore
-unreported.** Zero of the two measured tasks are k=1 cases. There is nothing yet
-to aggregate.
-
-## Why the run stopped, and what the stop means
-
-`recovery == 0` on a task whose control reproduced stops the run as a defect
-rather than recording a result. It fired. It was right to fire, and the two
-things it separated last time it fired are not the two things here.
-
-**This is not the apparatus defect the rule was written for.** The previous run
-(`import_local_run.VOID.json`) died here for a real defect: `str.replace` rewrote
-`BaseDatabaseClient` into `BaseDatabaseClient__renamed`, the mysql client failed
-to import, and nothing ran. That is fixed (`CHANGES.md` 34). This run's rename is
-a clean alpha-rename — the round-trip check passed on all 11 renamed files and
-the residue grep is empty — and the test module loaded and executed: `Ran 9
-tests`, nine `ERROR` lines, each traceback naming the symbol.
-
-**`recovery = 0` is a genuine property of this task.** All nine graded tests
-reach `DatabaseClient`: eight through one shared helper,
-
-```python
-class MySqlDbshellCommandTestCase(SimpleTestCase):
-    def settings_to_cmd_args_env(self, settings_dict, parameters=None):
-        from django.db.backends.mysql.client import DatabaseClient   # moved here
-```
-
-and the ninth, `test_crash_password_does_not_leak`, directly. Moving the import
-into the helper defers the `ImportError` from module load to call time; it does
-not remove it, because the helper *is* the coupling and every graded test calls
-it. No placement of that import can save any test here.
-
-So the rule's premise — *"`recovery == 0` cannot happen if the import is what
-couples the module"* — is sound, and its antecedent is false on this task. The
-module-scope import is not what couples this module. A helper method reached by
-every graded test is a second coupling shape, and for it a recovery of zero is an
-answer rather than a symptom.
-
-**The rule was not overridden and the run was not resumed.** Whether
-`django-14376` is reported as a genuine zero and the run continues on the
-remaining 10 is a decision about what the measurement means, not a repair.
-
-## A separate defect this exposed, not fixed here
-
-`reported/N` is `7/9` on `django-14376`: two graded ids were counted as failing
-without ever being observed to fail.
+## The table
 
 ```
-test_options_override_settings_proper_values (...) ... test_parameters (...) ... ERROR
+task                               symbol                     N     k  recovery  outcome
+scikit-learn__scikit-learn-14983   _build_repr              107     1       106  measured
+sphinx-doc__sphinx-7454            _parse_annotation         28     1        27  measured
+django__django-15380               MigrationAutodetector    134   122        12  measured
+django__django-15973               MigrationAutodetector    158   146        12  measured
+sphinx-doc__sphinx-7590            DefinitionParser          25    16         9  measured
+pylint-dev__pylint-4551            infer_node                10     2         8  measured
+pylint-dev__pylint-4551            get_annotation            10     4         6  measured
+django__django-12155               parse_docstring            7     4         3  measured
+scikit-learn__scikit-learn-14141   _get_deps_info             3     1         2  measured
+django__django-14376               DatabaseClient             9     9         0  helper_coupled
+django__django-15851               DatabaseClient             9     9         0  helper_coupled
+psf__requests-1766                 HTTPDigestAuth             -     -         -  not_applicable
+pylint-dev__pylint-4604            VariablesChecker           -     -         -  not_applicable
+
+measured        9   (k = 1: 3,   k > 1: 6)
+helper_coupled  2
+not_applicable  2
 ```
 
-Two result lines on one line. `test_options_override_settings_proper_values` uses
-`self.subTest`, and a failing subTest emits its error blocks without terminating
-the test's own status line, so the next test's line is appended to it. The parser
-attributes results from `test ... STATUS` lines and lost both names. There are
-**ten** `ERROR:` blocks for **nine** tests, because that one test errored twice
-under two subTest keys.
+`not_applicable` is not a recovery of zero. `requests-1766`: no test file
+references the symbol. `pylint-4604`: no module-scope `from … import
+VariablesChecker` to move — the shape §9 already predicted.
 
-Here it changed nothing: both tests really did error — their tracebacks are in
-the log — so `k = 9` is the right value, reached partly through the
-`absent ⇒ failing` branch rather than by observation.
+## The aggregate, and what selecting on `k = 1` does to it
 
-**The direction that would not be harmless is the other one.** `test_parameters`
-did emit `... ERROR` and was still lost, because its name sat mid-line. Had it
-**passed**, the same swallowing would have counted a passing test as failing —
-and for `formcheck` a false failure is a false witness. Whether any task in the
-500-task run is affected is not established here and is not assumed either way.
-This is `CHANGES.md` 18's family — a log parser that understood one runner — one
-level down: a parser that understands one output *shape*.
+**Over the `k = 1` rows only: 135 of 138 graded tests recovered, 97.8%.**
+
+**Denominator: 3 rows.** Three of the nine measured, three of the thirteen
+measurements, across twelve tasks.
+
+That number should be read for what it is. Selecting `k = 1` *fixes* `recovery =
+N − 1`, so the ratio is high by construction and the only real content in 97.8%
+is that the three `N` values happen to be large. The aggregate does not say the
+median coupled task recovers 97.8% of its suite. It says: on the three tasks
+where exactly one test reaches the symbol, everything else came back.
+
+## What the 12 do to the n = 3 mechanism
+
+`REPAIR.md` §4 establishes, at n = 3, that one module-scope import takes down the
+entire module and the single residual is the test whose *subject* is the symbol —
+`k = 1` in all three. **That shape holds on 3 of the 9 measured here.** It is not
+the distribution; it is one shape among several, and it was the first three seen.
+
+The other six are `k > 1` and are listed rather than averaged:
+
+```
+django__django-15380     MigrationAutodetector   N=134   k=122   recovery=12
+django__django-15973     MigrationAutodetector   N=158   k=146   recovery=12
+sphinx-doc__sphinx-7590  DefinitionParser        N=25    k=16    recovery=9
+pylint-dev__pylint-4551  infer_node              N=10    k=2     recovery=8
+pylint-dev__pylint-4551  get_annotation          N=10    k=4     recovery=6
+django__django-12155     parse_docstring         N=7     k=4     recovery=3
+```
+
+The two `MigrationAutodetector` tasks invert the picture the mechanism describes:
+122 of 134 and 146 of 158 graded tests still fail once the import is moved, so
+almost the whole suite genuinely reaches the symbol and only ~9% of the loss is
+attributable to the import line. On those two, "the suite is destroyed by one
+import" is false, and the reward damage and the coupling extent nearly coincide.
+
+## `HELPER_COUPLED`, and why it is a verdict here
+
+`django-14376` and `django-15851` both come back `recovery = 0` with the control
+reproduced. That is a classification, not an abort, and it is decided by four
+checks in code rather than by reading the row:
+
+1. the round trip held on every renamed file
+2. the residue grep is empty
+3. the module loaded — graded node ids reported > 0
+4. every graded test's own failure block names the symbol
+
+Both tasks pass all four. Every graded test reaches `DatabaseClient` through one
+shared helper — `settings_to_cmd_args_env`, called by eight of the nine, with the
+ninth reaching it directly — so moving the import into the helper defers the
+`ImportError` from load time to call time and removes nothing. The helper is the
+coupling, not the import. No placement of that import can change these.
+
+Check 3 is what separates this from the defect that voided the first run, where
+`str.replace` broke the module and nothing ran at all
+(`import_local_run.VOID.json`, `CHANGES.md` 34). `repair/scan/test_classify_zero.py`
+pins both directions against the real log: the positive classifies, and each of
+the four checks broken on its own aborts.
+
+## Still not a repair
+
+`import_local` scores **0.0 on every task here**, exactly as `REPAIR.md` §9 says.
+It is a diagnostic that separates reward damage from coupling extent. It is not a
+repair and must not be reported as one.
 
 ## Artifacts
 
-`repair/scan/import_local_run.json` — the two rows, written per row,
-unconditionally. `repair/scan/import_local_run.VOID.json` — the previous run,
-void, kept because it is the record of the substitution defect actually biting.
+`repair/scan/import_local_run.json` — 13 rows, written per row, unconditionally.
+`repair/scan/import_local_run.VOID.json` — the first run, void, kept as the record
+of the substitution defect biting.

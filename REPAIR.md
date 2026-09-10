@@ -399,17 +399,31 @@ it honestly means fixing what the operator anchors on **before** seeing which
 symbols it admits, on the same before-the-results discipline as
 `scale/STOPPING_RULE.md`, then running it across all 500.
 
-**The attributable-to-one-import fraction across the 15.** §4 establishes the
-mechanism at n = 3 but not its distribution: it is unmeasured on the other 12 of
-the 15 all-fail tasks, and nothing here says how it distributes. The measurement
-is the `import_local` variant applied to each of them — 15 container runs, no
-model, no judgement call, reusing the overlay surface and gate that exist. It
-would turn "the median coupled task loses 100% of its suite" from one number into
-two: how much signal is destroyed, and how much of a suite is really coupled.
+**The attributable-to-one-import fraction across the 15 — MEASURED, and it does
+not generalise.** §4 established the mechanism at n = 3. The `import_local`
+variant has now been run on the other 12 (`repair/scan/IMPORT_LOCAL_RESULT.md`,
+13 measurements over 12 tasks), and §4's shape — one module-scope import taking
+down the whole module, with the single residual being the test whose *subject* is
+the symbol, `k = 1` — **holds on 3 of the 9 measured.** It is one shape among
+several, and it was the first three seen.
 
-It is not a repair and must not be reported as one: `import_local` still scores
-0.0 on every task where any test genuinely names the symbol, on all three where
-it has been run.
+Six come back `k > 1` and are listed rather than averaged. Two of them invert the
+picture: `django-15380` and `django-15973` still fail 122 of 134 and 146 of 158
+graded tests once the import is moved, so nearly the whole suite genuinely
+reaches `MigrationAutodetector` and only about 9% of the loss is attributable to
+the import line. On those two, reward damage and coupling extent nearly coincide,
+which is the opposite of what §4's three cases show. Two more are a fourth
+outcome, `HELPER_COUPLED`: every graded test reaches the symbol through a shared
+helper, so recovery is genuinely 0 and no placement of the import can change it.
+
+The aggregate over the `k = 1` rows is 135 of 138 graded tests, 97.8%, on a
+denominator of **three rows** — and selecting on `k = 1` fixes `recovery = N − 1`,
+so that ratio is high by construction and says only that those three `N` are
+large. It is not the median coupled task.
+
+It is not a repair and must not be reported as one: `import_local` scores 0.0 on
+every task where any test genuinely names the symbol, which is every task it has
+been run on.
 
 ---
 

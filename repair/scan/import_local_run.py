@@ -431,8 +431,16 @@ def main():
     done = {(r["task"], r["symbol"]) for r in rows}
 
     for instance_id, symbol in todo:
+        # `done` is updated in the loop, not only seeded from the file. A task
+        # with the same symbol on two files -- sphinx-7590 carries
+        # `DefinitionParser` in both c.py and cpp.py -- appears twice in the
+        # witness rows, and this measurement is per (task, symbol): the rename
+        # covers both files either way. Without the update it ran twice, spent a
+        # second container, and put a byte-identical duplicate in the artifact
+        # that any aggregate would have counted twice.
         if (instance_id, symbol) in done:
             continue
+        done.add((instance_id, symbol))
         print("  %-34s %-22s ..." % (instance_id, symbol), flush=True)
         try:
             row = run_task(instance_id, symbol, by_id)
