@@ -78,6 +78,32 @@ C1 and C2 are properties of the **suite**. C3 is a property of the **test**. The
 come apart precisely when other tests overlap the same behaviour, which is common
 and more common in large suites.
 
+**A condition that fires on failure cannot discriminate a broken apparatus from a
+real negative.** A reward of 0.0 is compatible with both, so any check whose pass
+*is* a 0.0 is satisfied by a tree that never ran. That happened here: on
+`django-11179`'s first run the rename covered one of five referencing files, the
+library did not import, and every cell read 0.0 — C2 read all three mutants as
+CAUGHT and the overlay's positive control was green, over a tree in which nothing
+executed. What separated it from a correct rename was **C1**, the renamed gold
+*recovering* to 1.0, which a broken tree cannot do. The residue grep was added
+afterwards, in response to that run, and it closes the incomplete-rename case
+only: it cannot see a rename corrupted the other way, because `\bCollector\b` does
+not occur inside `NoFastDeleteCollector__renamed` (`CHANGES.md` 34). A check
+written against one failure is not thereby a check on the apparatus. The same
+shape is what stopped the `import_local` run, whose control must reproduce the
+witness and whose `recovery == 0` is a defect rather than a measurement.
+
+What follows for the method is that **every gate needs at least one condition
+whose pass requires the apparatus to work**, and C1 is currently the only one
+here that does. C2 and C3 are both satisfiable by a suite that did not run. C3
+compares the failing sets of the original and the repaired run, and `failing_ids`
+counts a graded id absent from the log as failing — so a suite that never
+executed yields *every* id on both sides, two identical full sets, which compare
+equal and read as no drift. The graded-node-id count below is a patch over that
+for C2 specifically, not a general answer. This is an
+observation over n=2, not a law: two occurrences of one shape, on one task each,
+and the second was recognised only because the first had been written down.
+
 Three constraints on C2, each of which a shortcut would quietly violate:
 
 * **The breakage must be behavioural, with identifiers intact.** A mutant that
