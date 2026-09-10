@@ -350,6 +350,41 @@ class SymbolRename(Operator):
                 refs += 1
             new_src = "\n".join(lines) + ("\n" if src.endswith("\n") else "")
             ast.parse(new_src)
+            # THE ROUND-TRIP INVARIANT, checked on this operator's own output.
+            #
+            # An alpha-rename replaces WHOLE occurrences of `name` with
+            # `new_name` and changes nothing else, so substituting `new_name`
+            # back on a word boundary must reproduce the input byte for byte.
+            #
+            # This is checked here because the span check above cannot see the
+            # class it catches. When a substring search lands inside a longer
+            # identifier, `ln[c0:c1]` is exactly `name` -- being the tail of the
+            # superstring it landed in -- so the span check passes and the
+            # corrupted rewrite goes out as a clean one.
+            #
+            # Weaker forms of the check do not hold, and both were tried first
+            # and failed on the case they were written for. Stripping
+            # `new_name` and looking for a leftover marker passes on
+            # `BaseFoo__renamed`, which CONTAINS `Foo__renamed`. Scanning tokens
+            # for the suffix misses `Foo__renamedlib`, where the edit landed
+            # inside a module path.
+            #
+            # What it does NOT catch, stated so the guarantee is not read wider
+            # than it is: an occurrence that should have been rewritten and was
+            # not still round-trips, because the invariant compares against the
+            # input rather than against a complete rename. It catches an edit
+            # that landed in the wrong place, not an edit that never happened.
+            #
+            # A source already containing the literal token `new_name` cannot
+            # round-trip and is REFUSED. That is the conservative direction, and
+            # the token is constructed not to occur.
+            back = re.sub(rf"\b{re.escape(new_name)}\b", name, new_src)
+            if back != src:
+                raise Refused(
+                    f"round-trip invariant failed in {path}: substituting "
+                    f"{new_name!r} back on a word boundary does not reproduce "
+                    f"the input, so the rewrite of {name!r} landed inside a "
+                    "longer identifier and this is not an alpha-rename")
             out[path] = new_src
         if dynamic:
             # Cite: an `__all__` entry before any other literal; a public

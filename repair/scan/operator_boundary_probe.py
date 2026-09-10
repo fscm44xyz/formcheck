@@ -22,7 +22,15 @@ The span check at :347 cannot catch it:
 
 because the slice IS exactly `name` -- it is the tail of `BaseFoo`.
 
+WHAT CHANGED. The round-trip invariant this probe used to apply from the outside
+now lives INSIDE the operator, as a `Refused`. So the two corrupting cases below
+no longer come back as a silently broken rename; they come back refused. This
+probe therefore checks three outcomes, not two, and a REFUSED is a pass for the
+guard and a fail for the branch -- which is the state until the branches are
+made boundary-aware.
+
     ~/.venv-fc/bin/python repair/scan/operator_boundary_probe.py
+    ~/.venv-fc/bin/python repair/scan/operator_boundary_probe.py --expect-fixed
 """
 
 import os
@@ -40,24 +48,34 @@ CASES = [
     ("superstring FIRST on the import line -- the django shape",
      {"pkg/mod.py": "class Foo:\n    pass\n",
       "pkg/use.py": "from pkg.mod import BaseFoo, Foo\n\n\ndef go():\n    return Foo()\n"},
-     "pkg/mod.py", "Foo", False),
+     "pkg/mod.py", "Foo", True),
     ("superstring SECOND -- index finds the real alias",
      {"pkg/mod.py": "class Foo:\n    pass\n",
       "pkg/use.py": "from pkg.mod import Foo, BaseFoo\n\n\ndef go():\n    return Foo()\n"},
-     "pkg/mod.py", "Foo", True),
+     "pkg/mod.py", "Foo", False),
     ("symbol as a substring of the MODULE path",
      {"pkg/mod.py": "class Foo:\n    pass\n",
       "pkg/use.py": "from pkg.Foolib import Foo\n\n\ndef go():\n    return Foo()\n"},
-     "pkg/mod.py", "Foo", False),
+     "pkg/mod.py", "Foo", True),
     ("subclassing a superstring, no import collision",
      {"pkg/mod.py": "from pkg.base import BaseFoo\n\n\nclass Foo(BaseFoo):\n    pass\n"},
-     "pkg/mod.py", "Foo", True),
+     "pkg/mod.py", "Foo", False),
 ]
+"""(label, sources, target, anchor name, corrupted_by_the_substring_branches)
+
+The last field marks the cases the two substring branches land wrong on. A
+CORRECT operator renames all four cleanly; until the branches are fixed, these
+are the two the round-trip invariant must refuse. Nothing may come back BROKEN
+at any stage -- that is the outcome the invariant exists to remove.
+"""
+
+OK, REFUSED, BROKEN = "OK", "REFUSED", "BROKEN"
 
 
 def run():
-    broken, disagreed = [], []
-    for label, sources, target, name, expect_ok in CASES:
+    """Return {label: outcome}, printing the operator's output for each case."""
+    outcomes = {}
+    for label, sources, target, name, _corrupted in CASES:
         print("=== %s" % label)
         try:
             out, rep = SymbolRename().apply(
@@ -65,6 +83,7 @@ def run():
                 "an issue naming nothing")
         except Refused as exc:
             print("  REFUSED: %s\n" % exc)
+            outcomes[label] = REFUSED
             continue
         ok = True
         for path in sorted(out):
@@ -73,49 +92,64 @@ def run():
             print("  --- %s" % path)
             for ln in out[path].splitlines():
                 print("      %s" % ln)
-            # THE INVARIANT, checked by round trip rather than by inspection.
-            # An alpha-rename replaces occurrences of the identifier `name` with
-            # `name__renamed` and changes nothing else, so substituting the new
-            # identifier back -- on a word boundary -- must reproduce the input
-            # byte for byte. Anything else means the edit landed somewhere it
-            # should not have.
-            #
-            # Two weaker checks were tried first and both failed on the cases
-            # they were written for. Stripping `name + "__renamed"` and looking
-            # for a leftover `"__renamed"` passes on `BaseFoo__renamed`, which
-            # CONTAINS `Foo__renamed` -- the defect being probed, reproduced in
-            # the probe. Scanning tokens for a `__renamed` suffix misses
-            # `Foo__renamedlib`, where the edit landed inside a module path.
+            # The same invariant the operator now applies, kept here as an
+            # INDEPENDENT check. If the operator's copy is ever weakened, this
+            # one still fails the case rather than agreeing with it.
             back = re.sub(r"\b%s__renamed\b" % re.escape(name), name, out[path])
             if back != sources[path]:
                 ok = False
                 print("      !! not an alpha-rename: substituting "
                       "%s__renamed back does not reproduce the input" % name)
         print("  references_rewritten: %d   -> %s\n"
-              % (rep["detail"]["references_rewritten"],
-                 "OK" if ok else "BROKEN RENAME"))
-        if not ok:
-            broken.append(label)
-        if ok != expect_ok:
-            disagreed.append(label)
-    return broken, disagreed
+              % (rep["detail"]["references_rewritten"], "OK" if ok else "BROKEN"))
+        outcomes[label] = OK if ok else BROKEN
+    return outcomes
 
 
-if __name__ == "__main__":
-    broken, disagreed = run()
+def main(expect_fixed):
+    outcomes = run()
+    corrupted = {label for label, _s, _t, _n, c in CASES if c}
+    expected = {label: (OK if expect_fixed or label not in corrupted else REFUSED)
+                for label, _s, _t, _n, _c in CASES}
+
     print("=" * 72)
-    print("BROKEN RENAME on %d of %d probe cases:" % (len(broken), len(CASES)))
-    for b in broken:
-        print("   %s" % b)
-    if disagreed:
-        print("\nProbe expectation disagreed with the measured result on: %s"
-              % ", ".join(disagreed))
-    print("\nCause: f2_operators.py:313 `col = line.index(name)` in the")
-    print("ImportFrom branch is a SUBSTRING search. The span check at :347")
-    print("cannot catch it -- `ln[c0:c1]` is exactly `name`, being the tail of")
-    print("the superstring it landed in.")
+    for label, _s, _t, _n, _c in CASES:
+        got, want = outcomes[label], expected[label]
+        print("  %-8s (expected %-8s) %s%s"
+              % (got, want, label, "" if got == want else "   <-- DISAGREES"))
+
+    broken = [l for l, o in outcomes.items() if o == BROKEN]
+    refused = [l for l, o in outcomes.items() if o == REFUSED]
+    disagreed = [l for l, o in outcomes.items() if o != expected[l]]
+
+    print("\nBROKEN RENAME on %d of %d probe cases." % (len(broken), len(CASES)))
+    print("Round-trip invariant fired (REFUSED) on %d of %d:"
+          % (len(refused), len(CASES)))
+    for l in refused:
+        print("   %s" % l)
+
+    if not expect_fixed:
+        print("\nThe invariant is in the operator; the two substring branches are")
+        print("NOT yet fixed. A refusal above is the guard working and the branch")
+        print("still broken. f2_operators.py:313 `col = line.index(name)` and :337")
+        print("`col = line.find(name, ...)` are substring searches; the span check")
+        print("cannot catch them, because `ln[c0:c1]` is exactly `name`, being the")
+        print("tail of the superstring it landed in.")
+
     print("\nBlast radius on the published 500-task run is UNDETERMINED from the")
     print("records: a witness produced this way and a genuine one both fail with")
     print("`cannot import name '<anchor>'`, so the recorded logs cannot separate")
     print("them. Establishing it means re-running the operator over the 28")
     print("tasks' production trees.")
+
+    if disagreed:
+        print("\nPROBE FAILED -- measured outcome disagreed with expectation on:")
+        for l in disagreed:
+            print("   %s" % l)
+        return 1
+    print("\nProbe agrees with expectation on all %d cases." % len(CASES))
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main("--expect-fixed" in sys.argv[1:]))
