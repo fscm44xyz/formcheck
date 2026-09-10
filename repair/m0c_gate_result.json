@@ -1,0 +1,240 @@
+{
+  "import_local/bug_leftblock": {
+    "f2p_fail": 1,
+    "f2p_failing": [
+      "astropy/modeling/tests/test_separable.py::test_separable[compound_model9-result9]"
+    ],
+    "f2p_pass": 1,
+    "n_parsed": 15,
+    "names_symbol_in_log": false,
+    "p2p_fail": 2,
+    "p2p_failing": [
+      "astropy/modeling/tests/test_separable.py::test_separable[compound_model7-result7]",
+      "astropy/modeling/tests/test_separable.py::test_separable[compound_model8-result8]"
+    ],
+    "p2p_pass": 11,
+    "reward": 0.0
+  },
+  "import_local/bug_revert": {
+    "f2p_fail": 2,
+    "f2p_failing": [
+      "astropy/modeling/tests/test_separable.py::test_separable[compound_model6-result6]",
+      "astropy/modeling/tests/test_separable.py::test_separable[compound_model9-result9]"
+    ],
+    "f2p_pass": 0,
+    "n_parsed": 15,
+    "names_symbol_in_log": false,
+    "p2p_fail": 0,
+    "p2p_failing": [],
+    "p2p_pass": 13,
+    "reward": 0.0
+  },
+  "import_local/bug_stackorder": {
+    "f2p_fail": 2,
+    "f2p_failing": [
+      "astropy/modeling/tests/test_separable.py::test_separable[compound_model6-result6]",
+      "astropy/modeling/tests/test_separable.py::test_separable[compound_model9-result9]"
+    ],
+    "f2p_pass": 0,
+    "n_parsed": 15,
+    "names_symbol_in_log": false,
+    "p2p_fail": 7,
+    "p2p_failing": [
+      "astropy/modeling/tests/test_separable.py::test_cstack",
+      "astropy/modeling/tests/test_separable.py::test_separable[compound_model0-result0]",
+      "astropy/modeling/tests/test_separable.py::test_separable[compound_model2-result2]",
+      "astropy/modeling/tests/test_separable.py::test_separable[compound_model3-result3]",
+      "astropy/modeling/tests/test_separable.py::test_separable[compound_model5-result5]",
+      "astropy/modeling/tests/test_separable.py::test_separable[compound_model7-result7]",
+      "astropy/modeling/tests/test_separable.py::test_separable[compound_model8-result8]"
+    ],
+    "p2p_pass": 6,
+    "reward": 0.0
+  },
+  "import_local/gold": {
+    "f2p_fail": 0,
+    "f2p_failing": [],
+    "f2p_pass": 2,
+    "n_parsed": 15,
+    "names_symbol_in_log": false,
+    "p2p_fail": 0,
+    "p2p_failing": [],
+    "p2p_pass": 13,
+    "reward": 1.0
+  },
+  "import_local/gold_renamed": {
+    "f2p_fail": 0,
+    "f2p_failing": [],
+    "f2p_pass": 2,
+    "n_parsed": 15,
+    "names_symbol_in_log": true,
+    "p2p_fail": 1,
+    "p2p_failing": [
+      "astropy/modeling/tests/test_separable.py::test_cstack"
+    ],
+    "p2p_pass": 12,
+    "reward": 0.0
+  },
+  "original/bug_leftblock": {
+    "f2p_fail": 1,
+    "f2p_failing": [
+      "astropy/modeling/tests/test_separable.py::test_separable[compound_model9-result9]"
+    ],
+    "f2p_pass": 1,
+    "n_parsed": 15,
+    "names_symbol_in_log": false,
+    "p2p_fail": 2,
+    "p2p_failing": [
+      "astropy/modeling/tests/test_separable.py::test_separable[compound_model7-result7]",
+      "astropy/modeling/tests/test_separable.py::test_separable[compound_model8-result8]"
+    ],
+    "p2p_pass": 11,
+    "reward": 0.0
+  },
+  "original/bug_revert": {
+    "f2p_fail": 2,
+    "f2p_failing": [
+      "astropy/modeling/tests/test_separable.py::test_separable[compound_model6-result6]",
+      "astropy/modeling/tests/test_separable.py::test_separable[compound_model9-result9]"
+    ],
+    "f2p_pass": 0,
+    "n_parsed": 15,
+    "names_symbol_in_log": false,
+    "p2p_fail": 0,
+    "p2p_failing": [],
+    "p2p_pass": 13,
+    "reward": 0.0
+  },
+  "original/bug_stackorder": {
+    "f2p_fail": 2,
+    "f2p_failing": [
+      "astropy/modeling/tests/test_separable.py::test_separable[compound_model6-result6]",
+      "astropy/modeling/tests/test_separable.py::test_separable[compound_model9-result9]"
+    ],
+    "f2p_pass": 0,
+    "n_parsed": 15,
+    "names_symbol_in_log": false,
+    "p2p_fail": 7,
+    "p2p_failing": [
+      "astropy/modeling/tests/test_separable.py::test_cstack",
+      "astropy/modeling/tests/test_separable.py::test_separable[compound_model0-result0]",
+      "astropy/modeling/tests/test_separable.py::test_separable[compound_model2-result2]",
+      "astropy/modeling/tests/test_separable.py::test_separable[compound_model3-result3]",
+      "astropy/modeling/tests/test_separable.py::test_separable[compound_model5-result5]",
+      "astropy/modeling/tests/test_separable.py::test_separable[compound_model7-result7]",
+      "astropy/modeling/tests/test_separable.py::test_separable[compound_model8-result8]"
+    ],
+    "p2p_pass": 6,
+    "reward": 0.0
+  },
+  "original/gold": {
+    "f2p_fail": 0,
+    "f2p_failing": [],
+    "f2p_pass": 2,
+    "n_parsed": 15,
+    "names_symbol_in_log": false,
+    "p2p_fail": 0,
+    "p2p_failing": [],
+    "p2p_pass": 13,
+    "reward": 1.0
+  },
+  "original/gold_renamed": {
+    "f2p_fail": 2,
+    "f2p_failing": [
+      "astropy/modeling/tests/test_separable.py::test_separable[compound_model6-result6]",
+      "astropy/modeling/tests/test_separable.py::test_separable[compound_model9-result9]"
+    ],
+    "f2p_pass": 0,
+    "n_parsed": 1,
+    "names_symbol_in_log": true,
+    "p2p_fail": 13,
+    "p2p_failing": [
+      "astropy/modeling/tests/test_separable.py::test_coord_matrix",
+      "astropy/modeling/tests/test_separable.py::test_cdot",
+      "astropy/modeling/tests/test_separable.py::test_cstack",
+      "astropy/modeling/tests/test_separable.py::test_arith_oper",
+      "astropy/modeling/tests/test_separable.py::test_separable[compound_model0-result0]",
+      "astropy/modeling/tests/test_separable.py::test_separable[compound_model1-result1]",
+      "astropy/modeling/tests/test_separable.py::test_separable[compound_model2-result2]",
+      "astropy/modeling/tests/test_separable.py::test_separable[compound_model3-result3]",
+      "astropy/modeling/tests/test_separable.py::test_separable[compound_model4-result4]",
+      "astropy/modeling/tests/test_separable.py::test_separable[compound_model5-result5]"
+    ],
+    "p2p_pass": 0,
+    "reward": 0.0
+  },
+  "repaired/bug_leftblock": {
+    "f2p_fail": 1,
+    "f2p_failing": [
+      "astropy/modeling/tests/test_separable.py::test_separable[compound_model9-result9]"
+    ],
+    "f2p_pass": 1,
+    "n_parsed": 15,
+    "names_symbol_in_log": false,
+    "p2p_fail": 2,
+    "p2p_failing": [
+      "astropy/modeling/tests/test_separable.py::test_separable[compound_model7-result7]",
+      "astropy/modeling/tests/test_separable.py::test_separable[compound_model8-result8]"
+    ],
+    "p2p_pass": 11,
+    "reward": 0.0
+  },
+  "repaired/bug_revert": {
+    "f2p_fail": 2,
+    "f2p_failing": [
+      "astropy/modeling/tests/test_separable.py::test_separable[compound_model6-result6]",
+      "astropy/modeling/tests/test_separable.py::test_separable[compound_model9-result9]"
+    ],
+    "f2p_pass": 0,
+    "n_parsed": 15,
+    "names_symbol_in_log": false,
+    "p2p_fail": 0,
+    "p2p_failing": [],
+    "p2p_pass": 13,
+    "reward": 0.0
+  },
+  "repaired/bug_stackorder": {
+    "f2p_fail": 2,
+    "f2p_failing": [
+      "astropy/modeling/tests/test_separable.py::test_separable[compound_model6-result6]",
+      "astropy/modeling/tests/test_separable.py::test_separable[compound_model9-result9]"
+    ],
+    "f2p_pass": 0,
+    "n_parsed": 15,
+    "names_symbol_in_log": false,
+    "p2p_fail": 7,
+    "p2p_failing": [
+      "astropy/modeling/tests/test_separable.py::test_cstack",
+      "astropy/modeling/tests/test_separable.py::test_separable[compound_model0-result0]",
+      "astropy/modeling/tests/test_separable.py::test_separable[compound_model2-result2]",
+      "astropy/modeling/tests/test_separable.py::test_separable[compound_model3-result3]",
+      "astropy/modeling/tests/test_separable.py::test_separable[compound_model5-result5]",
+      "astropy/modeling/tests/test_separable.py::test_separable[compound_model7-result7]",
+      "astropy/modeling/tests/test_separable.py::test_separable[compound_model8-result8]"
+    ],
+    "p2p_pass": 6,
+    "reward": 0.0
+  },
+  "repaired/gold": {
+    "f2p_fail": 0,
+    "f2p_failing": [],
+    "f2p_pass": 2,
+    "n_parsed": 15,
+    "names_symbol_in_log": false,
+    "p2p_fail": 0,
+    "p2p_failing": [],
+    "p2p_pass": 13,
+    "reward": 1.0
+  },
+  "repaired/gold_renamed": {
+    "f2p_fail": 0,
+    "f2p_failing": [],
+    "f2p_pass": 2,
+    "n_parsed": 15,
+    "names_symbol_in_log": false,
+    "p2p_fail": 0,
+    "p2p_failing": [],
+    "p2p_pass": 13,
+    "reward": 1.0
+  }
+}

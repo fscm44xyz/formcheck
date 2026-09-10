@@ -1,0 +1,20 @@
+diff --git a/astropy/modeling/tests/test_separable.py b/astropy/modeling/tests/test_separable.py
+--- a/astropy/modeling/tests/test_separable.py
++++ b/astropy/modeling/tests/test_separable.py
+@@ -11,7 +11,7 @@
+ from astropy.modeling import custom_model, models
+ from astropy.modeling.models import Mapping
+ from astropy.modeling.separable import (_coord_matrix, is_separable, _cdot,
+-                                        _cstack, _arith_oper, separability_matrix)
++                                        _arith_oper, separability_matrix)
+ from astropy.modeling.core import ModelDefinitionError
+ 
+ 
+@@ -113,6 +113,7 @@
+ 
+ 
+ def test_cstack():
++    from astropy.modeling.separable import _cstack
+     result = _cstack(sh1, scl1)
+     assert_allclose(result, np.array([[1, 0], [0, 1]]))
+ 

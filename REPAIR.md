@@ -13,7 +13,8 @@ a rule until more than one case has produced it.
 ## Candidate pattern 1 — the coupling may live in how the test *reaches* the
 ## code, not in what it *asserts*
 
-**Status: a hypothesis from n = 1. Not a rule, not yet a family.**
+**Status: held on n = 2, in two repos and both failure shapes. Two cases are not
+a family either — but it has now survived the case chosen to break it.**
 
 The plan for `pydata__xarray-4966` was to rewrite the coupled assertions. When
 the tests were actually read, the assertions turned out to be fine:
@@ -50,36 +51,103 @@ routinely breaks the second. If that asymmetry is general, then "repair the
 assertion" is the wrong frame for a whole class of these, and the question to ask
 of a coupled test is *which surface is coupled* before proposing anything.
 
-**Why it might not.** One case, one repo, one operator, one shape. Specifically:
+**It held on the second case, and more cleanly.** `astropy__astropy-12907` was
+picked by criteria fixed in advance — the `from … import` shape, a different
+repo, `p2p_coupling`, single-file gold — precisely because that shape might not
+have a test body to rewrite at all. It does, and the pattern applies: in
+`test_cstack` the assertion expressions are not merely equivalent to the
+originals, they are **byte-identical**. Only the call changed, from
+`_cstack(sh1, rot)` to `separability_matrix(sh1 & rot)`, and the expected
+matrices did not have to be touched. `separability_matrix` is exported in that
+module's `__all__`; `_cstack` is the private function behind the `&` operator it
+uses. Verified numerically before the repair was written, for all three cases.
 
-* `xarray-4966` is the module-attribute shape (`AttributeError: module … has no
-  attribute …`), which is **9 of the 28** tasks. The larger group — 19 of 28 — is
-  `ImportError: cannot import name …`, and 10 of those die at *collection*: the
-  test module does not import at all. There may be no test body to rewrite, and
-  the entry-point/assertion distinction may not even apply.
-* xarray had a public entry point that reaches the same behaviour with the same
-  discriminating power. That is a property of the library, not of the coupling.
-  A task whose behaviour is only reachable through an internal symbol cannot be
-  repaired this way at all, and it is not yet known how common that is.
-* The repaired test kept identical detection: every mutant's F2P breakdown was
-  unchanged. Whether a public entry point *generally* preserves discrimination,
-  or whether xarray's `decode_cf` happened to be a thin wrapper, is untested.
+**What is still not established.** Both repaired tasks happened to have a public
+entry point reaching the same behaviour with the same discriminating power. That
+is a property of the library, not of the coupling. A task whose behaviour is only
+reachable through an internal symbol cannot be repaired this way at all, and how
+common that is remains unmeasured. The remaining caveats:
 
-**What would confirm or kill it.** A second and third case in different repos and
-different shapes. If the `from … import` shape repairs by the same move — change
-what the test imports, leave the assertions alone — the pattern survives. If it
-requires rewriting assertions, or cannot be repaired at all, the pattern is
-xarray-specific and this section should say so.
+* **django is half the corpus and untested.** 14 of the 28 witness tasks are
+  django, excluded so far because their failures arrive as a synthetic
+  `unittest.loader._FailedTest` with no real node ids in the status map. Nothing
+  here has been shown to apply to them.
+* **Both cases were `symbol_rename`.** It is the only operator producing
+  witnesses, so this is not a limitation of the sample — but the pattern is a
+  claim about renames, not about coupling in general.
+* Two repos out of nine. `pytest`, `sphinx`, `pylint`, `scikit-learn`, `requests`
+  and `sympy` are untried.
 
-Evidence: `repair/M0B_RESULT.md`, `repair/m0b_gate.py`,
-`repair/test_repair_m0b.py`.
+**What would confirm or kill it.** A case where the coupled test has no public
+entry point reaching the same behaviour. The pattern predicts such a task cannot
+be repaired at the test level at all — and if one is found and *is* repairable by
+rewriting assertions, the pattern is wrong about which surface matters.
+
+Evidence: `repair/M0B_RESULT.md`, `repair/M0C_RESULT.md`, `repair/gate.py`,
+`repair/test_repair_m0b.py`, `repair/test_repair_m0c.py`.
+
+---
+
+## Candidate pattern 2 — at module scope, blast radius is unrelated to how many
+## tests are actually coupled
+
+**Status: measured once, on `astropy__astropy-12907`. n = 1.**
+
+`test_separable.py` reaches production code through one module-level import:
+
+```python
+from astropy.modeling.separable import (_coord_matrix, is_separable, _cdot,
+                                        _cstack, _arith_oper, separability_matrix)
+```
+
+`_cstack` is used by **exactly one** of the module's six test functions. Renaming
+it fails **all 15** graded tests, because the module stops importing. Both
+FAIL_TO_PASS tests — the ones the issue is about — already reach the code through
+public API and are pure collateral.
+
+The split was measured rather than argued, with a third test variant
+(`import_local`) that changes nothing but where `_cstack` is imported:
+
+| variant, under the rename | F2P | P2P | reward |
+|---|---|---|---|
+| `original` | 0/2 | 0/13 | 0.0 |
+| `import_local` | 2/2 | 12/13 | 0.0 |
+| `repaired` | 2/2 | 13/13 | 1.0 |
+
+**14 of 15 failures were the import line.** The 15th is intrinsic: `test_cstack`
+is a unit test whose *subject* is the renamed symbol, and no placement of an
+import saves a test that calls `_cstack` by name.
+
+Two consequences worth keeping separate:
+
+* **Collateral coupling** is unambiguously a reward defect. Those 14 tests assert
+  public behaviour and fail for a name they never mention.
+* **Intrinsic coupling** is a judgement. A unit test of a private helper names it
+  because that is what it tests. Repairing it means changing what the test enters
+  through — defensible here only because `separability_matrix` demonstrably
+  computes the same thing for these inputs, checked before the repair was
+  written.
+
+If this holds elsewhere, the headline number's *blast radius* figure — "in 15 of
+28 tasks every graded test fails" (`README.md`) — is largely a statement about
+module-level imports rather than about how much of a suite is really coupled.
+That would be worth knowing and is not yet known: it needs the same
+`import_local` measurement on more of the 19 import-shape tasks.
+
+**Not repaired, and reported instead:** `_coord_matrix`, `_cdot` and
+`_arith_oper` sit in the same import with the identical latent coupling.
+`formcheck` never flagged them because the gold patch does not touch them. Fixing
+them would be repairing what the harness did not find.
+
+Evidence: `repair/M0C_RESULT.md`,
+`test_the_blast_radius_was_almost_entirely_the_import_line`.
 
 ---
 
 ## Open question 1 — an operator that anchors on public re-exports
 
 **Status: deliberately not done. Logged with the reasoning, not deferred
-silently.**
+silently. Recurred identically on the second case.**
 
 After repairing `xarray-4966`, `formcheck` reports no witness. That verdict is
 narrower than it looks, and the gap is worth stating precisely.
@@ -102,6 +170,15 @@ is a `formcheck` verdict**:
 
 Both are checkable and both are checked (`test_the_repaired_test_names_no_
 internal_symbol`). Neither is the harness saying "I looked and found nothing."
+
+**The same gap reappeared unchanged on `astropy-12907`.** That gold patch edits
+one line inside `_cstack`, so `_cstack` is the only anchor before and after, and
+`separability_matrix` — the symbol the repair now depends on — is not probed. The
+two supporting facts are the same two: it is exported (`__all__` in
+`astropy/modeling/separable.py` line 24), and the repaired test names no private
+symbol. This is now a property of the method, not a quirk of one task: **every
+repair of this kind will end with an unprobed new entry point**, and each one is
+argued rather than measured.
 
 **Why the obvious fix is refused.** The obvious fix is an operator that anchors
 on public re-exports, so the new entry point is probed too. It is refused *now*
