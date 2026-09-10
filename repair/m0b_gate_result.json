@@ -8,6 +8,7 @@
       "xarray/tests/test_coding.py::test_decode_signed_from_unsigned[8]"
     ],
     "f2p_pass": 0,
+    "graded_ids_present": 25,
     "n_parsed": 25,
     "names_symbol_in_log": false,
     "p2p_fail": 0,
@@ -24,6 +25,7 @@
       "xarray/tests/test_coding.py::test_decode_signed_from_unsigned[8]"
     ],
     "f2p_pass": 0,
+    "graded_ids_present": 25,
     "n_parsed": 25,
     "names_symbol_in_log": false,
     "p2p_fail": 0,
@@ -39,6 +41,7 @@
       "xarray/tests/test_coding.py::test_decode_signed_from_unsigned[8]"
     ],
     "f2p_pass": 1,
+    "graded_ids_present": 25,
     "n_parsed": 25,
     "names_symbol_in_log": false,
     "p2p_fail": 0,
@@ -50,6 +53,7 @@
     "f2p_fail": 0,
     "f2p_failing": [],
     "f2p_pass": 4,
+    "graded_ids_present": 25,
     "n_parsed": 25,
     "names_symbol_in_log": false,
     "p2p_fail": 0,
@@ -66,6 +70,7 @@
       "xarray/tests/test_coding.py::test_decode_signed_from_unsigned[8]"
     ],
     "f2p_pass": 0,
+    "graded_ids_present": 25,
     "n_parsed": 25,
     "names_symbol_in_log": true,
     "p2p_fail": 4,
@@ -87,6 +92,7 @@
       "xarray/tests/test_coding.py::test_decode_signed_from_unsigned[8]"
     ],
     "f2p_pass": 0,
+    "graded_ids_present": 25,
     "n_parsed": 25,
     "names_symbol_in_log": false,
     "p2p_fail": 0,
@@ -103,6 +109,7 @@
       "xarray/tests/test_coding.py::test_decode_signed_from_unsigned[8]"
     ],
     "f2p_pass": 0,
+    "graded_ids_present": 25,
     "n_parsed": 25,
     "names_symbol_in_log": false,
     "p2p_fail": 0,
@@ -118,6 +125,7 @@
       "xarray/tests/test_coding.py::test_decode_signed_from_unsigned[8]"
     ],
     "f2p_pass": 1,
+    "graded_ids_present": 25,
     "n_parsed": 25,
     "names_symbol_in_log": false,
     "p2p_fail": 0,
@@ -129,6 +137,7 @@
     "f2p_fail": 0,
     "f2p_failing": [],
     "f2p_pass": 4,
+    "graded_ids_present": 25,
     "n_parsed": 25,
     "names_symbol_in_log": false,
     "p2p_fail": 0,
@@ -140,6 +149,7 @@
     "f2p_fail": 0,
     "f2p_failing": [],
     "f2p_pass": 4,
+    "graded_ids_present": 25,
     "n_parsed": 25,
     "names_symbol_in_log": false,
     "p2p_fail": 0,

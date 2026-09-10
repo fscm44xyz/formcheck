@@ -16,6 +16,9 @@ One file per defect class that has actually cost a run:
     ../repair/test_repair_m0c.py
                        the import shape, and how much of its blast
                        radius was one import line                  (repair-M0c)
+    ../repair/test_repair_m0d.py
+                       django's runner, and a repair that passes both
+                       conditions and is still weaker                (repair-M0d)
 
 Deliberately NOT covered here, because they need a container: the M0 gate
 (`scale/m0_run.py`, a 3.8 GB pull) and anything exercising a real image. Those
@@ -37,7 +40,8 @@ SUITES = ["test_scope.py", "test_rotation.py", "test_partition.py",
           "test_guards_fire.py",
           os.path.join("..", "repair", "test_repair_m0a.py"),
           os.path.join("..", "repair", "test_repair_m0b.py"),
-          os.path.join("..", "repair", "test_repair_m0c.py")]
+          os.path.join("..", "repair", "test_repair_m0c.py"),
+          os.path.join("..", "repair", "test_repair_m0d.py")]
 
 
 def main():

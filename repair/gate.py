@@ -101,6 +101,29 @@ class Gate:
                 if old not in src:
                     raise RuntimeError(f"rename anchor {old!r} missing in {path}")
                 self.put(f"{WORKDIR}/{path}", src.replace(old, new))
+            # THE RENAME MUST BE COMPLETE ACROSS PRODUCTION SOURCES.
+            #
+            # `symbol_rename` rewrites every reference in every scanned
+            # production file; a gate that renames a subset is not applying the
+            # transform the witness came from, it is breaking the library. That
+            # happened here on the first run: `Collector` is referenced from five
+            # django modules and the config listed one, so the test module failed
+            # to import in EVERY variant -- including the repaired one, which no
+            # longer mentions the symbol at all. The reward was 0.0 throughout and
+            # read exactly like "the repair does not work".
+            #
+            # An incomplete rename is now a hard error rather than a plausible
+            # row. The residue is searched over production sources only: test
+            # files legitimately still contain the old name, and rewriting them
+            # is precisely what the transform must never do.
+            residue = self.sh(
+                f"grep -rl '\\b{old}\\b' --include='*.py' . "
+                f"| grep -v '/tests\\?/' | sort").stdout.split()
+            if residue:
+                raise RuntimeError(
+                    f"incomplete rename: {old!r} still appears in production "
+                    f"source(s) {residue} that `rename` does not list. The gate "
+                    f"would be measuring a broken library, not an alpha-rename.")
         elif solution in self.mutants:
             m = self.mutants[solution]
             self.edit(self.target, m["old"], m["new"], solution)
@@ -119,7 +142,33 @@ class Gate:
         r = self.sh(f"export PATH={os.path.dirname(self.python)}:$PATH "
                     f"&& cd {WORKDIR} && {full}")
         log = "+ " + full + "\n" + (r.stdout or "") + "\n" + (r.stderr or "")
-        return log, grade_log(log, meta)
+        return log, grade_log(log, meta), self.graded_ids_present(log, meta, cmd)
+
+    @staticmethod
+    def graded_ids_present(log, meta, cmd):
+        """How many graded node ids the run actually REPORTED.
+
+        `get_eval_tests_report` walks the gold lists and asks `test_failed`,
+        which is `case not in sm or sm[case] in [FAILED, ERROR]` -- so a node id
+        the run never produced is scored **identically** to one that ran and
+        failed. Reward cannot tell them apart, by construction.
+
+        That is survivable while every run executes its suite. It stops being
+        survivable under a runner that reports a module-level import failure as
+        one synthetic `unittest.loader._FailedTest` and nothing else: there,
+        ANY mutant that breaks the import -- for any reason, including a
+        typo -- scores 0.0 with zero graded ids present, and a gate reading only
+        the reward would record it CAUGHT while proving nothing about behaviour.
+
+        So the count is recorded per run and `report` requires every mutant to
+        have reported as many graded ids as the gold did. This TIGHTENS the
+        gate; it is not an accommodation of any runner, and it applies to all
+        tasks equally.
+        """
+        from swebench.harness.log_parsers import MAP_REPO_TO_PARSER
+        status_map = MAP_REPO_TO_PARSER[meta["repo"]](log.split(cmd)[-1], None)
+        graded = list(meta["FAIL_TO_PASS"]) + list(meta["PASS_TO_PASS"])
+        return sum(1 for t in graded if t in status_map)
 
     def run(self, keep_image=False):
         from container_task import build_task_spec, check_tests_overlay
@@ -151,7 +200,7 @@ class Gate:
             for test in self.test_variants:
                 for solution in self.solutions:
                     self.build(solution, test)
-                    log, g = self.graded(spec)
+                    log, g, present = self.graded(spec)
                     old = self.rename[0]
                     results[f"{test}/{solution}"] = {
                         "reward": g["reward"], "f2p_pass": g["f2p_pass"],
@@ -159,6 +208,7 @@ class Gate:
                         "p2p_fail": g["p2p_fail"], "n_parsed": g["n_parsed"],
                         "f2p_failing": g["f2p_failing"],
                         "p2p_failing": g["p2p_failing"],
+                        "graded_ids_present": present,
                         "names_symbol_in_log": old in log and (
                             "has no attribute" in log
                             or "cannot import name" in log),
@@ -200,6 +250,7 @@ class Gate:
         ok &= c1 == 1.0
 
         print("\n  C2  behavioural mutants, repaired test:")
+        baseline_ids = results["repaired/gold"]["graded_ids_present"]
         for name in self.mutants:
             r = results[f"repaired/{name}"]["reward"]
             caught = r == 0.0
@@ -214,11 +265,43 @@ class Gate:
                     ok = False
                     print(f"        !! {v}/{name} fails by naming the symbol "
                           "-- coupled, not behavioural; it proves nothing")
+            present = results[f"repaired/{name}"]["graded_ids_present"]
+            if present < baseline_ids:
+                ok = False
+                print(f"        !! only {present}/{baseline_ids} graded node "
+                      "ids were reported -- this 0.0 is ABSENCE, not detection: "
+                      "the suite did not run")
 
         g1 = results["repaired/gold"]["reward"]
         print(f"\n  G1  original gold, repaired test reward = {g1}  "
               f"{'OK' if g1 == 1.0 else 'FAIL'}")
         ok &= g1 == 1.0
+
+        # DETECTION DRIFT. Reward 0.0 on both sides can hide a repaired test
+        # that stopped catching a mutant the original caught, when some OTHER
+        # test in the suite happens to catch it instead. The suite-level verdict
+        # is unchanged and the repaired test is strictly weaker. Reported
+        # separately from C2 because it is a different claim, and it does not
+        # flip the gate on its own -- the reward is what the reward is.
+        drift = []
+        for name in self.mutants:
+            base = results[f"original/{name}"]
+            rep = results[f"repaired/{name}"]
+            if (base["f2p_pass"], base["f2p_fail"]) != (rep["f2p_pass"],
+                                                        rep["f2p_fail"]):
+                drift.append((name, base, rep))
+        if drift:
+            print("\n  !! DETECTION DRIFT -- the repaired test catches less than "
+                  "the original:")
+            for name, base, rep in drift:
+                print(f"       {name:16s} F2P {base['f2p_pass']}/"
+                      f"{base['f2p_pass'] + base['f2p_fail']} -> "
+                      f"{rep['f2p_pass']}/{rep['f2p_pass'] + rep['f2p_fail']}"
+                      "   (the suite still scores 0.0; the repaired test does "
+                      "not do it)")
+        else:
+            print("\n  detection drift: none -- every mutant's F2P breakdown is "
+                  "identical under the original and repaired tests")
 
         print(f"\n  -> {'PASS' if ok else 'FAIL'}    {self.out}")
         return 0 if ok else 1

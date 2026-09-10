@@ -1343,3 +1343,68 @@ D2 was invisible. Before the fix: 6/8. After: 8/8; full fast suite 92/92.
 
 `scale/container_task.py` (`_digest_paths`, `_tree_digest`);
 `scale/test_digest.py`; `repair/CONTEXT.md` §4.3.
+
+---
+
+## 28. Two gate defects on the first django task, both of the family
+
+Neither is in the detection path — both are in `repair/gate.py`, the two-condition
+repair gate — and both are recorded because they returned a verdict for a reason
+invisible in the verdict.
+
+**D1 — an incomplete rename read exactly like a failed repair.** `m0d_gate`
+listed `django/db/models/deletion.py` as the only file to rename `Collector` in.
+It is referenced from **five** django modules, so renaming one of them broke
+django itself rather than performing an alpha-rename. Every variant then failed
+to import — including the *repaired* one, which no longer mentions the symbol at
+all — and every cell read `0.0 / F2P 0/1 / P2P 0/40`. That is precisely the
+output a genuinely failed repair produces. It was caught only because the
+`import_local` diagnostic recovered *nothing*, which cannot happen if the import
+line is the coupling: the number was wrong in a way the gate could not report.
+
+`gate.build` now greps production sources for the old name after applying the
+rename and raises on any residue, naming the files. Confirmed against the real
+operator afterwards, on a code path that did not produce the config:
+`detail.files_changed` lists the same five files and `references_rewritten: 9`.
+That cross-check is only possible because entry 27's sibling — persisting
+`report["detail"]` — put the operator's own account of the transform into the
+record.
+
+**D2 — C2 reports CAUGHT for a test that detects nothing.** The condition "a
+broken solution still scores 0.0" is read off the **task reward**, which is a
+property of the suite. Whether the *repaired test* still discriminates is a
+property of the test. They come apart whenever another test covers the same
+behaviour.
+
+On `django-11179` the repair deletes a precondition assertion, and the mutant
+`bug_nofast` — which disables exactly the code path that precondition pinned —
+goes from failing the F2P test (0/1) to passing it (1/1). The task reward is 0.0
+under both, because ten other PASS_TO_PASS tests catch the mutant. The gate
+printed `bug_nofast reward = 0.0 CAUGHT` for a test that had stopped detecting it.
+
+`report` now computes **detection drift** — any mutant whose F2P breakdown differs
+between the original and the repaired test — and prints it separately. It does
+not flip the verdict: the reward is what the reward is, and overstating drift as
+a failure would be its own inversion. It says what the reward cannot.
+
+Re-run against the two shipped repairs: *"detection drift: none"* on both, every
+pre-existing value unchanged. So `xarray-4966` and `astropy-12907` are confirmed
+clean by a check that did not exist when they were accepted, which is the only
+form of confirmation worth anything here.
+
+**Why both belong in this file.** D1 is a check whose failure mode is a plausible
+number; D2 is a check whose success mode is a plausible number. `REPORT.md` §7's
+family is "a check that reports a verdict for a reason invisible in its own
+output", and these are the same shape one milestone further out — in the machinery
+built to *repair* the defect, rather than in the machinery built to detect it.
+
+A third, smaller one is worth a line because the guard that caught it was written
+for an earlier milestone and had never fired: `setattr(instance,
+model._meta.pk.attname, None)` occurs twice in `deletion.py` — the gold adds it to
+the fast path, the slow path always had it — and `gate.edit`'s "anchor must appear
+exactly once" check refused rather than editing whichever one `str.replace` found
+first. An ambiguous anchor would have produced a mutant of a code path the test
+never reaches, reported as a caught mutant.
+
+`repair/gate.py` (`build`, `edit`, `report`, `graded_ids_present`);
+`repair/m0d_gate.py`; `repair/M0D_RESULT.md`; `repair/test_repair_m0d.py`.

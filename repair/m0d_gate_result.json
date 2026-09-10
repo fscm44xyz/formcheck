@@ -1,0 +1,246 @@
+{
+  "import_local/bug_nofast": {
+    "f2p_fail": 1,
+    "f2p_failing": [
+      "test_fast_delete_instance_set_pk_none (delete.tests.FastDeleteTests)"
+    ],
+    "f2p_pass": 0,
+    "graded_ids_present": 41,
+    "n_parsed": 53,
+    "names_symbol_in_log": false,
+    "p2p_fail": 10,
+    "p2p_failing": [
+      "test_fast_delete_empty_no_update_can_self_select (delete.tests.FastDeleteTests)",
+      "test_fast_delete_fk (delete.tests.FastDeleteTests)",
+      "test_fast_delete_inheritance (delete.tests.FastDeleteTests)",
+      "test_fast_delete_joined_qs (delete.tests.FastDeleteTests)",
+      "test_fast_delete_large_batch (delete.tests.FastDeleteTests)",
+      "test_fast_delete_m2m (delete.tests.FastDeleteTests)",
+      "test_fast_delete_qs (delete.tests.FastDeleteTests)",
+      "test_fast_delete_revm2m (delete.tests.FastDeleteTests)",
+      "test_model_delete_returns_num_rows (delete.tests.DeletionTests)",
+      "test_queryset_delete_returns_num_rows (delete.tests.DeletionTests)"
+    ],
+    "p2p_pass": 30,
+    "reward": 0.0
+  },
+  "import_local/bug_revert": {
+    "f2p_fail": 1,
+    "f2p_failing": [
+      "test_fast_delete_instance_set_pk_none (delete.tests.FastDeleteTests)"
+    ],
+    "f2p_pass": 0,
+    "graded_ids_present": 41,
+    "n_parsed": 43,
+    "names_symbol_in_log": false,
+    "p2p_fail": 0,
+    "p2p_failing": [],
+    "p2p_pass": 40,
+    "reward": 0.0
+  },
+  "import_local/bug_zero": {
+    "f2p_fail": 1,
+    "f2p_failing": [
+      "test_fast_delete_instance_set_pk_none (delete.tests.FastDeleteTests)"
+    ],
+    "f2p_pass": 0,
+    "graded_ids_present": 41,
+    "n_parsed": 43,
+    "names_symbol_in_log": false,
+    "p2p_fail": 0,
+    "p2p_failing": [],
+    "p2p_pass": 40,
+    "reward": 0.0
+  },
+  "import_local/gold": {
+    "f2p_fail": 0,
+    "f2p_failing": [],
+    "f2p_pass": 1,
+    "graded_ids_present": 41,
+    "n_parsed": 42,
+    "names_symbol_in_log": false,
+    "p2p_fail": 0,
+    "p2p_failing": [],
+    "p2p_pass": 40,
+    "reward": 1.0
+  },
+  "import_local/gold_renamed": {
+    "f2p_fail": 1,
+    "f2p_failing": [
+      "test_fast_delete_instance_set_pk_none (delete.tests.FastDeleteTests)"
+    ],
+    "f2p_pass": 0,
+    "graded_ids_present": 41,
+    "n_parsed": 43,
+    "names_symbol_in_log": true,
+    "p2p_fail": 0,
+    "p2p_failing": [],
+    "p2p_pass": 40,
+    "reward": 0.0
+  },
+  "original/bug_nofast": {
+    "f2p_fail": 1,
+    "f2p_failing": [
+      "test_fast_delete_instance_set_pk_none (delete.tests.FastDeleteTests)"
+    ],
+    "f2p_pass": 0,
+    "graded_ids_present": 41,
+    "n_parsed": 53,
+    "names_symbol_in_log": false,
+    "p2p_fail": 10,
+    "p2p_failing": [
+      "test_fast_delete_empty_no_update_can_self_select (delete.tests.FastDeleteTests)",
+      "test_fast_delete_fk (delete.tests.FastDeleteTests)",
+      "test_fast_delete_inheritance (delete.tests.FastDeleteTests)",
+      "test_fast_delete_joined_qs (delete.tests.FastDeleteTests)",
+      "test_fast_delete_large_batch (delete.tests.FastDeleteTests)",
+      "test_fast_delete_m2m (delete.tests.FastDeleteTests)",
+      "test_fast_delete_qs (delete.tests.FastDeleteTests)",
+      "test_fast_delete_revm2m (delete.tests.FastDeleteTests)",
+      "test_model_delete_returns_num_rows (delete.tests.DeletionTests)",
+      "test_queryset_delete_returns_num_rows (delete.tests.DeletionTests)"
+    ],
+    "p2p_pass": 30,
+    "reward": 0.0
+  },
+  "original/bug_revert": {
+    "f2p_fail": 1,
+    "f2p_failing": [
+      "test_fast_delete_instance_set_pk_none (delete.tests.FastDeleteTests)"
+    ],
+    "f2p_pass": 0,
+    "graded_ids_present": 41,
+    "n_parsed": 43,
+    "names_symbol_in_log": false,
+    "p2p_fail": 0,
+    "p2p_failing": [],
+    "p2p_pass": 40,
+    "reward": 0.0
+  },
+  "original/bug_zero": {
+    "f2p_fail": 1,
+    "f2p_failing": [
+      "test_fast_delete_instance_set_pk_none (delete.tests.FastDeleteTests)"
+    ],
+    "f2p_pass": 0,
+    "graded_ids_present": 41,
+    "n_parsed": 43,
+    "names_symbol_in_log": false,
+    "p2p_fail": 0,
+    "p2p_failing": [],
+    "p2p_pass": 40,
+    "reward": 0.0
+  },
+  "original/gold": {
+    "f2p_fail": 0,
+    "f2p_failing": [],
+    "f2p_pass": 1,
+    "graded_ids_present": 41,
+    "n_parsed": 42,
+    "names_symbol_in_log": false,
+    "p2p_fail": 0,
+    "p2p_failing": [],
+    "p2p_pass": 40,
+    "reward": 1.0
+  },
+  "original/gold_renamed": {
+    "f2p_fail": 1,
+    "f2p_failing": [
+      "test_fast_delete_instance_set_pk_none (delete.tests.FastDeleteTests)"
+    ],
+    "f2p_pass": 0,
+    "graded_ids_present": 0,
+    "n_parsed": 2,
+    "names_symbol_in_log": true,
+    "p2p_fail": 40,
+    "p2p_failing": [
+      "test_fast_delete_empty_no_update_can_self_select (delete.tests.FastDeleteTests)",
+      "test_fast_delete_fk (delete.tests.FastDeleteTests)",
+      "test_fast_delete_inheritance (delete.tests.FastDeleteTests)",
+      "test_fast_delete_joined_qs (delete.tests.FastDeleteTests)",
+      "test_fast_delete_large_batch (delete.tests.FastDeleteTests)",
+      "test_fast_delete_m2m (delete.tests.FastDeleteTests)",
+      "test_fast_delete_qs (delete.tests.FastDeleteTests)",
+      "test_fast_delete_revm2m (delete.tests.FastDeleteTests)",
+      "test_auto (delete.tests.OnDeleteTests)",
+      "test_auto_nullable (delete.tests.OnDeleteTests)"
+    ],
+    "p2p_pass": 0,
+    "reward": 0.0
+  },
+  "repaired/bug_nofast": {
+    "f2p_fail": 0,
+    "f2p_failing": [],
+    "f2p_pass": 1,
+    "graded_ids_present": 41,
+    "n_parsed": 52,
+    "names_symbol_in_log": false,
+    "p2p_fail": 10,
+    "p2p_failing": [
+      "test_fast_delete_empty_no_update_can_self_select (delete.tests.FastDeleteTests)",
+      "test_fast_delete_fk (delete.tests.FastDeleteTests)",
+      "test_fast_delete_inheritance (delete.tests.FastDeleteTests)",
+      "test_fast_delete_joined_qs (delete.tests.FastDeleteTests)",
+      "test_fast_delete_large_batch (delete.tests.FastDeleteTests)",
+      "test_fast_delete_m2m (delete.tests.FastDeleteTests)",
+      "test_fast_delete_qs (delete.tests.FastDeleteTests)",
+      "test_fast_delete_revm2m (delete.tests.FastDeleteTests)",
+      "test_model_delete_returns_num_rows (delete.tests.DeletionTests)",
+      "test_queryset_delete_returns_num_rows (delete.tests.DeletionTests)"
+    ],
+    "p2p_pass": 30,
+    "reward": 0.0
+  },
+  "repaired/bug_revert": {
+    "f2p_fail": 1,
+    "f2p_failing": [
+      "test_fast_delete_instance_set_pk_none (delete.tests.FastDeleteTests)"
+    ],
+    "f2p_pass": 0,
+    "graded_ids_present": 41,
+    "n_parsed": 43,
+    "names_symbol_in_log": false,
+    "p2p_fail": 0,
+    "p2p_failing": [],
+    "p2p_pass": 40,
+    "reward": 0.0
+  },
+  "repaired/bug_zero": {
+    "f2p_fail": 1,
+    "f2p_failing": [
+      "test_fast_delete_instance_set_pk_none (delete.tests.FastDeleteTests)"
+    ],
+    "f2p_pass": 0,
+    "graded_ids_present": 41,
+    "n_parsed": 43,
+    "names_symbol_in_log": false,
+    "p2p_fail": 0,
+    "p2p_failing": [],
+    "p2p_pass": 40,
+    "reward": 0.0
+  },
+  "repaired/gold": {
+    "f2p_fail": 0,
+    "f2p_failing": [],
+    "f2p_pass": 1,
+    "graded_ids_present": 41,
+    "n_parsed": 42,
+    "names_symbol_in_log": false,
+    "p2p_fail": 0,
+    "p2p_failing": [],
+    "p2p_pass": 40,
+    "reward": 1.0
+  },
+  "repaired/gold_renamed": {
+    "f2p_fail": 0,
+    "f2p_failing": [],
+    "f2p_pass": 1,
+    "graded_ids_present": 41,
+    "n_parsed": 42,
+    "names_symbol_in_log": false,
+    "p2p_fail": 0,
+    "p2p_failing": [],
+    "p2p_pass": 40,
+    "reward": 1.0
+  }
+}

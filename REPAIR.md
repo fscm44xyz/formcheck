@@ -13,8 +13,8 @@ a rule until more than one case has produced it.
 ## Candidate pattern 1 — the coupling may live in how the test *reaches* the
 ## code, not in what it *asserts*
 
-**Status: held on n = 2, in two repos and both failure shapes. Two cases are not
-a family either — but it has now survived the case chosen to break it.**
+**Status: held on 2 of 3. It failed on the third for a stated, checkable reason
+— the pattern now has a known boundary rather than only supporting cases.**
 
 The plan for `pydata__xarray-4966` was to rewrite the coupled assertions. When
 the tests were actually read, the assertions turned out to be fine:
@@ -62,16 +62,38 @@ matrices did not have to be touched. `separability_matrix` is exported in that
 module's `__all__`; `_cstack` is the private function behind the `&` operator it
 uses. Verified numerically before the repair was written, for all three cases.
 
-**What is still not established.** Both repaired tasks happened to have a public
-entry point reaching the same behaviour with the same discriminating power. That
-is a property of the library, not of the coupling. A task whose behaviour is only
-reachable through an internal symbol cannot be repaired this way at all, and how
-common that is remains unmeasured. The remaining caveats:
+**It failed on the third case, and that is the boundary.** On
+`django__django-11179` the coupled call is `Collector(using='default')` followed
+by `assertTrue(collector.can_fast_delete(u))` — and `Collector` is **not public**:
+no `__all__` in `django/db/models/deletion.py`, not re-exported from
+`django.db.models`. There is no exported symbol reaching the same behaviour, so
+the substitution the pattern prescribes is simply unavailable.
 
-* **django is half the corpus and untested.** 14 of the 28 witness tasks are
-  django, excluded so far because their failures arrive as a synthetic
-  `unittest.loader._FailedTest` with no real node ids in the status map. Nothing
-  here has been shown to apply to them.
+Worse, the coupled line is not an entry point to the behaviour under test at all.
+It is a **precondition**: it pins that the *fast* delete path is the one being
+exercised, which matters because the gold patch fixes only that path. The
+contract assertion (`assertIsNone(u.pk)`) was never coupled. So the pattern's own
+distinction — entry point versus assertion — does not partition this test; there
+is a third kind of line, and it is the coupled one.
+
+**The refined statement.** The pattern applies when the coupled line is a *route
+to the behaviour under test* and an exported route exists. It does not apply when
+the coupled line *asserts something about the implementation* that no public
+observable reproduces. On `django-11179` a behavioural substitute was looked for
+and measured — a query count — and found vacuous: after the gold patch the fast
+and slow paths issue the same single query and both null the pk, so
+`assertNumQueries(1)` separates nothing.
+
+**What is still not established.** The two repaired tasks happened to have a
+public entry point reaching the same behaviour with the same discriminating
+power. That is a property of the library, not of the coupling. The remaining
+caveats:
+
+* **django is half the corpus and one task of it has been tried.** The runner is
+  *not* the obstacle — `repair-M0d` established that the positive control works,
+  that the log distinguishes absence from failure, and that both conditions stay
+  evaluable. The one django task attempted did not repair cleanly, for a reason
+  that is not django-specific. The other 13 are untried.
 * **Both cases were `symbol_rename`.** It is the only operator producing
   witnesses, so this is not a limitation of the sample — but the pattern is a
   claim about renames, not about coupling in general.
@@ -91,7 +113,7 @@ Evidence: `repair/M0B_RESULT.md`, `repair/M0C_RESULT.md`, `repair/gate.py`,
 ## Candidate pattern 2 — at module scope, blast radius is unrelated to how many
 ## tests are actually coupled
 
-**Status: measured once, on `astropy__astropy-12907`. n = 1.**
+**Status: measured twice, in two repos and two test runners. n = 2.**
 
 `test_separable.py` reaches production code through one module-level import:
 
@@ -128,10 +150,24 @@ Two consequences worth keeping separate:
   computes the same thing for these inputs, checked before the repair was
   written.
 
-`REPORT.md` §3(a) and the README now carry an amendment stating this
-distinction — reward damage (measured, on all 28) versus extent of genuine
-coupling (not measured) — with the table above as its evidence and n = 1 marked
-as n = 1. No number in either document changed.
+**It held on `django__django-11179`, under a different runner.** One module-scope
+`from django.db.models.deletion import Collector`, added by the task's own test
+patch, used by exactly one of the module's 42 test methods:
+
+| variant, under the rename | F2P | P2P | reward |
+|---|---|---|---|
+| shipped test module | 0/1 | 0/40 | 0.0 |
+| `import_local` | 0/1 | **40/40** | 0.0 |
+| `repaired` | 1/1 | 40/40 | 1.0 |
+
+**40 of 41 failures were the import line**, against astropy's 14 of 15. Two
+repos, two runners, same shape. Also worth recording: on both tasks the coupling
+was introduced by the benchmark's own test patch, not by the upstream project.
+
+`REPORT.md` §3(a) and the README carry an amendment stating this distinction —
+reward damage (measured, on all 28) versus extent of genuine coupling (not
+measured) — with astropy's table as its evidence. No number in either document
+changed.
 
 **Not repaired, and reported instead:** `_coord_matrix`, `_cdot` and
 `_arith_oper` sit in the same import with the identical latent coupling.
@@ -233,6 +269,61 @@ And one on the repair itself: **node ids may not change.** `test_failed` counts 
 node id absent from the log as a failure, so renaming a test, its class, its
 module or its `parametrize` ids pins the reward at 0.0 regardless of what the
 test does (`repair/CONTEXT.md` §3.3).
+
+---
+
+## Finding 1 — C2 measured at the reward level cannot detect a hollowing-out
+
+**Status: measured once, on `django__django-11179`. It changes the method, not
+just a task.**
+
+The two conditions ask: does the renamed gold score 1.0 (C1), and do broken
+solutions still score 0.0 (C2)? Both are read off the **task reward**. On
+`django-11179` the candidate repair passes both — and is still strictly weaker
+than the test it replaced.
+
+The repair deletes the precondition `assertTrue(collector.can_fast_delete(u))`,
+because that is the only line naming the symbol. The mutant `bug_nofast` disables
+fast deletion entirely — exactly the regression that precondition existed to
+catch:
+
+| | original test | repaired test |
+|---|---|---|
+| F2P outcome under `bug_nofast` | **0/1 — fails** | **1/1 — passes** |
+| task reward | 0.0 | 0.0 |
+| P2P failures | 10 | 10 |
+
+The repaired test no longer detects the mutant. The reward is 0.0 anyway, because
+**ten other P2P tests catch it**. C2 reads `CAUGHT` for a test that detects
+nothing.
+
+**Why this is general.** Reward is a property of the *suite*. "Was this test
+weakened" is a property of the *test*. They come apart precisely when other tests
+overlap the same behaviour — which is common, and more common in large suites.
+A repair that guts a test will be scored CAUGHT by C2 whenever any sibling test
+happens to cover the mutant.
+
+It was invisible on `xarray-4966` and `astropy-12907` because in both, every
+mutant's F2P breakdown was identical under the original and repaired tests —
+there was nothing to see. It took a case where the repair genuinely lost
+something to show that the condition could not have told us.
+
+**What changed.** `repair/gate.py` now reports **detection drift** — any mutant
+whose F2P breakdown differs between the original and repaired tests — separately
+from C2. It does not flip the verdict, because the reward is what the reward is;
+it says what the reward cannot. Re-run against M0b and M0c: *"detection drift:
+none"* on both, with no other value changed, so the two shipped repairs are
+confirmed clean by a check that did not exist when they were made.
+
+**And formcheck cannot see it either.** On the unshipped `django-11179` repair,
+`symbol_rename:Collector` goes from WITNESS to CLEAN with reward 1.0 on a
+genuinely distinct tree. A repair can pass formcheck, pass C1, pass C2, and still
+be strictly weaker than what it replaced. That is the same shape as every entry in
+`CHANGES.md` §7's family: a check returning a verdict for a reason invisible in
+its own output.
+
+Evidence: `repair/M0D_RESULT.md`,
+`repair/test_repair_m0d.py::test_the_repair_is_a_hollowing_out_that_c2_cannot_see`.
 
 ---
 
