@@ -1408,3 +1408,58 @@ never reaches, reported as a caught mutant.
 
 `repair/gate.py` (`build`, `edit`, `report`, `graded_ids_present`);
 `repair/m0d_gate.py`; `repair/M0D_RESULT.md`; `repair/test_repair_m0d.py`.
+
+---
+
+## 29. A repair-note claim generalised from one case; a scan falsified it
+
+**Bug.** `REPAIR.md`, candidate pattern 2, carried this line:
+
+> Also worth recording: on both tasks the coupling was introduced by the
+> benchmark's own test patch, not by the upstream project.
+
+It is true of `django-11179`, whose test patch adds both
+`from django.db.models.deletion import Collector` and the one call that uses it.
+It is **false of `astropy-12907`**, whose test patch adds `cm_4d_expected` and
+four `compound_models` entries and never mentions `_cstack` at all — the coupling
+import at `test_separable.py:13-14` is the repository's, not the benchmark's.
+
+The claim was written while reading the second task's *repair*, and generalised
+from one case to two on a resemblance rather than a check. The two tasks did
+share a shape — one module-scope import carrying a whole module down — and the
+provenance of that import was assumed to be shared with it. It is a different
+property and it did not transfer.
+
+**How it was caught.** Not by review, and not by a number looking wrong: the
+sentence is plausible and nothing downstream depended on it yet. It was caught
+because the claim was interesting enough to be worth acting on — if the coupling
+were an artefact of task construction, that is a bigger finding than anything in
+the repair work — and checking it first is a diff scan costing no containers and
+no inference. `repair/scan/test_patch_origin.py` classifies all 34 witness
+(task, symbol) pairs; `astropy-12907` came back `pre_existing`, and the sentence
+was wrong.
+
+**Rule.** A claim that spans more cases than were examined is checked before it is
+acted on, and the check is written down as an artifact rather than performed in
+the head. Where the check is static — a diff scan, a grep over records — there is
+no reason to defer it: this one took ten seconds and the result is now the thing
+the repository cites instead of the sentence.
+
+The scan also answered the underlying question, and the answer is **not
+established**: the benchmark's test patch adds a reference to the coupled symbol
+in 12 of 28 tasks; in the other 16 the symbol appears nowhere in the test patch.
+The specific mechanism that made `django-11179` look general — the benchmark
+adding a *module-scope import* — is 4 pairs across 3 tasks. Nothing from the scan
+has been promoted to `REPORT.md`; it stays in `repair/scan/RESULT.md` as a
+measurement without a conclusion.
+
+**Second defect, found while running the scan.** The classifier's import-block
+state machine walked only added lines, so a parenthesised import whose head is an
+unchanged context line and whose continuation is added read as an *in-test*
+reference rather than a module import. `django-12155` is exactly that shape. It
+now walks the post-image — context plus added, in order. Caught by hand-checking
+five classifications against diffs already read in this session, which is the only
+reason it did not silently shift a count.
+
+`REPAIR.md` (candidate pattern 2); `repair/scan/test_patch_origin.py`;
+`repair/scan/RESULT.md`.

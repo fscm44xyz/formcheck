@@ -167,8 +167,21 @@ repos, two runners, same shape.
 introduced by the benchmark's own test patch. That is true of `django-11179` and
 **false of `astropy-12907`**, whose test patch never mentions `_cstack` — the
 coupling import pre-exists in the repository. The claim was generalised from one
-case to two without checking the second. A static scan of all 28 now measures it
-properly: `repair/scan/RESULT.md`.
+case to two without checking the second (`CHANGES.md` 29). A static scan of all
+28 now measures it properly: `repair/scan/RESULT.md`.
+
+**Observation, not a claim.** In **16 of the 28** witness tasks the coupled
+symbol appears **nowhere in the task's test patch** — the strongest form of
+`pre_existing`, not a judgement call about which line came from where. The
+reference lives in the repository's own test tree.
+
+Whatever the benchmark does or does not introduce, the majority of this coupling
+is **not an artefact of task construction**. It cannot be filtered out by
+building tasks differently, and a benchmark author fixing their own patch
+generation would not remove it. That bears on where a fix would have to live —
+in the graded suites themselves, or in what the reward is computed from — and it
+is worth having written down before any repair strategy is chosen. It is not yet
+a claim about anything beyond these 28 tasks.
 
 `REPORT.md` §3(a) and the README carry an amendment stating this distinction —
 reward damage (measured, on all 28) versus extent of genuine coupling (not
