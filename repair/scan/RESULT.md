@@ -141,3 +141,78 @@ the coupling import at `test_separable.py:13-14` pre-exists in the repository.
 The claim held for `django-11179` and was generalised from one case to two
 without checking the second. It has been corrected.
 
+
+---
+
+# On the 15 all-fail tasks, did any graded test run?
+
+Static. No Docker. `repair/scan/allfail_mechanism.py`, reading the `graded_log`
+already recorded by the 500-task run plus the dataset's own F2P/P2P lists.
+
+**This is not the `import_local` measurement.** That one needs 15 container runs —
+`REPAIR.md` §9 says so — and has not been run. This answers the half of the
+question the recorded logs already settle, and it costs nothing.
+
+For each all-fail witness, how many of the task's graded node ids the runner
+actually reported under the rename:
+
+| task | symbol | node ids reported | graded | mechanism |
+|---|---|---|---|---|
+| `astropy__astropy-12907` | `_cstack` | 0 | 15 | ran_none |
+| `django__django-11179` | `Collector` | 0 | 41 | ran_none |
+| `django__django-11433` | `construct_instance` | 0 | 143 | ran_none |
+| `django__django-12155` | `parse_docstring` | 0 | 7 | ran_none |
+| `django__django-14376` | `DatabaseClient` | 0 | 9 | ran_none |
+| `django__django-15380` | `MigrationAutodetector` | 0 | 134 | ran_none |
+| `django__django-15851` | `DatabaseClient` | 0 | 9 | ran_none |
+| `django__django-15973` | `MigrationAutodetector` | 0 | 158 | ran_none |
+| `psf__requests-1766` | `HTTPDigestAuth` | 0 | 85 | ran_none |
+| `pylint-dev__pylint-4551` | `get_annotation` | 0 | 10 | ran_none |
+| `pylint-dev__pylint-4551` | `infer_node` | 0 | 10 | ran_none |
+| `pylint-dev__pylint-4604` | `VariablesChecker` | 0 | 21 | ran_none |
+| `scikit-learn__scikit-learn-14141` | `_get_deps_info` | 0 | 3 | ran_none |
+| `scikit-learn__scikit-learn-14983` | `_build_repr` | 0 | 107 | ran_none |
+| `sphinx-doc__sphinx-7454` | `_parse_annotation` | 0 | 28 | ran_none |
+| `sphinx-doc__sphinx-7590` | `DefinitionParser` | 0 | 25 | ran_none |
+| `sphinx-doc__sphinx-7590` | `DefinitionParser` | 0 | 25 | ran_none |
+
+17 witness rows across 15 tasks (`pylint-4551` and `sphinx-7590` each carry two
+witness symbols over the same suite; the totals below deduplicate by task).
+
+## Aggregate
+
+```
+ran_none : 15 of 15 tasks -- 795 graded tests across them, none executed
+ran_some :  0 of 15 tasks
+```
+
+**On every one of the 15, the runner reported zero graded node ids.** Not one of
+the 795 tests executed. Every one of the 795 failures is scored by
+`test_failed`'s `case not in sm` branch — absence, not a test that ran and failed.
+
+## What this does and does not establish
+
+It establishes the **mechanism** on all 15: the total suite loss is a
+module-import failure in every case, across four repos and both test runners.
+None of these tasks is one where each test independently references the symbol
+and fails on its own terms — there are zero such tasks among the 15.
+
+It does **not** give the fraction. How many of the 795 would recover if the
+import were moved off module scope is `N − k` per task, where `k` is the number
+of tests that name the symbol themselves, and `k` is not derivable from a log
+that shows nothing running. `k = 1` on the three tasks where `import_local` has
+actually been run (`astropy-12907`, `django-11179`, `django-11433` — 14/15, 40/41,
+142/143), which is a measurement on 3 of 15, not an assumption about the other 12.
+
+So the honest bound is: on all 15 the 100% is an import failure rather than
+per-test coupling, and on 3 of 15 the residual is exactly one test. The remaining
+12 need the container runs.
+
+## One thing to note about this scan
+
+`psf__requests-1766`'s row went missing from two earlier terminal readings of
+these scans. The cause was a `grep -v "HTTP"` filter used to strip HTTP request
+logging from the output: its symbol is `HTTPDigestAuth`. The data was never
+affected — both scans wrote JSON — but the displayed table was, twice, and the
+row was noticed missing by counting rather than by reading. The scans now write
+their JSON unconditionally so the file rather than the terminal is the artifact.
