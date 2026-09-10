@@ -1745,3 +1745,85 @@ actually discriminates is part of stating the result.
 
 `repair/gate.py` (`build`); `repair/scan/import_local_run.py`
 (`rename_everywhere`).
+
+---
+
+## 35. A log parser with no branch for two test names on one line
+
+**Bug.** Django's verbose runner writes `name ... STATUS`, one line per test. A
+test whose status is never written leaves its line unterminated and the next
+test's line is appended to it:
+
+    test_options_override_settings_proper_values (...) ... test_parameters (...) ... ERROR
+
+`parse_log_django` handles that line twice and is wrong both times.
+`prev_test = line.split(" ... ")[0]` keeps only the first name, and the status
+branch takes `line.split(" ... ERROR")[0]` — the **whole prefix**,
+`A (...) ... B (...)`. The status map gains a key no test id can equal, and
+**both** ids are absent from it. Upstream `test_passed` is `case in status_map
+and status_map[case] in (PASSED, XFAIL)`, so an absent id is counted as failing.
+
+Had that line ended in `ok` instead of `ERROR`, two **passing** graded tests would
+have been counted as failing — and for `formcheck` a false failure is a false
+witness. That is why this was chased before the measurement that surfaced it.
+
+**Where it comes from.** One producing shape observed: a failing `self.subTest`,
+whose error blocks are emitted without the parent test's status ever being
+written. The log in hand carries ten `ERROR:` blocks for nine tests, one test
+having errored under two subTest keys. The parser's own comments name three
+further interleaving shapes and handle them — but the recovery covers **passes
+only**. There is no branch for a `FAIL`/`ERROR` arriving after interleaved
+output, and none for two names sharing a line.
+
+**The parser cannot tell the two cases apart; its output can.** While parsing,
+"the status line was absent" and "the status line was consumed by a preceding
+block" are the same event — an id missing from the map, with nothing marking why.
+But a real test id never contains `" ... "`, so a key that does is a consumed
+line and the ids inside it are recoverable by substring. That is what made the
+question answerable from stored logs rather than by re-running 500 containers.
+
+**Result, and the count that makes it a measurement.**
+
+    logs scanned                                  64   (63 graded rows + 1 control)
+    witness rows among them                       34 of 34
+    status-map keys containing " ... "             0
+    swallowed graded ids                           0
+    swallowed ids whose log shows them PASSING     0
+
+A detector reporting *none found* is worth nothing without the number of
+occasions it had to fire. Absence of an id from the status map is what it
+discriminates, and absence is abundant here: **2,387 graded ids are absent across
+43 of the 64 logs** — the all-fail shape, a module that never imported — and not
+one of them is absent because its status line was consumed. The zero is measured
+against 2,387 opportunities, not against silence.
+
+**It did not bite this run, and that is a property of these logs rather than of
+the parser.** Nothing was fixed upstream and nothing here defends against it. A
+corpus with one failing `subTest` in the wrong place would produce the false
+failure; this one does not contain that arrangement.
+
+**Coverage, and why the unstored logs are safe.** 259 rows ran a graded suite and
+63 store a log; the gap is the 196 `CLEAN` rows. They cannot hide a false failure
+by the structure of the defect — swallowing only *removes* ids, a removed id is
+not passed, so it lands in `f2p_fail` or `p2p_fail`, the reward falls below 1.0,
+and the row is not `CLEAN`. Checked rather than argued: all 196 have `reward
+1.0`, `f2p_fail 0`, `p2p_fail 0`, no exceptions.
+
+**Open, and stated in neither direction.** The parser marks `prev_test` PASSED
+whenever a later line begins with `ok`, and after interleaving `prev_test` can be
+the wrong test — on a merged line it is the *first* name. That records a pass
+against a test that did not pass. Checking it needs exactly the 196 `CLEAN` logs
+that were not stored, and it is not claimed in either direction here.
+
+Note that this open item and the unaudited 466 non-witness rows of entry 33 bias
+the same way — both toward **fewer** witnesses, not more — so the two gaps in the
+evidence do not offset each other and neither can be leaned on to argue the
+headline is conservative.
+
+**Rule.** A result of *none found* is reported with the number of occasions the
+detector had to fire; without it the claim and an untested detector are the same
+sentence. And where a defect was not reached rather than defended against, the
+report says which.
+
+`repair/scan/parser_swallow_scan.py`; `repair/scan/parser_swallow_scan.json`;
+`repair/scan/PARSER_SWALLOW_RESULT.md`.
