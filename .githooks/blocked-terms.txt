@@ -15,13 +15,16 @@
 # built on are technical facts and are expected to appear: Prime Intellect,
 # verifiers, SWE-bench, SWE-Bench Pro, Harbor, OpenAI, Docker, Django, pytest.
 #
-# What this section blocks is individual people.  Named individuals cannot be
-# enumerated in advance, so this list is meant to grow: when a name is caught by
-# reading rather than by grep, it is added here, one per line, \b-anchored:
+# What this section blocks is individual people -- by shape, never by name.
 #
-#   \bfirstname lastname\b
+# Do NOT append actual names here.  This file is tracked and public, so a list
+# of the people not to be mentioned mentions them: it would defeat the rule it
+# is supposed to enforce, and concentrate in one grep-able place exactly what
+# the rule exists to keep out.  The list stays seeded with shapes.
 #
-# The three patterns below catch the shapes a name arrives in, not the names.
+# A name caught by reading is therefore fixed by editing the text, not by
+# extending this section.  If a name keeps arriving, add the SHAPE that carries
+# it -- the construction, the honorific, the role word -- and not the name.
 \b(mr|mrs|ms|dr)\. [a-z]
 \b(recruiter|hiring manager)\b
 \bmy contact at\b

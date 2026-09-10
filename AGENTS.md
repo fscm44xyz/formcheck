@@ -31,9 +31,12 @@ deciding to put it there.
 
 The term list is `.githooks/blocked-terms.txt`, one extended regular expression
 per line, with `.githooks/allowed-lines.txt` holding the documented exceptions.
-Both are meant to be edited: the first rule cannot enumerate individual names in
-advance, so a name caught by reading is added to the list so that it is caught
-by grep next time.
+The term list holds **shapes, never names**. It is tracked and public, so a list
+of the people not to be mentioned mentions them — it would defeat the rule while
+appearing to enforce it, and would collect in one grep-able place exactly what
+the rule exists to keep out. A name caught by reading is fixed by editing the
+text; if a name keeps arriving, what gets added is the construction that carries
+it — the honorific, the role word, the attributing phrase — not the name.
 
 `.githooks/scan-blocked-terms.sh` is the scanner. Three modes:
 
