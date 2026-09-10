@@ -240,17 +240,35 @@ this project has never repaired.
 
 ---
 
-## The two conditions any repair must pass
+## The three conditions any repair must pass
 
-Established in `repair-M0b` and expected to hold for every case:
+C1 and C2 were established in `repair-M0b`. **C3 was added in `repair-M0d`, after
+a repair passed both of the others and was still strictly weaker than the test it
+replaced.** All three are required of every repair from here on.
 
-| | |
-|---|---|
-| **C1** | the renamed gold scores **1.0** — the coupling is gone |
-| **C2** | genuinely broken solutions still score **0.0** — the test was not hollowed out |
+| | | read off |
+|---|---|---|
+| **C1** | the renamed gold scores **1.0** — the coupling is gone | the task reward |
+| **C2** | genuinely broken solutions still score **0.0** — the suite still rejects wrong programs | the task reward |
+| **C3** | **no detection drift** — every mutant's F2P breakdown is identical under the original and the repaired test | the per-test breakdown |
 
-Neither is sufficient. A test asserting nothing passes C1 and fails C2; the
-original coupled test passes C2 and fails C1.
+No two of them are sufficient. A test asserting nothing passes C1 and fails C2;
+the original coupled test passes C2 and fails C1; and a repair that guts one test
+passes C1 and C2 whenever any sibling test happens to cover the same mutant —
+which is what C3 exists to catch. C1 and C2 are properties of the **suite**; C3
+is a property of the **test**, and that is exactly why the first two cannot
+substitute for it.
+
+C3 does not flip the gate's verdict on its own. The reward is what the reward is,
+and reporting drift as a failure would be its own inversion — the suite really did
+reject the mutant. It is reported separately, and a repair that drifts is not
+shipped without saying so.
+
+**`xarray-4966` and `astropy-12907` were confirmed clean by C3 after the fact.**
+Both were accepted before the condition existed; re-running their gates under it
+reports *"detection drift: none"* with every pre-existing value unchanged. That is
+the only form of confirmation worth anything — a check the work did not get to
+choose.
 
 Three constraints on C2, each learned the hard way rather than assumed:
 
@@ -269,6 +287,64 @@ And one on the repair itself: **node ids may not change.** `test_failed` counts 
 node id absent from the log as a failure, so renaming a test, its class, its
 module or its `parametrize` ids pins the reward at 0.0 regardless of what the
 test does (`repair/CONTEXT.md` §3.3).
+
+---
+
+## Outcome class — PRECONDITION coupling
+
+**Status: one task, `django__django-11179`. A verdict, not a failure to repair.**
+
+Two of the three tasks examined had their coupling in a **route**: the test named
+an internal symbol in order to reach the behaviour under test, and an exported
+symbol reached the same behaviour. Candidate pattern 1 is about those.
+
+`django-11179` is a third kind, and it needs its own name because calling it "a
+repair we could not find" would be wrong.
+
+```python
+u = User.objects.create()
+collector = Collector(using='default')            # the coupled lines
+self.assertTrue(collector.can_fast_delete(u))     # a PRECONDITION
+u.delete()
+self.assertIsNone(u.pk)                           # the contract -- never coupled
+```
+
+The coupled line does not route to the behaviour under test. It **pins that a
+particular code path runs** — here, that the *fast* delete path is the one being
+exercised, which matters because the gold patch fixes only that path and the slow
+path has always been correct. The contract assertion was never coupled at all.
+
+**Why pattern 1 cannot apply.** Pattern 1 substitutes one route for another. There
+is no route to substitute: the precondition is an assertion *about the
+implementation*, and the symbol it names is not public (`Collector` has no
+`__all__` entry in `django/db/models/deletion.py` and is not re-exported from
+`django.db.models`).
+
+**Why a substitute is vacuous, measured rather than argued.** The natural
+behavioural proxy is a query count — a fast delete should be one query. With
+`can_fast_delete` forced to return `False`, the delete still issues **one query,
+the same SQL, and still nulls the pk**. After the gold patch the two paths are
+observationally equivalent for this input, so `assertNumQueries(1)` separates
+nothing. Any public observable that could separate them would have to be one the
+gold patch made identical.
+
+**The recognition test.** A coupled line is PRECONDITION coupling when removing it
+leaves every assertion in the test still passing on the gold, *and* there exists a
+behavioural mutant that the removal stops the test from catching. On
+`django-11179` that mutant is `bug_nofast`: F2P 0/1 → 1/1 under the repair. This
+is exactly what C3 measures, which is why the class and the condition arrived
+together.
+
+**What it implies.** A task with PRECONDITION coupling cannot be repaired at the
+test level without either weakening the test or leaving the name in place. The
+honest options are to leave it, or to change something other than the test — the
+graded node-id lists, or the issue's own specification of which path is required.
+Both are outside what the overlay surface can do and outside what this project has
+argued for.
+
+n = 1. Nothing about it was django-specific.
+
+Evidence: `repair/M0D_RESULT.md`, `repair/test_repair_m0d.py`.
 
 ---
 
