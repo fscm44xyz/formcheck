@@ -371,8 +371,20 @@ class SymbolRename(Operator):
         report["preconditions"]["no_dynamic_reach"] = (
             f"{name!r} appears in no string literal across "
             f"{len(sources)} scanned file(s)")
-        report["detail"] = {"new_name": new_name, "references_rewritten": refs,
-                            "files": sorted(sources)}
+        # The files this transform CHANGED, not the files it scanned. The
+        # scanned set is the whole production tree -- 93 files on xarray,
+        # thousands on django -- and storing it per applied row would put a
+        # copy of the repo's file listing into every record that reaches
+        # `apply`. The soundness argument needs the scan to have been WIDE
+        # (`no_dynamic_reach` above already states its size); it does not need
+        # the listing. Repair consumes this to know which files to regenerate,
+        # and that is the changed subset.
+        report["detail"] = {
+            "new_name": new_name,
+            "references_rewritten": refs,
+            "files_changed": sorted(p for p in out if out[p] != sources.get(p)),
+            "files_scanned": len(sources),
+        }
         return out, report
 
 

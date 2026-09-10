@@ -295,6 +295,42 @@ def test_setup_refuses_a_bad_overlay_before_writing_it():
 
 
 # ---------------------------------------------------------------------------
+# item 2, carried over -- `detail` records what CHANGED, not what was scanned
+# ---------------------------------------------------------------------------
+
+
+def test_detail_records_the_changed_files_not_the_scanned_tree():
+    """`sorted(sources)` is the whole production tree -- 93 files on xarray,
+    thousands on django. Persisting that per applied row (item 2) would have put
+    a copy of the repo's file listing into every record. The soundness argument
+    for the dynamic-reach precondition needs the scan to have been WIDE, and
+    `preconditions["no_dynamic_reach"]` already states its size; it does not
+    need the listing.
+    """
+    from f2_operators import SymbolRename
+
+    sources = {
+        "pkg/mod.py": "def sym():\n    return 1\n",
+        "pkg/other.py": "from pkg.mod import sym\n\n\ndef go():\n    return sym()\n",
+        "pkg/untouched.py": "def unrelated():\n    return 2\n",
+    }
+    out, report = SymbolRename().apply(
+        sources, "pkg/mod.py", {"label": "sym", "name": "sym"},
+        "an issue that names nothing")
+    detail = report["detail"]
+
+    assert "files" not in detail, (
+        "the ambiguous `files` key survived -- a reader cannot tell scanned "
+        "from changed")
+    assert detail["files_changed"] == ["pkg/mod.py", "pkg/other.py"], detail
+    assert detail["files_scanned"] == 3, detail
+    assert detail["new_name"] == "sym__renamed"
+    assert detail["references_rewritten"] == 3, detail
+    # The untouched file is genuinely untouched, not merely unlisted.
+    assert out["pkg/untouched.py"] == sources["pkg/untouched.py"]
+
+
+# ---------------------------------------------------------------------------
 # addendum -- the overlay's POSITIVE and NEGATIVE control, kept as a pair
 # ---------------------------------------------------------------------------
 #
