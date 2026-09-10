@@ -1673,3 +1673,75 @@ the evidence that it works.
 `repro/f2_operators.py` (`SymbolRename.apply`);
 `repair/scan/operator_boundary_probe.py`; `repair/scan/blast_radius_28.py`;
 `repair/scan/BLAST_RADIUS_28.md`; `repair/scan/BLAST_RADIUS_28.json`.
+
+---
+
+## 34. The find respected word boundaries; the replace did not
+
+**Bug.** The repair side carried the same defect as entry 33, in a worse form.
+`SymbolRename` used `line.index`, which lands on the first substring occurrence.
+The gate and the scan script used `str.replace`, which rewrites *every* substring
+occurrence:
+
+    repair/gate.py                   src.replace(old, new)
+    repair/scan/import_local_run.py  src.replace(symbol, new)
+
+**What makes this its own entry rather than a second instance.** Both sites were
+already written in terms of word boundaries, everywhere except the one step that
+edits bytes. `import_local_run.rename_everywhere` **selects** the files to rewrite
+with `grep -rl '\bsymbol\b'` and then **verifies** no residue with the same
+expression; `gate.build` verifies with `grep -rl '\b{old}\b'` after rewriting.
+The boundaries were not absent from the design. They were absent from the
+substitution in the middle, between two checks that used them.
+
+**And the residue check could not catch it.** This is the part worth keeping.
+`str.replace("Collector", "Collector__renamed")` turns `NoFastDeleteCollector`
+into `NoFastDeleteCollector__renamed`, which no longer contains
+`\bCollector\b` — so the residue grep comes back clean on exactly the corruption
+it exists to catch. It is not a weaker guard against this class. It is no guard
+at all, and it reports success while being blind, which is the family shape
+again.
+
+**The positive control could not tell the two apart either.** C2 requires the
+behavioural mutants to score 0.0 under the repaired test, and reads 0.0 as
+CAUGHT. A rename that broke the library scores 0.0 on every mutant as well,
+because nothing imports. The control is satisfied identically by a caught mutant
+and a broken tree, so it cannot discriminate the case it would need to.
+
+**What separated them was the recovery condition.** C1 requires the renamed gold
+to come back to **1.0** under the repaired test. A broken rename cannot recover —
+it scores 0.0 there too, and C1 fails. That is what happened on this gate's first
+run, recorded in `gate.build`'s own comment: `Collector` is referenced from five
+django modules, the config listed one, and the reward was 0.0 in every cell
+including the repaired one, *"read exactly like the repair does not work"*. The
+gate has a second guard of the same kind — a 0.0 reported with fewer graded node
+ids present than the baseline is ABSENCE, not detection, and fails rather than
+counting as CAUGHT.
+
+So the arrangement that held was: the check that fires on success (C1, recovery
+to 1.0) discriminated, and the check that fires on failure (C2, mutants at 0.0)
+did not. A 0.0 is reachable by many roads and proves little on its own; a 1.0
+after a transform is narrow.
+
+**Measured before any container, on the real trees.** Every production file each
+gate renames, substituted both ways and compared byte for byte:
+
+    m0b  xarray-4966      UnsignedIntegerCoder  IDENTICAL   2 files
+    m0c  astropy-12907    _cstack               IDENTICAL   1 file
+    m0d  django-11179     Collector             DIFFERS     1 of 5 files
+    m0e  django-11433     construct_instance    IDENTICAL   1 file
+
+Three of the four gates cannot have moved, and that is a proof rather than a
+re-run: identical input to an identical pipeline. The single difference is
+`NoFastDeleteCollector` in `remove_stale_contenttypes.py`, which the old
+substitution renamed along with the anchor.
+
+**Rule.** A substitution is boundary-aware wherever the checks around it are, and
+a check written in terms of the property being preserved is verified against the
+failure it is meant to catch — not assumed to catch it because it mentions the
+right symbol. Where a control can be satisfied by the defect as easily as by the
+correct result, it is not a control for that defect, and saying which condition
+actually discriminates is part of stating the result.
+
+`repair/gate.py` (`build`); `repair/scan/import_local_run.py`
+(`rename_everywhere`).
