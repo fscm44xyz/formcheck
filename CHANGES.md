@@ -1580,3 +1580,96 @@ corrupted was the one being used to decide what to do next.
 
 `repair/scan/test_patch_origin.py`; `repair/scan/allfail_mechanism.py`;
 `repair/scan/RESULT.md`.
+
+---
+
+## 33. Two branches of the rename operator searched for a substring
+
+**Bug.** `SymbolRename.apply` collects AST spans and rewrites them, which is
+boundary-correct for `ast.Name` because a Name's `id` must equal the symbol
+exactly. Two branches did not use spans:
+
+    f2_operators.py  ImportFrom  col = line.index(name)
+    f2_operators.py  Attribute   col = line.find(name, node.value.end_col_offset)
+
+`str.index` is a substring search. On `from pkg.mod import BaseFoo, Foo` with
+anchor `Foo` it returns the offset inside `BaseFoo`, and the operator rewrote
+`BaseFoo` while leaving the real `Foo` alias alone. The span check that follows
+cannot catch it: `ln[c0:c1]` is exactly `name`, being the tail of the superstring
+the search landed in.
+
+**Why it could not be seen in the results.** A task hit this way had its
+definition renamed and its import left behind, which fails with `cannot import
+name '<anchor>'` — text that names the anchor, so `names_symbol` read it as
+coupling and the row came back `WITNESS`. In the records a witness produced by a
+broken rename and a witness produced by a coupled grader are the same bytes.
+`references_rewritten` counts the same either way. Nothing in the output of the
+check could distinguish them, which is the family shape exactly, and it is why
+the blast radius could not be settled by reading the 500 records and had to be
+measured by re-running.
+
+**The invariant, added before the fix.** An alpha-rename replaces whole
+occurrences of `name` with `name__renamed` and changes nothing else, so
+substituting the new identifier back on a word boundary must reproduce the input
+byte for byte. Anything else is `Refused`. It went in *before* the two branches
+were repaired, and was shown firing on the two corrupting shapes — installed
+after the fix it would have passed on every case from its first run, and a guard
+that has never fired is entry 19.
+
+Two weaker checks were written first and each failed on the case it was written
+for. Stripping `name + "__renamed"` and looking for a leftover `"__renamed"`
+passes on `BaseFoo__renamed`, which *contains* `Foo__renamed` — the defect being
+probed, reproduced inside the probe for it. A token scan for the suffix misses
+`Foo__renamedlib`, where the edit landed inside a module path.
+
+**Blast radius, measured.** Each of the 28 witness tasks' production trees was
+rebuilt offline — base commit + `tests.diff` + `gold.diff` — and `SymbolRename`
+applied twice: at `189451b`, the code that produced the published run, and at
+HEAD. The recorded rename was well-formed iff the two agree byte for byte. **All
+34 rows across all 28 tasks stand. None void, none undetermined.**
+
+The defect needs the anchor to appear as a substring earlier on the same import
+line, before the alias or inside the module path, and no such line exists across
+the 28. The near miss is the shape that looks worst and is not: `class
+DatabaseClient(BaseDatabaseClient)` in three django tasks, where the superstring
+is on the `class` line and reached through the `ClassDef` branch, while the
+import line names only `BaseDatabaseClient` — not the anchor, so the `ImportFrom`
+branch never fires.
+
+**Why that is a result and not a tautology.** A measurement that puts every row
+in one bucket says nothing until the other buckets are shown to be reachable.
+The first run of this scan produced the same 34/34 and was not reported, because
+as it stood it could not be told apart from a scan incapable of saying anything
+else. Three checks were added and all three had to pass before a table was
+printed:
+
+* **A positive control**, run first. Two shapes the old operator provably
+  corrupts go through the same comparison the 34 rows go through. Both must come
+  back void or the scan aborts instead of printing. They do.
+* **Every row rewrote real files** — 1, 2, 3, 5 and 11 across the 34. Two
+  operators agreeing on a tree neither of them touched is evidence about the
+  reconstruction, not about a rename, so that case is bucketed undetermined
+  rather than as a witness standing.
+* **The rewrite compared is the recorded one.** Applying the old operator to the
+  rebuilt tree reproduces the `tree_digest` that row recorded, on **34 of 34
+  rows**. The trees are byte-identical to the ones the run saw. A row failing
+  this is moved to undetermined, because the comparison would then be between
+  something else and the corrected operator.
+
+**Two limits, stated rather than left to be assumed.** The invariant compares
+against the input, not against a complete rename, so it catches an edit that
+landed in the wrong place and not an edit that never happened. And the scan
+covers the 34 witness rows only: the 466 non-witness rows are unaudited, and
+there this defect biases toward *fewer* witnesses, not more — a corrupted
+rewrite pushes a row away from `WITNESS`, which is the direction nobody audits
+and the shape entry 15 already records.
+
+**Rule.** A substitution that has a boundary-aware form available does not use a
+substring search, and an operator that claims to preserve a property checks that
+property on its own output. Where the check can only be written after the defect
+is known, it goes in before the fix and is shown firing, because the fix removes
+the evidence that it works.
+
+`repro/f2_operators.py` (`SymbolRename.apply`);
+`repair/scan/operator_boundary_probe.py`; `repair/scan/blast_radius_28.py`;
+`repair/scan/BLAST_RADIUS_28.md`; `repair/scan/BLAST_RADIUS_28.json`.

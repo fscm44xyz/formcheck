@@ -36,7 +36,7 @@ version.*
 | [4. What the number rests on](#4-what-the-number-rests-on) | controls, attribution, the checks that found nothing |
 | [5. The ceiling](#5-the-ceiling) | anchor availability, unparsed logs, `on_prime_hub` |
 | [6. Routing the border](#6-routing-the-border-and-what-a-judge-would-cost) | the 631 refusals, and what a judge would cost |
-| [7. The defect family](#7-the-defect-family) | nine defects, one shape — the result that survives the number |
+| [7. The defect family](#7-the-defect-family) | nine defects, one shape — the result that survives the number; and the same shape found afterwards in the operator itself |
 | [8. Reproducibility](#8-reproducibility-executed-rather-than-argued) | 2 of 4 on the July rig became 494 of 500 |
 | [9. What this does not show](#9-what-this-does-not-show) | the limits, and what a hub-side run would close |
 | [Appendix A — reproduce it](#appendix-a--reproduce-it) | copy-pasteable, pinned versions |
@@ -722,6 +722,11 @@ graders. It kept appearing in `formcheck`. **Every one was found by inspecting
 the machinery, never by a suspicious number** — because none of them produced a
 suspicious number. That is what makes them a class rather than a list.
 
+The nine below are the ones the run itself proves. The shape did not stop there:
+the operator that produced the 28 witnesses carried one too, found after the run
+closed and audited afterwards. It is the last subsection here, and `CHANGES.md`
+33 in full.
+
 | # | what it reported | what was actually true |
 |---|---|---|
 | 13 | `CLEAN`/`INVALID` verdicts | the P2P coupling partition had been silently reintroduced as collapsed, turning the project's most novel finding into an "invalid transform" count |
@@ -827,6 +832,62 @@ The abort cost nothing: `write_record` completes before the raise, so all 500
 records are intact and the abort landed on the last task in the queue. Fired
 eighty tasks earlier — which the arithmetic permitted and only the lease gate
 prevented — it would have killed a run that was working perfectly.
+
+### #33, because a broken rename and a real witness are the same bytes
+
+Found after the run, in `SymbolRename` — the operator that produced every one of
+the 28. It collects AST spans, which is boundary-correct for `ast.Name` because a
+Name's `id` must equal the symbol exactly. Two branches searched text instead:
+`line.index(name)` on an import line, `line.find(name, ...)` on a qualified
+attribute. Both are substring searches. On `from pkg.mod import BaseFoo, Foo`
+with anchor `Foo`, the first returns the offset inside `BaseFoo` and the operator
+renames the wrong identifier while leaving the real alias behind. The span check
+that follows cannot see it, because the slice it tests is exactly `name` — the
+tail of the superstring the search landed in.
+
+**What made it a member of this family rather than an ordinary bug.** A task hit
+this way has its definition renamed and its import left behind, and fails with
+`cannot import name '<anchor>'` — text naming the anchor, so the failure
+attribution reads it as coupling and the row comes back `WITNESS`. In the records
+a witness produced by a broken rename and a witness produced by a coupled grader
+are the same bytes. Nothing in the check's output separates them, so the extent
+of the damage could not be established by reading the 500 records at all.
+
+**So it was measured.** Each of the 28 tasks' production trees was rebuilt
+offline — base commit, test patch, gold patch — and the operator applied twice:
+the code that produced the published run, and the corrected code. The recorded
+rename was well-formed if and only if the two agree byte for byte. **All 34 rows
+across all 28 tasks stand.** None void, none undetermined.
+
+**That is only a result because the scan could have said otherwise, and three
+checks establish that it could.** The first run of the scan produced the same
+34/34 and was not reported: as it stood, a scan finding nothing and a scan
+incapable of finding anything are the same table. What was added, all of which
+must pass before a table is printed:
+
+- **A positive control** on two shapes the old operator provably corrupts,
+  pushed through the same comparison the 34 rows go through. Both must come back
+  void or the scan aborts rather than printing.
+- **Every row rewrote real files** — 1, 2, 3, 5 and 11 across the 34. Two
+  operators agreeing on a tree neither touched is evidence about the
+  reconstruction, not about a rename, and is now bucketed undetermined.
+- **The rewrite compared is the rewrite recorded.** Applying the old operator to
+  each rebuilt tree reproduces that row's recorded `tree_digest`, **34 of 34**.
+  The trees are byte-identical to the ones the run saw.
+
+The guard that now prevents it is a round-trip invariant: substituting the new
+identifier back on a word boundary must reproduce the input byte for byte, or the
+transform is `Refused`. It was installed **before** the two branches were
+repaired and shown firing on the corrupting shapes, because a fix removes the
+evidence that a guard works — §7's own rule, applied to itself.
+
+**Two limits.** The invariant compares against the input rather than against a
+complete rename, so it catches an edit that landed in the wrong place and not an
+edit that never happened. And the audit covers the 34 witness rows only. The 466
+non-witness rows are unaudited, and there the defect biases toward **fewer**
+witnesses, not more: a corrupted rewrite pushes a row away from `WITNESS`. That
+is the direction nobody audits, and no claim here rests on it having been
+checked.
 
 ### The rule, and what enforces it
 
