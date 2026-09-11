@@ -7,6 +7,9 @@
 
 set -uo pipefail
 
+# Drop the generated-with footer, in place, before anything reads the message.
+sed -i '/^\xf0\x9f\xa4\x96 Generated with \[Claude Code\]/d' "$1"
+
 scanner="$(git rev-parse --show-toplevel)/.githooks/scan-blocked-terms.sh"
 if [ ! -x "$scanner" ]; then
   printf 'commit-msg: %s is missing or not executable; refusing to commit unchecked.\n' "$scanner" >&2
