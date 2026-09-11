@@ -1269,3 +1269,609 @@ Patch size moved with the fix: **+52 −9 across 3 files** (was +49 −7);
 
 `verifiers/v1/cli/validate.py` (`_run_all`, `summarize`, `run_validate`);
 `verifiers-formcheck.patch`.
+
+---
+
+## 27. The graded memo could not see a test-side change — the tenth of the family
+
+**Bug.** `SweBenchFormcheckTask._tree_digest` hashed `FORMCHECK_TARGETS` and
+nothing else. `graded_report` memoizes the whole grading on that digest, so the
+key described the production files a transform rewrites and said nothing about
+the files the suite is actually made of.
+
+That was sound for every run this repository has taken. In the detection family a
+transform rewrites the solution and never the graded tests — `_READ_TREE` excludes
+the test tree, `formcheck_write` can only write paths `formcheck_read` returned,
+and `f2_operators` states the same rule from the operator's side. The test files
+were constant, so hashing them would have been dead weight, and the docstring said
+so in as many words: *"Only the targets are ever modified."*
+
+It stops being true the moment a test-side overlay exists. An overlay changes a
+graded test file and, by construction, **no target**. The digest is therefore
+identical across the overlaid and un-overlaid trees, `graded_report` reports
+`memo_hit` and returns the un-overlaid grading, and the row records a reward for a
+suite that never ran in the form being claimed. On an overlay meant to *fix* a
+coupled test that reads as reward 0.0 — the overlay looking like it did nothing —
+and on an overlay applied after a control run it reads as reward 1.0. Both are the
+memo answering a question it was never asked.
+
+**This is the same shape as the previous nine, and as D2 specifically: a check
+that reports a verdict for a reason invisible in its own output.** The only
+evidence of it in a record would be `digest_trace` — two entries with the same
+digest and `memo_hit: true` — which is exactly the tell D2 forced into the record
+and the reason it is there. The verdict and the reward cannot discriminate. It is
+also the same *cause* as D2 twice over: a key that fails to distinguish two trees
+it must distinguish, arrived at not by a coding error but by a statement about the
+system that was true when written and stopped being true when the system grew.
+
+**Rule.** The digest covers every file whose content can change what the graded
+run reports, and it is keyed on **the same list the run actually executes**:
+`_digest_paths()` returns `FORMCHECK_TARGETS + spec["test_files"]`, and
+`spec["test_files"]` is the list `formcheck_graded` runs and `test_invocation`
+turns into the runner's directives. Deriving it from a second, parallel notion of
+"the test files" is the cross-path inference `writeup.md` 4.1 warns about; there
+is one list.
+
+Every guard D2 installed is preserved and now applies to the wider set: one
+`sha256sum`-or-`MISSING` line per path, a raise if the line count disagrees, a
+raise on an all-`MISSING` result. The degenerate-case message now reads *"every
+digested path is missing"*, since "target" no longer names the whole set.
+
+**Found by inspection, before the overlay was built, not by a wrong number** —
+`repair/CONTEXT.md` §4.3, written during reconnaissance for repair-M0a. No number
+in `REPORT.md` is affected. The widened digest is a different *value* — it hashes
+more lines — but the same *equivalence relation* over the trees the 500-task run
+actually produced: that run varied no test file, so every pair of trees that
+hashed equal before hashes equal now, and every pair that differed still differs.
+Memo hits, verdicts and rewards are unchanged on all 500. What the entry
+records is a fix landing *before* the first measurement that could have been
+corrupted by it, which is the only time this family has ever been caught early.
+
+**Regression, and it fails against the old code.**
+`scale/test_digest.py::test_digest_varies_with_the_graded_test_files` builds two
+trees with identical targets and one differing graded test file and asserts the
+digests differ. Its stub `sh` reads the paths **out of the digest script** rather
+than being handed them, so a path the implementation never asks about never
+reaches the hash — without that it would restate the fix instead of testing it.
+`test_memo_re_runs_when_only_the_test_file_changed` drives the real
+`graded_report` three times and counts `runtime.run` calls: re-run after the
+overlay, and still a memo hit on the unchanged tree, because widening a key into
+"never memoize" would double the container time of all 500 tasks. Counting the
+calls rather than reading the reward is deliberate — both gradings return the same
+reward, so the reward cannot tell a re-run from a memo hit, which is precisely why
+D2 was invisible. Before the fix: 6/8. After: 8/8; full fast suite 92/92.
+
+`scale/container_task.py` (`_digest_paths`, `_tree_digest`);
+`scale/test_digest.py`; `repair/CONTEXT.md` §4.3.
+
+---
+
+## 28. Two gate defects on the first django task, both of the family
+
+Neither is in the detection path — both are in `repair/gate.py`, the two-condition
+repair gate — and both are recorded because they returned a verdict for a reason
+invisible in the verdict.
+
+**D1 — an incomplete rename read exactly like a failed repair.** `m0d_gate`
+listed `django/db/models/deletion.py` as the only file to rename `Collector` in.
+It is referenced from **five** django modules, so renaming one of them broke
+django itself rather than performing an alpha-rename. Every variant then failed
+to import — including the *repaired* one, which no longer mentions the symbol at
+all — and every cell read `0.0 / F2P 0/1 / P2P 0/40`. That is precisely the
+output a genuinely failed repair produces. It was caught only because the
+`import_local` diagnostic recovered *nothing*, which cannot happen if the import
+line is the coupling: the number was wrong in a way the gate could not report.
+
+`gate.build` now greps production sources for the old name after applying the
+rename and raises on any residue, naming the files. Confirmed against the real
+operator afterwards, on a code path that did not produce the config:
+`detail.files_changed` lists the same five files and `references_rewritten: 9`.
+That cross-check is only possible because entry 27's sibling — persisting
+`report["detail"]` — put the operator's own account of the transform into the
+record.
+
+**D2 — C2 reports CAUGHT for a test that detects nothing.** The condition "a
+broken solution still scores 0.0" is read off the **task reward**, which is a
+property of the suite. Whether the *repaired test* still discriminates is a
+property of the test. They come apart whenever another test covers the same
+behaviour.
+
+On `django-11179` the repair deletes a precondition assertion, and the mutant
+`bug_nofast` — which disables exactly the code path that precondition pinned —
+goes from failing the F2P test (0/1) to passing it (1/1). The task reward is 0.0
+under both, because ten other PASS_TO_PASS tests catch the mutant. The gate
+printed `bug_nofast reward = 0.0 CAUGHT` for a test that had stopped detecting it.
+
+`report` now computes **detection drift** — any mutant whose F2P breakdown differs
+between the original and the repaired test — and prints it separately. It does
+not flip the verdict: the reward is what the reward is, and overstating drift as
+a failure would be its own inversion. It says what the reward cannot.
+
+Re-run against the two shipped repairs: *"detection drift: none"* on both, every
+pre-existing value unchanged. So `xarray-4966` and `astropy-12907` are confirmed
+clean by a check that did not exist when they were accepted, which is the only
+form of confirmation worth anything here.
+
+**Why both belong in this file.** D1 is a check whose failure mode is a plausible
+number; D2 is a check whose success mode is a plausible number. `REPORT.md` §7's
+family is "a check that reports a verdict for a reason invisible in its own
+output", and these are the same shape one milestone further out — in the machinery
+built to *repair* the defect, rather than in the machinery built to detect it.
+
+A third, smaller one is worth a line because the guard that caught it was written
+for an earlier milestone and had never fired: `setattr(instance,
+model._meta.pk.attname, None)` occurs twice in `deletion.py` — the gold adds it to
+the fast path, the slow path always had it — and `gate.edit`'s "anchor must appear
+exactly once" check refused rather than editing whichever one `str.replace` found
+first. An ambiguous anchor would have produced a mutant of a code path the test
+never reaches, reported as a caught mutant.
+
+`repair/gate.py` (`build`, `edit`, `report`, `graded_ids_present`);
+`repair/m0d_gate.py`; `repair/M0D_RESULT.md`; `repair/test_repair_m0d.py`.
+
+---
+
+## 29. A repair-note claim generalised from one case; a scan falsified it
+
+**Bug.** `REPAIR.md`, candidate pattern 2, carried this line:
+
+> Also worth recording: on both tasks the coupling was introduced by the
+> benchmark's own test patch, not by the upstream project.
+
+It is true of `django-11179`, whose test patch adds both
+`from django.db.models.deletion import Collector` and the one call that uses it.
+It is **false of `astropy-12907`**, whose test patch adds `cm_4d_expected` and
+four `compound_models` entries and never mentions `_cstack` at all — the coupling
+import at `test_separable.py:13-14` is the repository's, not the benchmark's.
+
+The claim was written while reading the second task's *repair*, and generalised
+from one case to two on a resemblance rather than a check. The two tasks did
+share a shape — one module-scope import carrying a whole module down — and the
+provenance of that import was assumed to be shared with it. It is a different
+property and it did not transfer.
+
+**How it was caught.** Not by review, and not by a number looking wrong: the
+sentence is plausible and nothing downstream depended on it yet. It was caught
+because the claim was interesting enough to be worth acting on — if the coupling
+were an artefact of task construction, that is a bigger finding than anything in
+the repair work — and checking it first is a diff scan costing no containers and
+no inference. `repair/scan/test_patch_origin.py` classifies all 34 witness
+(task, symbol) pairs; `astropy-12907` came back `pre_existing`, and the sentence
+was wrong.
+
+**Rule.** A claim that spans more cases than were examined is checked before it is
+acted on, and the check is written down as an artifact rather than performed in
+the head. Where the check is static — a diff scan, a grep over records — there is
+no reason to defer it: this one took ten seconds and the result is now the thing
+the repository cites instead of the sentence.
+
+The scan also answered the underlying question, and the answer is **not
+established**: the benchmark's test patch adds a reference to the coupled symbol
+in 12 of 28 tasks; in the other 16 the symbol appears nowhere in the test patch.
+The specific mechanism that made `django-11179` look general — the benchmark
+adding a *module-scope import* — is 4 pairs across 3 tasks. Nothing from the scan
+has been promoted to `REPORT.md`; it stays in `repair/scan/RESULT.md` as a
+measurement without a conclusion.
+
+**Second defect, found while running the scan.** The classifier's import-block
+state machine walked only added lines, so a parenthesised import whose head is an
+unchanged context line and whose continuation is added read as an *in-test*
+reference rather than a module import. `django-12155` is exactly that shape. It
+now walks the post-image — context plus added, in order. Caught by hand-checking
+five classifications against diffs already read in this session, which is the only
+reason it did not silently shift a count.
+
+`REPAIR.md` (candidate pattern 2); `repair/scan/test_patch_origin.py`;
+`repair/scan/RESULT.md`.
+
+---
+
+## 30. C3 reported "no drift" using a comparison that could not have seen drift
+
+**Bug.** C3 — added in entry 28, promoted to a first-class condition after it — was
+implemented as a comparison of **FAIL_TO_PASS pass/fail counts** between the
+original and the repaired test. That is sufficient only when the coupled test
+happens to be a F2P test.
+
+It was, on `django-11179`, which is why the implementation looked adequate: the
+condition was written against the one case that had produced drift, and that case
+could not distinguish "compares the right thing" from "compares a proxy that
+happened to move".
+
+On `django-11433` the coupled test is one of **142 PASS_TO_PASS** tests. Under the
+deciding mutant its outcome changes, the F2P breakdown does not move at all
+(`0/1` under both variants), and the P2P failure count moves from 17 to 16 —
+one, inside a number the mutant itself moves by seventeen. **The old C3 would have
+printed "no detection drift" on a repair that had just stopped rejecting the
+mutant it existed to reject**, and the gate would have returned PASS.
+
+`grade_log`'s `p2p_failing` is no use for this either: it is truncated to ten
+entries (entry 27's sibling concern), so the report cannot say *which* tests
+failed on any task with more than ten failures.
+
+**Rule.** C3 recomputes the status map from each run's own log and compares the
+exact **set** of graded node ids that did not pass. Sets, not counts; node ids,
+not aggregates; recomputed, not read from the truncated field. The gate now also
+**fails** on drift rather than printing it — entry 28 made it report-only on the
+ground that "the reward is what the reward is", which was right while drift was an
+observation and wrong once it became a condition.
+
+**What the fix cost, and what it confirmed.** All three earlier gates were re-run
+under the new comparison. `xarray-4966` and `astropy-12907` come back
+`C3 OK -- no detection drift` with **every pre-existing value unchanged**, so the
+two shipped repairs survive a check strictly stronger than the one they were
+accepted under. `django-11179` comes back `C3 FAIL`, naming
+`test_fast_delete_instance_set_pk_none` — the same finding entry 28 recorded in
+prose, now produced by the gate as a verdict rather than a printed remark.
+
+**Family.** A check reporting a verdict for a reason invisible in its own output —
+here the check *is* the reason. C3's whole purpose is to see what the reward
+cannot, and it was reading a coarser aggregate of the same run. Written against
+one case and generalised without a case that could falsify it, which is
+`CHANGES.md` 29 in a different place.
+
+`repair/gate.py` (`failing_ids`, `report`); `repair/m0e_gate.py`;
+`repair/M0E_RESULT.md`; `repair/test_repair_m0e.py::test_c3_set_comparison_is_what_catches_this`.
+
+---
+
+## 31. "No containers" was applied to a measurement that needs fifteen of them
+
+**Bug.** The instruction for the next measurement read *"the static measurement,
+no containers … this is the second number and it costs nothing"*, applied to
+`REPAIR.md` open item 1 — running the `import_local` variant across the 15
+all-fail tasks.
+
+That item costs 15 container runs, and `REPAIR.md` §9 says so in its own text:
+*"15 container runs, no model, no judgement call"*. The generalisation went from
+**no inference** — which is true of it, and is the property that made it
+attractive — to **no Docker**, which is not. The two had travelled together on the
+preceding measurement (`repair/scan/test_patch_origin.py`, a pure diff scan), and
+the second property was carried across with the first.
+
+**How it was caught.** By reading the section the instruction cited before acting
+on it. The tell was mechanical rather than clever: the item's own cost line
+contradicted the premise in the sentence pointing at it.
+
+**Rule.** When an instruction names a prior artifact, the artifact is read before
+the work starts, and a contradiction between the two is raised rather than
+resolved silently in either direction. Resolving it silently is the failure mode
+in both directions: running 15 containers under "costs nothing" spends the budget
+the constraint was protecting, and substituting a cheaper measurement under the
+same name reports a different number against the original question.
+
+What was delivered instead was the part the recorded logs already settle — zero
+of 795 graded tests executed on any of the 15, so the mechanism is a module-import
+failure in every case — reported explicitly as *not* the `import_local` fraction,
+with the container cost of the real thing restated.
+
+---
+
+## 32. A `grep -v` filter swallowed the row it was filtering for
+
+**Bug.** Terminal readings of two scans were filtered through
+`grep -v "Warning\|cached\|httpx\|HTTP"` to strip HTTP request logging from the
+`datasets` library. One witness symbol is **`HTTPDigestAuth`**, so
+`psf__requests-1766` was removed from both displayed tables by the filter that
+was supposed to be removing noise.
+
+The underlying data was never affected — both scans wrote JSON, and the counts
+printed alongside the tables were computed from the full row set, which is why the
+tables and their own totals disagreed.
+
+**The part worth keeping.** It was noticed the first time, and dismissed: the row
+was recorded as *"a display artefact"* and not chased, on the reasoning that the
+count was right so the data was right. That reasoning is correct and beside the
+point. A table that disagrees with its own total is a signal that something
+between the data and the reader is wrong, and the cost of finding out was one
+command. It took a second occurrence, on a different scan, before it was chased —
+and the cause was a filter written by the same hand that then read the output
+through it.
+
+**Rule.** The JSON is written unconditionally and the file is the artifact; the
+terminal is a view of it. A filter applied to output is part of the measurement
+apparatus and can corrupt a reading exactly as a parser can — `CHANGES.md` 18 is
+the same shape one layer down, where a log parser that understood one runner
+silently converted four real witnesses into "invalid transform".
+
+**Family.** A check reporting a verdict for a reason invisible in its own output.
+Here the invisible reason was in the pipe, not the program, and the output it
+corrupted was the one being used to decide what to do next.
+
+`repair/scan/test_patch_origin.py`; `repair/scan/allfail_mechanism.py`;
+`repair/scan/RESULT.md`.
+
+---
+
+## 33. Two branches of the rename operator searched for a substring
+
+**Bug.** `SymbolRename.apply` collects AST spans and rewrites them, which is
+boundary-correct for `ast.Name` because a Name's `id` must equal the symbol
+exactly. Two branches did not use spans:
+
+    f2_operators.py  ImportFrom  col = line.index(name)
+    f2_operators.py  Attribute   col = line.find(name, node.value.end_col_offset)
+
+`str.index` is a substring search. On `from pkg.mod import BaseFoo, Foo` with
+anchor `Foo` it returns the offset inside `BaseFoo`, and the operator rewrote
+`BaseFoo` while leaving the real `Foo` alias alone. The span check that follows
+cannot catch it: `ln[c0:c1]` is exactly `name`, being the tail of the superstring
+the search landed in.
+
+**Why it could not be seen in the results.** A task hit this way had its
+definition renamed and its import left behind, which fails with `cannot import
+name '<anchor>'` — text that names the anchor, so `names_symbol` read it as
+coupling and the row came back `WITNESS`. In the records a witness produced by a
+broken rename and a witness produced by a coupled grader are the same bytes.
+`references_rewritten` counts the same either way. Nothing in the output of the
+check could distinguish them, which is the family shape exactly, and it is why
+the blast radius could not be settled by reading the 500 records and had to be
+measured by re-running.
+
+**The invariant, added before the fix.** An alpha-rename replaces whole
+occurrences of `name` with `name__renamed` and changes nothing else, so
+substituting the new identifier back on a word boundary must reproduce the input
+byte for byte. Anything else is `Refused`. It went in *before* the two branches
+were repaired, and was shown firing on the two corrupting shapes — installed
+after the fix it would have passed on every case from its first run, and a guard
+that has never fired is entry 19.
+
+Two weaker checks were written first and each failed on the case it was written
+for. Stripping `name + "__renamed"` and looking for a leftover `"__renamed"`
+passes on `BaseFoo__renamed`, which *contains* `Foo__renamed` — the defect being
+probed, reproduced inside the probe for it. A token scan for the suffix misses
+`Foo__renamedlib`, where the edit landed inside a module path.
+
+**Blast radius, measured.** Each of the 28 witness tasks' production trees was
+rebuilt offline — base commit + `tests.diff` + `gold.diff` — and `SymbolRename`
+applied twice: at `189451b`, the code that produced the published run, and at
+HEAD. The recorded rename was well-formed iff the two agree byte for byte. **All
+34 rows across all 28 tasks stand. None void, none undetermined.**
+
+The defect needs the anchor to appear as a substring earlier on the same import
+line, before the alias or inside the module path, and no such line exists across
+the 28. The near miss is the shape that looks worst and is not: `class
+DatabaseClient(BaseDatabaseClient)` in three django tasks, where the superstring
+is on the `class` line and reached through the `ClassDef` branch, while the
+import line names only `BaseDatabaseClient` — not the anchor, so the `ImportFrom`
+branch never fires.
+
+**Why that is a result and not a tautology.** A measurement that puts every row
+in one bucket says nothing until the other buckets are shown to be reachable.
+The first run of this scan produced the same 34/34 and was not reported, because
+as it stood it could not be told apart from a scan incapable of saying anything
+else. Three checks were added and all three had to pass before a table was
+printed:
+
+* **A positive control**, run first. Two shapes the old operator provably
+  corrupts go through the same comparison the 34 rows go through. Both must come
+  back void or the scan aborts instead of printing. They do.
+* **Every row rewrote real files** — 1, 2, 3, 5 and 11 across the 34. Two
+  operators agreeing on a tree neither of them touched is evidence about the
+  reconstruction, not about a rename, so that case is bucketed undetermined
+  rather than as a witness standing.
+* **The rewrite compared is the recorded one.** Applying the old operator to the
+  rebuilt tree reproduces the `tree_digest` that row recorded, on **34 of 34
+  rows**. The trees are byte-identical to the ones the run saw. A row failing
+  this is moved to undetermined, because the comparison would then be between
+  something else and the corrected operator.
+
+**Two limits, stated rather than left to be assumed.** The invariant compares
+against the input, not against a complete rename, so it catches an edit that
+landed in the wrong place and not an edit that never happened. And the scan
+covers the 34 witness rows only: the 466 non-witness rows are unaudited, and
+there this defect biases toward *fewer* witnesses, not more — a corrupted
+rewrite pushes a row away from `WITNESS`, which is the direction nobody audits
+and the shape entry 15 already records.
+
+**Rule.** A substitution that has a boundary-aware form available does not use a
+substring search, and an operator that claims to preserve a property checks that
+property on its own output. Where the check can only be written after the defect
+is known, it goes in before the fix and is shown firing, because the fix removes
+the evidence that it works.
+
+`repro/f2_operators.py` (`SymbolRename.apply`);
+`repair/scan/operator_boundary_probe.py`; `repair/scan/blast_radius_28.py`;
+`repair/scan/BLAST_RADIUS_28.md`; `repair/scan/BLAST_RADIUS_28.json`.
+
+---
+
+## 34. The find respected word boundaries; the replace did not
+
+**Bug.** The repair side carried the same defect as entry 33, in a worse form.
+`SymbolRename` used `line.index`, which lands on the first substring occurrence.
+The gate and the scan script used `str.replace`, which rewrites *every* substring
+occurrence:
+
+    repair/gate.py                   src.replace(old, new)
+    repair/scan/import_local_run.py  src.replace(symbol, new)
+
+**What makes this its own entry rather than a second instance.** Both sites were
+already written in terms of word boundaries, everywhere except the one step that
+edits bytes. `import_local_run.rename_everywhere` **selects** the files to rewrite
+with `grep -rl '\bsymbol\b'` and then **verifies** no residue with the same
+expression; `gate.build` verifies with `grep -rl '\b{old}\b'` after rewriting.
+The boundaries were not absent from the design. They were absent from the
+substitution in the middle, between two checks that used them.
+
+**And the residue check could not catch it.** This is the part worth keeping.
+`str.replace("Collector", "Collector__renamed")` turns `NoFastDeleteCollector`
+into `NoFastDeleteCollector__renamed`, which no longer contains
+`\bCollector\b` — so the residue grep comes back clean on exactly the corruption
+it exists to catch. It is not a weaker guard against this class. It is no guard
+at all, and it reports success while being blind, which is the family shape
+again.
+
+**The positive control could not tell the two apart either.** C2 requires the
+behavioural mutants to score 0.0 under the repaired test, and reads 0.0 as
+CAUGHT. A rename that broke the library scores 0.0 on every mutant as well,
+because nothing imports. The control is satisfied identically by a caught mutant
+and a broken tree, so it cannot discriminate the case it would need to.
+
+**What separated them was the recovery condition.** C1 requires the renamed gold
+to come back to **1.0** under the repaired test. A broken rename cannot recover —
+it scores 0.0 there too, and C1 fails. That is what happened on this gate's first
+run, recorded in `gate.build`'s own comment: `Collector` is referenced from five
+django modules, the config listed one, and the reward was 0.0 in every cell
+including the repaired one, *"read exactly like the repair does not work"*. The
+gate has a second guard of the same kind — a 0.0 reported with fewer graded node
+ids present than the baseline is ABSENCE, not detection, and fails rather than
+counting as CAUGHT.
+
+So the arrangement that held was: the check that fires on success (C1, recovery
+to 1.0) discriminated, and the check that fires on failure (C2, mutants at 0.0)
+did not. A 0.0 is reachable by many roads and proves little on its own; a 1.0
+after a transform is narrow.
+
+**Measured before any container, on the real trees.** Every production file each
+gate renames, substituted both ways and compared byte for byte:
+
+    m0b  xarray-4966      UnsignedIntegerCoder  IDENTICAL   2 files
+    m0c  astropy-12907    _cstack               IDENTICAL   1 file
+    m0d  django-11179     Collector             DIFFERS     1 of 5 files
+    m0e  django-11433     construct_instance    IDENTICAL   1 file
+
+Three of the four gates cannot have moved, and that is a proof rather than a
+re-run: identical input to an identical pipeline. The single difference is
+`NoFastDeleteCollector` in `remove_stale_contenttypes.py`, which the old
+substitution renamed along with the anchor.
+
+**Rule.** A substitution is boundary-aware wherever the checks around it are, and
+a check written in terms of the property being preserved is verified against the
+failure it is meant to catch — not assumed to catch it because it mentions the
+right symbol. Where a control can be satisfied by the defect as easily as by the
+correct result, it is not a control for that defect, and saying which condition
+actually discriminates is part of stating the result.
+
+`repair/gate.py` (`build`); `repair/scan/import_local_run.py`
+(`rename_everywhere`).
+
+---
+
+## 35. A log parser with no branch for two test names on one line
+
+**Bug.** Django's verbose runner writes `name ... STATUS`, one line per test. A
+test whose status is never written leaves its line unterminated and the next
+test's line is appended to it:
+
+    test_options_override_settings_proper_values (...) ... test_parameters (...) ... ERROR
+
+`parse_log_django` handles that line twice and is wrong both times.
+`prev_test = line.split(" ... ")[0]` keeps only the first name, and the status
+branch takes `line.split(" ... ERROR")[0]` — the **whole prefix**,
+`A (...) ... B (...)`. The status map gains a key no test id can equal, and
+**both** ids are absent from it. Upstream `test_passed` is `case in status_map
+and status_map[case] in (PASSED, XFAIL)`, so an absent id is counted as failing.
+
+Had that line ended in `ok` instead of `ERROR`, two **passing** graded tests would
+have been counted as failing — and for `formcheck` a false failure is a false
+witness. That is why this was chased before the measurement that surfaced it.
+
+**Where it comes from.** One producing shape observed: a failing `self.subTest`,
+whose error blocks are emitted without the parent test's status ever being
+written. The log in hand carries ten `ERROR:` blocks for nine tests, one test
+having errored under two subTest keys. The parser's own comments name three
+further interleaving shapes and handle them — but the recovery covers **passes
+only**. There is no branch for a `FAIL`/`ERROR` arriving after interleaved
+output, and none for two names sharing a line.
+
+**The parser cannot tell the two cases apart; its output can.** While parsing,
+"the status line was absent" and "the status line was consumed by a preceding
+block" are the same event — an id missing from the map, with nothing marking why.
+But a real test id never contains `" ... "`, so a key that does is a consumed
+line and the ids inside it are recoverable by substring. That is what made the
+question answerable from stored logs rather than by re-running 500 containers.
+
+**Result, and the count that makes it a measurement.**
+
+    logs scanned                                  64   (63 graded rows + 1 control)
+    witness rows among them                       34 of 34
+    status-map keys containing " ... "             0
+    swallowed graded ids                           0
+    swallowed ids whose log shows them PASSING     0
+
+A detector reporting *none found* is worth nothing without the number of
+occasions it had to fire. Absence of an id from the status map is what it
+discriminates, and absence is abundant here: **2,387 graded ids are absent across
+43 of the 64 logs** — the all-fail shape, a module that never imported — and not
+one of them is absent because its status line was consumed. The zero is measured
+against 2,387 opportunities, not against silence.
+
+**It did not bite this run, and that is a property of these logs rather than of
+the parser.** Nothing was fixed upstream and nothing here defends against it. A
+corpus with one failing `subTest` in the wrong place would produce the false
+failure; this one does not contain that arrangement.
+
+**Coverage, and why the unstored logs are safe.** 259 rows ran a graded suite and
+63 store a log; the gap is the 196 `CLEAN` rows. They cannot hide a false failure
+by the structure of the defect — swallowing only *removes* ids, a removed id is
+not passed, so it lands in `f2p_fail` or `p2p_fail`, the reward falls below 1.0,
+and the row is not `CLEAN`. Checked rather than argued: all 196 have `reward
+1.0`, `f2p_fail 0`, `p2p_fail 0`, no exceptions.
+
+**Open, and stated in neither direction.** The parser marks `prev_test` PASSED
+whenever a later line begins with `ok`, and after interleaving `prev_test` can be
+the wrong test — on a merged line it is the *first* name. That records a pass
+against a test that did not pass. Checking it needs exactly the 196 `CLEAN` logs
+that were not stored, and it is not claimed in either direction here.
+
+Note that this open item and the unaudited 466 non-witness rows of entry 33 bias
+the same way — both toward **fewer** witnesses, not more — so the two gaps in the
+evidence do not offset each other and neither can be leaned on to argue the
+headline is conservative.
+
+**Rule.** A result of *none found* is reported with the number of occasions the
+detector had to fire; without it the claim and an untested detector are the same
+sentence. And where a defect was not reached rather than defended against, the
+report says which.
+
+`repair/scan/parser_swallow_scan.py`; `repair/scan/parser_swallow_scan.json`;
+`repair/scan/PARSER_SWALLOW_RESULT.md`.
+
+---
+
+## 36. A resume set that was seeded once and never updated
+
+**Bug.** `import_local_run.main` builds `done` from the rows already in the
+artifact and skips any `(task, symbol)` already present:
+
+    done = {(r["task"], r["symbol"]) for r in rows}
+    for instance_id, symbol in todo:
+        if (instance_id, symbol) in done:
+            continue
+
+`done` is never added to inside the loop, so it only ever de-duplicates against
+*previous* runs, never against the current one. `todo` comes from the witness
+rows, and a task can carry the same symbol on two files —
+`sphinx-doc__sphinx-7590` holds `DefinitionParser` in both `sphinx/domains/c.py`
+and `sphinx/domains/cpp.py`, so it appears twice. It was measured twice: two
+image pulls, two containers, two gradings.
+
+**What it cost, and what it did not.** The two rows are byte-identical, so no
+value in the artifact is wrong — the measurement is per `(task, symbol)` and the
+rename covers both files either way. It spent one unnecessary container, and it
+left a duplicate row in a file whose whole purpose is to be summed. Any aggregate
+over the artifact would have counted that task twice, weighting one task's
+`N = 25` at double. The artifact is de-duplicated to 13 rows and `done` is now
+updated in the loop.
+
+**Why it is worth an entry.** The defect is not that a container was wasted. It
+is that a *resume* mechanism was doing duty as a *de-duplication* mechanism, and
+those are not the same thing: one asks "did a previous run do this?", the other
+asks "has this been done?". The first answers the second correctly only while
+`todo` has no repeats, which was true of every earlier run and is a property of
+the input rather than of the code.
+
+**How it was caught.** By reading the run's own output before summarising it —
+two adjacent lines with the same task, symbol and numbers. Not by a check; there
+was no check. The counts printed alongside would not have disagreed with the
+table either, because both were computed from the same duplicated rows, which is
+the shape entry 32 records in reverse.
+
+**Rule.** A collection assembled from per-row evidence is de-duplicated on the
+key it is summed by, in the loop that builds it, and the artifact is verified to
+hold one row per key before any total is taken from it. "The input does not
+repeat" is an assumption about data, not a property of code, and it belongs in an
+assertion if anything depends on it.
+
+`repair/scan/import_local_run.py` (`main`); `repair/scan/import_local_run.json`.

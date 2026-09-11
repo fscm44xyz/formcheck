@@ -1,0 +1,19 @@
+diff --git a/tests/delete/tests.py b/tests/delete/tests.py
+--- a/tests/delete/tests.py
++++ b/tests/delete/tests.py
+@@ -1,7 +1,6 @@
+ from math import ceil
+ 
+ from django.db import IntegrityError, connection, models
+-from django.db.models.deletion import Collector
+ from django.db.models.sql.constants import GET_ITERATOR_CHUNK_SIZE
+ from django.test import TestCase, skipIfDBFeature, skipUnlessDBFeature
+ 
+@@ -473,6 +472,7 @@
+         self.assertTrue(User.objects.filter(pk=u2.pk).exists())
+ 
+     def test_fast_delete_instance_set_pk_none(self):
++        from django.db.models.deletion import Collector
+         u = User.objects.create()
+         # User can be fast-deleted.
+         collector = Collector(using='default')

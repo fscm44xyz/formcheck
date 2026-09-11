@@ -1,0 +1,313 @@
+{
+  "completed": true,
+  "control": {
+    "graded": null,
+    "log": null,
+    "passed": true,
+    "reason": "untransformed reference scores 1.0"
+  },
+  "digest_trace": [
+    {
+      "digest": "34687e25c1c7abc532a83a88ab8a187e0e2b157d4c90b44d8d6e52333a20894e",
+      "memo_hit": false
+    },
+    {
+      "digest": "2f512d1a0043ac5500024f1d535a1514cdc8e526a303bc8e193e993a36ea84d5",
+      "memo_hit": false
+    },
+    {
+      "digest": "2f512d1a0043ac5500024f1d535a1514cdc8e526a303bc8e193e993a36ea84d5",
+      "memo_hit": true
+    }
+  ],
+  "disk_orphan_reclaimed_bytes": 0,
+  "disk_residual_bytes": 4096,
+  "elapsed_seconds": 142.8,
+  "error": null,
+  "image": "swebench/sweb.eval.x86_64.pydata_1776_xarray-4966:latest",
+  "instance_id": "pydata__xarray-4966",
+  "leaked_containers": [],
+  "leaked_image": false,
+  "log": [
+    [
+      "<control>",
+      "OK",
+      "untransformed reference scores 1.0"
+    ],
+    [
+      "kwonly_specialize:<no anchor>",
+      "NOT_APPLICABLE",
+      "no anchor inside the gold-touched region"
+    ],
+    [
+      "symbol_rename:UnsignedIntegerCoder",
+      "CLEAN",
+      "reward 1.0"
+    ],
+    [
+      "collection_reverse:<no anchor>",
+      "NOT_APPLICABLE",
+      "no anchor inside the gold-touched region"
+    ],
+    [
+      "message_reword:<no anchor>",
+      "NOT_APPLICABLE",
+      "no anchor inside the gold-touched region"
+    ]
+  ],
+  "mountable": true,
+  "multi_target": false,
+  "n_targets": 1,
+  "on_prime_hub": null,
+  "on_prime_hub_reason": "not resolvable offline; no hub environment index is reachable from this repo, verifiers or swebench",
+  "operators_not_applicable": [
+    "collection_reverse",
+    "kwonly_specialize",
+    "message_reword"
+  ],
+  "operators_with_anchors": [
+    "symbol_rename"
+  ],
+  "repo": "pydata/xarray",
+  "row": {
+    "elapsed": 20.15,
+    "error": null,
+    "error_type": null,
+    "index": 0,
+    "mode": "formcheck",
+    "name": "pydata__xarray-4966",
+    "reason": "valid",
+    "valid": true
+  },
+  "rows": [
+    {
+      "anchor": null,
+      "detail": null,
+      "failure_analysis": null,
+      "file": null,
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 4,
+        "found": true,
+        "n_parsed": 25,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 21,
+        "reward": 1.0
+      },
+      "loud_failure": false,
+      "observable": "callable signature (arity / parameter names)",
+      "operator": "kwonly_specialize",
+      "reason": "no anchor inside the gold-touched region",
+      "tier": "HIGH",
+      "tree_digest": "34687e25c1c7abc532a83a88ab8a187e0e2b157d4c90b44d8d6e52333a20894e",
+      "verdict": "NOT_APPLICABLE"
+    },
+    {
+      "anchor": "UnsignedIntegerCoder",
+      "detail": {
+        "files": [
+          "asv_bench/benchmarks/__init__.py",
+          "asv_bench/benchmarks/combine.py",
+          "asv_bench/benchmarks/dataarray_missing.py",
+          "asv_bench/benchmarks/dataset_io.py",
+          "asv_bench/benchmarks/indexing.py",
+          "asv_bench/benchmarks/interp.py",
+          "asv_bench/benchmarks/pandas.py",
+          "asv_bench/benchmarks/reindexing.py",
+          "asv_bench/benchmarks/repr.py",
+          "asv_bench/benchmarks/rolling.py",
+          "asv_bench/benchmarks/unstacking.py",
+          "ci/min_deps_check.py",
+          "setup.py",
+          "xarray/__init__.py",
+          "xarray/backends/__init__.py",
+          "xarray/backends/api.py",
+          "xarray/backends/apiv2.py",
+          "xarray/backends/cfgrib_.py",
+          "xarray/backends/common.py",
+          "xarray/backends/file_manager.py",
+          "xarray/backends/h5netcdf_.py",
+          "xarray/backends/locks.py",
+          "xarray/backends/lru_cache.py",
+          "xarray/backends/memory.py",
+          "xarray/backends/netCDF4_.py",
+          "xarray/backends/netcdf3.py",
+          "xarray/backends/plugins.py",
+          "xarray/backends/pseudonetcdf_.py",
+          "xarray/backends/pydap_.py",
+          "xarray/backends/pynio_.py",
+          "xarray/backends/rasterio_.py",
+          "xarray/backends/scipy_.py",
+          "xarray/backends/store.py",
+          "xarray/backends/zarr.py",
+          "xarray/coding/__init__.py",
+          "xarray/coding/cftime_offsets.py",
+          "xarray/coding/cftimeindex.py",
+          "xarray/coding/frequencies.py",
+          "xarray/coding/strings.py",
+          "xarray/coding/times.py",
+          "xarray/coding/variables.py",
+          "xarray/conventions.py",
+          "xarray/convert.py",
+          "xarray/core/__init__.py",
+          "xarray/core/accessor_dt.py",
+          "xarray/core/accessor_str.py",
+          "xarray/core/alignment.py",
+          "xarray/core/arithmetic.py",
+          "xarray/core/combine.py",
+          "xarray/core/common.py",
+          "xarray/core/computation.py",
+          "xarray/core/concat.py",
+          "xarray/core/coordinates.py",
+          "xarray/core/dask_array_compat.py",
+          "xarray/core/dask_array_ops.py",
+          "xarray/core/dataarray.py",
+          "xarray/core/dataset.py",
+          "xarray/core/dtypes.py",
+          "xarray/core/duck_array_ops.py",
+          "xarray/core/extensions.py",
+          "xarray/core/formatting.py",
+          "xarray/core/formatting_html.py",
+          "xarray/core/groupby.py",
+          "xarray/core/indexes.py",
+          "xarray/core/indexing.py",
+          "xarray/core/merge.py",
+          "xarray/core/missing.py",
+          "xarray/core/nanops.py",
+          "xarray/core/npcompat.py",
+          "xarray/core/nputils.py",
+          "xarray/core/ops.py",
+          "xarray/core/options.py",
+          "xarray/core/parallel.py",
+          "xarray/core/pdcompat.py",
+          "xarray/core/pycompat.py",
+          "xarray/core/resample.py",
+          "xarray/core/resample_cftime.py",
+          "xarray/core/rolling.py",
+          "xarray/core/rolling_exp.py",
+          "xarray/core/utils.py",
+          "xarray/core/variable.py",
+          "xarray/core/weighted.py",
+          "xarray/plot/__init__.py",
+          "xarray/plot/dataset_plot.py",
+          "xarray/plot/facetgrid.py",
+          "xarray/plot/plot.py",
+          "xarray/plot/utils.py",
+          "xarray/testing.py",
+          "xarray/tutorial.py",
+          "xarray/ufuncs.py",
+          "xarray/util/__init__.py",
+          "xarray/util/print_versions.py"
+        ],
+        "new_name": "UnsignedIntegerCoder__renamed",
+        "references_rewritten": 3
+      },
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "broke": [],
+        "coupled": [],
+        "failing": [],
+        "symbol": "UnsignedIntegerCoder",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": "xarray/coding/variables.py",
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 4,
+        "found": true,
+        "n_parsed": 25,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 21,
+        "reward": 1.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "reason": "reward 1.0",
+      "tier": "MEDIUM",
+      "tree_digest": "2f512d1a0043ac5500024f1d535a1514cdc8e526a303bc8e193e993a36ea84d5",
+      "verdict": "CLEAN"
+    },
+    {
+      "anchor": null,
+      "detail": null,
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "broke": [],
+        "coupled": [],
+        "failing": [],
+        "symbol": "UnsignedIntegerCoder",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": null,
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 4,
+        "found": true,
+        "n_parsed": 25,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 21,
+        "reward": 1.0
+      },
+      "loud_failure": false,
+      "observable": "order of elements in a returned collection",
+      "operator": "collection_reverse",
+      "reason": "no anchor inside the gold-touched region",
+      "tier": "MEDIUM",
+      "tree_digest": "2f512d1a0043ac5500024f1d535a1514cdc8e526a303bc8e193e993a36ea84d5",
+      "verdict": "NOT_APPLICABLE"
+    },
+    {
+      "anchor": null,
+      "detail": null,
+      "failure_analysis": {
+        "all_reference_the_symbol": false,
+        "broke": [],
+        "coupled": [],
+        "failing": [],
+        "symbol": "UnsignedIntegerCoder",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": null,
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 4,
+        "found": true,
+        "n_parsed": 25,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 21,
+        "reward": 1.0
+      },
+      "loud_failure": false,
+      "observable": "human-readable text of an exception message",
+      "operator": "message_reword",
+      "reason": "no anchor inside the gold-touched region",
+      "tier": "HIGH",
+      "tree_digest": "2f512d1a0043ac5500024f1d535a1514cdc8e526a303bc8e193e993a36ea84d5",
+      "verdict": "NOT_APPLICABLE"
+    }
+  ],
+  "targets": [
+    "xarray/coding/variables.py"
+  ],
+  "version": "0.12",
+  "witnesses": []
+}

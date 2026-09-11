@@ -274,6 +274,20 @@ class FormCheckMixin:
         different code path than the one that produced the verdict is the
         cross-path inference that manufactured the false witnesses of
         `writeup.md` 4.1.
+
+        THIRTEEN KEYS SINCE repair-M0a. The twelve above are unchanged in name,
+        order and meaning -- `scale/aggregate.py` and every record already
+        written read them, and a rename here is a silent schema break. The
+        thirteenth is `detail`, added because dropping it made the transform
+        unrecoverable: every operator in the family sets `report["detail"]`
+        (`f2_operators.py` 136, 374, 449, 507) with the specifics of what it
+        actually rewrote, and none of it survived into the record. A witness row
+        could name the anchor and the reward but not what was done to the tree,
+        so the repair milestone -- which consumes exactly that as its input --
+        would have had to re-derive the transform from the operator's source on
+        a different code path than the one that produced the verdict. That is
+        the inference `writeup.md` 4.1 warns about, and the fix is to record it
+        at the point it is known.
         """
         self.formcheck_rows.append({
             "operator": op.id,
@@ -287,6 +301,16 @@ class FormCheckMixin:
             # partition and the `symbol_rename`-only scoping of THE NUMBER are
             # both computed from the row that carries the verdict.
             "loud_failure": bool(op.loud_failure),
+            # WHAT THE TRANSFORM ACTUALLY DID, from the operator that did it.
+            # Shape is per-operator and deliberately not normalised here:
+            # `symbol_rename` records the new name, how many references it
+            # rewrote and the files it scanned; `message_reword` records the old
+            # and new text. Normalising them into a common shape at this point
+            # would be this file inventing a schema for four objects it does not
+            # own. `None` on a row that never reached `apply` -- NOT_APPLICABLE
+            # and REFUSED have no report, and an absent transform is recorded as
+            # absent rather than as an empty one.
+            "detail": (report or {}).get("detail"),
             "graded_log": graded_log,
             # The F2P/P2P breakdown behind this row's reward, when the taskset
             # computed one. Recorded here rather than re-derived from the log

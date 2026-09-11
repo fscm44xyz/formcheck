@@ -1,0 +1,453 @@
+{
+  "completed": true,
+  "control": {
+    "graded": null,
+    "log": null,
+    "passed": true,
+    "reason": "untransformed reference scores 1.0"
+  },
+  "digest_trace": [
+    {
+      "digest": "3f88c34b6abc9b7c90df374c634f4789d4b3e64e5cc84f651569d1801c2e7a6b",
+      "memo_hit": false
+    },
+    {
+      "digest": "db12937aa76e532614f42f69ca5a2f6c0fae96d36d63f2b2870ac90732f1cffe",
+      "memo_hit": false
+    },
+    {
+      "digest": "db12937aa76e532614f42f69ca5a2f6c0fae96d36d63f2b2870ac90732f1cffe",
+      "memo_hit": true
+    }
+  ],
+  "disk_orphan_reclaimed_bytes": 0,
+  "disk_residual_bytes": 8192,
+  "elapsed_seconds": 90.66,
+  "error": null,
+  "image": "swebench/sweb.eval.x86_64.django_1776_django-11179:latest",
+  "instance_id": "django__django-11179",
+  "leaked_containers": [],
+  "leaked_image": false,
+  "log": [
+    [
+      "<control>",
+      "OK",
+      "untransformed reference scores 1.0"
+    ],
+    [
+      "kwonly_specialize:<no anchor>",
+      "NOT_APPLICABLE",
+      "no anchor inside the gold-touched region"
+    ],
+    [
+      "symbol_rename:Collector",
+      "WITNESS",
+      "reward 0.0"
+    ],
+    [
+      "collection_reverse:<no anchor>",
+      "NOT_APPLICABLE",
+      "no anchor inside the gold-touched region"
+    ],
+    [
+      "message_reword:<no anchor>",
+      "NOT_APPLICABLE",
+      "no anchor inside the gold-touched region"
+    ]
+  ],
+  "mountable": true,
+  "multi_target": false,
+  "n_targets": 1,
+  "on_prime_hub": null,
+  "on_prime_hub_reason": "not resolvable offline; no hub environment index is reachable from this repo, verifiers or swebench",
+  "operators_not_applicable": [
+    "collection_reverse",
+    "kwonly_specialize",
+    "message_reword"
+  ],
+  "operators_with_anchors": [
+    "symbol_rename"
+  ],
+  "repo": "django/django",
+  "row": {
+    "elapsed": 20.8,
+    "error": null,
+    "error_type": null,
+    "index": 0,
+    "mode": "formcheck",
+    "name": "django__django-11179",
+    "reason": "invalid",
+    "valid": false
+  },
+  "rows": [
+    {
+      "anchor": null,
+      "detail": null,
+      "failure_analysis": null,
+      "file": null,
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 0,
+        "f2p_failing": [],
+        "f2p_pass": 1,
+        "found": true,
+        "n_parsed": 42,
+        "p2p_fail": 0,
+        "p2p_failing": [],
+        "p2p_pass": 40,
+        "reward": 1.0
+      },
+      "loud_failure": false,
+      "observable": "callable signature (arity / parameter names)",
+      "operator": "kwonly_specialize",
+      "reason": "no anchor inside the gold-touched region",
+      "tier": "HIGH",
+      "tree_digest": "3f88c34b6abc9b7c90df374c634f4789d4b3e64e5cc84f651569d1801c2e7a6b",
+      "verdict": "NOT_APPLICABLE"
+    },
+    {
+      "all_failures_attributed": true,
+      "anchor": "Collector",
+      "detail": {
+        "files_changed": [
+          "django/contrib/admin/utils.py",
+          "django/contrib/contenttypes/management/commands/remove_stale_contenttypes.py",
+          "django/db/models/base.py",
+          "django/db/models/deletion.py",
+          "django/db/models/query.py"
+        ],
+        "files_scanned": 818,
+        "new_name": "Collector__renamed",
+        "references_rewritten": 9
+      },
+      "f2p_fail": 1,
+      "failure_analysis": {
+        "all_reference_the_symbol": true,
+        "broke": [],
+        "coupled": [
+          "test_fast_delete_empty_no_update_can_self_select (delete.tests.FastDeleteTests)",
+          "test_fast_delete_fk (delete.tests.FastDeleteTests)",
+          "test_fast_delete_inheritance (delete.tests.FastDeleteTests)",
+          "test_fast_delete_joined_qs (delete.tests.FastDeleteTests)",
+          "test_fast_delete_large_batch (delete.tests.FastDeleteTests)",
+          "test_fast_delete_m2m (delete.tests.FastDeleteTests)",
+          "test_fast_delete_qs (delete.tests.FastDeleteTests)",
+          "test_fast_delete_revm2m (delete.tests.FastDeleteTests)",
+          "test_auto (delete.tests.OnDeleteTests)",
+          "test_auto_nullable (delete.tests.OnDeleteTests)",
+          "test_fast_delete_instance_set_pk_none (delete.tests.FastDeleteTests)"
+        ],
+        "failing": [
+          "test_fast_delete_empty_no_update_can_self_select (delete.tests.FastDeleteTests)",
+          "test_fast_delete_fk (delete.tests.FastDeleteTests)",
+          "test_fast_delete_inheritance (delete.tests.FastDeleteTests)",
+          "test_fast_delete_joined_qs (delete.tests.FastDeleteTests)",
+          "test_fast_delete_large_batch (delete.tests.FastDeleteTests)",
+          "test_fast_delete_m2m (delete.tests.FastDeleteTests)",
+          "test_fast_delete_qs (delete.tests.FastDeleteTests)",
+          "test_fast_delete_revm2m (delete.tests.FastDeleteTests)",
+          "test_auto (delete.tests.OnDeleteTests)",
+          "test_auto_nullable (delete.tests.OnDeleteTests)",
+          "test_fast_delete_instance_set_pk_none (delete.tests.FastDeleteTests)"
+        ],
+        "symbol": "Collector",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": "django/db/models/deletion.py",
+      "graded_log": "+ ./tests/runtests.py --verbosity 2 --settings=test_sqlite --parallel 1 delete.tests\nTesting against Django installed in '/testbed/django'\nImporting application delete\nSkipping setup of unused database(s): default, other.\nSystem check identified no issues (0 silenced).\n\ntests (unittest.loader._FailedTest) ... ERROR\n\n======================================================================\nERROR: tests (unittest.loader._FailedTest)\n----------------------------------------------------------------------\nImportError: Failed to import test module: tests\nTraceback (most recent call last):\n  File \"/opt/miniconda3/envs/testbed/lib/python3.6/unittest/loader.py\", line 153, in loadTestsFromName\n    module = __import__(module_name)\n  File \"/testbed/tests/delete/tests.py\", line 4, in <module>\n    from django.db.models.deletion import Collector\nImportError: cannot import name 'Collector'\n\n\n----------------------------------------------------------------------\nRan 1 test in 0.000s\n\nFAILED (errors=1)\n",
+      "graded_report": {
+        "f2p_fail": 1,
+        "f2p_failing": [
+          "test_fast_delete_instance_set_pk_none (delete.tests.FastDeleteTests)"
+        ],
+        "f2p_pass": 0,
+        "found": true,
+        "n_parsed": 2,
+        "p2p_fail": 40,
+        "p2p_failing": [
+          "test_fast_delete_empty_no_update_can_self_select (delete.tests.FastDeleteTests)",
+          "test_fast_delete_fk (delete.tests.FastDeleteTests)",
+          "test_fast_delete_inheritance (delete.tests.FastDeleteTests)",
+          "test_fast_delete_joined_qs (delete.tests.FastDeleteTests)",
+          "test_fast_delete_large_batch (delete.tests.FastDeleteTests)",
+          "test_fast_delete_m2m (delete.tests.FastDeleteTests)",
+          "test_fast_delete_qs (delete.tests.FastDeleteTests)",
+          "test_fast_delete_revm2m (delete.tests.FastDeleteTests)",
+          "test_auto (delete.tests.OnDeleteTests)",
+          "test_auto_nullable (delete.tests.OnDeleteTests)"
+        ],
+        "p2p_pass": 0,
+        "reward": 0.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "p2p_coupled_tests": [
+        "test_fast_delete_empty_no_update_can_self_select (delete.tests.FastDeleteTests)",
+        "test_fast_delete_fk (delete.tests.FastDeleteTests)",
+        "test_fast_delete_inheritance (delete.tests.FastDeleteTests)",
+        "test_fast_delete_joined_qs (delete.tests.FastDeleteTests)",
+        "test_fast_delete_large_batch (delete.tests.FastDeleteTests)",
+        "test_fast_delete_m2m (delete.tests.FastDeleteTests)",
+        "test_fast_delete_qs (delete.tests.FastDeleteTests)",
+        "test_fast_delete_revm2m (delete.tests.FastDeleteTests)",
+        "test_auto (delete.tests.OnDeleteTests)",
+        "test_auto_nullable (delete.tests.OnDeleteTests)"
+      ],
+      "p2p_fail": 40,
+      "reason": "reward 0.0",
+      "tier": "MEDIUM",
+      "tree_digest": "db12937aa76e532614f42f69ca5a2f6c0fae96d36d63f2b2870ac90732f1cffe",
+      "verdict": "WITNESS",
+      "witness_side": "p2p_coupling"
+    },
+    {
+      "anchor": null,
+      "detail": null,
+      "failure_analysis": {
+        "all_reference_the_symbol": true,
+        "broke": [],
+        "coupled": [
+          "test_fast_delete_empty_no_update_can_self_select (delete.tests.FastDeleteTests)",
+          "test_fast_delete_fk (delete.tests.FastDeleteTests)",
+          "test_fast_delete_inheritance (delete.tests.FastDeleteTests)",
+          "test_fast_delete_joined_qs (delete.tests.FastDeleteTests)",
+          "test_fast_delete_large_batch (delete.tests.FastDeleteTests)",
+          "test_fast_delete_m2m (delete.tests.FastDeleteTests)",
+          "test_fast_delete_qs (delete.tests.FastDeleteTests)",
+          "test_fast_delete_revm2m (delete.tests.FastDeleteTests)",
+          "test_auto (delete.tests.OnDeleteTests)",
+          "test_auto_nullable (delete.tests.OnDeleteTests)",
+          "test_fast_delete_instance_set_pk_none (delete.tests.FastDeleteTests)"
+        ],
+        "failing": [
+          "test_fast_delete_empty_no_update_can_self_select (delete.tests.FastDeleteTests)",
+          "test_fast_delete_fk (delete.tests.FastDeleteTests)",
+          "test_fast_delete_inheritance (delete.tests.FastDeleteTests)",
+          "test_fast_delete_joined_qs (delete.tests.FastDeleteTests)",
+          "test_fast_delete_large_batch (delete.tests.FastDeleteTests)",
+          "test_fast_delete_m2m (delete.tests.FastDeleteTests)",
+          "test_fast_delete_qs (delete.tests.FastDeleteTests)",
+          "test_fast_delete_revm2m (delete.tests.FastDeleteTests)",
+          "test_auto (delete.tests.OnDeleteTests)",
+          "test_auto_nullable (delete.tests.OnDeleteTests)",
+          "test_fast_delete_instance_set_pk_none (delete.tests.FastDeleteTests)"
+        ],
+        "symbol": "Collector",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": null,
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 1,
+        "f2p_failing": [
+          "test_fast_delete_instance_set_pk_none (delete.tests.FastDeleteTests)"
+        ],
+        "f2p_pass": 0,
+        "found": true,
+        "n_parsed": 2,
+        "p2p_fail": 40,
+        "p2p_failing": [
+          "test_fast_delete_empty_no_update_can_self_select (delete.tests.FastDeleteTests)",
+          "test_fast_delete_fk (delete.tests.FastDeleteTests)",
+          "test_fast_delete_inheritance (delete.tests.FastDeleteTests)",
+          "test_fast_delete_joined_qs (delete.tests.FastDeleteTests)",
+          "test_fast_delete_large_batch (delete.tests.FastDeleteTests)",
+          "test_fast_delete_m2m (delete.tests.FastDeleteTests)",
+          "test_fast_delete_qs (delete.tests.FastDeleteTests)",
+          "test_fast_delete_revm2m (delete.tests.FastDeleteTests)",
+          "test_auto (delete.tests.OnDeleteTests)",
+          "test_auto_nullable (delete.tests.OnDeleteTests)"
+        ],
+        "p2p_pass": 0,
+        "reward": 0.0
+      },
+      "loud_failure": false,
+      "observable": "order of elements in a returned collection",
+      "operator": "collection_reverse",
+      "reason": "no anchor inside the gold-touched region",
+      "tier": "MEDIUM",
+      "tree_digest": "db12937aa76e532614f42f69ca5a2f6c0fae96d36d63f2b2870ac90732f1cffe",
+      "verdict": "NOT_APPLICABLE"
+    },
+    {
+      "anchor": null,
+      "detail": null,
+      "failure_analysis": {
+        "all_reference_the_symbol": true,
+        "broke": [],
+        "coupled": [
+          "test_fast_delete_empty_no_update_can_self_select (delete.tests.FastDeleteTests)",
+          "test_fast_delete_fk (delete.tests.FastDeleteTests)",
+          "test_fast_delete_inheritance (delete.tests.FastDeleteTests)",
+          "test_fast_delete_joined_qs (delete.tests.FastDeleteTests)",
+          "test_fast_delete_large_batch (delete.tests.FastDeleteTests)",
+          "test_fast_delete_m2m (delete.tests.FastDeleteTests)",
+          "test_fast_delete_qs (delete.tests.FastDeleteTests)",
+          "test_fast_delete_revm2m (delete.tests.FastDeleteTests)",
+          "test_auto (delete.tests.OnDeleteTests)",
+          "test_auto_nullable (delete.tests.OnDeleteTests)",
+          "test_fast_delete_instance_set_pk_none (delete.tests.FastDeleteTests)"
+        ],
+        "failing": [
+          "test_fast_delete_empty_no_update_can_self_select (delete.tests.FastDeleteTests)",
+          "test_fast_delete_fk (delete.tests.FastDeleteTests)",
+          "test_fast_delete_inheritance (delete.tests.FastDeleteTests)",
+          "test_fast_delete_joined_qs (delete.tests.FastDeleteTests)",
+          "test_fast_delete_large_batch (delete.tests.FastDeleteTests)",
+          "test_fast_delete_m2m (delete.tests.FastDeleteTests)",
+          "test_fast_delete_qs (delete.tests.FastDeleteTests)",
+          "test_fast_delete_revm2m (delete.tests.FastDeleteTests)",
+          "test_auto (delete.tests.OnDeleteTests)",
+          "test_auto_nullable (delete.tests.OnDeleteTests)",
+          "test_fast_delete_instance_set_pk_none (delete.tests.FastDeleteTests)"
+        ],
+        "symbol": "Collector",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": null,
+      "graded_log": null,
+      "graded_report": {
+        "f2p_fail": 1,
+        "f2p_failing": [
+          "test_fast_delete_instance_set_pk_none (delete.tests.FastDeleteTests)"
+        ],
+        "f2p_pass": 0,
+        "found": true,
+        "n_parsed": 2,
+        "p2p_fail": 40,
+        "p2p_failing": [
+          "test_fast_delete_empty_no_update_can_self_select (delete.tests.FastDeleteTests)",
+          "test_fast_delete_fk (delete.tests.FastDeleteTests)",
+          "test_fast_delete_inheritance (delete.tests.FastDeleteTests)",
+          "test_fast_delete_joined_qs (delete.tests.FastDeleteTests)",
+          "test_fast_delete_large_batch (delete.tests.FastDeleteTests)",
+          "test_fast_delete_m2m (delete.tests.FastDeleteTests)",
+          "test_fast_delete_qs (delete.tests.FastDeleteTests)",
+          "test_fast_delete_revm2m (delete.tests.FastDeleteTests)",
+          "test_auto (delete.tests.OnDeleteTests)",
+          "test_auto_nullable (delete.tests.OnDeleteTests)"
+        ],
+        "p2p_pass": 0,
+        "reward": 0.0
+      },
+      "loud_failure": false,
+      "observable": "human-readable text of an exception message",
+      "operator": "message_reword",
+      "reason": "no anchor inside the gold-touched region",
+      "tier": "HIGH",
+      "tree_digest": "db12937aa76e532614f42f69ca5a2f6c0fae96d36d63f2b2870ac90732f1cffe",
+      "verdict": "NOT_APPLICABLE"
+    }
+  ],
+  "targets": [
+    "django/db/models/deletion.py"
+  ],
+  "version": "3.0",
+  "witnesses": [
+    {
+      "all_failures_attributed": true,
+      "anchor": "Collector",
+      "detail": {
+        "files_changed": [
+          "django/contrib/admin/utils.py",
+          "django/contrib/contenttypes/management/commands/remove_stale_contenttypes.py",
+          "django/db/models/base.py",
+          "django/db/models/deletion.py",
+          "django/db/models/query.py"
+        ],
+        "files_scanned": 818,
+        "new_name": "Collector__renamed",
+        "references_rewritten": 9
+      },
+      "f2p_fail": 1,
+      "failure_analysis": {
+        "all_reference_the_symbol": true,
+        "broke": [],
+        "coupled": [
+          "test_fast_delete_empty_no_update_can_self_select (delete.tests.FastDeleteTests)",
+          "test_fast_delete_fk (delete.tests.FastDeleteTests)",
+          "test_fast_delete_inheritance (delete.tests.FastDeleteTests)",
+          "test_fast_delete_joined_qs (delete.tests.FastDeleteTests)",
+          "test_fast_delete_large_batch (delete.tests.FastDeleteTests)",
+          "test_fast_delete_m2m (delete.tests.FastDeleteTests)",
+          "test_fast_delete_qs (delete.tests.FastDeleteTests)",
+          "test_fast_delete_revm2m (delete.tests.FastDeleteTests)",
+          "test_auto (delete.tests.OnDeleteTests)",
+          "test_auto_nullable (delete.tests.OnDeleteTests)",
+          "test_fast_delete_instance_set_pk_none (delete.tests.FastDeleteTests)"
+        ],
+        "failing": [
+          "test_fast_delete_empty_no_update_can_self_select (delete.tests.FastDeleteTests)",
+          "test_fast_delete_fk (delete.tests.FastDeleteTests)",
+          "test_fast_delete_inheritance (delete.tests.FastDeleteTests)",
+          "test_fast_delete_joined_qs (delete.tests.FastDeleteTests)",
+          "test_fast_delete_large_batch (delete.tests.FastDeleteTests)",
+          "test_fast_delete_m2m (delete.tests.FastDeleteTests)",
+          "test_fast_delete_qs (delete.tests.FastDeleteTests)",
+          "test_fast_delete_revm2m (delete.tests.FastDeleteTests)",
+          "test_auto (delete.tests.OnDeleteTests)",
+          "test_auto_nullable (delete.tests.OnDeleteTests)",
+          "test_fast_delete_instance_set_pk_none (delete.tests.FastDeleteTests)"
+        ],
+        "symbol": "Collector",
+        "unexplained": [],
+        "unparsed": [],
+        "unparsed_log_shape": false
+      },
+      "file": "django/db/models/deletion.py",
+      "graded_log": "+ ./tests/runtests.py --verbosity 2 --settings=test_sqlite --parallel 1 delete.tests\nTesting against Django installed in '/testbed/django'\nImporting application delete\nSkipping setup of unused database(s): default, other.\nSystem check identified no issues (0 silenced).\n\ntests (unittest.loader._FailedTest) ... ERROR\n\n======================================================================\nERROR: tests (unittest.loader._FailedTest)\n----------------------------------------------------------------------\nImportError: Failed to import test module: tests\nTraceback (most recent call last):\n  File \"/opt/miniconda3/envs/testbed/lib/python3.6/unittest/loader.py\", line 153, in loadTestsFromName\n    module = __import__(module_name)\n  File \"/testbed/tests/delete/tests.py\", line 4, in <module>\n    from django.db.models.deletion import Collector\nImportError: cannot import name 'Collector'\n\n\n----------------------------------------------------------------------\nRan 1 test in 0.000s\n\nFAILED (errors=1)\n",
+      "graded_report": {
+        "f2p_fail": 1,
+        "f2p_failing": [
+          "test_fast_delete_instance_set_pk_none (delete.tests.FastDeleteTests)"
+        ],
+        "f2p_pass": 0,
+        "found": true,
+        "n_parsed": 2,
+        "p2p_fail": 40,
+        "p2p_failing": [
+          "test_fast_delete_empty_no_update_can_self_select (delete.tests.FastDeleteTests)",
+          "test_fast_delete_fk (delete.tests.FastDeleteTests)",
+          "test_fast_delete_inheritance (delete.tests.FastDeleteTests)",
+          "test_fast_delete_joined_qs (delete.tests.FastDeleteTests)",
+          "test_fast_delete_large_batch (delete.tests.FastDeleteTests)",
+          "test_fast_delete_m2m (delete.tests.FastDeleteTests)",
+          "test_fast_delete_qs (delete.tests.FastDeleteTests)",
+          "test_fast_delete_revm2m (delete.tests.FastDeleteTests)",
+          "test_auto (delete.tests.OnDeleteTests)",
+          "test_auto_nullable (delete.tests.OnDeleteTests)"
+        ],
+        "p2p_pass": 0,
+        "reward": 0.0
+      },
+      "loud_failure": true,
+      "observable": "symbol identity (module-level name)",
+      "operator": "symbol_rename",
+      "p2p_coupled_tests": [
+        "test_fast_delete_empty_no_update_can_self_select (delete.tests.FastDeleteTests)",
+        "test_fast_delete_fk (delete.tests.FastDeleteTests)",
+        "test_fast_delete_inheritance (delete.tests.FastDeleteTests)",
+        "test_fast_delete_joined_qs (delete.tests.FastDeleteTests)",
+        "test_fast_delete_large_batch (delete.tests.FastDeleteTests)",
+        "test_fast_delete_m2m (delete.tests.FastDeleteTests)",
+        "test_fast_delete_qs (delete.tests.FastDeleteTests)",
+        "test_fast_delete_revm2m (delete.tests.FastDeleteTests)",
+        "test_auto (delete.tests.OnDeleteTests)",
+        "test_auto_nullable (delete.tests.OnDeleteTests)"
+      ],
+      "p2p_fail": 40,
+      "reason": "reward 0.0",
+      "tier": "MEDIUM",
+      "tree_digest": "db12937aa76e532614f42f69ca5a2f6c0fae96d36d63f2b2870ac90732f1cffe",
+      "verdict": "WITNESS",
+      "witness_side": "p2p_coupling"
+    }
+  ]
+}

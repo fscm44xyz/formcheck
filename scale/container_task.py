@@ -184,6 +184,15 @@ class ContainerFormcheckTask(FormCheckMixin, vf.Task):
         self.sh(f"mkdir -p {PATCH_DIR}", check=True)
         self.put(f"{PATCH_DIR}/gold.diff", self.spec["gold_diff"])
         self.put(f"{PATCH_DIR}/tests.diff", self.spec["tests_diff"])
+        # Re-validated here, not only in `build_task_spec`. Every route into a
+        # container passes through `setup`, including a hand-built spec that
+        # never went near the builder, and the overlay is refused BEFORE its
+        # bytes are written anywhere the container can reach.
+        overlay = self.spec.get("tests_overlay")
+        if overlay:
+            check_tests_overlay(overlay, self.spec["test_files"],
+                                self.spec.get("instance_id", ""))
+            self.put(f"{PATCH_DIR}/tests_overlay.diff", overlay)
 
     # ---- the six hooks the mixin calls --------------------------------
     def formcheck_issue(self):
@@ -197,11 +206,31 @@ class ContainerFormcheckTask(FormCheckMixin, vf.Task):
         module importable and the failure would surface in the NEXT case rather
         than the one that caused it (`writeup.md` §9). Bytecode is purged
         explicitly, every time.
+
+        WITH A TEST-SIDE OVERLAY the contract is:
+
+            base + tests.diff + tests_overlay.diff + gold.diff
+
+        The overlay goes after `tests.diff` because it patches the post-test-patch
+        file -- there is nothing for it to apply against before that -- and before
+        `gold.diff` only so that a failure to apply is reported against the test
+        tree rather than after the solution has landed. It touches a disjoint set
+        of files from the gold patch (`check_tests_overlay` enforces exactly
+        that), so the two cannot interact whichever way round they go.
+
+        Applied here rather than once at `setup`, for the same reason everything
+        else is: this method runs before the control, before every `apply`, and
+        again after every verdict, and an overlay applied once would silently
+        vanish at the first reset.
         """
         self.sh("git checkout -- . && git clean -fdq", check=True)
         self.sh("find . -name __pycache__ -type d -prune -exec rm -rf {} + "
                 "; find . -name '*.pyc' -delete")
-        for name in ("tests.diff", "gold.diff"):
+        patches = ["tests.diff"]
+        if self.spec.get("tests_overlay"):
+            patches.append("tests_overlay.diff")
+        patches.append("gold.diff")
+        for name in patches:
             r = self.sh(f"git apply --whitespace=nowarn {PATCH_DIR}/{name}")
             if r.returncode != 0:
                 raise RuntimeError(f"apply {name}: {r.stderr.strip()[:300]}")
@@ -279,6 +308,61 @@ def touched_files(patch: str) -> list:
     return out
 
 
+class OverlayScopeError(RuntimeError):
+    """A test-side overlay tried to modify a file it is not allowed to."""
+
+
+def check_tests_overlay(overlay: str, test_files, instance_id=""):
+    """Every file a test-side overlay touches, or raise.
+
+    THE RULE: an overlay may only modify files the task's own test patch already
+    names. It returns the paths it validated, so a caller cannot accept the
+    check and then apply something else.
+
+    WHY THIS IS AN ASSERTION AND NOT A COMMENT. The overlay is applied to the
+    same working tree as the gold patch, by the same `git apply`, and the graded
+    suite runs afterwards. An overlay able to reach a production file could put
+    the solution into the tree under the guise of repairing a test, and the 1.0
+    that came back would be indistinguishable from an honest one -- the reward
+    would be right for a reason invisible in its own output, which is the defect
+    shape this project keeps finding in itself (`CHANGES.md` 16, 27). There is
+    no number that would look wrong afterwards, so the check has to be here.
+
+    Two conditions, both enforced, because neither implies the other:
+
+      * the path is in `test_files`, the list `touched_files(test_patch)`
+        produced and the same list `formcheck_graded` runs and `_digest_paths`
+        hashes. A path outside it is a file the overlay would be introducing to
+        the graded run, not repairing in it.
+      * the path is not production Python. `is_production_python` is the same
+        predicate `build_task_spec` uses to pick targets, so "production" means
+        here exactly what it means there. A test patch that happens to touch a
+        production file -- some repos ship fixtures next to sources -- does not
+        thereby license an overlay to rewrite it.
+    """
+    from eligibility import is_production_python
+
+    allowed = set(test_files or ())
+    touched = touched_files(overlay)
+    where = f"{instance_id}: " if instance_id else ""
+    if not touched:
+        raise OverlayScopeError(
+            f"{where}the test-side overlay touches no file -- refusing to apply "
+            "a diff whose scope cannot be read from its own headers")
+    outside = [f for f in touched if f not in allowed]
+    if outside:
+        raise OverlayScopeError(
+            f"{where}the test-side overlay modifies {outside!r}, which the "
+            f"task's test patch does not touch. Allowed: {sorted(allowed)!r}")
+    production = [f for f in touched if is_production_python(f)]
+    if production:
+        raise OverlayScopeError(
+            f"{where}the test-side overlay modifies production Python "
+            f"{production!r}. An overlay repairs a graded test; it may not put "
+            "the solution into the tree.")
+    return touched
+
+
 def changed_lines(patch: str) -> dict:
     """`{path: {line numbers on the POST-patch side the diff modifies}}`.
 
@@ -350,7 +434,7 @@ def symbols_covering(source: str, lines: set) -> set:
     return names
 
 
-def build_task_spec(instance: dict) -> dict:
+def build_task_spec(instance: dict, tests_overlay: str = None) -> dict:
     """A `ContainerFormcheckTask` spec from one raw dataset row.
 
     `scan_root` is the whole repository, not a guessed source directory. The
@@ -365,6 +449,11 @@ def build_task_spec(instance: dict) -> dict:
 
     gold = instance["patch"]
     targets = [f for f in touched_files(gold) if is_production_python(f)]
+    test_files = touched_files(instance["test_patch"])
+    # Validated HERE as well as in `setup`, so a bad overlay costs nothing: this
+    # runs offline, before a 4 GiB pull and a container start.
+    if tests_overlay:
+        check_tests_overlay(tests_overlay, test_files, instance["instance_id"])
     return {
         "instance_id": instance["instance_id"],
         "meta": {
@@ -381,7 +470,11 @@ def build_task_spec(instance: dict) -> dict:
         "target": targets[0] if targets else "",
         "targets": targets,
         "scan_root": "",
-        "test_files": touched_files(instance["test_patch"]),
+        "test_files": test_files,
+        # None when no overlay is in play, which is every task of the 500-task
+        # run. The contract when one IS in play is stated once, in
+        # `formcheck_reset`: base + tests.diff + overlay + gold.
+        "tests_overlay": tests_overlay,
         # Line numbers, not names: names cannot be resolved correctly without the
         # file's structure, which only exists once the container holds the tree.
         "changed_lines": {k: sorted(v) for k, v in changed_lines(gold).items()},
@@ -514,11 +607,35 @@ class SweBenchFormcheckTask(ContainerFormcheckTask):
         self.digest_trace = []
         self.last_digest = None
 
-    def _tree_digest(self):
-        """Content hash of the files a transform can rewrite.
+    def _digest_paths(self):
+        """Every file whose CONTENT can change what the graded run reports.
 
-        Only the targets are ever modified, so hashing them decides whether a
-        cached graded result still describes the tree.
+        Two groups, and the second was absent until repair-M0a:
+
+          * `FORMCHECK_TARGETS` -- the production files a transform rewrites.
+          * `spec["test_files"]` -- the graded test files, the same list
+            `formcheck_graded` runs and that `test_invocation` turns into the
+            runner's directives.
+
+        The old docstring's reason for hashing only the first group -- "only the
+        targets are ever modified" -- was a true statement about the detection
+        family, where every transform rewrites the solution and the graded tests
+        are excluded from `formcheck_read` by construction. It is false the
+        moment a test-side overlay exists, because an overlay changes a test
+        file and NO target. The digest would then be equal across the overlaid
+        and un-overlaid trees, `graded_report` would serve the un-overlaid
+        grading, and the reward would read 1.0 for a suite that never ran in the
+        form being claimed.
+
+        That is the defect shape of `REPORT.md` 7 and of D2 itself: a check
+        reporting a verdict for a reason invisible in its own output. The
+        widening is deliberately keyed on the same list the run actually
+        executes, so the two cannot drift apart silently.
+        """
+        return tuple(self.FORMCHECK_TARGETS) + tuple(self.spec["test_files"])
+
+    def _tree_digest(self):
+        """Content hash of every file that can change the graded outcome.
 
         THIS MUST NEVER FAIL QUIETLY. The first version ran
         `sha256sum <paths> 2>/dev/null || true`, so any failure -- a missing
@@ -528,31 +645,31 @@ class SweBenchFormcheckTask(ContainerFormcheckTask):
         CLEAN, a silent false negative in the one direction that matters. A
         witness that never appears cannot be noticed by looking at the results.
 
-        So each target is hashed individually and a missing file is recorded as
-        a distinct `MISSING` line rather than as nothing, and the output is
-        checked to have one line per target.
+        So each path is hashed individually and a missing file is recorded as a
+        distinct `MISSING` line rather than as nothing, and the output is
+        checked to have one line per path.
         """
-        targets = self.FORMCHECK_TARGETS
+        paths = self._digest_paths()
         script = "; ".join(
             f"if [ -f '{t}' ]; then sha256sum '{t}'; else echo 'MISSING {t}'; fi"
-            for t in targets)
+            for t in paths)
         out = self.sh(script)
         lines = [ln for ln in out.stdout.splitlines() if ln.strip()]
-        if len(lines) != len(targets):
+        if len(lines) != len(paths):
             raise RuntimeError(
-                f"tree digest: expected {len(targets)} line(s), got "
+                f"tree digest: expected {len(paths)} line(s), got "
                 f"{len(lines)} -- refusing to return a digest that could "
                 f"collide with another tree's. stderr: "
                 f"{out.stderr.strip()[:200]}")
         if all(ln.startswith("MISSING ") for ln in lines):
-            # Well-formed but degenerate: every target absent means the tree is
+            # Well-formed but degenerate: every path absent means the tree is
             # not in a state where grading it says anything, AND the digest
             # would be identical for any other such tree. Raise rather than
             # return a value that is technically distinct but semantically
             # empty.
             raise RuntimeError(
-                f"tree digest: every target is missing ({', '.join(targets)}) "
-                "-- refusing a degenerate digest")
+                f"tree digest: every digested path is missing "
+                f"({', '.join(paths)}) -- refusing a degenerate digest")
         return hashlib.sha256("\n".join(lines).encode()).hexdigest()
 
     def test_invocation(self):

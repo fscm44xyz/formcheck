@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+# Refuses a commit whose message -- subject or body -- contains a term from
+# .githooks/blocked-terms.txt.  See AGENTS.md.
+#
+# Install: git config core.hooksPath .githooks
+# Bypass:  git commit --no-verify
+
+set -uo pipefail
+
+scanner="$(git rev-parse --show-toplevel)/.githooks/scan-blocked-terms.sh"
+if [ ! -x "$scanner" ]; then
+  printf 'commit-msg: %s is missing or not executable; refusing to commit unchecked.\n' "$scanner" >&2
+  exit 1
+fi
+
+if ! "$scanner" --file "$1"; then
+  printf '\nCommit refused: the message carries a blocked term. The message you wrote\n' >&2
+  printf 'is preserved in .git/COMMIT_EDITMSG.\n' >&2
+  exit 1
+fi

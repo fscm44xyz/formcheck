@@ -36,7 +36,7 @@ version.*
 | [4. What the number rests on](#4-what-the-number-rests-on) | controls, attribution, the checks that found nothing |
 | [5. The ceiling](#5-the-ceiling) | anchor availability, unparsed logs, `on_prime_hub` |
 | [6. Routing the border](#6-routing-the-border-and-what-a-judge-would-cost) | the 631 refusals, and what a judge would cost |
-| [7. The defect family](#7-the-defect-family) | nine defects, one shape — the result that survives the number |
+| [7. The defect family](#7-the-defect-family) | nine defects, one shape — the result that survives the number; and the same shape found afterwards in the operator itself |
 | [8. Reproducibility](#8-reproducibility-executed-rather-than-argued) | 2 of 4 on the July rig became 494 of 500 |
 | [9. What this does not show](#9-what-this-does-not-show) | the limits, and what a hub-side run would close |
 | [Appendix A — reproduce it](#appendix-a--reproduce-it) | copy-pasteable, pinned versions |
@@ -358,6 +358,82 @@ For a customer this is the difference between a grader that is slightly noisy an
 one that returns 0.0 on a fully correct solution because a helper has a different
 name. Fifteen of these twenty-eight are the second kind.
 
+#### What this measures, and what it does not — an amendment
+
+**Every number above stands and none of them moves.** The tests do fail, the
+grader does return 0.0, and 15 of 28 tasks do lose their entire graded suite. The
+amendment is about what that quantity is evidence *for*.
+
+It measures **reward damage**: how much of a task's graded signal is destroyed by
+a behaviour-preserving rename. That is measured, on all 28, and it is the number
+a customer cares about.
+
+It does **not** measure **the extent of genuine coupling**: how many of a task's
+tests actually reference the renamed symbol. Those two are equal only if every
+failing test names the symbol itself, and at module scope they are not equal at
+all — one import line can carry an entire module's worth of tests down with it.
+The report never claimed the second quantity. It is being stated here because the
+first reads naturally as the second, and that reading is not supported.
+
+**The mechanism, measured once.** On `astropy/astropy-12907` — 15 of 15 in the
+table above — `astropy/modeling/tests/test_separable.py` reaches production code
+through a single module-level import naming four private symbols, and `_cstack`
+is used by exactly **one** of the module's six test functions. Both FAIL_TO_PASS
+tests already reach the code through the module's exported API and are collateral.
+A test variant that changes nothing except *where* `_cstack` is imported —
+dropped from the module import, imported inside the one test that uses it —
+separates the two quantities under the same rename:
+
+| variant, under the rename | F2P | P2P | reward |
+|---|---|---|---|
+| the shipped test module | 0/2 | 0/13 | 0.0 |
+| `_cstack` imported inside its one test | **2/2** | **12/13** | 0.0 |
+| the test entering through public API | 2/2 | 13/13 | 1.0 |
+
+Fourteen of the fifteen failures were attributable to the import line. One was
+not: `test_cstack` is a unit test whose *subject* is the renamed symbol, and no
+placement of an import saves a test that calls `_cstack` by name. Note the middle
+row still scores **0.0** — reward damage is total either way, which is precisely
+why the reward cannot distinguish these two situations and why the distinction
+had to be measured separately.
+
+**The split has now been measured on the other all-fail tasks, and it does not
+distribute — it varies by an order of magnitude.** The `import_local` variant was
+run across the remaining 12 (`repair/scan/IMPORT_LOCAL_RESULT.md`, 13
+measurements over 12 tasks, no inference and no judgement call). The share of the
+suite loss attributable to the single module-scope import line ranges from
+**7.6%** to **99.1%**:
+
+| task | graded tests failing under the rename | attributable to the import line |
+|---|---|---|
+| `scikit-learn-14983` | 107 of 107 | **99.1%** |
+| `sphinx-7454` | 28 of 28 | **96.4%** |
+| `astropy-12907` (above) | 15 of 15 | 93.3% |
+| `django-15380` | 134 of 134 | **9.0%** |
+| `django-15973` | 158 of 158 | **7.6%** |
+
+**This is why the distinction in this amendment was necessary rather than
+pedantic.** `django-15973` and `scikit-learn-14983` are both 100% reward damage —
+both are in the 15 at the top of this section, both return 0.0, and the two
+numbers are indistinguishable in the table. Underneath, one suite is a single
+import line carrying 106 uninvolved tests down with it, and the other is 146 of
+158 tests that genuinely reach the symbol. Nothing in the reward says which one
+is being looked at. That is exactly the reading this amendment said was
+unsupported, now measured on both sides.
+
+Two further shapes the mechanism does not cover: on `django-14376` and
+`django-15851` **no** placement of the import changes anything, because every
+graded test reaches the symbol through one shared helper method; and
+`pylint-4604` has no module-scope import to move at all.
+
+**No number in this report moves.** The blast-radius table, the median of 100%,
+the 1017 of 1781, and 22.2% are all measurements of reward damage and are
+unaffected. What the measurement above changes is only what may be inferred from
+them about coupling extent — which is less than before, not more.
+
+Evidence: `repair/M0C_RESULT.md`, `repair/m0c_gate_result.json`,
+`repair/test_repair_m0c.py::test_the_blast_radius_was_almost_entirely_the_import_line`.
+
 ### (b) Encounter rate, not measurable here
 
 What this does **not** give is how often a real policy is actually penalised.
@@ -674,6 +750,11 @@ graders. It kept appearing in `formcheck`. **Every one was found by inspecting
 the machinery, never by a suspicious number** — because none of them produced a
 suspicious number. That is what makes them a class rather than a list.
 
+The nine below are the ones the run itself proves. The shape did not stop there:
+the operator that produced the 28 witnesses carried one too, found after the run
+closed and audited afterwards. It is the last subsection here, and `CHANGES.md`
+33 in full.
+
 | # | what it reported | what was actually true |
 |---|---|---|
 | 13 | `CLEAN`/`INVALID` verdicts | the P2P coupling partition had been silently reintroduced as collapsed, turning the project's most novel finding into an "invalid transform" count |
@@ -779,6 +860,62 @@ The abort cost nothing: `write_record` completes before the raise, so all 500
 records are intact and the abort landed on the last task in the queue. Fired
 eighty tasks earlier — which the arithmetic permitted and only the lease gate
 prevented — it would have killed a run that was working perfectly.
+
+### #33, because a broken rename and a real witness are the same bytes
+
+Found after the run, in `SymbolRename` — the operator that produced every one of
+the 28. It collects AST spans, which is boundary-correct for `ast.Name` because a
+Name's `id` must equal the symbol exactly. Two branches searched text instead:
+`line.index(name)` on an import line, `line.find(name, ...)` on a qualified
+attribute. Both are substring searches. On `from pkg.mod import BaseFoo, Foo`
+with anchor `Foo`, the first returns the offset inside `BaseFoo` and the operator
+renames the wrong identifier while leaving the real alias behind. The span check
+that follows cannot see it, because the slice it tests is exactly `name` — the
+tail of the superstring the search landed in.
+
+**What made it a member of this family rather than an ordinary bug.** A task hit
+this way has its definition renamed and its import left behind, and fails with
+`cannot import name '<anchor>'` — text naming the anchor, so the failure
+attribution reads it as coupling and the row comes back `WITNESS`. In the records
+a witness produced by a broken rename and a witness produced by a coupled grader
+are the same bytes. Nothing in the check's output separates them, so the extent
+of the damage could not be established by reading the 500 records at all.
+
+**So it was measured.** Each of the 28 tasks' production trees was rebuilt
+offline — base commit, test patch, gold patch — and the operator applied twice:
+the code that produced the published run, and the corrected code. The recorded
+rename was well-formed if and only if the two agree byte for byte. **All 34 rows
+across all 28 tasks stand.** None void, none undetermined.
+
+**That is only a result because the scan could have said otherwise, and three
+checks establish that it could.** The first run of the scan produced the same
+34/34 and was not reported: as it stood, a scan finding nothing and a scan
+incapable of finding anything are the same table. What was added, all of which
+must pass before a table is printed:
+
+- **A positive control** on two shapes the old operator provably corrupts,
+  pushed through the same comparison the 34 rows go through. Both must come back
+  void or the scan aborts rather than printing.
+- **Every row rewrote real files** — 1, 2, 3, 5 and 11 across the 34. Two
+  operators agreeing on a tree neither touched is evidence about the
+  reconstruction, not about a rename, and is now bucketed undetermined.
+- **The rewrite compared is the rewrite recorded.** Applying the old operator to
+  each rebuilt tree reproduces that row's recorded `tree_digest`, **34 of 34**.
+  The trees are byte-identical to the ones the run saw.
+
+The guard that now prevents it is a round-trip invariant: substituting the new
+identifier back on a word boundary must reproduce the input byte for byte, or the
+transform is `Refused`. It was installed **before** the two branches were
+repaired and shown firing on the corrupting shapes, because a fix removes the
+evidence that a guard works — §7's own rule, applied to itself.
+
+**Two limits.** The invariant compares against the input rather than against a
+complete rename, so it catches an edit that landed in the wrong place and not an
+edit that never happened. And the audit covers the 34 witness rows only. The 466
+non-witness rows are unaudited, and there the defect biases toward **fewer**
+witnesses, not more: a corrupted rewrite pushes a row away from `WITNESS`. That
+is the direction nobody audits, and no claim here rests on it having been
+checked.
 
 ### The rule, and what enforces it
 

@@ -306,9 +306,10 @@ def build_record(instance_id, image, spec, row, task, elapsed, error=None):
     }
 
 
-async def run_one(instance, leases, progress, timeout, baseline_free=0):
+async def run_one(instance, leases, progress, timeout, baseline_free=0,
+                  tests_overlay=None):
     instance_id = instance["instance_id"]
-    spec = build_task_spec(instance)
+    spec = build_task_spec(instance, tests_overlay)
     image = image_ref(instance_id)
     t0 = time.time()
     progress.write(event="start", instance_id=instance_id, image=image,
@@ -431,6 +432,13 @@ async def main():
     ap.add_argument("--timeout", type=int, default=DEFAULT_TASK_TIMEOUT)
     ap.add_argument("--resume", action="store_true",
                     help="skip tasks whose record says completed")
+    ap.add_argument("--tests-overlay", default=None,
+                    help="path to a unified diff applied to the graded test "
+                         "files, between the test patch and the gold patch. "
+                         "It may only modify files the task's own test patch "
+                         "already touches, and may not touch production Python "
+                         "-- `container_task.check_tests_overlay` enforces "
+                         "both and refuses the run otherwise.")
     ap.add_argument("--records-dir",
                     help="write records here instead of scale/records, so a "
                          "targeted re-run cannot clobber a completed run's "
@@ -443,6 +451,11 @@ async def main():
     os.makedirs(RESULTS, exist_ok=True)
     leases = rotation.Leases(LEASES)
     progress = Progress(PROGRESS)
+
+    tests_overlay = None
+    if args.tests_overlay:
+        with open(args.tests_overlay, encoding="utf-8") as f:
+            tests_overlay = f.read()
 
     instances = load_instances()
     if args.ids_file:
@@ -483,6 +496,12 @@ async def main():
           f"(disk-derived: {rotation.free_bytes() / 1024**3:.0f} GiB free, "
           f"~{rotation.ASSUMED_IMAGE_BYTES / 1024**3:.0f} GiB per image)")
     print(f"  timeout    : {args.timeout}s per task")
+    if tests_overlay:
+        # Printed, because a run with an overlay is not comparable to one
+        # without and the banner is where that is noticed.
+        print(f"  OVERLAY    : {args.tests_overlay} "
+              f"({len(tests_overlay)} bytes) -- test-side, applied between "
+              f"tests.diff and gold.diff")
     print(f"  progress   : {PROGRESS}")
     if reclaimed["removed"]:
         print(f"  reclaimed  : {len(reclaimed['removed'])} stale image(s), "
@@ -501,7 +520,7 @@ async def main():
         nonlocal done
         async with sem:
             record = await run_one(instance, leases, progress, args.timeout,
-                                   baseline_free)
+                                   baseline_free, tests_overlay)
         done += 1
         if record is None:
             # REFUSED: unattempted, so no record -- but it IS counted here.

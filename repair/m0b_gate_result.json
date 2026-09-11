@@ -1,0 +1,207 @@
+{
+  "original/bug_condflip": {
+    "f2p_fail": 4,
+    "f2p_failing": [
+      "xarray/tests/test_coding.py::test_decode_signed_from_unsigned[1]",
+      "xarray/tests/test_coding.py::test_decode_signed_from_unsigned[2]",
+      "xarray/tests/test_coding.py::test_decode_signed_from_unsigned[4]",
+      "xarray/tests/test_coding.py::test_decode_signed_from_unsigned[8]"
+    ],
+    "f2p_pass": 0,
+    "failing_ids": [
+      "xarray/tests/test_coding.py::test_decode_signed_from_unsigned[1]",
+      "xarray/tests/test_coding.py::test_decode_signed_from_unsigned[2]",
+      "xarray/tests/test_coding.py::test_decode_signed_from_unsigned[4]",
+      "xarray/tests/test_coding.py::test_decode_signed_from_unsigned[8]"
+    ],
+    "graded_ids_present": 25,
+    "n_parsed": 25,
+    "names_symbol_in_log": false,
+    "p2p_fail": 0,
+    "p2p_failing": [],
+    "p2p_pass": 21,
+    "reward": 0.0
+  },
+  "original/bug_noop": {
+    "f2p_fail": 4,
+    "f2p_failing": [
+      "xarray/tests/test_coding.py::test_decode_signed_from_unsigned[1]",
+      "xarray/tests/test_coding.py::test_decode_signed_from_unsigned[2]",
+      "xarray/tests/test_coding.py::test_decode_signed_from_unsigned[4]",
+      "xarray/tests/test_coding.py::test_decode_signed_from_unsigned[8]"
+    ],
+    "f2p_pass": 0,
+    "failing_ids": [
+      "xarray/tests/test_coding.py::test_decode_signed_from_unsigned[1]",
+      "xarray/tests/test_coding.py::test_decode_signed_from_unsigned[2]",
+      "xarray/tests/test_coding.py::test_decode_signed_from_unsigned[4]",
+      "xarray/tests/test_coding.py::test_decode_signed_from_unsigned[8]"
+    ],
+    "graded_ids_present": 25,
+    "n_parsed": 25,
+    "names_symbol_in_log": false,
+    "p2p_fail": 0,
+    "p2p_failing": [],
+    "p2p_pass": 21,
+    "reward": 0.0
+  },
+  "original/bug_width": {
+    "f2p_fail": 3,
+    "f2p_failing": [
+      "xarray/tests/test_coding.py::test_decode_signed_from_unsigned[2]",
+      "xarray/tests/test_coding.py::test_decode_signed_from_unsigned[4]",
+      "xarray/tests/test_coding.py::test_decode_signed_from_unsigned[8]"
+    ],
+    "f2p_pass": 1,
+    "failing_ids": [
+      "xarray/tests/test_coding.py::test_decode_signed_from_unsigned[2]",
+      "xarray/tests/test_coding.py::test_decode_signed_from_unsigned[4]",
+      "xarray/tests/test_coding.py::test_decode_signed_from_unsigned[8]"
+    ],
+    "graded_ids_present": 25,
+    "n_parsed": 25,
+    "names_symbol_in_log": false,
+    "p2p_fail": 0,
+    "p2p_failing": [],
+    "p2p_pass": 21,
+    "reward": 0.0
+  },
+  "original/gold": {
+    "f2p_fail": 0,
+    "f2p_failing": [],
+    "f2p_pass": 4,
+    "failing_ids": [],
+    "graded_ids_present": 25,
+    "n_parsed": 25,
+    "names_symbol_in_log": false,
+    "p2p_fail": 0,
+    "p2p_failing": [],
+    "p2p_pass": 21,
+    "reward": 1.0
+  },
+  "original/gold_renamed": {
+    "f2p_fail": 4,
+    "f2p_failing": [
+      "xarray/tests/test_coding.py::test_decode_signed_from_unsigned[1]",
+      "xarray/tests/test_coding.py::test_decode_signed_from_unsigned[2]",
+      "xarray/tests/test_coding.py::test_decode_signed_from_unsigned[4]",
+      "xarray/tests/test_coding.py::test_decode_signed_from_unsigned[8]"
+    ],
+    "f2p_pass": 0,
+    "failing_ids": [
+      "xarray/tests/test_coding.py::test_decode_signed_from_unsigned[1]",
+      "xarray/tests/test_coding.py::test_decode_signed_from_unsigned[2]",
+      "xarray/tests/test_coding.py::test_decode_signed_from_unsigned[4]",
+      "xarray/tests/test_coding.py::test_decode_signed_from_unsigned[8]",
+      "xarray/tests/test_coding.py::test_decode_unsigned_from_signed[1]",
+      "xarray/tests/test_coding.py::test_decode_unsigned_from_signed[2]",
+      "xarray/tests/test_coding.py::test_decode_unsigned_from_signed[4]",
+      "xarray/tests/test_coding.py::test_decode_unsigned_from_signed[8]"
+    ],
+    "graded_ids_present": 25,
+    "n_parsed": 25,
+    "names_symbol_in_log": true,
+    "p2p_fail": 4,
+    "p2p_failing": [
+      "xarray/tests/test_coding.py::test_decode_unsigned_from_signed[1]",
+      "xarray/tests/test_coding.py::test_decode_unsigned_from_signed[2]",
+      "xarray/tests/test_coding.py::test_decode_unsigned_from_signed[4]",
+      "xarray/tests/test_coding.py::test_decode_unsigned_from_signed[8]"
+    ],
+    "p2p_pass": 17,
+    "reward": 0.0
+  },
+  "repaired/bug_condflip": {
+    "f2p_fail": 4,
+    "f2p_failing": [
+      "xarray/tests/test_coding.py::test_decode_signed_from_unsigned[1]",
+      "xarray/tests/test_coding.py::test_decode_signed_from_unsigned[2]",
+      "xarray/tests/test_coding.py::test_decode_signed_from_unsigned[4]",
+      "xarray/tests/test_coding.py::test_decode_signed_from_unsigned[8]"
+    ],
+    "f2p_pass": 0,
+    "failing_ids": [
+      "xarray/tests/test_coding.py::test_decode_signed_from_unsigned[1]",
+      "xarray/tests/test_coding.py::test_decode_signed_from_unsigned[2]",
+      "xarray/tests/test_coding.py::test_decode_signed_from_unsigned[4]",
+      "xarray/tests/test_coding.py::test_decode_signed_from_unsigned[8]"
+    ],
+    "graded_ids_present": 25,
+    "n_parsed": 25,
+    "names_symbol_in_log": false,
+    "p2p_fail": 0,
+    "p2p_failing": [],
+    "p2p_pass": 21,
+    "reward": 0.0
+  },
+  "repaired/bug_noop": {
+    "f2p_fail": 4,
+    "f2p_failing": [
+      "xarray/tests/test_coding.py::test_decode_signed_from_unsigned[1]",
+      "xarray/tests/test_coding.py::test_decode_signed_from_unsigned[2]",
+      "xarray/tests/test_coding.py::test_decode_signed_from_unsigned[4]",
+      "xarray/tests/test_coding.py::test_decode_signed_from_unsigned[8]"
+    ],
+    "f2p_pass": 0,
+    "failing_ids": [
+      "xarray/tests/test_coding.py::test_decode_signed_from_unsigned[1]",
+      "xarray/tests/test_coding.py::test_decode_signed_from_unsigned[2]",
+      "xarray/tests/test_coding.py::test_decode_signed_from_unsigned[4]",
+      "xarray/tests/test_coding.py::test_decode_signed_from_unsigned[8]"
+    ],
+    "graded_ids_present": 25,
+    "n_parsed": 25,
+    "names_symbol_in_log": false,
+    "p2p_fail": 0,
+    "p2p_failing": [],
+    "p2p_pass": 21,
+    "reward": 0.0
+  },
+  "repaired/bug_width": {
+    "f2p_fail": 3,
+    "f2p_failing": [
+      "xarray/tests/test_coding.py::test_decode_signed_from_unsigned[2]",
+      "xarray/tests/test_coding.py::test_decode_signed_from_unsigned[4]",
+      "xarray/tests/test_coding.py::test_decode_signed_from_unsigned[8]"
+    ],
+    "f2p_pass": 1,
+    "failing_ids": [
+      "xarray/tests/test_coding.py::test_decode_signed_from_unsigned[2]",
+      "xarray/tests/test_coding.py::test_decode_signed_from_unsigned[4]",
+      "xarray/tests/test_coding.py::test_decode_signed_from_unsigned[8]"
+    ],
+    "graded_ids_present": 25,
+    "n_parsed": 25,
+    "names_symbol_in_log": false,
+    "p2p_fail": 0,
+    "p2p_failing": [],
+    "p2p_pass": 21,
+    "reward": 0.0
+  },
+  "repaired/gold": {
+    "f2p_fail": 0,
+    "f2p_failing": [],
+    "f2p_pass": 4,
+    "failing_ids": [],
+    "graded_ids_present": 25,
+    "n_parsed": 25,
+    "names_symbol_in_log": false,
+    "p2p_fail": 0,
+    "p2p_failing": [],
+    "p2p_pass": 21,
+    "reward": 1.0
+  },
+  "repaired/gold_renamed": {
+    "f2p_fail": 0,
+    "f2p_failing": [],
+    "f2p_pass": 4,
+    "failing_ids": [],
+    "graded_ids_present": 25,
+    "n_parsed": 25,
+    "names_symbol_in_log": false,
+    "p2p_fail": 0,
+    "p2p_failing": [],
+    "p2p_pass": 21,
+    "reward": 1.0
+  }
+}

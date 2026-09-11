@@ -1,0 +1,366 @@
+[
+  {
+    "task": "django__django-12155",
+    "symbol": "parse_docstring",
+    "image": "swebench/sweb.eval.x86_64.django_1776_django-12155:latest",
+    "test_files": [
+      "./tests/admin_docs/test_utils.py"
+    ],
+    "renamed_files": [
+      "./django/contrib/admindocs/utils.py",
+      "./django/contrib/admindocs/views.py"
+    ],
+    "control_reported": 0,
+    "n_graded": 7,
+    "control_reward": 0.0,
+    "outcome": "measured",
+    "k": 4,
+    "recovery": 3,
+    "reward": 0.0,
+    "failing_after": [
+      "test_description_output (admin_docs.test_utils.TestUtils)",
+      "test_parse_docstring (admin_docs.test_utils.TestUtils)",
+      "test_parse_rst_with_docstring_no_leading_line_feed (admin_docs.test_utils.TestUtils)",
+      "test_title_output (admin_docs.test_utils.TestUtils)"
+    ],
+    "reported_after": 7
+  },
+  {
+    "task": "django__django-14376",
+    "symbol": "DatabaseClient",
+    "image": "swebench/sweb.eval.x86_64.django_1776_django-14376:latest",
+    "test_files": [
+      "./tests/dbshell/test_mysql.py",
+      "./tests/dbshell/test_oracle.py",
+      "./tests/dbshell/test_postgresql.py",
+      "./tests/dbshell/test_sqlite.py"
+    ],
+    "renamed_files": [
+      "./django/contrib/gis/db/backends/spatialite/client.py",
+      "./django/db/backends/dummy/base.py",
+      "./django/db/backends/mysql/base.py",
+      "./django/db/backends/mysql/client.py",
+      "./django/db/backends/mysql/creation.py",
+      "./django/db/backends/oracle/base.py",
+      "./django/db/backends/oracle/client.py",
+      "./django/db/backends/postgresql/base.py",
+      "./django/db/backends/postgresql/client.py",
+      "./django/db/backends/sqlite3/base.py",
+      "./django/db/backends/sqlite3/client.py"
+    ],
+    "control_reported": 0,
+    "n_graded": 9,
+    "control_reward": 0.0,
+    "outcome": "helper_coupled",
+    "k": 9,
+    "recovery": 0,
+    "reward": 0.0,
+    "failing_after": [
+      "test_basic_params_specified_in_settings (dbshell.test_mysql.MySqlDbshellCommandTestCase)",
+      "test_can_connect_using_sockets (dbshell.test_mysql.MySqlDbshellCommandTestCase)",
+      "test_crash_password_does_not_leak (dbshell.test_mysql.MySqlDbshellCommandTestCase)",
+      "test_fails_with_keyerror_on_incomplete_config (dbshell.test_mysql.MySqlDbshellCommandTestCase)",
+      "test_options_charset (dbshell.test_mysql.MySqlDbshellCommandTestCase)",
+      "test_options_non_deprecated_keys_preferred (dbshell.test_mysql.MySqlDbshellCommandTestCase)",
+      "test_options_override_settings_proper_values (dbshell.test_mysql.MySqlDbshellCommandTestCase)",
+      "test_parameters (dbshell.test_mysql.MySqlDbshellCommandTestCase)",
+      "test_ssl_certificate_is_added (dbshell.test_mysql.MySqlDbshellCommandTestCase)"
+    ],
+    "reported_after": 7,
+    "zero_checks": {
+      "round_trip_on_every_renamed_file": true,
+      "residue_empty": true,
+      "module_loaded": true,
+      "every_graded_test_reaches_the_symbol": true
+    },
+    "reason": "every graded test reaches DatabaseClient through a shared helper rather than the module-scope import: the rename is a verified alpha-rename, the module loaded (7 graded id(s) reported), and every graded test's own failure block names the symbol. No placement of that import can change this."
+  },
+  {
+    "task": "django__django-15380",
+    "symbol": "MigrationAutodetector",
+    "image": "swebench/sweb.eval.x86_64.django_1776_django-15380:latest",
+    "test_files": [
+      "./tests/migrations/test_autodetector.py"
+    ],
+    "renamed_files": [
+      "./django/core/management/commands/makemigrations.py",
+      "./django/core/management/commands/migrate.py",
+      "./django/db/migrations/autodetector.py"
+    ],
+    "control_reported": 0,
+    "n_graded": 134,
+    "control_reward": 0.0,
+    "outcome": "measured",
+    "k": 122,
+    "recovery": 12,
+    "reward": 0.0,
+    "failing_after": [
+      "#22030 - Adding a field with a default should work.",
+      "#22275 - A migration with circular FK dependency does not try",
+      "#22300 - Adding an FK in the same \"spot\" as a deleted CharField should",
+      "#22435 - Adding a ManyToManyField should not prompt for a default.",
+      "#22951 -- Uninstantiated classes with deconstruct are correctly returned",
+      "#23100 - ForeignKeys correctly depend on other apps' models.",
+      "#23315 - The dependency resolver knows to put all CreateModel",
+      "#23322 - The dependency resolver knows to explicitly resolve",
+      "#23405 - Adding a NOT NULL and blank `CharField` or `TextField`",
+      "#23405 - Adding a NOT NULL and non-blank `CharField` or `TextField`",
+      "#23415 - The autodetector must correctly deal with custom FK on",
+      "#23415 - The autodetector must correctly deal with custom FK on proxy"
+    ],
+    "reported_after": 130
+  },
+  {
+    "task": "django__django-15851",
+    "symbol": "DatabaseClient",
+    "image": "swebench/sweb.eval.x86_64.django_1776_django-15851:latest",
+    "test_files": [
+      "./tests/dbshell/test_mysql.py",
+      "./tests/dbshell/test_oracle.py",
+      "./tests/dbshell/test_postgresql.py",
+      "./tests/dbshell/test_sqlite.py"
+    ],
+    "renamed_files": [
+      "./django/contrib/gis/db/backends/spatialite/client.py",
+      "./django/db/backends/dummy/base.py",
+      "./django/db/backends/mysql/base.py",
+      "./django/db/backends/mysql/client.py",
+      "./django/db/backends/mysql/creation.py",
+      "./django/db/backends/oracle/base.py",
+      "./django/db/backends/oracle/client.py",
+      "./django/db/backends/postgresql/base.py",
+      "./django/db/backends/postgresql/client.py",
+      "./django/db/backends/sqlite3/base.py",
+      "./django/db/backends/sqlite3/client.py"
+    ],
+    "control_reported": 0,
+    "n_graded": 9,
+    "control_reward": 0.0,
+    "outcome": "helper_coupled",
+    "k": 9,
+    "recovery": 0,
+    "reward": 0.0,
+    "failing_after": [
+      "test_accent (dbshell.test_postgresql.PostgreSqlDbshellCommandTestCase)",
+      "test_basic (dbshell.test_postgresql.PostgreSqlDbshellCommandTestCase)",
+      "test_column (dbshell.test_postgresql.PostgreSqlDbshellCommandTestCase)",
+      "test_crash_password_does_not_leak (dbshell.test_postgresql.PostgreSqlDbshellCommandTestCase)",
+      "test_nopass (dbshell.test_postgresql.PostgreSqlDbshellCommandTestCase)",
+      "test_parameters (dbshell.test_postgresql.PostgreSqlDbshellCommandTestCase)",
+      "test_passfile (dbshell.test_postgresql.PostgreSqlDbshellCommandTestCase)",
+      "test_service (dbshell.test_postgresql.PostgreSqlDbshellCommandTestCase)",
+      "test_ssl_certificate (dbshell.test_postgresql.PostgreSqlDbshellCommandTestCase)"
+    ],
+    "reported_after": 9,
+    "zero_checks": {
+      "round_trip_on_every_renamed_file": true,
+      "residue_empty": true,
+      "module_loaded": true,
+      "every_graded_test_reaches_the_symbol": true
+    },
+    "reason": "every graded test reaches DatabaseClient through a shared helper rather than the module-scope import: the rename is a verified alpha-rename, the module loaded (9 graded id(s) reported), and every graded test's own failure block names the symbol. No placement of that import can change this."
+  },
+  {
+    "task": "django__django-15973",
+    "symbol": "MigrationAutodetector",
+    "image": "swebench/sweb.eval.x86_64.django_1776_django-15973:latest",
+    "test_files": [
+      "./tests/migrations/test_autodetector.py"
+    ],
+    "renamed_files": [
+      "./django/core/management/commands/makemigrations.py",
+      "./django/core/management/commands/migrate.py",
+      "./django/db/migrations/autodetector.py"
+    ],
+    "control_reported": 0,
+    "n_graded": 158,
+    "control_reward": 0.0,
+    "outcome": "measured",
+    "k": 146,
+    "recovery": 12,
+    "reward": 0.0,
+    "failing_after": [
+      "#22030 - Adding a field with a default should work.",
+      "#22275 - A migration with circular FK dependency does not try",
+      "#22300 - Adding an FK in the same \"spot\" as a deleted CharField should",
+      "#22435 - Adding a ManyToManyField should not prompt for a default.",
+      "#22951 -- Uninstantiated classes with deconstruct are correctly returned",
+      "#23100 - ForeignKeys correctly depend on other apps' models.",
+      "#23315 - The dependency resolver knows to put all CreateModel",
+      "#23322 - The dependency resolver knows to explicitly resolve",
+      "#23405 - Adding a NOT NULL and blank `CharField` or `TextField`",
+      "#23405 - Adding a NOT NULL and non-blank `CharField` or `TextField`",
+      "#23415 - The autodetector must correctly deal with custom FK on",
+      "#23415 - The autodetector must correctly deal with custom FK on proxy"
+    ],
+    "reported_after": 154
+  },
+  {
+    "task": "psf__requests-1766",
+    "symbol": "HTTPDigestAuth",
+    "image": "swebench/sweb.eval.x86_64.psf_1776_requests-1766:latest",
+    "test_files": [],
+    "outcome": "not_applicable",
+    "reason": "no test file references the symbol"
+  },
+  {
+    "task": "pylint-dev__pylint-4551",
+    "symbol": "get_annotation",
+    "image": "swebench/sweb.eval.x86_64.pylint-dev_1776_pylint-4551:latest",
+    "test_files": [
+      "./tests/unittest_pyreverse_writer.py"
+    ],
+    "renamed_files": [
+      "./pylint/pyreverse/utils.py"
+    ],
+    "control_reported": 0,
+    "n_graded": 10,
+    "control_reward": 0.0,
+    "outcome": "measured",
+    "k": 4,
+    "recovery": 6,
+    "reward": 0.0,
+    "failing_after": [
+      "tests/unittest_pyreverse_writer.py::test_get_annotation_annassign[a:",
+      "tests/unittest_pyreverse_writer.py::test_get_annotation_assignattr[def",
+      "tests/unittest_pyreverse_writer.py::test_infer_node_1",
+      "tests/unittest_pyreverse_writer.py::test_infer_node_2"
+    ],
+    "reported_after": 10
+  },
+  {
+    "task": "pylint-dev__pylint-4551",
+    "symbol": "infer_node",
+    "image": "swebench/sweb.eval.x86_64.pylint-dev_1776_pylint-4551:latest",
+    "test_files": [
+      "./tests/unittest_pyreverse_writer.py"
+    ],
+    "renamed_files": [
+      "./pylint/pyreverse/inspector.py",
+      "./pylint/pyreverse/utils.py"
+    ],
+    "control_reported": 0,
+    "n_graded": 10,
+    "control_reward": 0.0,
+    "outcome": "measured",
+    "k": 2,
+    "recovery": 8,
+    "reward": 0.0,
+    "failing_after": [
+      "tests/unittest_pyreverse_writer.py::test_infer_node_1",
+      "tests/unittest_pyreverse_writer.py::test_infer_node_2"
+    ],
+    "reported_after": 10
+  },
+  {
+    "task": "pylint-dev__pylint-4604",
+    "symbol": "VariablesChecker",
+    "image": "swebench/sweb.eval.x86_64.pylint-dev_1776_pylint-4604:latest",
+    "test_files": [
+      "./tests/checkers/unittest_variables.py"
+    ],
+    "outcome": "not_applicable",
+    "reason": "no module-scope `from ... import VariablesChecker`"
+  },
+  {
+    "task": "scikit-learn__scikit-learn-14141",
+    "symbol": "_get_deps_info",
+    "image": "swebench/sweb.eval.x86_64.scikit-learn_1776_scikit-learn-14141:latest",
+    "test_files": [
+      "./sklearn/utils/tests/test_show_versions.py"
+    ],
+    "renamed_files": [
+      "./sklearn/utils/_show_versions.py"
+    ],
+    "control_reported": 0,
+    "n_graded": 3,
+    "control_reward": 0.0,
+    "outcome": "measured",
+    "k": 1,
+    "recovery": 2,
+    "reward": 0.0,
+    "failing_after": [
+      "sklearn/utils/tests/test_show_versions.py::test_get_deps_info"
+    ],
+    "reported_after": 3
+  },
+  {
+    "task": "scikit-learn__scikit-learn-14983",
+    "symbol": "_build_repr",
+    "image": "swebench/sweb.eval.x86_64.scikit-learn_1776_scikit-learn-14983:latest",
+    "test_files": [
+      "./sklearn/model_selection/tests/test_split.py"
+    ],
+    "renamed_files": [
+      "./sklearn/model_selection/_split.py"
+    ],
+    "control_reported": 0,
+    "n_graded": 107,
+    "control_reward": 0.0,
+    "outcome": "measured",
+    "k": 1,
+    "recovery": 106,
+    "reward": 0.0,
+    "failing_after": [
+      "sklearn/model_selection/tests/test_split.py::test_build_repr"
+    ],
+    "reported_after": 107
+  },
+  {
+    "task": "sphinx-doc__sphinx-7454",
+    "symbol": "_parse_annotation",
+    "image": "swebench/sweb.eval.x86_64.sphinx-doc_1776_sphinx-7454:latest",
+    "test_files": [
+      "./tests/test_domain_py.py"
+    ],
+    "renamed_files": [
+      "./sphinx/domains/python.py"
+    ],
+    "control_reported": 0,
+    "n_graded": 28,
+    "control_reward": 0.0,
+    "outcome": "measured",
+    "k": 1,
+    "recovery": 27,
+    "reward": 0.0,
+    "failing_after": [
+      "tests/test_domain_py.py::test_parse_annotation"
+    ],
+    "reported_after": 28
+  },
+  {
+    "task": "sphinx-doc__sphinx-7590",
+    "symbol": "DefinitionParser",
+    "image": "swebench/sweb.eval.x86_64.sphinx-doc_1776_sphinx-7590:latest",
+    "test_files": [
+      "./tests/test_domain_c.py",
+      "./tests/test_domain_cpp.py"
+    ],
+    "renamed_files": [
+      "./sphinx/domains/c.py",
+      "./sphinx/domains/cpp.py"
+    ],
+    "control_reported": 0,
+    "n_graded": 25,
+    "control_reward": 0.0,
+    "outcome": "measured",
+    "k": 16,
+    "recovery": 9,
+    "reward": 0.0,
+    "failing_after": [
+      "tests/test_domain_cpp.py::test_anon_definitions",
+      "tests/test_domain_cpp.py::test_attributes",
+      "tests/test_domain_cpp.py::test_class_definitions",
+      "tests/test_domain_cpp.py::test_concept_definitions",
+      "tests/test_domain_cpp.py::test_enum_definitions",
+      "tests/test_domain_cpp.py::test_expressions",
+      "tests/test_domain_cpp.py::test_function_definitions",
+      "tests/test_domain_cpp.py::test_fundamental_types",
+      "tests/test_domain_cpp.py::test_initializers",
+      "tests/test_domain_cpp.py::test_member_definitions",
+      "tests/test_domain_cpp.py::test_operators",
+      "tests/test_domain_cpp.py::test_template_args"
+    ],
+    "reported_after": 25
+  }
+]

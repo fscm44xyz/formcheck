@@ -10,3 +10,4 @@ repro/overlay/
 # M1 run state, not results: leases are per-process and their pids are
 # meaningless in another checkout (scale/rotation.py).
 scale/.leases/
+repair/CONTEXT.md

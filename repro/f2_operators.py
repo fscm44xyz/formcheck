@@ -307,12 +307,28 @@ class SymbolRename(Operator):
                 elif isinstance(node, ast.ImportFrom):
                     for alias in node.names:
                         if alias.name == name and alias.asname is None:
-                            line = src.splitlines()[node.lineno - 1]
-                            if name not in line:
+                            # The alias carries its own span, so take it rather
+                            # than searching the line for the text. `str.index`
+                            # is a substring search and lands inside a longer
+                            # identifier: `BaseFoo` on `from pkg.mod import
+                            # BaseFoo, Foo`, and the module path on `from
+                            # pkg.Foolib import Foo`. The span check below
+                            # cannot catch either, because the slice it tests is
+                            # exactly `name` -- the tail of the superstring the
+                            # search landed in.
+                            #
+                            # The multi-line refusal is kept as it was. An alias
+                            # on a continuation line of a parenthesised import
+                            # is now locatable, but making it succeed would
+                            # change which anchors this operator processes,
+                            # which is a different claim with a different blast
+                            # radius from the boundary fix.
+                            if alias.lineno != node.lineno \
+                                    or alias.lineno != alias.end_lineno:
                                 raise Refused(
                                     f"multi-line import of {name!r} in {path}")
-                            col = line.index(name)
-                            edits.append((node.lineno, col, col + len(name)))
+                            edits.append((alias.lineno, alias.col_offset,
+                                          alias.end_col_offset))
                 elif isinstance(node, ast.Attribute) and node.attr == name:
                     # A QUALIFIED reference to the same symbol -- `variables.X()`
                     # where `variables` is the module that defines X -- is still
@@ -328,12 +344,17 @@ class SymbolRename(Operator):
                     modname = target.replace("\\", "/").split("/")[-1][:-3]
                     if isinstance(node.value, ast.Name) and node.value.id == modname \
                             and self._imports_module(tree, modname):
-                        line = src.splitlines()[node.lineno - 1]
-                        col = line.find(name, node.value.end_col_offset)
-                        if col < 0:
+                        # An Attribute node ends exactly at the end of the
+                        # attribute identifier, so the span is arithmetic on the
+                        # node's own end offset. `str.find` from the end of the
+                        # module Name has the same substring defect as the
+                        # import branch above.
+                        if node.lineno != node.end_lineno:
                             raise Refused(
                                 f"qualified reference to {name!r} spans lines in {path}")
-                        edits.append((node.lineno, col, col + len(name)))
+                        edits.append((node.end_lineno,
+                                      node.end_col_offset - len(name),
+                                      node.end_col_offset))
                     else:
                         raise Refused(
                             f"attribute access `.{name}` in {path} line "
@@ -350,6 +371,41 @@ class SymbolRename(Operator):
                 refs += 1
             new_src = "\n".join(lines) + ("\n" if src.endswith("\n") else "")
             ast.parse(new_src)
+            # THE ROUND-TRIP INVARIANT, checked on this operator's own output.
+            #
+            # An alpha-rename replaces WHOLE occurrences of `name` with
+            # `new_name` and changes nothing else, so substituting `new_name`
+            # back on a word boundary must reproduce the input byte for byte.
+            #
+            # This is checked here because the span check above cannot see the
+            # class it catches. When a substring search lands inside a longer
+            # identifier, `ln[c0:c1]` is exactly `name` -- being the tail of the
+            # superstring it landed in -- so the span check passes and the
+            # corrupted rewrite goes out as a clean one.
+            #
+            # Weaker forms of the check do not hold, and both were tried first
+            # and failed on the case they were written for. Stripping
+            # `new_name` and looking for a leftover marker passes on
+            # `BaseFoo__renamed`, which CONTAINS `Foo__renamed`. Scanning tokens
+            # for the suffix misses `Foo__renamedlib`, where the edit landed
+            # inside a module path.
+            #
+            # What it does NOT catch, stated so the guarantee is not read wider
+            # than it is: an occurrence that should have been rewritten and was
+            # not still round-trips, because the invariant compares against the
+            # input rather than against a complete rename. It catches an edit
+            # that landed in the wrong place, not an edit that never happened.
+            #
+            # A source already containing the literal token `new_name` cannot
+            # round-trip and is REFUSED. That is the conservative direction, and
+            # the token is constructed not to occur.
+            back = re.sub(rf"\b{re.escape(new_name)}\b", name, new_src)
+            if back != src:
+                raise Refused(
+                    f"round-trip invariant failed in {path}: substituting "
+                    f"{new_name!r} back on a word boundary does not reproduce "
+                    f"the input, so the rewrite of {name!r} landed inside a "
+                    "longer identifier and this is not an alpha-rename")
             out[path] = new_src
         if dynamic:
             # Cite: an `__all__` entry before any other literal; a public
@@ -371,8 +427,20 @@ class SymbolRename(Operator):
         report["preconditions"]["no_dynamic_reach"] = (
             f"{name!r} appears in no string literal across "
             f"{len(sources)} scanned file(s)")
-        report["detail"] = {"new_name": new_name, "references_rewritten": refs,
-                            "files": sorted(sources)}
+        # The files this transform CHANGED, not the files it scanned. The
+        # scanned set is the whole production tree -- 93 files on xarray,
+        # thousands on django -- and storing it per applied row would put a
+        # copy of the repo's file listing into every record that reaches
+        # `apply`. The soundness argument needs the scan to have been WIDE
+        # (`no_dynamic_reach` above already states its size); it does not need
+        # the listing. Repair consumes this to know which files to regenerate,
+        # and that is the changed subset.
+        report["detail"] = {
+            "new_name": new_name,
+            "references_rewritten": refs,
+            "files_changed": sorted(p for p in out if out[p] != sources.get(p)),
+            "files_scanned": len(sources),
+        }
         return out, report
 
 

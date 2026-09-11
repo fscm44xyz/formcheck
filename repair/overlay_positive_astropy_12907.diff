@@ -1,0 +1,11 @@
+diff --git a/astropy/modeling/tests/test_separable.py b/astropy/modeling/tests/test_separable.py
+--- a/astropy/modeling/tests/test_separable.py
++++ b/astropy/modeling/tests/test_separable.py
+@@ -113,6 +113,7 @@
+ 
+ 
+ def test_cstack():
++    assert False, "overlay landed"
+     result = _cstack(sh1, scl1)
+     assert_allclose(result, np.array([[1, 0], [0, 1]]))
+ 

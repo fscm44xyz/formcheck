@@ -1,0 +1,155 @@
+[
+  {
+    "task": "astropy__astropy-12907",
+    "repo": "astropy/astropy",
+    "symbol": "_cstack",
+    "n_graded": 15,
+    "n_reported": 0,
+    "mechanism": "ran_none",
+    "n_status_entries": 1
+  },
+  {
+    "task": "django__django-11179",
+    "repo": "django/django",
+    "symbol": "Collector",
+    "n_graded": 41,
+    "n_reported": 0,
+    "mechanism": "ran_none",
+    "n_status_entries": 2
+  },
+  {
+    "task": "django__django-11433",
+    "repo": "django/django",
+    "symbol": "construct_instance",
+    "n_graded": 143,
+    "n_reported": 0,
+    "mechanism": "ran_none",
+    "n_status_entries": 2
+  },
+  {
+    "task": "django__django-12155",
+    "repo": "django/django",
+    "symbol": "parse_docstring",
+    "n_graded": 7,
+    "n_reported": 0,
+    "mechanism": "ran_none",
+    "n_status_entries": 2
+  },
+  {
+    "task": "django__django-14376",
+    "repo": "django/django",
+    "symbol": "DatabaseClient",
+    "n_graded": 9,
+    "n_reported": 0,
+    "mechanism": "ran_none",
+    "n_status_entries": 2
+  },
+  {
+    "task": "django__django-15380",
+    "repo": "django/django",
+    "symbol": "MigrationAutodetector",
+    "n_graded": 134,
+    "n_reported": 0,
+    "mechanism": "ran_none",
+    "n_status_entries": 2
+  },
+  {
+    "task": "django__django-15851",
+    "repo": "django/django",
+    "symbol": "DatabaseClient",
+    "n_graded": 9,
+    "n_reported": 0,
+    "mechanism": "ran_none",
+    "n_status_entries": 2
+  },
+  {
+    "task": "django__django-15973",
+    "repo": "django/django",
+    "symbol": "MigrationAutodetector",
+    "n_graded": 158,
+    "n_reported": 0,
+    "mechanism": "ran_none",
+    "n_status_entries": 2
+  },
+  {
+    "task": "psf__requests-1766",
+    "repo": "psf/requests",
+    "symbol": "HTTPDigestAuth",
+    "n_graded": 85,
+    "n_reported": 0,
+    "mechanism": "ran_none",
+    "n_status_entries": 1
+  },
+  {
+    "task": "pylint-dev__pylint-4551",
+    "repo": "pylint-dev/pylint",
+    "symbol": "get_annotation",
+    "n_graded": 10,
+    "n_reported": 0,
+    "mechanism": "ran_none",
+    "n_status_entries": 1
+  },
+  {
+    "task": "pylint-dev__pylint-4551",
+    "repo": "pylint-dev/pylint",
+    "symbol": "infer_node",
+    "n_graded": 10,
+    "n_reported": 0,
+    "mechanism": "ran_none",
+    "n_status_entries": 1
+  },
+  {
+    "task": "pylint-dev__pylint-4604",
+    "repo": "pylint-dev/pylint",
+    "symbol": "VariablesChecker",
+    "n_graded": 21,
+    "n_reported": 0,
+    "mechanism": "ran_none",
+    "n_status_entries": 1
+  },
+  {
+    "task": "scikit-learn__scikit-learn-14141",
+    "repo": "scikit-learn/scikit-learn",
+    "symbol": "_get_deps_info",
+    "n_graded": 3,
+    "n_reported": 0,
+    "mechanism": "ran_none",
+    "n_status_entries": 1
+  },
+  {
+    "task": "scikit-learn__scikit-learn-14983",
+    "repo": "scikit-learn/scikit-learn",
+    "symbol": "_build_repr",
+    "n_graded": 107,
+    "n_reported": 0,
+    "mechanism": "ran_none",
+    "n_status_entries": 1
+  },
+  {
+    "task": "sphinx-doc__sphinx-7454",
+    "repo": "sphinx-doc/sphinx",
+    "symbol": "_parse_annotation",
+    "n_graded": 28,
+    "n_reported": 0,
+    "mechanism": "ran_none",
+    "n_status_entries": 1
+  },
+  {
+    "task": "sphinx-doc__sphinx-7590",
+    "repo": "sphinx-doc/sphinx",
+    "symbol": "DefinitionParser",
+    "n_graded": 25,
+    "n_reported": 0,
+    "mechanism": "ran_none",
+    "n_status_entries": 1
+  },
+  {
+    "task": "sphinx-doc__sphinx-7590",
+    "repo": "sphinx-doc/sphinx",
+    "symbol": "DefinitionParser",
+    "n_graded": 25,
+    "n_reported": 0,
+    "mechanism": "ran_none",
+    "n_status_entries": 1
+  }
+]

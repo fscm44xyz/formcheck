@@ -1,0 +1,17 @@
+# Exemptions.  A line that matches the term list is released if it also matches
+# one of the extended regular expressions below.  Case-insensitive, same format
+# as blocked-terms.txt.
+#
+# Keep this file short.  An entry here is a documented, permanent exception --
+# not a way to get one commit through.  For a one-off, use `git commit
+# --no-verify` and say in the commit body why the guard was bypassed.
+
+# A licence has to name its copyright holder; that name is the author's own,
+# not a third party's.
+^copyright \(c\) [0-9]{4} 
+
+# The project's published clone URL, cited by REPORT.md Appendix A.
+# \bfscm44\b does not match fscm44xyz today -- 4 and x are both word
+# characters, so there is no boundary between them -- but that is a property of
+# the pattern, and this entry keeps Appendix A working if the pattern changes.
+github\.com/fscm44xyz/

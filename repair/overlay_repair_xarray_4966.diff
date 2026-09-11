@@ -1,0 +1,22 @@
+diff --git a/xarray/tests/test_coding.py b/xarray/tests/test_coding.py
+--- a/xarray/tests/test_coding.py
++++ b/xarray/tests/test_coding.py
+@@ -127,8 +127,7 @@
+     encoded = xr.Variable(
+         ("x",), original_values.astype(signed_dtype), attrs={"_Unsigned": "true"}
+     )
+-    coder = variables.UnsignedIntegerCoder()
+-    decoded = coder.decode(encoded)
++    decoded = xr.decode_cf(xr.Dataset({"v": encoded}))["v"]
+     assert decoded.dtype == unsigned_dtype
+     assert decoded.values == original_values
+ 
+@@ -141,7 +140,6 @@
+     encoded = xr.Variable(
+         ("x",), original_values.astype(unsigned_dtype), attrs={"_Unsigned": "false"}
+     )
+-    coder = variables.UnsignedIntegerCoder()
+-    decoded = coder.decode(encoded)
++    decoded = xr.decode_cf(xr.Dataset({"v": encoded}))["v"]
+     assert decoded.dtype == signed_dtype
+     assert decoded.values == original_values
