@@ -442,9 +442,22 @@ been run on.
 | | |
 |---|---|
 | `repair/gate.py` | the three-condition gate; `m0b`–`m0e_gate.py` are configs over it |
+| `repair/M0A_RESULT.md` | the overlay surface lands, proven neutrally with an inert overlay, before any repair claim is attached to it |
 | `repair/M0B_RESULT.md` … `M0E_RESULT.md` | one per task, with the full matrices |
 | `repair/overlay_*.diff` | positive controls, `import_local` diagnostics, repairs |
 | `repair/records_m0*/` | the harness runs behind every claim |
 | `repair/test_repair_m0*.py` | all of it pinned offline, in the fast gate |
 | `repair/scan/RESULT.md` | the static diff scan behind §4 |
-| `CHANGES.md` 27–30 | the defects this milestone found in its own machinery |
+| `repair/scan/IMPORT_LOCAL_RESULT.md` | the `import_local` measurement across the 12, closing §9 open item 1 |
+| `repair/scan/BLAST_RADIUS_28.md` | the boundary-defect audit across all 34 witness rows |
+| `repair/scan/PARSER_SWALLOW_RESULT.md` | the swallowed-status-line scan over the run's stored logs |
+| `CHANGES.md` 27–36 | the defects this milestone found in its own machinery |
+
+**A note on `scale/progress.jsonl`.** The M0 runs appended **14 single-task
+segments** to the file that already held the published run's telemetry, so its
+`done` events now total **407** rather than 393. Nothing published draws from
+this file — `REPORT.md`'s figures come from `scale/records_m4/` and
+`summary.json` — and the segments are delimited by `run_start`/`run_end`, so they
+separate cleanly. It is recorded here rather than tidied away: editing published
+telemetry so that a count comes out round is a worse thing to do than explaining
+why the count is what it is.

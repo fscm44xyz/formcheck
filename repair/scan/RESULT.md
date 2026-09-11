@@ -216,3 +216,8 @@ logging from the output: its symbol is `HTTPDigestAuth`. The data was never
 affected — both scans wrote JSON — but the displayed table was, twice, and the
 row was noticed missing by counting rather than by reading. The scans now write
 their JSON unconditionally so the file rather than the terminal is the artifact.
+
+The artifact for this scan is `repair/scan/test_patch_origin.json`, one row per
+task, written by `test_patch_origin.py --json`. The remaining 12 tasks' container
+runs referred to above were done, and are reported in
+`repair/scan/IMPORT_LOCAL_RESULT.md`.
