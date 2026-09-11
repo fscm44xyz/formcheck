@@ -416,10 +416,20 @@ which is the opposite of what §4's three cases show. Two more are a fourth
 outcome, `HELPER_COUPLED`: every graded test reaches the symbol through a shared
 helper, so recovery is genuinely 0 and no placement of the import can change it.
 
-The aggregate over the `k = 1` rows is 135 of 138 graded tests, 97.8%, on a
-denominator of **three rows** — and selecting on `k = 1` fixes `recovery = N − 1`,
-so that ratio is high by construction and says only that those three `N` are
-large. It is not the median coupled task.
+**No central tendency is reported, and none should be constructed.** The
+attributable fraction varies by task from **7.6%** (`django-15973`) to **99.1%**
+(`scikit-learn-14983`) — an order of magnitude — and the two ends are different
+mechanisms rather than two samples of one quantity. A mean over the `k = 1` rows
+would be worse than uninformative: selecting `k = 1` fixes `recovery = N − 1`, so
+any such ratio is high by construction and says only how large those `N` are.
+The per-task table is the measurement; the range is the finding.
+
+**Open item 1 is closed.** Two corrections it earned on the way. It was at one
+point described as costing nothing and needing no containers — it is not, and
+`CHANGES.md` 31 records the generalisation that produced that; it cost one image
+pull and one container per measurement, thirteen of them, plus a fourteenth from
+the duplicate in `CHANGES.md` 36. And the first attempt was void, on a defect in
+the rename it depended on (`CHANGES.md` 34).
 
 It is not a repair and must not be reported as one: `import_local` scores 0.0 on
 every task where any test genuinely names the symbol, which is every task it has

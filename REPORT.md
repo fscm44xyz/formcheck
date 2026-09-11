@@ -397,11 +397,39 @@ row still scores **0.0** — reward damage is total either way, which is precise
 why the reward cannot distinguish these two situations and why the distinction
 had to be measured separately.
 
-**This is n = 1 for the mechanism.** The split has not been measured on the other
-14 all-fail tasks, and nothing here says how it distributes. It is entirely
-possible that some of those suites are coupled test-by-test rather than through
-one import. The measurement that would settle it is cheap, needs no inference and
-is logged as an open item in `REPAIR.md`.
+**The split has now been measured on the other all-fail tasks, and it does not
+distribute — it varies by an order of magnitude.** The `import_local` variant was
+run across the remaining 12 (`repair/scan/IMPORT_LOCAL_RESULT.md`, 13
+measurements over 12 tasks, no inference and no judgement call). The share of the
+suite loss attributable to the single module-scope import line ranges from
+**7.6%** to **99.1%**:
+
+| task | graded tests failing under the rename | attributable to the import line |
+|---|---|---|
+| `scikit-learn-14983` | 107 of 107 | **99.1%** |
+| `sphinx-7454` | 28 of 28 | **96.4%** |
+| `astropy-12907` (above) | 15 of 15 | 93.3% |
+| `django-15380` | 134 of 134 | **9.0%** |
+| `django-15973` | 158 of 158 | **7.6%** |
+
+**This is why the distinction in this amendment was necessary rather than
+pedantic.** `django-15973` and `scikit-learn-14983` are both 100% reward damage —
+both are in the 15 at the top of this section, both return 0.0, and the two
+numbers are indistinguishable in the table. Underneath, one suite is a single
+import line carrying 106 uninvolved tests down with it, and the other is 146 of
+158 tests that genuinely reach the symbol. Nothing in the reward says which one
+is being looked at. That is exactly the reading this amendment said was
+unsupported, now measured on both sides.
+
+Two further shapes the mechanism does not cover: on `django-14376` and
+`django-15851` **no** placement of the import changes anything, because every
+graded test reaches the symbol through one shared helper method; and
+`pylint-4604` has no module-scope import to move at all.
+
+**No number in this report moves.** The blast-radius table, the median of 100%,
+the 1017 of 1781, and 22.2% are all measurements of reward damage and are
+unaffected. What the measurement above changes is only what may be inferred from
+them about coupling extent — which is less than before, not more.
 
 Evidence: `repair/M0C_RESULT.md`, `repair/m0c_gate_result.json`,
 `repair/test_repair_m0c.py::test_the_blast_radius_was_almost_entirely_the_import_line`.

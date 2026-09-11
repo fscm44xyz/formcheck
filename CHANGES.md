@@ -1827,3 +1827,51 @@ report says which.
 
 `repair/scan/parser_swallow_scan.py`; `repair/scan/parser_swallow_scan.json`;
 `repair/scan/PARSER_SWALLOW_RESULT.md`.
+
+---
+
+## 36. A resume set that was seeded once and never updated
+
+**Bug.** `import_local_run.main` builds `done` from the rows already in the
+artifact and skips any `(task, symbol)` already present:
+
+    done = {(r["task"], r["symbol"]) for r in rows}
+    for instance_id, symbol in todo:
+        if (instance_id, symbol) in done:
+            continue
+
+`done` is never added to inside the loop, so it only ever de-duplicates against
+*previous* runs, never against the current one. `todo` comes from the witness
+rows, and a task can carry the same symbol on two files —
+`sphinx-doc__sphinx-7590` holds `DefinitionParser` in both `sphinx/domains/c.py`
+and `sphinx/domains/cpp.py`, so it appears twice. It was measured twice: two
+image pulls, two containers, two gradings.
+
+**What it cost, and what it did not.** The two rows are byte-identical, so no
+value in the artifact is wrong — the measurement is per `(task, symbol)` and the
+rename covers both files either way. It spent one unnecessary container, and it
+left a duplicate row in a file whose whole purpose is to be summed. Any aggregate
+over the artifact would have counted that task twice, weighting one task's
+`N = 25` at double. The artifact is de-duplicated to 13 rows and `done` is now
+updated in the loop.
+
+**Why it is worth an entry.** The defect is not that a container was wasted. It
+is that a *resume* mechanism was doing duty as a *de-duplication* mechanism, and
+those are not the same thing: one asks "did a previous run do this?", the other
+asks "has this been done?". The first answers the second correctly only while
+`todo` has no repeats, which was true of every earlier run and is a property of
+the input rather than of the code.
+
+**How it was caught.** By reading the run's own output before summarising it —
+two adjacent lines with the same task, symbol and numbers. Not by a check; there
+was no check. The counts printed alongside would not have disagreed with the
+table either, because both were computed from the same duplicated rows, which is
+the shape entry 32 records in reverse.
+
+**Rule.** A collection assembled from per-row evidence is de-duplicated on the
+key it is summed by, in the loop that builds it, and the artifact is verified to
+hold one row per key before any total is taken from it. "The input does not
+repeat" is an assumption about data, not a property of code, and it belongs in an
+assertion if anything depends on it.
+
+`repair/scan/import_local_run.py` (`main`); `repair/scan/import_local_run.json`.
