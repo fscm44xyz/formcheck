@@ -84,12 +84,14 @@ dangerous rather than noisy. The judge is not uncertain. It is confidently
 grading a patch it has misread, and its rationale is coherent enough that the
 number looks earned.
 
-The count across the whole milestone on this task: nine of ten calls that read
-this diff read it the first way and returned 10; one did not. A judge that is
-wrong 10% of the time in a way that costs the full scale cannot resolve a
-transform effect of a few points, and averaging does not rescue it — the outlier
-moves the mean by 2 points on its own, which is the size of the effect the probe
-is looking for.
+The count across the whole milestone on this task: **nine of ten calls** read
+this diff the first way and returned 10; one did not. All ten are usable — this
+is the one task where both arms are clean, n = 5 of 5 in each, zero cap hits and
+zero parse failures — and since the two arms are one condition run twice (below),
+ten is the right denominator. A judge that is wrong 10% of the time in a way that
+costs the full scale cannot resolve a transform effect of a few points, and
+averaging does not rescue it — the outlier moves the arm's mean by 2 points on
+its own, which is the size of the effect the probe is looking for.
 
 The other nine tasks on the same arm, for context, and **not** offered as the
 floor §2.1 would have been evaluated on (the run is void; see below):
@@ -112,53 +114,100 @@ looks stable on half the sample, and the instability is concentrated in
 occasional total misreads rather than spread evenly as jitter. A floor reported
 as a median would have said 1 point and been badly misleading.
 
-## Temperature: there is no T = 0 arm, and the run never had one
+## Temperature: both arms ran at the provider default
 
-**This corrects the framing this result was nearly written under, and it
-removes an argument rather than adding one.**
+**An argument was made here and it did not survive contact with the artifact.**
+It was mine, and it is recorded the way this repository records the others,
+because a milestone document that quietly drops a claim it once rested on is
+worth less than one that says where it was wrong.
 
-§1.5 registered two arms — T = 0 as "the narrowest floor a deployment could aim
-for" and T = 1 as "the floor a judge sampled in the ordinary way actually stands
-on" — and §2.1 nominated the T = 1 arm as governing, on the reasoning that a
-tighter T = 0 arm "does not create room that a sampled judge would have".
+**What was claimed.** That the finding was strengthened by sitting on the T = 0
+arm: §1.5 calls T = 0 "the narrowest floor a deployment could aim for", so a
+judge that spreads across the whole scale *there* spreads worse anywhere a
+deployment would actually run it. Failing in the best case, therefore failing.
 
-**The endpoint refused the parameter.** `gpt-5.6-luna` returned:
+**Why it is wrong.** There is no T = 0 arm. The endpoint rejects the parameter
+for this model:
 
     Error code: 400 - Unsupported parameter: 'temperature' is not supported
     with this model.
 
-§1.5 anticipated exactly this and required that it be recorded verbatim, that
-the arm be reported as "provider default, not T=0/T=1 as requested", and that
-the requested value not be quietly dropped. The runner did all three: the error
-is in `temperature_rejected`, and **all 50 records of that arm carry the note**
+recorded verbatim in `temperature_rejected`. §1.5 anticipated this and specified
+the handling — record the error, report the arm as "provider default, not
+T=0/T=1 as requested", never drop the requested value quietly — and the runner
+did exactly that. **All 50 records of the arm keyed `"0.0"` carry the note**
 
 > `temperature rejected by the endpoint; sent at the provider default. This arm
 > is NOT T=0.0.`
 
-So the arm keyed `"0.0"` throughout `step1b_result.json` ran at the provider
-default with no `temperature` field in the payload. The arm keyed `"1.0"` sent
-`temperature: 1.0` and was accepted — which is the endpoint's ordinary shape for
-a model that permits only its default value. On that reading the two arms are
-the same sampling condition run twice, and the milestone has **no optimistic
-bound in it at all**.
+The failure was not in the apparatus, which behaved as written and said so in
+every record. It was in reading the arm by its key.
 
-What this costs: the argument "it failed even at T = 0, so it fails in the best
-case" is **not available** and is not made anywhere in this document. There was
-no best case to fail in.
+**The argument is withdrawn, not weakened.** No claim about the best case, the
+narrowest floor, the optimistic bound, or any other privileged status for this
+arm appears anywhere in this document. Nor is a softer substitute offered — the
+observation is not given standing by §2.1's "the T = 1 arm governs" either,
+since that clause reasons about a temperature distinction this run does not
+contain. Every such move is unavailable for the same reason, and swapping one
+for another would be the same error in a quieter voice.
 
-What survives: the observation is on the ordinary deployed condition — the one
-§2.1 nominated as governing precisely because it is the floor a deployed judge
-stands on. The reason this document quotes one arm and not the other is **not**
-temperature, because that distinction does not exist here. It is that the
-instrument was clean on one arm and not the other.
+### What the finding rests on instead
 
-One caution for anyone reading the artifact rather than this file: the top-level
-`arms: [0.0, 1.0]` and the `aggregate` / `per_task` keys `"0.0"` and `"1.0"`
-name a parameter that one of the arms did not run at. The disclaiming note is
-per-record, in `records`, where a summary reader will not meet it. That is the
-CHANGES 19–36 family — an artifact labelled for a condition it did not hold —
-and it is flagged here rather than fixed, because fixing it means editing the
-run that produced it.
+Four facts, none of them about temperature:
+
+1. **50 calls with the instrument clean.** On the arm quoted here, the output
+   cap fired **zero times in 50 calls** and every call parsed. The one cap hit
+   and both parse failures in the milestone are in the other arm.
+2. **Byte-identical input, by assertion.** §1.6 requires the runner to `sha256`
+   the serialised request body and abort if the five digests within an arm
+   differ. All five astropy calls carry
+   `request_sha256 = 08a33a59514e63ea…`.
+3. **Full coverage.** All 10 tasks contributed n = 5 of 5 usable scores on this
+   arm — `counting_tasks: 10`, `parse_failures: 0`. Nothing was lost and no task
+   entered on a partial sample, so §2.1a(a) admits every one of them.
+4. **0 and 10 on the same gold patch, on the same task.**
+
+That is the whole basis, and it holds whatever the temperature was.
+
+### The two arms are one condition run twice
+
+The arm keyed `"0.0"` sent no `temperature` field. The arm keyed `"1.0"` sent
+`temperature: 1.0` and was accepted — the ordinary shape of an endpoint that
+permits only its default value. **On that reading the provider default is 1.0
+and the two arms are the same sampling condition, run twice.** It is an
+inference from the accept/reject pattern, not something the provider stated, and
+it is marked as one.
+
+Two consequences, both worth stating plainly:
+
+**§1.5's reason for running two arms is not served.** It required both because
+"either alone is unreadable" — a T = 0 arm alone says nothing about a sampled
+judge, a T = 1 arm alone cannot separate sampling from provider
+nondeterminism. Neither separation is available from a design that ran one
+condition twice. The two-arm structure survives in the artifact's keys and
+nowhere in its data.
+
+**N is 10 calls per task at one setting, not two settings of 5.** That is the
+honest description of the sample. It is not used here to pool the per-task table
+into ten-call ranges, because the second arm is censored — one call at the cap,
+two parse failures — and pooling would pull censored draws into a figure the
+void already excludes. The one place the pooled count is used is the astropy
+task specifically, where **both** arms are clean: n = 5 of 5 usable in each,
+zero cap hits, zero parse failures. Ten calls saw that diff, nine returned 10
+and one returned 0. The two sets of five are byte-identical *within* each set;
+across the sets the payloads differ by the presence of the `temperature` field,
+so they are ten calls at one setting, not ten byte-identical calls.
+
+### A note for anyone reading the artifact rather than this file
+
+The top-level `arms: [0.0, 1.0]` and the `aggregate` / `per_task` keys `"0.0"`
+and `"1.0"` name a parameter that neither arm is known to have run at and that
+one of them demonstrably did not. The disclaiming note is per-record, in
+`records`, where a reader working from the summary will never meet it. That is
+the CHANGES 19–36 family — an artifact labelled for a condition it did not hold,
+with the evidence present but not where the verdict is read — and it is the
+proximate cause of the withdrawn argument above. It is flagged here rather than
+fixed, because fixing it means editing the run that produced it.
 
 ## The void, stated separately
 
@@ -259,6 +308,13 @@ observation and its scope is narrow.
 - **Ten tasks**, and **all of them coupled tasks** — drawn from the 28 witness
   tasks, which as `step1b_result.json` records is "not a random draw from the
   500". This says nothing about the judge's behaviour on the wider set.
+- **The judge could not be run at a lower temperature.** The endpoint rejects
+  the parameter for this model, so every call in this milestone ran at the
+  provider default and no narrower setting was reachable. Whether a steadier
+  configuration of this judge exists is therefore **unmeasured — not ruled
+  out.** Nothing here licenses the claim that lowering the temperature would not
+  help; it licenses only the claim that it was not tried, because it could not
+  be.
 - **No rubric with anchored per-criterion scoring was tried.** The observed
   failure is a misread of a diff, not an inability to map a correct read onto a
   number, so a rubric that forces the judge to state what the patch changes
@@ -293,8 +349,9 @@ pre-commit to any of them.
     supersedes       nothing -- step 1 is void (1.10); 1b is a new measurement
     model            gpt-5.6-luna (provider: openai)
     tasks            10, from 28 witness tasks -- coupled, not a random draw
-    N                5 per task per arm
-    arms             2, both at the provider default temperature (see above)
+    N                5 per task per arm; 10 per task at one setting (see above)
+    arms             2 by key, one sampling condition -- temperature rejected
+                     by the endpoint, both arms at the provider default
     calls            100   usable 98   parse rate 0.98
     output cap       4000  hits 1
     input caps       did not fire
