@@ -228,6 +228,156 @@ that a mistake in the estimate stops the run rather than spending through it.
 
 ---
 
+## 1.10 Step 1 is VOID on a harness defect, not closed on a measurement
+
+**Added 2026-09-14, in its own commit, after step 1 ran.**
+
+Step 1 produced 15 usable scores of 100 calls. 82 responses contained zero
+visible characters; 84 of the 85 parse failures had `output_tokens` exactly
+equal to `max_output_tokens = 400`, while all 15 parsed calls came in strictly
+under it. `gpt-5.6-luna` is a reasoning model — the same endpoint rejected the
+`temperature` parameter outright (§1.5) — and it spends output tokens on
+reasoning before emitting visible text. At 400 the budget was exhausted before
+the response began.
+
+**The cap, not the judge, determined the output.** Step 1 therefore did not
+measure the judge's variance floor. It measured an instrument parameter of this
+protocol's own runner.
+
+### The distinction this section exists to fix
+
+These two outcomes are not interchangeable, and §2.2 applies to exactly one of
+them:
+
+| | *Closed on a measurement* | *Void on a harness defect* |
+|---|---|---|
+| the quantity was | measured; threshold not met | never measured |
+| what determined the output | the subject | an instrument parameter |
+| reportable as a result about the judge | yes | **no** |
+| §2.2 (no retuning) | **binds** | does not bind — there is no result to protect |
+| correct next move | report it; do not retune | fix the instrument, re-register |
+
+**§2.2 does not license reporting a void run as a null result.** Its purpose is
+to stop this protocol from being loosened until it yields a signal. Invoking it
+to certify a no-signal outcome that the apparatus produced inverts it: the
+clause guarding against a manufactured positive would be manufacturing a
+negative. The direction of the error is not a defence. *"We observed no
+variance" is as much a claim about the judge as "we observed variance," and both
+require an instrument that could have observed it.* Step 1 could not have: a
+judge returning five different scores per task would have produced the same 82
+empty strings.
+
+### What step 1 may and may not be quoted for
+
+- **May:** the defect itself — the cap, the token distribution, the 85% parse
+  rate, and the §2.1 gate reporting `opens: true` off three tasks, one at n = 1.
+  Those are facts about this repository's apparatus and are recorded in
+  CHANGES.md 37.
+- **May not:** any statement about judge variance, any variance floor, any claim
+  that the `formcheck` probe does or does not transfer to a semantic judge, and
+  any answer to §0. **No judge variance was observed, so none is reported.** The
+  15 scores are all 10, on a censored sample of 3 tasks of 10; that is not a
+  distribution and no spread is computed from it anywhere.
+
+`judge/step1_result.json` is retained unedited, and its `step2_gate.opens: true`
+stands in the file as the defect's evidence. Nothing reads it as a verdict.
+
+---
+
+## 1.11 Step 1b — the registered re-measurement, cap set from the observed distribution
+
+**Registered 2026-09-14 in its own commit, before any step 1b call is made.**
+This is a **new measurement**, not a re-run and not a correction of step 1.
+Step 1 is void (§1.10); there is no step 1 number for this to replace, and
+step 1b's result is never reported as an amendment to one.
+
+### 1.11.1 What is frozen, and what changes
+
+Frozen, carried over **unchanged and not re-derived**:
+
+- **The 10 tasks of §1.1.** Not re-picked. Re-picking after seeing which tasks
+  survived would select on the outcome, and 7 of the 10 produced nothing, so a
+  re-pick would be the most consequential possible tuning.
+- **The prompt**, by digest: `sha256(judge/prompt_template.txt)` must equal
+  `798ed4c9f3997ade69b14e2090969dd9caea43c1bad660d9ee612cecbe5761fd`. The runner
+  asserts this and aborts on mismatch.
+- **The scale** (§1.3), **the parse rule** (§1.7 — still never retried), **the
+  two arms and N = 5** (§1.5), the **input caps** (§1.2), the **cost ceiling**
+  (§1.9), and **§2.1 + §2.1a in full**, including the n = 5 per-task and 8-of-10
+  per-arm sufficiency conditions.
+
+**The only change to the sampled quantity is the output cap.** One further
+change is made to *reporting only*, declared here rather than made quietly
+(§1.11.3); it does not alter what is sent or sampled.
+
+### 1.11.2 The cap, and where the number comes from
+
+`MAX_OUTPUT_TOKENS = 4000`.
+
+The derivation, stated before the run:
+
+1. Step 1's 15 parsed calls consumed **115 to 351** output tokens in total
+   (the Responses API counts reasoning and visible tokens together, so these are
+   totals, not visible-text lengths). Observed maximum of a *successful* call:
+   **351**.
+2. 84 calls were **censored at 400**. Censoring gives a **lower bound only**:
+   those calls needed more than 400 and the data cannot say how much more. The
+   tail of the requirement distribution is unobserved.
+3. So the observed distribution cannot be used to pick a *tight* cap — only to
+   establish that a tight one is wrong. 351 is the maximum of the uncensored
+   part, which is precisely the part that was cheap; setting the cap near it
+   would re-create the defect while looking data-driven.
+4. **4000** is 10× the cap that failed and ≈11× the largest successful step-1
+   call. It is chosen to make the cap **not plausibly binding**, not to fit the
+   observed points.
+5. Cost: worst case is all 100 calls running to the cap — 400,000 output tokens
+   at the §1.9 table's $1.20/1M for `gpt-5.6-luna`, ≈ **$0.48**, plus ≈$0.02 of
+   input. That is under the $2 ceiling by roughly 4×, so the ceiling does not
+   bind and cost is not a reason to choose a tighter cap.
+
+### 1.11.3 The cap is verified non-binding, not assumed to be
+
+Step 1's defect was not only that the cap was too low; it was that **the run
+could not report that the cap had fired.** `truncation` was computed from the
+§1.2 input caps alone and printed `"none -- no cap fired"` while the output cap
+fired on 84 of 100 calls.
+
+The reporting change, registered here: every step-1b record carries
+`output_cap_hit` (`output_tokens >= max_output_tokens`), and the summary reports
+`output_cap_hits` as a count over all calls, separately from the input-cap
+`input_truncation` field. This changes no request payload and no sampled value.
+
+**Step 1b is VOID, by this section and on the same grounds as §1.10, if
+`output_cap_hits > 0`** — even one. A single call at the cap means the cap is
+still shaping the output distribution, and a floor computed alongside it is
+computed on censored draws.
+
+### 1.11.4 The stopping rule — fixed now, before step 1b runs
+
+Registered so that a third configuration attempt is not available as a choice
+once step 1b's numbers exist:
+
+- **Parse rate is reported before any spread, range, median or gate verdict is
+  computed or read.** Ordering matters: a parse rate inspected after a favourable
+  floor is a parse rate nobody would have acted on.
+- **If step 1b's parse rate is below 95%**, step 1b is reported as **a second
+  failure to instrument the judge**, and **no third configuration is attempted
+  under this protocol.** Not a higher cap, not a different model, not a
+  constrained output format, not a re-pick, not a raised N. Two attempts is the
+  budget; a third would be tuning the apparatus until the subject appears, and
+  the honest report at that point is that this repository could not instrument
+  this judge — a statement about the apparatus, which is all a failed
+  instrumentation ever licenses (§1.10).
+- **If the parse rate is at or above 95%**, the floor is computed and §2.1 +
+  §2.1a are evaluated on it, and *that* result — opening or closing — is a
+  measurement and falls under §2.2.
+
+95% is set here, before the run, as the rate at which the surviving sample can
+satisfy §2.1a's 8-of-10-at-n=5 condition with room to spare; it is not adjusted
+afterwards.
+
+---
+
 ## 2. Step 2 — the same 10, gold versus renamed gold
 
 **Not run until step 1 is reported.**

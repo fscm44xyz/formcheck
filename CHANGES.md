@@ -1944,14 +1944,49 @@ reported `not measured` and the gate does not open. It was written before the
 amended gate was evaluated, and it only ever makes opening harder, so it cannot
 have manufactured a result.
 
-Not changed: the parser, the prompt, `max_output_tokens`, and the 100 calls.
-Raising the cap and re-running would produce a readable floor, and it would also
-be choosing the measurement after seeing the result, which §2.2 forbids. The
-85% is not an obstacle to the measurement — **it is the measurement.** Under
-this protocol, at this budget, on this model, the judge does not emit a parsable
-score often enough to have a variance floor worth estimating. That is the answer
-to §0's question about whether the probe transfers, and it arrives from the
-first arm rather than the second.
+Not changed in step 1's own artifact: the parser, the prompt, the cap, and the
+100 calls. That run is not edited to make it readable.
+
+**Correction, same day, before anything was built on it.** The paragraph that
+stood here read the 85% as a result about judges — "the probe does not transfer
+at this budget", offered as the answer to §0. That was wrong, and wrong in a way
+this file exists to catch. What the run measured is a **400-token output cap
+pointed at a reasoning model.** That is a defect in this repository's apparatus,
+the same family as the digest memo (26) and the substring replace (33) — not a
+property of semantic judges, and not evidence about one. **No judge variance was
+observed in step 1, because the judge's scores were never observed.** A floor
+cannot be estimated from 15 censored draws that are all the same number.
+
+§2.2 forbids loosening the protocol after an unfavourable result. It does not
+license promoting a misconfiguration into a claim about the world, and reading
+it that way inverts it: the clause that exists to stop a favourable result being
+manufactured was used to certify an unfavourable one that the apparatus, not the
+subject, produced. A protocol clause is not a licence to stop investigating.
+
+**The distinction, recorded as the rule it became.** Step 1 is **VOID on a
+harness defect** — not closed on a measurement. The two have different
+consequences and must never be conflated:
+
+- *Closed on a measurement* — the quantity was measured and the gate's
+  threshold was not met. Reportable. §2.2 binds: the protocol is not retuned to
+  get a different answer.
+- *Void on a harness defect* — the quantity was never measured, because an
+  instrument parameter, not the subject, determined the output. Not reportable
+  as a result at all. §2.2 does not bind, because there is no result to protect;
+  fixing the instrument and re-registering is the only correct move.
+
+A void run yields exactly one publishable fact: the defect. `PROTOCOL.md` §1.10
+records the voiding and §1.11 registers **step 1b**, which changes the cap and
+nothing else — same 10 tasks (not re-picked), same arms, same N, same prompt
+digest, and §2.1a's sufficiency rules carried over unchanged.
+
+**Rule.** *A run whose output was determined by an instrument parameter rather
+than by its subject is void, and a void run is never reported as a measurement
+of its subject — including when the null it appears to support is the
+conservative or self-critical one.* The direction of the error does not change
+its status: "we found nothing" is as much a claim requiring a working instrument
+as "we found something", and a pre-registration clause that forbids retuning
+after a result cannot be invoked to convert a broken instrument into a finding.
 
 **Rule.** *A check on the value of a statistic states the minimum sample that
 statistic is admitted on, in the same clause, or it is a check on its own
