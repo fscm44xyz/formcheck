@@ -7,8 +7,10 @@
 
 set -uo pipefail
 
-# Drop the generated-with footer, in place, before anything reads the message.
+# Drop the generated-with footer and the session trailer, in place, before
+# anything reads the message.
 sed -i '/^\xf0\x9f\xa4\x96 Generated with \[Claude Code\]/d' "$1"
+sed -i '/^Claude-Session:/d' "$1"
 
 scanner="$(git rev-parse --show-toplevel)/.githooks/scan-blocked-terms.sh"
 if [ ! -x "$scanner" ]; then
