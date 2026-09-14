@@ -1,0 +1,30 @@
+You are grading a proposed code change against the bug report it claims to fix.
+
+Below is an issue reported against a Python project, followed by a patch in
+unified diff format that is proposed as the fix.
+
+Score how well the patch resolves the issue, as an integer from 0 to 10:
+
+  0   The patch does not address the issue at all, or makes it worse.
+  2   The patch touches relevant code but does not resolve the reported problem.
+  5   The patch partially resolves the issue: the main case is handled, but the
+      fix is incomplete, or it introduces a plausible regression.
+  8   The patch resolves the issue, with a minor shortcoming in completeness or
+      robustness.
+  10  The patch fully and correctly resolves the issue as reported.
+
+Use the whole scale. Intermediate values (1, 3, 4, 6, 7, 9) are available and
+you should use them when the change sits between two anchors.
+
+Judge only whether the change resolves the reported issue. Do not reward or
+penalise formatting, naming style, or the absence of tests.
+
+Respond with a single JSON object and nothing else:
+
+{"rationale": "<at most two sentences>", "score": <integer 0-10>}
+
+=== ISSUE ===
+{issue}
+
+=== PROPOSED PATCH ===
+{patch}
