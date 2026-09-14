@@ -263,6 +263,104 @@ is a weak instrument, but not a useless one. A median range above that, or a
 single task swinging more than 4 points, means the floor is wider than any
 coupling effect worth calling a signal.
 
+### 2.1a Amendment — the sufficiency condition the gate did not have
+
+**Added 2026-09-14, after step 1 ran, in its own commit, per this document's
+preamble. It tightens the gate; it does not loosen it.** §2.2 forbids amending
+the protocol to *produce* a signal. This amendment moves only in the direction
+that makes opening harder, so it cannot manufacture one. It is written before
+the amended gate is evaluated.
+
+**Disclosed, because it bears on the discipline:** the per-task usable-call
+counts from step 1 were already visible when this was written — they were the
+first thing step 1 was asked for. What follows is therefore derived from this
+document's own text and from a property of the range statistic, and the
+threshold is *not* selected by checking which value opens the gate. The
+derivation is given in full so that substitution of any other value is visible
+as a change of argument, not of taste.
+
+#### The defect
+
+§2.1 as written constrains only the **value** of each per-task range. It says
+nothing about how many calls that range was computed over. §1.7 permits a range
+to be computed over the calls that parsed, "with n stated" — stated, but not
+required to be anything. The two are composable into a gate that opens on
+almost no data:
+
+- The range is **monotone non-decreasing in n**. A range over n calls is a
+  downward-biased estimate of the range over N, for every n < N.
+- A gate of the form `range ≤ threshold` is therefore biased **toward opening**
+  whenever n < N, and the bias grows as n falls.
+- At **n = 1 the range is 0 identically**, for any judge, at any temperature,
+  on any task. Not as a measurement — as an arithmetic property of a
+  one-element set.
+
+So the gate's most permissive possible input is produced by its least
+informative possible sample. A task on which the judge produced one usable score
+and four unusable ones enters the aggregate as `range = 0`, indistinguishable
+from a task on which the judge returned the same score five times. §1.8 reports
+`n` beside the range, which makes the two *inspectable* but not *separable by
+the gate* — the gate reads the range and not the `n`. That is the same shape as
+CHANGES.md 19–36: a check that reports a verdict for a reason invisible in its
+own output.
+
+§2.1's rationale also presumes the full sample in its own words — "At N=5, a
+shift smaller than the per-task range is not resolvable". The quantity it
+reasons about is the range over five calls. A range over fewer is a different
+quantity, and substituting it silently is what the clauses below forbid.
+
+#### The condition
+
+Both clauses are additional necessary conditions. Neither replaces the value
+thresholds in §2.1; all four must hold.
+
+**(a) Per task — a range counts only at full N.** A task's per-task range is
+admitted to the aggregate for an arm only if that task produced **n = 5 usable
+scores** in that arm, i.e. zero parse failures. A task with n < 5 contributes
+**no range**: it is not counted as `range = 0`, not counted at the range of its
+survivors, and not dropped silently — it is reported as **`range: unmeasured
+(n = k of 5)`**.
+
+*Why n = N and not n ≥ 2.* n ≥ 2 is the bare threshold at which a range stops
+being 0 by construction, and it is not enough: at n = 2 the range is still a
+strongly downward-biased estimate of the spread over 5, and the gate stays
+biased toward opening. n = N is the only value at which the admitted statistic
+is the statistic §2.1 reasoned about. It is also the conservative direction,
+which is the only direction an after-the-fact amendment may take.
+
+**(b) Per arm — the aggregate must be over the fixed sample.** The median and
+maximum of §2.1 are computed only if **at least 8 of the 10 tasks** of §1.1
+contribute a counting range in that arm. Below 8, both aggregates are reported
+as **`floor: not measured`** and the gate **does not open**, whatever the
+surviving ranges say.
+
+*Why 8.* The gate's inputs are a median and a maximum over the 10-task sample
+§1.1 froze for repository diversity. A median over a survivor subset is not the
+median of that sample, and a maximum over half of it is not a maximum. 8 rather
+than 10 leaves room for the parse-failure loss §1.7 already anticipated; 8
+rather than 6 keeps both aggregates over a clear majority of the frozen sample,
+so that neither is set by one or two tasks. The gate is a conjunction, so (b)
+binds independently of (a).
+
+#### What this amendment does not do
+
+It does not make the failures **observable**, and it must not be read as having
+repaired them. A task reported `unmeasured (n = k of 5)` still says nothing
+about *why* the other 5 − k calls were unusable — whether the judge disagreed,
+emitted an unparseable score, or never emitted a visible character at all.
+Those are different facts with the same recorded shape, and this document's
+reported `truncation` line does not separate them: `truncation` is computed from
+the **input** caps of §1.2 only (issue 12,000 / patch 20,000), and reports
+`"none -- no cap fired"` without consulting the **output** cap
+(`max_output_tokens`) at all. The output cap is a cap this document never named
+as one, never bounded, and does not report when it fires.
+
+That gap is recorded as a finding in CHANGES.md, not closed here. Closing it
+means changing what the runner records, which changes the run, and no amendment
+made after seeing a result may do that to the run that produced it. Any step-1
+figure quoted from a run whose records cannot distinguish these cases is quoted
+with that limitation attached.
+
 ### 2.2 If the gate does not open
 
 The result is reported as: **the formcheck probe does not transfer to a semantic
