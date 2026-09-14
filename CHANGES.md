@@ -1875,3 +1875,129 @@ repeat" is an assumption about data, not a property of code, and it belongs in a
 assertion if anything depends on it.
 
 `repair/scan/import_local_run.py` (`main`); `repair/scan/import_local_run.json`.
+
+---
+
+## 37. The variance gate could open on n=1, and 85 of 100 calls returned nothing
+
+**Found by reading step 1's own records before reading its verdict.** The gate
+had already reported `opens: true`.
+
+**Bug, part one — the gate.** `PROTOCOL.md` §2.1 gates step 2 on the *value* of
+each per-task range: median ≤ 2, max ≤ 4. §1.7 permits a range to be computed
+over whichever of the 5 calls parsed, "with n stated". Nothing required n to be
+anything. The range is monotone non-decreasing in n, so a range over n < N is a
+downward-biased estimate of the spread over N, and **at n = 1 the range is 0
+identically** — an arithmetic property of a one-element set, not a measurement.
+The gate's most permissive input is produced by its least informative sample.
+
+It happened. `opens: true` was computed from three tasks per arm, and on the
+T=1 arm that governs:
+
+    scikit-learn__scikit-learn-14141   n=5   range 0
+    django__django-11179              n=2   range 0
+    sphinx-doc__sphinx-7454           n=1   range 0   <- 0 by construction
+
+`median_range: 0`, `max_range: 0`, `pooled_stdev: 0.0`. Read off the artifact,
+the judge looks perfectly stable. Two of the three ranges rest on fewer than two
+observations, and the other seven tasks of the frozen ten produced no usable
+score at all. §1.8 does print `n` beside each range, so the defect is visible on
+inspection — but the gate reads the range and not the `n`, so the verdict is not
+separable from the honest case by the check that issued it. Same family as 17,
+19, 30 and D2.
+
+**Bug, part two — why there was almost no data.** 85 of 100 calls were parse
+failures. Not disagreement, not malformed scores: **82 returned zero visible
+characters.** The cause is in the token counts:
+
+    parsed  (n=15):  output_tokens 115..351,  at cap: 0 of 15
+    failed  (n=85):  output_tokens 0..400,    at cap: 84 of 85
+
+`max_output_tokens = 400`. Every call that parsed came in under it; every
+failure but one sat exactly on it. `gpt-5.6-luna` is a reasoning model — the
+same endpoint rejected `temperature` outright — and it spends output tokens on
+reasoning before emitting any visible text. At 400 the budget was consumed
+before the response began. The three failures that emitted anything show the cut
+mid-rationale, before the `score` field the parser needs:
+
+    {"rationale":"The patch updates the primary-key
+
+**The reporting defect that hid it.** The artifact records:
+
+    "truncation": "none -- no cap fired"
+
+`any_truncated` is built in `build_prompt` from the §1.2 **input** caps only —
+issue 12,000, patch 20,000 — which genuinely did not fire. The **output** cap is
+a different cap. §1.2 bounds the input caps, measures the longest of the ten
+against them, and states "a cap that silently fires is exactly the defect family
+this project keeps finding" — and then the run reports `no cap fired` while a cap
+the document never named as one fired on 84 of 100 calls. The clause is true of
+the caps it was written about and false of the run as a whole, which is worse
+than an error: it is a correct sentence that answers a question nobody asked.
+
+**What was changed, and what deliberately was not.** `PROTOCOL.md` §2.1a adds
+the sufficiency condition: a per-task range is admitted only at **n = 5** (n = N,
+because that is the statistic §2.1's own rationale reasons about, and because it
+is the conservative direction); an arm's median and maximum are computed only if
+**≥ 8 of the 10** tasks contribute a counting range, otherwise the floor is
+reported `not measured` and the gate does not open. It was written before the
+amended gate was evaluated, and it only ever makes opening harder, so it cannot
+have manufactured a result.
+
+Not changed in step 1's own artifact: the parser, the prompt, the cap, and the
+100 calls. That run is not edited to make it readable.
+
+**Correction, same day, before anything was built on it.** The paragraph that
+stood here read the 85% as a result about judges — "the probe does not transfer
+at this budget", offered as the answer to §0. That was wrong, and wrong in a way
+this file exists to catch. What the run measured is a **400-token output cap
+pointed at a reasoning model.** That is a defect in this repository's apparatus,
+the same family as the digest memo (26) and the substring replace (33) — not a
+property of semantic judges, and not evidence about one. **No judge variance was
+observed in step 1, because the judge's scores were never observed.** A floor
+cannot be estimated from 15 censored draws that are all the same number.
+
+§2.2 forbids loosening the protocol after an unfavourable result. It does not
+license promoting a misconfiguration into a claim about the world, and reading
+it that way inverts it: the clause that exists to stop a favourable result being
+manufactured was used to certify an unfavourable one that the apparatus, not the
+subject, produced. A protocol clause is not a licence to stop investigating.
+
+**The distinction, recorded as the rule it became.** Step 1 is **VOID on a
+harness defect** — not closed on a measurement. The two have different
+consequences and must never be conflated:
+
+- *Closed on a measurement* — the quantity was measured and the gate's
+  threshold was not met. Reportable. §2.2 binds: the protocol is not retuned to
+  get a different answer.
+- *Void on a harness defect* — the quantity was never measured, because an
+  instrument parameter, not the subject, determined the output. Not reportable
+  as a result at all. §2.2 does not bind, because there is no result to protect;
+  fixing the instrument and re-registering is the only correct move.
+
+A void run yields exactly one publishable fact: the defect. `PROTOCOL.md` §1.10
+records the voiding and §1.11 registers **step 1b**, which changes the cap and
+nothing else — same 10 tasks (not re-picked), same arms, same N, same prompt
+digest, and §2.1a's sufficiency rules carried over unchanged.
+
+**Rule.** *A run whose output was determined by an instrument parameter rather
+than by its subject is void, and a void run is never reported as a measurement
+of its subject — including when the null it appears to support is the
+conservative or self-critical one.* The direction of the error does not change
+its status: "we found nothing" is as much a claim requiring a working instrument
+as "we found something", and a pre-registration clause that forbids retuning
+after a result cannot be invoked to convert a broken instrument into a finding.
+
+**Rule.** *A check on the value of a statistic states the minimum sample that
+statistic is admitted on, in the same clause, or it is a check on its own
+sample size.* Degenerate-by-construction values — a range over one point, a
+variance over one point, a max over an empty set — are the permissive end of
+every threshold, so a gate without a sufficiency condition fails toward
+opening. And: *a field named for a general condition is computed over every
+instance of it, or it is named for the subset it actually covers.*
+`"truncation"` that consults only input caps is named `input_truncation`, or it
+consults the output cap too.
+
+`judge/PROTOCOL.md` (§2.1a, new); `judge/variance.py` (`build_prompt`,
+`any_truncated`, the `step2_gate` computation — the defect is recorded, the code
+is unchanged pending a newly registered run); `judge/step1_result.json`.
