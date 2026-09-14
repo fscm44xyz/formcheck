@@ -34,7 +34,28 @@ TEMPLATE = os.path.join(HERE, "prompt_template.txt")
 DEFAULT_MODEL = "gpt-5.6-luna"
 N_CALLS = 5
 ARMS = (0.0, 1.0)
-MAX_OUTPUT_TOKENS = 400
+
+# PROTOCOL.md 1.11.2 -- step 1b. 400 is what voided step 1: it is a reasoning
+# model, and at 400 the budget was spent on reasoning before any visible text.
+# 4000 is 10x that and ~11x the largest SUCCESSFUL step-1 call (351 tokens).
+# Deliberately NOT fitted to the observed 115..351: those are the uncensored
+# tail of a distribution censored at 400, so they bound the requirement from
+# below only, and a cap fitted to them would re-create the defect while looking
+# data-driven.
+MAX_OUTPUT_TOKENS = 4_000
+
+# PROTOCOL.md 1.11.1 -- the prompt is frozen by digest across step 1 and 1b.
+FROZEN_PROMPT_SHA256 = (
+    "798ed4c9f3997ade69b14e2090969dd9caea43c1bad660d9ee612cecbe5761fd")
+
+# PROTOCOL.md 2.1a -- the sufficiency condition. A per-task range is admitted
+# only at full N; an arm needs this many admitted tasks for its aggregate.
+MIN_USABLE_PER_TASK = N_CALLS
+MIN_COUNTING_TASKS = 8
+
+# PROTOCOL.md 1.11.4 -- fixed before the run. Below this, step 1b is a second
+# failure to instrument the judge and NO third configuration is attempted.
+MIN_PARSE_RATE = 0.95
 
 ISSUE_CAP = 12_000
 PATCH_CAP = 20_000
@@ -179,17 +200,31 @@ def usage_counts(usage):
     return tin, tout, cached
 
 
-def spread(scores):
-    if not scores:
-        return {"n": 0, "range": None, "stdev": None, "mean": None}
-    return {
-        "n": len(scores),
-        "min": min(scores),
-        "max": max(scores),
-        "range": max(scores) - min(scores),
-        "mean": round(statistics.fmean(scores), 3),
-        "stdev": round(statistics.stdev(scores), 3) if len(scores) > 1 else 0.0,
-    }
+def spread(scores, n_required=MIN_USABLE_PER_TASK):
+    """PROTOCOL.md 2.1a(a). A range is ADMITTED only at n = N.
+
+    Below that the task reports `range: None` with `admitted: False` and an
+    explicit reason -- never `range: 0`, which is what a one-element set yields
+    by construction and which is the permissive end of the 2.1 threshold. The
+    range is monotone non-decreasing in n, so admitting n < N biases the gate
+    toward opening. `observed_range` is kept for the record and is NOT what the
+    gate reads."""
+    out = {"n": len(scores), "admitted": False, "range": None,
+           "stdev": None, "mean": None}
+    if scores:
+        out.update({
+            "min": min(scores), "max": max(scores),
+            "observed_range": max(scores) - min(scores),
+            "mean": round(statistics.fmean(scores), 3),
+            "stdev": round(statistics.stdev(scores), 3) if len(scores) > 1 else 0.0,
+        })
+    if len(scores) < n_required:
+        out["unadmitted_reason"] = (
+            f"unmeasured (n = {len(scores)} of {n_required}); PROTOCOL.md 2.1a(a)")
+        return out
+    out["admitted"] = True
+    out["range"] = max(scores) - min(scores)
+    return out
 
 
 def main():
@@ -198,12 +233,18 @@ def main():
     ap.add_argument("--n", type=int, default=N_CALLS)
     ap.add_argument("--dry-run", action="store_true",
                     help="projection and one rendered prompt; sends nothing")
-    ap.add_argument("-o", "--out", default=os.path.join(HERE, "step1_result.json"))
+    ap.add_argument("-o", "--out", default=os.path.join(HERE, "step1b_result.json"))
     args = ap.parse_args()
 
     with open(TEMPLATE) as fh:
         template = fh.read()
     template_sha = hashlib.sha256(template.encode()).hexdigest()
+    # PROTOCOL.md 1.11.1 -- same prompt as step 1, asserted, not assumed.
+    if template_sha != FROZEN_PROMPT_SHA256:
+        raise SystemExit(
+            "prompt digest does not match the value frozen in PROTOCOL.md 1.11.1.\n"
+            f"  computed: {template_sha}\n  frozen  : {FROZEN_PROMPT_SHA256}\n"
+            "Step 1b changes the output cap and nothing else. Aborting.")
 
     population = witness_tasks()
     chosen = select(population, 10)
@@ -224,10 +265,12 @@ def main():
     rate = PRICES.get(args.model)
     chars = sum(len(p) for p in prompts.values())
     est_in = chars / 4 * args.n * len(ARMS)
-    est_out = 120 * args.n * len(ARMS) * len(chosen)
+    # worst case is every call running to the cap (PROTOCOL.md 1.11.2 step 5)
+    est_out = MAX_OUTPUT_TOKENS * args.n * len(ARMS) * len(chosen)
     est_cost = (est_in * rate[0] / 1e6 + est_out * rate[1] / 1e6) if rate else None
 
-    print("judge-variance -- step 1, the variance floor")
+    print("judge-variance -- step 1b, the variance floor "
+          "(step 1 is VOID, PROTOCOL.md 1.10)")
     print(f"  protocol       : judge/PROTOCOL.md")
     print(f"  prompt sha256  : {template_sha}")
     print(f"  model          : {args.model}")
@@ -235,7 +278,9 @@ def main():
     print(f"  arms           : {', '.join('T=' + str(t) for t in ARMS)}")
     print(f"  N per arm      : {args.n}")
     print(f"  total calls    : {len(chosen) * args.n * len(ARMS)}")
-    print(f"  truncated      : {any_truncated or 'none -- no cap fired'}")
+    print(f"  output cap     : {MAX_OUTPUT_TOKENS} tokens (PROTOCOL.md 1.11.2)")
+    print(f"  input caps     : issue {ISSUE_CAP}, patch {PATCH_CAP} chars -- fired: "
+          f"{any_truncated or 'none'}")
     if rate:
         print(f"  rate           : ${rate[0]:.2f} in / ${rate[1]:.2f} out per 1M")
         print(f"  projected cost : ${est_cost:.4f}   (ceiling ${COST_CEILING_USD:.2f})")
@@ -307,10 +352,14 @@ def main():
                     "request_sha256": digest(sent), "note": note,
                     "response_id": getattr(resp, "id", None),
                     "input_tokens": tin, "output_tokens": tout, "cached_tokens": cached,
+                    # PROTOCOL.md 1.11.3 -- the cap's firing is RECORDED, not
+                    # inferred. Step 1 could not report the cap it died on.
+                    "output_cap_hit": bool(tout is not None and tout >= MAX_OUTPUT_TOKENS),
                     "elapsed": round(time.time() - t0, 2),
                 })
                 print(f"    T={temp} {iid:34s} call {call}/{args.n}  "
-                      f"score={score if score is not None else 'PARSE-FAIL'}")
+                      f"score={score if score is not None else 'PARSE-FAIL'}"
+                      f"{'  [OUTPUT CAP HIT]' if records[-1]['output_cap_hit'] else ''}")
             # PROTOCOL.md 1.6 -- identical input, asserted, not assumed.
             if len(seen_sha) > 1:
                 raise SystemExit(
@@ -323,6 +372,50 @@ def main():
     cost = None
     if rate:
         cost = tin_total * rate[0] / 1e6 + tout_total * rate[1] / 1e6
+
+    # ---- PROTOCOL.md 1.11.4: the parse rate and the cap audit are computed and
+    # printed BEFORE any spread, range, median or gate verdict exists. A parse
+    # rate inspected after a favourable floor is one nobody would have acted on.
+    n_calls_made = len(records)
+    n_usable = sum(1 for r in records if r.get("score") is not None)
+    parse_rate = (n_usable / n_calls_made) if n_calls_made else 0.0
+    cap_hits = sum(1 for r in records if r.get("output_cap_hit"))
+    instrument = {
+        "calls": n_calls_made,
+        "usable": n_usable,
+        "parse_rate": round(parse_rate, 4),
+        "min_parse_rate": MIN_PARSE_RATE,
+        "parse_rate_ok": parse_rate >= MIN_PARSE_RATE,
+        "output_cap": MAX_OUTPUT_TOKENS,
+        "output_cap_hits": cap_hits,
+        # PROTOCOL.md 1.11.3 -- one call at the cap voids the run.
+        "void_on_cap": cap_hits > 0,
+        "input_truncation": any_truncated or "none -- input caps did not fire",
+    }
+    if cap_hits:
+        instrument["void_reason"] = (
+            f"PROTOCOL.md 1.11.3: {cap_hits} of {n_calls_made} calls sat at the "
+            f"{MAX_OUTPUT_TOKENS}-token output cap. The cap is still shaping the "
+            "output distribution, so any floor computed here is computed on "
+            "censored draws. VOID on a harness defect (1.10), not a measurement.")
+    elif not instrument["parse_rate_ok"]:
+        instrument["stop_reason"] = (
+            f"PROTOCOL.md 1.11.4: parse rate {parse_rate:.1%} is below "
+            f"{MIN_PARSE_RATE:.0%}. This is a SECOND failure to instrument the "
+            "judge. No third configuration is attempted: not a higher cap, not a "
+            "different model, not a constrained output format, not a re-pick, not "
+            "a raised N. Reportable only as a statement about the apparatus.")
+
+    print("\n--- PROTOCOL.md 1.11.4: instrument check, read before any floor ---")
+    print(f"  usable scores  : {n_usable}/{n_calls_made}  "
+          f"parse rate {parse_rate:.1%}  (threshold {MIN_PARSE_RATE:.0%}) "
+          f"-> {'OK' if instrument['parse_rate_ok'] else 'BELOW THRESHOLD'}")
+    print(f"  output cap hits: {cap_hits}/{n_calls_made} at {MAX_OUTPUT_TOKENS} "
+          f"-> {'VOID (1.11.3)' if cap_hits else 'cap did not bind'}")
+    tw = [r["output_tokens"] for r in records if r.get("output_tokens")]
+    if tw:
+        print(f"  output tokens  : min={min(tw)} max={max(tw)} "
+              f"median={statistics.median(tw):.0f}")
 
     per_task = {}
     for temp in ARMS:
@@ -337,27 +430,59 @@ def main():
 
     aggregate = {}
     for temp in ARMS:
-        ranges = [v["range"] for v in per_task[str(temp)].values() if v["range"] is not None]
-        pooled = [s for v in per_task[str(temp)].values() for s in v["scores"] if s is not None]
+        arm = per_task[str(temp)]
+        # PROTOCOL.md 2.1a(a) -- only ADMITTED ranges enter the aggregate.
+        ranges = [v["range"] for v in arm.values() if v.get("admitted")]
+        unmeasured = {k: v["n"] for k, v in arm.items() if not v.get("admitted")}
+        pooled = [s for v in arm.values() for s in v["scores"] if s is not None]
+        # PROTOCOL.md 2.1a(b) -- a median over a survivor subset is not the
+        # median of the sample 1.1 froze, and a max over half of it is not a max.
+        covered = len(ranges) >= MIN_COUNTING_TASKS
         aggregate[str(temp)] = {
-            "tasks": len(ranges),
+            "counting_tasks": len(ranges),
+            "min_counting_tasks": MIN_COUNTING_TASKS,
+            "unmeasured_tasks": unmeasured,
+            "coverage_ok": covered,
             "ranges": sorted(ranges),
-            "median_range": statistics.median(ranges) if ranges else None,
-            "max_range": max(ranges) if ranges else None,
+            "median_range": statistics.median(ranges) if covered else None,
+            "max_range": max(ranges) if covered else None,
             "tasks_with_range_0": sum(1 for r in ranges if r == 0),
             "pooled_stdev": round(statistics.stdev(pooled), 3) if len(pooled) > 1 else None,
-            "parse_failures": sum(v["parse_failures"] for v in per_task[str(temp)].values()),
+            "parse_failures": sum(v["parse_failures"] for v in arm.values()),
         }
+        if not covered:
+            aggregate[str(temp)]["floor"] = (
+                f"not measured -- {len(ranges)} of {len(arm)} tasks reached "
+                f"n = {MIN_USABLE_PER_TASK} (PROTOCOL.md 2.1a(b) requires "
+                f"{MIN_COUNTING_TASKS})")
 
-    gate = None
+    # PROTOCOL.md 2.1 + 2.1a. The gate is evaluated ONLY on a non-void run whose
+    # parse rate cleared 1.11.4; otherwise there is no floor for it to read.
+    gate = {"evaluated": False}
     t1 = aggregate.get("1.0")
-    if t1 and t1["median_range"] is not None:
-        gate = {"median_range_le_2": t1["median_range"] <= 2,
+    if instrument["void_on_cap"]:
+        gate["reason"] = instrument["void_reason"]
+    elif not instrument["parse_rate_ok"]:
+        gate["reason"] = instrument["stop_reason"]
+    elif not t1["coverage_ok"]:
+        gate.update({"evaluated": True, "opens": False,
+                     "coverage_ok": False, "reason": t1["floor"]})
+    else:
+        gate = {"evaluated": True,
+                "coverage_ok": True,
+                "counting_tasks": t1["counting_tasks"],
+                "median_range_le_2": t1["median_range"] <= 2,
                 "max_range_le_4": t1["max_range"] <= 4}
-        gate["opens"] = all(gate.values())
+        gate["opens"] = gate["median_range_le_2"] and gate["max_range_le_4"]
 
     out = {
-        "milestone": "judge-variance", "step": 1,
+        "milestone": "judge-variance", "step": "1b",
+        "supersedes": None,
+        "step1_status": ("VOID on a harness defect (PROTOCOL.md 1.10): a "
+                         "400-token output cap against a reasoning model. No "
+                         "judge variance was observed in step 1, so none is "
+                         "reported from it. Step 1b is a new measurement, not a "
+                         "correction of a step-1 number."),
         "protocol": "judge/PROTOCOL.md",
         "prompt_sha256": template_sha,
         "provider": "openai", "model": args.model,
@@ -367,7 +492,11 @@ def main():
         "tasks": chosen,
         "population": {"witness_tasks": len(population),
                        "note": "the floor is measured on coupled tasks, not a random draw from the 500"},
-        "truncation": any_truncated or "none -- no cap fired",
+        # NOT named `truncation`: it consults the 1.2 INPUT caps only. The
+        # output cap is reported separately, under `instrument`. Step 1 printed
+        # "no cap fired" here while the output cap fired on 84 of 100 calls.
+        "input_truncation": any_truncated or "none -- input caps did not fire",
+        "instrument": instrument,
         "per_task": per_task, "aggregate": aggregate,
         "step2_gate": gate,
         "input_tokens": tin_total, "output_tokens": tout_total,
@@ -383,11 +512,19 @@ def main():
     print(f"[wrote] {args.out}")
     for temp in ARMS:
         a = aggregate[str(temp)]
-        print(f"  T={temp}: ranges={a['ranges']} median={a['median_range']} "
-              f"max={a['max_range']} range0={a['tasks_with_range_0']}/{a['tasks']} "
+        print(f"  T={temp}: counting={a['counting_tasks']}/{len(chosen)} "
+              f"ranges={a['ranges']} median={a['median_range']} max={a['max_range']} "
               f"parse_fail={a['parse_failures']}")
-    if gate:
-        print(f"  step-2 gate (PROTOCOL.md 2.1): {'OPENS' if gate['opens'] else 'DOES NOT OPEN'}")
+        if not a["coverage_ok"]:
+            print(f"         {a['floor']}")
+
+    if instrument["void_on_cap"]:
+        print("\n  STEP 1B IS VOID -- " + instrument["void_reason"])
+    elif not instrument["parse_rate_ok"]:
+        print("\n  STOP -- " + instrument["stop_reason"])
+    else:
+        print(f"\n  step-2 gate (PROTOCOL.md 2.1 + 2.1a): "
+              f"{'OPENS' if gate['opens'] else 'DOES NOT OPEN'}")
 
 
 if __name__ == "__main__":
